@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 19:15-0400\n"
+"POT-Creation-Date: 2026-11-01 19:19-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,39 +18,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: omarchy_settings/app.py:29 omarchy_settings/app.py:45
+#: omarchy_settings/app.py:30 omarchy_settings/app.py:47
 msgid "Omarchy Settings"
 msgstr ""
 
-#: omarchy_settings/app.py:34
+#: omarchy_settings/app.py:35
 msgid "Themes"
 msgstr ""
 
-#: omarchy_settings/app.py:36 omarchy_settings/pages/monitors.py:237
+#: omarchy_settings/app.py:37 omarchy_settings/pages/monitors.py:237
 msgid "Displays"
 msgstr ""
 
-#: omarchy_settings/app.py:37 omarchy_settings/pages/bar.py:61
+#: omarchy_settings/app.py:38 omarchy_settings/pages/bar.py:61
 msgid "Power"
 msgstr ""
 
-#: omarchy_settings/app.py:38
+#: omarchy_settings/app.py:39
 msgid "Shortcuts"
 msgstr ""
 
-#: omarchy_settings/app.py:39
+#: omarchy_settings/app.py:40
 msgid "Bar and fonts"
 msgstr ""
 
-#: omarchy_settings/app.py:40
+#: omarchy_settings/app.py:41
 msgid "Connectivity"
 msgstr ""
 
-#: omarchy_settings/app.py:49
+#: omarchy_settings/app.py:42
+msgid "System"
+msgstr ""
+
+#: omarchy_settings/app.py:51
 msgid "Dependencies…"
 msgstr ""
 
-#: omarchy_settings/app.py:50
+#: omarchy_settings/app.py:52
 msgid "Main menu"
 msgstr ""
 
@@ -507,8 +511,9 @@ msgstr ""
 #: omarchy_settings/pages/bar.py:210 omarchy_settings/pages/bar.py:242
 #: omarchy_settings/pages/bar.py:322 omarchy_settings/pages/bar.py:345
 #: omarchy_settings/pages/bar.py:395 omarchy_settings/pages/bluetooth.py:257
-#: omarchy_settings/pages/ethernet.py:219 omarchy_settings/pages/wifi.py:287
-#: omarchy_settings/pages/wifi.py:325 omarchy_settings/pages/wifi.py:336
+#: omarchy_settings/pages/ethernet.py:219 omarchy_settings/pages/system.py:81
+#: omarchy_settings/pages/wifi.py:287 omarchy_settings/pages/wifi.py:325
+#: omarchy_settings/pages/wifi.py:336
 #, python-brace-format
 msgid "Failed: {error}"
 msgstr ""
@@ -522,7 +527,7 @@ msgstr ""
 msgid "Custom — {format}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:232
+#: omarchy_settings/pages/bar.py:232 omarchy_settings/pages/system.py:113
 msgid "Clock format"
 msgstr ""
 
@@ -1184,6 +1189,7 @@ msgid "Save and reconnect"
 msgstr ""
 
 #: omarchy_settings/pages/ethernet.py:105 omarchy_settings/pages/hyprland.py:98
+#: omarchy_settings/pages/system.py:66
 msgid "Apply"
 msgstr ""
 
@@ -1292,7 +1298,7 @@ msgstr ""
 msgid "Portuguese (Portugal)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:55
+#: omarchy_settings/pages/hyprland.py:55 omarchy_settings/pages/system.py:14
 msgid "Spanish"
 msgstr ""
 
@@ -2264,6 +2270,200 @@ msgstr ""
 
 #: omarchy_settings/pages/shortcuts.py:440
 msgid "Hyprland didn't accept that shortcut; nothing was changed"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:14
+msgid "English"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:14
+msgid "Portuguese"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:14
+msgid "French"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:14
+msgid "German"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:15
+msgid "Italian"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:15
+msgid "Dutch"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:15
+msgid "Polish"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:15
+msgid "Russian"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:15
+msgid "Ukrainian"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:16
+msgid "Japanese"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:16
+msgid "Chinese"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:16
+msgid "Korean"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:16
+msgid "Turkish"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:16
+msgid "Swedish"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:17
+msgid "Web browser"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:17
+msgid "Terminal"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:17
+msgid "Text editor"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:18
+msgid "Omarchy version"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:18
+msgid "Computer name"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:18
+msgid "Kernel"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:19
+msgid "Processor"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:19
+msgid "Threads"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:19
+msgid "Memory"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:42
+msgid "Date and time"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:48
+msgid "Language"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:48
+msgid "Used by apps, this one included, after you log out and back in."
+msgstr ""
+
+#: omarchy_settings/pages/system.py:53
+msgid "Default apps"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:54
+msgid "Only installed apps are listed."
+msgstr ""
+
+#: omarchy_settings/pages/system.py:59
+msgid "About this computer"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:78
+#, python-brace-format
+msgid "Changed to {value}"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:81
+msgid "Not changed"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:94
+msgid "Time zone"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:95
+msgid "Type to search"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:106
+msgid "Synchronized"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:106
+msgid "Keeps the clock right through the internet"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:110
+msgid "Could not change automatic time"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:112
+msgid "Set the time automatically"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:114
+msgid "12 or 24 hours: Bar and fonts → Clock format"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:122
+msgid "No languages listed"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:124
+msgid "System language"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:128
+msgid "Only languages generated on this system are listed"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:129
+msgid "Others need to be enabled in /etc/locale.gen first"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:145
+#, python-brace-format
+msgid "Now: {name}"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:150
+msgid "Default app changed"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:151
+msgid "Could not change the default app"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:165
+msgid "Update Omarchy"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:165
+msgid "Opens a terminal with the update"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:165
+msgid "Update"
 msgstr ""
 
 #: omarchy_settings/pages/themes.py:91

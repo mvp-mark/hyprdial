@@ -19,6 +19,7 @@ from .pages.hyprland import HyprlandPage
 from .pages.monitors import MonitorsPage
 from .pages.power import PowerPage
 from .pages.shortcuts import ShortcutsPage
+from .pages.system import SystemPage
 from .pages.themes import ThemesPage
 
 APP_ID = "org.omarchy.Settings"
@@ -38,6 +39,7 @@ class Window(Adw.ApplicationWindow):
             (ShortcutsPage(self), "shortcuts", _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic"),
             (BarPage(self), "bar", _("Bar and fonts"), "preferences-desktop-font-symbolic"),
             (ConnectivityPage(self), "connectivity", _("Connectivity"), "network-wireless-symbolic"),
+            (SystemPage(self), "system", _("System"), "computer-symbolic"),
         ]
         for page, name, title, icon in pages:
             self.stack.add_titled_with_icon(page, name, title, icon)
