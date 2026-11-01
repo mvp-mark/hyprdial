@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Omarchy Settings
+Name[pt_BR]=Configurações do Omarchy
+Comment=Interface gráfica de configuração para o Omarchy
+Exec=omarchy-settings
+Icon=preferences-system-symbolic
+Terminal=false
+Categories=Settings;DesktopSettings;GTK;
+StartupWMClass=org.omarchy.Settings
