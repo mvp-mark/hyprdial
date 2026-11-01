@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 15:52-0400\n"
+"POT-Creation-Date: 2026-11-01 19:08-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,7 +245,7 @@ msgstr ""
 msgid "Claude Code, Codex and Fireworks usage and limits"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:50 omarchy_settings/pages/connectivity.py:46
+#: omarchy_settings/pages/bar.py:50 omarchy_settings/pages/connectivity.py:49
 msgid "Audio"
 msgstr ""
 
@@ -506,7 +506,7 @@ msgstr ""
 
 #: omarchy_settings/pages/bar.py:212 omarchy_settings/pages/bar.py:244
 #: omarchy_settings/pages/bar.py:324 omarchy_settings/pages/bar.py:347
-#: omarchy_settings/pages/bar.py:397
+#: omarchy_settings/pages/bar.py:397 omarchy_settings/pages/ethernet.py:219
 #, python-brace-format
 msgid "Failed: {error}"
 msgstr ""
@@ -675,9 +675,9 @@ msgid "Modules and layout"
 msgstr ""
 
 #: omarchy_settings/pages/bar.py:376 omarchy_settings/pages/bar.py:378
-#: omarchy_settings/pages/connectivity.py:40
-#: omarchy_settings/pages/connectivity.py:41
-#: omarchy_settings/pages/connectivity.py:51
+#: omarchy_settings/pages/connectivity.py:43
+#: omarchy_settings/pages/connectivity.py:44
+#: omarchy_settings/pages/connectivity.py:54
 msgid "Open"
 msgstr ""
 
@@ -803,64 +803,64 @@ msgstr ""
 msgid "Failed to apply {name}"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:39
+#: omarchy_settings/pages/connectivity.py:42
 msgid "Network and Bluetooth"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:40
+#: omarchy_settings/pages/connectivity.py:43
 msgid "Networks and connections (impala)"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:41
+#: omarchy_settings/pages/connectivity.py:44
 msgid "Bluetooth devices"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:41
+#: omarchy_settings/pages/connectivity.py:44
 msgid "Pair and connect (bluetui)"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:51
+#: omarchy_settings/pages/connectivity.py:54
 msgid "Full mixer"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:51
+#: omarchy_settings/pages/connectivity.py:54
 msgid "Devices and per-app volume (wiremix)"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:56
+#: omarchy_settings/pages/connectivity.py:59
 #, python-brace-format
 msgid "{cmd} is not installed; install it from ☰ → Dependencies"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:64
+#: omarchy_settings/pages/connectivity.py:67
 msgid "Turns the adapter on or off"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:69
+#: omarchy_settings/pages/connectivity.py:72
 msgid "Could not change Bluetooth"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:79
+#: omarchy_settings/pages/connectivity.py:82
 msgid "Output volume"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:79
+#: omarchy_settings/pages/connectivity.py:82
 msgid "Default device"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:90
+#: omarchy_settings/pages/connectivity.py:93
 msgid "Mute output"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:90
+#: omarchy_settings/pages/connectivity.py:93
 msgid "Mutes the default device"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:92
+#: omarchy_settings/pages/connectivity.py:95
 msgid "Mute microphone"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:92
+#: omarchy_settings/pages/connectivity.py:95
 msgid "Mutes the default input"
 msgstr ""
 
@@ -915,6 +915,140 @@ msgstr ""
 #: omarchy_settings/pages/dependencies.py:102
 #, python-brace-format
 msgid "Installation failed: {error}"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:21
+msgid "No cable connected"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:23 omarchy_settings/pages/ethernet.py:191
+msgid "Connected"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:25 omarchy_settings/pages/ethernet.py:97
+#, python-brace-format
+msgid "{speed} Mb/s"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:30
+msgid "Cable connected, getting an address…"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:31
+msgid "Cable connected, not connected to the network"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:36
+msgid "No cable detected"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:37
+msgid "Check that the cable is firmly plugged in at both ends."
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:38
+msgid "The link is running at 10 Mb/s"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:39
+msgid ""
+"A gigabit port stuck at 10 Mb/s usually means a damaged cable or a bad port. "
+"Try another cable or another port on the router."
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:41
+msgid "No address from the network"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:42
+msgid ""
+"Nothing on the cable answered the request for an address (DHCP). Check that "
+"the other end is a router, or set a manual address below."
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:66
+msgid "Details"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:68
+msgid "Hardware address"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:68
+msgid "IPv4 address"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:69
+msgid "Gateway"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:69
+msgid "DNS servers"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:69
+msgid "Link speed"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:86
+msgid "Disconnect"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:86
+msgid "Connect"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:101
+msgid "IPv4 settings"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:102
+msgid "When the cable is plugged in"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:104
+msgid "Save and reconnect"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:105 omarchy_settings/pages/hyprland.py:98
+msgid "Apply"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:115
+msgid "Wired (Ethernet)"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:121
+msgid "Refresh"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:146
+msgid "NetworkManager (nmcli) is not available"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:168
+msgid "No Ethernet port found"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:181
+msgid "Cable"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:191
+msgid "Disconnected"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:200
+msgid "Saving and reconnecting…"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:201
+msgid "Settings saved and connected"
+msgstr ""
+
+#: omarchy_settings/pages/ethernet.py:217
+#, python-brace-format
+msgid "Settings saved, but the connection didn't come up: {error}"
 msgstr ""
 
 #: omarchy_settings/pages/hyprland.py:27
@@ -1027,10 +1161,6 @@ msgstr ""
 
 #: omarchy_settings/pages/hyprland.py:95
 msgid "Applies several settings at once; you can fine-tune each one below."
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:98
-msgid "Apply"
 msgstr ""
 
 #: omarchy_settings/pages/hyprland.py:102
@@ -1347,6 +1477,49 @@ msgstr ""
 
 #: omarchy_settings/pages/hyprland.py:379
 msgid "Hyprland options restored"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:25
+msgid "Address"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:26 omarchy_settings/pages/ipv4.py:41
+msgid "Automatic (DHCP)"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:26 omarchy_settings/pages/ipv4.py:41
+msgid "Manual"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:29
+msgid "IP address (e.g. 192.168.1.50/24)"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:31
+msgid "Gateway (e.g. 192.168.1.1)"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:32
+msgid "DNS servers, comma separated (optional)"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:33
+msgid "Connect automatically"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:67
+#, python-brace-format
+msgid "Invalid IP address: {value}"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:67
+#, python-brace-format
+msgid "Invalid gateway: {value}"
+msgstr ""
+
+#: omarchy_settings/pages/ipv4.py:68
+#, python-brace-format
+msgid "Invalid DNS server: {value}"
 msgstr ""
 
 #: omarchy_settings/pages/monitors.py:20

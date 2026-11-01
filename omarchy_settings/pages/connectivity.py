@@ -1,4 +1,4 @@
-"""Network, Bluetooth and audio page (shortcuts to Omarchy's TUIs + direct controls)."""
+"""Network, Bluetooth and audio page (wired settings, shortcuts to Omarchy's TUIs, direct controls)."""
 from __future__ import annotations
 
 import re
@@ -12,6 +12,7 @@ from gi.repository import Adw, GLib, Gtk  # noqa: E402
 from .. import core
 from ..i18n import _
 from ..ui import bg, button_row, switch_row
+from .ethernet import EthernetGroup
 
 SINK = "@DEFAULT_AUDIO_SINK@"
 SOURCE = "@DEFAULT_AUDIO_SOURCE@"
@@ -35,6 +36,8 @@ class ConnectivityPage(Adw.PreferencesPage):
         super().__init__()
         self.win = win
         self._vol_timer = 0
+
+        self.add(EthernetGroup(win))
 
         net = Adw.PreferencesGroup(title=_("Network and Bluetooth"))
         net.add(button_row("Wi-Fi", _("Networks and connections (impala)"), _("Open"), lambda: self._tui("impala")))

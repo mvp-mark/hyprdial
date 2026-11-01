@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 15:50-0400\n"
+"POT-Creation-Date: 2026-11-01 19:08-0400\n"
 "PO-Revision-Date: 2026-11-01 12:00-0400\n"
 "Last-Translator: Marcus Vinícius Peixoto Paulo\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -237,7 +237,7 @@ msgstr "Agentes de IA"
 msgid "Claude Code, Codex and Fireworks usage and limits"
 msgstr "Uso e limites do Claude Code, Codex e Fireworks"
 
-#: omarchy_settings/pages/bar.py:50 omarchy_settings/pages/connectivity.py:46
+#: omarchy_settings/pages/bar.py:50 omarchy_settings/pages/connectivity.py:49
 msgid "Audio"
 msgstr "Áudio"
 
@@ -496,7 +496,7 @@ msgstr "omarchy-bar não encontrado: atualize o Omarchy para usar esta página."
 
 #: omarchy_settings/pages/bar.py:212 omarchy_settings/pages/bar.py:244
 #: omarchy_settings/pages/bar.py:324 omarchy_settings/pages/bar.py:347
-#: omarchy_settings/pages/bar.py:397
+#: omarchy_settings/pages/bar.py:397 omarchy_settings/pages/ethernet.py:219
 #, python-brace-format
 msgid "Failed: {error}"
 msgstr "Falhou: {error}"
@@ -665,9 +665,9 @@ msgid "Modules and layout"
 msgstr "Módulos e layout"
 
 #: omarchy_settings/pages/bar.py:376 omarchy_settings/pages/bar.py:378
-#: omarchy_settings/pages/connectivity.py:40
-#: omarchy_settings/pages/connectivity.py:41
-#: omarchy_settings/pages/connectivity.py:51
+#: omarchy_settings/pages/connectivity.py:43
+#: omarchy_settings/pages/connectivity.py:44
+#: omarchy_settings/pages/connectivity.py:54
 msgid "Open"
 msgstr "Abrir"
 
@@ -791,64 +791,64 @@ msgstr "Fonte {name} aplicada"
 msgid "Failed to apply {name}"
 msgstr "Falha ao aplicar {name}"
 
-#: omarchy_settings/pages/connectivity.py:39
+#: omarchy_settings/pages/connectivity.py:42
 msgid "Network and Bluetooth"
 msgstr "Rede e Bluetooth"
 
-#: omarchy_settings/pages/connectivity.py:40
+#: omarchy_settings/pages/connectivity.py:43
 msgid "Networks and connections (impala)"
 msgstr "Redes e conexões (impala)"
 
-#: omarchy_settings/pages/connectivity.py:41
+#: omarchy_settings/pages/connectivity.py:44
 msgid "Bluetooth devices"
 msgstr "Dispositivos Bluetooth"
 
-#: omarchy_settings/pages/connectivity.py:41
+#: omarchy_settings/pages/connectivity.py:44
 msgid "Pair and connect (bluetui)"
 msgstr "Parear e conectar (bluetui)"
 
-#: omarchy_settings/pages/connectivity.py:51
+#: omarchy_settings/pages/connectivity.py:54
 msgid "Full mixer"
 msgstr "Mixer completo"
 
-#: omarchy_settings/pages/connectivity.py:51
+#: omarchy_settings/pages/connectivity.py:54
 msgid "Devices and per-app volume (wiremix)"
 msgstr "Dispositivos e volume por aplicativo (wiremix)"
 
-#: omarchy_settings/pages/connectivity.py:56
+#: omarchy_settings/pages/connectivity.py:59
 #, python-brace-format
 msgid "{cmd} is not installed; install it from ☰ → Dependencies"
 msgstr "{cmd} não está instalado; instale em ☰ → Dependências"
 
-#: omarchy_settings/pages/connectivity.py:64
+#: omarchy_settings/pages/connectivity.py:67
 msgid "Turns the adapter on or off"
 msgstr "Liga ou desliga o adaptador"
 
-#: omarchy_settings/pages/connectivity.py:69
+#: omarchy_settings/pages/connectivity.py:72
 msgid "Could not change Bluetooth"
 msgstr "Não foi possível alterar o Bluetooth"
 
-#: omarchy_settings/pages/connectivity.py:79
+#: omarchy_settings/pages/connectivity.py:82
 msgid "Output volume"
 msgstr "Volume de saída"
 
-#: omarchy_settings/pages/connectivity.py:79
+#: omarchy_settings/pages/connectivity.py:82
 msgid "Default device"
 msgstr "Dispositivo padrão"
 
-#: omarchy_settings/pages/connectivity.py:90
+#: omarchy_settings/pages/connectivity.py:93
 msgid "Mute output"
 msgstr "Saída sem som"
 
-#: omarchy_settings/pages/connectivity.py:90
+#: omarchy_settings/pages/connectivity.py:93
 msgid "Mutes the default device"
 msgstr "Silencia o dispositivo padrão"
 
-#: omarchy_settings/pages/connectivity.py:92
+#: omarchy_settings/pages/connectivity.py:95
 msgid "Mute microphone"
 msgstr "Microfone sem som"
 
-#: omarchy_settings/pages/connectivity.py:92
+#: omarchy_settings/pages/connectivity.py:95
 msgid "Mutes the default input"
 msgstr "Silencia a entrada padrão"
 
@@ -904,6 +904,136 @@ msgstr "Instalação cancelada"
 #, python-brace-format
 msgid "Installation failed: {error}"
 msgstr "A instalação falhou: {error}"
+
+#: omarchy_settings/pages/ethernet.py:21
+msgid "No cable connected"
+msgstr "Nenhum cabo conectado"
+
+#: omarchy_settings/pages/ethernet.py:23 omarchy_settings/pages/ethernet.py:191
+msgid "Connected"
+msgstr "Conectado"
+
+#: omarchy_settings/pages/ethernet.py:25 omarchy_settings/pages/ethernet.py:97
+#, python-brace-format
+msgid "{speed} Mb/s"
+msgstr "{speed} Mb/s"
+
+#: omarchy_settings/pages/ethernet.py:30
+msgid "Cable connected, getting an address…"
+msgstr "Cabo conectado, obtendo um endereço…"
+
+#: omarchy_settings/pages/ethernet.py:31
+msgid "Cable connected, not connected to the network"
+msgstr "Cabo conectado, sem conexão com a rede"
+
+#: omarchy_settings/pages/ethernet.py:36
+msgid "No cable detected"
+msgstr "Nenhum cabo detectado"
+
+#: omarchy_settings/pages/ethernet.py:37
+msgid "Check that the cable is firmly plugged in at both ends."
+msgstr "Confira se o cabo está bem encaixado nas duas pontas."
+
+#: omarchy_settings/pages/ethernet.py:38
+msgid "The link is running at 10 Mb/s"
+msgstr "A conexão está a 10 Mb/s"
+
+#: omarchy_settings/pages/ethernet.py:39
+msgid "A gigabit port stuck at 10 Mb/s usually means a damaged cable or a bad port. Try another cable or another port on the router."
+msgstr "Uma porta gigabit presa em 10 Mb/s costuma indicar cabo danificado ou porta com defeito. Tente outro cabo ou outra porta do roteador."
+
+#: omarchy_settings/pages/ethernet.py:41
+msgid "No address from the network"
+msgstr "A rede não forneceu um endereço"
+
+#: omarchy_settings/pages/ethernet.py:42
+msgid "Nothing on the cable answered the request for an address (DHCP). Check that the other end is a router, or set a manual address below."
+msgstr "Nada no cabo respondeu ao pedido de endereço (DHCP). Confira se a outra ponta é um roteador ou defina um endereço manual abaixo."
+
+#: omarchy_settings/pages/ethernet.py:66
+msgid "Details"
+msgstr "Detalhes"
+
+#: omarchy_settings/pages/ethernet.py:68
+msgid "Hardware address"
+msgstr "Endereço físico (MAC)"
+
+#: omarchy_settings/pages/ethernet.py:68
+msgid "IPv4 address"
+msgstr "Endereço IPv4"
+
+#: omarchy_settings/pages/ethernet.py:69
+msgid "Gateway"
+msgstr "Gateway"
+
+#: omarchy_settings/pages/ethernet.py:69
+msgid "DNS servers"
+msgstr "Servidores DNS"
+
+#: omarchy_settings/pages/ethernet.py:69
+msgid "Link speed"
+msgstr "Velocidade da conexão"
+
+#: omarchy_settings/pages/ethernet.py:86
+msgid "Disconnect"
+msgstr "Desconectar"
+
+#: omarchy_settings/pages/ethernet.py:86
+msgid "Connect"
+msgstr "Conectar"
+
+#: omarchy_settings/pages/ethernet.py:101
+msgid "IPv4 settings"
+msgstr "Configurações IPv4"
+
+#: omarchy_settings/pages/ethernet.py:102
+msgid "When the cable is plugged in"
+msgstr "Quando o cabo for conectado"
+
+#: omarchy_settings/pages/ethernet.py:104
+msgid "Save and reconnect"
+msgstr "Salvar e reconectar"
+
+#: omarchy_settings/pages/ethernet.py:105 omarchy_settings/pages/hyprland.py:98
+msgid "Apply"
+msgstr "Aplicar"
+
+#: omarchy_settings/pages/ethernet.py:115
+msgid "Wired (Ethernet)"
+msgstr "Cabo (Ethernet)"
+
+#: omarchy_settings/pages/ethernet.py:121
+msgid "Refresh"
+msgstr "Atualizar"
+
+#: omarchy_settings/pages/ethernet.py:146
+msgid "NetworkManager (nmcli) is not available"
+msgstr "O NetworkManager (nmcli) não está disponível"
+
+#: omarchy_settings/pages/ethernet.py:168
+msgid "No Ethernet port found"
+msgstr "Nenhuma porta Ethernet encontrada"
+
+#: omarchy_settings/pages/ethernet.py:181
+msgid "Cable"
+msgstr "Cabo"
+
+#: omarchy_settings/pages/ethernet.py:191
+msgid "Disconnected"
+msgstr "Desconectado"
+
+#: omarchy_settings/pages/ethernet.py:200
+msgid "Saving and reconnecting…"
+msgstr "Salvando e reconectando…"
+
+#: omarchy_settings/pages/ethernet.py:201
+msgid "Settings saved and connected"
+msgstr "Configurações salvas e conectado"
+
+#: omarchy_settings/pages/ethernet.py:217
+#, python-brace-format
+msgid "Settings saved, but the connection didn't come up: {error}"
+msgstr "Configurações salvas, mas a conexão não subiu: {error}"
 
 #: omarchy_settings/pages/hyprland.py:27
 msgid "Compact"
@@ -1016,10 +1146,6 @@ msgstr "Estilo rápido"
 #: omarchy_settings/pages/hyprland.py:95
 msgid "Applies several settings at once; you can fine-tune each one below."
 msgstr "Aplica vários ajustes de uma vez; depois dá para refinar cada um abaixo."
-
-#: omarchy_settings/pages/hyprland.py:98
-msgid "Apply"
-msgstr "Aplicar"
 
 #: omarchy_settings/pages/hyprland.py:102
 msgid "Windows"
@@ -1336,6 +1462,49 @@ msgstr "Estilo {name} aplicado"
 #: omarchy_settings/pages/hyprland.py:379
 msgid "Hyprland options restored"
 msgstr "Opções do Hyprland restauradas"
+
+#: omarchy_settings/pages/ipv4.py:25
+msgid "Address"
+msgstr "Endereço"
+
+#: omarchy_settings/pages/ipv4.py:26 omarchy_settings/pages/ipv4.py:41
+msgid "Automatic (DHCP)"
+msgstr "Automático (DHCP)"
+
+#: omarchy_settings/pages/ipv4.py:26 omarchy_settings/pages/ipv4.py:41
+msgid "Manual"
+msgstr "Manual"
+
+#: omarchy_settings/pages/ipv4.py:29
+msgid "IP address (e.g. 192.168.1.50/24)"
+msgstr "Endereço IP (ex.: 192.168.1.50/24)"
+
+#: omarchy_settings/pages/ipv4.py:31
+msgid "Gateway (e.g. 192.168.1.1)"
+msgstr "Gateway (ex.: 192.168.1.1)"
+
+#: omarchy_settings/pages/ipv4.py:32
+msgid "DNS servers, comma separated (optional)"
+msgstr "Servidores DNS, separados por vírgula (opcional)"
+
+#: omarchy_settings/pages/ipv4.py:33
+msgid "Connect automatically"
+msgstr "Conectar automaticamente"
+
+#: omarchy_settings/pages/ipv4.py:67
+#, python-brace-format
+msgid "Invalid IP address: {value}"
+msgstr "Endereço IP inválido: {value}"
+
+#: omarchy_settings/pages/ipv4.py:67
+#, python-brace-format
+msgid "Invalid gateway: {value}"
+msgstr "Gateway inválido: {value}"
+
+#: omarchy_settings/pages/ipv4.py:68
+#, python-brace-format
+msgid "Invalid DNS server: {value}"
+msgstr "Servidor DNS inválido: {value}"
 
 #: omarchy_settings/pages/monitors.py:20
 msgid "Normal"
