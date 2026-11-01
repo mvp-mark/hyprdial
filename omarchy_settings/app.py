@@ -14,6 +14,8 @@ from .core import HyprStore
 from .pages.bar import BarPage
 from .pages.connectivity import ConnectivityPage
 from .pages.hyprland import HyprlandPage
+from .pages.monitors import MonitorsPage
+from .pages.shortcuts import ShortcutsPage
 from .pages.themes import ThemesPage
 
 APP_ID = "org.omarchy.Settings"
@@ -27,7 +29,9 @@ class Window(Adw.ApplicationWindow):
         self.stack = Adw.ViewStack()
         pages = [
             (ThemesPage(self), "themes", "Temas", "preferences-desktop-theme-symbolic"),
-            (HyprlandPage(self), "hyprland", "Hyprland", "preferences-desktop-display-symbolic"),
+            (HyprlandPage(self), "hyprland", "Hyprland", "preferences-system-symbolic"),
+            (MonitorsPage(self), "monitors", "Monitores", "preferences-desktop-display-symbolic"),
+            (ShortcutsPage(self), "shortcuts", "Atalhos", "preferences-desktop-keyboard-shortcuts-symbolic"),
             (BarPage(self), "bar", "Barra e fontes", "preferences-desktop-font-symbolic"),
             (ConnectivityPage(self), "connectivity", "Conectividade", "network-wireless-symbolic"),
         ]
