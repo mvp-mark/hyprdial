@@ -1,4 +1,4 @@
-"""Página de atalhos: os do Omarchy (mudar de tecla, desativar, restaurar) e atalhos próprios."""
+"""Shortcuts page: Omarchy's (change key, disable, restore) and the user's own shortcuts."""
 from __future__ import annotations
 
 import copy
@@ -60,15 +60,15 @@ def keycaps_box(keys: str | None, dim: bool = False) -> Gtk.Box:
 
 
 class KeyDialog(Adw.AlertDialog):
-    """Escolha de teclas: grava a combinação pressionada, com modificadores ajustáveis à mão.
+    """Key picker: records the pressed combination, with modifiers adjustable by hand.
 
-    O Hyprland intercepta combinações que já estão em uso, então elas podem não chegar aqui;
-    nesse caso basta marcar os modificadores e gravar só a tecla final.
+    Hyprland intercepts combinations that are already in use, so they may not reach this window;
+    in that case select the modifiers and record just the final key.
     """
 
     def __init__(self, heading: str, keys: str | None, conflicts, on_save, custom: dict | None = None):
         super().__init__(heading=heading)
-        self.conflicts = conflicts  # função: teclas -> (mensagem, bloqueia)
+        self.conflicts = conflicts  # function: keys -> (message, blocks)
         self.on_save = on_save
         mods, self.key = kb.split_keys(keys) if keys else (["SUPER"], "")
         self.recording = False
@@ -142,7 +142,7 @@ class KeyDialog(Adw.AlertDialog):
         name = Gdk.keyval_name(keyval) or ""
         if name in MODIFIER_KEYS:
             return True
-        # tecla base, sem o efeito do Shift (Shift+1 grava "1", não "!")
+        # base key, without the effect of Shift (Shift+1 records "1", not "!")
         ok, _keys, keyvals = Gdk.Display.get_default().map_keycode(keycode)
         base = keyvals[0] if ok and keyvals else keyval
         self.key = (Gdk.keyval_name(Gdk.keyval_to_lower(base)) or name).upper()
@@ -205,7 +205,7 @@ class ShortcutsPage(Adw.PreferencesPage):
         self.add(self.footer)
         self.reload()
 
-    # ------------------------------------------------------------------ montagem
+    # ------------------------------------------------------------------ building
     def reload(self) -> None:
         state = copy.deepcopy(self.store.bindings)
         bg(lambda: kb.build_entries(kb.live_binds(), kb.source_binds(), state), self._populate)
@@ -264,7 +264,7 @@ class ShortcutsPage(Adw.PreferencesPage):
 
     @staticmethod
     def _hay(keys: str | None) -> str:
-        """Texto de busca para teclas: 'super+shift+b' e os nomes amigáveis."""
+        """Search text for keys: 'super+shift+b' and the friendly names."""
         if not keys:
             return ""
         return f"{kb.canon(keys).replace(' ', '')} {' '.join(kb.keycaps(keys))} {'+'.join(kb.keycaps(keys))}"
@@ -320,7 +320,7 @@ class ShortcutsPage(Adw.PreferencesPage):
             if q:
                 exp.set_expanded(count > 0)
 
-    # ------------------------------------------------------------------ conflitos
+    # ------------------------------------------------------------------ conflicts
     def _who_uses(self, keys: str, ignore: str | None = None, ignore_custom: int | None = None):
         c = kb.canon(keys)
         for i, item in enumerate(self.store.bindings.get("custom", [])):
@@ -343,12 +343,12 @@ class ShortcutsPage(Adw.PreferencesPage):
         return check
 
     def _take_keys(self, state: dict, keys: str, ignore: str | None = None) -> None:
-        """Desativa o atalho do Omarchy que hoje usa estas teclas."""
+        """Disables the Omarchy shortcut that currently uses these keys."""
         kind, who = self._who_uses(keys, ignore)
         if kind == "entry":
             state["overrides"][who.keys] = {"desc": who.desc}
 
-    # ------------------------------------------------------------------ ações
+    # ------------------------------------------------------------------ actions
     def _edit_entry(self, e: kb.Entry) -> None:
         def save(dialog: KeyDialog) -> None:
             state = copy.deepcopy(self.store.bindings)
@@ -424,7 +424,7 @@ class ShortcutsPage(Adw.PreferencesPage):
         dialog.present(self.win)
 
     def _apply(self, state: dict, ok_msg: str, expect: str | None = None) -> None:
-        """Grava, recarrega e confere; se o atalho novo não aparecer no Hyprland, desfaz."""
+        """Writes, reloads and checks; if the new shortcut doesn't show up in Hyprland, undoes it."""
         previous = copy.deepcopy(self.store.bindings)
         self._busy = True
 

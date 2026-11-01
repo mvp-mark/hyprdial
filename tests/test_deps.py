@@ -7,7 +7,7 @@ from omarchy_settings import core, deps
 
 @pytest.fixture
 def pacman(monkeypatch):
-    """Simula `pacman -T`: imprime só os pacotes da lista `absent`."""
+    """Fakes `pacman -T`: prints only the packages in the `absent` list."""
     state = {"absent": set(), "calls": []}
 
     def fake_run(args, timeout=10):

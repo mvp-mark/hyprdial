@@ -12,8 +12,8 @@ def test_logical_size_applies_scale_and_rotation():
 
 def test_touches_needs_shared_edge_segment():
     assert touches(A, B)
-    assert not touches(A, B.moved(2560, 1440))  # só o canto
-    assert not touches(A, B.moved(2600, 0))  # vão entre eles
+    assert not touches(A, B.moved(2560, 1440))  # only the corner
+    assert not touches(A, B.moved(2600, 0))  # gap between them
 
 
 def test_overlaps():

@@ -1,7 +1,7 @@
-"""Temas e wallpapers do Omarchy (sem GTK, testável).
+"""Omarchy themes and wallpapers (no GTK, testable).
 
-Um tema é uma pasta em $OMARCHY_PATH/themes/<slug>; ~/.config/omarchy/themes/<slug> pode ser um tema
-inteiro do usuário ou só sobrepor arquivos do oficial, como o omarchy-theme-set faz. O tema atual fica em
+A theme is a folder in $OMARCHY_PATH/themes/<slug>; ~/.config/omarchy/themes/<slug> can be a whole user theme
+or just overlay files of the official one, as omarchy-theme-set does. The current theme lives in
 ~/.local/state/omarchy/current.
 """
 from __future__ import annotations
@@ -28,7 +28,7 @@ class Theme:
     name: str
     preview: Path | None
     colors: dict = field(default_factory=dict)
-    user: bool = False  # existe em ~/.config/omarchy/themes
+    user: bool = False  # exists in ~/.config/omarchy/themes
 
     @property
     def dark(self) -> bool:
@@ -39,7 +39,7 @@ class Theme:
 
 
 def display_name(slug: str) -> str:
-    """Mesmo formato do omarchy-theme-list: 'catppuccin-latte' -> 'Catppuccin Latte'."""
+    """Same format as omarchy-theme-list: 'catppuccin-latte' -> 'Catppuccin Latte'."""
     return re.sub(r"(^|-)([a-z])", lambda m: m.group(1) + m.group(2).upper(), slug).replace("-", " ")
 
 
@@ -59,7 +59,7 @@ def read_colors(path: Path | None) -> dict:
 
 
 def list_themes(user_dir: Path = USER_THEMES, omarchy_dir: Path = OMARCHY_THEMES) -> list[Theme]:
-    roots = (user_dir, omarchy_dir)  # o do usuário vem primeiro: sobrepõe o oficial
+    roots = (user_dir, omarchy_dir)  # the user's comes first: it overlays the official one
     slugs: set[str] = set()
     for root in roots:
         if root.is_dir():
@@ -79,7 +79,7 @@ def current_slug(state: Path = STATE) -> str:
 
 
 def wallpapers(state: Path = STATE, user_backgrounds: Path = USER_BACKGROUNDS) -> list[Path]:
-    """Wallpapers do tema atual: os do usuário e os do tema, na ordem do omarchy-theme-bg-next."""
+    """Wallpapers of the current theme: the user's and the theme's, in omarchy-theme-bg-next order."""
     slug = current_slug(state)
     files: list[Path] = []
     for root in (user_backgrounds / slug, state / "theme" / "backgrounds"):

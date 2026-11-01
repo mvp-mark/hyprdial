@@ -1,9 +1,8 @@
-"""Núcleo sem dependência de GTK: execução de comandos e edição das configs do Hyprland.
+"""GTK-free core: running commands and editing the Hyprland configs.
 
-Estratégia: nada do que o Omarchy gerencia é alterado. Os ajustes do usuário ficam em
-~/.config/hypr/omarchy-settings.lua (gerado) e uma única linha `require(...)` é
-inserida em hyprland.lua, depois dos arquivos do usuário, para que esses valores
-tenham a palavra final.
+Strategy: nothing managed by Omarchy is modified. User settings live in
+~/.config/hypr/omarchy-settings.lua (generated) and a single `require(...)` line is
+inserted into hyprland.lua, after the user's files, so these values have the last word.
 """
 from __future__ import annotations
 
@@ -45,7 +44,7 @@ def out(args: list[str], timeout: float = 10) -> str:
 
 
 def spawn(args: list[str]) -> bool:
-    """Inicia um processo desacoplado da janela."""
+    """Starts a process detached from the window."""
     try:
         subprocess.Popen(
             args,
@@ -75,7 +74,7 @@ def open_in_editor(path: Path) -> bool:
 
 # --------------------------------------------------------------------------- Hyprland
 def live_option(key: str):
-    """Valor atual de uma opção no Hyprland em execução (ou None)."""
+    """Current value of an option in the running Hyprland (or None)."""
     raw = out(["hyprctl", "getoption", key, "-j"])
     try:
         data = json.loads(raw)
@@ -104,7 +103,7 @@ def fmt(value) -> str:
 
 
 def lua(value) -> str:
-    """Literal Lua para um valor Python já tipado (bool, número ou string)."""
+    """Lua literal for an already typed Python value (bool, number or string)."""
     if isinstance(value, (bool, int, float)):
         return fmt(value)
     text = str(value)
@@ -114,7 +113,7 @@ def lua(value) -> str:
 
 
 def option_lua(text: str) -> str:
-    """Opções são guardadas como texto; recupera bool/número antes de virar Lua."""
+    """Options are stored as text; recover bool/number before turning them into Lua."""
     if text in ("true", "false"):
         return text
     try:
@@ -125,12 +124,12 @@ def option_lua(text: str) -> str:
 
 
 def lua_key(name: str) -> str:
-    """Na API Lua, opções com hífen (ex.: 'tap-to-click' do hyprctl) usam sublinhado."""
+    """In the Lua API, hyphenated options (e.g. hyprctl's 'tap-to-click') use underscores."""
     return name.replace("-", "_")
 
 
 def config_call(values: dict[str, str]) -> str:
-    """Converte {'decoration:blur:enabled': 'true', ...} em hl.config({ ... })."""
+    """Turns {'decoration:blur:enabled': 'true', ...} into hl.config({ ... })."""
     tree: dict = {}
     for key in sorted(values):
         *path, leaf = key.split(":")
@@ -165,7 +164,7 @@ def monitor_call(rule: dict) -> str:
 
 
 def render(values: dict[str, str], monitors: dict[str, dict], bindings: dict | None = None) -> str:
-    from . import keybinds  # importado aqui: keybinds depende deste módulo
+    from . import keybinds  # imported here: keybinds depends on this module
 
     parts = [HEADER]
     if values:
@@ -176,7 +175,7 @@ def render(values: dict[str, str], monitors: dict[str, dict], bindings: dict | N
 
 
 def list_monitors() -> list[dict]:
-    """Monitores conectados (inclusive desativados) segundo o Hyprland em execução."""
+    """Connected displays (disabled ones included) according to the running Hyprland."""
     try:
         data = json.loads(out(["hyprctl", "monitors", "all", "-j"]))
     except (ValueError, TypeError):
@@ -185,7 +184,7 @@ def list_monitors() -> list[dict]:
 
 
 def live_rule(mon: dict) -> dict:
-    """Regra hl.monitor equivalente ao estado atual de um monitor."""
+    """hl.monitor rule equivalent to a display's current state."""
     rule = {
         "output": mon["name"],
         "mode": f"{mon['width']}x{mon['height']}@{mon['refreshRate']:.2f}",
@@ -203,7 +202,7 @@ def live_rule(mon: dict) -> dict:
 
 
 class HyprStore:
-    """Guarda ajustes do Hyprland, aplica ao vivo (hyprctl eval) e persiste em arquivo."""
+    """Keeps Hyprland settings, applies them live (hyprctl eval) and persists them to a file."""
 
     DEBOUNCE = 0.25
 
@@ -227,7 +226,7 @@ class HyprStore:
         except (OSError, ValueError, AttributeError, TypeError):
             return {}, {}, empty
 
-    # leituras consideram o que ainda está na fila, para mudanças seguidas não se sobrescreverem
+    # reads include what is still queued, so back-to-back changes don't overwrite each other
     def get(self, key: str) -> str | None:
         with self._lock:
             if key in self._pending:
@@ -252,12 +251,12 @@ class HyprStore:
         self._queue(self._pending_monitors, output, None)
 
     def reset_options(self) -> None:
-        """Remove só as opções do Hyprland; monitores e atalhos têm restauração própria."""
+        """Removes only the Hyprland options; displays and shortcuts have their own restore."""
         for key in list(self.values):
             self.unset(key)
 
     def apply_bindings(self, bindings: dict) -> None:
-        """Grava os atalhos e recarrega o Hyprland na hora (chamar fora da thread da interface)."""
+        """Writes the shortcuts and reloads Hyprland right away (call it off the UI thread)."""
         self.flush()
         with self._lock:
             self.bindings = bindings
@@ -277,7 +276,7 @@ class HyprStore:
             self._timer.daemon = True
             self._timer.start()
 
-    # -- aplicação
+    # -- applying
     def flush(self) -> None:
         with self._lock:
             pending, self._pending = self._pending, {}
@@ -289,7 +288,7 @@ class HyprStore:
         for key, value in pending.items():
             if value is None:
                 self.values.pop(key, None)
-                needs_reload = True  # não existe 'unset' ao vivo: recarrega a config
+                needs_reload = True  # there is no live 'unset': reload the config
             else:
                 self.values[key] = changed[key] = value
         live = [config_call(changed)] if changed else []
@@ -318,7 +317,7 @@ class HyprStore:
         self.ensure_required()
 
     def ensure_required(self) -> None:
-        """Carrega o arquivo gerado depois dos do usuário, mas antes dos toggles do Omarchy."""
+        """Loads the generated file after the user's files but before Omarchy's toggles."""
         if not self.main.exists():
             return
         text = self.main.read_text()
@@ -332,7 +331,7 @@ class HyprStore:
         for i, line in enumerate(lines):
             if line.strip() == TOGGLES_LINE:
                 while i > 0 and lines[i - 1].lstrip().startswith("--"):
-                    i -= 1  # mantém o comentário junto da linha que ele descreve
+                    i -= 1  # keep the comment next to the line it describes
                 lines.insert(i, block + "\n")
                 break
         else:

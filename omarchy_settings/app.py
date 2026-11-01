@@ -1,4 +1,4 @@
-"""Janela principal e ponto de entrada."""
+"""Main window and entry point."""
 from __future__ import annotations
 
 import sys
@@ -69,7 +69,7 @@ class Window(Adw.ApplicationWindow):
         self.toasts.add_toast(Adw.Toast(title=message, timeout=2))
 
     def _on_close(self, _win) -> bool:
-        self.store.flush()  # garante que ajustes pendentes foram gravados
+        self.store.flush()  # make sure pending settings were written
         return False
 
 

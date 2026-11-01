@@ -1,7 +1,7 @@
-"""Página de ajustes do Hyprland: estilo, janelas, efeitos, teclado, mouse, touchpad e comportamento.
+"""Hyprland settings page: style, windows, effects, keyboard, mouse, touchpad and behavior.
 
-Cada linha mostra o valor em uso (estado salvo > Hyprland em execução > padrão) e, quando este app
-sobrescreve a opção, um botão ↶ que devolve só aquela opção ao padrão do Omarchy.
+Each row shows the value in use (saved state > running Hyprland > default) and, when this app overrides the
+option, a ↶ button that returns just that option to Omarchy's default.
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from .. import core
 from ..i18n import _
 from ..ui import bg, button_row, to_bool, to_float
 
-# Estilos rápidos: chaves ausentes num estilo voltam ao padrão do Omarchy.
+# Quick styles: keys missing from a style go back to Omarchy's default.
 PRESET_KEYS = (
     "general:gaps_in", "general:gaps_out", "general:border_size", "decoration:rounding",
     "decoration:blur:enabled", "decoration:blur:size", "decoration:blur:passes",
@@ -46,7 +46,7 @@ LAYOUTS = [
     ("scrolling", _("Side scrolling"), _("Side-by-side columns that scroll horizontally, niri style")),
 ]
 
-# (rótulo, layout, variante)
+# (label, layout, variant)
 KEYBOARDS = [
     (_("Portuguese (Brazil, ABNT2)"), "br", ""),
     (_("English (US)"), "us", ""),
@@ -59,7 +59,7 @@ ACCEL = [("", _("Device default")), ("adaptive", _("Adaptive")), ("flat", _("Off
 
 
 def keyboard_index(layout: str, variant: str) -> int:
-    """Posição na lista de layouts comuns; o último item é 'Personalizado'."""
+    """Position in the list of common layouts; the last item is 'Custom'."""
     return next((i for i, (_label, lay, var) in enumerate(KEYBOARDS) if (lay, var) == (layout, variant)), len(KEYBOARDS))
 
 
@@ -88,7 +88,7 @@ class HyprlandPage(Adw.PreferencesPage):
                              _("Restore"), self._reset_all, "destructive-action"))
         self.add(reset)
 
-    # ------------------------------------------------------------------ grupos
+    # ------------------------------------------------------------------ groups
     def _style_group(self) -> None:
         group = Adw.PreferencesGroup(
             title=_("Quick style"),
@@ -191,7 +191,7 @@ class HyprlandPage(Adw.PreferencesPage):
                              _("Seconds without moving the mouse; 0 never hides"), 0, 60, 1, 0))
         self.add(group)
 
-    # ------------------------------------------------------------------ linhas
+    # ------------------------------------------------------------------ rows
     def _initial(self, key: str, default):
         saved = self.store.get(key)
         if saved is not None:
@@ -200,7 +200,7 @@ class HyprlandPage(Adw.PreferencesPage):
         return default if live is None else live
 
     def _register(self, key: str, row, set_widget: Callable, default) -> None:
-        """Botão ↶ por opção, visível só quando este app sobrescreve o valor."""
+        """A ↶ button per option, visible only when this app overrides the value."""
         undo = Gtk.Button(icon_name="edit-undo-symbolic", valign=Gtk.Align.CENTER,
                           tooltip_text=_("Back to Omarchy's default"))
         undo.add_css_class("flat")
@@ -218,7 +218,7 @@ class HyprlandPage(Adw.PreferencesPage):
             self._sync_keyboard_row()
 
     def _sync_keyboard_row(self) -> None:
-        """Mantém a lista de layouts comuns de acordo com os campos de Avançado (após editar ou restaurar)."""
+        """Keeps the common layouts list in sync with the Advanced fields (after editing or restoring)."""
         layout = self.entries["input:kb_layout"].get_text().strip()
         variant = self.entries["input:kb_variant"].get_text().strip()
         updating, self._updating = self._updating, True
@@ -239,7 +239,7 @@ class HyprlandPage(Adw.PreferencesPage):
         return row
 
     def _percent(self, key, title, subtitle, lo, hi, default) -> Adw.SpinRow:
-        """Opção de 0 a 1 mostrada como porcentagem."""
+        """A 0 to 1 option shown as a percentage."""
         row = Adw.SpinRow.new_with_range(lo, hi, 1)
         row.set_title(title)
         row.set_subtitle(subtitle)
@@ -256,7 +256,7 @@ class HyprlandPage(Adw.PreferencesPage):
         return row
 
     def _choice(self, key, title, default, options, subtitle_for: Callable | None = None) -> Adw.ComboRow:
-        """Lista de (valor, rótulo); um valor atual fora da lista entra como opção extra."""
+        """List of (value, label); a current value outside the list is added as an extra option."""
         options = list(options)
         values = [str(v) for v, _ in options]
         current = str(self._initial(key, default))
@@ -297,7 +297,7 @@ class HyprlandPage(Adw.PreferencesPage):
         return row
 
     def _keyboard_row(self) -> Adw.ComboRow:
-        """Atalho para os layouts mais comuns; o resto fica em Avançado."""
+        """Shortcut to the most common layouts; everything else is under Advanced."""
         layout = str(self._initial("input:kb_layout", "us"))
         variant = str(self._initial("input:kb_variant", "") or "")
         labels = [label for label, _lay, _var in KEYBOARDS] + [_("Custom (see Advanced)")]
@@ -311,7 +311,7 @@ class HyprlandPage(Adw.PreferencesPage):
             if i >= len(KEYBOARDS) or self._updating:
                 return
             _label, lay, var = KEYBOARDS[i]
-            # grava direto: _changed ressincronizaria esta mesma lista no meio do sinal e entraria em laço
+            # write directly: _changed would re-sync this same list mid-signal and loop forever
             for key, value in (("input:kb_layout", lay), ("input:kb_variant", var)):
                 self.store.set(key, value)
                 self.controls[key][2].set_visible(True)
@@ -325,7 +325,7 @@ class HyprlandPage(Adw.PreferencesPage):
         row.connect("notify::selected", on_selected)
         return row
 
-    # ------------------------------------------------------------------ estilos e restauração
+    # ------------------------------------------------------------------ styles and restoring
     def _apply_preset(self, name: str, values: dict) -> None:
         self._updating = True
         try:
@@ -341,7 +341,7 @@ class HyprlandPage(Adw.PreferencesPage):
             self._updating = False
         restored = [k for k in PRESET_KEYS if k not in values]
         if restored:
-            # o que voltou ao padrão só é conhecido depois que o Hyprland recarrega
+            # what went back to the default is only known after Hyprland reloads
             GLib.timeout_add(1200, self._sync_from_live, restored)
         self.win.toast(_("{name} style applied").format(name=name))
 

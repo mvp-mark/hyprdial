@@ -1,4 +1,4 @@
-"""Helpers de interface compartilhados pelas páginas."""
+"""Widget helpers shared by the pages."""
 from __future__ import annotations
 
 import threading
@@ -12,7 +12,7 @@ from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
 
 def bg(fn: Callable, done: Callable | None = None) -> None:
-    """Executa fn em thread e entrega o resultado (ou a exceção) a done na thread da UI."""
+    """Runs fn in a thread and hands the result (or the exception) to done on the UI thread."""
 
     def work() -> None:
         try:

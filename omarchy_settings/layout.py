@@ -1,7 +1,7 @@
-"""Geometria da disposição de monitores (sem GTK, testável).
+"""Display arrangement geometry (no GTK, testable).
 
-Coordenadas em pixels lógicos do Hyprland: tamanho do modo dividido pela escala,
-com largura e altura trocadas quando o monitor está girado 90° ou 270°.
+Coordinates are Hyprland logical pixels: the mode size divided by the scale, with width and
+height swapped when the display is rotated 90° or 270°.
 """
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ def overlaps(a: Rect, b: Rect) -> bool:
 
 
 def touches(a: Rect, b: Rect) -> bool:
-    """Compartilham um trecho de borda (o cursor consegue passar de um para o outro)."""
+    """They share a stretch of edge (the pointer can move from one to the other)."""
     side = (a.right == b.x or b.right == a.x) and a.y < b.bottom and b.y < a.bottom
     top = (a.bottom == b.y or b.bottom == a.y) and a.x < b.right and b.x < a.right
     return side or top
@@ -53,7 +53,7 @@ def _clamp(v: int, lo: int, hi: int) -> int:
 
 
 def snap(r: Rect, others: list[Rect], threshold: float) -> Rect:
-    """Durante o arraste, puxa as bordas de r para as bordas próximas dos outros monitores."""
+    """While dragging, pulls r's edges to the nearby edges of the other displays."""
 
     def best(pos: int, size: int, edges: list[int]) -> int:
         candidates = [e for e in edges] + [e - size for e in edges]
@@ -66,7 +66,7 @@ def snap(r: Rect, others: list[Rect], threshold: float) -> Rect:
 
 
 def settle(r: Rect, others: list[Rect]) -> Rect:
-    """Ao soltar: posição mais próxima em que r não sobrepõe ninguém e encosta em algum monitor."""
+    """On release: the closest position where r overlaps nothing and touches some display."""
     if not others:
         return r
 
@@ -87,7 +87,7 @@ def settle(r: Rect, others: list[Rect]) -> Rect:
 
 
 def normalize(rects: list[Rect]) -> list[Rect]:
-    """Desloca tudo para que o canto superior esquerdo da disposição fique em 0x0."""
+    """Shifts everything so the arrangement's top-left corner is at 0x0."""
     if not rects:
         return rects
     dx, dy = min(r.x for r in rects), min(r.y for r in rects)

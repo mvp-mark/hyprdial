@@ -18,7 +18,7 @@ def by_desc(sources, desc):
     return next(s for s in sources if s.desc == desc)
 
 
-# ------------------------------------------------------------------ teclas
+# ------------------------------------------------------------------ keys
 def test_canon_ignores_modifier_order_case_and_aliases():
     assert kb.canon("shift + super + b") == "SUPER + SHIFT + B"
     assert kb.canon("MOD4 + CONTROL + return") == "SUPER + CTRL + RETURN"
@@ -41,7 +41,7 @@ def test_keycaps():
     assert kb.keycaps("SUPER + CTRL + code:11") == ["Super", "Ctrl", "2"]
 
 
-# ------------------------------------------------------------------ leitura das fontes
+# ------------------------------------------------------------------ reading the sources
 def test_find_binds_skips_comments_and_strings():
     text = '-- o.bind("A", "x", "y")\nlocal s = "o.bind(no)"\no.bind("SUPER + A", "Real", "cmd, with comma")\n'
     assert kb.find_binds(text) == [("o.bind", ['"SUPER + A"', '"Real"', '"cmd, with comma"'])]
@@ -85,7 +85,7 @@ def test_movable(sources):
     assert not by_desc(sources, "Universal copy").movable
 
 
-# ------------------------------------------------------------------ entradas da página
+# ------------------------------------------------------------------ page entries
 def live(modmask, key, desc, keycode=0):
     return {"modmask": modmask, "key": key, "keycode": keycode, "description": desc, "submap": "", "mouse": False}
 
@@ -93,10 +93,10 @@ def live(modmask, key, desc, keycode=0):
 def test_build_entries_matches_sources_and_reconstructs_loops(sources):
     entries = kb.build_entries([
         live(64, "RETURN", "Terminal"),
-        live(64, "", "Expand window left"),        # code:20, sem 'key' no hyprctl
-        live(64, "", "Switch to workspace 3"),     # gerado em laço
+        live(64, "", "Expand window left"),        # code:20, no 'key' from hyprctl
+        live(64, "", "Switch to workspace 3"),     # generated in a loop
         live(64, "C", "Universal copy"),
-        live(64, "F12", "Something else"),         # só existe ao vivo
+        live(64, "F12", "Something else"),         # only exists live
     ], sources, kb.empty_state())
     e = {x.desc: x for x in entries}
     assert e["Terminal"].action == '{ omarchy = "terminal" }' and e["Terminal"].category == "applications"
@@ -117,7 +117,7 @@ def test_build_entries_with_overrides_and_custom(sources):
     }
     entries = kb.build_entries([live(64, "T", "Terminal"), live(64, "G", "Gimp")], sources, state)
     e = {x.desc: x for x in entries}
-    assert set(e) == {"Terminal", "Close window"}  # as teclas novas não aparecem duplicadas
+    assert set(e) == {"Terminal", "Close window"}  # the new keys don't show up twice
     assert e["Terminal"].current_keys == "SUPER + T" and e["Terminal"].keys == "SUPER + RETURN"
     assert e["Close window"].current_keys is None
 
@@ -146,10 +146,10 @@ def test_custom_action(kind, expected):
     assert kb.custom_action(kind, "gimp") == expected
 
 
-# ------------------------------------------------------------------ arquivos reais do Omarchy
-@pytest.mark.skipif(not kb.DEFAULT_DIR.is_dir(), reason="Omarchy não instalado")
+# ------------------------------------------------------------------ Omarchy's real files
+@pytest.mark.skipif(not kb.DEFAULT_DIR.is_dir(), reason="Omarchy not installed")
 def test_real_omarchy_bindings_still_parse():
-    """Avisa quando uma atualização do Omarchy mudar o formato dos arquivos de atalhos."""
+    """Warns when an Omarchy update changes the format of the shortcut files."""
     sources = [s for s in kb.source_binds() if s.category != "user"]
     assert len(sources) > 50
     assert all(kb.split_keys(s.keys)[1] for s in sources)

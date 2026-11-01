@@ -1,4 +1,4 @@
-"""Página de monitores: disposição arrastável, resolução, taxa, escala, rotação, VRR, espelhamento e brilho."""
+"""Displays page: drag-and-drop arrangement, resolution, refresh rate, scale, rotation, VRR, mirroring and brightness."""
 from __future__ import annotations
 
 import json
@@ -28,7 +28,7 @@ TRANSFORMS = [
 ]
 VRR = [_("Off"), _("On"), _("Fullscreen only")]
 CONFIRM_SECONDS = 15
-# Mudanças que podem deixar a tela ilegível pedem confirmação, com reversão automática.
+# Changes that can make the screen unreadable ask for confirmation, with an automatic revert.
 RISKY = ("mode", "scale", "transform", "disabled", "mirror", "bitdepth")
 
 
@@ -54,17 +54,17 @@ def text_size() -> int | None:
 
 
 class MonitorLayout(Gtk.DrawingArea):
-    """Monitores desenhados em escala; arraste para posicionar, eles se encaixam pelas bordas."""
+    """Displays drawn to scale; drag to position them, they snap to each other's edges."""
 
     PAD = 18
-    SNAP_PX = 16  # distância na tela para grudar numa borda
+    SNAP_PX = 16  # on-screen distance to snap to an edge
 
     def __init__(self, rects: list[layout.Rect], on_change):
         super().__init__(hexpand=True, content_height=320)
         self.rects = list(rects)
         self.on_change = on_change
         self._drag: tuple[int, layout.Rect] | None = None
-        self._view: tuple[float, float, float] | None = None  # congelada durante o arraste
+        self._view: tuple[float, float, float] | None = None  # frozen while dragging
         self.set_draw_func(self._draw)
 
         drag = Gtk.GestureDrag()
@@ -82,11 +82,11 @@ class MonitorLayout(Gtk.DrawingArea):
             self.rects = list(rects)
             self.queue_draw()
 
-    # -- conversão entre pixels lógicos e a área desenhada
+    # -- converting between logical pixels and the drawing area
     def _compute_view(self) -> tuple[float, float, float]:
         x0, y0 = min(r.x for r in self.rects), min(r.y for r in self.rects)
         x1, y1 = max(r.right for r in self.rects), max(r.bottom for r in self.rects)
-        # folga de um monitor inteiro em volta, para caber qualquer um em qualquer lado
+        # a whole display's worth of margin around, so any display fits on any side
         mx, my = max(r.w for r in self.rects), max(r.h for r in self.rects)
         x0, y0, x1, y1 = x0 - mx, y0 - my, x1 + mx, y1 + my
         w, h = max(self.get_width() - 2 * self.PAD, 1), max(self.get_height() - 2 * self.PAD, 1)
@@ -108,14 +108,14 @@ class MonitorLayout(Gtk.DrawingArea):
                 return i
         return None
 
-    # -- arraste
+    # -- dragging
     def _on_begin(self, gesture, x, y) -> None:
         i = self._hit(x, y)
         if i is None:
             gesture.set_state(Gtk.EventSequenceState.DENIED)
             return
         self._view = self._compute_view()
-        self.rects.append(self.rects.pop(i))  # o arrastado é desenhado por cima
+        self.rects.append(self.rects.pop(i))  # the dragged one is drawn on top
         self._drag = (len(self.rects) - 1, self.rects[-1])
         self.set_cursor_from_name("grabbing")
         self.queue_draw()
@@ -125,7 +125,7 @@ class MonitorLayout(Gtk.DrawingArea):
             return
         i, start = self._drag
         k, ox, oy = self._view
-        # mantém o monitor arrastado dentro da área visível
+        # keep the dragged display inside the visible area
         x = min(max(start.x + dx / k, -ox / k), (self.get_width() - ox) / k - start.w)
         y = min(max(start.y + dy / k, -oy / k), (self.get_height() - oy) / k - start.h)
         moved = start.moved(round(x), round(y))
@@ -143,7 +143,7 @@ class MonitorLayout(Gtk.DrawingArea):
         self.queue_draw()
         self.on_change(list(self.rects))
 
-    # -- desenho
+    # -- drawing
     def _draw(self, _area, cr, _w, _h) -> None:
         if not self.rects:
             return
@@ -167,7 +167,7 @@ class MonitorLayout(Gtk.DrawingArea):
             text = Pango.Layout.new(self.get_pango_context())
             text.set_alignment(Pango.Alignment.CENTER)
             name = GLib.markup_escape_text(r.name)
-            # rótulo completo, só o nome, ou nada, conforme o espaço na escala atual
+            # full label, name only, or nothing, depending on the space at the current scale
             for markup in (f"<b>{name}</b>\n<small>{r.w}×{r.h}</small>", f"<small><b>{name}</b></small>", None):
                 if markup is None:
                     break
@@ -225,7 +225,7 @@ class MonitorsPage(Adw.PreferencesPage):
         self.footer = footer
         self.refresh()
 
-    # -- montagem
+    # -- building
     def refresh(self) -> None:
         bg(core.list_monitors, self._populate)
 
@@ -269,7 +269,7 @@ class MonitorsPage(Adw.PreferencesPage):
         return group
 
     def _rects(self) -> list[layout.Rect]:
-        """Monitores ativos e não espelhados, em pixels lógicos."""
+        """Active, non-mirrored displays, in logical pixels."""
         rects = []
         for mon in self.monitors:
             rule = self._rule(mon)
@@ -284,7 +284,7 @@ class MonitorsPage(Adw.PreferencesPage):
     def _on_arranged(self, rects: list[layout.Rect]) -> None:
         by_name = {m["name"]: m for m in self.monitors}
         moved = 0
-        self._syncing = True  # os spins abaixo acompanham sem gerar mudanças extras
+        self._syncing = True  # the spin rows below follow along without causing extra changes
         try:
             for r in rects:
                 mon = by_name.get(r.name)
@@ -366,7 +366,7 @@ class MonitorsPage(Adw.PreferencesPage):
                              rule.get("bitdepth") == 10, lambda on: self._change(mon, bitdepth=10 if on else None)))
 
         if core.have("omarchy-brightness-display"):
-            # o brilho chega depois (DDC é lento); 'Restaurar' continua sendo a última linha
+            # brightness arrives later (DDC is slow); 'Restore' stays the last row
             bg(lambda: brightness(name), lambda value: self._add_brightness(group, name, value))
         else:
             group.add(self._restore_row(name))
@@ -381,7 +381,7 @@ class MonitorsPage(Adw.PreferencesPage):
         m = re.fullmatch(r"(-?\d+)x(-?\d+)", str(rule.get("position", "")))
         return (int(m.group(1)), int(m.group(2))) if m else (mon.get("x", 0), mon.get("y", 0))
 
-    # -- alterações
+    # -- changes
     def _change(self, mon: dict, **fields) -> None:
         before = self.store.get_monitor(mon["name"])
         rule = self._rule(mon)
@@ -434,10 +434,10 @@ class MonitorsPage(Adw.PreferencesPage):
         self.refresh()
         return False
 
-    # -- confirmação com reversão automática
+    # -- confirmation with automatic revert
     def _confirm(self, name: str, before: dict | None) -> None:
         if self._dialog is not None or not hasattr(Adw, "AlertDialog"):
-            return  # já existe uma confirmação aberta; ela cobre esta mudança também
+            return  # a confirmation is already open; it covers this change too
         remaining = [CONFIRM_SECONDS]
         dialog = Adw.AlertDialog(heading=_("Keep these display settings?"))
         dialog.add_response("revert", _("Revert"))
@@ -454,7 +454,7 @@ class MonitorsPage(Adw.PreferencesPage):
         def tick() -> bool:
             remaining[0] -= 1
             if remaining[0] <= 0:
-                dialog.close()  # dispara a resposta de fechamento: reverter
+                dialog.close()  # triggers the close response: revert
                 return False
             body()
             return True

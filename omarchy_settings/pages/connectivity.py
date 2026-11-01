@@ -1,4 +1,4 @@
-"""Página de rede, Bluetooth e áudio (atalhos para as TUIs do Omarchy + controles diretos)."""
+"""Network, Bluetooth and audio page (shortcuts to Omarchy's TUIs + direct controls)."""
 from __future__ import annotations
 
 import re
@@ -18,7 +18,7 @@ SOURCE = "@DEFAULT_AUDIO_SOURCE@"
 
 
 def get_volume(target: str) -> tuple[float, bool]:
-    """Retorna (volume 0..1.5, mudo)."""
+    """Returns (volume 0..1.5, muted)."""
     text = core.out(["wpctl", "get-volume", target])
     m = re.search(r"Volume:\s*([\d.]+)", text)
     return (float(m.group(1)) if m else 0.0, "[MUTED]" in text)
@@ -70,7 +70,7 @@ class ConnectivityPage(Adw.PreferencesPage):
 
         bg(lambda: core.run(["bluetoothctl", "power", "on" if on else "off"]), done)
 
-    # -- Áudio
+    # -- Audio
     def _populate_audio(self, result) -> None:
         if isinstance(result, Exception):
             return

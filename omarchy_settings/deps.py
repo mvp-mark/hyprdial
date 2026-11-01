@@ -1,6 +1,6 @@
-"""Dependências do app (sem GTK): lista única usada pela janela de dependências e pelo install.sh.
+"""App dependencies (no GTK): single list used by the dependencies dialog and by install.sh.
 
-Uso no terminal: python3 -m omarchy_settings.deps [--missing] [--group required|optional|dev] [--exclude PKG]...
+Command line: python3 -m omarchy_settings.deps [--missing] [--group required|optional|dev] [--exclude PKG]...
 """
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ class Dep:
     package: str
     group: str
     purpose: str
-    default: bool = True  # pré-selecionado para instalar quando estiver faltando
+    default: bool = True  # preselected for installation when missing
 
 
 def dependencies() -> list[Dep]:
@@ -41,17 +41,17 @@ def group_title(group: str) -> str:
 
 
 def missing(packages: list[str]) -> set[str]:
-    """Pacotes não instalados, segundo `pacman -T` (lista só os que faltam)."""
+    """Packages that aren't installed, according to `pacman -T` (which lists only the missing ones)."""
     if not packages:
         return set()
     r = core.run(["pacman", "-T", *packages])
     if r is None:
-        return set(packages)  # sem pacman: trata tudo como ausente
+        return set(packages)  # no pacman: treat everything as missing
     return {line.strip() for line in r.stdout.splitlines() if line.strip()}
 
 
 def install_command(packages: list[str]) -> list[str]:
-    """Instalação com senha gráfica (polkit), para ser chamada pela interface."""
+    """Installation with a graphical password prompt (polkit), for the UI."""
     return ["pkexec", "pacman", "-S", "--needed", "--noconfirm", *packages]
 
 

@@ -1,8 +1,8 @@
-"""Atalhos do Hyprland (sem GTK, testável).
+"""Hyprland shortcuts (no GTK, testable).
 
-Os atalhos ativos vêm de `hyprctl binds -j`, que no modo Lua não diz o que cada um faz. A ação é
-recuperada lendo as chamadas o.bind(...) dos arquivos do Omarchy e do bindings.lua do usuário; só os
-atalhos encontrados assim podem trocar de tecla. Qualquer atalho ativo pode ser desativado.
+Active shortcuts come from `hyprctl binds -j`, which in Lua mode doesn't say what each one does. The action is
+recovered by reading the o.bind(...) calls in Omarchy's files and the user's bindings.lua; only shortcuts found
+that way can change keys. Any active shortcut can be disabled.
 """
 from __future__ import annotations
 
@@ -46,13 +46,13 @@ KEY_NAMES = {
     "XF86AUDIOPLAY": "Play", "XF86AUDIOPAUSE": _("Pause"), "XF86AUDIONEXT": _("Next"), "XF86AUDIOPREV": _("Previous"),
 }
 
-# Códigos de tecla usados pelo Omarchy (posição física, independe do layout)
+# Keycodes used by Omarchy (physical position, independent of the layout)
 KEYCODES = {20: "-", 21: "=", 34: "[", 35: "]", 201: "Copilot"}
 
 
-# ------------------------------------------------------------------ teclas
+# ------------------------------------------------------------------ keys
 def split_keys(text: str) -> tuple[list[str], str]:
-    """'SUPER + SHIFT + B' -> (['SUPER', 'SHIFT'], 'B'); modificadores na ordem canônica."""
+    """'SUPER + SHIFT + B' -> (['SUPER', 'SHIFT'], 'B'); modifiers in canonical order."""
     parts = [p.strip() for p in text.replace(",", "+").split("+") if p.strip()]
     if not parts:
         return [], ""
@@ -65,7 +65,7 @@ def join_keys(mods: list[str], key: str) -> str:
 
 
 def canon(text: str) -> str:
-    """Identidade de um atalho, independente da ordem dos modificadores e de maiúsculas."""
+    """A shortcut's identity, regardless of modifier order and case."""
     mods, key = split_keys(text)
     return join_keys(mods, key.upper())
 
@@ -75,7 +75,7 @@ def from_modmask(modmask: int, key: str) -> str:
 
 
 def key_label(key: str) -> str:
-    """Nome amigável da tecla final; code:10..19 são as teclas 1..0 da fileira de números."""
+    """Friendly name of the final key; code:10..19 are the 1..0 keys of the number row."""
     m = re.fullmatch(r"code:(\d+)", key)
     if m and 10 <= int(m.group(1)) <= 19:
         return str((int(m.group(1)) - 9) % 10)
@@ -92,9 +92,9 @@ def keycaps(text: str) -> list[str]:
     return [m.capitalize() if m != "CTRL" else "Ctrl" for m in mods] + [key_label(key)]
 
 
-# ------------------------------------------------------------------ leitura das fontes Lua
+# ------------------------------------------------------------------ reading the Lua sources
 def _skip(text: str, i: int) -> int | None:
-    """Se uma string ou comentário Lua começa em i, devolve o índice logo depois dele."""
+    """If a Lua string or comment starts at i, returns the index right after it."""
     if text.startswith("--[[", i):
         end = text.find("]]", i + 4)
         return len(text) if end < 0 else end + 2
@@ -113,7 +113,7 @@ def _skip(text: str, i: int) -> int | None:
 
 
 def _args(text: str, i: int) -> tuple[list[str], int]:
-    """Separa os argumentos de uma chamada começando logo após '('."""
+    """Splits the arguments of a call starting right after '('."""
     depth, start, args = 0, i, []
     while i < len(text):
         skipped = _skip(text, i)
@@ -136,7 +136,7 @@ def _args(text: str, i: int) -> tuple[list[str], int]:
 
 
 def find_binds(text: str) -> list[tuple[str, list[str]]]:
-    """Chamadas o.bind(...) e o.bind_toggle(...) fora de strings e comentários."""
+    """o.bind(...) and o.bind_toggle(...) calls outside strings and comments."""
     calls, i = [], 0
     while i < len(text):
         skipped = _skip(text, i)
@@ -155,15 +155,15 @@ def find_binds(text: str) -> list[tuple[str, list[str]]]:
 
 LUA_KEYWORDS = {"and", "break", "do", "else", "elseif", "end", "false", "for", "function", "goto", "if", "in",
                 "local", "nil", "not", "or", "repeat", "return", "then", "true", "until", "while"}
-# Nomes que existem em qualquer arquivo de configuração; o resto seria local do arquivo de origem.
+# Names that exist in any config file; anything else would be local to the source file.
 GLOBAL_NAMES = {"hl", "o", "string", "table", "math", "os", "tostring", "tonumber", "ipairs", "pairs", "type",
                 "print", "select", "unpack"}
 
 
 def free_names(expr: str) -> set[str]:
-    """Nomes que a expressão Lua usa sem declarar (ignora campos, chaves de tabela e locais declarados nela)."""
+    """Names the Lua expression uses without declaring them (ignores fields, table keys and locals declared in it)."""
     code, i = [], 0
-    while i < len(expr):  # tira strings e comentários
+    while i < len(expr):  # strip strings and comments
         skipped = _skip(expr, i)
         if skipped is not None:
             code.append(" ")
@@ -182,7 +182,7 @@ def free_names(expr: str) -> set[str]:
             declared.add(name)  # local x / for x, y in / function(a, b)
         elif after.startswith("=") and not after.startswith("=="):
             if before.endswith(("{", ",")):
-                continue  # chave de tabela: { omarchy = ... }
+                continue  # table key: { omarchy = ... }
             declared.add(name)
         else:
             used.add(name)
@@ -198,12 +198,12 @@ def lua_string(expr: str) -> str | None:
 class SourceBind:
     keys: str
     desc: str | None
-    action: str  # expressão Lua: dispatcher e, se houver, opções
+    action: str  # Lua expression: dispatcher and, if any, options
     category: str
 
     @property
     def movable(self) -> bool:
-        """A ação pode ser copiada para outro arquivo se não depende de nada local ao arquivo de origem."""
+        """The action can be copied to another file if it depends on nothing local to the source file."""
         return not free_names(self.action)
 
 
@@ -214,7 +214,7 @@ def parse_source(text: str, category: str) -> list[SourceBind]:
             continue
         keys, desc = lua_string(args[0]), lua_string(args[1])
         if keys is None:
-            continue  # tecla calculada (ex.: dentro de um for)
+            continue  # computed key (e.g. inside a for loop)
         rest = ", ".join(args[2:])
         action = f'"omarchy-toggle-" .. {rest}' if name == "o.bind_toggle" else rest
         result.append(SourceBind(keys, desc, action, category))
@@ -251,15 +251,15 @@ def guess_category(desc: str) -> str:
     return "other"
 
 
-# ------------------------------------------------------------------ modelo da página
+# ------------------------------------------------------------------ page model
 @dataclass
 class Entry:
-    keys: str  # tecla original (identidade do atalho)
+    keys: str  # original key (the shortcut's identity)
     desc: str
     category: str
-    action: str | None = None  # None = não dá para mudar de tecla, só desativar
-    locked: str = ""  # por que não dá para mudar de tecla
-    override: dict | None = None  # {} desativado, {"keys": ...} mudou de tecla
+    action: str | None = None  # None = the key can't be changed, only disabled
+    locked: str = ""  # why the key can't be changed
+    override: dict | None = None  # {} disabled, {"keys": ...} moved to another key
     extra: dict = field(default_factory=dict)
 
     @property
@@ -274,8 +274,8 @@ def empty_state() -> dict:
 
 
 def live_keys(bind: dict, by_desc: dict) -> str | None:
-    """Teclas de um atalho ativo. Atalhos por código de tecla (code:N) vêm sem 'key' do hyprctl:
-    procura pela descrição nas fontes, ou reconstrói os gerados em laço (workspace N -> code:N+9)."""
+    """Keys of an active shortcut. Keycode shortcuts (code:N) come from hyprctl without a 'key':
+    look them up by description in the sources, or rebuild the ones generated in loops (workspace N -> code:N+9)."""
     modmask = int(bind.get("modmask", 0))
     key = str(bind.get("key", ""))
     if key:
@@ -297,7 +297,7 @@ def build_entries(live: list[dict], sources: list[SourceBind], state: dict) -> l
     by_canon: dict[str, SourceBind] = {}
     for s in sources:
         by_canon.setdefault(canon(s.keys), s)
-    # teclas ocupadas por mudanças deste app; não aparecem como atalhos à parte
+    # keys taken by this app's changes; they don't show up as separate shortcuts
     taken = {canon(o["keys"]) for o in overrides.values() if o.get("keys")}
     taken |= {canon(c["keys"]) for c in state.get("custom", [])}
 
@@ -340,7 +340,7 @@ def custom_action(kind: str, command: str) -> str:
 
 
 def render(state: dict) -> list[str]:
-    """Linhas Lua: todos os unbinds primeiro, depois os binds; cada uma isolada com pcall."""
+    """Lua lines: every unbind first, then the binds; each one wrapped in pcall."""
     overrides, custom = state.get("overrides", {}), state.get("custom", [])
     if not overrides and not custom:
         return []

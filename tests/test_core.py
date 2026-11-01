@@ -18,7 +18,7 @@ o.window(".*", { idle_inhibit = "fullscreen" })
 
 @pytest.fixture
 def calls(monkeypatch):
-    """Grava os comandos em vez de chamar o hyprctl de verdade."""
+    """Records the commands instead of calling the real hyprctl."""
     recorded = []
 
     def fake_run(args, timeout=10):
@@ -39,7 +39,7 @@ def store(tmp_path, calls):
         s._timer.cancel()
 
 
-# ------------------------------------------------------------------ conversão para Lua
+# ------------------------------------------------------------------ conversion to Lua
 @pytest.mark.parametrize("value, expected", [
     (True, "true"), (5, "5"), (1.0, "1"), (0.92, "0.92"), (1.333333, "1.333333"), ("br", '"br"'), ('a"b', '"a\\"b"'),
 ])

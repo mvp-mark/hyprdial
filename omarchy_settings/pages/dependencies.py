@@ -1,4 +1,4 @@
-"""Janela de dependências: mostra o que está instalado e instala o que faltar (com senha via polkit)."""
+"""Dependencies dialog: shows what is installed and installs what is missing (password through polkit)."""
 from __future__ import annotations
 
 import gi
@@ -11,7 +11,7 @@ from .. import core, deps
 from ..i18n import _, ngettext
 from ..ui import bg
 
-# pkexec: 126 = senha não informada ou recusada, 127 = sem autorização
+# pkexec: 126 = password not given or rejected, 127 = not authorized
 PKEXEC_CANCELLED = (126, 127)
 
 
@@ -19,7 +19,7 @@ class DependenciesDialog(Adw.PreferencesDialog):
     def __init__(self):
         super().__init__(title=_("Dependencies"))
         self.set_content_width(560)
-        self.set_content_height(640)  # o Adw.Dialog reduz sozinho se a janela for menor
+        self.set_content_height(640)  # Adw.Dialog shrinks by itself if the window is smaller
         self.page = Adw.PreferencesPage()
         self.add(self.page)
         self.groups: list[Adw.PreferencesGroup] = []

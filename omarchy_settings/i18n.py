@@ -1,8 +1,8 @@
-"""Tradução da interface com gettext.
+"""Interface translation with gettext.
 
-O idioma segue o sistema (LANGUAGE, LC_ALL, LC_MESSAGES, LANG). Os textos do código estão em inglês, que
-também é o idioma usado quando não há catálogo para o idioma do sistema. Os catálogos ficam em
-omarchy_settings/locale e são compilados de po/*.po pelo install.sh.
+The language follows the system (LANGUAGE, LC_ALL, LC_MESSAGES, LANG). Source strings are in English, which is
+also the fallback when there is no catalog for the system language. Catalogs live in omarchy_settings/locale and
+are compiled from po/*.po by install.sh.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ DOMAIN = "omarchy-settings"
 LOCALE_DIR = Path(__file__).parent / "locale"
 
 try:
-    locale.setlocale(locale.LC_ALL, "")  # datas e números no formato do sistema
+    locale.setlocale(locale.LC_ALL, "")  # dates and numbers in the system format
 except locale.Error:
     pass
 

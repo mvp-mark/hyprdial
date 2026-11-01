@@ -1,4 +1,4 @@
-"""Página de temas e wallpapers: galeria com prévia, cores e filtro; grade de wallpapers do tema atual."""
+"""Themes and wallpapers page: gallery with previews, colors and filters; wallpaper grid of the current theme."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -41,9 +41,9 @@ def install_css() -> None:
 
 
 def load_thumbnails(paths: list[Path], size: tuple[int, int]) -> dict[Path, GdkPixbuf.Pixbuf]:
-    """Decodifica já no tamanho do cartão (roda fora da thread da interface).
+    """Decodes straight at card size (runs off the UI thread).
 
-    O tamanho exato importa: o FlowBox distribui os cartões pelo tamanho natural da imagem.
+    The exact size matters: FlowBox lays out the cards by the image's natural size.
     """
     result = {}
     for path in paths:
@@ -82,7 +82,7 @@ def swatch_strip(colors: list[str]) -> Gtk.DrawingArea:
 
 
 def thumb_card(size: tuple[int, int], title: str | None = None, extra: Gtk.Widget | None = None):
-    """Cartão com imagem (preenchida depois), selo de 'atual' e legenda opcional."""
+    """Card with an image (filled in later), a 'current' badge and an optional caption."""
     card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6, css_classes=["oms-card"])
     overlay = Gtk.Overlay()
     picture = Gtk.Picture(content_fit=Gtk.ContentFit.COVER, css_classes=["oms-thumb", "card"])
@@ -143,7 +143,7 @@ class ThemesPage(Adw.PreferencesPage):
         self.wall_flow.connect("child-activated", self._on_wall_activated)
         self.wall_group.add(self.wall_flow)
         self.add(self.wall_group)
-        # grupo à parte: num PreferencesGroup as linhas sempre vêm antes dos outros widgets, e a grade deve vir antes
+        # separate group: in a PreferencesGroup rows always come before other widgets, and the grid must come first
         wall_actions = Adw.PreferencesGroup()
         wall_actions.add(button_row(_("Next wallpaper"), _("Cycles through the current theme's backgrounds"),
                                     _("Change"), self._next_wallpaper))
@@ -155,7 +155,7 @@ class ThemesPage(Adw.PreferencesPage):
         bg(td.list_themes, self._populate_themes)
         self._load_wallpapers()
 
-    # ------------------------------------------------------------------ temas
+    # ------------------------------------------------------------------ themes
     def _populate_themes(self, themes) -> None:
         if isinstance(themes, Exception) or not themes:
             self.theme_group.add(Adw.ActionRow(title=_("No themes found"),
@@ -206,7 +206,7 @@ class ThemesPage(Adw.PreferencesPage):
         self._apply_theme(child.theme.slug)
 
     def _apply_theme(self, slug: str, undoable: bool = True) -> None:
-        """Aplica o tema; o toast de sucesso oferece voltar ao anterior (exceto quando já é um desfazer)."""
+        """Applies the theme; the success toast offers going back to the previous one (unless it already is an undo)."""
         previous = td.current_slug()
         if self.applying or slug == previous:
             return

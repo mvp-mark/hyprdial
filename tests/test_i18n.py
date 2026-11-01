@@ -11,7 +11,7 @@ import pytest
 ROOT = Path(__file__).parent.parent
 PO_DIR = ROOT / "po"
 needs_gettext = pytest.mark.skipif(not shutil.which("msgfmt") or not shutil.which("xgettext"),
-                                   reason="ferramentas do gettext não instaladas")
+                                   reason="gettext tools not installed")
 
 
 def unquote(line: str) -> str:
@@ -20,7 +20,7 @@ def unquote(line: str) -> str:
 
 
 def parse_po(path: Path) -> list[dict]:
-    """Entradas {campo: texto} de um .po (msgid, msgid_plural, msgstr, msgstr[0]...)."""
+    """Entries {field: text} of a .po file (msgid, msgid_plural, msgstr, msgstr[0]...)."""
     entries, current, field = [], {}, None
     for line in path.read_text().splitlines() + [""]:
         if not line.strip():
@@ -43,7 +43,7 @@ def placeholders(text: str) -> set[str]:
 
 @pytest.mark.parametrize("po", sorted(PO_DIR.glob("*.po")), ids=lambda p: p.stem)
 def test_placeholders_match(po):
-    """Marcadores diferentes entre inglês e tradução quebrariam o .format() em tempo de execução."""
+    """Placeholders that differ between English and the translation would break .format() at runtime."""
     for e in parse_po(po):
         for key, value in e.items():
             if not key.startswith("msgstr") or not value:
@@ -55,15 +55,15 @@ def test_placeholders_match(po):
 @needs_gettext
 @pytest.mark.parametrize("po", sorted(PO_DIR.glob("*.po")), ids=lambda p: p.stem)
 def test_catalog_covers_every_message(po, tmp_path):
-    """Todo texto marcado no código tem tradução, e nada traduzido sobra sem uso."""
+    """Every marked string has a translation, and no translation is left unused."""
     sources = sorted(str(p) for p in (ROOT / "omarchy_settings").rglob("*.py"))
     pot = tmp_path / "messages.pot"
     subprocess.run(["xgettext", "--language=Python", "--keyword=_", "--keyword=ngettext:1,2",
                     "--from-code=UTF-8", "-o", str(pot), *sources], check=True)
     wanted = {e["msgid"] for e in parse_po(pot)}
     have = {e["msgid"]: e for e in parse_po(po)}
-    assert wanted - set(have) == set(), "sem tradução"
-    assert set(have) - wanted == set(), "tradução sem uso no código"
+    assert wanted - set(have) == set(), "missing translations"
+    assert set(have) - wanted == set(), "translations unused by the code"
     empty = [m for m, e in have.items() if not any(v for k, v in e.items() if k.startswith("msgstr"))]
     assert empty == []
 

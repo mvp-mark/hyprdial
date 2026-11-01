@@ -1,8 +1,8 @@
-"""Página da barra (Omarchy shell), inatividade e fontes do sistema.
+"""Bar page (Omarchy shell), idle settings and system font.
 
-A barra é do omarchy-shell (Quickshell). Posição, transparência e widgets são alterados pelos comandos
-`omarchy-bar` e `omarchy-plugin-*`, que conversam com o shell em execução; só a inatividade é gravada
-direto em ~/.config/omarchy/shell.json, do mesmo jeito que os comandos do Omarchy fazem.
+The bar belongs to omarchy-shell (Quickshell). Position, transparency and widgets are changed through the
+`omarchy-bar` and `omarchy-plugin-*` commands, which talk to the running shell; only the idle settings are
+written straight to ~/.config/omarchy/shell.json, the same way Omarchy's commands do it.
 """
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ def idle_label(seconds: int) -> str:
         return ngettext("{n} minute", "{n} minutes", seconds // 60).format(n=seconds // 60)
     return ngettext("{n} second", "{n} seconds", seconds).format(n=seconds)
 
-# Nomes traduzíveis para os widgets do Omarchy; widgets de terceiros usam o nome do catálogo.
+# Translatable names for Omarchy's widgets; third-party widgets use the catalog name.
 WIDGET_NAMES = {
     "omarchy.active-window": (_("Active window"), _("Title of the focused window")),
     "omarchy.agents": (_("AI agents"), _("Claude Code, Codex and Fireworks usage and limits")),
@@ -68,9 +68,9 @@ WIDGET_NAMES = {
 }
 
 def clock_formats() -> list[tuple[str, str]]:
-    """(formato Qt, rótulo com exemplo usando a hora atual)."""
+    """(Qt format, label with an example using the current time)."""
     now = datetime.now()
-    day, short = now.strftime("%A"), now.strftime("%a")  # nomes no idioma do sistema
+    day, short = now.strftime("%A"), now.strftime("%a")  # names in the system language
     hm, date = now.strftime("%H:%M"), now.strftime("%d/%m")
     h12 = f"{now.hour % 12 or 12}:{now:%M} {'PM' if now.hour >= 12 else 'AM'}"
     return [
@@ -82,9 +82,9 @@ def clock_formats() -> list[tuple[str, str]]:
     ]
 
 
-# ------------------------------------------------------------------ configuração do shell
+# ------------------------------------------------------------------ shell configuration
 def read_shell() -> dict:
-    """Mesma regra do omarchy-shell-config: o arquivo do usuário, ou os padrões se ele estiver vazio."""
+    """Same rule as omarchy-shell-config: the user's file, or the defaults if it is empty."""
     for path in (SHELL_CONFIG, SHELL_DEFAULTS):
         try:
             if path.stat().st_size:
@@ -123,7 +123,7 @@ def write_idle(key: str, seconds: int) -> bool:
 
 
 def widget_catalog() -> dict[str, tuple[str, str]]:
-    """id -> (nome, descrição) de todos os widgets de barra conhecidos pelo shell."""
+    """id -> (name, description) of every bar widget the shell knows about."""
     try:
         catalog = json.loads(core.out(["omarchy-plugin-catalog"], timeout=15))
     except (ValueError, TypeError):
@@ -143,7 +143,7 @@ def command(args: list[str]) -> tuple[bool, str]:
     return r.returncode == 0, (r.stderr or r.stdout).strip()
 
 
-# ------------------------------------------------------------------ página
+# ------------------------------------------------------------------ page
 class BarPage(Adw.PreferencesPage):
     def __init__(self, win):
         super().__init__()
@@ -204,7 +204,7 @@ class BarPage(Adw.PreferencesPage):
             self.bar_group.set_description(_("omarchy-bar not found: update Omarchy to use this page."))
         bg(widget_catalog, self._on_catalog)
 
-    # -- barra
+    # -- bar
     def _bar(self, args: list[str], ok_msg: str | None = None, rebuild: bool = False) -> None:
         def done(res) -> None:
             ok, msg = res if isinstance(res, tuple) else (False, str(res))
@@ -218,7 +218,7 @@ class BarPage(Adw.PreferencesPage):
         bg(lambda: command(["omarchy-bar", *args]), done)
 
     def _set_visible(self, on: bool) -> None:
-        # omarchy-toggle-bar controla a flag "bar-off": 'off' mostra a barra, 'on' esconde
+        # omarchy-toggle-bar controls the "bar-off" flag: 'off' shows the bar, 'on' hides it
         bg(lambda: command(["omarchy-toggle-bar", "off" if on else "on"]))
 
     def _add_clock_row(self, config: dict) -> None:
@@ -268,7 +268,7 @@ class BarPage(Adw.PreferencesPage):
         titles = ([_("Widgets at the top"), _("Widgets in the middle"), _("Widgets at the bottom")] if vertical
                   else [_("Widgets on the left"), _("Widgets in the center"), _("Widgets on the right")])
 
-        # PreferencesPage só adiciona no fim: tira tudo que vem depois de "Barra" e repõe na ordem
+        # PreferencesPage only appends: remove everything after "Bar" and add it back in order
         tail = [self.add_group, self.idle_group, self.waybar_group, self.font_group, self.restore_group]
         for group in self.widget_groups + tail:
             if group.get_parent() is not None:
@@ -405,7 +405,7 @@ class BarPage(Adw.PreferencesPage):
             waybar.ensure_config()
             waybar.write_position(position)
             if waybar.running():
-                waybar.stop()  # a posição só muda de verdade recriando a janela
+                waybar.stop()  # the position only really changes when the window is recreated
                 waybar.start()
 
         bg(work, lambda _r: self.win.toast(_("Waybar position changed")))
@@ -432,7 +432,7 @@ class BarPage(Adw.PreferencesPage):
 
         bg(work, lambda _r: (self.win.toast(_("Waybar files restored")), self._fill_waybar()))
 
-    # -- inatividade
+    # -- idle
     def _idle_group(self, config: dict) -> None:
         idle = config.get("idle") if isinstance(config.get("idle"), dict) else {}
         self.idle_group = Adw.PreferencesGroup(title=_("Idle"),
@@ -462,7 +462,7 @@ class BarPage(Adw.PreferencesPage):
     def _set_stay_awake(self, on: bool) -> None:
         bg(lambda: command(["omarchy-toggle-idle", "stay-awake" if on else "allow-idle"]))
 
-    # -- fontes
+    # -- fonts
     def _populate_fonts(self, result) -> None:
         if isinstance(result, Exception) or not result[0]:
             self.font_group.add(Adw.ActionRow(title=_("No fonts listed"), subtitle=_("omarchy-font-list returned nothing")))

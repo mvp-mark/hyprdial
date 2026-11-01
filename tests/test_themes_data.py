@@ -20,7 +20,7 @@ def test_user_theme_overlays_official(tmp_path):
     make_theme(official, "nord")
     overlay = user / "nord"
     overlay.mkdir(parents=True)
-    (overlay / "colors.toml").write_text('mode = "light"\naccent = "#abcdef"\n')  # só sobrepõe as cores
+    (overlay / "colors.toml").write_text('mode = "light"\naccent = "#abcdef"\n')  # only overlays the colors
     make_theme(user, "mine", preview=False)
     themes = {t.slug: t for t in td.list_themes(user, official)}
     assert set(themes) == {"nord", "mine"}

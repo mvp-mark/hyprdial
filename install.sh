@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Instala o omarchy-settings para o usuário atual (sem pip).
-#   ./install.sh          instala o app
-#   ./install.sh --deps   antes, instala as dependências que faltarem (obrigatórias e opcionais, menos a Waybar)
-#   ./install.sh --dev    o mesmo que --deps, mais as de desenvolvimento (pytest)
-#   ./install.sh --waybar instala também a Waybar (barra alternativa; combina com as outras opções)
-# A lista de dependências fica em omarchy_settings/deps.py.
+# Installs omarchy-settings for the current user (no pip).
+#   ./install.sh          installs the app
+#   ./install.sh --deps   first installs missing dependencies (required and optional, except Waybar)
+#   ./install.sh --dev    same as --deps, plus development tools (pytest)
+#   ./install.sh --waybar also installs Waybar (alternative bar; combines with the other options)
+# The dependency list lives in omarchy_settings/deps.py.
 set -euo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -66,7 +66,7 @@ rm -rf "$APP_DIR/omarchy_settings"
 cp -r "$SRC/omarchy_settings" "$APP_DIR/"
 find "$APP_DIR" -name __pycache__ -type d -prune -exec rm -rf {} +
 
-# Traduções: po/<idioma>.po -> omarchy_settings/locale/<idioma>/LC_MESSAGES/omarchy-settings.mo
+# Translations: po/<lang>.po -> omarchy_settings/locale/<lang>/LC_MESSAGES/omarchy-settings.mo
 if command -v msgfmt >/dev/null; then
   for po in "$SRC"/po/*.po; do
     lang=$(basename "$po" .po)
@@ -74,7 +74,7 @@ if command -v msgfmt >/dev/null; then
       mkdir -p "$dest/locale/$lang/LC_MESSAGES"
       msgfmt -o "$dest/locale/$lang/LC_MESSAGES/omarchy-settings.mo" "$po"
     done
-    # pt_PT e outras variantes sem catálogo próprio usam o português do Brasil
+    # pt_PT and other variants without their own catalog use Brazilian Portuguese
     if [[ $lang == pt_BR ]]; then
       for dest in "$SRC/omarchy_settings" "$APP_DIR/omarchy_settings"; do
         mkdir -p "$dest/locale/pt/LC_MESSAGES"
