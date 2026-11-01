@@ -12,20 +12,21 @@ gi.require_version("PangoCairo", "1.0")
 from gi.repository import Adw, GLib, Gtk, Pango, PangoCairo  # noqa: E402
 
 from .. import core, layout
+from ..i18n import _, ngettext
 from ..ui import bg, button_row, combo_row, spin_row, switch_row, to_float
 
 SCALES = [1, 1.25, 1.333333, 1.5, 1.6, 1.666667, 2, 2.5, 3]
 TRANSFORMS = [
-    "Normal",
+    _("Normal"),
     "90°",
     "180°",
     "270°",
-    "Invertido",
-    "Invertido + 90°",
-    "Invertido + 180°",
-    "Invertido + 270°",
+    _("Flipped"),
+    _("Flipped + 90°"),
+    _("Flipped + 180°"),
+    _("Flipped + 270°"),
 ]
-VRR = ["Desligado", "Ligado", "Só em tela cheia"]
+VRR = [_("Off"), _("On"), _("Fullscreen only")]
 CONFIRM_SECONDS = 15
 # Mudanças que podem deixar a tela ilegível pedem confirmação, com reversão automática.
 RISKY = ("mode", "scale", "transform", "disabled", "mirror", "bitdepth")
@@ -208,17 +209,17 @@ class MonitorsPage(Adw.PreferencesPage):
         self.pos_rows: dict[str, tuple[Adw.SpinRow, Adw.SpinRow]] = {}
         self._syncing = False
 
-        display = Adw.PreferencesGroup(title="Tela")
+        display = Adw.PreferencesGroup(title=_("Display"))
         if core.have("omarchy-toggle-nightlight"):
             bg(nightlight_on, lambda on: self._add_nightlight(display, on))
         if core.have("omarchy-display-text-size"):
             bg(text_size, lambda size: self._add_text_size(display, size))
-        display.add(button_row("Recarregar", "Lê de novo os monitores conectados", "Recarregar", self.refresh))
+        display.add(button_row(_("Reload"), _("Reads the connected displays again"), _("Reload"), self.refresh))
         self.add(display)
 
         footer = Adw.PreferencesGroup(
-            description="Os ajustes ficam em ~/.config/hypr/omarchy-settings.lua e têm prioridade sobre "
-            "monitors.lua. 'Restaurar' volta ao que está em monitors.lua.",
+            description=_("Settings are stored in ~/.config/hypr/omarchy-settings.lua and take priority over "
+                          "monitors.lua. 'Restore' returns to what is in monitors.lua."),
         )
         self.add(footer)
         self.footer = footer
@@ -243,7 +244,7 @@ class MonitorsPage(Adw.PreferencesPage):
             self.groups.append(arrangement)
             self.add(arrangement)
         if not self.monitors:
-            empty = Adw.PreferencesGroup(title="Monitores", description="Nenhum monitor encontrado pelo hyprctl.")
+            empty = Adw.PreferencesGroup(title=_("Displays"), description=_("hyprctl found no displays."))
             self.groups.append(empty)
             self.add(empty)
         for mon in self.monitors:
@@ -257,9 +258,9 @@ class MonitorsPage(Adw.PreferencesPage):
         if len(rects) < 2:
             return None
         group = Adw.PreferencesGroup(
-            title="Disposição",
-            description="Arraste os monitores com o mouse; eles se encaixam pelas bordas. "
-            "Ao soltar, a posição é aplicada.",
+            title=_("Arrangement"),
+            description=_("Drag the displays with the mouse; they snap to each other's edges. "
+                          "The position is applied when you let go."),
         )
         frame = Gtk.Frame()
         self.layout = MonitorLayout(rects, self._on_arranged)
@@ -298,7 +299,7 @@ class MonitorsPage(Adw.PreferencesPage):
         finally:
             self._syncing = False
         if moved:
-            self.win.toast("Posição dos monitores aplicada")
+            self.win.toast(_("Display positions applied"))
 
     def _rule(self, mon: dict) -> dict:
         return self.store.get_monitor(mon["name"]) or core.live_rule(mon)
@@ -309,12 +310,12 @@ class MonitorsPage(Adw.PreferencesPage):
         disabled = bool(rule.get("disabled"))
         model = " ".join(p for p in (mon.get("make"), mon.get("model")) if p) or mon.get("description", "")
         size = f"{mon['width']}×{mon['height']} @ {mon['refreshRate']:.2f} Hz"
-        desc = f"{model} · {'desativado' if disabled else size}"
+        desc = f"{model} · {_('disabled') if disabled else size}"
         if self.store.get_monitor(name):
-            desc += " · ajustado por este app"
+            desc += " · " + _("adjusted by this app")
         group = Adw.PreferencesGroup(title=name, description=desc)
 
-        group.add(switch_row("Ativado", "Desligar remove o monitor do desktop", not disabled,
+        group.add(switch_row(_("Enabled"), _("Turning it off removes the display from the desktop"), not disabled,
                              lambda on: self._set_enabled(mon, on)))
         if disabled:
             group.add(self._restore_row(name))
@@ -325,7 +326,7 @@ class MonitorsPage(Adw.PreferencesPage):
         if current_mode and current_mode not in modes:
             modes.insert(0, current_mode)
         if modes:
-            group.add(combo_row("Resolução e taxa", "Modos que o monitor anuncia", modes,
+            group.add(combo_row(_("Resolution and refresh rate"), _("Modes the display advertises"), modes,
                                 modes.index(current_mode) if current_mode in modes else 0,
                                 lambda i: self._change(mon, mode=modes[i])))
 
@@ -334,34 +335,34 @@ class MonitorsPage(Adw.PreferencesPage):
         if not any(abs(s - current_scale) < 0.001 for s in scales):
             scales.append(current_scale)
             scales.sort()
-        group.add(combo_row("Escala", "Tamanho da interface neste monitor", [scale_label(s) for s in scales],
+        group.add(combo_row(_("Scale"), _("Interface size on this display"), [scale_label(s) for s in scales],
                             min(range(len(scales)), key=lambda i: abs(scales[i] - current_scale)),
                             lambda i: self._change(mon, scale=scales[i])))
 
-        group.add(combo_row("Rotação", "Para monitores na vertical use 90° ou 270°", TRANSFORMS,
+        group.add(combo_row(_("Rotation"), _("For portrait displays use 90° or 270°"), TRANSFORMS,
                             int(rule.get("transform", 0)), lambda i: self._change(mon, transform=i)))
 
         x, y = self._position(rule, mon)
-        xrow = spin_row("Posição horizontal (X)", "Em pixels lógicos; também dá para arrastar em Disposição",
+        xrow = spin_row(_("Horizontal position (X)"), _("In logical pixels; you can also drag it in Arrangement"),
                         -16384, 16384, 10, x, lambda v: self._move(mon, x=v))
-        yrow = spin_row("Posição vertical (Y)", "Em pixels lógicos", -16384, 16384, 10, y,
+        yrow = spin_row(_("Vertical position (Y)"), _("In logical pixels"), -16384, 16384, 10, y,
                         lambda v: self._move(mon, y=v))
         self.pos_rows[name] = (xrow, yrow)
         group.add(xrow)
         group.add(yrow)
 
-        group.add(combo_row("Taxa variável (VRR / FreeSync)", "Reduz tearing em jogos e vídeos", VRR,
+        group.add(combo_row(_("Variable refresh rate (VRR / FreeSync)"), _("Reduces tearing in games and videos"), VRR,
                             int(rule.get("vrr", 0)), lambda i: self._change(mon, vrr=i)))
 
         others = [m["name"] for m in self.monitors if m["name"] != name]
         if others:
-            options = ["Não espelhar"] + others
+            options = [_("Don't mirror")] + others
             current = rule.get("mirror")
-            group.add(combo_row("Espelhar", "Mostra o mesmo conteúdo de outro monitor", options,
+            group.add(combo_row(_("Mirror"), _("Shows the same content as another display"), options,
                                 options.index(current) if current in options else 0,
                                 lambda i: self._change(mon, mirror=options[i] if i else None)))
 
-        group.add(switch_row("Cor de 10 bits", "Só ative se o monitor e o cabo suportarem",
+        group.add(switch_row(_("10-bit color"), _("Only enable it if the display and cable support it"),
                              rule.get("bitdepth") == 10, lambda on: self._change(mon, bitdepth=10 if on else None)))
 
         if core.have("omarchy-brightness-display"):
@@ -372,7 +373,7 @@ class MonitorsPage(Adw.PreferencesPage):
         return group
 
     def _restore_row(self, name: str) -> Adw.ActionRow:
-        return button_row("Restaurar este monitor", "Volta ao que está em monitors.lua", "Restaurar",
+        return button_row(_("Restore this display"), _("Returns to what is in monitors.lua"), _("Restore"),
                           lambda: self._restore(name))
 
     @staticmethod
@@ -406,7 +407,7 @@ class MonitorsPage(Adw.PreferencesPage):
         if not on:
             active = [m for m in self.monitors if not self._rule(m).get("disabled")]
             if len(active) <= 1:
-                self.win.toast("Não é possível desativar o único monitor ativo")
+                self.win.toast(_("The only active display can't be turned off"))
                 GLib.timeout_add(300, self._reload_later)
                 return
             before = self.store.get_monitor(mon["name"])
@@ -423,10 +424,10 @@ class MonitorsPage(Adw.PreferencesPage):
 
     def _restore(self, name: str) -> None:
         if self.store.get_monitor(name) is None:
-            self.win.toast(f"{name} já usa monitors.lua")
+            self.win.toast(_("{name} already uses monitors.lua").format(name=name))
             return
         self.store.unset_monitor(name)
-        self.win.toast(f"{name} restaurado")
+        self.win.toast(_("{name} restored").format(name=name))
         GLib.timeout_add(900, self._reload_later)
 
     def _reload_later(self) -> bool:
@@ -438,15 +439,17 @@ class MonitorsPage(Adw.PreferencesPage):
         if self._dialog is not None or not hasattr(Adw, "AlertDialog"):
             return  # já existe uma confirmação aberta; ela cobre esta mudança também
         remaining = [CONFIRM_SECONDS]
-        dialog = Adw.AlertDialog(heading="Manter estas configurações de tela?")
-        dialog.add_response("revert", "Reverter")
-        dialog.add_response("keep", "Manter")
+        dialog = Adw.AlertDialog(heading=_("Keep these display settings?"))
+        dialog.add_response("revert", _("Revert"))
+        dialog.add_response("keep", _("Keep"))
         dialog.set_response_appearance("keep", Adw.ResponseAppearance.SUGGESTED)
         dialog.set_default_response("keep")
         dialog.set_close_response("revert")
 
         def body() -> None:
-            dialog.set_body(f"As alterações em {name} serão revertidas em {remaining[0]} s.")
+            dialog.set_body(ngettext("Changes to {name} will be reverted in {seconds} second.",
+                                     "Changes to {name} will be reverted in {seconds} seconds.",
+                                     remaining[0]).format(name=name, seconds=remaining[0]))
 
         def tick() -> bool:
             remaining[0] -= 1
@@ -464,7 +467,7 @@ class MonitorsPage(Adw.PreferencesPage):
                     self.store.unset_monitor(name)
                 else:
                     self.store.set_monitor(before)
-                self.win.toast("Configurações de tela revertidas")
+                self.win.toast(_("Display settings reverted"))
             GLib.timeout_add(900, self._reload_later)
 
         body()
@@ -480,7 +483,7 @@ class MonitorsPage(Adw.PreferencesPage):
         if not isinstance(value, int):
             group.add(self._restore_row(name))
             return
-        row = Adw.ActionRow(title="Brilho", subtitle="Via DDC/CI")
+        row = Adw.ActionRow(title=_("Brightness"), subtitle=_("Via DDC/CI"))
         scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 5)
         scale.set_value(value)
         scale.set_draw_value(True)
@@ -507,7 +510,7 @@ class MonitorsPage(Adw.PreferencesPage):
     def _add_nightlight(self, group: Adw.PreferencesGroup, on) -> None:
         if not isinstance(on, bool):
             return
-        group.add(switch_row("Luz noturna", "Tela mais quente para reduzir a luz azul", on, self._set_nightlight))
+        group.add(switch_row(_("Night light"), _("Warmer screen to reduce blue light"), on, self._set_nightlight))
 
     def _set_nightlight(self, on: bool) -> None:
         def work() -> None:
@@ -519,7 +522,7 @@ class MonitorsPage(Adw.PreferencesPage):
     def _add_text_size(self, group: Adw.PreferencesGroup, size) -> None:
         if not isinstance(size, int):
             return
-        group.add(spin_row("Tamanho do texto", "Shell, apps GTK e terminais (padrão 12)", 9, 20, 1, size,
+        group.add(spin_row(_("Text size"), _("Shell, GTK apps and terminals (default 12)"), 9, 20, 1, size,
                            self._set_text_size))
 
     def _set_text_size(self, size: int) -> None:

@@ -102,8 +102,8 @@ def test_build_entries_matches_sources_and_reconstructs_loops(sources):
     assert e["Terminal"].action == '{ omarchy = "terminal" }' and e["Terminal"].category == "applications"
     assert e["Expand window left"].keys == "SUPER + code:20" and e["Expand window left"].action
     assert e["Switch to workspace 3"].keys == "SUPER + code:12"
-    assert e["Switch to workspace 3"].action is None and "laço" in e["Switch to workspace 3"].locked
-    assert e["Universal copy"].action is None and "função interna" in e["Universal copy"].locked
+    assert e["Switch to workspace 3"].action is None and "loop" in e["Switch to workspace 3"].locked
+    assert e["Universal copy"].action is None and "internal" in e["Universal copy"].locked
     assert e["Something else"].category == "other"
 
 

@@ -1,0 +1,1141 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: omarchy-settings\n"
+"PO-Revision-Date: 2026-11-01 12:00-0400\n"
+"Last-Translator: Marcus Vinícius Peixoto Paulo\n"
+"Language-Team: Portuguese (Brazil)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "1 is normal"
+msgstr "1 é o normal"
+
+msgid "10-bit color"
+msgstr "Cor de 10 bits"
+
+msgid "100% is fully opaque"
+msgstr "100% é totalmente opaca"
+
+msgid "12-hour format — {example}"
+msgstr "Formato de 12 horas — {example}"
+
+msgid "2½ minutes"
+msgstr "2 minutos e meio"
+
+msgid "Acceleration"
+msgstr "Aceleração"
+
+msgid "Active window"
+msgstr "Janela ativa"
+
+msgid "Active window opacity"
+msgstr "Opacidade da janela ativa"
+
+msgid "Adaptive"
+msgstr "Adaptativa"
+
+msgid "Add"
+msgstr "Adicionar"
+
+msgid "Add widget"
+msgstr "Adicionar widget"
+
+msgid "adjusted by this app"
+msgstr "ajustado por este app"
+
+msgid "Advanced"
+msgstr "Avançado"
+
+msgid "AI agents"
+msgstr "Agentes de IA"
+
+msgid "Already used by your shortcut “{name}”."
+msgstr "Já usado pelo seu atalho “{name}”."
+
+msgid "Already used by “{name}”, which will be disabled."
+msgstr "Já usado por “{name}”, que será desativado."
+
+msgid "Animations"
+msgstr "Animações"
+
+msgid "Applications"
+msgstr "Aplicativos"
+
+msgid "Applied to the terminal, bar and other Omarchy apps."
+msgstr "Aplicada ao terminal, barra e demais apps do Omarchy."
+
+msgid "Applies several settings at once; you can fine-tune each one below."
+msgstr "Aplica vários ajustes de uma vez; depois dá para refinar cada um abaixo."
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Applying {name}…"
+msgstr "Aplicando {name}…"
+
+msgid "Arrangement"
+msgstr "Disposição"
+
+msgid "Asks for the password to come back"
+msgstr "Pede a senha para voltar"
+
+msgid "Audio"
+msgstr "Áudio"
+
+msgid "Available widgets"
+msgstr "Widgets disponíveis"
+
+msgid "Avoids moving the pointer by accident"
+msgstr "Evita mover o cursor sem querer"
+
+msgid "Back to Omarchy's default"
+msgstr "Voltar ao padrão do Omarchy"
+
+msgid "Bar"
+msgstr "Barra"
+
+msgid "Bar and fonts"
+msgstr "Barra e fontes"
+
+msgid "Bar position changed"
+msgstr "Posição da barra alterada"
+
+msgid "Bar restored"
+msgstr "Barra restaurada"
+
+msgid "Battery, power profile and system usage"
+msgstr "Bateria, perfil de energia e uso do sistema"
+
+msgid "Before: {keys}"
+msgstr "Antes: {keys}"
+
+msgid "Behavior"
+msgstr "Comportamento"
+
+msgid "Below 100% lets you see what is behind"
+msgstr "Abaixo de 100% deixa ver o que está atrás"
+
+msgid "Blank space"
+msgstr "Espaço em branco"
+
+msgid "Bluetooth devices"
+msgstr "Dispositivos Bluetooth"
+
+msgid "Blur"
+msgstr "Desfoque (blur)"
+
+msgid "Blur radius"
+msgstr "Raio do desfoque"
+
+msgid "Blurs what shows behind translucent windows"
+msgstr "Embaça o que aparece atrás de janelas translúcidas"
+
+msgid "Border width"
+msgstr "Espessura da borda"
+
+msgid "Bottom"
+msgstr "Rodapé"
+
+msgid "Brightness"
+msgstr "Brilho"
+
+msgid "Brightness +"
+msgstr "Brilho +"
+
+msgid "Brightness and display controls"
+msgstr "Brilho e controles da tela"
+
+msgid "Brightness −"
+msgstr "Brilho −"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Change"
+msgstr "Trocar"
+
+msgid "Change the key"
+msgstr "Mudar a tecla"
+
+msgid "Changes the colors of the system, terminal, bar and editor at once."
+msgstr "Troca cores do sistema, terminal, barra e editor de uma vez."
+
+msgid "Changes to {name} will be reverted in {seconds} second."
+msgid_plural "Changes to {name} will be reverted in {seconds} seconds."
+msgstr[0] "As alterações em {name} serão revertidas em {seconds} segundo."
+msgstr[1] "As alterações em {name} serão revertidas em {seconds} segundos."
+
+msgid "Characters per second"
+msgstr "Caracteres por segundo"
+
+msgid "Claude Code, Codex and Fireworks usage and limits"
+msgstr "Uso e limites do Claude Code, Codex e Fireworks"
+
+msgid "Click the clock to see the alternate format"
+msgstr "Clique no relógio para ver o formato alternativo"
+
+msgid "Clipboard"
+msgstr "Área de transferência"
+
+msgid "Clock"
+msgstr "Relógio"
+
+msgid "Clock format"
+msgstr "Formato do relógio"
+
+msgid "Clock format changed"
+msgstr "Formato do relógio alterado"
+
+msgid "Comfortable"
+msgstr "Confortável"
+
+msgid "Command (e.g. firefox, gimp, btop)"
+msgstr "Comando (ex.: firefox, gimp, btop)"
+
+msgid "command not found"
+msgstr "comando não encontrado"
+
+msgid "Compact"
+msgstr "Compacto"
+
+msgid "Connectivity"
+msgstr "Conectividade"
+
+msgid "Content follows the wheel's movement"
+msgstr "O conteúdo acompanha o movimento da roda"
+
+msgid "Controls for the music or video playing"
+msgstr "Controle da música ou vídeo tocando"
+
+msgid "Could not change Bluetooth"
+msgstr "Não foi possível alterar o Bluetooth"
+
+msgid "Could not read the shortcuts"
+msgstr "Não foi possível ler os atalhos"
+
+msgid "Could not write shell.json"
+msgstr "Não foi possível gravar shell.json"
+
+msgid "Counted from the moment you stop using the computer."
+msgstr "Contado a partir do momento em que você para de usar o computador."
+
+msgid "Current layout; click to switch"
+msgstr "Layout atual; clique para alternar"
+
+msgid "Current: {font}"
+msgstr "Atual: {font}"
+
+msgid "Custom (see Advanced)"
+msgstr "Personalizado (veja Avançado)"
+
+msgid "Custom ({value})"
+msgstr "Personalizado ({value})"
+
+msgid "Custom — {format}"
+msgstr "Personalizado — {format}"
+
+msgid "Cycles through the current theme's backgrounds"
+msgstr "Alterna entre os fundos do tema atual"
+
+msgid "Date and time, with a calendar on click"
+msgstr "Data e hora, com calendário ao clicar"
+
+msgid "Day, date and time — {example}"
+msgstr "Dia, data e hora — {example}"
+
+msgid "Default device"
+msgstr "Dispositivo padrão"
+
+msgid "Delay before repeating"
+msgstr "Espera antes de repetir"
+
+msgid "Delete"
+msgstr "Apagar"
+
+msgid "Device default"
+msgstr "Padrão do dispositivo"
+
+msgid "Devices and connection"
+msgstr "Dispositivos e conexão"
+
+msgid "Devices and per-app volume (wiremix)"
+msgstr "Dispositivos e volume por aplicativo (wiremix)"
+
+msgid "Dim unfocused windows"
+msgstr "Escurecer janelas sem foco"
+
+msgid "Dimming strength"
+msgstr "Intensidade do escurecimento"
+
+msgid "Disable while typing"
+msgstr "Desativar enquanto digita"
+
+msgid "disabled"
+msgstr "desativado"
+
+msgid "Disabled"
+msgstr "Desativado"
+
+msgid "Display"
+msgstr "Tela"
+
+msgid "Display positions applied"
+msgstr "Posição dos monitores aplicada"
+
+msgid "Display settings reverted"
+msgstr "Configurações de tela revertidas"
+
+msgid "Displays"
+msgstr "Monitores"
+
+msgid "Don't mirror"
+msgstr "Não espelhar"
+
+msgid "Drag a window's border with the mouse to resize it"
+msgstr "Arraste a borda da janela com o mouse para mudar o tamanho"
+
+msgid "Drag the displays with the mouse; they snap to each other's edges. The position is applied when you let go."
+msgstr "Arraste os monitores com o mouse; eles se encaixam pelas bordas. Ao soltar, a posição é aplicada."
+
+msgid "E.g. opening a link brings the browser to the front"
+msgstr "Ex.: ao abrir um link, o navegador vem para frente"
+
+msgid "Each new window splits the space of the focused window"
+msgstr "Cada nova janela divide o espaço da janela em foco"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Edit shortcut"
+msgstr "Editar atalho"
+
+msgid "Effects use more GPU; on laptops they can drain the battery."
+msgstr "Efeitos usam mais GPU; em notebooks podem gastar bateria."
+
+msgid "Elegant"
+msgstr "Elegante"
+
+msgid "Empty"
+msgstr "Vazio"
+
+msgid "Enable blur"
+msgstr "Ativar desfoque"
+
+msgid "Enable shadow"
+msgstr "Ativar sombra"
+
+msgid "Enabled"
+msgstr "Ativado"
+
+msgid "English (US)"
+msgstr "Inglês (EUA)"
+
+msgid "English (US, international with dead keys)"
+msgstr "Inglês (EUA, internacional com acentos)"
+
+msgid "Every widget is already on the bar"
+msgstr "Todos os widgets já estão na barra"
+
+msgid "Failed to apply {name}"
+msgstr "Falha ao aplicar {name}"
+
+msgid "Failed: {error}"
+msgstr "Falhou: {error}"
+
+msgid "Flipped"
+msgstr "Invertido"
+
+msgid "Flipped + 180°"
+msgstr "Invertido + 180°"
+
+msgid "Flipped + 270°"
+msgstr "Invertido + 270°"
+
+msgid "Flipped + 90°"
+msgstr "Invertido + 90°"
+
+msgid "Focus windows that ask for attention"
+msgstr "Focar janelas que pedem atenção"
+
+msgid "Font"
+msgstr "Fonte"
+
+msgid "Font {name} applied"
+msgstr "Fonte {name} aplicada"
+
+msgid "For portrait displays use 90° or 270°"
+msgstr "Para monitores na vertical use 90° ou 270°"
+
+msgid "From -1 (slower) to 1 (faster)"
+msgstr "De -1 (mais lento) a 1 (mais rápido)"
+
+msgid "From your bindings.lua"
+msgstr "Do seu bindings.lua"
+
+msgid "Full date and time — {example}"
+msgstr "Data completa e hora — {example}"
+
+msgid "Full mixer"
+msgstr "Mixer completo"
+
+msgid "Fullscreen only"
+msgstr "Só em tela cheia"
+
+msgid "Gap between windows"
+msgstr "Espaço entre janelas"
+
+msgid "Generated in a loop by Omarchy; it can only be disabled"
+msgstr "Gerado em laço pelo Omarchy; só dá para desativar"
+
+msgid "Go back to the previous workspace"
+msgstr "Voltar ao workspace anterior"
+
+msgid "Going to the workspace you are on returns to the previous one"
+msgstr "Ir para o workspace em que você já está volta para o anterior"
+
+msgid "Helps you see which window is active"
+msgstr "Ajuda a ver qual janela está ativa"
+
+msgid "Hide an idle pointer"
+msgstr "Esconder o cursor parado"
+
+msgid "Hide the pointer while typing"
+msgstr "Esconder o cursor ao digitar"
+
+msgid "Horizontal position (X)"
+msgstr "Posição horizontal (X)"
+
+msgid "hyprctl found no displays."
+msgstr "Nenhum monitor encontrado pelo hyprctl."
+
+msgid "Hyprland didn't accept that shortcut; nothing was changed"
+msgstr "O Hyprland não aceitou esse atalho; nada foi alterado"
+
+msgid "Hyprland options restored"
+msgstr "Opções do Hyprland restauradas"
+
+msgid "Icons of background apps"
+msgstr "Ícones de aplicativos em segundo plano"
+
+msgid "Idle"
+msgstr "Inatividade"
+
+msgid "In logical pixels"
+msgstr "Em pixels lógicos"
+
+msgid "In logical pixels; you can also drag it in Arrangement"
+msgstr "Em pixels lógicos; também dá para arrastar em Disposição"
+
+msgid "In pixels"
+msgstr "Em pixels"
+
+msgid "Indicators"
+msgstr "Indicadores"
+
+msgid "Instead of clicking the bottom-right corner"
+msgstr "Em vez de clicar no canto inferior direito"
+
+msgid "Interface size on this display"
+msgstr "Tamanho da interface neste monitor"
+
+msgid "Keep"
+msgstr "Manter"
+
+msgid "Keep these display settings?"
+msgstr "Manter estas configurações de tela?"
+
+msgid "Key for “{name}”"
+msgstr "Tecla para “{name}”"
+
+msgid "Keyboard"
+msgstr "Teclado"
+
+msgid "Keyboard layout"
+msgstr "Layout do teclado"
+
+msgid "Layouts (e.g. br,us)"
+msgstr "Layouts (ex.: br,us)"
+
+msgid "Left side"
+msgstr "Lateral esquerda"
+
+msgid "Left-handed mode"
+msgstr "Modo canhoto"
+
+msgid "Like on a phone"
+msgstr "Como no celular"
+
+msgid "Loading…"
+msgstr "Carregando…"
+
+msgid "Lock the screen after"
+msgstr "Bloquear a tela após"
+
+msgid "Main and stack"
+msgstr "Principal e pilha"
+
+msgid "Margin to the screen edge"
+msgstr "Margem até a borda da tela"
+
+msgid "Media"
+msgstr "Mídia"
+
+msgid "Media, volume and brightness"
+msgstr "Mídia, volume e brilho"
+
+msgid "Mic mute"
+msgstr "Mudo mic"
+
+msgid "Microphone"
+msgstr "Microfone"
+
+msgid "Microphone state and mute button"
+msgstr "Estado do microfone e botão de mudo"
+
+msgid "Milliseconds holding a key before it repeats"
+msgstr "Milissegundos segurando a tecla até ela repetir"
+
+msgid "Mirror"
+msgstr "Espelhar"
+
+msgid "Modes the display advertises"
+msgstr "Modos que o monitor anuncia"
+
+msgid "More passes = smoother and heavier"
+msgstr "Mais passadas = mais suave e mais pesado"
+
+msgid "More room between windows and soft corners"
+msgstr "Mais respiro entre as janelas e cantos suaves"
+
+msgid "Mouse"
+msgstr "Mouse"
+
+msgid "Move earlier"
+msgstr "Mover antes"
+
+msgid "Move later"
+msgstr "Mover depois"
+
+msgid "Move to the next section"
+msgstr "Mover para a próxima seção"
+
+msgid "Move to the previous section"
+msgstr "Mover para a seção anterior"
+
+msgid "Move widgets here with the arrows"
+msgstr "Mova widgets para cá com as setas"
+
+msgid "Multiple layouts, variants and XKB options"
+msgstr "Layouts múltiplos, variantes e opções do XKB"
+
+msgid "Mute"
+msgstr "Mudo"
+
+msgid "Mute microphone"
+msgstr "Microfone sem som"
+
+msgid "Mute output"
+msgstr "Saída sem som"
+
+msgid "Mutes the default device"
+msgstr "Silencia o dispositivo padrão"
+
+msgid "Mutes the default input"
+msgstr "Silencia a entrada padrão"
+
+msgid "Name (shown in the shortcut list)"
+msgstr "Nome (aparece na lista de atalhos)"
+
+msgid "Natural scrolling"
+msgstr "Rolagem natural"
+
+msgid "Network"
+msgstr "Rede"
+
+msgid "Network and Bluetooth"
+msgstr "Rede e Bluetooth"
+
+msgid "Networks and connections (impala)"
+msgstr "Redes e conexões (impala)"
+
+msgid "Never"
+msgstr "Nunca"
+
+msgid "New shortcut"
+msgstr "Novo atalho"
+
+msgid "Next"
+msgstr "Próxima"
+
+msgid "Next wallpaper"
+msgstr "Próximo wallpaper"
+
+msgid "Night light"
+msgstr "Luz noturna"
+
+msgid "No fonts listed"
+msgstr "Nenhuma fonte listada"
+
+msgid "No gaps or decorations: maximum usable area"
+msgstr "Sem espaços nem enfeites: máximo de área útil"
+
+msgid "No shortcuts of your own"
+msgstr "Nenhum atalho próprio"
+
+msgid "No themes found"
+msgstr "Nenhum tema encontrado"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Num Lock on at startup"
+msgstr "Num Lock ligado ao iniciar"
+
+msgid "Off"
+msgstr "Desligado"
+
+msgid "Off (good for games)"
+msgstr "Desligada (bom para jogos)"
+
+msgid "Omarchy menu"
+msgstr "Menu do Omarchy"
+
+msgid "Omarchy Settings"
+msgstr "Configurações do Omarchy"
+
+msgid "Omarchy shortcuts"
+msgstr "Atalhos do Omarchy"
+
+msgid "Omarchy's default look"
+msgstr "O visual padrão do Omarchy"
+
+msgid "Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."
+msgstr "Os atalhos do Omarchy voltam ao padrão e os seus atalhos próprios são apagados."
+
+msgid "omarchy-bar not found: update Omarchy to use this page."
+msgstr "omarchy-bar não encontrado: atualize o Omarchy para usar esta página."
+
+msgid "omarchy-font-list returned nothing"
+msgstr "omarchy-font-list sem saída"
+
+msgid "omarchy-font-set not found"
+msgstr "omarchy-font-set não encontrado"
+
+msgid "omarchy-theme-list is not available"
+msgstr "omarchy-theme-list não está disponível"
+
+msgid "On"
+msgstr "Ligado"
+
+msgid "On click, but the keyboard follows the mouse"
+msgstr "Ao clicar, mas o teclado segue o mouse"
+
+msgid "On mouse hover"
+msgstr "Ao passar o mouse"
+
+msgid "One large window on the left and the others stacked beside it"
+msgstr "Uma janela grande à esquerda e as outras empilhadas ao lado"
+
+msgid "Only enable it if the display and cable support it"
+msgstr "Só ative se o monitor e o cabo suportarem"
+
+msgid "Only on click"
+msgstr "Só ao clicar"
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Open app"
+msgstr "Abrir aplicativo"
+
+msgid "Open in terminal"
+msgstr "Abrir no terminal"
+
+msgid "Opens the command menu"
+msgstr "Abre o menu de comandos"
+
+msgid "Options (e.g. compose:caps,grp:alts_toggle)"
+msgstr "Opções (ex.: compose:caps,grp:alts_toggle)"
+
+msgid "Other"
+msgstr "Outros"
+
+msgid "Other windows' opacity"
+msgstr "Opacidade das outras janelas"
+
+msgid "Output volume"
+msgstr "Volume de saída"
+
+msgid "Pair and connect (bluetui)"
+msgstr "Parear e conectar (bluetui)"
+
+msgid "Paste with the middle button"
+msgstr "Colar com o botão do meio"
+
+msgid "Pause"
+msgstr "Pausa"
+
+msgid "Pauses the screensaver and lock until you turn this off"
+msgstr "Pausa proteção de tela e bloqueio até desligar isto"
+
+msgid "Pointer speed"
+msgstr "Velocidade do cursor"
+
+msgid "Portuguese (Brazil, ABNT2)"
+msgstr "Português (Brasil, ABNT2)"
+
+msgid "Portuguese (Portugal)"
+msgstr "Português (Portugal)"
+
+msgid "Position"
+msgstr "Posição"
+
+msgid "Power"
+msgstr "Energia"
+
+msgid "Press the combination. If the system already uses it, it may not reach this window: select the modifiers above and record just the key."
+msgstr "Pressione a combinação. Se o sistema já usa essa combinação ela pode não chegar aqui: marque os modificadores acima e grave só a tecla."
+
+msgid "Press the key…"
+msgstr "Pressione a tecla…"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Quality"
+msgstr "Qualidade"
+
+msgid "Quick style"
+msgstr "Estilo rápido"
+
+msgid "Radius in pixels; 0 keeps corners square"
+msgstr "Raio em pixels; 0 deixa os cantos retos"
+
+msgid "Reads the connected displays again"
+msgstr "Lê de novo os monitores conectados"
+
+msgid "Record another key"
+msgstr "Gravar outra tecla"
+
+msgid "Reduces tearing in games and videos"
+msgstr "Reduz tearing em jogos e vídeos"
+
+msgid "Reload"
+msgstr "Recarregar"
+
+msgid "Remove from the bar"
+msgstr "Remover da barra"
+
+msgid "Repeat rate"
+msgstr "Velocidade da repetição"
+
+msgid "Resize from the border"
+msgstr "Redimensionar pela borda"
+
+msgid "Resolution and refresh rate"
+msgstr "Resolução e taxa"
+
+msgid "Restart"
+msgstr "Reiniciar"
+
+msgid "Restart the shell"
+msgstr "Reiniciar o shell"
+
+msgid "Restarting the shell…"
+msgstr "Reiniciando o shell…"
+
+msgid "Restore"
+msgstr "Restaurar"
+
+msgid "Restore all shortcuts"
+msgstr "Restaurar todos os atalhos"
+
+msgid "Restore all shortcuts?"
+msgstr "Restaurar todos os atalhos?"
+
+msgid "Restore default bar"
+msgstr "Restaurar barra padrão"
+
+msgid "Restore defaults"
+msgstr "Restaurar padrões"
+
+msgid "Restore the default bar?"
+msgstr "Restaurar a barra padrão?"
+
+msgid "Restore this display"
+msgstr "Restaurar este monitor"
+
+msgid "Returns every option on this page to Omarchy's default"
+msgstr "Volta todas as opções desta página ao padrão do Omarchy"
+
+msgid "Returns position, transparency and widgets to Omarchy's default"
+msgstr "Volta posição, transparência e widgets ao padrão do Omarchy"
+
+msgid "Returns to what is in monitors.lua"
+msgstr "Volta ao que está em monitors.lua"
+
+msgid "Revert"
+msgstr "Reverter"
+
+msgid "Right side"
+msgstr "Lateral direita"
+
+msgid "Rotation"
+msgstr "Rotação"
+
+msgid "Rounded corners"
+msgstr "Cantos arredondados"
+
+msgid "Rounded corners, shadow, blur and translucent inactive windows"
+msgstr "Cantos arredondados, sombra, desfoque e janelas inativas translúcidas"
+
+msgid "Run command"
+msgstr "Executar comando"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Scale"
+msgstr "Escala"
+
+msgid "Screensaver after"
+msgstr "Proteção de tela após"
+
+msgid "Scroll speed"
+msgstr "Velocidade da rolagem"
+
+msgid "Search by name or key (e.g. browser, super+b)"
+msgstr "Buscar por nome ou tecla (ex.: browser, super+b)"
+
+msgid "Seconds without moving the mouse; 0 never hides"
+msgstr "Segundos sem mexer o mouse; 0 nunca esconde"
+
+msgid "Settings are stored in ~/.config/hypr/omarchy-settings.lua and take priority over monitors.lua. 'Restore' returns to what is in monitors.lua."
+msgstr "Os ajustes ficam em ~/.config/hypr/omarchy-settings.lua e têm prioridade sobre monitors.lua. 'Restaurar' volta ao que está em monitors.lua."
+
+msgid "Shadow"
+msgstr "Sombra"
+
+msgid "Shell restarted"
+msgstr "Shell reiniciado"
+
+msgid "Shell, GTK apps and terminals (default 12)"
+msgstr "Shell, apps GTK e terminais (padrão 12)"
+
+msgid "Shortcut “{name}” deleted"
+msgstr "Atalho “{name}” apagado"
+
+msgid "Shortcut “{name}” saved"
+msgstr "Atalho “{name}” salvo"
+
+msgid "Shortcuts"
+msgstr "Atalhos"
+
+msgid "Shortcuts restored"
+msgstr "Atalhos restaurados"
+
+msgid "Show the bar"
+msgstr "Mostrar a barra"
+
+msgid "Shows the same content as another display"
+msgstr "Mostra o mesmo conteúdo de outro monitor"
+
+msgid "Shows the wallpaper behind the bar"
+msgstr "Deixa ver o papel de parede atrás da barra"
+
+msgid "Side scrolling"
+msgstr "Rolagem lateral"
+
+msgid "Side-by-side columns that scroll horizontally, niri style"
+msgstr "Colunas lado a lado que rolam na horizontal, estilo niri"
+
+msgid "Size"
+msgstr "Tamanho"
+
+msgid "Soft shadow around windows"
+msgstr "Sombra suave em volta das janelas"
+
+msgid "Space"
+msgstr "Espaço"
+
+msgid "Spacer"
+msgstr "Espaçador"
+
+msgid "Spanish"
+msgstr "Espanhol"
+
+msgid "Split (default)"
+msgstr "Dividir (padrão)"
+
+msgid "States like screen recording and do not disturb"
+msgstr "Estados como gravação de tela e não perturbe"
+
+msgid "Stay awake"
+msgstr "Manter acordado"
+
+msgid "Strength"
+msgstr "Intensidade"
+
+msgid "Swaps the left and right buttons"
+msgstr "Troca os botões esquerdo e direito"
+
+msgid "Sync status and recent files"
+msgstr "Status de sincronização e arquivos recentes"
+
+msgid "System font"
+msgstr "Fonte do sistema"
+
+msgid "System tray"
+msgstr "Bandeja do sistema"
+
+msgid "Tap to click"
+msgstr "Tocar para clicar"
+
+msgid "Tells you when an Omarchy update is available"
+msgstr "Avisa quando há atualização do Omarchy"
+
+msgid "Temperature with details on click"
+msgstr "Temperatura com detalhes ao clicar"
+
+msgid "Test by typing accented characters after switching"
+msgstr "Teste digitando acentos e ç depois de trocar"
+
+msgid "Text size"
+msgstr "Tamanho do texto"
+
+msgid "The color comes from the theme; 0 hides the border"
+msgstr "A cor vem do tema; 0 esconde a borda"
+
+msgid "The default shortcuts come from Omarchy. Changes made here are stored in ~/.config/hypr/omarchy-settings.lua and can be undone with ↶."
+msgstr "Os atalhos padrão vêm do Omarchy. Mudanças feitas aqui ficam em ~/.config/hypr/omarchy-settings.lua e podem ser desfeitas com ↶."
+
+msgid "The only active display can't be turned off"
+msgstr "Não é possível desativar o único monitor ativo"
+
+msgid "The original key is used by “{name}”"
+msgstr "A tecla original está em uso por “{name}”"
+
+msgid "The position, transparency and widget list return to Omarchy's default."
+msgstr "A posição, a transparência e a lista de widgets voltam ao padrão do Omarchy."
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "Theme {name} applied"
+msgstr "Tema {name} aplicado"
+
+msgid "Themes"
+msgstr "Temas"
+
+msgid "Those keys are used by another shortcut; change its key first"
+msgstr "Essas teclas estão em uso por outro atalho; mude a tecla dele antes"
+
+msgid "Time only — {example}"
+msgstr "Só a hora — {example}"
+
+msgid "Title of the focused window"
+msgstr "Título da janela em foco"
+
+msgid "Top"
+msgstr "Topo"
+
+msgid "Touchpad"
+msgstr "Touchpad"
+
+msgid "Transitions when opening, closing and switching workspaces"
+msgstr "Transições ao abrir, fechar e trocar de workspace"
+
+msgid "Transparency and effects"
+msgstr "Transparência e efeitos"
+
+msgid "Transparent background"
+msgstr "Fundo transparente"
+
+msgid "Turning it off removes the display from the desktop"
+msgstr "Desligar remove o monitor do desktop"
+
+msgid "Turns the adapter on or off"
+msgstr "Liga ou desliga o adaptador"
+
+msgid "Two-finger click = right button"
+msgstr "Clique com dois dedos = botão direito"
+
+msgid "Undoes every change and deletes your own shortcuts"
+msgstr "Desfaz todas as mudanças e apaga os atalhos próprios"
+
+msgid "unknown"
+msgstr "desconhecida"
+
+msgid "unknown error"
+msgstr "erro desconhecido"
+
+msgid "Update Omarchy to change fonts from here"
+msgstr "Atualize o Omarchy para trocar fontes por aqui"
+
+msgid "Updates"
+msgstr "Atualizações"
+
+msgid "Use it if the bar freezes or disappears"
+msgstr "Use se a barra travar ou sumir"
+
+msgid "Use “New shortcut” to open an app or run a command"
+msgstr "Use “Novo atalho” para abrir um app ou rodar um comando"
+
+msgid "Uses an internal Omarchy function; it can only be disabled"
+msgstr "Usa uma função interna do Omarchy; só dá para desativar"
+
+msgid "Utilities and captures"
+msgstr "Utilitários e capturas"
+
+msgid "Variable refresh rate (VRR / FreeSync)"
+msgstr "Taxa variável (VRR / FreeSync)"
+
+msgid "Variants (e.g. ,intl)"
+msgstr "Variantes (ex.: ,intl)"
+
+msgid "Vertical position (Y)"
+msgstr "Posição vertical (Y)"
+
+msgid "Via DDC/CI"
+msgstr "Via DDC/CI"
+
+msgid "Voice dictation"
+msgstr "Ditado por voz"
+
+msgid "Volume, sound output and per-app mixer"
+msgstr "Volume, saída de som e mixer por aplicativo"
+
+msgid "VPN status and connection switching"
+msgstr "Status e troca de conexão da VPN"
+
+msgid "Wallpaper"
+msgstr "Wallpaper"
+
+msgid "Wallpaper changed"
+msgstr "Wallpaper alterado"
+
+msgid "Wallpaper: {name}"
+msgstr "Wallpaper: {name}"
+
+msgid "Warmer screen to reduce blue light"
+msgstr "Tela mais quente para reduzir a luz azul"
+
+msgid "Weather"
+msgstr "Clima"
+
+msgid "Weekday and time — {example}"
+msgstr "Dia da semana e hora — {example}"
+
+msgid "What to do"
+msgstr "O que fazer"
+
+msgid "Wi-Fi and connection state"
+msgstr "Wi-Fi e estado da conexão"
+
+msgid "Widgets at the bottom"
+msgstr "Widgets na base"
+
+msgid "Widgets at the top"
+msgstr "Widgets no topo"
+
+msgid "Widgets in the center"
+msgstr "Widgets no centro"
+
+msgid "Widgets in the middle"
+msgstr "Widgets no meio"
+
+msgid "Widgets on the left"
+msgstr "Widgets à esquerda"
+
+msgid "Widgets on the right"
+msgstr "Widgets à direita"
+
+msgid "Window focus"
+msgstr "Foco das janelas"
+
+msgid "Window layout"
+msgstr "Organização das janelas"
+
+msgid "Windows"
+msgstr "Janelas"
+
+msgid "Windows and workspaces"
+msgstr "Janelas e workspaces"
+
+msgid "Without a modifier, this key stops working for typing."
+msgstr "Sem modificador, essa tecla deixa de funcionar para digitar."
+
+msgid "Workspace numbers"
+msgstr "Números dos workspaces"
+
+msgid "Workspaces"
+msgstr "Workspaces"
+
+msgid "You can also toggle it with the Omarchy shortcut"
+msgstr "Também dá para alternar pelo atalho do Omarchy"
+
+msgid "Your shortcuts"
+msgstr "Seus atalhos"
+
+msgid "{cmd} is not installed"
+msgstr "{cmd} não está instalado"
+
+msgid "{name} added to the bar"
+msgstr "{name} adicionado à barra"
+
+msgid "{name} already uses monitors.lua"
+msgstr "{name} já usa monitors.lua"
+
+msgid "{name} removed from the bar"
+msgstr "{name} removido da barra"
+
+msgid "{name} restored"
+msgstr "{name} restaurado"
+
+msgid "{name} style applied"
+msgstr "Estilo {name} aplicado"
+
+msgid "{n} changed"
+msgid_plural "{n} changed"
+msgstr[0] "{n} alterado"
+msgstr[1] "{n} alterados"
+
+msgid "{n} hour"
+msgid_plural "{n} hours"
+msgstr[0] "{n} hora"
+msgstr[1] "{n} horas"
+
+msgid "{n} minute"
+msgid_plural "{n} minutes"
+msgstr[0] "{n} minuto"
+msgstr[1] "{n} minutos"
+
+msgid "{n} not on the bar"
+msgid_plural "{n} not on the bar"
+msgstr[0] "{n} fora da barra"
+msgstr[1] "{n} fora da barra"
+
+msgid "{n} second"
+msgid_plural "{n} seconds"
+msgstr[0] "{n} segundo"
+msgstr[1] "{n} segundos"
+
+msgid "{n} shortcut"
+msgid_plural "{n} shortcuts"
+msgstr[0] "{n} atalho"
+msgstr[1] "{n} atalhos"
+
+msgid "“{name}” disabled"
+msgstr "“{name}” desativado"
+
+msgid "“{name}” enabled"
+msgstr "“{name}” ativado"
+
+msgid "“{name}” is back to the default"
+msgstr "“{name}” voltou ao padrão"
+
+msgid "“{name}” is now {keys}"
+msgstr "“{name}” agora é {keys}"

@@ -38,6 +38,25 @@ omarchy-settings
 
 Para testar sem instalar: `python3 -m omarchy_settings` dentro da pasta do projeto.
 
+## Idioma
+
+A interface segue o idioma do sistema (`LANGUAGE`, `LC_ALL`, `LC_MESSAGES`, `LANG`). Os textos do código estão
+em inglês, que também é o idioma usado quando não há tradução; há tradução para português do Brasil (`po/pt_BR.po`),
+usada também por outras variantes de português. Datas seguem o formato regional do sistema (`LC_TIME`).
+Para testar outro idioma sem mudar o sistema: `LANGUAGE=pt_BR omarchy-settings`.
+
+O `install.sh` compila os catálogos com `msgfmt` (pacote `gettext`). Para atualizar ou adicionar um idioma:
+
+```bash
+xgettext --language=Python --keyword=_ --keyword=ngettext:1,2 --from-code=UTF-8 \
+  -o po/omarchy-settings.pot $(find omarchy_settings -name '*.py')
+msgmerge -U po/pt_BR.po po/omarchy-settings.pot     # atualiza uma tradução existente
+msginit -i po/omarchy-settings.pot -l de -o po/de.po  # ou cria uma nova
+./install.sh
+```
+
+Os nomes dos atalhos do Omarchy aparecem como o próprio Omarchy os escreve (em inglês).
+
 ## Testes
 
 ```bash
@@ -45,7 +64,9 @@ sudo pacman -S --needed python-pytest
 python3 -m pytest
 ```
 
-Cobrem as partes sem interface (`core.py`, `layout.py`, `keybinds.py`) sem tocar no Hyprland em execução.
+Cobrem as partes sem interface (`core.py`, `layout.py`, `keybinds.py`) sem tocar no Hyprland em execução, e as
+traduções: todo texto marcado no código tem tradução, nenhuma tradução sobra sem uso e os marcadores (`{name}`…)
+batem entre o inglês e a tradução.
 `tests/fixtures/` tem cópias reduzidas dos arquivos de atalhos do Omarchy; um teste extra lê os arquivos reais
 (pulado se o Omarchy não estiver instalado) e falha se uma atualização mudar o formato deles.
 
@@ -56,10 +77,12 @@ omarchy_settings/
   core.py            execução de comandos e edição das configs (sem GTK, testável)
   keybinds.py        atalhos: leitura das fontes Lua, identificação e geração (sem GTK)
   layout.py          geometria da disposição de monitores: encaixe e sobreposição (sem GTK)
+  i18n.py            tradução (gettext) no idioma do sistema
   ui.py              helpers de widgets
   app.py             janela principal
   pages/             themes, hyprland, monitors, shortcuts, bar, connectivity
 data/                .desktop
+po/                  template (.pot) e traduções (.po)
 tests/               pytest + fixtures
 install.sh
 ```
@@ -70,4 +93,4 @@ install.sh
 - Trocar a tecla dos atalhos gerados em laço pelo Omarchy (workspaces 1–0, janelas de grupo, painéis da barra);
   hoje só dá para desativá-los.
 - Remover uma única cópia do Espaçador da barra (hoje a remoção vale para todas).
-- Se o app for publicado: internacionalização (gettext) e empacotamento (PKGBUILD/AUR).
+- Se o app for publicado: empacotamento (PKGBUILD/AUR) e mais idiomas.

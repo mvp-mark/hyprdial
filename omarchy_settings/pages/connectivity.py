@@ -10,6 +10,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
 from .. import core
+from ..i18n import _
 from ..ui import bg, button_row, switch_row
 
 SINK = "@DEFAULT_AUDIO_SINK@"
@@ -35,24 +36,24 @@ class ConnectivityPage(Adw.PreferencesPage):
         self.win = win
         self._vol_timer = 0
 
-        net = Adw.PreferencesGroup(title="Rede e Bluetooth")
-        net.add(button_row("Wi-Fi", "Redes e conexões (impala)", "Abrir", lambda: self._tui("impala")))
-        net.add(button_row("Dispositivos Bluetooth", "Parear e conectar (bluetui)", "Abrir", lambda: self._tui("bluetui")))
+        net = Adw.PreferencesGroup(title=_("Network and Bluetooth"))
+        net.add(button_row("Wi-Fi", _("Networks and connections (impala)"), _("Open"), lambda: self._tui("impala")))
+        net.add(button_row(_("Bluetooth devices"), _("Pair and connect (bluetui)"), _("Open"), lambda: self._tui("bluetui")))
         self.bt_group = net
         self.add(net)
         bg(bluetooth_powered, self._add_bt_switch)
 
-        audio = Adw.PreferencesGroup(title="Áudio")
+        audio = Adw.PreferencesGroup(title=_("Audio"))
         self.add(audio)
         self.audio_group = audio
         if core.have("wpctl"):
             bg(lambda: (get_volume(SINK), get_volume(SOURCE)), self._populate_audio)
-        audio.add(button_row("Mixer completo", "Dispositivos e volume por aplicativo (wiremix)", "Abrir",
+        audio.add(button_row(_("Full mixer"), _("Devices and per-app volume (wiremix)"), _("Open"),
                              lambda: self._tui("wiremix")))
 
     def _tui(self, cmd: str) -> None:
         if not core.have(cmd):
-            self.win.toast(f"{cmd} não está instalado")
+            self.win.toast(_("{cmd} is not installed").format(cmd=cmd))
             return
         core.launch_tui(cmd)
 
@@ -60,12 +61,12 @@ class ConnectivityPage(Adw.PreferencesPage):
     def _add_bt_switch(self, powered) -> None:
         if isinstance(powered, Exception) or powered is None:
             return
-        self.bt_group.add(switch_row("Bluetooth", "Liga ou desliga o adaptador", powered, self._set_bt))
+        self.bt_group.add(switch_row("Bluetooth", _("Turns the adapter on or off"), powered, self._set_bt))
 
     def _set_bt(self, on: bool) -> None:
         def done(res) -> None:
             if isinstance(res, Exception) or res is None or res.returncode != 0:
-                self.win.toast("Não foi possível alterar o Bluetooth")
+                self.win.toast(_("Could not change Bluetooth"))
 
         bg(lambda: core.run(["bluetoothctl", "power", "on" if on else "off"]), done)
 
@@ -75,7 +76,7 @@ class ConnectivityPage(Adw.PreferencesPage):
             return
         (vol, muted), (_mvol, mic_muted) = result
 
-        row = Adw.ActionRow(title="Volume de saída", subtitle="Dispositivo padrão")
+        row = Adw.ActionRow(title=_("Output volume"), subtitle=_("Default device"))
         scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 150, 1)
         scale.set_value(round(vol * 100))
         scale.set_draw_value(True)
@@ -86,9 +87,9 @@ class ConnectivityPage(Adw.PreferencesPage):
         row.add_suffix(scale)
         self.audio_group.add(row)
 
-        self.audio_group.add(switch_row("Saída sem som", "Silencia o dispositivo padrão", muted,
+        self.audio_group.add(switch_row(_("Mute output"), _("Mutes the default device"), muted,
                                         lambda on: self._mute(SINK, on)))
-        self.audio_group.add(switch_row("Microfone sem som", "Silencia a entrada padrão", mic_muted,
+        self.audio_group.add(switch_row(_("Mute microphone"), _("Mutes the default input"), mic_muted,
                                         lambda on: self._mute(SOURCE, on)))
 
     def _on_volume(self, scale: Gtk.Scale) -> None:

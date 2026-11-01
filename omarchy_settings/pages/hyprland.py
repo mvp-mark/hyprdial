@@ -14,6 +14,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
 from .. import core
+from ..i18n import _
 from ..ui import bg, button_row, to_bool, to_float
 
 # Estilos rápidos: chaves ausentes num estilo voltam ao padrão do Omarchy.
@@ -23,16 +24,16 @@ PRESET_KEYS = (
     "decoration:shadow:enabled", "decoration:shadow:range", "decoration:inactive_opacity",
 )
 PRESETS = [
-    ("Compacto", "Sem espaços nem enfeites: máximo de área útil", {
+    (_("Compact"), _("No gaps or decorations: maximum usable area"), {
         "general:gaps_in": 0, "general:gaps_out": 0, "general:border_size": 1, "decoration:rounding": 0,
         "decoration:blur:enabled": False, "decoration:shadow:enabled": False,
     }),
-    ("Omarchy", "O visual padrão do Omarchy", {}),
-    ("Confortável", "Mais respiro entre as janelas e cantos suaves", {
+    ("Omarchy", _("Omarchy's default look"), {}),
+    (_("Comfortable"), _("More room between windows and soft corners"), {
         "general:gaps_in": 8, "general:gaps_out": 16, "general:border_size": 2, "decoration:rounding": 10,
         "decoration:shadow:enabled": True, "decoration:shadow:range": 12,
     }),
-    ("Elegante", "Cantos arredondados, sombra, desfoque e janelas inativas translúcidas", {
+    (_("Elegant"), _("Rounded corners, shadow, blur and translucent inactive windows"), {
         "general:gaps_in": 10, "general:gaps_out": 20, "general:border_size": 2, "decoration:rounding": 14,
         "decoration:blur:enabled": True, "decoration:blur:size": 6, "decoration:blur:passes": 2,
         "decoration:shadow:enabled": True, "decoration:shadow:range": 20, "decoration:inactive_opacity": 0.92,
@@ -40,29 +41,29 @@ PRESETS = [
 ]
 
 LAYOUTS = [
-    ("dwindle", "Dividir (padrão)", "Cada nova janela divide o espaço da janela em foco"),
-    ("master", "Principal e pilha", "Uma janela grande à esquerda e as outras empilhadas ao lado"),
-    ("scrolling", "Rolagem lateral", "Colunas lado a lado que rolam na horizontal, estilo niri"),
+    ("dwindle", _("Split (default)"), _("Each new window splits the space of the focused window")),
+    ("master", _("Main and stack"), _("One large window on the left and the others stacked beside it")),
+    ("scrolling", _("Side scrolling"), _("Side-by-side columns that scroll horizontally, niri style")),
 ]
 
 # (rótulo, layout, variante)
 KEYBOARDS = [
-    ("Português (Brasil, ABNT2)", "br", ""),
-    ("Inglês (EUA)", "us", ""),
-    ("Inglês (EUA, internacional com acentos)", "us", "intl"),
-    ("Português (Portugal)", "pt", ""),
-    ("Espanhol", "es", ""),
+    (_("Portuguese (Brazil, ABNT2)"), "br", ""),
+    (_("English (US)"), "us", ""),
+    (_("English (US, international with dead keys)"), "us", "intl"),
+    (_("Portuguese (Portugal)"), "pt", ""),
+    (_("Spanish"), "es", ""),
 ]
 
-ACCEL = [("", "Padrão do dispositivo"), ("adaptive", "Adaptativa"), ("flat", "Desligada (bom para jogos)")]
+ACCEL = [("", _("Device default")), ("adaptive", _("Adaptive")), ("flat", _("Off (good for games)"))]
 
 
 def keyboard_index(layout: str, variant: str) -> int:
     """Posição na lista de layouts comuns; o último item é 'Personalizado'."""
-    return next((i for i, (_, lay, var) in enumerate(KEYBOARDS) if (lay, var) == (layout, variant)), len(KEYBOARDS))
+    return next((i for i, (_label, lay, var) in enumerate(KEYBOARDS) if (lay, var) == (layout, variant)), len(KEYBOARDS))
 
 
-FOLLOW = [(1, "Ao passar o mouse"), (0, "Só ao clicar"), (2, "Ao clicar, mas o teclado segue o mouse")]
+FOLLOW = [(1, _("On mouse hover")), (0, _("Only on click")), (2, _("On click, but the keyboard follows the mouse"))]
 
 
 class HyprlandPage(Adw.PreferencesPage):
@@ -83,111 +84,111 @@ class HyprlandPage(Adw.PreferencesPage):
         self._behavior_group()
 
         reset = Adw.PreferencesGroup()
-        reset.add(button_row("Restaurar padrões", "Volta todas as opções desta página ao padrão do Omarchy",
-                             "Restaurar", self._reset_all, "destructive-action"))
+        reset.add(button_row(_("Restore defaults"), _("Returns every option on this page to Omarchy's default"),
+                             _("Restore"), self._reset_all, "destructive-action"))
         self.add(reset)
 
     # ------------------------------------------------------------------ grupos
     def _style_group(self) -> None:
         group = Adw.PreferencesGroup(
-            title="Estilo rápido",
-            description="Aplica vários ajustes de uma vez; depois dá para refinar cada um abaixo.",
+            title=_("Quick style"),
+            description=_("Applies several settings at once; you can fine-tune each one below."),
         )
         for name, desc, values in PRESETS:
-            group.add(button_row(name, desc, "Aplicar", lambda v=values, n=name: self._apply_preset(n, v)))
+            group.add(button_row(name, desc, _("Apply"), lambda v=values, n=name: self._apply_preset(n, v)))
         self.add(group)
 
     def _windows_group(self) -> None:
-        group = Adw.PreferencesGroup(title="Janelas")
-        group.add(self._choice("general:layout", "Organização das janelas", LAYOUTS[0][0],
-                               [(k, label) for k, label, _ in LAYOUTS], subtitle_for=self._layout_subtitle))
-        group.add(self._spin("general:gaps_in", "Espaço entre janelas", "Em pixels", 0, 40, 1, 5))
-        group.add(self._spin("general:gaps_out", "Margem até a borda da tela", "Em pixels", 0, 80, 1, 10))
-        group.add(self._spin("general:border_size", "Espessura da borda", "A cor vem do tema; 0 esconde a borda",
+        group = Adw.PreferencesGroup(title=_("Windows"))
+        group.add(self._choice("general:layout", _("Window layout"), LAYOUTS[0][0],
+                               [(k, label) for k, label, _desc in LAYOUTS], subtitle_for=self._layout_subtitle))
+        group.add(self._spin("general:gaps_in", _("Gap between windows"), _("In pixels"), 0, 40, 1, 5))
+        group.add(self._spin("general:gaps_out", _("Margin to the screen edge"), _("In pixels"), 0, 80, 1, 10))
+        group.add(self._spin("general:border_size", _("Border width"), _("The color comes from the theme; 0 hides the border"),
                              0, 10, 1, 2))
-        group.add(self._spin("decoration:rounding", "Cantos arredondados", "Raio em pixels; 0 deixa os cantos retos",
+        group.add(self._spin("decoration:rounding", _("Rounded corners"), _("Radius in pixels; 0 keeps corners square"),
                              0, 30, 1, 0))
-        group.add(self._switch("general:resize_on_border", "Redimensionar pela borda",
-                               "Arraste a borda da janela com o mouse para mudar o tamanho", False))
+        group.add(self._switch("general:resize_on_border", _("Resize from the border"),
+                               _("Drag a window's border with the mouse to resize it"), False))
         self.add(group)
 
     def _effects_group(self) -> None:
-        group = Adw.PreferencesGroup(title="Transparência e efeitos",
-                                     description="Efeitos usam mais GPU; em notebooks podem gastar bateria.")
-        group.add(self._percent("decoration:active_opacity", "Opacidade da janela ativa", "100% é totalmente opaca",
+        group = Adw.PreferencesGroup(title=_("Transparency and effects"),
+                                     description=_("Effects use more GPU; on laptops they can drain the battery."))
+        group.add(self._percent("decoration:active_opacity", _("Active window opacity"), _("100% is fully opaque"),
                                 30, 100, 1.0))
-        group.add(self._percent("decoration:inactive_opacity", "Opacidade das outras janelas",
-                                "Abaixo de 100% deixa ver o que está atrás", 30, 100, 1.0))
-        group.add(self._switch("decoration:dim_inactive", "Escurecer janelas sem foco",
-                               "Ajuda a ver qual janela está ativa", False))
-        group.add(self._percent("decoration:dim_strength", "Intensidade do escurecimento", "", 0, 100, 0.5))
+        group.add(self._percent("decoration:inactive_opacity", _("Other windows' opacity"),
+                                _("Below 100% lets you see what is behind"), 30, 100, 1.0))
+        group.add(self._switch("decoration:dim_inactive", _("Dim unfocused windows"),
+                               _("Helps you see which window is active"), False))
+        group.add(self._percent("decoration:dim_strength", _("Dimming strength"), "", 0, 100, 0.5))
 
-        blur = Adw.ExpanderRow(title="Desfoque (blur)", subtitle="Embaça o que aparece atrás de janelas translúcidas")
-        blur.add_row(self._switch("decoration:blur:enabled", "Ativar desfoque", "", False))
-        blur.add_row(self._spin("decoration:blur:size", "Intensidade", "Raio do desfoque", 1, 20, 1, 8))
-        blur.add_row(self._spin("decoration:blur:passes", "Qualidade", "Mais passadas = mais suave e mais pesado",
+        blur = Adw.ExpanderRow(title=_("Blur"), subtitle=_("Blurs what shows behind translucent windows"))
+        blur.add_row(self._switch("decoration:blur:enabled", _("Enable blur"), "", False))
+        blur.add_row(self._spin("decoration:blur:size", _("Strength"), _("Blur radius"), 1, 20, 1, 8))
+        blur.add_row(self._spin("decoration:blur:passes", _("Quality"), _("More passes = smoother and heavier"),
                                 1, 4, 1, 1))
         group.add(blur)
 
-        shadow = Adw.ExpanderRow(title="Sombra", subtitle="Sombra suave em volta das janelas")
-        shadow.add_row(self._switch("decoration:shadow:enabled", "Ativar sombra", "", False))
-        shadow.add_row(self._spin("decoration:shadow:range", "Tamanho", "Em pixels", 1, 50, 1, 4))
+        shadow = Adw.ExpanderRow(title=_("Shadow"), subtitle=_("Soft shadow around windows"))
+        shadow.add_row(self._switch("decoration:shadow:enabled", _("Enable shadow"), "", False))
+        shadow.add_row(self._spin("decoration:shadow:range", _("Size"), _("In pixels"), 1, 50, 1, 4))
         group.add(shadow)
 
-        group.add(self._switch("animations:enabled", "Animações", "Transições ao abrir, fechar e trocar de workspace",
+        group.add(self._switch("animations:enabled", _("Animations"), _("Transitions when opening, closing and switching workspaces"),
                                True))
         self.add(group)
 
     def _keyboard_group(self) -> None:
-        group = Adw.PreferencesGroup(title="Teclado")
+        group = Adw.PreferencesGroup(title=_("Keyboard"))
         group.add(self._keyboard_row())
-        group.add(self._switch("input:numlock_by_default", "Num Lock ligado ao iniciar", "", False))
-        group.add(self._spin("input:repeat_delay", "Espera antes de repetir",
-                             "Milissegundos segurando a tecla até ela repetir", 100, 1000, 50, 600))
-        group.add(self._spin("input:repeat_rate", "Velocidade da repetição", "Caracteres por segundo", 1, 100, 1, 25))
+        group.add(self._switch("input:numlock_by_default", _("Num Lock on at startup"), "", False))
+        group.add(self._spin("input:repeat_delay", _("Delay before repeating"),
+                             _("Milliseconds holding a key before it repeats"), 100, 1000, 50, 600))
+        group.add(self._spin("input:repeat_rate", _("Repeat rate"), _("Characters per second"), 1, 100, 1, 25))
 
-        advanced = Adw.ExpanderRow(title="Avançado", subtitle="Layouts múltiplos, variantes e opções do XKB")
-        advanced.add_row(self._entry("input:kb_layout", "Layouts (ex.: br,us)", "us"))
-        advanced.add_row(self._entry("input:kb_variant", "Variantes (ex.: ,intl)", ""))
-        advanced.add_row(self._entry("input:kb_options", "Opções (ex.: compose:caps,grp:alts_toggle)", ""))
+        advanced = Adw.ExpanderRow(title=_("Advanced"), subtitle=_("Multiple layouts, variants and XKB options"))
+        advanced.add_row(self._entry("input:kb_layout", _("Layouts (e.g. br,us)"), "us"))
+        advanced.add_row(self._entry("input:kb_variant", _("Variants (e.g. ,intl)"), ""))
+        advanced.add_row(self._entry("input:kb_options", _("Options (e.g. compose:caps,grp:alts_toggle)"), ""))
         group.add(advanced)
         self.add(group)
 
     def _mouse_group(self) -> None:
-        group = Adw.PreferencesGroup(title="Mouse")
-        group.add(self._spin("input:sensitivity", "Velocidade do cursor", "De -1 (mais lento) a 1 (mais rápido)",
+        group = Adw.PreferencesGroup(title=_("Mouse"))
+        group.add(self._spin("input:sensitivity", _("Pointer speed"), _("From -1 (slower) to 1 (faster)"),
                              -1, 1, 0.05, 0, digits=2))
-        group.add(self._choice("input:accel_profile", "Aceleração", "", ACCEL))
-        group.add(self._switch("input:natural_scroll", "Rolagem natural", "O conteúdo acompanha o movimento da roda",
+        group.add(self._choice("input:accel_profile", _("Acceleration"), "", ACCEL))
+        group.add(self._switch("input:natural_scroll", _("Natural scrolling"), _("Content follows the wheel's movement"),
                                False))
-        group.add(self._spin("input:scroll_factor", "Velocidade da rolagem", "1 é o normal", 0.1, 5, 0.1, 1.0,
+        group.add(self._spin("input:scroll_factor", _("Scroll speed"), _("1 is normal"), 0.1, 5, 0.1, 1.0,
                              digits=1))
-        group.add(self._switch("input:left_handed", "Modo canhoto", "Troca os botões esquerdo e direito", False))
-        group.add(self._choice("input:follow_mouse", "Foco das janelas", 1, FOLLOW))
+        group.add(self._switch("input:left_handed", _("Left-handed mode"), _("Swaps the left and right buttons"), False))
+        group.add(self._choice("input:follow_mouse", _("Window focus"), 1, FOLLOW))
         self.add(group)
 
     def _touchpad_group(self) -> None:
-        group = Adw.PreferencesGroup(title="Touchpad")
-        group.add(self._switch("input:touchpad:tap-to-click", "Tocar para clicar", "", True))
-        group.add(self._switch("input:touchpad:natural_scroll", "Rolagem natural", "Como no celular", False))
-        group.add(self._switch("input:touchpad:clickfinger_behavior", "Clique com dois dedos = botão direito",
-                               "Em vez de clicar no canto inferior direito", False))
-        group.add(self._switch("input:touchpad:disable_while_typing", "Desativar enquanto digita",
-                               "Evita mover o cursor sem querer", True))
-        group.add(self._spin("input:touchpad:scroll_factor", "Velocidade da rolagem", "1 é o normal",
+        group = Adw.PreferencesGroup(title=_("Touchpad"))
+        group.add(self._switch("input:touchpad:tap-to-click", _("Tap to click"), "", True))
+        group.add(self._switch("input:touchpad:natural_scroll", _("Natural scrolling"), _("Like on a phone"), False))
+        group.add(self._switch("input:touchpad:clickfinger_behavior", _("Two-finger click = right button"),
+                               _("Instead of clicking the bottom-right corner"), False))
+        group.add(self._switch("input:touchpad:disable_while_typing", _("Disable while typing"),
+                               _("Avoids moving the pointer by accident"), True))
+        group.add(self._spin("input:touchpad:scroll_factor", _("Scroll speed"), _("1 is normal"),
                              0.1, 3, 0.1, 1.0, digits=1))
         self.add(group)
 
     def _behavior_group(self) -> None:
-        group = Adw.PreferencesGroup(title="Comportamento")
-        group.add(self._switch("misc:focus_on_activate", "Focar janelas que pedem atenção",
-                               "Ex.: ao abrir um link, o navegador vem para frente", False))
-        group.add(self._switch("binds:workspace_back_and_forth", "Voltar ao workspace anterior",
-                               "Ir para o workspace em que você já está volta para o anterior", False))
-        group.add(self._switch("misc:middle_click_paste", "Colar com o botão do meio", "", True))
-        group.add(self._switch("cursor:hide_on_key_press", "Esconder o cursor ao digitar", "", False))
-        group.add(self._spin("cursor:inactive_timeout", "Esconder o cursor parado",
-                             "Segundos sem mexer o mouse; 0 nunca esconde", 0, 60, 1, 0))
+        group = Adw.PreferencesGroup(title=_("Behavior"))
+        group.add(self._switch("misc:focus_on_activate", _("Focus windows that ask for attention"),
+                               _("E.g. opening a link brings the browser to the front"), False))
+        group.add(self._switch("binds:workspace_back_and_forth", _("Go back to the previous workspace"),
+                               _("Going to the workspace you are on returns to the previous one"), False))
+        group.add(self._switch("misc:middle_click_paste", _("Paste with the middle button"), "", True))
+        group.add(self._switch("cursor:hide_on_key_press", _("Hide the pointer while typing"), "", False))
+        group.add(self._spin("cursor:inactive_timeout", _("Hide an idle pointer"),
+                             _("Seconds without moving the mouse; 0 never hides"), 0, 60, 1, 0))
         self.add(group)
 
     # ------------------------------------------------------------------ linhas
@@ -201,7 +202,7 @@ class HyprlandPage(Adw.PreferencesPage):
     def _register(self, key: str, row, set_widget: Callable, default) -> None:
         """Botão ↶ por opção, visível só quando este app sobrescreve o valor."""
         undo = Gtk.Button(icon_name="edit-undo-symbolic", valign=Gtk.Align.CENTER,
-                          tooltip_text="Voltar ao padrão do Omarchy")
+                          tooltip_text=_("Back to Omarchy's default"))
         undo.add_css_class("flat")
         undo.set_visible(self.store.get(key) is not None)
         undo.connect("clicked", lambda _b: self._reset_keys([key]))
@@ -260,7 +261,7 @@ class HyprlandPage(Adw.PreferencesPage):
         values = [str(v) for v, _ in options]
         current = str(self._initial(key, default))
         if current not in values:
-            options.append((current, f"Personalizado ({current})"))
+            options.append((current, _("Custom ({value})").format(value=current)))
             values.append(current)
         row = Adw.ComboRow(title=title, subtitle=subtitle_for(current) if subtitle_for else "")
         row.set_model(Gtk.StringList.new([label for _, label in options]))
@@ -285,7 +286,7 @@ class HyprlandPage(Adw.PreferencesPage):
 
     @staticmethod
     def _layout_subtitle(value: str) -> str:
-        return next((desc for k, _, desc in LAYOUTS if k == value), "")
+        return next((desc for k, _label, desc in LAYOUTS if k == value), "")
 
     def _entry(self, key, title, default) -> Adw.EntryRow:
         row = self.entries[key] = Adw.EntryRow(title=title)
@@ -299,9 +300,9 @@ class HyprlandPage(Adw.PreferencesPage):
         """Atalho para os layouts mais comuns; o resto fica em Avançado."""
         layout = str(self._initial("input:kb_layout", "us"))
         variant = str(self._initial("input:kb_variant", "") or "")
-        labels = [label for label, _, _ in KEYBOARDS] + ["Personalizado (veja Avançado)"]
+        labels = [label for label, _lay, _var in KEYBOARDS] + [_("Custom (see Advanced)")]
         current = keyboard_index(layout, variant)
-        row = self._kb_row = Adw.ComboRow(title="Layout do teclado", subtitle="Teste digitando acentos e ç depois de trocar")
+        row = self._kb_row = Adw.ComboRow(title=_("Keyboard layout"), subtitle=_("Test by typing accented characters after switching"))
         row.set_model(Gtk.StringList.new(labels))
         row.set_selected(current)
 
@@ -309,7 +310,7 @@ class HyprlandPage(Adw.PreferencesPage):
             i = r.get_selected()
             if i >= len(KEYBOARDS) or self._updating:
                 return
-            _, lay, var = KEYBOARDS[i]
+            _label, lay, var = KEYBOARDS[i]
             # grava direto: _changed ressincronizaria esta mesma lista no meio do sinal e entraria em laço
             for key, value in (("input:kb_layout", lay), ("input:kb_variant", var)):
                 self.store.set(key, value)
@@ -342,7 +343,7 @@ class HyprlandPage(Adw.PreferencesPage):
         if restored:
             # o que voltou ao padrão só é conhecido depois que o Hyprland recarrega
             GLib.timeout_add(1200, self._sync_from_live, restored)
-        self.win.toast(f"Estilo {name} aplicado")
+        self.win.toast(_("{name} style applied").format(name=name))
 
     def _reset_keys(self, keys: list[str]) -> None:
         for key in keys:
@@ -375,4 +376,4 @@ class HyprlandPage(Adw.PreferencesPage):
     def _reset_all(self) -> None:
         self.store.reset_options()
         GLib.timeout_add(1200, self._sync_from_live, list(self.controls))
-        self.win.toast("Opções do Hyprland restauradas")
+        self.win.toast(_("Hyprland options restored"))

@@ -11,6 +11,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, Gtk  # noqa: E402
 
 from .. import core
+from ..i18n import _
 from ..ui import bg, button_row
 
 IMAGE_EXT = {".jpg", ".jpeg", ".png", ".webp"}
@@ -65,21 +66,21 @@ class ThemesPage(Adw.PreferencesPage):
         self.win = win
 
         self.theme_group = Adw.PreferencesGroup(
-            title="Tema", description="Troca cores do sistema, terminal, barra e editor de uma vez."
+            title=_("Theme"), description=_("Changes the colors of the system, terminal, bar and editor at once.")
         )
         self.add(self.theme_group)
         bg(lambda: (list_themes(), core.out(["omarchy-theme-current"])), self._populate_themes)
 
-        self.wall_group = Adw.PreferencesGroup(title="Wallpaper")
+        self.wall_group = Adw.PreferencesGroup(title=_("Wallpaper"))
         self.add(self.wall_group)
         self.wall_group.add(
             button_row(
-                "Próximo wallpaper",
-                "Alterna entre os fundos do tema atual",
-                "Trocar",
+                _("Next wallpaper"),
+                _("Cycles through the current theme's backgrounds"),
+                _("Change"),
                 lambda: bg(
                     lambda: core.run(["omarchy-theme-bg-next"]),
-                    lambda _r: win.toast("Wallpaper alterado"),
+                    lambda _r: win.toast(_("Wallpaper changed")),
                 ),
             )
         )
@@ -89,7 +90,7 @@ class ThemesPage(Adw.PreferencesPage):
     def _populate_themes(self, result) -> None:
         if isinstance(result, Exception) or not result[0]:
             self.theme_group.add(
-                Adw.ActionRow(title="Nenhum tema encontrado", subtitle="omarchy-theme-list não está disponível")
+                Adw.ActionRow(title=_("No themes found"), subtitle=_("omarchy-theme-list is not available"))
             )
             return
         themes, current = result
@@ -110,11 +111,11 @@ class ThemesPage(Adw.PreferencesPage):
     def _on_theme_toggled(self, button: Gtk.CheckButton, name: str) -> None:
         if not button.get_active():
             return
-        self.win.toast(f"Aplicando {name}…")
+        self.win.toast(_("Applying {name}…").format(name=name))
 
         def done(res) -> None:
             ok = not isinstance(res, Exception) and res is not None and res.returncode == 0
-            self.win.toast(f"Tema {name} aplicado" if ok else f"Falha ao aplicar {name}")
+            self.win.toast((_("Theme {name} applied") if ok else _("Failed to apply {name}")).format(name=name))
 
         bg(lambda: core.run(["omarchy-theme-set", name], timeout=120), done)
 
@@ -138,4 +139,4 @@ class ThemesPage(Adw.PreferencesPage):
 
     def _on_wall_activated(self, _flow, child, paths: list[Path]) -> None:
         path = paths[child.get_index()]
-        bg(lambda: set_wallpaper(path), lambda _r: self.win.toast(f"Wallpaper: {path.name}"))
+        bg(lambda: set_wallpaper(path), lambda _r: self.win.toast(_("Wallpaper: {name}").format(name=path.name)))

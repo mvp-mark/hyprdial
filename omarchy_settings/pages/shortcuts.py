@@ -10,6 +10,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gdk, GLib, Gtk  # noqa: E402
 
 from .. import keybinds as kb
+from ..i18n import _, ngettext
 from ..ui import bg, button_row
 
 CSS = b"""
@@ -76,23 +77,23 @@ class KeyDialog(Adw.AlertDialog):
         self.is_custom = custom is not None
         if self.is_custom:
             group = Adw.PreferencesGroup()
-            self.desc_row = Adw.EntryRow(title="Nome (aparece na lista de atalhos)", text=custom.get("desc", ""))
-            self.kind_row = Adw.ComboRow(title="O que fazer")
-            self.kind_row.set_model(Gtk.StringList.new([label for _, label in kb.KINDS]))
-            kinds = [k for k, _ in kb.KINDS]
+            self.desc_row = Adw.EntryRow(title=_("Name (shown in the shortcut list)"), text=custom.get("desc", ""))
+            self.kind_row = Adw.ComboRow(title=_("What to do"))
+            self.kind_row.set_model(Gtk.StringList.new([label for _kind, label in kb.KINDS]))
+            kinds = [k for k, _label in kb.KINDS]
             self.kind_row.set_selected(kinds.index(custom.get("kind", "launch")))
-            self.cmd_row = Adw.EntryRow(title="Comando (ex.: firefox, gimp, btop)", text=custom.get("command", ""))
+            self.cmd_row = Adw.EntryRow(title=_("Command (e.g. firefox, gimp, btop)"), text=custom.get("command", ""))
             for row in (self.desc_row, self.kind_row, self.cmd_row):
                 group.add(row)
-            self.desc_row.connect("changed", lambda *_: self._update())
-            self.cmd_row.connect("changed", lambda *_: self._update())
+            self.desc_row.connect("changed", lambda *_args: self._update())
+            self.cmd_row.connect("changed", lambda *_args: self._update())
             body.append(group)
 
         self.mod_buttons = {}
         mods_box = Gtk.Box(halign=Gtk.Align.CENTER, css_classes=["linked"])
-        for _, name in kb.MOD_BITS:
+        for _bit, name in kb.MOD_BITS:
             btn = Gtk.ToggleButton(label=name.capitalize() if name != "CTRL" else "Ctrl", active=name in mods)
-            btn.connect("toggled", lambda *_: self._update())
+            btn.connect("toggled", lambda *_args: self._update())
             self.mod_buttons[name] = btn
             mods_box.append(btn)
         body.append(mods_box)
@@ -106,8 +107,8 @@ class KeyDialog(Adw.AlertDialog):
         body.append(self.message)
         self.set_extra_child(body)
 
-        self.add_response("cancel", "Cancelar")
-        self.add_response("save", "Salvar")
+        self.add_response("cancel", _("Cancel"))
+        self.add_response("save", _("Save"))
         self.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
         self.set_close_response("cancel")
         self.connect("response", self._on_response)
@@ -128,7 +129,7 @@ class KeyDialog(Adw.AlertDialog):
 
     def _set_recording(self, on: bool) -> None:
         self.recording = on
-        self.record_btn.set_label("Pressione a tecla…" if on else "Gravar outra tecla")
+        self.record_btn.set_label(_("Press the key…") if on else _("Record another key"))
         if on:
             self.record_btn.add_css_class("suggested-action")
         else:
@@ -158,12 +159,12 @@ class KeyDialog(Adw.AlertDialog):
         self.preview.append(keycaps_box(keys))
         msg, blocked = ("", False)
         if self.recording:
-            msg = ("Pressione a combinação. Se o sistema já usa essa combinação ela pode não chegar aqui: "
-                   "marque os modificadores acima e grave só a tecla.")
+            msg = _("Press the combination. If the system already uses it, it may not reach this window: "
+                    "select the modifiers above and record just the key.")
         elif keys:
             msg, blocked = self.conflicts(keys)
             if not msg and not any(b.get_active() for b in self.mod_buttons.values()) and len(self.key) == 1:
-                msg = "Sem modificador, essa tecla deixa de funcionar para digitar."
+                msg = _("Without a modifier, this key stops working for typing.")
         if self.is_custom and not (self.desc_row.get_text().strip() and self.cmd_row.get_text().strip()):
             blocked = True
         self.message.set_label(msg)
@@ -186,12 +187,12 @@ class ShortcutsPage(Adw.PreferencesPage):
         self.expanders: dict[str, Adw.ExpanderRow] = {}
         self._busy = False
 
-        top = Adw.PreferencesGroup(description="Os atalhos padrão vêm do Omarchy. Mudanças feitas aqui ficam em "
-                                               "~/.config/hypr/omarchy-settings.lua e podem ser desfeitas com ↶.")
+        top = Adw.PreferencesGroup(description=_("The default shortcuts come from Omarchy. Changes made here are stored "
+                                                 "in ~/.config/hypr/omarchy-settings.lua and can be undone with ↶."))
         header = Gtk.Box(spacing=8)
-        self.search = Gtk.SearchEntry(hexpand=True, placeholder_text="Buscar por nome ou tecla (ex.: browser, super+b)")
+        self.search = Gtk.SearchEntry(hexpand=True, placeholder_text=_("Search by name or key (e.g. browser, super+b)"))
         self.search.connect("search-changed", lambda _e: self._filter())
-        new = Gtk.Button(label="Novo atalho", css_classes=["suggested-action"])
+        new = Gtk.Button(label=_("New shortcut"), css_classes=["suggested-action"])
         new.connect("clicked", lambda _b: self._edit_custom(None))
         header.append(self.search)
         header.append(new)
@@ -199,8 +200,8 @@ class ShortcutsPage(Adw.PreferencesPage):
         self.add(top)
 
         self.footer = Adw.PreferencesGroup()
-        self.footer.add(button_row("Restaurar todos os atalhos", "Desfaz todas as mudanças e apaga os atalhos próprios",
-                                   "Restaurar", self._confirm_reset, "destructive-action"))
+        self.footer.add(button_row(_("Restore all shortcuts"), _("Undoes every change and deletes your own shortcuts"),
+                                   _("Restore"), self._confirm_reset, "destructive-action"))
         self.add(self.footer)
         self.reload()
 
@@ -211,7 +212,7 @@ class ShortcutsPage(Adw.PreferencesPage):
 
     def _populate(self, entries) -> None:
         if isinstance(entries, Exception):
-            self.win.toast("Não foi possível ler os atalhos")
+            self.win.toast(_("Could not read the shortcuts"))
             return
         self.entries = entries
         expanded = {cat: exp.get_expanded() for cat, exp in self.expanders.items()}
@@ -220,25 +221,25 @@ class ShortcutsPage(Adw.PreferencesPage):
         self.groups, self.rows, self.expanders = [], [], {}
         self.remove(self.footer)
 
-        custom = Adw.PreferencesGroup(title="Seus atalhos")
+        custom = Adw.PreferencesGroup(title=_("Your shortcuts"))
         items = self.store.bindings.get("custom", [])
         if not items:
-            custom.add(Adw.ActionRow(title="Nenhum atalho próprio",
-                                     subtitle="Use “Novo atalho” para abrir um app ou rodar um comando"))
+            custom.add(Adw.ActionRow(title=_("No shortcuts of your own"),
+                                     subtitle=_("Use “New shortcut” to open an app or run a command")))
         for index, item in enumerate(items):
             row = self._custom_row(index, item)
             custom.add(row)
             self.rows.append((row, f"{item['desc']} {item['command']} {self._hay(item['keys'])}".lower(), None))
         self._add_group(custom)
 
-        omarchy = Adw.PreferencesGroup(title="Atalhos do Omarchy")
+        omarchy = Adw.PreferencesGroup(title=_("Omarchy shortcuts"))
         for cat in kb.CATEGORY_ORDER:
             cat_entries = [e for e in entries if e.category == cat]
             if not cat_entries:
                 continue
             changed = sum(e.override is not None for e in cat_entries)
             exp = Adw.ExpanderRow(title=kb.CATEGORIES[cat],
-                                  subtitle=f"{len(cat_entries)} atalhos" + (f" · {changed} alterados" if changed else ""),
+                                  subtitle=self._category_subtitle(len(cat_entries), changed),
                                   expanded=expanded.get(cat, False))
             for e in cat_entries:
                 row = self._entry_row(e)
@@ -249,6 +250,13 @@ class ShortcutsPage(Adw.PreferencesPage):
         self._add_group(omarchy)
         self.add(self.footer)
         self._filter()
+
+    @staticmethod
+    def _category_subtitle(total: int, changed: int) -> str:
+        text = ngettext("{n} shortcut", "{n} shortcuts", total).format(n=total)
+        if changed:
+            text += " · " + ngettext("{n} changed", "{n} changed", changed).format(n=changed)
+        return text
 
     def _add_group(self, group: Adw.PreferencesGroup) -> None:
         self.groups.append(group)
@@ -265,22 +273,22 @@ class ShortcutsPage(Adw.PreferencesPage):
         row = Adw.ActionRow(title=e.desc, use_markup=False)
         disabled = e.override is not None and not e.override.get("keys")
         if disabled:
-            row.set_subtitle("Desativado")
+            row.set_subtitle(_("Disabled"))
         elif e.override is not None:
-            row.set_subtitle(f"Antes: {' + '.join(kb.keycaps(e.keys))}")
+            row.set_subtitle(_("Before: {keys}").format(keys=" + ".join(kb.keycaps(e.keys))))
         row.add_suffix(keycaps_box(e.current_keys or e.keys, dim=disabled))
 
         edit = Gtk.Button(icon_name="document-edit-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
                           sensitive=e.action is not None and not disabled,
-                          tooltip_text="Mudar a tecla" if e.action else e.locked)
+                          tooltip_text=_("Change the key") if e.action else e.locked)
         edit.connect("clicked", lambda _b: self._edit_entry(e))
         row.add_suffix(edit)
         if e.override is not None:
             undo = Gtk.Button(icon_name="edit-undo-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                              tooltip_text="Voltar ao padrão do Omarchy")
+                              tooltip_text=_("Back to Omarchy's default"))
             undo.connect("clicked", lambda _b: self._restore(e))
             row.add_suffix(undo)
-        switch = Gtk.Switch(active=not disabled, valign=Gtk.Align.CENTER, tooltip_text="Ativo")
+        switch = Gtk.Switch(active=not disabled, valign=Gtk.Align.CENTER, tooltip_text=_("Enabled"))
         switch.connect("notify::active", lambda s, _p: self._toggle(e, s.get_active()))
         row.add_suffix(switch)
         return row
@@ -290,10 +298,10 @@ class ShortcutsPage(Adw.PreferencesPage):
         row = Adw.ActionRow(title=item["desc"], subtitle=f"{kind}: {item['command']}", use_markup=False)
         row.add_suffix(keycaps_box(item["keys"]))
         edit = Gtk.Button(icon_name="document-edit-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                          tooltip_text="Editar")
+                          tooltip_text=_("Edit"))
         edit.connect("clicked", lambda _b: self._edit_custom(index))
         delete = Gtk.Button(icon_name="user-trash-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                            tooltip_text="Apagar")
+                            tooltip_text=_("Delete"))
         delete.connect("clicked", lambda _b: self._delete_custom(index))
         row.add_suffix(edit)
         row.add_suffix(delete)
@@ -327,9 +335,9 @@ class ShortcutsPage(Adw.PreferencesPage):
         def check(keys: str) -> tuple[str, bool]:
             kind, who = self._who_uses(keys, ignore, ignore_custom)
             if kind == "custom":
-                return f"Já usado pelo seu atalho “{who['desc']}”.", True
+                return _("Already used by your shortcut “{name}”.").format(name=who["desc"]), True
             if kind == "entry":
-                return f"Já usado por “{who.desc}”, que será desativado.", False
+                return _("Already used by “{name}”, which will be disabled.").format(name=who.desc), False
             return "", False
 
         return check
@@ -350,9 +358,10 @@ class ShortcutsPage(Adw.PreferencesPage):
                 state["overrides"].pop(e.keys, None)
             else:
                 state["overrides"][e.keys] = {"desc": e.desc, "keys": keys, "action": e.action}
-            self._apply(state, f"“{e.desc}” agora é {' + '.join(kb.keycaps(keys))}", expect=keys)
+            self._apply(state, _("“{name}” is now {keys}").format(name=e.desc, keys=" + ".join(kb.keycaps(keys))),
+                        expect=keys)
 
-        KeyDialog(f"Tecla para “{e.desc}”", e.current_keys or e.keys, self._conflict_check(ignore=e.keys),
+        KeyDialog(_("Key for “{name}”").format(name=e.desc), e.current_keys or e.keys, self._conflict_check(ignore=e.keys),
                   save).present(self.win)
 
     def _toggle(self, e: kb.Entry, on: bool) -> None:
@@ -361,24 +370,24 @@ class ShortcutsPage(Adw.PreferencesPage):
         state = copy.deepcopy(self.store.bindings)
         if on:
             if self._who_uses(e.keys, ignore=e.keys)[0]:
-                self.win.toast("Essas teclas estão em uso por outro atalho; mude a tecla dele antes")
+                self.win.toast(_("Those keys are used by another shortcut; change its key first"))
                 GLib.idle_add(self.reload)
                 return
             state["overrides"].pop(e.keys, None)
         else:
             state["overrides"][e.keys] = {"desc": e.desc}
-        self._apply(state, f"“{e.desc}” {'ativado' if on else 'desativado'}")
+        self._apply(state, (_("“{name}” enabled") if on else _("“{name}” disabled")).format(name=e.desc))
 
     def _restore(self, e: kb.Entry) -> None:
         state = copy.deepcopy(self.store.bindings)
         state["overrides"].pop(e.keys, None)
         kind, who = self._who_uses(e.keys, ignore=e.keys)
         if kind == "custom":
-            self.win.toast(f"A tecla original está em uso por “{who['desc']}”")
+            self.win.toast(_("The original key is used by “{name}”").format(name=who["desc"]))
             return
         if kind == "entry":
             state["overrides"][who.keys] = {"desc": who.desc}
-        self._apply(state, f"“{e.desc}” voltou ao padrão")
+        self._apply(state, _("“{name}” is back to the default").format(name=e.desc))
 
     def _edit_custom(self, index: int | None) -> None:
         items = self.store.bindings.get("custom", [])
@@ -393,25 +402,25 @@ class ShortcutsPage(Adw.PreferencesPage):
                 state["custom"].append(new)
             else:
                 state["custom"][index] = new
-            self._apply(state, f"Atalho “{new['desc']}” salvo", expect=keys)
+            self._apply(state, _("Shortcut “{name}” saved").format(name=new["desc"]), expect=keys)
 
-        KeyDialog("Novo atalho" if index is None else "Editar atalho", item.get("keys"),
+        KeyDialog(_("New shortcut") if index is None else _("Edit shortcut"), item.get("keys"),
                   self._conflict_check(ignore_custom=index), save, custom=item).present(self.win)
 
     def _delete_custom(self, index: int) -> None:
         state = copy.deepcopy(self.store.bindings)
         item = state["custom"].pop(index)
-        self._apply(state, f"Atalho “{item['desc']}” apagado")
+        self._apply(state, _("Shortcut “{name}” deleted").format(name=item["desc"]))
 
     def _confirm_reset(self) -> None:
-        dialog = Adw.AlertDialog(heading="Restaurar todos os atalhos?",
-                                 body="Os atalhos do Omarchy voltam ao padrão e os seus atalhos próprios são apagados.")
-        dialog.add_response("cancel", "Cancelar")
-        dialog.add_response("reset", "Restaurar")
+        dialog = Adw.AlertDialog(heading=_("Restore all shortcuts?"),
+                                 body=_("Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."))
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("reset", _("Restore"))
         dialog.set_response_appearance("reset", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.set_close_response("cancel")
         dialog.connect("response", lambda _d, r: r == "reset" and self._apply(kb.empty_state(),
-                                                                              "Atalhos restaurados"))
+                                                                              _("Shortcuts restored")))
         dialog.present(self.win)
 
     def _apply(self, state: dict, ok_msg: str, expect: str | None = None) -> None:
@@ -428,7 +437,7 @@ class ShortcutsPage(Adw.PreferencesPage):
             if kb.canon(expect) in live:
                 return None
             self.store.apply_bindings(previous)
-            return "O Hyprland não aceitou esse atalho; nada foi alterado"
+            return _("Hyprland didn't accept that shortcut; nothing was changed")
 
         def done(error) -> None:
             self._busy = False

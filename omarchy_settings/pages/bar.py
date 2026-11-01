@@ -18,6 +18,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
 from .. import core
+from ..i18n import _, ngettext
 from ..ui import bg, button_row, combo_row, switch_row
 
 OMARCHY_PATH = os.environ.get("OMARCHY_PATH", "/usr/share/omarchy")
@@ -27,49 +28,57 @@ BAR_OFF_FLAG = core.HOME / ".local/state/omarchy/toggles/bar-off"
 STAY_AWAKE_FLAG = core.HOME / ".local/state/omarchy/indicators/stay-awake"
 
 SECTIONS = ["left", "center", "right"]
-POSITIONS = [("top", "Topo"), ("bottom", "Rodapé"), ("left", "Lateral esquerda"), ("right", "Lateral direita")]
-IDLE_TIMES = [(60, "1 minuto"), (120, "2 minutos"), (150, "2 minutos e meio"), (300, "5 minutos"),
-              (600, "10 minutos"), (900, "15 minutos"), (1800, "30 minutos"), (3600, "1 hora"), (0, "Nunca")]
+POSITIONS = [("top", _("Top")), ("bottom", _("Bottom")), ("left", _("Left side")), ("right", _("Right side"))]
+IDLE_TIMES = [60, 120, 150, 300, 600, 900, 1800, 3600, 0]
 
-# Nomes em português para os widgets do Omarchy; widgets de terceiros usam o nome do catálogo.
+
+def idle_label(seconds: int) -> str:
+    if seconds == 0:
+        return _("Never")
+    if seconds == 150:
+        return _("2½ minutes")
+    if seconds % 3600 == 0:
+        return ngettext("{n} hour", "{n} hours", seconds // 3600).format(n=seconds // 3600)
+    if seconds % 60 == 0:
+        return ngettext("{n} minute", "{n} minutes", seconds // 60).format(n=seconds // 60)
+    return ngettext("{n} second", "{n} seconds", seconds).format(n=seconds)
+
+# Nomes traduzíveis para os widgets do Omarchy; widgets de terceiros usam o nome do catálogo.
 WIDGET_NAMES = {
-    "omarchy.active-window": ("Janela ativa", "Título da janela em foco"),
-    "omarchy.agents": ("Agentes de IA", "Uso e limites do Claude Code, Codex e Fireworks"),
-    "omarchy.audio": ("Áudio", "Volume, saída de som e mixer por aplicativo"),
-    "omarchy.bluetooth": ("Bluetooth", "Dispositivos e conexão"),
-    "omarchy.clock": ("Relógio", "Data e hora, com calendário ao clicar"),
-    "omarchy.dropbox": ("Dropbox", "Status de sincronização e arquivos recentes"),
-    "omarchy.indicators": ("Indicadores", "Estados como gravação de tela e não perturbe"),
-    "omarchy.keyboard-layout": ("Layout do teclado", "Layout atual; clique para alternar"),
-    "omarchy.media": ("Mídia", "Controle da música ou vídeo tocando"),
-    "omarchy.menu": ("Menu do Omarchy", "Abre o menu de comandos"),
-    "omarchy.microphone": ("Microfone", "Estado do microfone e botão de mudo"),
-    "omarchy.monitor": ("Tela", "Brilho e controles da tela"),
-    "omarchy.network": ("Rede", "Wi-Fi e estado da conexão"),
-    "omarchy.power": ("Energia", "Bateria, perfil de energia e uso do sistema"),
-    "omarchy.spacer": ("Espaçador", "Espaço em branco"),
-    "omarchy.system-update": ("Atualizações", "Avisa quando há atualização do Omarchy"),
-    "omarchy.tailscale": ("Tailscale", "Status e troca de conexão da VPN"),
-    "omarchy.tray": ("Bandeja do sistema", "Ícones de aplicativos em segundo plano"),
-    "omarchy.weather": ("Clima", "Temperatura com detalhes ao clicar"),
-    "omarchy.workspaces": ("Workspaces", "Números dos workspaces"),
+    "omarchy.active-window": (_("Active window"), _("Title of the focused window")),
+    "omarchy.agents": (_("AI agents"), _("Claude Code, Codex and Fireworks usage and limits")),
+    "omarchy.audio": (_("Audio"), _("Volume, sound output and per-app mixer")),
+    "omarchy.bluetooth": ("Bluetooth", _("Devices and connection")),
+    "omarchy.clock": (_("Clock"), _("Date and time, with a calendar on click")),
+    "omarchy.dropbox": ("Dropbox", _("Sync status and recent files")),
+    "omarchy.indicators": (_("Indicators"), _("States like screen recording and do not disturb")),
+    "omarchy.keyboard-layout": (_("Keyboard layout"), _("Current layout; click to switch")),
+    "omarchy.media": (_("Media"), _("Controls for the music or video playing")),
+    "omarchy.menu": (_("Omarchy menu"), _("Opens the command menu")),
+    "omarchy.microphone": (_("Microphone"), _("Microphone state and mute button")),
+    "omarchy.monitor": (_("Display"), _("Brightness and display controls")),
+    "omarchy.network": (_("Network"), _("Wi-Fi and connection state")),
+    "omarchy.power": (_("Power"), _("Battery, power profile and system usage")),
+    "omarchy.spacer": (_("Spacer"), _("Blank space")),
+    "omarchy.system-update": (_("Updates"), _("Tells you when an Omarchy update is available")),
+    "omarchy.tailscale": ("Tailscale", _("VPN status and connection switching")),
+    "omarchy.tray": (_("System tray"), _("Icons of background apps")),
+    "omarchy.weather": (_("Weather"), _("Temperature with details on click")),
+    "omarchy.workspaces": (_("Workspaces"), _("Workspace numbers")),
 }
-
-WEEKDAYS = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]
-
 
 def clock_formats() -> list[tuple[str, str]]:
     """(formato Qt, rótulo com exemplo usando a hora atual)."""
     now = datetime.now()
-    day, short = WEEKDAYS[now.weekday()], WEEKDAYS[now.weekday()][:3]
+    day, short = now.strftime("%A"), now.strftime("%a")  # nomes no idioma do sistema
     hm, date = now.strftime("%H:%M"), now.strftime("%d/%m")
     h12 = f"{now.hour % 12 or 12}:{now:%M} {'PM' if now.hour >= 12 else 'AM'}"
     return [
-        ("dddd HH:mm", f"Dia da semana e hora — {day} {hm}"),
-        ("HH:mm", f"Só a hora — {hm}"),
-        ("ddd dd/MM HH:mm", f"Dia, data e hora — {short} {date} {hm}"),
-        ("dd/MM/yyyy HH:mm", f"Data completa e hora — {date}/{now:%Y} {hm}"),
-        ("h:mm AP", f"Formato de 12 horas — {h12}"),
+        ("dddd HH:mm", _("Weekday and time — {example}").format(example=f"{day} {hm}")),
+        ("HH:mm", _("Time only — {example}").format(example=hm)),
+        ("ddd dd/MM HH:mm", _("Day, date and time — {example}").format(example=f"{short} {date} {hm}")),
+        ("dd/MM/yyyy HH:mm", _("Full date and time — {example}").format(example=f"{date}/{now:%Y} {hm}")),
+        ("h:mm AP", _("12-hour format — {example}").format(example=h12)),
     ]
 
 
@@ -130,7 +139,7 @@ def widget_catalog() -> dict[str, tuple[str, str]]:
 def command(args: list[str]) -> tuple[bool, str]:
     r = core.run(args, timeout=20)
     if r is None:
-        return False, "comando não encontrado"
+        return False, _("command not found")
     return r.returncode == 0, (r.stderr or r.stdout).strip()
 
 
@@ -144,47 +153,47 @@ class BarPage(Adw.PreferencesPage):
         config = read_shell()
         bar = config.get("bar") or {}
 
-        self.bar_group = Adw.PreferencesGroup(title="Barra")
-        self.bar_group.add(switch_row("Mostrar a barra", "Também dá para alternar pelo atalho do Omarchy",
+        self.bar_group = Adw.PreferencesGroup(title=_("Bar"))
+        self.bar_group.add(switch_row(_("Show the bar"), _("You can also toggle it with the Omarchy shortcut"),
                                       not BAR_OFF_FLAG.exists(), self._set_visible))
-        positions = [p for p, _ in POSITIONS]
+        positions = [p for p, _label in POSITIONS]
         position = bar.get("position", "top")
-        self.bar_group.add(combo_row("Posição", "", [label for _, label in POSITIONS],
+        self.bar_group.add(combo_row(_("Position"), "", [label for _pos, label in POSITIONS],
                                      positions.index(position) if position in positions else 0,
-                                     lambda i: self._bar(["position", positions[i]], "Posição da barra alterada",
+                                     lambda i: self._bar(["position", positions[i]], _("Bar position changed"),
                                                          rebuild=True)))
-        self.bar_group.add(switch_row("Fundo transparente", "Deixa ver o papel de parede atrás da barra",
+        self.bar_group.add(switch_row(_("Transparent background"), _("Shows the wallpaper behind the bar"),
                                       bool(bar.get("transparent")),
                                       lambda on: self._bar(["transparent", "true" if on else "false"])))
         self._add_clock_row(config)
-        self.bar_group.add(button_row("Reiniciar o shell", "Use se a barra travar ou sumir", "Reiniciar",
+        self.bar_group.add(button_row(_("Restart the shell"), _("Use it if the bar freezes or disappears"), _("Restart"),
                                       self._restart_shell))
         self.add(self.bar_group)
 
-        self.add_group = Adw.PreferencesGroup(title="Adicionar widget")
-        self.add_expander = Adw.ExpanderRow(title="Widgets disponíveis", subtitle="Carregando…")
+        self.add_group = Adw.PreferencesGroup(title=_("Add widget"))
+        self.add_expander = Adw.ExpanderRow(title=_("Available widgets"), subtitle=_("Loading…"))
         self.add_group.add(self.add_expander)
         self.add(self.add_group)
 
         self._idle_group(config)
 
-        self.font_group = Adw.PreferencesGroup(title="Fonte do sistema",
-                                               description="Aplicada ao terminal, barra e demais apps do Omarchy.")
+        self.font_group = Adw.PreferencesGroup(title=_("System font"),
+                                               description=_("Applied to the terminal, bar and other Omarchy apps."))
         self.add(self.font_group)
         if core.have("omarchy-font-set"):
             bg(lambda: ([f.strip() for f in core.out(["omarchy-font-list"]).splitlines() if f.strip()],
                         core.out(["omarchy-font-current"])), self._populate_fonts)
         else:
-            self.font_group.add(Adw.ActionRow(title="omarchy-font-set não encontrado",
-                                              subtitle="Atualize o Omarchy para trocar fontes por aqui"))
+            self.font_group.add(Adw.ActionRow(title=_("omarchy-font-set not found"),
+                                              subtitle=_("Update Omarchy to change fonts from here")))
 
         self.restore_group = restore = Adw.PreferencesGroup()
-        restore.add(button_row("Restaurar barra padrão", "Volta posição, transparência e widgets ao padrão do Omarchy",
-                               "Restaurar", self._confirm_defaults, "destructive-action"))
+        restore.add(button_row(_("Restore default bar"), _("Returns position, transparency and widgets to Omarchy's default"),
+                               _("Restore"), self._confirm_defaults, "destructive-action"))
         self.add(restore)
 
         if not core.have("omarchy-bar"):
-            self.bar_group.set_description("omarchy-bar não encontrado: atualize o Omarchy para usar esta página.")
+            self.bar_group.set_description(_("omarchy-bar not found: update Omarchy to use this page."))
         bg(widget_catalog, self._on_catalog)
 
     # -- barra
@@ -192,7 +201,7 @@ class BarPage(Adw.PreferencesPage):
         def done(res) -> None:
             ok, msg = res if isinstance(res, tuple) else (False, str(res))
             if not ok:
-                self.win.toast(f"Falhou: {msg or 'erro desconhecido'}")
+                self.win.toast(_("Failed: {error}").format(error=msg or _("unknown error")))
             elif ok_msg:
                 self.win.toast(ok_msg)
             if rebuild or not ok:
@@ -211,31 +220,31 @@ class BarPage(Adw.PreferencesPage):
             return
         formats = clock_formats()
         current = clock.get("format", "dddd HH:mm")
-        if current not in [f for f, _ in formats]:
-            formats.append((current, f"Personalizado — {current}"))
-        values = [f for f, _ in formats]
-        self.bar_group.add(combo_row("Formato do relógio", "Clique no relógio para ver o formato alternativo",
-                                     [label for _, label in formats], values.index(current),
+        if current not in [f for f, _label in formats]:
+            formats.append((current, _("Custom — {format}").format(format=current)))
+        values = [f for f, _label in formats]
+        self.bar_group.add(combo_row(_("Clock format"), _("Click the clock to see the alternate format"),
+                                     [label for _fmt, label in formats], values.index(current),
                                      lambda i: self._bar(["set", "omarchy.clock", "format", values[i]],
-                                                         "Formato do relógio alterado")))
+                                                         _("Clock format changed"))))
 
     def _restart_shell(self) -> None:
-        self.win.toast("Reiniciando o shell…")
+        self.win.toast(_("Restarting the shell…"))
 
         def done(res) -> None:
             ok, msg = res if isinstance(res, tuple) else (False, str(res))
-            self.win.toast("Shell reiniciado" if ok else f"Falhou: {msg}")
+            self.win.toast(_("Shell restarted") if ok else _("Failed: {error}").format(error=msg))
 
         bg(lambda: command(["omarchy-restart-shell"]), done)
 
     def _confirm_defaults(self) -> None:
-        dialog = Adw.AlertDialog(heading="Restaurar a barra padrão?",
-                                 body="A posição, a transparência e a lista de widgets voltam ao padrão do Omarchy.")
-        dialog.add_response("cancel", "Cancelar")
-        dialog.add_response("restore", "Restaurar")
+        dialog = Adw.AlertDialog(heading=_("Restore the default bar?"),
+                                 body=_("The position, transparency and widget list return to Omarchy's default."))
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("restore", _("Restore"))
         dialog.set_response_appearance("restore", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.set_close_response("cancel")
-        dialog.connect("response", lambda _d, r: r == "restore" and self._bar(["defaults"], "Barra restaurada",
+        dialog.connect("response", lambda _d, r: r == "restore" and self._bar(["defaults"], _("Bar restored"),
                                                                                rebuild=True))
         dialog.present(self.win)
 
@@ -248,7 +257,8 @@ class BarPage(Adw.PreferencesPage):
         config = read_shell()
         layout = bar_layout(config)
         vertical = (config.get("bar") or {}).get("position") in ("left", "right")
-        titles = (["No topo", "No meio", "Na base"] if vertical else ["À esquerda", "No centro", "À direita"])
+        titles = ([_("Widgets at the top"), _("Widgets in the middle"), _("Widgets at the bottom")] if vertical
+                  else [_("Widgets on the left"), _("Widgets in the center"), _("Widgets on the right")])
 
         # PreferencesPage só adiciona no fim: tira tudo que vem depois de "Barra" e repõe na ordem
         tail = [self.add_group, self.idle_group, self.font_group, self.restore_group]
@@ -257,10 +267,10 @@ class BarPage(Adw.PreferencesPage):
                 self.remove(group)
         self.widget_groups = []
         for idx, section in enumerate(SECTIONS):
-            group = Adw.PreferencesGroup(title=f"Widgets {titles[idx].lower()}")
+            group = Adw.PreferencesGroup(title=titles[idx])
             items = layout[section]
             if not items:
-                group.add(Adw.ActionRow(title="Vazio", subtitle="Mova widgets para cá com as setas"))
+                group.add(Adw.ActionRow(title=_("Empty"), subtitle=_("Move widgets here with the arrows")))
             for pos, item in enumerate(items):
                 group.add(self._widget_row(section, pos, len(items), item["id"], layout, vertical))
             self.widget_groups.append(group)
@@ -278,13 +288,13 @@ class BarPage(Adw.PreferencesPage):
         to_prev, to_next = ("go-previous-symbolic", "go-next-symbolic") if not vertical else ("go-up-symbolic",
                                                                                               "go-down-symbolic")
         buttons = [
-            (to_prev, "Mover para a seção anterior", si > 0,
+            (to_prev, _("Move to the previous section"), si > 0,
              lambda: self._move(wid, section, pos, SECTIONS[si - 1], len(layout[SECTIONS[si - 1]]))),
-            (before, "Mover antes", pos > 0, lambda: self._move(wid, section, pos, section, pos - 1)),
-            (after, "Mover depois", pos < count - 1, lambda: self._move(wid, section, pos, section, pos + 1)),
-            (to_next, "Mover para a próxima seção", si < len(SECTIONS) - 1,
+            (before, _("Move earlier"), pos > 0, lambda: self._move(wid, section, pos, section, pos - 1)),
+            (after, _("Move later"), pos < count - 1, lambda: self._move(wid, section, pos, section, pos + 1)),
+            (to_next, _("Move to the next section"), si < len(SECTIONS) - 1,
              lambda: self._move(wid, section, pos, SECTIONS[si + 1], 0)),
-            ("list-remove-symbolic", "Remover da barra", True, lambda: self._remove(wid, name)),
+            ("list-remove-symbolic", _("Remove from the bar"), True, lambda: self._remove(wid, name)),
         ]
         box = Gtk.Box(spacing=2, valign=Gtk.Align.CENTER)
         for icon, tip, sensitive, action in buttons:
@@ -302,7 +312,8 @@ class BarPage(Adw.PreferencesPage):
     def _remove(self, wid: str, name: str) -> None:
         def done(res) -> None:
             ok, msg = res if isinstance(res, tuple) else (False, str(res))
-            self.win.toast(f"{name} removido da barra" if ok else f"Falhou: {msg}")
+            self.win.toast(_("{name} removed from the bar").format(name=name) if ok
+                           else _("Failed: {error}").format(error=msg))
             GLib.timeout_add(300, self._refresh_widgets)
 
         bg(lambda: command(["omarchy-plugin-disable", wid]), done)
@@ -313,17 +324,19 @@ class BarPage(Adw.PreferencesPage):
                            key=lambda t: t[1].lower())
         expanded = self.add_expander.get_expanded()
         self.add_group.remove(self.add_expander)
-        self.add_expander = Adw.ExpanderRow(title="Widgets disponíveis", expanded=expanded,
-                                            subtitle=f"{len(available)} fora da barra" if available
-                                            else "Todos os widgets já estão na barra")
+        self.add_expander = Adw.ExpanderRow(title=_("Available widgets"), expanded=expanded,
+                                            subtitle=ngettext("{n} not on the bar", "{n} not on the bar", len(available)).format(n=len(available))
+                                            if available
+                                            else _("Every widget is already on the bar"))
         for wid, name, desc in available:
-            self.add_expander.add_row(button_row(name, desc, "Adicionar", lambda w=wid, n=name: self._add(w, n)))
+            self.add_expander.add_row(button_row(name, desc, _("Add"), lambda w=wid, n=name: self._add(w, n)))
         self.add_group.add(self.add_expander)
 
     def _add(self, wid: str, name: str) -> None:
         def done(res) -> None:
             ok, msg = res if isinstance(res, tuple) else (False, str(res))
-            self.win.toast(f"{name} adicionado à barra" if ok else f"Falhou: {msg}")
+            self.win.toast(_("{name} added to the bar").format(name=name) if ok
+                           else _("Failed: {error}").format(error=msg))
             GLib.timeout_add(300, self._refresh_widgets)
 
         bg(lambda: command(["omarchy-plugin-enable", wid]), done)
@@ -331,31 +344,29 @@ class BarPage(Adw.PreferencesPage):
     # -- inatividade
     def _idle_group(self, config: dict) -> None:
         idle = config.get("idle") if isinstance(config.get("idle"), dict) else {}
-        self.idle_group = Adw.PreferencesGroup(title="Inatividade",
-                                               description="Contado a partir do momento em que você para de usar o "
-                                                           "computador.")
-        self.idle_group.add(self._idle_row("screensaver", "Proteção de tela após", "", idle.get("screensaver", 150)))
-        self.idle_group.add(self._idle_row("lock", "Bloquear a tela após", "Pede a senha para voltar",
+        self.idle_group = Adw.PreferencesGroup(title=_("Idle"),
+                                               description=_("Counted from the moment you stop using the computer."))
+        self.idle_group.add(self._idle_row("screensaver", _("Screensaver after"), "", idle.get("screensaver", 150)))
+        self.idle_group.add(self._idle_row("lock", _("Lock the screen after"), _("Asks for the password to come back"),
                                            idle.get("lock", 300)))
-        self.idle_group.add(switch_row("Manter acordado", "Pausa proteção de tela e bloqueio até desligar isto",
+        self.idle_group.add(switch_row(_("Stay awake"), _("Pauses the screensaver and lock until you turn this off"),
                                        STAY_AWAKE_FLAG.exists(), self._set_stay_awake))
         self.add(self.idle_group)
 
     def _idle_row(self, key: str, title: str, subtitle: str, current) -> Adw.ComboRow:
-        times = list(IDLE_TIMES)
+        values = list(IDLE_TIMES)
         try:
             current = int(current)
         except (TypeError, ValueError):
             current = 0
-        if current not in [s for s, _ in times]:
-            times.insert(-1, (current, f"{current} segundos"))
-        values = [s for s, _ in times]
+        if current not in values:
+            values.insert(-1, current)
 
         def on_select(i: int) -> None:
             bg(lambda: write_idle(key, values[i]),
-               lambda ok: None if ok is True else self.win.toast("Não foi possível gravar shell.json"))
+               lambda ok: None if ok is True else self.win.toast(_("Could not write shell.json")))
 
-        return combo_row(title, subtitle, [label for _, label in times], values.index(current), on_select)
+        return combo_row(title, subtitle, [idle_label(s) for s in values], values.index(current), on_select)
 
     def _set_stay_awake(self, on: bool) -> None:
         bg(lambda: command(["omarchy-toggle-idle", "stay-awake" if on else "allow-idle"]))
@@ -363,19 +374,19 @@ class BarPage(Adw.PreferencesPage):
     # -- fontes
     def _populate_fonts(self, result) -> None:
         if isinstance(result, Exception) or not result[0]:
-            self.font_group.add(Adw.ActionRow(title="Nenhuma fonte listada", subtitle="omarchy-font-list sem saída"))
+            self.font_group.add(Adw.ActionRow(title=_("No fonts listed"), subtitle=_("omarchy-font-list returned nothing")))
             return
         fonts, current = result
         selected = fonts.index(current) if current in fonts else 0
-        row = combo_row("Fonte", f"Atual: {current or 'desconhecida'}", fonts, selected,
+        row = combo_row(_("Font"), _("Current: {font}").format(font=current or _("unknown")), fonts, selected,
                         lambda i: self._set_font(fonts[i]))
         self.font_group.add(row)
 
     def _set_font(self, name: str) -> None:
-        self.win.toast(f"Aplicando {name}…")
+        self.win.toast(_("Applying {name}…").format(name=name))
 
         def done(res) -> None:
             ok = not isinstance(res, Exception) and res is not None and res.returncode == 0
-            self.win.toast(f"Fonte {name} aplicada" if ok else f"Falha ao aplicar {name}")
+            self.win.toast((_("Font {name} applied") if ok else _("Failed to apply {name}")).format(name=name))
 
         bg(lambda: core.run(["omarchy-font-set", name], timeout=60), done)

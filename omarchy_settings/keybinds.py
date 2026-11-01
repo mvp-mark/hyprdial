@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from . import core
+from .i18n import _
 
 OMARCHY_PATH = Path(os.environ.get("OMARCHY_PATH", "/usr/share/omarchy"))
 DEFAULT_DIR = OMARCHY_PATH / "default" / "hypr" / "bindings"
@@ -23,26 +24,26 @@ MOD_ALIASES = {"SUPER": "SUPER", "MOD4": "SUPER", "WIN": "SUPER", "LOGO": "SUPER
                "CTRL": "CTRL", "CONTROL": "CTRL", "ALT": "ALT", "MOD1": "ALT"}
 
 CATEGORIES = {
-    "applications": "Aplicativos",
-    "tiling": "Janelas e workspaces",
-    "utilities": "Utilitários e capturas",
-    "clipboard": "Área de transferência",
-    "media": "Mídia, volume e brilho",
-    "voxtype": "Ditado por voz",
-    "user": "Do seu bindings.lua",
-    "other": "Outros",
+    "applications": _("Applications"),
+    "tiling": _("Windows and workspaces"),
+    "utilities": _("Utilities and captures"),
+    "clipboard": _("Clipboard"),
+    "media": _("Media, volume and brightness"),
+    "voxtype": _("Voice dictation"),
+    "user": _("From your bindings.lua"),
+    "other": _("Other"),
 }
 CATEGORY_ORDER = list(CATEGORIES)
 
-KINDS = [("launch", "Abrir aplicativo"), ("command", "Executar comando"), ("tui", "Abrir no terminal")]
+KINDS = [("launch", _("Open app")), ("command", _("Run command")), ("tui", _("Open in terminal"))]
 
 KEY_NAMES = {
-    "RETURN": "Enter", "SPACE": "Espaço", "ESCAPE": "Esc", "TAB": "Tab", "BACKSPACE": "Backspace",
+    "RETURN": "Enter", "SPACE": _("Space"), "ESCAPE": "Esc", "TAB": "Tab", "BACKSPACE": "Backspace",
     "DELETE": "Delete", "PRINT": "Print", "SLASH": "/", "COMMA": ",", "PERIOD": ".", "MINUS": "-",
     "EQUAL": "=", "LEFT": "←", "RIGHT": "→", "UP": "↑", "DOWN": "↓", "HOME": "Home", "END": "End",
-    "XF86AUDIORAISEVOLUME": "Volume +", "XF86AUDIOLOWERVOLUME": "Volume −", "XF86AUDIOMUTE": "Mudo",
-    "XF86AUDIOMICMUTE": "Mudo mic", "XF86MONBRIGHTNESSUP": "Brilho +", "XF86MONBRIGHTNESSDOWN": "Brilho −",
-    "XF86AUDIOPLAY": "Play", "XF86AUDIOPAUSE": "Pausa", "XF86AUDIONEXT": "Próxima", "XF86AUDIOPREV": "Anterior",
+    "XF86AUDIORAISEVOLUME": "Volume +", "XF86AUDIOLOWERVOLUME": "Volume −", "XF86AUDIOMUTE": _("Mute"),
+    "XF86AUDIOMICMUTE": _("Mic mute"), "XF86MONBRIGHTNESSUP": _("Brightness +"), "XF86MONBRIGHTNESSDOWN": _("Brightness −"),
+    "XF86AUDIOPLAY": "Play", "XF86AUDIOPAUSE": _("Pause"), "XF86AUDIONEXT": _("Next"), "XF86AUDIOPREV": _("Previous"),
 }
 
 # Códigos de tecla usados pelo Omarchy (posição física, independe do layout)
@@ -56,11 +57,11 @@ def split_keys(text: str) -> tuple[list[str], str]:
     if not parts:
         return [], ""
     mods = {MOD_ALIASES.get(p.upper(), p.upper()) for p in parts[:-1]}
-    return [m for _, m in MOD_BITS if m in mods], parts[-1]
+    return [m for _bit, m in MOD_BITS if m in mods], parts[-1]
 
 
 def join_keys(mods: list[str], key: str) -> str:
-    return " + ".join([m for _, m in MOD_BITS if m in mods] + [key])
+    return " + ".join([m for _bit, m in MOD_BITS if m in mods] + [key])
 
 
 def canon(text: str) -> str:
@@ -314,10 +315,10 @@ def build_entries(live: list[dict], sources: list[SourceBind], state: dict) -> l
         desc = b.get("description") or (src.desc if src else "") or text
         category = src.category if src else guess_category(desc)
         if src is None:
-            entries[c] = Entry(text, desc, category, locked="Gerado em laço pelo Omarchy; só dá para desativar")
+            entries[c] = Entry(text, desc, category, locked=_("Generated in a loop by Omarchy; it can only be disabled"))
         elif not src.movable:
             entries[c] = Entry(src.keys, desc, category,
-                               locked="Usa uma função interna do Omarchy; só dá para desativar")
+                               locked=_("Uses an internal Omarchy function; it can only be disabled"))
         else:
             entries[c] = Entry(src.keys, desc, category, src.action)
 
@@ -343,7 +344,7 @@ def render(state: dict) -> list[str]:
     overrides, custom = state.get("overrides", {}), state.get("custom", [])
     if not overrides and not custom:
         return []
-    lines = ["", "-- Atalhos"]
+    lines = ["", "-- Shortcuts"]
     for orig in sorted(overrides):
         lines.append(f"pcall(function() hl.unbind({core.lua(orig)}) end)")
     for orig in sorted(overrides):

@@ -11,6 +11,7 @@ from gi.repository import Adw, GObject  # noqa: E402
 
 from . import __version__
 from .core import HyprStore
+from .i18n import _
 from .pages.bar import BarPage
 from .pages.connectivity import ConnectivityPage
 from .pages.hyprland import HyprlandPage
@@ -23,22 +24,22 @@ APP_ID = "org.omarchy.Settings"
 
 class Window(Adw.ApplicationWindow):
     def __init__(self, app: Adw.Application):
-        super().__init__(application=app, title="Omarchy Settings", default_width=900, default_height=720)
+        super().__init__(application=app, title=_("Omarchy Settings"), default_width=900, default_height=720)
         self.store = HyprStore()
 
         self.stack = Adw.ViewStack()
         pages = [
-            (ThemesPage(self), "themes", "Temas", "preferences-desktop-theme-symbolic"),
+            (ThemesPage(self), "themes", _("Themes"), "preferences-desktop-theme-symbolic"),
             (HyprlandPage(self), "hyprland", "Hyprland", "preferences-system-symbolic"),
-            (MonitorsPage(self), "monitors", "Monitores", "preferences-desktop-display-symbolic"),
-            (ShortcutsPage(self), "shortcuts", "Atalhos", "preferences-desktop-keyboard-shortcuts-symbolic"),
-            (BarPage(self), "bar", "Barra e fontes", "preferences-desktop-font-symbolic"),
-            (ConnectivityPage(self), "connectivity", "Conectividade", "network-wireless-symbolic"),
+            (MonitorsPage(self), "monitors", _("Displays"), "preferences-desktop-display-symbolic"),
+            (ShortcutsPage(self), "shortcuts", _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic"),
+            (BarPage(self), "bar", _("Bar and fonts"), "preferences-desktop-font-symbolic"),
+            (ConnectivityPage(self), "connectivity", _("Connectivity"), "network-wireless-symbolic"),
         ]
         for page, name, title, icon in pages:
             self.stack.add_titled_with_icon(page, name, title, icon)
 
-        title = Adw.ViewSwitcherTitle(stack=self.stack, title="Omarchy Settings")
+        title = Adw.ViewSwitcherTitle(stack=self.stack, title=_("Omarchy Settings"))
         header = Adw.HeaderBar()
         header.set_title_widget(title)
         bottom = Adw.ViewSwitcherBar(stack=self.stack)
