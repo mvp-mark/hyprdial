@@ -53,7 +53,7 @@ class ConnectivityPage(Adw.PreferencesPage):
 
     def _tui(self, cmd: str) -> None:
         if not core.have(cmd):
-            self.win.toast(_("{cmd} is not installed").format(cmd=cmd))
+            self.win.toast(_("{cmd} is not installed; install it from ☰ → Dependencies").format(cmd=cmd))
             return
         core.launch_tui(cmd)
 

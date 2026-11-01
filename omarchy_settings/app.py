@@ -7,13 +7,14 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, GObject  # noqa: E402
+from gi.repository import Adw, Gio, GObject, Gtk  # noqa: E402
 
 from . import __version__
 from .core import HyprStore
 from .i18n import _
 from .pages.bar import BarPage
 from .pages.connectivity import ConnectivityPage
+from .pages.dependencies import DependenciesDialog
 from .pages.hyprland import HyprlandPage
 from .pages.monitors import MonitorsPage
 from .pages.shortcuts import ShortcutsPage
@@ -42,6 +43,12 @@ class Window(Adw.ApplicationWindow):
         title = Adw.ViewSwitcherTitle(stack=self.stack, title=_("Omarchy Settings"))
         header = Adw.HeaderBar()
         header.set_title_widget(title)
+        menu = Gio.Menu()
+        menu.append(_("Dependencies…"), "win.dependencies")
+        header.pack_end(Gtk.MenuButton(icon_name="open-menu-symbolic", menu_model=menu, tooltip_text=_("Main menu")))
+        action = Gio.SimpleAction(name="dependencies")
+        action.connect("activate", lambda *_args: self.show_dependencies())
+        self.add_action(action)
         bottom = Adw.ViewSwitcherBar(stack=self.stack)
         title.bind_property("title-visible", bottom, "reveal", GObject.BindingFlags.SYNC_CREATE)
 
@@ -54,6 +61,9 @@ class Window(Adw.ApplicationWindow):
         self.toasts.set_child(view)
         self.set_content(self.toasts)
         self.connect("close-request", self._on_close)
+
+    def show_dependencies(self) -> None:
+        DependenciesDialog().present(self)
 
     def toast(self, message: str) -> None:
         self.toasts.add_toast(Adw.Toast(title=message, timeout=2))

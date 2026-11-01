@@ -1,6 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-01 15:50-0400\n"
 "PO-Revision-Date: 2026-11-01 12:00-0400\n"
 "Last-Translator: Marcus Vinícius Peixoto Paulo\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -10,1132 +12,1666 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-msgid "1 is normal"
-msgstr "1 é o normal"
-
-msgid "10-bit color"
-msgstr "Cor de 10 bits"
-
-msgid "100% is fully opaque"
-msgstr "100% é totalmente opaca"
-
-msgid "12-hour format — {example}"
-msgstr "Formato de 12 horas — {example}"
-
-msgid "2½ minutes"
-msgstr "2 minutos e meio"
-
-msgid "Acceleration"
-msgstr "Aceleração"
-
-msgid "Active window"
-msgstr "Janela ativa"
-
-msgid "Active window opacity"
-msgstr "Opacidade da janela ativa"
-
-msgid "Adaptive"
-msgstr "Adaptativa"
-
-msgid "Add"
-msgstr "Adicionar"
-
-msgid "Add widget"
-msgstr "Adicionar widget"
-
-msgid "adjusted by this app"
-msgstr "ajustado por este app"
-
-msgid "Advanced"
-msgstr "Avançado"
-
-msgid "AI agents"
-msgstr "Agentes de IA"
-
-msgid "Already used by your shortcut “{name}”."
-msgstr "Já usado pelo seu atalho “{name}”."
-
-msgid "Already used by “{name}”, which will be disabled."
-msgstr "Já usado por “{name}”, que será desativado."
-
-msgid "Animations"
-msgstr "Animações"
-
-msgid "Applications"
-msgstr "Aplicativos"
-
-msgid "Applied to the terminal, bar and other Omarchy apps."
-msgstr "Aplicada ao terminal, barra e demais apps do Omarchy."
-
-msgid "Applies several settings at once; you can fine-tune each one below."
-msgstr "Aplica vários ajustes de uma vez; depois dá para refinar cada um abaixo."
-
-msgid "Apply"
-msgstr "Aplicar"
-
-msgid "Applying {name}…"
-msgstr "Aplicando {name}…"
-
-msgid "Arrangement"
-msgstr "Disposição"
-
-msgid "Asks for the password to come back"
-msgstr "Pede a senha para voltar"
-
-msgid "Audio"
-msgstr "Áudio"
-
-msgid "Available widgets"
-msgstr "Widgets disponíveis"
-
-msgid "Avoids moving the pointer by accident"
-msgstr "Evita mover o cursor sem querer"
-
-msgid "Back to Omarchy's default"
-msgstr "Voltar ao padrão do Omarchy"
-
-msgid "Bar"
-msgstr "Barra"
-
-msgid "Bar and fonts"
-msgstr "Barra e fontes"
-
-msgid "Bar position changed"
-msgstr "Posição da barra alterada"
-
-msgid "Bar restored"
-msgstr "Barra restaurada"
-
-msgid "Battery, power profile and system usage"
-msgstr "Bateria, perfil de energia e uso do sistema"
-
-msgid "Before: {keys}"
-msgstr "Antes: {keys}"
-
-msgid "Behavior"
-msgstr "Comportamento"
-
-msgid "Below 100% lets you see what is behind"
-msgstr "Abaixo de 100% deixa ver o que está atrás"
-
-msgid "Blank space"
-msgstr "Espaço em branco"
-
-msgid "Bluetooth devices"
-msgstr "Dispositivos Bluetooth"
-
-msgid "Blur"
-msgstr "Desfoque (blur)"
-
-msgid "Blur radius"
-msgstr "Raio do desfoque"
-
-msgid "Blurs what shows behind translucent windows"
-msgstr "Embaça o que aparece atrás de janelas translúcidas"
-
-msgid "Border width"
-msgstr "Espessura da borda"
-
-msgid "Bottom"
-msgstr "Rodapé"
-
-msgid "Brightness"
-msgstr "Brilho"
-
-msgid "Brightness +"
-msgstr "Brilho +"
-
-msgid "Brightness and display controls"
-msgstr "Brilho e controles da tela"
-
-msgid "Brightness −"
-msgstr "Brilho −"
-
-msgid "Cancel"
-msgstr "Cancelar"
-
-msgid "Change"
-msgstr "Trocar"
-
-msgid "Change the key"
-msgstr "Mudar a tecla"
-
-msgid "Changes the colors of the system, terminal, bar and editor at once."
-msgstr "Troca cores do sistema, terminal, barra e editor de uma vez."
-
-msgid "Changes to {name} will be reverted in {seconds} second."
-msgid_plural "Changes to {name} will be reverted in {seconds} seconds."
-msgstr[0] "As alterações em {name} serão revertidas em {seconds} segundo."
-msgstr[1] "As alterações em {name} serão revertidas em {seconds} segundos."
-
-msgid "Characters per second"
-msgstr "Caracteres por segundo"
-
-msgid "Claude Code, Codex and Fireworks usage and limits"
-msgstr "Uso e limites do Claude Code, Codex e Fireworks"
-
-msgid "Click the clock to see the alternate format"
-msgstr "Clique no relógio para ver o formato alternativo"
-
-msgid "Clipboard"
-msgstr "Área de transferência"
-
-msgid "Clock"
-msgstr "Relógio"
-
-msgid "Clock format"
-msgstr "Formato do relógio"
-
-msgid "Clock format changed"
-msgstr "Formato do relógio alterado"
-
-msgid "Comfortable"
-msgstr "Confortável"
-
-msgid "Command (e.g. firefox, gimp, btop)"
-msgstr "Comando (ex.: firefox, gimp, btop)"
-
-msgid "command not found"
-msgstr "comando não encontrado"
-
-msgid "Compact"
-msgstr "Compacto"
-
-msgid "Connectivity"
-msgstr "Conectividade"
-
-msgid "Content follows the wheel's movement"
-msgstr "O conteúdo acompanha o movimento da roda"
-
-msgid "Controls for the music or video playing"
-msgstr "Controle da música ou vídeo tocando"
-
-msgid "Could not change Bluetooth"
-msgstr "Não foi possível alterar o Bluetooth"
-
-msgid "Could not read the shortcuts"
-msgstr "Não foi possível ler os atalhos"
-
-msgid "Could not write shell.json"
-msgstr "Não foi possível gravar shell.json"
-
-msgid "Counted from the moment you stop using the computer."
-msgstr "Contado a partir do momento em que você para de usar o computador."
-
-msgid "Current layout; click to switch"
-msgstr "Layout atual; clique para alternar"
-
-msgid "Current: {font}"
-msgstr "Atual: {font}"
-
-msgid "Custom (see Advanced)"
-msgstr "Personalizado (veja Avançado)"
-
-msgid "Custom ({value})"
-msgstr "Personalizado ({value})"
-
-msgid "Custom — {format}"
-msgstr "Personalizado — {format}"
-
-msgid "Cycles through the current theme's backgrounds"
-msgstr "Alterna entre os fundos do tema atual"
-
-msgid "Date and time, with a calendar on click"
-msgstr "Data e hora, com calendário ao clicar"
-
-msgid "Day, date and time — {example}"
-msgstr "Dia, data e hora — {example}"
-
-msgid "Default device"
-msgstr "Dispositivo padrão"
-
-msgid "Delay before repeating"
-msgstr "Espera antes de repetir"
-
-msgid "Delete"
-msgstr "Apagar"
-
-msgid "Device default"
-msgstr "Padrão do dispositivo"
-
-msgid "Devices and connection"
-msgstr "Dispositivos e conexão"
-
-msgid "Devices and per-app volume (wiremix)"
-msgstr "Dispositivos e volume por aplicativo (wiremix)"
-
-msgid "Dim unfocused windows"
-msgstr "Escurecer janelas sem foco"
-
-msgid "Dimming strength"
-msgstr "Intensidade do escurecimento"
-
-msgid "Disable while typing"
-msgstr "Desativar enquanto digita"
-
-msgid "disabled"
-msgstr "desativado"
-
-msgid "Disabled"
-msgstr "Desativado"
-
-msgid "Display"
-msgstr "Tela"
-
-msgid "Display positions applied"
-msgstr "Posição dos monitores aplicada"
-
-msgid "Display settings reverted"
-msgstr "Configurações de tela revertidas"
-
-msgid "Displays"
-msgstr "Monitores"
-
-msgid "Don't mirror"
-msgstr "Não espelhar"
-
-msgid "Drag a window's border with the mouse to resize it"
-msgstr "Arraste a borda da janela com o mouse para mudar o tamanho"
-
-msgid "Drag the displays with the mouse; they snap to each other's edges. The position is applied when you let go."
-msgstr "Arraste os monitores com o mouse; eles se encaixam pelas bordas. Ao soltar, a posição é aplicada."
-
-msgid "E.g. opening a link brings the browser to the front"
-msgstr "Ex.: ao abrir um link, o navegador vem para frente"
-
-msgid "Each new window splits the space of the focused window"
-msgstr "Cada nova janela divide o espaço da janela em foco"
-
-msgid "Edit"
-msgstr "Editar"
-
-msgid "Edit shortcut"
-msgstr "Editar atalho"
-
-msgid "Effects use more GPU; on laptops they can drain the battery."
-msgstr "Efeitos usam mais GPU; em notebooks podem gastar bateria."
-
-msgid "Elegant"
-msgstr "Elegante"
-
-msgid "Empty"
-msgstr "Vazio"
-
-msgid "Enable blur"
-msgstr "Ativar desfoque"
-
-msgid "Enable shadow"
-msgstr "Ativar sombra"
-
-msgid "Enabled"
-msgstr "Ativado"
-
-msgid "English (US)"
-msgstr "Inglês (EUA)"
-
-msgid "English (US, international with dead keys)"
-msgstr "Inglês (EUA, internacional com acentos)"
-
-msgid "Every widget is already on the bar"
-msgstr "Todos os widgets já estão na barra"
-
-msgid "Failed to apply {name}"
-msgstr "Falha ao aplicar {name}"
-
-msgid "Failed: {error}"
-msgstr "Falhou: {error}"
-
-msgid "Flipped"
-msgstr "Invertido"
-
-msgid "Flipped + 180°"
-msgstr "Invertido + 180°"
-
-msgid "Flipped + 270°"
-msgstr "Invertido + 270°"
-
-msgid "Flipped + 90°"
-msgstr "Invertido + 90°"
-
-msgid "Focus windows that ask for attention"
-msgstr "Focar janelas que pedem atenção"
-
-msgid "Font"
-msgstr "Fonte"
-
-msgid "Font {name} applied"
-msgstr "Fonte {name} aplicada"
-
-msgid "For portrait displays use 90° or 270°"
-msgstr "Para monitores na vertical use 90° ou 270°"
-
-msgid "From -1 (slower) to 1 (faster)"
-msgstr "De -1 (mais lento) a 1 (mais rápido)"
-
-msgid "From your bindings.lua"
-msgstr "Do seu bindings.lua"
-
-msgid "Full date and time — {example}"
-msgstr "Data completa e hora — {example}"
-
-msgid "Full mixer"
-msgstr "Mixer completo"
-
-msgid "Fullscreen only"
-msgstr "Só em tela cheia"
-
-msgid "Gap between windows"
-msgstr "Espaço entre janelas"
-
-msgid "Generated in a loop by Omarchy; it can only be disabled"
-msgstr "Gerado em laço pelo Omarchy; só dá para desativar"
-
-msgid "Go back to the previous workspace"
-msgstr "Voltar ao workspace anterior"
-
-msgid "Going to the workspace you are on returns to the previous one"
-msgstr "Ir para o workspace em que você já está volta para o anterior"
-
-msgid "Helps you see which window is active"
-msgstr "Ajuda a ver qual janela está ativa"
-
-msgid "Hide an idle pointer"
-msgstr "Esconder o cursor parado"
-
-msgid "Hide the pointer while typing"
-msgstr "Esconder o cursor ao digitar"
-
-msgid "Horizontal position (X)"
-msgstr "Posição horizontal (X)"
-
-msgid "hyprctl found no displays."
-msgstr "Nenhum monitor encontrado pelo hyprctl."
-
-msgid "Hyprland didn't accept that shortcut; nothing was changed"
-msgstr "O Hyprland não aceitou esse atalho; nada foi alterado"
-
-msgid "Hyprland options restored"
-msgstr "Opções do Hyprland restauradas"
-
-msgid "Icons of background apps"
-msgstr "Ícones de aplicativos em segundo plano"
-
-msgid "Idle"
-msgstr "Inatividade"
-
-msgid "In logical pixels"
-msgstr "Em pixels lógicos"
-
-msgid "In logical pixels; you can also drag it in Arrangement"
-msgstr "Em pixels lógicos; também dá para arrastar em Disposição"
-
-msgid "In pixels"
-msgstr "Em pixels"
-
-msgid "Indicators"
-msgstr "Indicadores"
-
-msgid "Instead of clicking the bottom-right corner"
-msgstr "Em vez de clicar no canto inferior direito"
-
-msgid "Interface size on this display"
-msgstr "Tamanho da interface neste monitor"
-
-msgid "Keep"
-msgstr "Manter"
-
-msgid "Keep these display settings?"
-msgstr "Manter estas configurações de tela?"
-
-msgid "Key for “{name}”"
-msgstr "Tecla para “{name}”"
-
-msgid "Keyboard"
-msgstr "Teclado"
-
-msgid "Keyboard layout"
-msgstr "Layout do teclado"
-
-msgid "Layouts (e.g. br,us)"
-msgstr "Layouts (ex.: br,us)"
-
-msgid "Left side"
-msgstr "Lateral esquerda"
-
-msgid "Left-handed mode"
-msgstr "Modo canhoto"
-
-msgid "Like on a phone"
-msgstr "Como no celular"
-
-msgid "Loading…"
-msgstr "Carregando…"
-
-msgid "Lock the screen after"
-msgstr "Bloquear a tela após"
-
-msgid "Main and stack"
-msgstr "Principal e pilha"
-
-msgid "Margin to the screen edge"
-msgstr "Margem até a borda da tela"
-
-msgid "Media"
-msgstr "Mídia"
-
-msgid "Media, volume and brightness"
-msgstr "Mídia, volume e brilho"
-
-msgid "Mic mute"
-msgstr "Mudo mic"
-
-msgid "Microphone"
-msgstr "Microfone"
-
-msgid "Microphone state and mute button"
-msgstr "Estado do microfone e botão de mudo"
-
-msgid "Milliseconds holding a key before it repeats"
-msgstr "Milissegundos segurando a tecla até ela repetir"
-
-msgid "Mirror"
-msgstr "Espelhar"
-
-msgid "Modes the display advertises"
-msgstr "Modos que o monitor anuncia"
-
-msgid "More passes = smoother and heavier"
-msgstr "Mais passadas = mais suave e mais pesado"
-
-msgid "More room between windows and soft corners"
-msgstr "Mais respiro entre as janelas e cantos suaves"
-
-msgid "Mouse"
-msgstr "Mouse"
-
-msgid "Move earlier"
-msgstr "Mover antes"
-
-msgid "Move later"
-msgstr "Mover depois"
-
-msgid "Move to the next section"
-msgstr "Mover para a próxima seção"
-
-msgid "Move to the previous section"
-msgstr "Mover para a seção anterior"
-
-msgid "Move widgets here with the arrows"
-msgstr "Mova widgets para cá com as setas"
-
-msgid "Multiple layouts, variants and XKB options"
-msgstr "Layouts múltiplos, variantes e opções do XKB"
-
-msgid "Mute"
-msgstr "Mudo"
-
-msgid "Mute microphone"
-msgstr "Microfone sem som"
-
-msgid "Mute output"
-msgstr "Saída sem som"
-
-msgid "Mutes the default device"
-msgstr "Silencia o dispositivo padrão"
-
-msgid "Mutes the default input"
-msgstr "Silencia a entrada padrão"
-
-msgid "Name (shown in the shortcut list)"
-msgstr "Nome (aparece na lista de atalhos)"
-
-msgid "Natural scrolling"
-msgstr "Rolagem natural"
-
-msgid "Network"
-msgstr "Rede"
-
-msgid "Network and Bluetooth"
-msgstr "Rede e Bluetooth"
-
-msgid "Networks and connections (impala)"
-msgstr "Redes e conexões (impala)"
-
-msgid "Never"
-msgstr "Nunca"
-
-msgid "New shortcut"
-msgstr "Novo atalho"
-
-msgid "Next"
-msgstr "Próxima"
-
-msgid "Next wallpaper"
-msgstr "Próximo wallpaper"
-
-msgid "Night light"
-msgstr "Luz noturna"
-
-msgid "No fonts listed"
-msgstr "Nenhuma fonte listada"
-
-msgid "No gaps or decorations: maximum usable area"
-msgstr "Sem espaços nem enfeites: máximo de área útil"
-
-msgid "No shortcuts of your own"
-msgstr "Nenhum atalho próprio"
-
-msgid "No themes found"
-msgstr "Nenhum tema encontrado"
-
-msgid "Normal"
-msgstr "Normal"
-
-msgid "Num Lock on at startup"
-msgstr "Num Lock ligado ao iniciar"
-
-msgid "Off"
-msgstr "Desligado"
-
-msgid "Off (good for games)"
-msgstr "Desligada (bom para jogos)"
-
-msgid "Omarchy menu"
-msgstr "Menu do Omarchy"
-
+#: omarchy_settings/app.py:28 omarchy_settings/app.py:43
 msgid "Omarchy Settings"
 msgstr "Configurações do Omarchy"
 
-msgid "Omarchy shortcuts"
-msgstr "Atalhos do Omarchy"
-
-msgid "Omarchy's default look"
-msgstr "O visual padrão do Omarchy"
-
-msgid "Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."
-msgstr "Os atalhos do Omarchy voltam ao padrão e os seus atalhos próprios são apagados."
-
-msgid "omarchy-bar not found: update Omarchy to use this page."
-msgstr "omarchy-bar não encontrado: atualize o Omarchy para usar esta página."
-
-msgid "omarchy-font-list returned nothing"
-msgstr "omarchy-font-list sem saída"
-
-msgid "omarchy-font-set not found"
-msgstr "omarchy-font-set não encontrado"
-
-msgid "omarchy-theme-list is not available"
-msgstr "omarchy-theme-list não está disponível"
-
-msgid "On"
-msgstr "Ligado"
-
-msgid "On click, but the keyboard follows the mouse"
-msgstr "Ao clicar, mas o teclado segue o mouse"
-
-msgid "On mouse hover"
-msgstr "Ao passar o mouse"
-
-msgid "One large window on the left and the others stacked beside it"
-msgstr "Uma janela grande à esquerda e as outras empilhadas ao lado"
-
-msgid "Only enable it if the display and cable support it"
-msgstr "Só ative se o monitor e o cabo suportarem"
-
-msgid "Only on click"
-msgstr "Só ao clicar"
-
-msgid "Open"
-msgstr "Abrir"
-
-msgid "Open app"
-msgstr "Abrir aplicativo"
-
-msgid "Open in terminal"
-msgstr "Abrir no terminal"
-
-msgid "Opens the command menu"
-msgstr "Abre o menu de comandos"
-
-msgid "Options (e.g. compose:caps,grp:alts_toggle)"
-msgstr "Opções (ex.: compose:caps,grp:alts_toggle)"
-
-msgid "Other"
-msgstr "Outros"
-
-msgid "Other windows' opacity"
-msgstr "Opacidade das outras janelas"
-
-msgid "Output volume"
-msgstr "Volume de saída"
-
-msgid "Pair and connect (bluetui)"
-msgstr "Parear e conectar (bluetui)"
-
-msgid "Paste with the middle button"
-msgstr "Colar com o botão do meio"
-
-msgid "Pause"
-msgstr "Pausa"
-
-msgid "Pauses the screensaver and lock until you turn this off"
-msgstr "Pausa proteção de tela e bloqueio até desligar isto"
-
-msgid "Pointer speed"
-msgstr "Velocidade do cursor"
-
-msgid "Portuguese (Brazil, ABNT2)"
-msgstr "Português (Brasil, ABNT2)"
-
-msgid "Portuguese (Portugal)"
-msgstr "Português (Portugal)"
-
-msgid "Position"
-msgstr "Posição"
-
-msgid "Power"
-msgstr "Energia"
-
-msgid "Press the combination. If the system already uses it, it may not reach this window: select the modifiers above and record just the key."
-msgstr "Pressione a combinação. Se o sistema já usa essa combinação ela pode não chegar aqui: marque os modificadores acima e grave só a tecla."
-
-msgid "Press the key…"
-msgstr "Pressione a tecla…"
-
-msgid "Previous"
-msgstr "Anterior"
-
-msgid "Quality"
-msgstr "Qualidade"
-
-msgid "Quick style"
-msgstr "Estilo rápido"
-
-msgid "Radius in pixels; 0 keeps corners square"
-msgstr "Raio em pixels; 0 deixa os cantos retos"
-
-msgid "Reads the connected displays again"
-msgstr "Lê de novo os monitores conectados"
-
-msgid "Record another key"
-msgstr "Gravar outra tecla"
-
-msgid "Reduces tearing in games and videos"
-msgstr "Reduz tearing em jogos e vídeos"
-
-msgid "Reload"
-msgstr "Recarregar"
-
-msgid "Remove from the bar"
-msgstr "Remover da barra"
-
-msgid "Repeat rate"
-msgstr "Velocidade da repetição"
-
-msgid "Resize from the border"
-msgstr "Redimensionar pela borda"
-
-msgid "Resolution and refresh rate"
-msgstr "Resolução e taxa"
-
-msgid "Restart"
-msgstr "Reiniciar"
-
-msgid "Restart the shell"
-msgstr "Reiniciar o shell"
-
-msgid "Restarting the shell…"
-msgstr "Reiniciando o shell…"
-
-msgid "Restore"
-msgstr "Restaurar"
-
-msgid "Restore all shortcuts"
-msgstr "Restaurar todos os atalhos"
-
-msgid "Restore all shortcuts?"
-msgstr "Restaurar todos os atalhos?"
-
-msgid "Restore default bar"
-msgstr "Restaurar barra padrão"
-
-msgid "Restore defaults"
-msgstr "Restaurar padrões"
-
-msgid "Restore the default bar?"
-msgstr "Restaurar a barra padrão?"
-
-msgid "Restore this display"
-msgstr "Restaurar este monitor"
-
-msgid "Returns every option on this page to Omarchy's default"
-msgstr "Volta todas as opções desta página ao padrão do Omarchy"
-
-msgid "Returns position, transparency and widgets to Omarchy's default"
-msgstr "Volta posição, transparência e widgets ao padrão do Omarchy"
-
-msgid "Returns to what is in monitors.lua"
-msgstr "Volta ao que está em monitors.lua"
-
-msgid "Revert"
-msgstr "Reverter"
-
-msgid "Right side"
-msgstr "Lateral direita"
-
-msgid "Rotation"
-msgstr "Rotação"
-
-msgid "Rounded corners"
-msgstr "Cantos arredondados"
-
-msgid "Rounded corners, shadow, blur and translucent inactive windows"
-msgstr "Cantos arredondados, sombra, desfoque e janelas inativas translúcidas"
-
-msgid "Run command"
-msgstr "Executar comando"
-
-msgid "Save"
-msgstr "Salvar"
-
-msgid "Scale"
-msgstr "Escala"
-
-msgid "Screensaver after"
-msgstr "Proteção de tela após"
-
-msgid "Scroll speed"
-msgstr "Velocidade da rolagem"
-
-msgid "Search by name or key (e.g. browser, super+b)"
-msgstr "Buscar por nome ou tecla (ex.: browser, super+b)"
-
-msgid "Seconds without moving the mouse; 0 never hides"
-msgstr "Segundos sem mexer o mouse; 0 nunca esconde"
-
-msgid "Settings are stored in ~/.config/hypr/omarchy-settings.lua and take priority over monitors.lua. 'Restore' returns to what is in monitors.lua."
-msgstr "Os ajustes ficam em ~/.config/hypr/omarchy-settings.lua e têm prioridade sobre monitors.lua. 'Restaurar' volta ao que está em monitors.lua."
-
-msgid "Shadow"
-msgstr "Sombra"
-
-msgid "Shell restarted"
-msgstr "Shell reiniciado"
-
-msgid "Shell, GTK apps and terminals (default 12)"
-msgstr "Shell, apps GTK e terminais (padrão 12)"
-
-msgid "Shortcut “{name}” deleted"
-msgstr "Atalho “{name}” apagado"
-
-msgid "Shortcut “{name}” saved"
-msgstr "Atalho “{name}” salvo"
-
-msgid "Shortcuts"
-msgstr "Atalhos"
-
-msgid "Shortcuts restored"
-msgstr "Atalhos restaurados"
-
-msgid "Show the bar"
-msgstr "Mostrar a barra"
-
-msgid "Shows the same content as another display"
-msgstr "Mostra o mesmo conteúdo de outro monitor"
-
-msgid "Shows the wallpaper behind the bar"
-msgstr "Deixa ver o papel de parede atrás da barra"
-
-msgid "Side scrolling"
-msgstr "Rolagem lateral"
-
-msgid "Side-by-side columns that scroll horizontally, niri style"
-msgstr "Colunas lado a lado que rolam na horizontal, estilo niri"
-
-msgid "Size"
-msgstr "Tamanho"
-
-msgid "Soft shadow around windows"
-msgstr "Sombra suave em volta das janelas"
-
-msgid "Space"
-msgstr "Espaço"
-
-msgid "Spacer"
-msgstr "Espaçador"
-
-msgid "Spanish"
-msgstr "Espanhol"
-
-msgid "Split (default)"
-msgstr "Dividir (padrão)"
-
-msgid "States like screen recording and do not disturb"
-msgstr "Estados como gravação de tela e não perturbe"
-
-msgid "Stay awake"
-msgstr "Manter acordado"
-
-msgid "Strength"
-msgstr "Intensidade"
-
-msgid "Swaps the left and right buttons"
-msgstr "Troca os botões esquerdo e direito"
-
-msgid "Sync status and recent files"
-msgstr "Status de sincronização e arquivos recentes"
-
-msgid "System font"
-msgstr "Fonte do sistema"
-
-msgid "System tray"
-msgstr "Bandeja do sistema"
-
-msgid "Tap to click"
-msgstr "Tocar para clicar"
-
-msgid "Tells you when an Omarchy update is available"
-msgstr "Avisa quando há atualização do Omarchy"
-
-msgid "Temperature with details on click"
-msgstr "Temperatura com detalhes ao clicar"
-
-msgid "Test by typing accented characters after switching"
-msgstr "Teste digitando acentos e ç depois de trocar"
-
-msgid "Text size"
-msgstr "Tamanho do texto"
-
-msgid "The color comes from the theme; 0 hides the border"
-msgstr "A cor vem do tema; 0 esconde a borda"
-
-msgid "The default shortcuts come from Omarchy. Changes made here are stored in ~/.config/hypr/omarchy-settings.lua and can be undone with ↶."
-msgstr "Os atalhos padrão vêm do Omarchy. Mudanças feitas aqui ficam em ~/.config/hypr/omarchy-settings.lua e podem ser desfeitas com ↶."
-
-msgid "The only active display can't be turned off"
-msgstr "Não é possível desativar o único monitor ativo"
-
-msgid "The original key is used by “{name}”"
-msgstr "A tecla original está em uso por “{name}”"
-
-msgid "The position, transparency and widget list return to Omarchy's default."
-msgstr "A posição, a transparência e a lista de widgets voltam ao padrão do Omarchy."
-
-msgid "Theme"
-msgstr "Tema"
-
-msgid "Theme {name} applied"
-msgstr "Tema {name} aplicado"
-
+#: omarchy_settings/app.py:33
 msgid "Themes"
 msgstr "Temas"
 
-msgid "Those keys are used by another shortcut; change its key first"
-msgstr "Essas teclas estão em uso por outro atalho; mude a tecla dele antes"
+#: omarchy_settings/app.py:35 omarchy_settings/pages/monitors.py:247
+msgid "Displays"
+msgstr "Monitores"
 
-msgid "Time only — {example}"
-msgstr "Só a hora — {example}"
+#: omarchy_settings/app.py:36
+msgid "Shortcuts"
+msgstr "Atalhos"
 
-msgid "Title of the focused window"
-msgstr "Título da janela em foco"
+#: omarchy_settings/app.py:37
+msgid "Bar and fonts"
+msgstr "Barra e fontes"
 
-msgid "Top"
-msgstr "Topo"
+#: omarchy_settings/app.py:38
+msgid "Connectivity"
+msgstr "Conectividade"
 
-msgid "Touchpad"
-msgstr "Touchpad"
+#: omarchy_settings/app.py:47
+msgid "Dependencies…"
+msgstr "Dependências…"
 
-msgid "Transitions when opening, closing and switching workspaces"
-msgstr "Transições ao abrir, fechar e trocar de workspace"
+#: omarchy_settings/app.py:48
+msgid "Main menu"
+msgstr "Menu principal"
 
-msgid "Transparency and effects"
-msgstr "Transparência e efeitos"
+#: omarchy_settings/deps.py:26
+msgid "Python bindings for GTK"
+msgstr "Bindings do GTK para Python"
 
-msgid "Transparent background"
-msgstr "Fundo transparente"
+#: omarchy_settings/deps.py:27
+msgid "Interface toolkit"
+msgstr "Toolkit da interface"
 
-msgid "Turning it off removes the display from the desktop"
-msgstr "Desligar remove o monitor do desktop"
+#: omarchy_settings/deps.py:28
+msgid "GNOME widgets and styles (1.5 or newer)"
+msgstr "Widgets e estilos do GNOME (1.5 ou mais recente)"
 
-msgid "Turns the adapter on or off"
-msgstr "Liga ou desliga o adaptador"
+#: omarchy_settings/deps.py:29
+msgid "Compiles the interface translations"
+msgstr "Compila as traduções da interface"
 
-msgid "Two-finger click = right button"
-msgstr "Clique com dois dedos = botão direito"
+#: omarchy_settings/deps.py:30
+msgid "Wi-Fi manager opened by the Connectivity page"
+msgstr "Gerenciador de Wi-Fi aberto pela página Conectividade"
 
-msgid "Undoes every change and deletes your own shortcuts"
-msgstr "Desfaz todas as mudanças e apaga os atalhos próprios"
+#: omarchy_settings/deps.py:31
+msgid "Bluetooth manager opened by the Connectivity page"
+msgstr "Gerenciador de Bluetooth aberto pela página Conectividade"
 
-msgid "unknown"
-msgstr "desconhecida"
+#: omarchy_settings/deps.py:32
+msgid "Audio mixer opened by the Connectivity page"
+msgstr "Mixer de áudio aberto pela página Conectividade"
 
-msgid "unknown error"
-msgstr "erro desconhecido"
+#: omarchy_settings/deps.py:33
+msgid "Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar doesn't start it or replace the current bar"
+msgstr "Barra alternativa. O Omarchy usa a barra do Omarchy shell; instalar a Waybar não a inicia nem substitui a barra atual"
 
-msgid "Update Omarchy to change fonts from here"
-msgstr "Atualize o Omarchy para trocar fontes por aqui"
+#: omarchy_settings/deps.py:35
+msgid "Runs the project's tests"
+msgstr "Roda os testes do projeto"
 
-msgid "Updates"
-msgstr "Atualizações"
+#: omarchy_settings/deps.py:40
+msgid "Required"
+msgstr "Obrigatórias"
 
-msgid "Use it if the bar freezes or disappears"
-msgstr "Use se a barra travar ou sumir"
+#: omarchy_settings/deps.py:40
+msgid "Optional"
+msgstr "Opcionais"
 
-msgid "Use “New shortcut” to open an app or run a command"
-msgstr "Use “Novo atalho” para abrir um app ou rodar um comando"
+#: omarchy_settings/deps.py:40
+msgid "Development"
+msgstr "Desenvolvimento"
 
-msgid "Uses an internal Omarchy function; it can only be disabled"
-msgstr "Usa uma função interna do Omarchy; só dá para desativar"
+#: omarchy_settings/keybinds.py:27
+msgid "Applications"
+msgstr "Aplicativos"
 
-msgid "Utilities and captures"
-msgstr "Utilitários e capturas"
-
-msgid "Variable refresh rate (VRR / FreeSync)"
-msgstr "Taxa variável (VRR / FreeSync)"
-
-msgid "Variants (e.g. ,intl)"
-msgstr "Variantes (ex.: ,intl)"
-
-msgid "Vertical position (Y)"
-msgstr "Posição vertical (Y)"
-
-msgid "Via DDC/CI"
-msgstr "Via DDC/CI"
-
-msgid "Voice dictation"
-msgstr "Ditado por voz"
-
-msgid "Volume, sound output and per-app mixer"
-msgstr "Volume, saída de som e mixer por aplicativo"
-
-msgid "VPN status and connection switching"
-msgstr "Status e troca de conexão da VPN"
-
-msgid "Wallpaper"
-msgstr "Wallpaper"
-
-msgid "Wallpaper changed"
-msgstr "Wallpaper alterado"
-
-msgid "Wallpaper: {name}"
-msgstr "Wallpaper: {name}"
-
-msgid "Warmer screen to reduce blue light"
-msgstr "Tela mais quente para reduzir a luz azul"
-
-msgid "Weather"
-msgstr "Clima"
-
-msgid "Weekday and time — {example}"
-msgstr "Dia da semana e hora — {example}"
-
-msgid "What to do"
-msgstr "O que fazer"
-
-msgid "Wi-Fi and connection state"
-msgstr "Wi-Fi e estado da conexão"
-
-msgid "Widgets at the bottom"
-msgstr "Widgets na base"
-
-msgid "Widgets at the top"
-msgstr "Widgets no topo"
-
-msgid "Widgets in the center"
-msgstr "Widgets no centro"
-
-msgid "Widgets in the middle"
-msgstr "Widgets no meio"
-
-msgid "Widgets on the left"
-msgstr "Widgets à esquerda"
-
-msgid "Widgets on the right"
-msgstr "Widgets à direita"
-
-msgid "Window focus"
-msgstr "Foco das janelas"
-
-msgid "Window layout"
-msgstr "Organização das janelas"
-
-msgid "Windows"
-msgstr "Janelas"
-
+#: omarchy_settings/keybinds.py:28
 msgid "Windows and workspaces"
 msgstr "Janelas e workspaces"
 
-msgid "Without a modifier, this key stops working for typing."
-msgstr "Sem modificador, essa tecla deixa de funcionar para digitar."
+#: omarchy_settings/keybinds.py:29
+msgid "Utilities and captures"
+msgstr "Utilitários e capturas"
 
-msgid "Workspace numbers"
-msgstr "Números dos workspaces"
+#: omarchy_settings/keybinds.py:30
+msgid "Clipboard"
+msgstr "Área de transferência"
 
-msgid "Workspaces"
-msgstr "Workspaces"
+#: omarchy_settings/keybinds.py:31
+msgid "Media, volume and brightness"
+msgstr "Mídia, volume e brilho"
 
-msgid "You can also toggle it with the Omarchy shortcut"
-msgstr "Também dá para alternar pelo atalho do Omarchy"
+#: omarchy_settings/keybinds.py:32
+msgid "Voice dictation"
+msgstr "Ditado por voz"
 
-msgid "Your shortcuts"
-msgstr "Seus atalhos"
+#: omarchy_settings/keybinds.py:33
+msgid "From your bindings.lua"
+msgstr "Do seu bindings.lua"
 
-msgid "{cmd} is not installed"
-msgstr "{cmd} não está instalado"
+#: omarchy_settings/keybinds.py:34
+msgid "Other"
+msgstr "Outros"
 
-msgid "{name} added to the bar"
-msgstr "{name} adicionado à barra"
+#: omarchy_settings/keybinds.py:38
+msgid "Open app"
+msgstr "Abrir aplicativo"
 
-msgid "{name} already uses monitors.lua"
-msgstr "{name} já usa monitors.lua"
+#: omarchy_settings/keybinds.py:38
+msgid "Run command"
+msgstr "Executar comando"
 
-msgid "{name} removed from the bar"
-msgstr "{name} removido da barra"
+#: omarchy_settings/keybinds.py:38
+msgid "Open in terminal"
+msgstr "Abrir no terminal"
 
-msgid "{name} restored"
-msgstr "{name} restaurado"
+#: omarchy_settings/keybinds.py:41
+msgid "Space"
+msgstr "Espaço"
 
-msgid "{name} style applied"
-msgstr "Estilo {name} aplicado"
+#: omarchy_settings/keybinds.py:44
+msgid "Mute"
+msgstr "Mudo"
 
-msgid "{n} changed"
-msgid_plural "{n} changed"
-msgstr[0] "{n} alterado"
-msgstr[1] "{n} alterados"
+#: omarchy_settings/keybinds.py:45
+msgid "Mic mute"
+msgstr "Mudo mic"
 
+#: omarchy_settings/keybinds.py:45
+msgid "Brightness +"
+msgstr "Brilho +"
+
+#: omarchy_settings/keybinds.py:45
+msgid "Brightness −"
+msgstr "Brilho −"
+
+#: omarchy_settings/keybinds.py:46
+msgid "Pause"
+msgstr "Pausa"
+
+#: omarchy_settings/keybinds.py:46
+msgid "Next"
+msgstr "Próxima"
+
+#: omarchy_settings/keybinds.py:46
+msgid "Previous"
+msgstr "Anterior"
+
+#: omarchy_settings/keybinds.py:318
+msgid "Generated in a loop by Omarchy; it can only be disabled"
+msgstr "Gerado em laço pelo Omarchy; só dá para desativar"
+
+#: omarchy_settings/keybinds.py:321
+msgid "Uses an internal Omarchy function; it can only be disabled"
+msgstr "Usa uma função interna do Omarchy; só dá para desativar"
+
+#: omarchy_settings/pages/bar.py:31
+msgid "Top"
+msgstr "Topo"
+
+#: omarchy_settings/pages/bar.py:31
+msgid "Bottom"
+msgstr "Rodapé"
+
+#: omarchy_settings/pages/bar.py:31
+msgid "Left side"
+msgstr "Lateral esquerda"
+
+#: omarchy_settings/pages/bar.py:31
+msgid "Right side"
+msgstr "Lateral direita"
+
+#: omarchy_settings/pages/bar.py:37
+msgid "Never"
+msgstr "Nunca"
+
+#: omarchy_settings/pages/bar.py:39
+msgid "2½ minutes"
+msgstr "2 minutos e meio"
+
+#: omarchy_settings/pages/bar.py:41
+#, python-brace-format
 msgid "{n} hour"
 msgid_plural "{n} hours"
 msgstr[0] "{n} hora"
 msgstr[1] "{n} horas"
 
+#: omarchy_settings/pages/bar.py:43
+#, python-brace-format
 msgid "{n} minute"
 msgid_plural "{n} minutes"
 msgstr[0] "{n} minuto"
 msgstr[1] "{n} minutos"
 
-msgid "{n} not on the bar"
-msgid_plural "{n} not on the bar"
-msgstr[0] "{n} fora da barra"
-msgstr[1] "{n} fora da barra"
-
+#: omarchy_settings/pages/bar.py:44
+#, python-brace-format
 msgid "{n} second"
 msgid_plural "{n} seconds"
 msgstr[0] "{n} segundo"
 msgstr[1] "{n} segundos"
 
+#: omarchy_settings/pages/bar.py:48
+msgid "Active window"
+msgstr "Janela ativa"
+
+#: omarchy_settings/pages/bar.py:48
+msgid "Title of the focused window"
+msgstr "Título da janela em foco"
+
+#: omarchy_settings/pages/bar.py:49
+msgid "AI agents"
+msgstr "Agentes de IA"
+
+#: omarchy_settings/pages/bar.py:49
+msgid "Claude Code, Codex and Fireworks usage and limits"
+msgstr "Uso e limites do Claude Code, Codex e Fireworks"
+
+#: omarchy_settings/pages/bar.py:50 omarchy_settings/pages/connectivity.py:46
+msgid "Audio"
+msgstr "Áudio"
+
+#: omarchy_settings/pages/bar.py:50
+msgid "Volume, sound output and per-app mixer"
+msgstr "Volume, saída de som e mixer por aplicativo"
+
+#: omarchy_settings/pages/bar.py:51
+msgid "Devices and connection"
+msgstr "Dispositivos e conexão"
+
+#: omarchy_settings/pages/bar.py:52
+msgid "Clock"
+msgstr "Relógio"
+
+#: omarchy_settings/pages/bar.py:52
+msgid "Date and time, with a calendar on click"
+msgstr "Data e hora, com calendário ao clicar"
+
+#: omarchy_settings/pages/bar.py:53
+msgid "Sync status and recent files"
+msgstr "Status de sincronização e arquivos recentes"
+
+#: omarchy_settings/pages/bar.py:54
+msgid "Indicators"
+msgstr "Indicadores"
+
+#: omarchy_settings/pages/bar.py:54
+msgid "States like screen recording and do not disturb"
+msgstr "Estados como gravação de tela e não perturbe"
+
+#: omarchy_settings/pages/bar.py:55 omarchy_settings/pages/hyprland.py:305
+msgid "Keyboard layout"
+msgstr "Layout do teclado"
+
+#: omarchy_settings/pages/bar.py:55
+msgid "Current layout; click to switch"
+msgstr "Layout atual; clique para alternar"
+
+#: omarchy_settings/pages/bar.py:56
+msgid "Media"
+msgstr "Mídia"
+
+#: omarchy_settings/pages/bar.py:56
+msgid "Controls for the music or video playing"
+msgstr "Controle da música ou vídeo tocando"
+
+#: omarchy_settings/pages/bar.py:57
+msgid "Omarchy menu"
+msgstr "Menu do Omarchy"
+
+#: omarchy_settings/pages/bar.py:57
+msgid "Opens the command menu"
+msgstr "Abre o menu de comandos"
+
+#: omarchy_settings/pages/bar.py:58
+msgid "Microphone"
+msgstr "Microfone"
+
+#: omarchy_settings/pages/bar.py:58
+msgid "Microphone state and mute button"
+msgstr "Estado do microfone e botão de mudo"
+
+#: omarchy_settings/pages/bar.py:59 omarchy_settings/pages/monitors.py:212
+msgid "Display"
+msgstr "Tela"
+
+#: omarchy_settings/pages/bar.py:59
+msgid "Brightness and display controls"
+msgstr "Brilho e controles da tela"
+
+#: omarchy_settings/pages/bar.py:60
+msgid "Network"
+msgstr "Rede"
+
+#: omarchy_settings/pages/bar.py:60
+msgid "Wi-Fi and connection state"
+msgstr "Wi-Fi e estado da conexão"
+
+#: omarchy_settings/pages/bar.py:61
+msgid "Power"
+msgstr "Energia"
+
+#: omarchy_settings/pages/bar.py:61
+msgid "Battery, power profile and system usage"
+msgstr "Bateria, perfil de energia e uso do sistema"
+
+#: omarchy_settings/pages/bar.py:62
+msgid "Spacer"
+msgstr "Espaçador"
+
+#: omarchy_settings/pages/bar.py:62
+msgid "Blank space"
+msgstr "Espaço em branco"
+
+#: omarchy_settings/pages/bar.py:63
+msgid "Updates"
+msgstr "Atualizações"
+
+#: omarchy_settings/pages/bar.py:63
+msgid "Tells you when an Omarchy update is available"
+msgstr "Avisa quando há atualização do Omarchy"
+
+#: omarchy_settings/pages/bar.py:64
+msgid "VPN status and connection switching"
+msgstr "Status e troca de conexão da VPN"
+
+#: omarchy_settings/pages/bar.py:65
+msgid "System tray"
+msgstr "Bandeja do sistema"
+
+#: omarchy_settings/pages/bar.py:65
+msgid "Icons of background apps"
+msgstr "Ícones de aplicativos em segundo plano"
+
+#: omarchy_settings/pages/bar.py:66
+msgid "Weather"
+msgstr "Clima"
+
+#: omarchy_settings/pages/bar.py:66
+msgid "Temperature with details on click"
+msgstr "Temperatura com detalhes ao clicar"
+
+#: omarchy_settings/pages/bar.py:67
+msgid "Workspaces"
+msgstr "Workspaces"
+
+#: omarchy_settings/pages/bar.py:67
+msgid "Workspace numbers"
+msgstr "Números dos workspaces"
+
+#: omarchy_settings/pages/bar.py:77
+#, python-brace-format
+msgid "Weekday and time — {example}"
+msgstr "Dia da semana e hora — {example}"
+
+#: omarchy_settings/pages/bar.py:78
+#, python-brace-format
+msgid "Time only — {example}"
+msgstr "Só a hora — {example}"
+
+#: omarchy_settings/pages/bar.py:79
+#, python-brace-format
+msgid "Day, date and time — {example}"
+msgstr "Dia, data e hora — {example}"
+
+#: omarchy_settings/pages/bar.py:80
+#, python-brace-format
+msgid "Full date and time — {example}"
+msgstr "Data completa e hora — {example}"
+
+#: omarchy_settings/pages/bar.py:81
+#, python-brace-format
+msgid "12-hour format — {example}"
+msgstr "Formato de 12 horas — {example}"
+
+#: omarchy_settings/pages/bar.py:142
+msgid "command not found"
+msgstr "comando não encontrado"
+
+#: omarchy_settings/pages/bar.py:156
+msgid "Bar"
+msgstr "Barra"
+
+#: omarchy_settings/pages/bar.py:157
+msgid "Show the bar"
+msgstr "Mostrar a barra"
+
+#: omarchy_settings/pages/bar.py:157
+msgid "You can also toggle it with the Omarchy shortcut"
+msgstr "Também dá para alternar pelo atalho do Omarchy"
+
+#: omarchy_settings/pages/bar.py:161
+msgid "Position"
+msgstr "Posição"
+
+#: omarchy_settings/pages/bar.py:163
+msgid "Bar position changed"
+msgstr "Posição da barra alterada"
+
+#: omarchy_settings/pages/bar.py:165
+msgid "Transparent background"
+msgstr "Fundo transparente"
+
+#: omarchy_settings/pages/bar.py:165
+msgid "Shows the wallpaper behind the bar"
+msgstr "Deixa ver o papel de parede atrás da barra"
+
+#: omarchy_settings/pages/bar.py:169
+msgid "Restart the shell"
+msgstr "Reiniciar o shell"
+
+#: omarchy_settings/pages/bar.py:169
+msgid "Use it if the bar freezes or disappears"
+msgstr "Use se a barra travar ou sumir"
+
+#: omarchy_settings/pages/bar.py:169
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: omarchy_settings/pages/bar.py:173
+msgid "Add widget"
+msgstr "Adicionar widget"
+
+#: omarchy_settings/pages/bar.py:174 omarchy_settings/pages/bar.py:327
+msgid "Available widgets"
+msgstr "Widgets disponíveis"
+
+#: omarchy_settings/pages/bar.py:174
+msgid "Loading…"
+msgstr "Carregando…"
+
+#: omarchy_settings/pages/bar.py:180
+msgid "System font"
+msgstr "Fonte do sistema"
+
+#: omarchy_settings/pages/bar.py:181
+msgid "Applied to the terminal, bar and other Omarchy apps."
+msgstr "Aplicada ao terminal, barra e demais apps do Omarchy."
+
+#: omarchy_settings/pages/bar.py:187
+msgid "omarchy-font-set not found"
+msgstr "omarchy-font-set não encontrado"
+
+#: omarchy_settings/pages/bar.py:188
+msgid "Update Omarchy to change fonts from here"
+msgstr "Atualize o Omarchy para trocar fontes por aqui"
+
+#: omarchy_settings/pages/bar.py:191
+msgid "Restore default bar"
+msgstr "Restaurar barra padrão"
+
+#: omarchy_settings/pages/bar.py:191
+msgid "Returns position, transparency and widgets to Omarchy's default"
+msgstr "Volta posição, transparência e widgets ao padrão do Omarchy"
+
+#: omarchy_settings/pages/bar.py:192 omarchy_settings/pages/bar.py:244
+#: omarchy_settings/pages/hyprland.py:88 omarchy_settings/pages/monitors.py:376
+#: omarchy_settings/pages/shortcuts.py:204
+#: omarchy_settings/pages/shortcuts.py:419
+msgid "Restore"
+msgstr "Restaurar"
+
+#: omarchy_settings/pages/bar.py:196
+msgid "omarchy-bar not found: update Omarchy to use this page."
+msgstr "omarchy-bar não encontrado: atualize o Omarchy para usar esta página."
+
+#: omarchy_settings/pages/bar.py:204 omarchy_settings/pages/bar.py:236
+#: omarchy_settings/pages/bar.py:316 omarchy_settings/pages/bar.py:339
+#, python-brace-format
+msgid "Failed: {error}"
+msgstr "Falhou: {error}"
+
+#: omarchy_settings/pages/bar.py:204
+msgid "unknown error"
+msgstr "erro desconhecido"
+
+#: omarchy_settings/pages/bar.py:224
+#, python-brace-format
+msgid "Custom — {format}"
+msgstr "Personalizado — {format}"
+
+#: omarchy_settings/pages/bar.py:226
+msgid "Clock format"
+msgstr "Formato do relógio"
+
+#: omarchy_settings/pages/bar.py:226
+msgid "Click the clock to see the alternate format"
+msgstr "Clique no relógio para ver o formato alternativo"
+
+#: omarchy_settings/pages/bar.py:229
+msgid "Clock format changed"
+msgstr "Formato do relógio alterado"
+
+#: omarchy_settings/pages/bar.py:232
+msgid "Restarting the shell…"
+msgstr "Reiniciando o shell…"
+
+#: omarchy_settings/pages/bar.py:236
+msgid "Shell restarted"
+msgstr "Shell reiniciado"
+
+#: omarchy_settings/pages/bar.py:241
+msgid "Restore the default bar?"
+msgstr "Restaurar a barra padrão?"
+
+#: omarchy_settings/pages/bar.py:242
+msgid "The position, transparency and widget list return to Omarchy's default."
+msgstr "A posição, a transparência e a lista de widgets voltam ao padrão do Omarchy."
+
+#: omarchy_settings/pages/bar.py:243 omarchy_settings/pages/shortcuts.py:110
+#: omarchy_settings/pages/shortcuts.py:418
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: omarchy_settings/pages/bar.py:247
+msgid "Bar restored"
+msgstr "Barra restaurada"
+
+#: omarchy_settings/pages/bar.py:260
+msgid "Widgets at the top"
+msgstr "Widgets no topo"
+
+#: omarchy_settings/pages/bar.py:260
+msgid "Widgets in the middle"
+msgstr "Widgets no meio"
+
+#: omarchy_settings/pages/bar.py:260
+msgid "Widgets at the bottom"
+msgstr "Widgets na base"
+
+#: omarchy_settings/pages/bar.py:261
+msgid "Widgets on the left"
+msgstr "Widgets à esquerda"
+
+#: omarchy_settings/pages/bar.py:261
+msgid "Widgets in the center"
+msgstr "Widgets no centro"
+
+#: omarchy_settings/pages/bar.py:261
+msgid "Widgets on the right"
+msgstr "Widgets à direita"
+
+#: omarchy_settings/pages/bar.py:273
+msgid "Empty"
+msgstr "Vazio"
+
+#: omarchy_settings/pages/bar.py:273
+msgid "Move widgets here with the arrows"
+msgstr "Mova widgets para cá com as setas"
+
+#: omarchy_settings/pages/bar.py:291
+msgid "Move to the previous section"
+msgstr "Mover para a seção anterior"
+
+#: omarchy_settings/pages/bar.py:293
+msgid "Move earlier"
+msgstr "Mover antes"
+
+#: omarchy_settings/pages/bar.py:294
+msgid "Move later"
+msgstr "Mover depois"
+
+#: omarchy_settings/pages/bar.py:295
+msgid "Move to the next section"
+msgstr "Mover para a próxima seção"
+
+#: omarchy_settings/pages/bar.py:297
+msgid "Remove from the bar"
+msgstr "Remover da barra"
+
+#: omarchy_settings/pages/bar.py:315
+#, python-brace-format
+msgid "{name} removed from the bar"
+msgstr "{name} removido da barra"
+
+#: omarchy_settings/pages/bar.py:328
+#, python-brace-format
+msgid "{n} not on the bar"
+msgid_plural "{n} not on the bar"
+msgstr[0] "{n} fora da barra"
+msgstr[1] "{n} fora da barra"
+
+#: omarchy_settings/pages/bar.py:330
+msgid "Every widget is already on the bar"
+msgstr "Todos os widgets já estão na barra"
+
+#: omarchy_settings/pages/bar.py:332
+msgid "Add"
+msgstr "Adicionar"
+
+#: omarchy_settings/pages/bar.py:338
+#, python-brace-format
+msgid "{name} added to the bar"
+msgstr "{name} adicionado à barra"
+
+#: omarchy_settings/pages/bar.py:347
+msgid "Idle"
+msgstr "Inatividade"
+
+#: omarchy_settings/pages/bar.py:348
+msgid "Counted from the moment you stop using the computer."
+msgstr "Contado a partir do momento em que você para de usar o computador."
+
+#: omarchy_settings/pages/bar.py:349
+msgid "Screensaver after"
+msgstr "Proteção de tela após"
+
+#: omarchy_settings/pages/bar.py:350
+msgid "Lock the screen after"
+msgstr "Bloquear a tela após"
+
+#: omarchy_settings/pages/bar.py:350
+msgid "Asks for the password to come back"
+msgstr "Pede a senha para voltar"
+
+#: omarchy_settings/pages/bar.py:352
+msgid "Stay awake"
+msgstr "Manter acordado"
+
+#: omarchy_settings/pages/bar.py:352
+msgid "Pauses the screensaver and lock until you turn this off"
+msgstr "Pausa proteção de tela e bloqueio até desligar isto"
+
+#: omarchy_settings/pages/bar.py:367
+msgid "Could not write shell.json"
+msgstr "Não foi possível gravar shell.json"
+
+#: omarchy_settings/pages/bar.py:377
+msgid "No fonts listed"
+msgstr "Nenhuma fonte listada"
+
+#: omarchy_settings/pages/bar.py:377
+msgid "omarchy-font-list returned nothing"
+msgstr "omarchy-font-list sem saída"
+
+#: omarchy_settings/pages/bar.py:381
+msgid "Font"
+msgstr "Fonte"
+
+#: omarchy_settings/pages/bar.py:381
+#, python-brace-format
+msgid "Current: {font}"
+msgstr "Atual: {font}"
+
+#: omarchy_settings/pages/bar.py:381
+msgid "unknown"
+msgstr "desconhecida"
+
+#: omarchy_settings/pages/bar.py:386 omarchy_settings/pages/themes.py:114
+#, python-brace-format
+msgid "Applying {name}…"
+msgstr "Aplicando {name}…"
+
+#: omarchy_settings/pages/bar.py:390
+#, python-brace-format
+msgid "Font {name} applied"
+msgstr "Fonte {name} aplicada"
+
+#: omarchy_settings/pages/bar.py:390 omarchy_settings/pages/themes.py:118
+#, python-brace-format
+msgid "Failed to apply {name}"
+msgstr "Falha ao aplicar {name}"
+
+#: omarchy_settings/pages/connectivity.py:39
+msgid "Network and Bluetooth"
+msgstr "Rede e Bluetooth"
+
+#: omarchy_settings/pages/connectivity.py:40
+msgid "Networks and connections (impala)"
+msgstr "Redes e conexões (impala)"
+
+#: omarchy_settings/pages/connectivity.py:40
+#: omarchy_settings/pages/connectivity.py:41
+#: omarchy_settings/pages/connectivity.py:51
+msgid "Open"
+msgstr "Abrir"
+
+#: omarchy_settings/pages/connectivity.py:41
+msgid "Bluetooth devices"
+msgstr "Dispositivos Bluetooth"
+
+#: omarchy_settings/pages/connectivity.py:41
+msgid "Pair and connect (bluetui)"
+msgstr "Parear e conectar (bluetui)"
+
+#: omarchy_settings/pages/connectivity.py:51
+msgid "Full mixer"
+msgstr "Mixer completo"
+
+#: omarchy_settings/pages/connectivity.py:51
+msgid "Devices and per-app volume (wiremix)"
+msgstr "Dispositivos e volume por aplicativo (wiremix)"
+
+#: omarchy_settings/pages/connectivity.py:56
+#, python-brace-format
+msgid "{cmd} is not installed; install it from ☰ → Dependencies"
+msgstr "{cmd} não está instalado; instale em ☰ → Dependências"
+
+#: omarchy_settings/pages/connectivity.py:64
+msgid "Turns the adapter on or off"
+msgstr "Liga ou desliga o adaptador"
+
+#: omarchy_settings/pages/connectivity.py:69
+msgid "Could not change Bluetooth"
+msgstr "Não foi possível alterar o Bluetooth"
+
+#: omarchy_settings/pages/connectivity.py:79
+msgid "Output volume"
+msgstr "Volume de saída"
+
+#: omarchy_settings/pages/connectivity.py:79
+msgid "Default device"
+msgstr "Dispositivo padrão"
+
+#: omarchy_settings/pages/connectivity.py:90
+msgid "Mute output"
+msgstr "Saída sem som"
+
+#: omarchy_settings/pages/connectivity.py:90
+msgid "Mutes the default device"
+msgstr "Silencia o dispositivo padrão"
+
+#: omarchy_settings/pages/connectivity.py:92
+msgid "Mute microphone"
+msgstr "Microfone sem som"
+
+#: omarchy_settings/pages/connectivity.py:92
+msgid "Mutes the default input"
+msgstr "Silencia a entrada padrão"
+
+#: omarchy_settings/pages/dependencies.py:20
+msgid "Dependencies"
+msgstr "Dependências"
+
+#: omarchy_settings/pages/dependencies.py:37
+msgid "Checking…"
+msgstr "Verificando…"
+
+#: omarchy_settings/pages/dependencies.py:58
+msgid "Not installed"
+msgstr "Não instalado"
+
+#: omarchy_settings/pages/dependencies.py:61
+msgid "Installed"
+msgstr "Instalado"
+
+#: omarchy_settings/pages/dependencies.py:76
+msgid "Everything is installed"
+msgstr "Tudo está instalado"
+
+#: omarchy_settings/pages/dependencies.py:78
+msgid "Select packages to install"
+msgstr "Selecione os pacotes para instalar"
+
+#: omarchy_settings/pages/dependencies.py:80
+#, python-brace-format
+msgid "Install {n} package"
+msgid_plural "Install {n} packages"
+msgstr[0] "Instalar {n} pacote"
+msgstr[1] "Instalar {n} pacotes"
+
+#: omarchy_settings/pages/dependencies.py:90
+msgid "Installing…"
+msgstr "Instalando…"
+
+#: omarchy_settings/pages/dependencies.py:95
+msgid "Could not run pkexec"
+msgstr "Não foi possível executar o pkexec"
+
+#: omarchy_settings/pages/dependencies.py:97
+#, python-brace-format
+msgid "Installed: {packages}"
+msgstr "Instalado: {packages}"
+
+#: omarchy_settings/pages/dependencies.py:99
+msgid "Installation cancelled"
+msgstr "Instalação cancelada"
+
+#: omarchy_settings/pages/dependencies.py:102
+#, python-brace-format
+msgid "Installation failed: {error}"
+msgstr "A instalação falhou: {error}"
+
+#: omarchy_settings/pages/hyprland.py:27
+msgid "Compact"
+msgstr "Compacto"
+
+#: omarchy_settings/pages/hyprland.py:27
+msgid "No gaps or decorations: maximum usable area"
+msgstr "Sem espaços nem enfeites: máximo de área útil"
+
+#: omarchy_settings/pages/hyprland.py:31
+msgid "Omarchy's default look"
+msgstr "O visual padrão do Omarchy"
+
+#: omarchy_settings/pages/hyprland.py:32
+msgid "Comfortable"
+msgstr "Confortável"
+
+#: omarchy_settings/pages/hyprland.py:32
+msgid "More room between windows and soft corners"
+msgstr "Mais respiro entre as janelas e cantos suaves"
+
+#: omarchy_settings/pages/hyprland.py:36
+msgid "Elegant"
+msgstr "Elegante"
+
+#: omarchy_settings/pages/hyprland.py:36
+msgid "Rounded corners, shadow, blur and translucent inactive windows"
+msgstr "Cantos arredondados, sombra, desfoque e janelas inativas translúcidas"
+
+#: omarchy_settings/pages/hyprland.py:44
+msgid "Split (default)"
+msgstr "Dividir (padrão)"
+
+#: omarchy_settings/pages/hyprland.py:44
+msgid "Each new window splits the space of the focused window"
+msgstr "Cada nova janela divide o espaço da janela em foco"
+
+#: omarchy_settings/pages/hyprland.py:45
+msgid "Main and stack"
+msgstr "Principal e pilha"
+
+#: omarchy_settings/pages/hyprland.py:45
+msgid "One large window on the left and the others stacked beside it"
+msgstr "Uma janela grande à esquerda e as outras empilhadas ao lado"
+
+#: omarchy_settings/pages/hyprland.py:46
+msgid "Side scrolling"
+msgstr "Rolagem lateral"
+
+#: omarchy_settings/pages/hyprland.py:46
+msgid "Side-by-side columns that scroll horizontally, niri style"
+msgstr "Colunas lado a lado que rolam na horizontal, estilo niri"
+
+#: omarchy_settings/pages/hyprland.py:51
+msgid "Portuguese (Brazil, ABNT2)"
+msgstr "Português (Brasil, ABNT2)"
+
+#: omarchy_settings/pages/hyprland.py:52
+msgid "English (US)"
+msgstr "Inglês (EUA)"
+
+#: omarchy_settings/pages/hyprland.py:53
+msgid "English (US, international with dead keys)"
+msgstr "Inglês (EUA, internacional com acentos)"
+
+#: omarchy_settings/pages/hyprland.py:54
+msgid "Portuguese (Portugal)"
+msgstr "Português (Portugal)"
+
+#: omarchy_settings/pages/hyprland.py:55
+msgid "Spanish"
+msgstr "Espanhol"
+
+#: omarchy_settings/pages/hyprland.py:58
+msgid "Device default"
+msgstr "Padrão do dispositivo"
+
+#: omarchy_settings/pages/hyprland.py:58
+msgid "Adaptive"
+msgstr "Adaptativa"
+
+#: omarchy_settings/pages/hyprland.py:58
+msgid "Off (good for games)"
+msgstr "Desligada (bom para jogos)"
+
+#: omarchy_settings/pages/hyprland.py:66
+msgid "On mouse hover"
+msgstr "Ao passar o mouse"
+
+#: omarchy_settings/pages/hyprland.py:66
+msgid "Only on click"
+msgstr "Só ao clicar"
+
+#: omarchy_settings/pages/hyprland.py:66
+msgid "On click, but the keyboard follows the mouse"
+msgstr "Ao clicar, mas o teclado segue o mouse"
+
+#: omarchy_settings/pages/hyprland.py:87
+msgid "Restore defaults"
+msgstr "Restaurar padrões"
+
+#: omarchy_settings/pages/hyprland.py:87
+msgid "Returns every option on this page to Omarchy's default"
+msgstr "Volta todas as opções desta página ao padrão do Omarchy"
+
+#: omarchy_settings/pages/hyprland.py:94
+msgid "Quick style"
+msgstr "Estilo rápido"
+
+#: omarchy_settings/pages/hyprland.py:95
+msgid "Applies several settings at once; you can fine-tune each one below."
+msgstr "Aplica vários ajustes de uma vez; depois dá para refinar cada um abaixo."
+
+#: omarchy_settings/pages/hyprland.py:98
+msgid "Apply"
+msgstr "Aplicar"
+
+#: omarchy_settings/pages/hyprland.py:102
+msgid "Windows"
+msgstr "Janelas"
+
+#: omarchy_settings/pages/hyprland.py:103
+msgid "Window layout"
+msgstr "Organização das janelas"
+
+#: omarchy_settings/pages/hyprland.py:105
+msgid "Gap between windows"
+msgstr "Espaço entre janelas"
+
+#: omarchy_settings/pages/hyprland.py:105
+#: omarchy_settings/pages/hyprland.py:106
+#: omarchy_settings/pages/hyprland.py:135
+msgid "In pixels"
+msgstr "Em pixels"
+
+#: omarchy_settings/pages/hyprland.py:106
+msgid "Margin to the screen edge"
+msgstr "Margem até a borda da tela"
+
+#: omarchy_settings/pages/hyprland.py:107
+msgid "Border width"
+msgstr "Espessura da borda"
+
+#: omarchy_settings/pages/hyprland.py:107
+msgid "The color comes from the theme; 0 hides the border"
+msgstr "A cor vem do tema; 0 esconde a borda"
+
+#: omarchy_settings/pages/hyprland.py:109
+msgid "Rounded corners"
+msgstr "Cantos arredondados"
+
+#: omarchy_settings/pages/hyprland.py:109
+msgid "Radius in pixels; 0 keeps corners square"
+msgstr "Raio em pixels; 0 deixa os cantos retos"
+
+#: omarchy_settings/pages/hyprland.py:111
+msgid "Resize from the border"
+msgstr "Redimensionar pela borda"
+
+#: omarchy_settings/pages/hyprland.py:112
+msgid "Drag a window's border with the mouse to resize it"
+msgstr "Arraste a borda da janela com o mouse para mudar o tamanho"
+
+#: omarchy_settings/pages/hyprland.py:116
+msgid "Transparency and effects"
+msgstr "Transparência e efeitos"
+
+#: omarchy_settings/pages/hyprland.py:117
+msgid "Effects use more GPU; on laptops they can drain the battery."
+msgstr "Efeitos usam mais GPU; em notebooks podem gastar bateria."
+
+#: omarchy_settings/pages/hyprland.py:118
+msgid "Active window opacity"
+msgstr "Opacidade da janela ativa"
+
+#: omarchy_settings/pages/hyprland.py:118
+msgid "100% is fully opaque"
+msgstr "100% é totalmente opaca"
+
+#: omarchy_settings/pages/hyprland.py:120
+msgid "Other windows' opacity"
+msgstr "Opacidade das outras janelas"
+
+#: omarchy_settings/pages/hyprland.py:121
+msgid "Below 100% lets you see what is behind"
+msgstr "Abaixo de 100% deixa ver o que está atrás"
+
+#: omarchy_settings/pages/hyprland.py:122
+msgid "Dim unfocused windows"
+msgstr "Escurecer janelas sem foco"
+
+#: omarchy_settings/pages/hyprland.py:123
+msgid "Helps you see which window is active"
+msgstr "Ajuda a ver qual janela está ativa"
+
+#: omarchy_settings/pages/hyprland.py:124
+msgid "Dimming strength"
+msgstr "Intensidade do escurecimento"
+
+#: omarchy_settings/pages/hyprland.py:126
+msgid "Blur"
+msgstr "Desfoque (blur)"
+
+#: omarchy_settings/pages/hyprland.py:126
+msgid "Blurs what shows behind translucent windows"
+msgstr "Embaça o que aparece atrás de janelas translúcidas"
+
+#: omarchy_settings/pages/hyprland.py:127
+msgid "Enable blur"
+msgstr "Ativar desfoque"
+
+#: omarchy_settings/pages/hyprland.py:128
+msgid "Strength"
+msgstr "Intensidade"
+
+#: omarchy_settings/pages/hyprland.py:128
+msgid "Blur radius"
+msgstr "Raio do desfoque"
+
+#: omarchy_settings/pages/hyprland.py:129
+msgid "Quality"
+msgstr "Qualidade"
+
+#: omarchy_settings/pages/hyprland.py:129
+msgid "More passes = smoother and heavier"
+msgstr "Mais passadas = mais suave e mais pesado"
+
+#: omarchy_settings/pages/hyprland.py:133
+msgid "Shadow"
+msgstr "Sombra"
+
+#: omarchy_settings/pages/hyprland.py:133
+msgid "Soft shadow around windows"
+msgstr "Sombra suave em volta das janelas"
+
+#: omarchy_settings/pages/hyprland.py:134
+msgid "Enable shadow"
+msgstr "Ativar sombra"
+
+#: omarchy_settings/pages/hyprland.py:135
+msgid "Size"
+msgstr "Tamanho"
+
+#: omarchy_settings/pages/hyprland.py:138
+msgid "Animations"
+msgstr "Animações"
+
+#: omarchy_settings/pages/hyprland.py:138
+msgid "Transitions when opening, closing and switching workspaces"
+msgstr "Transições ao abrir, fechar e trocar de workspace"
+
+#: omarchy_settings/pages/hyprland.py:143
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: omarchy_settings/pages/hyprland.py:145
+msgid "Num Lock on at startup"
+msgstr "Num Lock ligado ao iniciar"
+
+#: omarchy_settings/pages/hyprland.py:146
+msgid "Delay before repeating"
+msgstr "Espera antes de repetir"
+
+#: omarchy_settings/pages/hyprland.py:147
+msgid "Milliseconds holding a key before it repeats"
+msgstr "Milissegundos segurando a tecla até ela repetir"
+
+#: omarchy_settings/pages/hyprland.py:148
+msgid "Repeat rate"
+msgstr "Velocidade da repetição"
+
+#: omarchy_settings/pages/hyprland.py:148
+msgid "Characters per second"
+msgstr "Caracteres por segundo"
+
+#: omarchy_settings/pages/hyprland.py:150
+msgid "Advanced"
+msgstr "Avançado"
+
+#: omarchy_settings/pages/hyprland.py:150
+msgid "Multiple layouts, variants and XKB options"
+msgstr "Layouts múltiplos, variantes e opções do XKB"
+
+#: omarchy_settings/pages/hyprland.py:151
+msgid "Layouts (e.g. br,us)"
+msgstr "Layouts (ex.: br,us)"
+
+#: omarchy_settings/pages/hyprland.py:152
+msgid "Variants (e.g. ,intl)"
+msgstr "Variantes (ex.: ,intl)"
+
+#: omarchy_settings/pages/hyprland.py:153
+msgid "Options (e.g. compose:caps,grp:alts_toggle)"
+msgstr "Opções (ex.: compose:caps,grp:alts_toggle)"
+
+#: omarchy_settings/pages/hyprland.py:158
+msgid "Mouse"
+msgstr "Mouse"
+
+#: omarchy_settings/pages/hyprland.py:159
+msgid "Pointer speed"
+msgstr "Velocidade do cursor"
+
+#: omarchy_settings/pages/hyprland.py:159
+msgid "From -1 (slower) to 1 (faster)"
+msgstr "De -1 (mais lento) a 1 (mais rápido)"
+
+#: omarchy_settings/pages/hyprland.py:161
+msgid "Acceleration"
+msgstr "Aceleração"
+
+#: omarchy_settings/pages/hyprland.py:162
+#: omarchy_settings/pages/hyprland.py:173
+msgid "Natural scrolling"
+msgstr "Rolagem natural"
+
+#: omarchy_settings/pages/hyprland.py:162
+msgid "Content follows the wheel's movement"
+msgstr "O conteúdo acompanha o movimento da roda"
+
+#: omarchy_settings/pages/hyprland.py:164
+#: omarchy_settings/pages/hyprland.py:178
+msgid "Scroll speed"
+msgstr "Velocidade da rolagem"
+
+#: omarchy_settings/pages/hyprland.py:164
+#: omarchy_settings/pages/hyprland.py:178
+msgid "1 is normal"
+msgstr "1 é o normal"
+
+#: omarchy_settings/pages/hyprland.py:166
+msgid "Left-handed mode"
+msgstr "Modo canhoto"
+
+#: omarchy_settings/pages/hyprland.py:166
+msgid "Swaps the left and right buttons"
+msgstr "Troca os botões esquerdo e direito"
+
+#: omarchy_settings/pages/hyprland.py:167
+msgid "Window focus"
+msgstr "Foco das janelas"
+
+#: omarchy_settings/pages/hyprland.py:171
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: omarchy_settings/pages/hyprland.py:172
+msgid "Tap to click"
+msgstr "Tocar para clicar"
+
+#: omarchy_settings/pages/hyprland.py:173
+msgid "Like on a phone"
+msgstr "Como no celular"
+
+#: omarchy_settings/pages/hyprland.py:174
+msgid "Two-finger click = right button"
+msgstr "Clique com dois dedos = botão direito"
+
+#: omarchy_settings/pages/hyprland.py:175
+msgid "Instead of clicking the bottom-right corner"
+msgstr "Em vez de clicar no canto inferior direito"
+
+#: omarchy_settings/pages/hyprland.py:176
+msgid "Disable while typing"
+msgstr "Desativar enquanto digita"
+
+#: omarchy_settings/pages/hyprland.py:177
+msgid "Avoids moving the pointer by accident"
+msgstr "Evita mover o cursor sem querer"
+
+#: omarchy_settings/pages/hyprland.py:183
+msgid "Behavior"
+msgstr "Comportamento"
+
+#: omarchy_settings/pages/hyprland.py:184
+msgid "Focus windows that ask for attention"
+msgstr "Focar janelas que pedem atenção"
+
+#: omarchy_settings/pages/hyprland.py:185
+msgid "E.g. opening a link brings the browser to the front"
+msgstr "Ex.: ao abrir um link, o navegador vem para frente"
+
+#: omarchy_settings/pages/hyprland.py:186
+msgid "Go back to the previous workspace"
+msgstr "Voltar ao workspace anterior"
+
+#: omarchy_settings/pages/hyprland.py:187
+msgid "Going to the workspace you are on returns to the previous one"
+msgstr "Ir para o workspace em que você já está volta para o anterior"
+
+#: omarchy_settings/pages/hyprland.py:188
+msgid "Paste with the middle button"
+msgstr "Colar com o botão do meio"
+
+#: omarchy_settings/pages/hyprland.py:189
+msgid "Hide the pointer while typing"
+msgstr "Esconder o cursor ao digitar"
+
+#: omarchy_settings/pages/hyprland.py:190
+msgid "Hide an idle pointer"
+msgstr "Esconder o cursor parado"
+
+#: omarchy_settings/pages/hyprland.py:191
+msgid "Seconds without moving the mouse; 0 never hides"
+msgstr "Segundos sem mexer o mouse; 0 nunca esconde"
+
+#: omarchy_settings/pages/hyprland.py:205
+#: omarchy_settings/pages/shortcuts.py:288
+msgid "Back to Omarchy's default"
+msgstr "Voltar ao padrão do Omarchy"
+
+#: omarchy_settings/pages/hyprland.py:264
+#, python-brace-format
+msgid "Custom ({value})"
+msgstr "Personalizado ({value})"
+
+#: omarchy_settings/pages/hyprland.py:303
+msgid "Custom (see Advanced)"
+msgstr "Personalizado (veja Avançado)"
+
+#: omarchy_settings/pages/hyprland.py:305
+msgid "Test by typing accented characters after switching"
+msgstr "Teste digitando acentos e ç depois de trocar"
+
+#: omarchy_settings/pages/hyprland.py:346
+#, python-brace-format
+msgid "{name} style applied"
+msgstr "Estilo {name} aplicado"
+
+#: omarchy_settings/pages/hyprland.py:379
+msgid "Hyprland options restored"
+msgstr "Opções do Hyprland restauradas"
+
+#: omarchy_settings/pages/monitors.py:20
+msgid "Normal"
+msgstr "Normal"
+
+#: omarchy_settings/pages/monitors.py:24
+msgid "Flipped"
+msgstr "Invertido"
+
+#: omarchy_settings/pages/monitors.py:25
+msgid "Flipped + 90°"
+msgstr "Invertido + 90°"
+
+#: omarchy_settings/pages/monitors.py:26
+msgid "Flipped + 180°"
+msgstr "Invertido + 180°"
+
+#: omarchy_settings/pages/monitors.py:27
+msgid "Flipped + 270°"
+msgstr "Invertido + 270°"
+
+#: omarchy_settings/pages/monitors.py:29
+msgid "Off"
+msgstr "Desligado"
+
+#: omarchy_settings/pages/monitors.py:29
+msgid "On"
+msgstr "Ligado"
+
+#: omarchy_settings/pages/monitors.py:29
+msgid "Fullscreen only"
+msgstr "Só em tela cheia"
+
+#: omarchy_settings/pages/monitors.py:217
+msgid "Reload"
+msgstr "Recarregar"
+
+#: omarchy_settings/pages/monitors.py:217
+msgid "Reads the connected displays again"
+msgstr "Lê de novo os monitores conectados"
+
+#: omarchy_settings/pages/monitors.py:221
+msgid "Settings are stored in ~/.config/hypr/omarchy-settings.lua and take priority over monitors.lua. 'Restore' returns to what is in monitors.lua."
+msgstr "Os ajustes ficam em ~/.config/hypr/omarchy-settings.lua e têm prioridade sobre monitors.lua. 'Restaurar' volta ao que está em monitors.lua."
+
+#: omarchy_settings/pages/monitors.py:247
+msgid "hyprctl found no displays."
+msgstr "Nenhum monitor encontrado pelo hyprctl."
+
+#: omarchy_settings/pages/monitors.py:261
+msgid "Arrangement"
+msgstr "Disposição"
+
+#: omarchy_settings/pages/monitors.py:262
+msgid "Drag the displays with the mouse; they snap to each other's edges. The position is applied when you let go."
+msgstr "Arraste os monitores com o mouse; eles se encaixam pelas bordas. Ao soltar, a posição é aplicada."
+
+#: omarchy_settings/pages/monitors.py:302
+msgid "Display positions applied"
+msgstr "Posição dos monitores aplicada"
+
+#: omarchy_settings/pages/monitors.py:313
+msgid "disabled"
+msgstr "desativado"
+
+#: omarchy_settings/pages/monitors.py:315
+msgid "adjusted by this app"
+msgstr "ajustado por este app"
+
+#: omarchy_settings/pages/monitors.py:318
+#: omarchy_settings/pages/shortcuts.py:291
+msgid "Enabled"
+msgstr "Ativado"
+
+#: omarchy_settings/pages/monitors.py:318
+msgid "Turning it off removes the display from the desktop"
+msgstr "Desligar remove o monitor do desktop"
+
+#: omarchy_settings/pages/monitors.py:329
+msgid "Resolution and refresh rate"
+msgstr "Resolução e taxa"
+
+#: omarchy_settings/pages/monitors.py:329
+msgid "Modes the display advertises"
+msgstr "Modos que o monitor anuncia"
+
+#: omarchy_settings/pages/monitors.py:338
+msgid "Scale"
+msgstr "Escala"
+
+#: omarchy_settings/pages/monitors.py:338
+msgid "Interface size on this display"
+msgstr "Tamanho da interface neste monitor"
+
+#: omarchy_settings/pages/monitors.py:342
+msgid "Rotation"
+msgstr "Rotação"
+
+#: omarchy_settings/pages/monitors.py:342
+msgid "For portrait displays use 90° or 270°"
+msgstr "Para monitores na vertical use 90° ou 270°"
+
+#: omarchy_settings/pages/monitors.py:346
+msgid "Horizontal position (X)"
+msgstr "Posição horizontal (X)"
+
+#: omarchy_settings/pages/monitors.py:346
+msgid "In logical pixels; you can also drag it in Arrangement"
+msgstr "Em pixels lógicos; também dá para arrastar em Disposição"
+
+#: omarchy_settings/pages/monitors.py:348
+msgid "Vertical position (Y)"
+msgstr "Posição vertical (Y)"
+
+#: omarchy_settings/pages/monitors.py:348
+msgid "In logical pixels"
+msgstr "Em pixels lógicos"
+
+#: omarchy_settings/pages/monitors.py:354
+msgid "Variable refresh rate (VRR / FreeSync)"
+msgstr "Taxa variável (VRR / FreeSync)"
+
+#: omarchy_settings/pages/monitors.py:354
+msgid "Reduces tearing in games and videos"
+msgstr "Reduz tearing em jogos e vídeos"
+
+#: omarchy_settings/pages/monitors.py:359
+msgid "Don't mirror"
+msgstr "Não espelhar"
+
+#: omarchy_settings/pages/monitors.py:361
+msgid "Mirror"
+msgstr "Espelhar"
+
+#: omarchy_settings/pages/monitors.py:361
+msgid "Shows the same content as another display"
+msgstr "Mostra o mesmo conteúdo de outro monitor"
+
+#: omarchy_settings/pages/monitors.py:365
+msgid "10-bit color"
+msgstr "Cor de 10 bits"
+
+#: omarchy_settings/pages/monitors.py:365
+msgid "Only enable it if the display and cable support it"
+msgstr "Só ative se o monitor e o cabo suportarem"
+
+#: omarchy_settings/pages/monitors.py:376
+msgid "Restore this display"
+msgstr "Restaurar este monitor"
+
+#: omarchy_settings/pages/monitors.py:376
+msgid "Returns to what is in monitors.lua"
+msgstr "Volta ao que está em monitors.lua"
+
+#: omarchy_settings/pages/monitors.py:410
+msgid "The only active display can't be turned off"
+msgstr "Não é possível desativar o único monitor ativo"
+
+#: omarchy_settings/pages/monitors.py:427
+#, python-brace-format
+msgid "{name} already uses monitors.lua"
+msgstr "{name} já usa monitors.lua"
+
+#: omarchy_settings/pages/monitors.py:430
+#, python-brace-format
+msgid "{name} restored"
+msgstr "{name} restaurado"
+
+#: omarchy_settings/pages/monitors.py:442
+msgid "Keep these display settings?"
+msgstr "Manter estas configurações de tela?"
+
+#: omarchy_settings/pages/monitors.py:443
+msgid "Revert"
+msgstr "Reverter"
+
+#: omarchy_settings/pages/monitors.py:444
+msgid "Keep"
+msgstr "Manter"
+
+#: omarchy_settings/pages/monitors.py:450
+#, python-brace-format
+msgid "Changes to {name} will be reverted in {seconds} second."
+msgid_plural "Changes to {name} will be reverted in {seconds} seconds."
+msgstr[0] "As alterações em {name} serão revertidas em {seconds} segundo."
+msgstr[1] "As alterações em {name} serão revertidas em {seconds} segundos."
+
+#: omarchy_settings/pages/monitors.py:470
+msgid "Display settings reverted"
+msgstr "Configurações de tela revertidas"
+
+#: omarchy_settings/pages/monitors.py:486
+msgid "Brightness"
+msgstr "Brilho"
+
+#: omarchy_settings/pages/monitors.py:486
+msgid "Via DDC/CI"
+msgstr "Via DDC/CI"
+
+#: omarchy_settings/pages/monitors.py:513
+msgid "Night light"
+msgstr "Luz noturna"
+
+#: omarchy_settings/pages/monitors.py:513
+msgid "Warmer screen to reduce blue light"
+msgstr "Tela mais quente para reduzir a luz azul"
+
+#: omarchy_settings/pages/monitors.py:525
+msgid "Text size"
+msgstr "Tamanho do texto"
+
+#: omarchy_settings/pages/monitors.py:525
+msgid "Shell, GTK apps and terminals (default 12)"
+msgstr "Shell, apps GTK e terminais (padrão 12)"
+
+#: omarchy_settings/pages/shortcuts.py:80
+msgid "Name (shown in the shortcut list)"
+msgstr "Nome (aparece na lista de atalhos)"
+
+#: omarchy_settings/pages/shortcuts.py:81
+msgid "What to do"
+msgstr "O que fazer"
+
+#: omarchy_settings/pages/shortcuts.py:85
+msgid "Command (e.g. firefox, gimp, btop)"
+msgstr "Comando (ex.: firefox, gimp, btop)"
+
+#: omarchy_settings/pages/shortcuts.py:111
+msgid "Save"
+msgstr "Salvar"
+
+#: omarchy_settings/pages/shortcuts.py:132
+msgid "Press the key…"
+msgstr "Pressione a tecla…"
+
+#: omarchy_settings/pages/shortcuts.py:132
+msgid "Record another key"
+msgstr "Gravar outra tecla"
+
+#: omarchy_settings/pages/shortcuts.py:162
+msgid "Press the combination. If the system already uses it, it may not reach this window: select the modifiers above and record just the key."
+msgstr "Pressione a combinação. Se o sistema já usa essa combinação ela pode não chegar aqui: marque os modificadores acima e grave só a tecla."
+
+#: omarchy_settings/pages/shortcuts.py:167
+msgid "Without a modifier, this key stops working for typing."
+msgstr "Sem modificador, essa tecla deixa de funcionar para digitar."
+
+#: omarchy_settings/pages/shortcuts.py:190
+msgid "The default shortcuts come from Omarchy. Changes made here are stored in ~/.config/hypr/omarchy-settings.lua and can be undone with ↶."
+msgstr "Os atalhos padrão vêm do Omarchy. Mudanças feitas aqui ficam em ~/.config/hypr/omarchy-settings.lua e podem ser desfeitas com ↶."
+
+#: omarchy_settings/pages/shortcuts.py:193
+msgid "Search by name or key (e.g. browser, super+b)"
+msgstr "Buscar por nome ou tecla (ex.: browser, super+b)"
+
+#: omarchy_settings/pages/shortcuts.py:195
+#: omarchy_settings/pages/shortcuts.py:407
+msgid "New shortcut"
+msgstr "Novo atalho"
+
+#: omarchy_settings/pages/shortcuts.py:203
+msgid "Restore all shortcuts"
+msgstr "Restaurar todos os atalhos"
+
+#: omarchy_settings/pages/shortcuts.py:203
+msgid "Undoes every change and deletes your own shortcuts"
+msgstr "Desfaz todas as mudanças e apaga os atalhos próprios"
+
+#: omarchy_settings/pages/shortcuts.py:215
+msgid "Could not read the shortcuts"
+msgstr "Não foi possível ler os atalhos"
+
+#: omarchy_settings/pages/shortcuts.py:224
+msgid "Your shortcuts"
+msgstr "Seus atalhos"
+
+#: omarchy_settings/pages/shortcuts.py:227
+msgid "No shortcuts of your own"
+msgstr "Nenhum atalho próprio"
+
+#: omarchy_settings/pages/shortcuts.py:228
+msgid "Use “New shortcut” to open an app or run a command"
+msgstr "Use “Novo atalho” para abrir um app ou rodar um comando"
+
+#: omarchy_settings/pages/shortcuts.py:235
+msgid "Omarchy shortcuts"
+msgstr "Atalhos do Omarchy"
+
+#: omarchy_settings/pages/shortcuts.py:256
+#, python-brace-format
 msgid "{n} shortcut"
 msgid_plural "{n} shortcuts"
 msgstr[0] "{n} atalho"
 msgstr[1] "{n} atalhos"
 
-msgid "“{name}” disabled"
-msgstr "“{name}” desativado"
+#: omarchy_settings/pages/shortcuts.py:258
+#, python-brace-format
+msgid "{n} changed"
+msgid_plural "{n} changed"
+msgstr[0] "{n} alterado"
+msgstr[1] "{n} alterados"
 
+#: omarchy_settings/pages/shortcuts.py:276
+msgid "Disabled"
+msgstr "Desativado"
+
+#: omarchy_settings/pages/shortcuts.py:278
+#, python-brace-format
+msgid "Before: {keys}"
+msgstr "Antes: {keys}"
+
+#: omarchy_settings/pages/shortcuts.py:283
+msgid "Change the key"
+msgstr "Mudar a tecla"
+
+#: omarchy_settings/pages/shortcuts.py:301
+msgid "Edit"
+msgstr "Editar"
+
+#: omarchy_settings/pages/shortcuts.py:304
+msgid "Delete"
+msgstr "Apagar"
+
+#: omarchy_settings/pages/shortcuts.py:338
+#, python-brace-format
+msgid "Already used by your shortcut “{name}”."
+msgstr "Já usado pelo seu atalho “{name}”."
+
+#: omarchy_settings/pages/shortcuts.py:340
+#, python-brace-format
+msgid "Already used by “{name}”, which will be disabled."
+msgstr "Já usado por “{name}”, que será desativado."
+
+#: omarchy_settings/pages/shortcuts.py:361
+#, python-brace-format
+msgid "“{name}” is now {keys}"
+msgstr "“{name}” agora é {keys}"
+
+#: omarchy_settings/pages/shortcuts.py:364
+#, python-brace-format
+msgid "Key for “{name}”"
+msgstr "Tecla para “{name}”"
+
+#: omarchy_settings/pages/shortcuts.py:373
+msgid "Those keys are used by another shortcut; change its key first"
+msgstr "Essas teclas estão em uso por outro atalho; mude a tecla dele antes"
+
+#: omarchy_settings/pages/shortcuts.py:379
+#, python-brace-format
 msgid "“{name}” enabled"
 msgstr "“{name}” ativado"
 
+#: omarchy_settings/pages/shortcuts.py:379
+#, python-brace-format
+msgid "“{name}” disabled"
+msgstr "“{name}” desativado"
+
+#: omarchy_settings/pages/shortcuts.py:386
+#, python-brace-format
+msgid "The original key is used by “{name}”"
+msgstr "A tecla original está em uso por “{name}”"
+
+#: omarchy_settings/pages/shortcuts.py:390
+#, python-brace-format
 msgid "“{name}” is back to the default"
 msgstr "“{name}” voltou ao padrão"
 
-msgid "“{name}” is now {keys}"
-msgstr "“{name}” agora é {keys}"
+#: omarchy_settings/pages/shortcuts.py:405
+#, python-brace-format
+msgid "Shortcut “{name}” saved"
+msgstr "Atalho “{name}” salvo"
+
+#: omarchy_settings/pages/shortcuts.py:407
+msgid "Edit shortcut"
+msgstr "Editar atalho"
+
+#: omarchy_settings/pages/shortcuts.py:413
+#, python-brace-format
+msgid "Shortcut “{name}” deleted"
+msgstr "Atalho “{name}” apagado"
+
+#: omarchy_settings/pages/shortcuts.py:416
+msgid "Restore all shortcuts?"
+msgstr "Restaurar todos os atalhos?"
+
+#: omarchy_settings/pages/shortcuts.py:417
+msgid "Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."
+msgstr "Os atalhos do Omarchy voltam ao padrão e os seus atalhos próprios são apagados."
+
+#: omarchy_settings/pages/shortcuts.py:423
+msgid "Shortcuts restored"
+msgstr "Atalhos restaurados"
+
+#: omarchy_settings/pages/shortcuts.py:440
+msgid "Hyprland didn't accept that shortcut; nothing was changed"
+msgstr "O Hyprland não aceitou esse atalho; nada foi alterado"
+
+#: omarchy_settings/pages/themes.py:69
+msgid "Theme"
+msgstr "Tema"
+
+#: omarchy_settings/pages/themes.py:69
+msgid "Changes the colors of the system, terminal, bar and editor at once."
+msgstr "Troca cores do sistema, terminal, barra e editor de uma vez."
+
+#: omarchy_settings/pages/themes.py:74
+msgid "Wallpaper"
+msgstr "Wallpaper"
+
+#: omarchy_settings/pages/themes.py:78
+msgid "Next wallpaper"
+msgstr "Próximo wallpaper"
+
+#: omarchy_settings/pages/themes.py:79
+msgid "Cycles through the current theme's backgrounds"
+msgstr "Alterna entre os fundos do tema atual"
+
+#: omarchy_settings/pages/themes.py:80
+msgid "Change"
+msgstr "Trocar"
+
+#: omarchy_settings/pages/themes.py:83
+msgid "Wallpaper changed"
+msgstr "Wallpaper alterado"
+
+#: omarchy_settings/pages/themes.py:93
+msgid "No themes found"
+msgstr "Nenhum tema encontrado"
+
+#: omarchy_settings/pages/themes.py:93
+msgid "omarchy-theme-list is not available"
+msgstr "omarchy-theme-list não está disponível"
+
+#: omarchy_settings/pages/themes.py:118
+#, python-brace-format
+msgid "Theme {name} applied"
+msgstr "Tema {name} aplicado"
+
+#: omarchy_settings/pages/themes.py:142
+#, python-brace-format
+msgid "Wallpaper: {name}"
+msgstr "Wallpaper: {name}"

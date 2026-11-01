@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 12:38-0400\n"
+"POT-Creation-Date: 2026-11-01 15:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,28 +18,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: omarchy_settings/app.py:27 omarchy_settings/app.py:42
+#: omarchy_settings/app.py:28 omarchy_settings/app.py:43
 msgid "Omarchy Settings"
 msgstr ""
 
-#: omarchy_settings/app.py:32
+#: omarchy_settings/app.py:33
 msgid "Themes"
 msgstr ""
 
-#: omarchy_settings/app.py:34 omarchy_settings/pages/monitors.py:247
+#: omarchy_settings/app.py:35 omarchy_settings/pages/monitors.py:247
 msgid "Displays"
 msgstr ""
 
-#: omarchy_settings/app.py:35
+#: omarchy_settings/app.py:36
 msgid "Shortcuts"
 msgstr ""
 
-#: omarchy_settings/app.py:36
+#: omarchy_settings/app.py:37
 msgid "Bar and fonts"
 msgstr ""
 
-#: omarchy_settings/app.py:37
+#: omarchy_settings/app.py:38
 msgid "Connectivity"
+msgstr ""
+
+#: omarchy_settings/app.py:47
+msgid "Dependencies…"
+msgstr ""
+
+#: omarchy_settings/app.py:48
+msgid "Main menu"
+msgstr ""
+
+#: omarchy_settings/deps.py:26
+msgid "Python bindings for GTK"
+msgstr ""
+
+#: omarchy_settings/deps.py:27
+msgid "Interface toolkit"
+msgstr ""
+
+#: omarchy_settings/deps.py:28
+msgid "GNOME widgets and styles (1.5 or newer)"
+msgstr ""
+
+#: omarchy_settings/deps.py:29
+msgid "Compiles the interface translations"
+msgstr ""
+
+#: omarchy_settings/deps.py:30
+msgid "Wi-Fi manager opened by the Connectivity page"
+msgstr ""
+
+#: omarchy_settings/deps.py:31
+msgid "Bluetooth manager opened by the Connectivity page"
+msgstr ""
+
+#: omarchy_settings/deps.py:32
+msgid "Audio mixer opened by the Connectivity page"
+msgstr ""
+
+#: omarchy_settings/deps.py:33
+msgid ""
+"Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar "
+"doesn't start it or replace the current bar"
+msgstr ""
+
+#: omarchy_settings/deps.py:35
+msgid "Runs the project's tests"
+msgstr ""
+
+#: omarchy_settings/deps.py:40
+msgid "Required"
+msgstr ""
+
+#: omarchy_settings/deps.py:40
+msgid "Optional"
+msgstr ""
+
+#: omarchy_settings/deps.py:40
+msgid "Development"
 msgstr ""
 
 #: omarchy_settings/keybinds.py:27
@@ -664,7 +722,7 @@ msgstr ""
 
 #: omarchy_settings/pages/connectivity.py:56
 #, python-brace-format
-msgid "{cmd} is not installed"
+msgid "{cmd} is not installed; install it from ☰ → Dependencies"
 msgstr ""
 
 #: omarchy_settings/pages/connectivity.py:64
@@ -697,6 +755,59 @@ msgstr ""
 
 #: omarchy_settings/pages/connectivity.py:92
 msgid "Mutes the default input"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:20
+msgid "Dependencies"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:37
+msgid "Checking…"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:58
+msgid "Not installed"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:61
+msgid "Installed"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:76
+msgid "Everything is installed"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:78
+msgid "Select packages to install"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:80
+#, python-brace-format
+msgid "Install {n} package"
+msgid_plural "Install {n} packages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: omarchy_settings/pages/dependencies.py:90
+msgid "Installing…"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:95
+msgid "Could not run pkexec"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:97
+#, python-brace-format
+msgid "Installed: {packages}"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:99
+msgid "Installation cancelled"
+msgstr ""
+
+#: omarchy_settings/pages/dependencies.py:102
+#, python-brace-format
+msgid "Installation failed: {error}"
 msgstr ""
 
 #: omarchy_settings/pages/hyprland.py:27

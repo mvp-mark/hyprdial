@@ -29,11 +29,30 @@ The bar is changed through Omarchy's own commands, which talk to the running she
 ## Installation
 
 ```bash
-sudo pacman -S --needed python-gobject gtk4 libadwaita   # libadwaita >= 1.5 for the display confirmation
-sudo pacman -S --needed impala bluetui wiremix           # TUIs opened by the Connectivity page
-./install.sh
+./install.sh --deps   # installs missing dependencies (asks for your sudo password), then the app
 omarchy-settings
 ```
+
+| Option | What it does |
+|---|---|
+| `./install.sh` | Installs the app only (fails with a hint if a required dependency is missing) |
+| `./install.sh --deps` | Installs missing required and optional dependencies first (except Waybar) |
+| `./install.sh --dev` | Same as `--deps`, plus development tools (pytest) |
+| `./install.sh --waybar` | Also installs Waybar; can be combined with the options above |
+
+Dependencies, listed in `omarchy_settings/deps.py`:
+
+| Group | Packages |
+|---|---|
+| Required | `python-gobject`, `gtk4`, `libadwaita` (>= 1.5), `gettext` |
+| Optional | `impala`, `bluetui`, `wiremix` (TUIs opened by the Connectivity page), `waybar` |
+| Development | `python-pytest` |
+
+Waybar is offered as an optional alternative bar only: Omarchy uses the Omarchy shell bar, and installing Waybar
+doesn't start it or replace the current bar.
+
+Dependencies can also be installed from inside the app: **☰ → Dependencies** shows what's installed and installs
+the selected packages, asking for your password through polkit.
 
 To try it without installing: `python3 -m omarchy_settings` from the project folder.
 
@@ -59,11 +78,11 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 ## Tests
 
 ```bash
-sudo pacman -S --needed python-pytest
+./install.sh --dev    # or: sudo pacman -S --needed python-pytest
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`) without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`) without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -74,6 +93,7 @@ Omarchy isn't installed) and fails if an update changes their format.
 ```
 omarchy_settings/
   core.py            running commands and editing the configs (no GTK, testable)
+  deps.py            dependency list and check (no GTK; also used by install.sh)
   keybinds.py        shortcuts: parsing the Lua sources, matching and generation (no GTK)
   layout.py          display arrangement geometry: snapping and overlap (no GTK)
   i18n.py            translation (gettext) in the system language
