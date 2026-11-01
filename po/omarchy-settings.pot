@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 16:30-0400\n"
+"POT-Creation-Date: 2026-11-01 19:11-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,7 +245,7 @@ msgstr ""
 msgid "Claude Code, Codex and Fireworks usage and limits"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:50 omarchy_settings/pages/connectivity.py:50
+#: omarchy_settings/pages/bar.py:50 omarchy_settings/pages/connectivity.py:41
 msgid "Audio"
 msgstr ""
 
@@ -506,9 +506,9 @@ msgstr ""
 
 #: omarchy_settings/pages/bar.py:212 omarchy_settings/pages/bar.py:244
 #: omarchy_settings/pages/bar.py:324 omarchy_settings/pages/bar.py:347
-#: omarchy_settings/pages/bar.py:397 omarchy_settings/pages/ethernet.py:219
-#: omarchy_settings/pages/wifi.py:287 omarchy_settings/pages/wifi.py:325
-#: omarchy_settings/pages/wifi.py:336
+#: omarchy_settings/pages/bar.py:397 omarchy_settings/pages/bluetooth.py:257
+#: omarchy_settings/pages/ethernet.py:219 omarchy_settings/pages/wifi.py:287
+#: omarchy_settings/pages/wifi.py:325 omarchy_settings/pages/wifi.py:336
 #, python-brace-format
 msgid "Failed: {error}"
 msgstr ""
@@ -550,7 +550,9 @@ msgstr ""
 msgid "The position, transparency and widget list return to Omarchy's default."
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:251 omarchy_settings/pages/shortcuts.py:110
+#: omarchy_settings/pages/bar.py:251 omarchy_settings/pages/bluetooth.py:100
+#: omarchy_settings/pages/bluetooth.py:284
+#: omarchy_settings/pages/shortcuts.py:110
 #: omarchy_settings/pages/shortcuts.py:418 omarchy_settings/pages/wifi.py:94
 #: omarchy_settings/pages/wifi.py:356 omarchy_settings/pages/wifi.py:382
 msgid "Cancel"
@@ -678,8 +680,8 @@ msgid "Modules and layout"
 msgstr ""
 
 #: omarchy_settings/pages/bar.py:376 omarchy_settings/pages/bar.py:378
-#: omarchy_settings/pages/connectivity.py:45
-#: omarchy_settings/pages/connectivity.py:55 omarchy_settings/pages/wifi.py:23
+#: omarchy_settings/pages/bluetooth.py:229
+#: omarchy_settings/pages/connectivity.py:46 omarchy_settings/pages/wifi.py:23
 #: omarchy_settings/pages/wifi.py:238
 msgid "Open"
 msgstr ""
@@ -806,60 +808,276 @@ msgstr ""
 msgid "Failed to apply {name}"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:44
+#: omarchy_settings/pages/bluetooth.py:95
+#, python-brace-format
+msgid "Check that “{name}” shows the same code, then confirm."
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:97
+#, python-brace-format
+msgid "Type this code on “{name}” and press Enter."
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:98
+msgid "Pairing code"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:102
+msgid "Confirm"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:111
 msgid "Bluetooth"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:45
-msgid "Bluetooth devices"
+#: omarchy_settings/pages/bluetooth.py:145
+msgid "No Bluetooth adapter found"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:45
-msgid "Pair and connect (bluetui)"
+#: omarchy_settings/pages/bluetooth.py:146
+msgid "bluetoothctl is not installed"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:55
+#: omarchy_settings/pages/bluetooth.py:174
+#: omarchy_settings/pages/monitors.py:29 omarchy_settings/pages/wifi.py:203
+msgid "Off"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:175
+#, python-brace-format
+msgid "{n} device connected"
+msgid_plural "{n} devices connected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: omarchy_settings/pages/bluetooth.py:176
+msgid "On, nothing connected"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:182
+msgid "Paired devices"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:183
+#, python-brace-format
+msgid "{n} paired"
+msgid_plural "{n} paired"
+msgstr[0] ""
+msgstr[1] ""
+
+#: omarchy_settings/pages/bluetooth.py:187
+msgid "No paired devices"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:188
+msgid "Put the device in pairing mode and search below"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:197
+msgid "Searching for devices…"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:198
+msgid "Put the device in pairing mode now"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:203
+msgid "Pair a new device"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:203
+#, python-brace-format
+msgid "Searches for {n} seconds"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:204
+msgid "Search"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:206
+msgid "Nearby devices"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:207 omarchy_settings/pages/wifi.py:220
+#, python-brace-format
+msgid "{n} found"
+msgid_plural "{n} found"
+msgstr[0] ""
+msgstr[1] ""
+
+#: omarchy_settings/pages/bluetooth.py:211
+msgid "No devices found"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:212
+msgid "Check that the device is in pairing mode and search again"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:216
+msgid "Pair"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:220
+msgid "Search again"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:229
+#: omarchy_settings/pages/hyprland.py:150 omarchy_settings/pages/wifi.py:238
+msgid "Advanced"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:229
+msgid "Full Bluetooth manager (bluetui)"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:233
+#: omarchy_settings/pages/ethernet.py:23 omarchy_settings/pages/ethernet.py:191
+#: omarchy_settings/pages/wifi.py:243 omarchy_settings/pages/wifi.py:258
+msgid "Connected"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:233 omarchy_settings/pages/wifi.py:212
+msgid "Not connected"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:241
+#: omarchy_settings/pages/ethernet.py:86 omarchy_settings/pages/wifi.py:252
+msgid "Disconnect"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:241
+#: omarchy_settings/pages/ethernet.py:86 omarchy_settings/pages/wifi.py:95
+#: omarchy_settings/pages/wifi.py:252
+msgid "Connect"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:245
+#: omarchy_settings/pages/bluetooth.py:285 omarchy_settings/pages/wifi.py:267
+#: omarchy_settings/pages/wifi.py:383
+msgid "Forget"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:266
+msgid "Could not change Bluetooth"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:276
+#, python-brace-format
+msgid "{name} disconnected"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:278
+#, python-brace-format
+msgid "Connecting to {name}…"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:279
+#, python-brace-format
+msgid "{name} connected"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:282
+#, python-brace-format
+msgid "Forget “{name}”?"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:283
+msgid "To use it again, you'll have to pair it again."
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:289
+#, python-brace-format
+msgid "{name} forgotten"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:310
+msgid "Could not start bluetoothctl"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:312
+#, python-brace-format
+msgid "Pairing with {name}…"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:346
+msgid "Pairing canceled"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:351
+#, python-brace-format
+msgid "{name} asks for a PIN typed here; pair it with Advanced (bluetui)"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:356
+#, python-brace-format
+msgid "{name} paired and connected"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:358
+#, python-brace-format
+msgid "{name} paired, but it didn't connect; try Connect"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:360
+#, python-brace-format
+msgid "{name} is no longer in range; search again"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:361
+#, python-brace-format
+msgid "{name} rejected the pairing"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:362
+#, python-brace-format
+msgid "Pairing with {name} took too long"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:363
+#, python-brace-format
+msgid "{name} is already paired"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:366
+#: omarchy_settings/pages/bluetooth.py:368
+#, python-brace-format
+msgid "Could not pair with {name}"
+msgstr ""
+
+#: omarchy_settings/pages/connectivity.py:46
 msgid "Full mixer"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:55
+#: omarchy_settings/pages/connectivity.py:46
 msgid "Devices and per-app volume (wiremix)"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:60
+#: omarchy_settings/pages/connectivity.py:51
 #, python-brace-format
 msgid "{cmd} is not installed; install it from ☰ → Dependencies"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:68
-msgid "Turns the adapter on or off"
-msgstr ""
-
-#: omarchy_settings/pages/connectivity.py:73
-msgid "Could not change Bluetooth"
-msgstr ""
-
-#: omarchy_settings/pages/connectivity.py:83
+#: omarchy_settings/pages/connectivity.py:61
 msgid "Output volume"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:83
+#: omarchy_settings/pages/connectivity.py:61
 msgid "Default device"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:94
+#: omarchy_settings/pages/connectivity.py:72
 msgid "Mute output"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:94
+#: omarchy_settings/pages/connectivity.py:72
 msgid "Mutes the default device"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:96
+#: omarchy_settings/pages/connectivity.py:74
 msgid "Mute microphone"
 msgstr ""
 
-#: omarchy_settings/pages/connectivity.py:96
+#: omarchy_settings/pages/connectivity.py:74
 msgid "Mutes the default input"
 msgstr ""
 
@@ -918,11 +1136,6 @@ msgstr ""
 
 #: omarchy_settings/pages/ethernet.py:21
 msgid "No cable connected"
-msgstr ""
-
-#: omarchy_settings/pages/ethernet.py:23 omarchy_settings/pages/ethernet.py:191
-#: omarchy_settings/pages/wifi.py:243 omarchy_settings/pages/wifi.py:258
-msgid "Connected"
 msgstr ""
 
 #: omarchy_settings/pages/ethernet.py:25 omarchy_settings/pages/ethernet.py:97
@@ -988,15 +1201,6 @@ msgstr ""
 
 #: omarchy_settings/pages/ethernet.py:69
 msgid "Link speed"
-msgstr ""
-
-#: omarchy_settings/pages/ethernet.py:86 omarchy_settings/pages/wifi.py:252
-msgid "Disconnect"
-msgstr ""
-
-#: omarchy_settings/pages/ethernet.py:86 omarchy_settings/pages/wifi.py:95
-#: omarchy_settings/pages/wifi.py:252
-msgid "Connect"
 msgstr ""
 
 #: omarchy_settings/pages/ethernet.py:101 omarchy_settings/pages/wifi.py:264
@@ -1322,10 +1526,6 @@ msgstr ""
 msgid "Characters per second"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:150 omarchy_settings/pages/wifi.py:238
-msgid "Advanced"
-msgstr ""
-
 #: omarchy_settings/pages/hyprland.py:150
 msgid "Multiple layouts, variants and XKB options"
 msgstr ""
@@ -1541,10 +1741,6 @@ msgstr ""
 
 #: omarchy_settings/pages/monitors.py:27
 msgid "Flipped + 270°"
-msgstr ""
-
-#: omarchy_settings/pages/monitors.py:29 omarchy_settings/pages/wifi.py:203
-msgid "Off"
 msgstr ""
 
 #: omarchy_settings/pages/monitors.py:29
@@ -2082,20 +2278,9 @@ msgstr ""
 msgid "Connecting…"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:212
-msgid "Not connected"
-msgstr ""
-
 #: omarchy_settings/pages/wifi.py:219
 msgid "Available networks"
 msgstr ""
-
-#: omarchy_settings/pages/wifi.py:220
-#, python-brace-format
-msgid "{n} found"
-msgid_plural "{n} found"
-msgstr[0] ""
-msgstr[1] ""
 
 #: omarchy_settings/pages/wifi.py:223
 msgid "No networks found"
@@ -2143,10 +2328,6 @@ msgstr ""
 #: omarchy_settings/pages/wifi.py:261
 #, python-brace-format
 msgid "profile “{name}”"
-msgstr ""
-
-#: omarchy_settings/pages/wifi.py:267 omarchy_settings/pages/wifi.py:383
-msgid "Forget"
 msgstr ""
 
 #: omarchy_settings/pages/wifi.py:305 omarchy_settings/pages/wifi.py:308
