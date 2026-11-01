@@ -26,7 +26,9 @@ Nothing managed by Omarchy is modified. Hyprland, display, shortcut and power bu
 `~/.config/hypr/omarchy-settings.lua`, and **a single line** `require("hypr.omarchy-settings")` is inserted into
 `~/.config/hypr/hyprland.lua` right before Omarchy's toggles (backup at `hyprland.lua.omarchy-settings.bak`), so
 these values take priority over `monitors.lua`, `input.lua` and `looknfeel.lua`. Each page restores only its own
-settings: "Restore defaults" on the Hyprland page, "Restore this display" and "Restore all shortcuts". Shortcuts
+settings: "Restore defaults" on the Hyprland page, "Restore this display" and "Restore all shortcuts".
+**☰ → Restore app defaults** empties the generated file at once (a copy is kept as
+`omarchy-settings.lua.<date>.bak`, and the toast offers Undo). Shortcuts
 are wrapped in `pcall`, so a broken shortcut can't take down the rest of the file.
 The bar is changed through Omarchy's own commands, which talk to the running shell.
 

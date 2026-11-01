@@ -98,3 +98,4 @@ def test_store_persists_extras(tmp_path, monkeypatch):
     assert core.HyprStore(**paths).extras == {"power_button": "lock"}
     store.set_extra("power_button", None)
     assert "XF86PowerOff" not in paths["managed"].read_text()
+

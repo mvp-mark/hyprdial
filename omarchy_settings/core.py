@@ -11,6 +11,7 @@ import os
 import shutil
 import subprocess
 import threading
+import time
 from pathlib import Path
 
 HOME = Path.home()
@@ -277,6 +278,33 @@ class HyprStore:
         self.save()
         if reload:
             run(["hyprctl", "reload"])
+
+    def reset_all(self) -> tuple[dict, Path | None]:
+        """Back to plain Omarchy: empties the generated file and reloads (call it off the UI thread).
+
+        Returns what was there, for restore(), and the backup copy of the generated file.
+        """
+        self.flush()
+        with self._lock:
+            previous = {"values": self.values, "monitors": self.monitors, "bindings": self.bindings,
+                        "extras": self.extras}
+            self.values, self.monitors, self.bindings, self.extras = {}, {}, {"overrides": {}, "custom": []}, {}
+        backup = None
+        if self.managed.exists():
+            backup = self.managed.with_name(f"{self.managed.name}.{time.strftime('%Y%m%d-%H%M%S')}.bak")
+            shutil.copy2(self.managed, backup)
+        self.save()
+        run(["hyprctl", "reload"])
+        return previous, backup
+
+    def restore(self, previous: dict) -> None:
+        """Undoes reset_all()."""
+        self.flush()
+        with self._lock:
+            self.values, self.monitors = previous["values"], previous["monitors"]
+            self.bindings, self.extras = previous["bindings"], previous["extras"]
+        self.save()
+        run(["hyprctl", "reload"])
 
     def _queue(self, pending: dict, key: str, value) -> None:
         with self._lock:

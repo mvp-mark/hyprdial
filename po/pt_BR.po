@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 19:18-0400\n"
+"POT-Creation-Date: 2026-11-01 19:20-0400\n"
 "PO-Revision-Date: 2026-11-01 12:00-0400\n"
 "Last-Translator: Marcus Vinícius Peixoto Paulo\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -12,45 +12,91 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: omarchy_settings/app.py:30 omarchy_settings/app.py:47
+#: omarchy_settings/app.py:31 omarchy_settings/app.py:37
 msgid "Omarchy Settings"
 msgstr "Configurações do Omarchy"
 
-#: omarchy_settings/app.py:35
-msgid "Themes"
-msgstr "Temas"
-
-#: omarchy_settings/app.py:37 omarchy_settings/pages/monitors.py:237
-msgid "Displays"
-msgstr "Monitores"
-
-#: omarchy_settings/app.py:38 omarchy_settings/pages/bar.py:61
-msgid "Power"
-msgstr "Energia"
-
-#: omarchy_settings/app.py:39
-msgid "Shortcuts"
-msgstr "Atalhos"
-
-#: omarchy_settings/app.py:40
-msgid "Bar and fonts"
-msgstr "Barra e fontes"
-
 #: omarchy_settings/app.py:41
-msgid "Connectivity"
-msgstr "Conectividade"
-
-#: omarchy_settings/app.py:42
-msgid "System"
-msgstr "Sistema"
-
-#: omarchy_settings/app.py:51
 msgid "Dependencies…"
 msgstr "Dependências…"
 
-#: omarchy_settings/app.py:52
+#: omarchy_settings/app.py:42
+msgid "Restore app defaults…"
+msgstr "Restaurar padrões do app…"
+
+#: omarchy_settings/app.py:43
 msgid "Main menu"
 msgstr "Menu principal"
+
+#: omarchy_settings/app.py:65
+msgid "Themes"
+msgstr "Temas"
+
+#: omarchy_settings/app.py:67 omarchy_settings/pages/monitors.py:237
+msgid "Displays"
+msgstr "Monitores"
+
+#: omarchy_settings/app.py:68 omarchy_settings/pages/bar.py:61
+msgid "Power"
+msgstr "Energia"
+
+#: omarchy_settings/app.py:69
+msgid "Shortcuts"
+msgstr "Atalhos"
+
+#: omarchy_settings/app.py:70
+msgid "Bar and fonts"
+msgstr "Barra e fontes"
+
+#: omarchy_settings/app.py:71
+msgid "Connectivity"
+msgstr "Conectividade"
+
+#: omarchy_settings/app.py:72
+msgid "System"
+msgstr "Sistema"
+
+#: omarchy_settings/app.py:88
+msgid "Restore app defaults?"
+msgstr "Restaurar os padrões do app?"
+
+#: omarchy_settings/app.py:89
+msgid "Removes every Hyprland, display, shortcut and power button setting made in this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. A backup of the generated file is kept, and you can undo right after."
+msgstr "Remove todas as configurações de Hyprland, telas, atalhos e botão de energia feitas neste app, voltando às do Omarchy. Barra, tema, rede e sistema não são alterados. Um backup do arquivo gerado é guardado, e dá para desfazer logo em seguida."
+
+#: omarchy_settings/app.py:92 omarchy_settings/pages/bar.py:249
+#: omarchy_settings/pages/bluetooth.py:100
+#: omarchy_settings/pages/bluetooth.py:284
+#: omarchy_settings/pages/shortcuts.py:110
+#: omarchy_settings/pages/shortcuts.py:418 omarchy_settings/pages/wifi.py:94
+#: omarchy_settings/pages/wifi.py:356 omarchy_settings/pages/wifi.py:382
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: omarchy_settings/app.py:93 omarchy_settings/pages/bar.py:198
+#: omarchy_settings/pages/bar.py:250 omarchy_settings/pages/bar.py:380
+#: omarchy_settings/pages/hyprland.py:88 omarchy_settings/pages/monitors.py:366
+#: omarchy_settings/pages/shortcuts.py:204
+#: omarchy_settings/pages/shortcuts.py:419
+msgid "Restore"
+msgstr "Restaurar"
+
+#: omarchy_settings/app.py:102
+#, python-brace-format
+msgid "Could not restore: {error}"
+msgstr "Não foi possível restaurar: {error}"
+
+#: omarchy_settings/app.py:106
+msgid "App defaults restored"
+msgstr "Padrões do app restaurados"
+
+#: omarchy_settings/app.py:106 omarchy_settings/pages/themes.py:226
+msgid "Undo"
+msgstr "Desfazer"
+
+#: omarchy_settings/app.py:108
+msgid "Settings brought back"
+msgstr "Configurações de volta"
 
 #: omarchy_settings/deps.py:26
 msgid "Python bindings for GTK"
@@ -486,14 +532,6 @@ msgstr "Restaurar barra padrão"
 msgid "Returns position, transparency and widgets to Omarchy's default"
 msgstr "Volta posição, transparência e widgets ao padrão do Omarchy"
 
-#: omarchy_settings/pages/bar.py:198 omarchy_settings/pages/bar.py:250
-#: omarchy_settings/pages/bar.py:380 omarchy_settings/pages/hyprland.py:88
-#: omarchy_settings/pages/monitors.py:366
-#: omarchy_settings/pages/shortcuts.py:204
-#: omarchy_settings/pages/shortcuts.py:419
-msgid "Restore"
-msgstr "Restaurar"
-
 #: omarchy_settings/pages/bar.py:202
 msgid "omarchy-bar not found: update Omarchy to use this page."
 msgstr "omarchy-bar não encontrado: atualize o Omarchy para usar esta página."
@@ -544,14 +582,6 @@ msgstr "Restaurar a barra padrão?"
 #: omarchy_settings/pages/bar.py:248
 msgid "The position, transparency and widget list return to Omarchy's default."
 msgstr "A posição, a transparência e a lista de widgets voltam ao padrão do Omarchy."
-
-#: omarchy_settings/pages/bar.py:249 omarchy_settings/pages/bluetooth.py:100
-#: omarchy_settings/pages/bluetooth.py:284
-#: omarchy_settings/pages/shortcuts.py:110
-#: omarchy_settings/pages/shortcuts.py:418 omarchy_settings/pages/wifi.py:94
-#: omarchy_settings/pages/wifi.py:356 omarchy_settings/pages/wifi.py:382
-msgid "Cancel"
-msgstr "Cancelar"
 
 #: omarchy_settings/pages/bar.py:253
 msgid "Bar restored"
@@ -2548,10 +2578,6 @@ msgstr "Tema claro"
 #, python-brace-format
 msgid "Theme {name} applied"
 msgstr "Tema {name} aplicado"
-
-#: omarchy_settings/pages/themes.py:226
-msgid "Undo"
-msgstr "Desfazer"
 
 #: omarchy_settings/pages/themes.py:271
 #, python-brace-format

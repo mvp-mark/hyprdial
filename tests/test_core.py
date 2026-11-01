@@ -165,3 +165,19 @@ def test_corrupt_state_starts_empty(tmp_path, calls):
     state.write_text("{not json")
     s = core.HyprStore(managed=tmp_path / "g.lua", main=tmp_path / "none.lua", state=state)
     assert (s.values, s.monitors, s.bindings) == ({}, {}, {"overrides": {}, "custom": []})
+
+
+def test_reset_all_backs_up_and_restore_undoes(tmp_path, monkeypatch):
+    monkeypatch.setattr(core, "run", lambda args, timeout=10: None)
+    paths = dict(managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua",
+                 state=tmp_path / "state.json")
+    store = core.HyprStore(**paths)
+    store.set("general:gaps_in", 3)
+    store.set_extra("power_button", "suspend")
+    before = paths["managed"].read_text()
+    previous, backup = store.reset_all()
+    assert backup.read_text() == before
+    assert paths["managed"].read_text() == core.HEADER + "\n"
+    assert core.HyprStore(**paths).extras == {} and core.HyprStore(**paths).values == {}
+    store.restore(previous)
+    assert paths["managed"].read_text() == before
