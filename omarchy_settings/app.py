@@ -18,6 +18,7 @@ from .pages.dependencies import DependenciesDialog
 from .pages.hyprland import HyprlandPage
 from .pages.monitors import MonitorsPage
 from .pages.power import PowerPage
+from .pages.search import SearchDialog
 from .pages.shortcuts import ShortcutsPage
 from .pages.system import SystemPage
 from .pages.themes import ThemesPage
@@ -41,6 +42,17 @@ class Window(Adw.ApplicationWindow):
         menu.append(_("Dependencies…"), "win.dependencies")
         menu.append(_("Restore app defaults…"), "win.restore-defaults")
         header.pack_end(Gtk.MenuButton(icon_name="open-menu-symbolic", menu_model=menu, tooltip_text=_("Main menu")))
+        find = Gtk.Button(icon_name="system-search-symbolic", tooltip_text=_("Search settings (Ctrl+F)"),
+                          action_name="win.search")
+        header.pack_start(find)
+        action = Gio.SimpleAction(name="search")
+        action.connect("activate", lambda *_args: self.show_search())
+        self.add_action(action)
+        # bubble phase: the shortcut recorder, which captures keys, gets Ctrl+F first
+        keys = Gtk.ShortcutController(propagation_phase=Gtk.PropagationPhase.BUBBLE)
+        keys.add_shortcut(Gtk.Shortcut(trigger=Gtk.ShortcutTrigger.parse_string("<Control>f"),
+                                       action=Gtk.NamedAction.new("win.search")))
+        self.add_controller(keys)
         action = Gio.SimpleAction(name="dependencies")
         action.connect("activate", lambda *_args: self.show_dependencies())
         self.add_action(action)
@@ -109,6 +121,10 @@ class Window(Adw.ApplicationWindow):
             self.toasts.add_toast(toast)
 
         bg(self.store.reset_all, done)
+
+    def show_search(self) -> None:
+        if self.get_visible_dialog() is None:
+            SearchDialog(self.stack).present(self)
 
     def show_dependencies(self) -> None:
         DependenciesDialog().present(self)

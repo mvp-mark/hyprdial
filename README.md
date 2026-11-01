@@ -20,6 +20,9 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
 | Connectivity | Wired (Ethernet): status, link speed, address, gateway and DNS, plain-language diagnosis (no cable, 10 Mb/s link, no DHCP address), connect/disconnect, IPv4 automatic (DHCP) or manual, custom DNS, auto-connect; Wi-Fi: radio on/off, available networks with signal and security, connect (password asked in a dialog, hidden networks too), saved networks with IPv4/DNS settings and forget, impala for advanced cases; Bluetooth: on/off, paired devices with battery level, connect/disconnect, forget, search and pair (pairing codes shown or confirmed in a dialog), bluetui for advanced cases; volume and mute; mixer (wiremix) | `nmcli` (NetworkManager), libnm for saving Wi-Fi passwords (never on a command line), `/sys/class/net`, `bluetoothctl` (pairing through an interactive session with a KeyboardDisplay agent), `wpctl` |
 | System | Time zone (searchable) and automatic time (NTP); system language (among those generated); default browser, terminal and editor (installed ones only); notifications: do not disturb and recent notifications; about this computer (Omarchy version, kernel, processor, memory) and "Update Omarchy" | `timedatectl`, `localectl` (both ask for the password through polkit), `omarchy default`, `omarchy-shell notifications`, `omarchy-update` in a floating terminal |
 
+Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
+matter, and choosing a result opens its page, expands what is around it and highlights it.
+
 ## How settings are stored
 
 Nothing managed by Omarchy is modified. Hyprland, display, shortcut and power button settings go to
@@ -101,7 +104,7 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `network.py`, `wifi.py`, `bluetooth.py`, `power.py`, `system.py`) without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `network.py`, `wifi.py`, `bluetooth.py`, `power.py`, `system.py`, `search.py`) without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -122,10 +125,11 @@ omarchy_settings/
   bluetooth.py       Bluetooth through bluetoothctl: devices, scan, commands, pairing output parser (no GTK)
   power.py           power profile, night light and its schedule, power button (no GTK)
   system.py          date and time, language, default apps, notifications, system info (no GTK)
+  search.py          settings search: accent-insensitive matching and ranking (no GTK)
   i18n.py            translation (gettext) in the system language
   ui.py              widget helpers
   app.py             main window
-  pages/             themes, hyprland, monitors, power, shortcuts, bar, connectivity, system
+  pages/             themes, hyprland, monitors, power, shortcuts, bar, connectivity, system, search
 data/                .desktop
 po/                  template (.pot) and translations (.po)
 tests/               pytest + fixtures

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 19:20-0400\n"
+"POT-Creation-Date: 2026-11-01 19:22-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,55 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: omarchy_settings/app.py:31 omarchy_settings/app.py:37
+#: omarchy_settings/app.py:32 omarchy_settings/app.py:38
 msgid "Omarchy Settings"
 msgstr ""
 
-#: omarchy_settings/app.py:41
+#: omarchy_settings/app.py:42
 msgid "Dependencies…"
 msgstr ""
 
-#: omarchy_settings/app.py:42
+#: omarchy_settings/app.py:43
 msgid "Restore app defaults…"
 msgstr ""
 
-#: omarchy_settings/app.py:43
+#: omarchy_settings/app.py:44
 msgid "Main menu"
 msgstr ""
 
-#: omarchy_settings/app.py:65
+#: omarchy_settings/app.py:45
+msgid "Search settings (Ctrl+F)"
+msgstr ""
+
+#: omarchy_settings/app.py:77
 msgid "Themes"
 msgstr ""
 
-#: omarchy_settings/app.py:67 omarchy_settings/pages/monitors.py:237
+#: omarchy_settings/app.py:79 omarchy_settings/pages/monitors.py:237
 msgid "Displays"
 msgstr ""
 
-#: omarchy_settings/app.py:68 omarchy_settings/pages/bar.py:61
+#: omarchy_settings/app.py:80 omarchy_settings/pages/bar.py:61
 msgid "Power"
 msgstr ""
 
-#: omarchy_settings/app.py:69
+#: omarchy_settings/app.py:81
 msgid "Shortcuts"
 msgstr ""
 
-#: omarchy_settings/app.py:70
+#: omarchy_settings/app.py:82
 msgid "Bar and fonts"
 msgstr ""
 
-#: omarchy_settings/app.py:71
+#: omarchy_settings/app.py:83
 msgid "Connectivity"
 msgstr ""
 
-#: omarchy_settings/app.py:72
+#: omarchy_settings/app.py:84
 msgid "System"
 msgstr ""
 
-#: omarchy_settings/app.py:88
+#: omarchy_settings/app.py:100
 msgid "Restore app defaults?"
 msgstr ""
 
-#: omarchy_settings/app.py:89
+#: omarchy_settings/app.py:101
 msgid ""
 "Removes every Hyprland, display, shortcut and power button setting made in "
 "this app, returning to Omarchy's own. The bar, theme, network and system "
@@ -74,7 +78,7 @@ msgid ""
 "can undo right after."
 msgstr ""
 
-#: omarchy_settings/app.py:92 omarchy_settings/pages/bar.py:249
+#: omarchy_settings/app.py:104 omarchy_settings/pages/bar.py:249
 #: omarchy_settings/pages/bluetooth.py:100
 #: omarchy_settings/pages/bluetooth.py:284
 #: omarchy_settings/pages/shortcuts.py:110
@@ -83,7 +87,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: omarchy_settings/app.py:93 omarchy_settings/pages/bar.py:198
+#: omarchy_settings/app.py:105 omarchy_settings/pages/bar.py:198
 #: omarchy_settings/pages/bar.py:250 omarchy_settings/pages/bar.py:380
 #: omarchy_settings/pages/hyprland.py:88 omarchy_settings/pages/monitors.py:366
 #: omarchy_settings/pages/shortcuts.py:204
@@ -91,20 +95,20 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: omarchy_settings/app.py:102
+#: omarchy_settings/app.py:114
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr ""
 
-#: omarchy_settings/app.py:106
+#: omarchy_settings/app.py:118
 msgid "App defaults restored"
 msgstr ""
 
-#: omarchy_settings/app.py:106 omarchy_settings/pages/themes.py:226
+#: omarchy_settings/app.py:118 omarchy_settings/pages/themes.py:226
 msgid "Undo"
 msgstr ""
 
-#: omarchy_settings/app.py:108
+#: omarchy_settings/app.py:120
 msgid "Settings brought back"
 msgstr ""
 
@@ -2116,6 +2120,18 @@ msgstr ""
 
 #: omarchy_settings/pages/power.py:226
 msgid "Could not write shell.json"
+msgstr ""
+
+#: omarchy_settings/pages/search.py:83 omarchy_settings/pages/search.py:88
+msgid "Search settings"
+msgstr ""
+
+#: omarchy_settings/pages/search.py:95 omarchy_settings/pages/search.py:121
+msgid "Type the name of a setting"
+msgstr ""
+
+#: omarchy_settings/pages/search.py:121
+msgid "Nothing found"
 msgstr ""
 
 #: omarchy_settings/pages/shortcuts.py:80
