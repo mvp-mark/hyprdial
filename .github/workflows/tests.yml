@@ -1,0 +1,19 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    # Arch Linux, like Omarchy: same Python and gettext versions as on the desktop
+    container: archlinux:latest
+    steps:
+      - name: Install dependencies
+        run: pacman -Syu --noconfirm --needed python python-pytest gettext git
+
+      - uses: actions/checkout@v4
+
+      - name: Run tests
+        run: python -m pytest -q -rs

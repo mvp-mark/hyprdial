@@ -1,5 +1,7 @@
 # omarchy-settings
 
+[![tests](https://github.com/mvp-mark/omarchy-settings/actions/workflows/tests.yml/badge.svg)](https://github.com/mvp-mark/omarchy-settings/actions/workflows/tests.yml)
+
 Graphical settings app for [Omarchy](https://omarchy.org), built with GTK4 + libadwaita (Python).
 
 **Requires Omarchy with the Lua-based Hyprland configuration** (`~/.config/hypr/hyprland.lua`, Hyprland 0.5x)
