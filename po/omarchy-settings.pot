@@ -788,7 +788,7 @@ msgstr ""
 msgid "unknown"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:477 omarchy_settings/pages/themes.py:114
+#: omarchy_settings/pages/bar.py:477 omarchy_settings/pages/themes.py:215
 #, python-brace-format
 msgid "Applying {name}…"
 msgstr ""
@@ -798,7 +798,7 @@ msgstr ""
 msgid "Font {name} applied"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:481 omarchy_settings/pages/themes.py:118
+#: omarchy_settings/pages/bar.py:481 omarchy_settings/pages/themes.py:222
 #, python-brace-format
 msgid "Failed to apply {name}"
 msgstr ""
@@ -1755,48 +1755,92 @@ msgstr ""
 msgid "Hyprland didn't accept that shortcut; nothing was changed"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:69
+#: omarchy_settings/pages/themes.py:91
+msgid "Current"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:116
 msgid "Theme"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:69
+#: omarchy_settings/pages/themes.py:116
 msgid "Changes the colors of the system, terminal, bar and editor at once."
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:74
+#: omarchy_settings/pages/themes.py:118
+msgid "Search themes"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:123
+msgid "All"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:123
+msgid "Dark"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:123
+msgid "Light"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:139
 msgid "Wallpaper"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:78
+#: omarchy_settings/pages/themes.py:148
 msgid "Next wallpaper"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:79
+#: omarchy_settings/pages/themes.py:148
 msgid "Cycles through the current theme's backgrounds"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:80
+#: omarchy_settings/pages/themes.py:149
 msgid "Change"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:83
-msgid "Wallpaper changed"
+#: omarchy_settings/pages/themes.py:150
+msgid "Your wallpapers"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:93
+#: omarchy_settings/pages/themes.py:151
+msgid "Images in this folder appear here for the current theme"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:152
+msgid "Open folder"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:161
 msgid "No themes found"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:93
-msgid "omarchy-theme-list is not available"
+#: omarchy_settings/pages/themes.py:162
+msgid "Omarchy's theme folder could not be read"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:118
+#: omarchy_settings/pages/themes.py:167
+msgid "Dark theme"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:167
+msgid "Light theme"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:224
 #, python-brace-format
 msgid "Theme {name} applied"
 msgstr ""
 
-#: omarchy_settings/pages/themes.py:142
+#: omarchy_settings/pages/themes.py:226
+msgid "Undo"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:271
 #, python-brace-format
 msgid "Wallpaper: {name}"
+msgstr ""
+
+#: omarchy_settings/pages/themes.py:275
+msgid "Wallpaper changed"
 msgstr ""

@@ -776,7 +776,7 @@ msgstr "Atual: {font}"
 msgid "unknown"
 msgstr "desconhecida"
 
-#: omarchy_settings/pages/bar.py:477 omarchy_settings/pages/themes.py:114
+#: omarchy_settings/pages/bar.py:477 omarchy_settings/pages/themes.py:215
 #, python-brace-format
 msgid "Applying {name}…"
 msgstr "Aplicando {name}…"
@@ -786,7 +786,7 @@ msgstr "Aplicando {name}…"
 msgid "Font {name} applied"
 msgstr "Fonte {name} aplicada"
 
-#: omarchy_settings/pages/bar.py:481 omarchy_settings/pages/themes.py:118
+#: omarchy_settings/pages/bar.py:481 omarchy_settings/pages/themes.py:222
 #, python-brace-format
 msgid "Failed to apply {name}"
 msgstr "Falha ao aplicar {name}"
@@ -1733,48 +1733,92 @@ msgstr "Atalhos restaurados"
 msgid "Hyprland didn't accept that shortcut; nothing was changed"
 msgstr "O Hyprland não aceitou esse atalho; nada foi alterado"
 
-#: omarchy_settings/pages/themes.py:69
+#: omarchy_settings/pages/themes.py:91
+msgid "Current"
+msgstr "Atual"
+
+#: omarchy_settings/pages/themes.py:116
 msgid "Theme"
 msgstr "Tema"
 
-#: omarchy_settings/pages/themes.py:69
+#: omarchy_settings/pages/themes.py:116
 msgid "Changes the colors of the system, terminal, bar and editor at once."
 msgstr "Troca cores do sistema, terminal, barra e editor de uma vez."
 
-#: omarchy_settings/pages/themes.py:74
+#: omarchy_settings/pages/themes.py:118
+msgid "Search themes"
+msgstr "Buscar temas"
+
+#: omarchy_settings/pages/themes.py:123
+msgid "All"
+msgstr "Todos"
+
+#: omarchy_settings/pages/themes.py:123
+msgid "Dark"
+msgstr "Escuros"
+
+#: omarchy_settings/pages/themes.py:123
+msgid "Light"
+msgstr "Claros"
+
+#: omarchy_settings/pages/themes.py:139
 msgid "Wallpaper"
 msgstr "Wallpaper"
 
-#: omarchy_settings/pages/themes.py:78
+#: omarchy_settings/pages/themes.py:148
 msgid "Next wallpaper"
 msgstr "Próximo wallpaper"
 
-#: omarchy_settings/pages/themes.py:79
+#: omarchy_settings/pages/themes.py:148
 msgid "Cycles through the current theme's backgrounds"
 msgstr "Alterna entre os fundos do tema atual"
 
-#: omarchy_settings/pages/themes.py:80
+#: omarchy_settings/pages/themes.py:149
 msgid "Change"
 msgstr "Trocar"
 
-#: omarchy_settings/pages/themes.py:83
-msgid "Wallpaper changed"
-msgstr "Wallpaper alterado"
+#: omarchy_settings/pages/themes.py:150
+msgid "Your wallpapers"
+msgstr "Seus wallpapers"
 
-#: omarchy_settings/pages/themes.py:93
+#: omarchy_settings/pages/themes.py:151
+msgid "Images in this folder appear here for the current theme"
+msgstr "Imagens nesta pasta aparecem aqui para o tema atual"
+
+#: omarchy_settings/pages/themes.py:152
+msgid "Open folder"
+msgstr "Abrir pasta"
+
+#: omarchy_settings/pages/themes.py:161
 msgid "No themes found"
 msgstr "Nenhum tema encontrado"
 
-#: omarchy_settings/pages/themes.py:93
-msgid "omarchy-theme-list is not available"
-msgstr "omarchy-theme-list não está disponível"
+#: omarchy_settings/pages/themes.py:162
+msgid "Omarchy's theme folder could not be read"
+msgstr "Não foi possível ler a pasta de temas do Omarchy"
 
-#: omarchy_settings/pages/themes.py:118
+#: omarchy_settings/pages/themes.py:167
+msgid "Dark theme"
+msgstr "Tema escuro"
+
+#: omarchy_settings/pages/themes.py:167
+msgid "Light theme"
+msgstr "Tema claro"
+
+#: omarchy_settings/pages/themes.py:224
 #, python-brace-format
 msgid "Theme {name} applied"
 msgstr "Tema {name} aplicado"
 
-#: omarchy_settings/pages/themes.py:142
+#: omarchy_settings/pages/themes.py:226
+msgid "Undo"
+msgstr "Desfazer"
+
+#: omarchy_settings/pages/themes.py:271
 #, python-brace-format
 msgid "Wallpaper: {name}"
 msgstr "Wallpaper: {name}"
+
+#: omarchy_settings/pages/themes.py:275
+msgid "Wallpaper changed"
+msgstr "Wallpaper alterado"

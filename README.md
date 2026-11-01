@@ -9,7 +9,7 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
 
 | Page | What it does | How it applies changes |
 |---|---|---|
-| Themes | Picks the theme and wallpaper (with thumbnails) | `omarchy-theme-set`, `omarchy-theme-bg-next` |
+| Themes | Theme gallery with previews and color swatches, search and dark/light filter, current theme highlighted; all wallpapers of the current theme (yours included) with the one in use marked | `omarchy-theme-set`, `omarchy-theme-bg-set`, `omarchy-theme-bg-next` |
 | Hyprland | Quick styles (Compact, Omarchy, Comfortable, Elegant); window layout, gaps, border, corners, opacity, dimming, blur, shadow, animations; keyboard layout and key repeat; mouse speed, acceleration, scrolling and focus; touchpad; pointer and workspace behavior. A ↶ button per option returns it to Omarchy's default | `hyprctl eval` live + generated file |
 | Displays | Drag-and-drop arrangement (snaps to edges); per display: enable/disable, resolution and refresh rate, scale, rotation, position, VRR, mirroring, 10-bit color, brightness (DDC/CI); night light and text size | `hyprctl eval` live + generated file (asks for confirmation and reverts after 15 s), `omarchy-brightness-display`, `omarchy-toggle-nightlight`, `omarchy-display-text-size` |
 | Shortcuts | Every active shortcut, by category, searchable by name or key; change the key of an Omarchy shortcut (by recording the combination), disable it, restore it with ↶; your own shortcuts to open apps, run commands or open in the terminal; conflict warnings | `hyprctl binds` + parsing `default/hypr/bindings/*.lua`; `hl.unbind`/`o.bind` in the generated file, with reload and verification |
@@ -95,7 +95,7 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `waybar.py`) without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`) without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -107,6 +107,7 @@ Omarchy isn't installed) and fails if an update changes their format.
 omarchy_settings/
   core.py            running commands and editing the configs (no GTK, testable)
   deps.py            dependency list and check (no GTK; also used by install.sh)
+  themes_data.py     themes, previews, colors and wallpapers (no GTK)
   waybar.py          optional Waybar: starter files, theme colors, hooks, start/stop (no GTK)
   keybinds.py        shortcuts: parsing the Lua sources, matching and generation (no GTK)
   layout.py          display arrangement geometry: snapping and overlap (no GTK)
