@@ -1,4 +1,4 @@
-"""Date and time, language, default apps and system info (no GTK, testable).
+"""Date and time, language, default apps, notifications and system info (no GTK, testable).
 
 Time zone, NTP and language go through timedatectl/localectl, which ask for the password through polkit (the
 Omarchy shell shows the prompt). Default apps go through `omarchy default`, the same commands as Omarchy's menu.
@@ -97,6 +97,22 @@ def default_apps() -> dict[str, tuple[list[tuple[str, str]], str]]:
 
 def set_default_app(kind: str, name: str) -> tuple[bool, str]:
     return result(core.run(["omarchy", "default", kind, name], timeout=30))
+
+
+# ------------------------------------------------------------------ notifications
+def dnd() -> bool | None:
+    state = core.out(["omarchy-shell", "notifications", "isDnd"])
+    return {"on": True, "off": False}.get(state)
+
+
+def set_dnd(on: bool) -> bool:
+    ok = core.out(["omarchy-shell", "notifications", "setDnd", "on" if on else "off"]) == ("on" if on else "off")
+    core.run(["omarchy-shell", "-q", "omarchy.indicators", "refresh"])
+    return ok
+
+
+def show_history() -> None:
+    core.run(["omarchy-shell", "notifications", "showHistory"])
 
 
 # ------------------------------------------------------------------ about

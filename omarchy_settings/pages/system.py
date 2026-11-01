@@ -1,4 +1,4 @@
-"""System page: date and time, language, default apps and about (with Omarchy updates)."""
+"""System page: date and time, language, default apps, notifications and about (with Omarchy updates)."""
 from __future__ import annotations
 
 import gi
@@ -55,6 +55,11 @@ class SystemPage(Adw.PreferencesPage):
         self.add(self.apps_group)
         if core.have("omarchy"):
             bg(system.default_apps, self._populate_apps)
+
+        self.notify_group = Adw.PreferencesGroup(title=_("Notifications"))
+        self.add(self.notify_group)
+        if core.have("omarchy-shell"):
+            bg(system.dnd, self._populate_notifications)
 
         self.about_group = Adw.PreferencesGroup(title=_("About this computer"))
         self.add(self.about_group)
@@ -152,6 +157,21 @@ class SystemPage(Adw.PreferencesPage):
 
             row.connect("notify::selected", changed)
             self.apps_group.add(row)
+
+    # -- notifications
+    def _populate_notifications(self, on) -> None:
+        if on is None or isinstance(on, Exception):
+            self.notify_group.add(Adw.ActionRow(title=_("The Omarchy shell isn't answering")))
+            return
+
+        def set_dnd(value: bool) -> None:
+            bg(lambda: system.set_dnd(value), lambda ok: None if ok is True
+               else self.win.toast(_("Could not change Do not disturb")))
+
+        self.notify_group.add(switch_row(_("Do not disturb"), _("Hides notifications; critical ones still show"),
+                                         on, set_dnd))
+        self.notify_group.add(button_row(_("Recent notifications"), _("Shows them again on screen"), _("Show"),
+                                         lambda: bg(system.show_history)))
 
     # -- about
     def _populate_about(self, info) -> None:

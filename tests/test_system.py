@@ -58,6 +58,16 @@ def test_default_apps_only_installed(fake, tmp_path, monkeypatch):
     assert apps["editor"] == ([("nvim", "Neovim"), ("zed", "Zed")], "zed")  # the command name maps back
 
 
+def test_dnd(fake):
+    answers, calls, _have = fake
+    assert system.dnd() is None  # shell not answering
+    answers["omarchy-shell notifications isDnd"] = "off"
+    assert system.dnd() is False
+    answers["omarchy-shell notifications setDnd on"] = "on"
+    assert system.set_dnd(True)
+    assert ["omarchy-shell", "-q", "omarchy.indicators", "refresh"] in calls
+
+
 def test_about_drops_empty_values(fake, monkeypatch):
     answers, _calls, _have = fake
     answers["omarchy version"] = "4.0.6-1"
