@@ -13,7 +13,7 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
 | Hyprland | Quick styles (Compact, Omarchy, Comfortable, Elegant); window layout, gaps, border, corners, opacity, dimming, blur, shadow, animations; keyboard layout and key repeat; mouse speed, acceleration, scrolling and focus; touchpad; pointer and workspace behavior. A ↶ button per option returns it to Omarchy's default | `hyprctl eval` live + generated file |
 | Displays | Drag-and-drop arrangement (snaps to edges); per display: enable/disable, resolution and refresh rate, scale, rotation, position, VRR, mirroring, 10-bit color, brightness (DDC/CI); night light and text size | `hyprctl eval` live + generated file (asks for confirmation and reverts after 15 s), `omarchy-brightness-display`, `omarchy-toggle-nightlight`, `omarchy-display-text-size` |
 | Shortcuts | Every active shortcut, by category, searchable by name or key; change the key of an Omarchy shortcut (by recording the combination), disable it, restore it with ↶; your own shortcuts to open apps, run commands or open in the terminal; conflict warnings | `hyprctl binds` + parsing `default/hypr/bindings/*.lua`; `hl.unbind`/`o.bind` in the generated file, with reload and verification |
-| Bar and fonts | Omarchy shell bar: show/hide, position, transparency, clock format; widgets per section (reorder, move between sections, remove, add); screensaver, lock and "stay awake"; system font | `omarchy-bar`, `omarchy-plugin-enable/disable`, `omarchy-toggle-bar`, `omarchy-toggle-idle`, `idle` in `~/.config/omarchy/shell.json`, `omarchy-font-set` |
+| Bar and fonts | Omarchy shell bar: show/hide, position, transparency, clock format; widgets per section (reorder, move between sections, remove, add); screensaver, lock and "stay awake"; optional Waybar (see below); system font | `omarchy-bar`, `omarchy-plugin-enable/disable`, `omarchy-toggle-bar`, `omarchy-toggle-idle`, `idle` in `~/.config/omarchy/shell.json`, `omarchy-font-set` |
 | Connectivity | Wi-Fi, Bluetooth and mixer (impala, bluetui, wiremix); volume and mute; Bluetooth on/off | `wpctl`, `bluetoothctl` |
 
 ## How settings are stored
@@ -25,6 +25,19 @@ these values take priority over `monitors.lua`, `input.lua` and `looknfeel.lua`.
 settings: "Restore defaults" on the Hyprland page, "Restore this display" and "Restore all shortcuts". Shortcuts
 are wrapped in `pcall`, so a broken shortcut can't take down the rest of the file.
 The bar is changed through Omarchy's own commands, which talk to the running shell.
+
+## Waybar (optional)
+
+Omarchy now uses the Omarchy shell bar and no longer manages Waybar. The **Bar and fonts** page can still run
+Waybar instead of it:
+
+- **Use Waybar instead of the Omarchy bar** starts Waybar, hides the Omarchy bar and starts Waybar at login (an
+  Omarchy `post-boot` hook). Turning it off stops Waybar and shows the Omarchy bar again.
+- A starter `~/.config/waybar/config.jsonc` and `style.css` are created if they don't exist (existing files are
+  never overwritten; "Restore Waybar files" recreates them and keeps the old ones as `.omarchy-settings.bak`).
+- Colors follow the Omarchy theme: a user template (`~/.config/omarchy/themed/waybar.css.tpl`) is rendered by Omarchy
+  on every theme change, `style.css` imports it, and a `theme-set` hook reloads Waybar.
+- Position, restart and shortcuts to edit both files.
 
 ## Installation
 
@@ -82,7 +95,7 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`) without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `waybar.py`) without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -94,6 +107,7 @@ Omarchy isn't installed) and fails if an update changes their format.
 omarchy_settings/
   core.py            running commands and editing the configs (no GTK, testable)
   deps.py            dependency list and check (no GTK; also used by install.sh)
+  waybar.py          optional Waybar: starter files, theme colors, hooks, start/stop (no GTK)
   keybinds.py        shortcuts: parsing the Lua sources, matching and generation (no GTK)
   layout.py          display arrangement geometry: snapping and overlap (no GTK)
   i18n.py            translation (gettext) in the system language

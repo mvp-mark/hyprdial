@@ -17,7 +17,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
-from .. import core
+from .. import core, deps, waybar
 from ..i18n import _, ngettext
 from ..ui import bg, button_row, combo_row, switch_row
 
@@ -177,6 +177,14 @@ class BarPage(Adw.PreferencesPage):
 
         self._idle_group(config)
 
+        self.waybar_group = Adw.PreferencesGroup(
+            title=_("Waybar"),
+            description=_("Optional alternative bar. Omarchy doesn't manage Waybar; its colors follow the "
+                          "Omarchy theme."))
+        self.waybar_rows: list[Gtk.Widget] = []
+        self.add(self.waybar_group)
+        self._fill_waybar()
+
         self.font_group = Adw.PreferencesGroup(title=_("System font"),
                                                description=_("Applied to the terminal, bar and other Omarchy apps."))
         self.add(self.font_group)
@@ -261,7 +269,7 @@ class BarPage(Adw.PreferencesPage):
                   else [_("Widgets on the left"), _("Widgets in the center"), _("Widgets on the right")])
 
         # PreferencesPage só adiciona no fim: tira tudo que vem depois de "Barra" e repõe na ordem
-        tail = [self.add_group, self.idle_group, self.font_group, self.restore_group]
+        tail = [self.add_group, self.idle_group, self.waybar_group, self.font_group, self.restore_group]
         for group in self.widget_groups + tail:
             if group.get_parent() is not None:
                 self.remove(group)
@@ -340,6 +348,89 @@ class BarPage(Adw.PreferencesPage):
             GLib.timeout_add(300, self._refresh_widgets)
 
         bg(lambda: command(["omarchy-plugin-enable", wid]), done)
+
+    # -- Waybar
+    def _fill_waybar(self) -> None:
+        for row in self.waybar_rows:
+            self.waybar_group.remove(row)
+        self.waybar_rows = []
+
+        def add(row: Gtk.Widget) -> None:
+            self.waybar_rows.append(row)
+            self.waybar_group.add(row)
+
+        if not waybar.installed():
+            add(button_row(_("Waybar is not installed"), _("Install it to use it instead of the Omarchy bar"),
+                           _("Install"), self._install_waybar, "suggested-action"))
+            return
+        add(switch_row(_("Use Waybar instead of the Omarchy bar"),
+                       _("Starts Waybar now and at login, and hides the Omarchy bar"),
+                       waybar.enabled(), self._set_waybar))
+        positions = list(waybar.POSITIONS)
+        current = waybar.read_position() if waybar.has_config() else "top"
+        labels = dict(POSITIONS)
+        add(combo_row(_("Waybar position"), "", [labels[p] for p in positions], positions.index(current),
+                      lambda i: self._waybar_position(positions[i])))
+        add(button_row(_("Restart Waybar"), _("Applies changes made to its files"), _("Restart"),
+                       self._restart_waybar))
+        add(button_row(_("Edit config.jsonc"), _("Modules and layout"), _("Open"),
+                       lambda: self._edit_waybar(waybar.CONFIG)))
+        add(button_row(_("Edit style.css"), _("Sizes, fonts and spacing; colors come from the theme"), _("Open"),
+                       lambda: self._edit_waybar(waybar.STYLE)))
+        add(button_row(_("Restore Waybar files"), _("Recreates config.jsonc and style.css; the current ones are "
+                                                    "kept as .omarchy-settings.bak"),
+                       _("Restore"), self._reset_waybar))
+
+    def _install_waybar(self) -> None:
+        self.win.toast(_("Installing Waybar…"))
+
+        def done(res) -> None:
+            ok = not isinstance(res, Exception) and res is not None and res.returncode == 0
+            self.win.toast(_("Waybar installed") if ok else _("Waybar was not installed"))
+            self._fill_waybar()
+
+        bg(lambda: core.run(deps.install_command(["waybar"]), timeout=900), done)
+
+    def _set_waybar(self, on: bool) -> None:
+        def done(res) -> None:
+            if isinstance(res, Exception):
+                self.win.toast(_("Failed: {error}").format(error=res))
+            else:
+                self.win.toast(_("Using Waybar") if on else _("Using the Omarchy bar"))
+
+        bg(lambda: waybar.set_enabled(on), done)
+
+    def _waybar_position(self, position: str) -> None:
+        def work() -> None:
+            waybar.ensure_config()
+            waybar.write_position(position)
+            if waybar.running():
+                waybar.stop()  # a posição só muda de verdade recriando a janela
+                waybar.start()
+
+        bg(work, lambda _r: self.win.toast(_("Waybar position changed")))
+
+    def _restart_waybar(self) -> None:
+        def work() -> bool:
+            was_running = waybar.running()
+            waybar.ensure_config()
+            waybar.stop()
+            return waybar.start() if was_running or waybar.enabled() else False
+
+        bg(work, lambda started: self.win.toast(_("Waybar restarted") if started is True
+                                                 else _("Waybar isn't in use; turn it on above")))
+
+    def _edit_waybar(self, path) -> None:
+        waybar.ensure_config()
+        core.open_in_editor(path)
+
+    def _reset_waybar(self) -> None:
+        def work() -> None:
+            waybar.reset_config()
+            if waybar.running():
+                waybar.reload()
+
+        bg(work, lambda _r: (self.win.toast(_("Waybar files restored")), self._fill_waybar()))
 
     # -- inatividade
     def _idle_group(self, config: dict) -> None:
