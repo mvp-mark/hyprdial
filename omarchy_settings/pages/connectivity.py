@@ -13,6 +13,7 @@ from .. import core
 from ..i18n import _
 from ..ui import bg, button_row, switch_row
 from .ethernet import EthernetGroup
+from .wifi import WifiGroup
 
 SINK = "@DEFAULT_AUDIO_SINK@"
 SOURCE = "@DEFAULT_AUDIO_SOURCE@"
@@ -38,9 +39,9 @@ class ConnectivityPage(Adw.PreferencesPage):
         self._vol_timer = 0
 
         self.add(EthernetGroup(win))
+        self.add(WifiGroup(win, self._tui))
 
-        net = Adw.PreferencesGroup(title=_("Network and Bluetooth"))
-        net.add(button_row("Wi-Fi", _("Networks and connections (impala)"), _("Open"), lambda: self._tui("impala")))
+        net = Adw.PreferencesGroup(title=_("Bluetooth"))
         net.add(button_row(_("Bluetooth devices"), _("Pair and connect (bluetui)"), _("Open"), lambda: self._tui("bluetui")))
         self.bt_group = net
         self.add(net)
