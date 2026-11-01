@@ -1,96 +1,95 @@
 # omarchy-settings
 
-Interface gráfica de configuração para o [Omarchy](https://omarchy.org), em GTK4 + libadwaita (Python).
+Graphical settings app for [Omarchy](https://omarchy.org), built with GTK4 + libadwaita (Python).
 
-**Requer o Omarchy com a configuração do Hyprland em Lua** (`~/.config/hypr/hyprland.lua`, Hyprland 0.5x)
-e o Omarchy shell. Instalações antigas, com `hyprland.conf` e Waybar, não são suportadas.
+**Requires Omarchy with the Lua-based Hyprland configuration** (`~/.config/hypr/hyprland.lua`, Hyprland 0.5x)
+and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are not supported.
 
-## Páginas
+## Pages
 
-| Página | O que faz | Como aplica |
+| Page | What it does | How it applies changes |
 |---|---|---|
-| Temas | Escolhe tema e wallpaper (com miniaturas) | `omarchy-theme-set`, `omarchy-theme-bg-next` |
-| Hyprland | Estilos rápidos (Compacto, Omarchy, Confortável, Elegante); organização das janelas, espaços, borda, cantos, opacidade, escurecimento, desfoque, sombra, animações; layout e repetição do teclado; velocidade, aceleração, rolagem e foco do mouse; touchpad; comportamento do cursor e workspaces. Botão ↶ por opção volta ao padrão do Omarchy | `hyprctl eval` ao vivo + arquivo gerado |
-| Monitores | Disposição arrastável com o mouse (encaixe pelas bordas); por monitor: ativar/desativar, resolução e taxa, escala, rotação, posição, VRR, espelhamento, cor de 10 bits, brilho (DDC/CI); luz noturna e tamanho do texto | `hyprctl eval` ao vivo + arquivo gerado (pede confirmação e reverte em 15 s), `omarchy-brightness-display`, `omarchy-toggle-nightlight`, `omarchy-display-text-size` |
-| Atalhos | Todos os atalhos ativos, por categoria, com busca por nome ou tecla; mudar a tecla de um atalho do Omarchy (gravando a combinação), desativar, restaurar com ↶; atalhos próprios para abrir apps, rodar comandos ou abrir no terminal; aviso de conflito | `hyprctl binds` + leitura de `default/hypr/bindings/*.lua`; `hl.unbind`/`o.bind` no arquivo gerado, com recarga e verificação |
-| Barra e fontes | Barra do Omarchy shell: mostrar/ocultar, posição, transparência, formato do relógio; widgets por seção (reordenar, mover entre seções, remover, adicionar); proteção de tela, bloqueio e "manter acordado"; fonte do sistema | `omarchy-bar`, `omarchy-plugin-enable/disable`, `omarchy-toggle-bar`, `omarchy-toggle-idle`, `idle` em `~/.config/omarchy/shell.json`, `omarchy-font-set` |
-| Conectividade | Wi-Fi, Bluetooth e mixer (impala, bluetui, wiremix); volume e mudo; liga/desliga Bluetooth | `wpctl`, `bluetoothctl` |
+| Themes | Picks the theme and wallpaper (with thumbnails) | `omarchy-theme-set`, `omarchy-theme-bg-next` |
+| Hyprland | Quick styles (Compact, Omarchy, Comfortable, Elegant); window layout, gaps, border, corners, opacity, dimming, blur, shadow, animations; keyboard layout and key repeat; mouse speed, acceleration, scrolling and focus; touchpad; pointer and workspace behavior. A ↶ button per option returns it to Omarchy's default | `hyprctl eval` live + generated file |
+| Displays | Drag-and-drop arrangement (snaps to edges); per display: enable/disable, resolution and refresh rate, scale, rotation, position, VRR, mirroring, 10-bit color, brightness (DDC/CI); night light and text size | `hyprctl eval` live + generated file (asks for confirmation and reverts after 15 s), `omarchy-brightness-display`, `omarchy-toggle-nightlight`, `omarchy-display-text-size` |
+| Shortcuts | Every active shortcut, by category, searchable by name or key; change the key of an Omarchy shortcut (by recording the combination), disable it, restore it with ↶; your own shortcuts to open apps, run commands or open in the terminal; conflict warnings | `hyprctl binds` + parsing `default/hypr/bindings/*.lua`; `hl.unbind`/`o.bind` in the generated file, with reload and verification |
+| Bar and fonts | Omarchy shell bar: show/hide, position, transparency, clock format; widgets per section (reorder, move between sections, remove, add); screensaver, lock and "stay awake"; system font | `omarchy-bar`, `omarchy-plugin-enable/disable`, `omarchy-toggle-bar`, `omarchy-toggle-idle`, `idle` in `~/.config/omarchy/shell.json`, `omarchy-font-set` |
+| Connectivity | Wi-Fi, Bluetooth and mixer (impala, bluetui, wiremix); volume and mute; Bluetooth on/off | `wpctl`, `bluetoothctl` |
 
-## Como as configurações são gravadas
+## How settings are stored
 
-Nada que o Omarchy gerencia é modificado. Os ajustes do Hyprland, dos monitores e dos atalhos vão para
-`~/.config/hypr/omarchy-settings.lua`, e **uma linha** `require("hypr.omarchy-settings")` é inserida em
-`~/.config/hypr/hyprland.lua` logo antes dos toggles do Omarchy (backup em
-`hyprland.lua.omarchy-settings.bak`), para que esses valores prevaleçam sobre `monitors.lua`, `input.lua`
-e `looknfeel.lua`. Cada página restaura só o que é dela: "Restaurar padrões" na página Hyprland, "Restaurar
-este monitor" e "Restaurar todos os atalhos". Atalhos ficam isolados com `pcall`, então um atalho com problema
-não derruba o resto do arquivo.
-A barra é alterada pelos próprios comandos do Omarchy, que conversam com o shell em execução.
+Nothing managed by Omarchy is modified. Hyprland, display and shortcut settings go to
+`~/.config/hypr/omarchy-settings.lua`, and **a single line** `require("hypr.omarchy-settings")` is inserted into
+`~/.config/hypr/hyprland.lua` right before Omarchy's toggles (backup at `hyprland.lua.omarchy-settings.bak`), so
+these values take priority over `monitors.lua`, `input.lua` and `looknfeel.lua`. Each page restores only its own
+settings: "Restore defaults" on the Hyprland page, "Restore this display" and "Restore all shortcuts". Shortcuts
+are wrapped in `pcall`, so a broken shortcut can't take down the rest of the file.
+The bar is changed through Omarchy's own commands, which talk to the running shell.
 
-## Instalação
+## Installation
 
 ```bash
-sudo pacman -S --needed python-gobject gtk4 libadwaita   # libadwaita >= 1.5 para a confirmação de tela
-sudo pacman -S --needed impala bluetui wiremix           # TUIs abertas pela página Conectividade
+sudo pacman -S --needed python-gobject gtk4 libadwaita   # libadwaita >= 1.5 for the display confirmation
+sudo pacman -S --needed impala bluetui wiremix           # TUIs opened by the Connectivity page
 ./install.sh
 omarchy-settings
 ```
 
-Para testar sem instalar: `python3 -m omarchy_settings` dentro da pasta do projeto.
+To try it without installing: `python3 -m omarchy_settings` from the project folder.
 
-## Idioma
+## Language
 
-A interface segue o idioma do sistema (`LANGUAGE`, `LC_ALL`, `LC_MESSAGES`, `LANG`). Os textos do código estão
-em inglês, que também é o idioma usado quando não há tradução; há tradução para português do Brasil (`po/pt_BR.po`),
-usada também por outras variantes de português. Datas seguem o formato regional do sistema (`LC_TIME`).
-Para testar outro idioma sem mudar o sistema: `LANGUAGE=pt_BR omarchy-settings`.
+The interface follows the system language (`LANGUAGE`, `LC_ALL`, `LC_MESSAGES`, `LANG`). Source strings are in
+English, which is also the fallback when there is no translation; a Brazilian Portuguese translation is included
+(`po/pt_BR.po`) and is also used for other Portuguese variants. Dates follow the system's regional format
+(`LC_TIME`). To try another language without changing the system: `LANGUAGE=pt_BR omarchy-settings`.
 
-O `install.sh` compila os catálogos com `msgfmt` (pacote `gettext`). Para atualizar ou adicionar um idioma:
+`install.sh` compiles the catalogs with `msgfmt` (`gettext` package). To update or add a language:
 
 ```bash
 xgettext --language=Python --keyword=_ --keyword=ngettext:1,2 --from-code=UTF-8 \
   -o po/omarchy-settings.pot $(find omarchy_settings -name '*.py')
-msgmerge -U po/pt_BR.po po/omarchy-settings.pot     # atualiza uma tradução existente
-msginit -i po/omarchy-settings.pot -l de -o po/de.po  # ou cria uma nova
+msgmerge -U po/pt_BR.po po/omarchy-settings.pot       # update an existing translation
+msginit -i po/omarchy-settings.pot -l de -o po/de.po  # or create a new one
 ./install.sh
 ```
 
-Os nomes dos atalhos do Omarchy aparecem como o próprio Omarchy os escreve (em inglês).
+Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 
-## Testes
+## Tests
 
 ```bash
 sudo pacman -S --needed python-pytest
 python3 -m pytest
 ```
 
-Cobrem as partes sem interface (`core.py`, `layout.py`, `keybinds.py`) sem tocar no Hyprland em execução, e as
-traduções: todo texto marcado no código tem tradução, nenhuma tradução sobra sem uso e os marcadores (`{name}`…)
-batem entre o inglês e a tradução.
-`tests/fixtures/` tem cópias reduzidas dos arquivos de atalhos do Omarchy; um teste extra lê os arquivos reais
-(pulado se o Omarchy não estiver instalado) e falha se uma atualização mudar o formato deles.
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`) without touching the running Hyprland, and
+the translations: every marked string has a translation, no translation is left unused, and the placeholders
+(`{name}`…) match between English and the translation.
+`tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
+Omarchy isn't installed) and fails if an update changes their format.
 
-## Estrutura
+## Layout
 
 ```
 omarchy_settings/
-  core.py            execução de comandos e edição das configs (sem GTK, testável)
-  keybinds.py        atalhos: leitura das fontes Lua, identificação e geração (sem GTK)
-  layout.py          geometria da disposição de monitores: encaixe e sobreposição (sem GTK)
-  i18n.py            tradução (gettext) no idioma do sistema
-  ui.py              helpers de widgets
-  app.py             janela principal
+  core.py            running commands and editing the configs (no GTK, testable)
+  keybinds.py        shortcuts: parsing the Lua sources, matching and generation (no GTK)
+  layout.py          display arrangement geometry: snapping and overlap (no GTK)
+  i18n.py            translation (gettext) in the system language
+  ui.py              widget helpers
+  app.py             main window
   pages/             themes, hyprland, monitors, shortcuts, bar, connectivity
 data/                .desktop
-po/                  template (.pot) e traduções (.po)
+po/                  template (.pot) and translations (.po)
 tests/               pytest + fixtures
 install.sh
 ```
 
-## Próximos passos
+## Next steps
 
-- Página de **aplicativos padrão** (navegador, terminal, editor, gerenciador de arquivos; apps para PDF e imagens).
-- Trocar a tecla dos atalhos gerados em laço pelo Omarchy (workspaces 1–0, janelas de grupo, painéis da barra);
-  hoje só dá para desativá-los.
-- Remover uma única cópia do Espaçador da barra (hoje a remoção vale para todas).
-- Se o app for publicado: empacotamento (PKGBUILD/AUR) e mais idiomas.
+- A **default apps** page (browser, terminal, editor, file manager; apps for PDFs and images).
+- Changing the key of shortcuts Omarchy generates in loops (workspaces 1–0, group windows, bar panels); today
+  they can only be disabled.
+- Removing a single Spacer from the bar (today removal applies to all of them).
+- Packaging (PKGBUILD/AUR) and more languages.
