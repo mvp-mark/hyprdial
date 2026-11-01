@@ -163,14 +163,16 @@ def monitor_call(rule: dict) -> str:
     return f"hl.monitor({{ {fields} }})"
 
 
-def render(values: dict[str, str], monitors: dict[str, dict], bindings: dict | None = None) -> str:
-    from . import keybinds  # imported here: keybinds depends on this module
+def render(values: dict[str, str], monitors: dict[str, dict], bindings: dict | None = None,
+           extras: dict | None = None) -> str:
+    from . import keybinds, power  # imported here: both depend on this module
 
     parts = [HEADER]
     if values:
         parts.append(config_call(values))
     parts.extend(monitor_call(monitors[name]) for name in sorted(monitors))
     parts.extend(keybinds.render(bindings or {}))
+    parts.extend(power.render_extras(extras or {}))
     return "\n".join(parts) + "\n"
 
 
@@ -208,23 +210,24 @@ class HyprStore:
 
     def __init__(self, managed: Path = HYPR_MANAGED, main: Path = HYPR_MAIN, state: Path = STATE_FILE):
         self.managed, self.main, self.state_file = managed, main, state
-        self.values, self.monitors, self.bindings = self._load()
+        self.values, self.monitors, self.bindings, self.extras = self._load()
         self._pending: dict[str, str | None] = {}
         self._pending_monitors: dict[str, dict | None] = {}
         self._lock = threading.Lock()
         self._timer: threading.Timer | None = None
 
     # -- estado
-    def _load(self) -> tuple[dict[str, str], dict[str, dict], dict]:
+    def _load(self) -> tuple[dict[str, str], dict[str, dict], dict, dict]:
         empty = {"overrides": {}, "custom": []}
         try:
             data = json.loads(self.state_file.read_text())
             values = {str(k): str(v) for k, v in data.get("hypr", {}).items()}
             monitors = {str(k): dict(v) for k, v in data.get("monitors", {}).items()}
             bindings = data.get("bindings") if isinstance(data.get("bindings"), dict) else empty
-            return values, monitors, {**empty, **bindings}
+            extras = data.get("extras") if isinstance(data.get("extras"), dict) else {}
+            return values, monitors, {**empty, **bindings}, extras
         except (OSError, ValueError, AttributeError, TypeError):
-            return {}, {}, empty
+            return {}, {}, empty, {}
 
     # reads include what is still queued, so back-to-back changes don't overwrite each other
     def get(self, key: str) -> str | None:
@@ -262,6 +265,18 @@ class HyprStore:
             self.bindings = bindings
         self.save()
         run(["hyprctl", "reload"])
+
+    def set_extra(self, key: str, value, reload: bool = True) -> None:
+        """Power and night light settings: written (and reloaded) right away; call it off the UI thread."""
+        self.flush()
+        with self._lock:
+            if value is None:
+                self.extras.pop(key, None)
+            else:
+                self.extras[key] = value
+        self.save()
+        if reload:
+            run(["hyprctl", "reload"])
 
     def _queue(self, pending: dict, key: str, value) -> None:
         with self._lock:
@@ -309,11 +324,12 @@ class HyprStore:
     def save(self) -> None:
         self.managed.parent.mkdir(parents=True, exist_ok=True)
         tmp = self.managed.with_suffix(".tmp")
-        tmp.write_text(render(self.values, self.monitors, self.bindings))
+        tmp.write_text(render(self.values, self.monitors, self.bindings, self.extras))
         os.replace(tmp, self.managed)
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
         self.state_file.write_text(json.dumps({"hypr": self.values, "monitors": self.monitors,
-                                               "bindings": self.bindings}, indent=2, ensure_ascii=False))
+                                               "bindings": self.bindings, "extras": self.extras},
+                                              indent=2, ensure_ascii=False))
         self.ensure_required()
 
     def ensure_required(self) -> None:

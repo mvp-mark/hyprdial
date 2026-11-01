@@ -1,7 +1,6 @@
 """Displays page: drag-and-drop arrangement, resolution, refresh rate, scale, rotation, VRR, mirroring and brightness."""
 from __future__ import annotations
 
-import json
 import re
 
 import gi
@@ -39,13 +38,6 @@ def scale_label(value: float) -> str:
 def brightness(output: str) -> int | None:
     m = re.fullmatch(r"\s*(\d+)\s*", core.out(["omarchy-brightness-display", "--monitor", output], timeout=8))
     return int(m.group(1)) if m else None
-
-
-def nightlight_on() -> bool | None:
-    try:
-        return bool(json.loads(core.out(["omarchy-toggle-nightlight", "--status"])).get("enabled"))
-    except (ValueError, AttributeError):
-        return None
 
 
 def text_size() -> int | None:
@@ -210,8 +202,6 @@ class MonitorsPage(Adw.PreferencesPage):
         self._syncing = False
 
         display = Adw.PreferencesGroup(title=_("Display"))
-        if core.have("omarchy-toggle-nightlight"):
-            bg(nightlight_on, lambda on: self._add_nightlight(display, on))
         if core.have("omarchy-display-text-size"):
             bg(text_size, lambda size: self._add_text_size(display, size))
         display.add(button_row(_("Reload"), _("Reads the connected displays again"), _("Reload"), self.refresh))
@@ -506,18 +496,6 @@ class MonitorsPage(Adw.PreferencesPage):
             return False
 
         self._bright_timers[name] = GLib.timeout_add(300, apply)
-
-    def _add_nightlight(self, group: Adw.PreferencesGroup, on) -> None:
-        if not isinstance(on, bool):
-            return
-        group.add(switch_row(_("Night light"), _("Warmer screen to reduce blue light"), on, self._set_nightlight))
-
-    def _set_nightlight(self, on: bool) -> None:
-        def work() -> None:
-            if nightlight_on() != on:
-                core.run(["omarchy-toggle-nightlight"], timeout=15)
-
-        bg(work)
 
     def _add_text_size(self, group: Adw.PreferencesGroup, size) -> None:
         if not isinstance(size, int):

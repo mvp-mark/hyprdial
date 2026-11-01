@@ -1,4 +1,4 @@
-"""Bar page (Omarchy shell), idle settings and system font.
+"""Bar page (Omarchy shell) and system font; idle helpers shared with the Power page.
 
 The bar belongs to omarchy-shell (Quickshell). Position, transparency and widgets are changed through the
 `omarchy-bar` and `omarchy-plugin-*` commands, which talk to the running shell; only the idle settings are
@@ -175,8 +175,6 @@ class BarPage(Adw.PreferencesPage):
         self.add_group.add(self.add_expander)
         self.add(self.add_group)
 
-        self._idle_group(config)
-
         self.waybar_group = Adw.PreferencesGroup(
             title=_("Waybar"),
             description=_("Optional alternative bar. Omarchy doesn't manage Waybar; its colors follow the "
@@ -269,7 +267,7 @@ class BarPage(Adw.PreferencesPage):
                   else [_("Widgets on the left"), _("Widgets in the center"), _("Widgets on the right")])
 
         # PreferencesPage only appends: remove everything after "Bar" and add it back in order
-        tail = [self.add_group, self.idle_group, self.waybar_group, self.font_group, self.restore_group]
+        tail = [self.add_group, self.waybar_group, self.font_group, self.restore_group]
         for group in self.widget_groups + tail:
             if group.get_parent() is not None:
                 self.remove(group)
@@ -431,36 +429,6 @@ class BarPage(Adw.PreferencesPage):
                 waybar.reload()
 
         bg(work, lambda _r: (self.win.toast(_("Waybar files restored")), self._fill_waybar()))
-
-    # -- idle
-    def _idle_group(self, config: dict) -> None:
-        idle = config.get("idle") if isinstance(config.get("idle"), dict) else {}
-        self.idle_group = Adw.PreferencesGroup(title=_("Idle"),
-                                               description=_("Counted from the moment you stop using the computer."))
-        self.idle_group.add(self._idle_row("screensaver", _("Screensaver after"), "", idle.get("screensaver", 150)))
-        self.idle_group.add(self._idle_row("lock", _("Lock the screen after"), _("Asks for the password to come back"),
-                                           idle.get("lock", 300)))
-        self.idle_group.add(switch_row(_("Stay awake"), _("Pauses the screensaver and lock until you turn this off"),
-                                       STAY_AWAKE_FLAG.exists(), self._set_stay_awake))
-        self.add(self.idle_group)
-
-    def _idle_row(self, key: str, title: str, subtitle: str, current) -> Adw.ComboRow:
-        values = list(IDLE_TIMES)
-        try:
-            current = int(current)
-        except (TypeError, ValueError):
-            current = 0
-        if current not in values:
-            values.insert(-1, current)
-
-        def on_select(i: int) -> None:
-            bg(lambda: write_idle(key, values[i]),
-               lambda ok: None if ok is True else self.win.toast(_("Could not write shell.json")))
-
-        return combo_row(title, subtitle, [idle_label(s) for s in values], values.index(current), on_select)
-
-    def _set_stay_awake(self, on: bool) -> None:
-        bg(lambda: command(["omarchy-toggle-idle", "stay-awake" if on else "allow-idle"]))
 
     # -- fonts
     def _populate_fonts(self, result) -> None:

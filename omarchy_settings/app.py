@@ -17,6 +17,7 @@ from .pages.connectivity import ConnectivityPage
 from .pages.dependencies import DependenciesDialog
 from .pages.hyprland import HyprlandPage
 from .pages.monitors import MonitorsPage
+from .pages.power import PowerPage
 from .pages.shortcuts import ShortcutsPage
 from .pages.themes import ThemesPage
 
@@ -33,6 +34,7 @@ class Window(Adw.ApplicationWindow):
             (ThemesPage(self), "themes", _("Themes"), "preferences-desktop-theme-symbolic"),
             (HyprlandPage(self), "hyprland", "Hyprland", "preferences-system-symbolic"),
             (MonitorsPage(self), "monitors", _("Displays"), "preferences-desktop-display-symbolic"),
+            (PowerPage(self), "power", _("Power"), "system-shutdown-symbolic"),
             (ShortcutsPage(self), "shortcuts", _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic"),
             (BarPage(self), "bar", _("Bar and fonts"), "preferences-desktop-font-symbolic"),
             (ConnectivityPage(self), "connectivity", _("Connectivity"), "network-wireless-symbolic"),
