@@ -1,6 +1,6 @@
 pkgbase = omarchy-settings
 	pkgdesc = Graphical settings app for Omarchy (GTK4 + libadwaita)
-	pkgver = 0.5.1
+	pkgver = 0.5.2
 	pkgrel = 1
 	url = https://github.com/mvp-mark/omarchy-settings
 	arch = any
@@ -14,7 +14,7 @@ pkgbase = omarchy-settings
 	optdepends = bluetui: Bluetooth manager opened by the Connectivity page
 	optdepends = wiremix: audio mixer opened by the Sound page
 	optdepends = waybar: alternative bar (Omarchy uses the Omarchy shell bar)
-	source = omarchy-settings-0.5.1.tar.gz::https://github.com/mvp-mark/omarchy-settings/archive/refs/tags/v0.5.1.tar.gz
-	sha256sums = 5769982d29a5419f1aa43c31788e24ddd716b319284cb23fbcee4e42e47419c6
+	source = omarchy-settings-0.5.2.tar.gz::https://github.com/mvp-mark/omarchy-settings/archive/refs/tags/v0.5.2.tar.gz
+	sha256sums = SKIP
 
 pkgname = omarchy-settings

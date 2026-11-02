@@ -2,7 +2,7 @@
 # Dependencies follow omarchy_settings/deps.py (tests/test_pkgbuild.py checks it):
 # required -> depends (gettext only compiles the translations -> makedepends), optional -> optdepends.
 pkgname=omarchy-settings
-pkgver=0.5.1
+pkgver=0.5.2
 pkgrel=1
 pkgdesc="Graphical settings app for Omarchy (GTK4 + libadwaita)"
 arch=('any')
@@ -15,7 +15,7 @@ optdepends=('impala: Wi-Fi manager opened by the Connectivity page'
             'wiremix: audio mixer opened by the Sound page'
             "waybar: alternative bar (Omarchy uses the Omarchy shell bar)")
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('5769982d29a5419f1aa43c31788e24ddd716b319284cb23fbcee4e42e47419c6')
+sha256sums=('SKIP')
 
 build() {
   cd "$pkgname-$pkgver"
