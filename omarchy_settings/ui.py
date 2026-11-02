@@ -91,6 +91,11 @@ def button_row(title, subtitle, label, on_click, style: str | None = None) -> Ad
     return row
 
 
+def on_ui_thread(fn: Callable, *args) -> None:
+    """Runs fn(*args) on the UI thread; for callbacks that come from worker threads."""
+    GLib.idle_add(lambda: fn(*args) or False)
+
+
 class Debouncer:
     """Calls fn with the latest arguments once they stop coming for delay_ms (sliders, typing).
 

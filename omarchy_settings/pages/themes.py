@@ -258,7 +258,7 @@ class ThemesPage(Adw.PreferencesPage):
                 toast.connect("button-clicked", lambda _t: self._apply_theme(previous, undoable=False))
             self.win.toasts.add_toast(toast)
 
-        bg(lambda: core.run(["omarchy-theme-set", name], timeout=120), done)
+        bg(lambda: td.set_theme(name), done)
 
     # ------------------------------------------------------------------ wallpapers
     def _load_wallpapers(self) -> None:
@@ -298,7 +298,7 @@ class ThemesPage(Adw.PreferencesPage):
     def _on_wall_activated(self, _flow, child: Gtk.FlowBoxChild) -> None:
         path = child.path
         bg(
-            lambda: core.run(["omarchy-theme-bg-set", str(path)]),
+            lambda: td.set_wallpaper(path),
             lambda _r: (
                 self._mark_current_wallpaper(td.current_wallpaper()),
                 self.win.toast(_("Wallpaper: {name}").format(name=path.name)),
@@ -307,7 +307,7 @@ class ThemesPage(Adw.PreferencesPage):
 
     def _next_wallpaper(self) -> None:
         bg(
-            lambda: core.run(["omarchy-theme-bg-next"]),
+            td.next_wallpaper,
             lambda _r: (self._mark_current_wallpaper(td.current_wallpaper()), self.win.toast(_("Wallpaper changed"))),
         )
 

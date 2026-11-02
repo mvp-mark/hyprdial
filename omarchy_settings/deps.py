@@ -58,6 +58,11 @@ def missing(packages: list[str]) -> set[str]:
     return {line.strip() for line in r.stdout.splitlines() if line.strip()}
 
 
+def install(packages: list[str]):
+    """Installs with a graphical password prompt; can take minutes."""
+    return core.run(install_command(packages), timeout=900)
+
+
 def install_command(packages: list[str]) -> list[str]:
     """Installation with a graphical password prompt (polkit), for the UI."""
     return ["pkexec", "pacman", "-S", "--needed", "--noconfirm", *packages]

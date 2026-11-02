@@ -6,7 +6,10 @@ code, so it runs one interactive bluetoothctl fed through stdin; PairParser turn
 
 from __future__ import annotations
 
+import os
 import re
+import subprocess
+import threading
 from dataclasses import dataclass
 
 from . import core
@@ -220,3 +223,72 @@ def failure_reason(text: str) -> str:
     if "AlreadyExists" in text:
         return "already"
     return ""
+
+
+PAIR_TIMEOUT = 60  # seconds
+
+
+class PairSession:
+    """One interactive bluetoothctl that pairs, trusts and connects a device.
+
+    on_event(event) gets PairParser's events, plus ("ended",) when the process exits. They come from a reader thread
+    through dispatch(fn, *args), which the window sets to run fn on its UI thread.
+    """
+
+    def __init__(self, mac: str, on_event, dispatch=lambda fn, *args: fn(*args)):
+        self.mac, self.on_event, self.dispatch = mac, on_event, dispatch
+        self.parser = PairParser()
+        self.proc: subprocess.Popen | None = None
+        self.finished = False
+
+    def start(self) -> bool:
+        try:
+            self.proc = subprocess.Popen(
+                ["bluetoothctl"],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
+        except OSError:
+            return False
+        threading.Thread(target=self._read, daemon=True).start()
+        self.send(PAIR_START.format(mac=self.mac))
+        timer = threading.Timer(PAIR_TIMEOUT, lambda: self.dispatch(self._timeout))
+        timer.daemon = True
+        timer.start()
+        return True
+
+    def send(self, text: str) -> None:
+        if self.proc and self.proc.poll() is None:
+            try:
+                self.proc.stdin.write(text.encode())
+                self.proc.stdin.flush()
+            except OSError:
+                pass
+
+    def stop(self) -> None:
+        self.finished = True
+        self.send("quit\n")
+        if self.proc:
+            try:
+                self.proc.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                self.proc.kill()
+
+    def _read(self) -> None:
+        fd = self.proc.stdout.fileno()
+        while True:
+            try:
+                chunk = os.read(fd, 4096)
+            except OSError:
+                break
+            if not chunk:
+                break
+            for event in self.parser.feed(chunk.decode(errors="replace")):
+                self.dispatch(self.on_event, event)
+        self.dispatch(self.on_event, ("ended",))
+
+    def _timeout(self) -> None:
+        if not self.finished:
+            self.on_event(("failed", "timeout"))

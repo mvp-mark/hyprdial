@@ -146,3 +146,12 @@ def failure_reason(error: str) -> str:
     if "no network with ssid" in e or "not found" in e:
         return "not-found"
     return ""
+
+
+def connection_info(iface: str) -> dict[str, list[str]]:
+    """nmcli fields of the device: GENERAL.CONNECTION and IP4.ADDRESS."""
+    return parse_fields(core.out(["nmcli", "-t", "-f", "GENERAL.CONNECTION,IP4.ADDRESS", "device", "show", iface]))
+
+
+def run(args: list[str]):
+    return core.run(args, timeout=30)

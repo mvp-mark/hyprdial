@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import threading
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -136,3 +138,34 @@ def find_test_sound(directory: Path = SOUND_DIR) -> Path | None:
 def play(path: Path) -> bool:
     """Plays on the default output (pw-play waits until the sound ends)."""
     return ok(core.run(["pw-play", str(path)], timeout=15))
+
+
+class Watcher:
+    """Runs `pactl subscribe` and calls on_event for every event line, through dispatch(fn) from a reader thread
+    (the window sets dispatch to run fn on its UI thread)."""
+
+    def __init__(self, on_event, dispatch=lambda fn: fn()):
+        self.on_event, self.dispatch = on_event, dispatch
+        self.proc: subprocess.Popen | None = None
+
+    def start(self) -> None:
+        if self.proc is not None:
+            return
+        try:
+            self.proc = subprocess.Popen(
+                ["pactl", "subscribe"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True
+            )
+        except OSError:
+            return
+        threading.Thread(target=self._read, args=(self.proc,), daemon=True).start()
+
+    def _read(self, proc: subprocess.Popen) -> None:
+        for line in proc.stdout:
+            if "Event" in line and "client" not in line:
+                self.dispatch(self.on_event)
+
+    def stop(self) -> None:
+        if self.proc is not None:
+            self.proc.kill()
+            self.proc.wait()
+            self.proc = None

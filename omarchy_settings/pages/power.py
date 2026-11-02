@@ -8,10 +8,11 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk  # noqa: E402
 
-from .. import core, power
+from .. import core, power, shell
 from ..i18n import _
+from ..shell import IDLE_TIMES, STAY_AWAKE_FLAG, read_shell, write_idle
 from ..ui import Debouncer, bg, combo_row, missing_row, switch_row
-from .bar import IDLE_TIMES, STAY_AWAKE_FLAG, command, idle_label, read_shell, write_idle
+from .bar import idle_label
 
 PROFILE_LABELS = {
     "power-saver": (_("Power saver"), _("Less heat and noise, lower performance")),
@@ -92,10 +93,7 @@ class PowerPage(Adw.PreferencesPage):
 
     # -- night light
     def _read_schedule(self):
-        try:
-            return power.parse_schedule(power.HYPRSUNSET_CONF.read_text())
-        except OSError:
-            return None
+        return power.read_schedule()
 
     def _populate_night(self, result) -> None:
         if isinstance(result, Exception):
@@ -181,7 +179,7 @@ class PowerPage(Adw.PreferencesPage):
         start, end = power.valid_time(self.start.get_text()), power.valid_time(self.end.get_text())
         if start and end and start != end:
             power.write_schedule(start, end, temp)
-            core.run(["omarchy-restart-hyprsunset"], timeout=15)
+            power.restart_hyprsunset()
 
     def _save_schedule(self, on: bool) -> None:
         if self._syncing:
@@ -198,7 +196,7 @@ class PowerPage(Adw.PreferencesPage):
             def work() -> None:
                 power.write_schedule(*times, temp)
                 self.store.set_extra("nightlight_schedule", True)
-                core.run(["omarchy-restart-hyprsunset"], timeout=15)
+                power.restart_hyprsunset()
 
             bg(
                 work,
@@ -213,7 +211,7 @@ class PowerPage(Adw.PreferencesPage):
             def work() -> None:
                 power.restore_schedule()
                 self.store.set_extra("nightlight_schedule", None)
-                core.run(["omarchy-restart-hyprsunset"], timeout=15)
+                power.restart_hyprsunset()
 
             bg(
                 work,
@@ -273,4 +271,4 @@ class PowerPage(Adw.PreferencesPage):
         return combo_row(title, subtitle, [idle_label(s) for s in values], values.index(current), on_select)
 
     def _set_stay_awake(self, on: bool) -> None:
-        bg(lambda: command(["omarchy-toggle-idle", "stay-awake" if on else "allow-idle"]))
+        bg(lambda: shell.stay_awake(on))

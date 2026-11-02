@@ -1,16 +1,8 @@
-"""Bar page (Omarchy shell) and system font; idle helpers shared with the Power page.
-
-The bar belongs to omarchy-shell (Quickshell). Position, transparency and widgets are changed through the
-`omarchy-bar` and `omarchy-plugin-*` commands, which talk to the running shell; only the idle settings are
-written straight to ~/.config/omarchy/shell.json, the same way Omarchy's commands do it.
-"""
+"""Bar page (Omarchy shell) and system font; idle labels shared with the Power page. The logic is in shell.py."""
 
 from __future__ import annotations
 
-import json
-import os
 from datetime import datetime
-from pathlib import Path
 
 import gi
 
@@ -18,19 +10,12 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
-from .. import core, deps, waybar
+from .. import core, deps, shell, waybar
 from ..i18n import _, ngettext
+from ..shell import BAR_OFF_FLAG, SECTIONS, bar_layout, read_shell
 from ..ui import bg, button_row, combo_row, confirm, switch_row
 
-OMARCHY_PATH = os.environ.get("OMARCHY_PATH", "/usr/share/omarchy")
-SHELL_CONFIG = core.CONF_DIR / "omarchy" / "shell.json"
-SHELL_DEFAULTS = Path(OMARCHY_PATH) / "config" / "omarchy" / "shell.json"
-BAR_OFF_FLAG = core.HOME / ".local/state/omarchy/toggles/bar-off"
-STAY_AWAKE_FLAG = core.HOME / ".local/state/omarchy/indicators/stay-awake"
-
-SECTIONS = ["left", "center", "right"]
 POSITIONS = [("top", _("Top")), ("bottom", _("Bottom")), ("left", _("Left side")), ("right", _("Right side"))]
-IDLE_TIMES = [60, 120, 150, 300, 600, 900, 1800, 3600, 0]
 
 
 def idle_label(seconds: int) -> str:
@@ -85,66 +70,9 @@ def clock_formats() -> list[tuple[str, str]]:
     ]
 
 
-# ------------------------------------------------------------------ shell configuration
-def read_shell() -> dict:
-    """Same rule as omarchy-shell-config: the user's file, or the defaults if it is empty."""
-    for path in (SHELL_CONFIG, SHELL_DEFAULTS):
-        try:
-            if path.stat().st_size:
-                data = json.loads(path.read_text())
-                if isinstance(data, dict):
-                    return data
-        except (OSError, ValueError):
-            continue
-    return {}
-
-
-def bar_layout(config: dict) -> dict[str, list[dict]]:
-    layout = (config.get("bar") or {}).get("layout") or {}
-    result = {}
-    for section in SECTIONS:
-        items = layout.get(section) if isinstance(layout.get(section), list) else []
-        result[section] = [i if isinstance(i, dict) else {"id": str(i)} for i in items]
-    return result
-
-
-def write_idle(key: str, seconds: int) -> bool:
-    config = read_shell()
-    config.setdefault("version", 1)
-    idle = config.get("idle") if isinstance(config.get("idle"), dict) else {}
-    idle[key] = seconds
-    config["idle"] = idle
-    try:
-        SHELL_CONFIG.parent.mkdir(parents=True, exist_ok=True)
-        tmp = SHELL_CONFIG.with_suffix(".tmp")
-        tmp.write_text(json.dumps(config, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
-        os.replace(tmp, SHELL_CONFIG)
-    except OSError:
-        return False
-    core.run(["omarchy-shell", "shell", "reloadConfig"])
-    return True
-
-
 def widget_catalog() -> dict[str, tuple[str, str]]:
-    """id -> (name, description) of every bar widget the shell knows about."""
-    try:
-        catalog = json.loads(core.out(["omarchy-plugin-catalog"], timeout=15))
-    except (ValueError, TypeError):
-        catalog = []
-    result = {}
-    for item in catalog if isinstance(catalog, list) else []:
-        if isinstance(item, dict) and item.get("barWidget"):
-            result[item["id"]] = WIDGET_NAMES.get(
-                item["id"], (item.get("name") or item["id"], item.get("description") or "")
-            )
-    return result
-
-
-def command(args: list[str]) -> tuple[bool, str]:
-    r = core.run(args, timeout=20)
-    if r is None:
-        return False, _("command not found")
-    return r.returncode == 0, (r.stderr or r.stdout).strip()
+    """The shell's widgets, with translated names for Omarchy's own."""
+    return {wid: WIDGET_NAMES.get(wid, info) for wid, info in shell.widget_catalog().items()}
 
 
 # ------------------------------------------------------------------ page
@@ -213,13 +141,7 @@ class BarPage(Adw.PreferencesPage):
         )
         self.add(self.font_group)
         if core.have("omarchy-font-set"):
-            bg(
-                lambda: (
-                    [f.strip() for f in core.out(["omarchy-font-list"]).splitlines() if f.strip()],
-                    core.out(["omarchy-font-current"]),
-                ),
-                self._populate_fonts,
-            )
+            bg(shell.fonts, self._populate_fonts)
         else:
             self.font_group.add(
                 Adw.ActionRow(
@@ -254,11 +176,10 @@ class BarPage(Adw.PreferencesPage):
             if rebuild or not ok:
                 GLib.timeout_add(300, self._refresh_widgets)
 
-        bg(lambda: command(["omarchy-bar", *args]), done)
+        bg(lambda: shell.bar(args), done)
 
     def _set_visible(self, on: bool) -> None:
-        # omarchy-toggle-bar controls the "bar-off" flag: 'off' shows the bar, 'on' hides it
-        bg(lambda: command(["omarchy-toggle-bar", "off" if on else "on"]))
+        bg(lambda: shell.show_bar(on))
 
     def _add_clock_row(self, config: dict) -> None:
         clock = next(
@@ -288,7 +209,7 @@ class BarPage(Adw.PreferencesPage):
             ok, msg = res if isinstance(res, tuple) else (False, str(res))
             self.win.toast(_("Shell restarted") if ok else _("Failed: {error}").format(error=msg))
 
-        bg(lambda: command(["omarchy-restart-shell"]), done)
+        bg(shell.restart, done)
 
     def _confirm_defaults(self) -> None:
         confirm(
@@ -394,7 +315,7 @@ class BarPage(Adw.PreferencesPage):
             )
             GLib.timeout_add(300, self._refresh_widgets)
 
-        bg(lambda: command(["omarchy-plugin-disable", wid]), done)
+        bg(lambda: shell.disable_widget(wid), done)
 
     def _fill_available(self, layout: dict) -> None:
         present = {i["id"] for items in layout.values() for i in items}
@@ -422,7 +343,7 @@ class BarPage(Adw.PreferencesPage):
             )
             GLib.timeout_add(300, self._refresh_widgets)
 
-        bg(lambda: command(["omarchy-plugin-enable", wid]), done)
+        bg(lambda: shell.enable_widget(wid), done)
 
     # -- Waybar
     def _fill_waybar(self) -> None:
@@ -496,7 +417,7 @@ class BarPage(Adw.PreferencesPage):
             self.win.toast(_("Waybar installed") if ok else _("Waybar was not installed"))
             self._fill_waybar()
 
-        bg(lambda: core.run(deps.install_command(["waybar"]), timeout=900), done)
+        bg(lambda: deps.install(["waybar"]), done)
 
     def _set_waybar(self, on: bool) -> None:
         def done(res) -> None:
@@ -568,4 +489,4 @@ class BarPage(Adw.PreferencesPage):
             ok = not isinstance(res, Exception) and res is not None and res.returncode == 0
             self.win.toast((_("Font {name} applied") if ok else _("Failed to apply {name}")).format(name=name))
 
-        bg(lambda: core.run(["omarchy-font-set", name], timeout=60), done)
+        bg(lambda: shell.set_font(name), done)

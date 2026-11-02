@@ -102,3 +102,15 @@ def current_wallpaper(state: Path = STATE) -> Path | None:
         return link.resolve(strict=True)
     except (OSError, RuntimeError):
         return None
+
+
+def set_theme(name: str):
+    return core.run(["omarchy-theme-set", name], timeout=120)
+
+
+def set_wallpaper(path: Path):
+    return core.run(["omarchy-theme-bg-set", str(path)])
+
+
+def next_wallpaper():
+    return core.run(["omarchy-theme-bg-next"])

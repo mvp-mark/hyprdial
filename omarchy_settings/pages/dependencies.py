@@ -8,7 +8,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk  # noqa: E402
 
-from .. import core, deps
+from .. import deps
 from ..i18n import _, ngettext
 from ..ui import bg
 
@@ -105,4 +105,4 @@ class DependenciesDialog(Adw.PreferencesDialog):
             self.add_toast(Adw.Toast(title=message, timeout=4))
             self.refresh()
 
-        bg(lambda: core.run(deps.install_command(packages), timeout=900), done)
+        bg(lambda: deps.install(packages), done)

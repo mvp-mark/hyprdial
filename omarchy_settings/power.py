@@ -154,3 +154,14 @@ def render_extras(extras: dict) -> list[str]:
             'pcall(function() o.launch_on_start("hyprsunset") end)',
         ]
     return lines
+
+
+def read_schedule(conf: Path = HYPRSUNSET_CONF) -> tuple[str, str, int] | None:
+    try:
+        return parse_schedule(conf.read_text())
+    except OSError:
+        return None
+
+
+def restart_hyprsunset() -> None:
+    core.run(["omarchy-restart-hyprsunset"], timeout=15)

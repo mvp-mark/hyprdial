@@ -2,95 +2,24 @@
 
 from __future__ import annotations
 
-import os
-import subprocess
 import threading
 
 import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, GLib, Gtk  # noqa: E402
+from gi.repository import Adw, Gtk  # noqa: E402
 
 from .. import bluetooth as bt
 from .. import core
 from ..i18n import _, ngettext
-from ..ui import bg, button_row, confirm, refresh_while_mapped
+from ..ui import bg, button_row, confirm, on_ui_thread, refresh_while_mapped
 
 REFRESH_SECONDS = 10
-PAIR_TIMEOUT = 60
 
 
 def battery_icon(level: int) -> str:
     return f"battery-level-{min(100, round(level / 10) * 10)}-symbolic"
-
-
-class PairSession:
-    """One interactive bluetoothctl that pairs, trusts and connects a device.
-
-    on_event(event) is called on the UI thread with PairParser's events, plus ("ended",) when the process exits.
-    """
-
-    def __init__(self, mac: str, on_event):
-        self.mac, self.on_event = mac, on_event
-        self.parser = bt.PairParser()
-        self.proc: subprocess.Popen | None = None
-        self.finished = False
-
-    def start(self) -> bool:
-        try:
-            self.proc = subprocess.Popen(
-                ["bluetoothctl"],
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                start_new_session=True,
-            )
-        except OSError:
-            return False
-        threading.Thread(target=self._read, daemon=True).start()
-        self.send(bt.PAIR_START.format(mac=self.mac))
-        GLib.timeout_add_seconds(PAIR_TIMEOUT, self._timeout)
-        return True
-
-    def send(self, text: str) -> None:
-        if self.proc and self.proc.poll() is None:
-            try:
-                self.proc.stdin.write(text.encode())
-                self.proc.stdin.flush()
-            except OSError:
-                pass
-
-    def stop(self) -> None:
-        self.finished = True
-        self.send("quit\n")
-        if self.proc:
-            try:
-                self.proc.wait(timeout=2)
-            except subprocess.TimeoutExpired:
-                self.proc.kill()
-
-    def _read(self) -> None:
-        fd = self.proc.stdout.fileno()
-        while True:
-            try:
-                chunk = os.read(fd, 4096)
-            except OSError:
-                break
-            if not chunk:
-                break
-            for event in self.parser.feed(chunk.decode(errors="replace")):
-                GLib.idle_add(self._emit, event)
-        GLib.idle_add(self._emit, ("ended",))
-
-    def _emit(self, event) -> bool:
-        self.on_event(event)
-        return False
-
-    def _timeout(self) -> bool:
-        if not self.finished:
-            self.on_event(("failed", "timeout"))
-        return False
 
 
 class CodeDialog(Adw.AlertDialog):
@@ -122,7 +51,7 @@ class BluetoothGroup(Adw.PreferencesGroup):
         self.scanning = False
         self.nearby: list[bt.Device] | None = None  # None until a search ran
         self.expanded = {"paired": True, "nearby": True}
-        self.session: PairSession | None = None
+        self.session: bt.PairSession | None = None
         self.code_dialog: CodeDialog | None = None
         refresh_while_mapped(self, REFRESH_SECONDS, self._tick)
         self.refresh()
@@ -324,7 +253,7 @@ class BluetoothGroup(Adw.PreferencesGroup):
     def _pair(self, d: bt.Device) -> None:
         if self.session is not None:
             return
-        self.session = PairSession(d.mac, lambda event: self._on_pair_event(d, event))
+        self.session = bt.PairSession(d.mac, lambda event: self._on_pair_event(d, event), on_ui_thread)
         if not self.session.start():
             self.session = None
             self.win.toast(_("Could not start bluetoothctl"))

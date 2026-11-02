@@ -16,7 +16,12 @@ core.py        running commands (run/out/have/spawn) and the generated Hyprland 
 - **Topic modules have no GTK imports**, so they can be tested with a fake command runner. They return plain data
   (dataclasses, tuples, `(ok, message)`) instead of raising for expected failures.
 - **Every command goes through `core.run`/`core.out`/`core.spawn`**, never `subprocess` directly, except for
-  long-lived interactive processes (`bluetoothctl` pairing, `pactl subscribe`), which live in their topic module.
+  long-lived interactive processes (`bluetooth.PairSession`, `sound.Watcher`), which live in their topic module
+  and report from a reader thread through a `dispatch` callback; pages pass `ui.on_ui_thread`.
+- **Opening another app** (an editor, the browser, a terminal) is fine from a page, through `core.spawn`,
+  `core.open_in_editor` or `ui.launch_tui`; reading or changing system state is not.
+- `nm.py` saves Wi-Fi passwords through libnm. It needs PyGObject's NM bindings but no GTK, so it sits outside the
+  unit tests, which run without PyGObject.
 
 ## Changing the system: Omarchy first
 

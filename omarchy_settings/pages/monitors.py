@@ -11,7 +11,7 @@ gi.require_version("Adw", "1")
 gi.require_version("PangoCairo", "1.0")
 from gi.repository import Adw, GLib, Gtk, Pango, PangoCairo  # noqa: E402
 
-from .. import core, layout
+from .. import core, displays, layout
 from ..i18n import _, ngettext
 from ..ui import Debouncer, bg, button_row, combo_row, spin_row, switch_row, to_float
 
@@ -34,16 +34,6 @@ RISKY = ("mode", "scale", "transform", "disabled", "mirror", "bitdepth")
 
 def scale_label(value: float) -> str:
     return f"{value:g}×" if value == round(value, 2) else f"{value:.2f}×"
-
-
-def brightness(output: str) -> int | None:
-    m = re.fullmatch(r"\s*(\d+)\s*", core.out(["omarchy-brightness-display", "--monitor", output], timeout=8))
-    return int(m.group(1)) if m else None
-
-
-def text_size() -> int | None:
-    m = re.search(r"text size:\s*(\d+)", core.out(["omarchy-display-text-size"]))
-    return int(m.group(1)) if m else None
 
 
 class MonitorLayout(Gtk.DrawingArea):
@@ -204,16 +194,14 @@ class MonitorsPage(Adw.PreferencesPage):
         self.monitors: list[dict] = []
         self._dialog = None
         self._brightness: dict[str, Debouncer] = {}
-        self._text_size = Debouncer(
-            600, lambda size: bg(lambda: core.run(["omarchy-display-text-size", str(size)], timeout=30))
-        )
+        self._text_size = Debouncer(600, lambda size: bg(lambda: displays.set_text_size(size)))
         self.layout: MonitorLayout | None = None
         self.pos_rows: dict[str, tuple[Adw.SpinRow, Adw.SpinRow]] = {}
         self._syncing = False
 
         display = Adw.PreferencesGroup(title=_("Display"))
         if core.have("omarchy-display-text-size"):
-            bg(text_size, lambda size: self._add_text_size(display, size))
+            bg(displays.text_size, lambda size: self._add_text_size(display, size))
         display.add(button_row(_("Reload"), _("Reads the connected displays again"), _("Reload"), self.refresh))
         self.add(display)
 
@@ -427,7 +415,7 @@ class MonitorsPage(Adw.PreferencesPage):
 
         if core.have("omarchy-brightness-display"):
             # brightness arrives later (DDC is slow); 'Restore' stays the last row
-            bg(lambda: brightness(name), lambda value: self._add_brightness(group, name, value))
+            bg(lambda: displays.brightness(name), lambda value: self._add_brightness(group, name, value))
         else:
             group.add(self._restore_row(name))
         return group
@@ -567,11 +555,7 @@ class MonitorsPage(Adw.PreferencesPage):
         if name not in self._brightness:
             self._brightness[name] = Debouncer(
                 300,
-                lambda v: bg(
-                    lambda: core.run(
-                        ["omarchy-brightness-display", "--no-osd", "--monitor", name, f"{int(v)}%"], timeout=15
-                    )
-                ),
+                lambda v: bg(lambda: displays.set_brightness(name, int(v))),
             )
         self._brightness[name](value)
 

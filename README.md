@@ -129,7 +129,7 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `network.py`, `wifi.py`, `bluetooth.py`, `apps.py`, `webapps.py`, `autostart.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `shell.py`, `displays.py`, `network.py`, `wifi.py`, `bluetooth.py`, `apps.py`, `webapps.py`, `autostart.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -149,8 +149,11 @@ omarchy_settings/
   layout.py          display arrangement geometry: snapping and overlap (no GTK)
   network.py         wired connections through nmcli: state, profiles, validation, commands (no GTK)
   wifi.py            Wi-Fi through nmcli: radio, scan, saved networks, commands (no GTK)
+  nm.py              saving a Wi-Fi password through libnm, never on a command line
   bluetooth.py       Bluetooth through bluetoothctl: devices, scan, commands, pairing output parser (no GTK)
   sound.py           output/input devices and app streams through pactl (no GTK)
+  shell.py           Omarchy shell: bar, widgets, idle, font (no GTK)
+  displays.py        display brightness and text size (no GTK)
   power.py           power profile, night light and its schedule, power button (no GTK)
   apps.py            default apps: Omarchy's and by file type (no GTK)
   autostart.py       startup apps: XDG autostart entries and own commands (no GTK)

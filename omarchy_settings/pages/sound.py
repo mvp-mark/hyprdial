@@ -4,19 +4,17 @@ Updates live from `pactl subscribe` while the page is visible."""
 
 from __future__ import annotations
 
-import subprocess
-import threading
 import time
 
 import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, Gdk, GLib, Gtk  # noqa: E402
+from gi.repository import Adw, Gdk, Gtk  # noqa: E402
 
 from .. import core, sound
 from ..i18n import _
-from ..ui import Debouncer, bg, button_row, launch_tui, missing_row, switch_row
+from ..ui import Debouncer, bg, button_row, launch_tui, missing_row, on_ui_thread, switch_row
 
 REFRESH_DELAY = 300  # ms: pactl sends bursts of events; one read covers a whole burst
 USER_GRACE = 1.0  # s: a volume the user just moved isn't overwritten by the events it causes
@@ -93,36 +91,6 @@ class VolumeRow(Adw.ActionRow):
         self._touched = time.monotonic()
         kind, index, on = self.kind, self.index, button.get_active()
         bg(lambda: sound.set_mute(kind, index, on))
-
-
-class Watcher:
-    """Runs `pactl subscribe` and calls on_event (on the UI thread) for every event line."""
-
-    def __init__(self, on_event):
-        self.on_event = on_event
-        self.proc: subprocess.Popen | None = None
-
-    def start(self) -> None:
-        if self.proc is not None:
-            return
-        try:
-            self.proc = subprocess.Popen(
-                ["pactl", "subscribe"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True
-            )
-        except OSError:
-            return
-        threading.Thread(target=self._read, args=(self.proc,), daemon=True).start()
-
-    def _read(self, proc: subprocess.Popen) -> None:
-        for line in proc.stdout:
-            if "Event" in line and "client" not in line:
-                GLib.idle_add(lambda: self.on_event() or False)
-
-    def stop(self) -> None:
-        if self.proc is not None:
-            self.proc.kill()
-            self.proc.wait()
-            self.proc = None
 
 
 class DeviceGroup(Adw.PreferencesGroup):
@@ -254,7 +222,7 @@ class SoundPage(Adw.PreferencesPage):
         )
         self.add(advanced)
 
-        self.watcher = Watcher(self._schedule_refresh)
+        self.watcher = sound.Watcher(self._schedule_refresh, on_ui_thread)
         self.connect("map", lambda _w: (self.watcher.start(), self._refresh()))
         self.connect("unmap", lambda _w: self.watcher.stop())
         self._refresh()
