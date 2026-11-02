@@ -143,7 +143,7 @@ fits every machine). It installs system-wide, with the app in `/usr/share/omarch
 `/usr/bin/omarchy-settings` and the launcher entry:
 
 ```bash
-sudo pacman -U https://github.com/mvp-mark/omarchy-settings/releases/download/v0.5.0/omarchy-settings-0.5.0-1-any.pkg.tar.zst
+sudo pacman -U https://github.com/mvp-mark/omarchy-settings/releases/download/v0.5.1/omarchy-settings-0.5.1-1-any.pkg.tar.zst
 ```
 
 Or build it yourself from `packaging/arch/PKGBUILD`, which takes the release tag's source and compiles the
