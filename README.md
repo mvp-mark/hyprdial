@@ -42,9 +42,10 @@ matter, and choosing a result opens its page, expands what is around it and high
 
 | | |
 |---|---|
-| ![Hyprland page](docs/screenshots/hyprland.png) Hyprland | ![Displays page](docs/screenshots/monitors.png) Displays |
+| ![Appearance page](docs/screenshots/appearance.png) Appearance | ![Displays page](docs/screenshots/monitors.png) Displays |
 | ![Sound page](docs/screenshots/sound.png) Sound | ![Power page](docs/screenshots/power.png) Power |
-| ![System page](docs/screenshots/system.png) System | ![Search dialog](docs/screenshots/search.png) Search (Ctrl+F) |
+| ![Apps page](docs/screenshots/apps.png) Apps | ![System page](docs/screenshots/system.png) System |
+| ![Search dialog](docs/screenshots/search.png) Search (Ctrl+F) | |
 
 ## How settings are stored
 
