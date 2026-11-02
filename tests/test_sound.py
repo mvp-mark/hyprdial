@@ -33,26 +33,19 @@ SOURCE_OUTPUTS = [
 
 
 @pytest.fixture
-def fake(monkeypatch):
-    answers = {
+def commands(commands):
+    """The shared fake, answering pactl with the lists above."""
+    commands.answers.update({
         "pactl -f json list sinks": json.dumps(SINKS),
         "pactl -f json list sources": json.dumps(SOURCES),
         "pactl -f json list sink-inputs": json.dumps(SINK_INPUTS),
         "pactl -f json list source-outputs": json.dumps(SOURCE_OUTPUTS),
         "pactl get-default-sink": "usb.analog\n",
         "pactl get-default-source": "mic.analog\n",
-    }
-    calls: list[list[str]] = []
-    have: set[str] = set()
+    })
+    return commands
 
-    def fake_run(args, timeout=10):
-        calls.append(args)
-        return subprocess.CompletedProcess(args, 0, answers.get(" ".join(args), ""), "")
 
-    monkeypatch.setattr(core, "out", lambda args, timeout=10: answers.get(" ".join(args), "").strip())
-    monkeypatch.setattr(core, "run", fake_run)
-    monkeypatch.setattr(core, "have", lambda cmd: cmd in have)
-    return answers, calls, have
 
 
 def test_volume_is_the_channel_average():
@@ -61,7 +54,7 @@ def test_volume_is_the_channel_average():
     assert sound.volume_of({}) == 0.0
 
 
-def test_snapshot_hides_monitor_sources_and_meters(fake):
+def test_snapshot_hides_monitor_sources_and_meters(commands):
     snap = sound.snapshot()
     assert [d.name for d in snap.outputs] == ["usb.analog", "hdmi"]
     assert snap.outputs[1].muted and snap.outputs[0].volume == 0.64
@@ -70,25 +63,23 @@ def test_snapshot_hides_monitor_sources_and_meters(fake):
     assert [s.app for s in snap.recording] == ["Chromium input"]
 
 
-def test_streams_names_and_generic_media(fake):
+def test_streams_names_and_generic_media(commands):
     zen, mpv = sound.snapshot().playing
     assert (zen.app, zen.media, zen.icon, zen.volume) == ("Zen", "A video", "zen", 1.24)
     assert (mpv.app, mpv.media, mpv.muted) == ("mpv", "", True)  # binary as the name, "Playback" dropped
     assert mpv.icon == "audio-x-generic-symbolic"
 
 
-def test_bad_json_is_empty(fake):
-    answers, _calls, _have = fake
-    answers["pactl -f json list sinks"] = "not json"
+def test_bad_json_is_empty(commands):
+    commands.answers["pactl -f json list sinks"] = "not json"
     assert sound.snapshot().outputs == []
 
 
-def test_commands(fake):
-    _answers, calls, _have = fake
+def test_commands(commands):
     assert sound.set_default("sink", sound.Device(78, "hdmi", "HDMI", 1.0, False))
     assert sound.set_volume("sink-input", 227, 0.8)
     assert sound.set_mute("source", 63, True)
-    assert calls == [["pactl", "set-default-sink", "hdmi"], ["pactl", "set-sink-input-volume", "227", "80%"],
+    assert commands.calls == [["pactl", "set-default-sink", "hdmi"], ["pactl", "set-sink-input-volume", "227", "80%"],
                      ["pactl", "set-source-mute", "63", "1"]]
 
 
@@ -99,13 +90,12 @@ def test_find_test_sound(tmp_path):
     assert sound.find_test_sound(tmp_path) == tmp_path / "bell.oga"
 
 
-def test_set_default_through_omarchy_moves_the_apps(fake):
-    answers, calls, have = fake
-    have.add("omarchy-audio-output-set-default")
+def test_set_default_through_omarchy_moves_the_apps(commands):
+    commands.have.add("omarchy-audio-output-set-default")
     hdmi = sound.snapshot().outputs[1]
     assert hdmi.node_id == "44"
-    calls.clear()
+    commands.calls.clear()
     assert not sound.set_default("sink", hdmi)  # the command ran but the default is still usb.analog
-    answers["pactl get-default-sink"] = "hdmi"
+    commands.answers["pactl get-default-sink"] = "hdmi"
     assert sound.set_default("sink", hdmi)
-    assert calls[0] == ["omarchy-audio-output-set-default", "44", "hdmi"]
+    assert commands.calls[0] == ["omarchy-audio-output-set-default", "44", "hdmi"]

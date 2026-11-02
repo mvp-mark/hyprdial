@@ -117,6 +117,7 @@ xgettext --language=Python --keyword=_ --keyword=ngettext:1,2 --from-code=UTF-8 
 msgmerge -U po/pt_BR.po po/omarchy-settings.pot       # update an existing translation
 msginit -i po/omarchy-settings.pot -l de -o po/de.po  # or create a new one
 ./install.sh
+pyproject.toml       ruff and pytest settings
 ```
 
 Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
@@ -135,6 +136,8 @@ the translations: every marked string has a translation, no translation is left 
 Omarchy isn't installed) and fails if an update changes their format.
 
 ## Layout
+
+The layers and the rules new code follows are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ```
 omarchy_settings/

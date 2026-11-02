@@ -16,37 +16,27 @@ PROFILES_OUT = """* performance:
 """
 
 
+
+
 @pytest.fixture
-def fake(monkeypatch):
-    answers: dict[str, str] = {}
-    calls: list[list[str]] = []
-
-    def fake_run(args, timeout=10):
-        calls.append(args)
-        return subprocess.CompletedProcess(args, 0, answers.get(" ".join(args), ""), "")
-
-    monkeypatch.setattr(core, "out", lambda args, timeout=10: answers.get(" ".join(args), "").strip())
-    monkeypatch.setattr(core, "run", fake_run)
-    monkeypatch.setattr(core, "have", lambda cmd: True)
-    return answers, calls
+def commands(commands):
+    commands.have_all = True
+    return commands
 
 
-def test_profiles_in_fixed_order_with_active(fake):
-    answers, _calls = fake
-    answers["powerprofilesctl list"] = PROFILES_OUT
+def test_profiles_in_fixed_order_with_active(commands):
+    commands.answers["powerprofilesctl list"] = PROFILES_OUT
     assert power.profiles() == (["power-saver", "balanced", "performance"], "performance")
 
 
-def test_set_profile_goes_through_omarchy(fake):
-    _answers, calls = fake
+def test_set_profile_goes_through_omarchy(commands):
     assert power.set_profile("balanced")
-    assert calls == [["omarchy-powerprofiles-set", "autodetect", "balanced"]]
+    assert commands.calls == [["omarchy-powerprofiles-set", "autodetect", "balanced"]]
 
 
-def test_temperature_and_nightlight_state(fake):
-    answers, _calls = fake
+def test_temperature_and_nightlight_state(commands):
     assert power.temperature() is None  # hyprsunset not running
-    answers["hyprctl hyprsunset temperature"] = "4000"
+    commands.answers["hyprctl hyprsunset temperature"] = "4000"
     assert power.temperature() == 4000 and power.nightlight_on(4000)
     assert not power.nightlight_on(6500) and not power.nightlight_on(None)
 
