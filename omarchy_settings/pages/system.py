@@ -6,11 +6,11 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, Gtk  # noqa: E402
+from gi.repository import Adw, Gio, Gtk  # noqa: E402
 
 from .. import core, system
 from ..i18n import _
-from ..ui import bg, button_row, missing_row, switch_row
+from ..ui import Debouncer, bg, button_row, confirm, missing_row, switch_row
 
 LANGUAGES = {
     "en": _("English"),
@@ -39,8 +39,9 @@ ABOUT_TITLES = {
 }
 
 
-def locale_label(loc: str) -> str:
-    name = LANGUAGES.get(loc.split("_")[0].split(".")[0])
+def locale_label(loc: str, description: str = "") -> str:
+    """Translated language name for the common ones, else glibc's English description."""
+    name = LANGUAGES.get(loc.split("_")[0].split(".")[0]) or description
     return f"{name} — {loc}" if name else loc
 
 
@@ -68,8 +69,15 @@ class SystemPage(Adw.PreferencesPage):
             title=_("Language"), description=_("Used by apps, this one included, after you log out and back in.")
         )
         self.add(self.lang_group)
+        self.lang_rows: list[Gtk.Widget] = []
         if core.have("localectl"):
-            bg(system.locale_settings, self._populate_language)
+            self._load_language()
+            # locale-gen rewrites the archive when a language is installed (in the terminal opened below)
+            self.archive_monitor = Gio.File.new_for_path(str(system.LOCALE_ARCHIVE)).monitor_file(
+                Gio.FileMonitorFlags.NONE, None
+            )
+            self.reload_language = Debouncer(1000, self._load_language)
+            self.archive_monitor.connect("changed", lambda *_a: self.reload_language())
 
         self.notify_group = Adw.PreferencesGroup(title=_("Notifications"))
         self.add(self.notify_group)
@@ -157,22 +165,52 @@ class SystemPage(Adw.PreferencesPage):
         )
 
     # -- language
+    def _load_language(self) -> None:
+        def load():
+            current, available = system.locale_settings()
+            installable = system.installable_locales(available)
+            return current, available, [(loc, system.locale_description(loc)) for loc in installable]
+
+        bg(load, self._populate_language)
+
+    def _add_lang_row(self, row: Gtk.Widget) -> None:
+        self.lang_group.add(row)
+        self.lang_rows.append(row)
+
     def _populate_language(self, result) -> None:
         if isinstance(result, Exception):
             return
-        current, available = result
-        if not available:
-            self.lang_group.add(Adw.ActionRow(title=_("No languages listed")))
+        for row in self.lang_rows:
+            self.lang_group.remove(row)
+        self.lang_rows = []
+        current, available, installable = result
+        if available:
+            row = searchable_combo(_("System language"), available, [locale_label(loc) for loc in available], current)
+            self._apply_row(row, available, current, system.set_locale)
+            self._add_lang_row(row)
+        else:
+            self._add_lang_row(Adw.ActionRow(title=_("No languages listed")))
+        if not installable:
             return
-        row = searchable_combo(_("System language"), available, [locale_label(loc) for loc in available], current)
+        names = [loc for loc, _desc in installable]
+        combo = searchable_combo(_("Install a language"), names, [locale_label(*item) for item in installable], "")
+        combo.set_subtitle(_("Then choose it above"))
+        btn = Gtk.Button(label=_("Install"), valign=Gtk.Align.CENTER)
+        btn.connect("clicked", lambda _b: self._confirm_install(names[combo.get_selected()]))
+        combo.add_suffix(btn)
+        self._add_lang_row(combo)
 
-        self._apply_row(row, available, current, system.set_locale)
-        self.lang_group.add(row)
-        self.lang_group.add(
-            Adw.ActionRow(
-                title=_("Only languages generated on this system are listed"),
-                subtitle=_("Others need to be enabled in /etc/locale.gen first"),
-            )
+    def _confirm_install(self, name: str) -> None:
+        confirm(
+            self.win,
+            heading=_("Install {language}?").format(language=name),
+            body=_(
+                "Opens a terminal that asks for your password, enables the language in /etc/locale.gen "
+                "and runs locale-gen. It appears in the list above when it finishes."
+            ),
+            action=_("Install"),
+            on_confirm=lambda: core.spawn(system.install_locale_command(name)),
+            destructive=False,
         )
 
     # -- notifications

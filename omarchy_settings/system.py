@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import os
 import platform
+import re
 from pathlib import Path
 
 from . import core
@@ -55,6 +56,52 @@ def locale_settings() -> tuple[str, list[str]]:
 
 def set_locale(lang: str) -> tuple[bool, str]:
     return result(core.run(["localectl", "set-locale", f"LANG={lang}"], timeout=120))
+
+
+LOCALE_GEN = Path("/etc/locale.gen")
+LOCALE_ARCHIVE = Path("/usr/lib/locale/locale-archive")  # rewritten by locale-gen
+TERMINAL = "omarchy-launch-floating-terminal-with-presentation"
+LOCALE_NAME = re.compile(r"[A-Za-z0-9_.@-]+")
+
+
+def _locale_key(name: str) -> str:
+    """pt_BR.UTF-8 and pt_BR.utf8 are the same locale."""
+    return name.lower().replace(".utf-8", "").replace(".utf8", "")
+
+
+def installable_locales(generated: list[str], locale_gen: Path = LOCALE_GEN) -> list[str]:
+    """UTF-8 locales listed (commented out) in /etc/locale.gen that aren't generated yet."""
+    try:
+        text = locale_gen.read_text(errors="replace")
+    except OSError:
+        return []
+    have = {_locale_key(g) for g in generated}
+    found = []
+    for line in text.splitlines():
+        m = re.fullmatch(r"#\s?(\S+)\s+UTF-8\s*", line)
+        if m and LOCALE_NAME.fullmatch(m.group(1)) and _locale_key(m.group(1)) not in have:
+            found.append(m.group(1))
+    return sorted(set(found))
+
+
+def locale_description(name: str, locales_dir: Path = Path("/usr/share/i18n/locales")) -> str:
+    """'Brazilian Portuguese (Brazil)' from glibc's locale sources; '' when there's none."""
+    base = re.sub(r"\.utf-?8", "", name, flags=re.IGNORECASE)
+    try:
+        text = (locales_dir / base).read_text(errors="replace")
+    except (OSError, ValueError):
+        return ""
+    fields = dict(re.findall(r'^(language|territory)\s+"([^"]*)"', text, re.MULTILINE))
+    language, territory = fields.get("language", ""), fields.get("territory", "")
+    return f"{language} ({territory})" if language and territory else language
+
+
+def install_locale_command(name: str) -> list[str]:
+    """Uncomments the locale in /etc/locale.gen and runs locale-gen, with sudo in a visible terminal."""
+    if not LOCALE_NAME.fullmatch(name):
+        raise ValueError(name)
+    pattern = name.replace(".", "\\.")  # the only character in LOCALE_NAME that sed treats specially
+    return [TERMINAL, f"sudo sed -i 's/^#\\s\\?\\({pattern} UTF-8\\)/\\1/' {LOCALE_GEN} && sudo locale-gen"]
 
 
 def result(r) -> tuple[bool, str]:

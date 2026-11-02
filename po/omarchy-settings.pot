@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 11:42-0400\n"
+"POT-Creation-Date: 2026-11-02 11:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -450,7 +450,7 @@ msgstr ""
 
 #: omarchy_settings/pages/autostart.py:47 omarchy_settings/pages/bar.py:412
 #: omarchy_settings/pages/bar.py:419 omarchy_settings/pages/bluetooth.py:178
-#: omarchy_settings/pages/sound.py:220 omarchy_settings/pages/system.py:85
+#: omarchy_settings/pages/sound.py:220 omarchy_settings/pages/system.py:93
 #: omarchy_settings/pages/wifi.py:22 omarchy_settings/pages/wifi.py:212
 msgid "Open"
 msgstr ""
@@ -798,7 +798,7 @@ msgstr ""
 #: omarchy_settings/pages/bar.py:174 omarchy_settings/pages/bar.py:211
 #: omarchy_settings/pages/bar.py:322 omarchy_settings/pages/bar.py:358
 #: omarchy_settings/pages/bar.py:445 omarchy_settings/pages/bluetooth.py:213
-#: omarchy_settings/pages/ethernet.py:223 omarchy_settings/pages/system.py:117
+#: omarchy_settings/pages/ethernet.py:223 omarchy_settings/pages/system.py:125
 #: omarchy_settings/pages/wifi.py:269 omarchy_settings/pages/wifi.py:307
 #: omarchy_settings/pages/wifi.py:322
 #, python-brace-format
@@ -814,7 +814,7 @@ msgstr ""
 msgid "Custom — {format}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:198 omarchy_settings/pages/system.py:156
+#: omarchy_settings/pages/bar.py:198 omarchy_settings/pages/system.py:164
 msgid "Clock format"
 msgstr ""
 
@@ -940,7 +940,8 @@ msgstr ""
 msgid "Install it to use it instead of the Omarchy bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:383
+#: omarchy_settings/pages/bar.py:383 omarchy_settings/pages/system.py:198
+#: omarchy_settings/pages/system.py:211
 msgid "Install"
 msgstr ""
 
@@ -1445,7 +1446,7 @@ msgid "Save and reconnect"
 msgstr ""
 
 #: omarchy_settings/pages/ethernet.py:117
-#: omarchy_settings/pages/hyprland.py:137 omarchy_settings/pages/system.py:100
+#: omarchy_settings/pages/hyprland.py:137 omarchy_settings/pages/system.py:108
 msgid "Apply"
 msgstr ""
 
@@ -2817,165 +2818,177 @@ msgstr ""
 msgid "Memory"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:62
+#: omarchy_settings/pages/system.py:63
 msgid "Date and time"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:68
+#: omarchy_settings/pages/system.py:69
 msgid "Language"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:68
+#: omarchy_settings/pages/system.py:69
 msgid "Used by apps, this one included, after you log out and back in."
 msgstr ""
 
-#: omarchy_settings/pages/system.py:74
+#: omarchy_settings/pages/system.py:82
 msgid "Notifications"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:79
+#: omarchy_settings/pages/system.py:87
 msgid "Printers"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:83
+#: omarchy_settings/pages/system.py:91
 msgid "Manage printers"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:84
+#: omarchy_settings/pages/system.py:92
 msgid "Add printers and see the print queue in the browser (CUPS)"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:90
+#: omarchy_settings/pages/system.py:98
 msgid "Install the cups package to use printers"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:93
+#: omarchy_settings/pages/system.py:101
 msgid "About this computer"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:114
+#: omarchy_settings/pages/system.py:122
 #, python-brace-format
 msgid "Changed to {value}"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:117
+#: omarchy_settings/pages/system.py:125
 msgid "Not changed"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:130
+#: omarchy_settings/pages/system.py:138
 msgid "Time zone"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:131
+#: omarchy_settings/pages/system.py:139
 msgid "Type to search"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:142
+#: omarchy_settings/pages/system.py:150
 msgid "Synchronized"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:142
+#: omarchy_settings/pages/system.py:150
 msgid "Keeps the clock right through the internet"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:150
+#: omarchy_settings/pages/system.py:158
 msgid "Could not change automatic time"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:154
+#: omarchy_settings/pages/system.py:162
 msgid "Set the time automatically"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:156
+#: omarchy_settings/pages/system.py:164
 msgid "12 or 24 hours: Bar and fonts → Clock format"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:165
-msgid "No languages listed"
-msgstr ""
-
-#: omarchy_settings/pages/system.py:167
+#: omarchy_settings/pages/system.py:188
 msgid "System language"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:173
-msgid "Only languages generated on this system are listed"
+#: omarchy_settings/pages/system.py:192
+msgid "No languages listed"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:174
-msgid "Others need to be enabled in /etc/locale.gen first"
+#: omarchy_settings/pages/system.py:196
+msgid "Install a language"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:181
-msgid "The Omarchy shell isn't answering"
+#: omarchy_settings/pages/system.py:197
+msgid "Then choose it above"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:187
-msgid "Could not change Do not disturb"
+#: omarchy_settings/pages/system.py:206
+#, python-brace-format
+msgid "Install {language}?"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:191
-msgid "Do not disturb"
-msgstr ""
-
-#: omarchy_settings/pages/system.py:191
-msgid "Hides notifications; critical ones still show"
-msgstr ""
-
-#: omarchy_settings/pages/system.py:195
-msgid "Recent notifications"
-msgstr ""
-
-#: omarchy_settings/pages/system.py:195
-msgid "Shows them again on screen"
-msgstr ""
-
-#: omarchy_settings/pages/system.py:195
-msgid "Show"
-msgstr ""
-
-#: omarchy_settings/pages/system.py:209
-msgid "Update Omarchy"
-msgstr ""
-
-#: omarchy_settings/pages/system.py:209
-msgid "Checking for updates…"
-msgstr ""
-
-#: omarchy_settings/pages/system.py:209
-msgid "Update"
-msgstr ""
-
-#: omarchy_settings/pages/system.py:215 omarchy_settings/pages/system.py:240
-msgid "Opens a terminal with the update"
+#: omarchy_settings/pages/system.py:208
+msgid ""
+"Opens a terminal that asks for your password, enables the language in /etc/"
+"locale.gen and runs locale-gen. It appears in the list above when it "
+"finishes."
 msgstr ""
 
 #: omarchy_settings/pages/system.py:219
+msgid "The Omarchy shell isn't answering"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:225
+msgid "Could not change Do not disturb"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:229
+msgid "Do not disturb"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:229
+msgid "Hides notifications; critical ones still show"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:233
+msgid "Recent notifications"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:233
+msgid "Shows them again on screen"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:233
+msgid "Show"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:247
+msgid "Update Omarchy"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:247
+msgid "Checking for updates…"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:247
+msgid "Update"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:253 omarchy_settings/pages/system.py:278
+msgid "Opens a terminal with the update"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:257
 msgid "Create a snapshot now"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:220
+#: omarchy_settings/pages/system.py:258
 msgid "A restore point of the system; asks for your password in a terminal"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:221
+#: omarchy_settings/pages/system.py:259
 msgid "Create"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:227
+#: omarchy_settings/pages/system.py:265
 msgid "Going back to a snapshot"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:228
+#: omarchy_settings/pages/system.py:266
 msgid "Choose it in the boot menu when the computer starts"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:235
+#: omarchy_settings/pages/system.py:273
 #, python-brace-format
 msgid "Update available: {version}"
 msgstr ""
 
-#: omarchy_settings/pages/system.py:238
+#: omarchy_settings/pages/system.py:276
 msgid "Omarchy is up to date"
 msgstr ""
 

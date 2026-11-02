@@ -72,3 +72,26 @@ def test_snapshot_needs_snapper(commands):
     commands.have.add("snapper")
     assert system.can_snapshot()
     assert system.SNAPSHOT_COMMAND[-2:] == ["omarchy-snapshot", "create"]
+
+
+def test_installable_locales(tmp_path):
+    gen = tmp_path / "locale.gen"
+    gen.write_text(
+        "en_US.UTF-8 UTF-8  \n#en_US ISO-8859-1  \n#pt_BR.UTF-8 UTF-8  \n#be_BY@latin UTF-8\n#ja_JP.UTF-8 UTF-8\n"
+    )
+    assert system.installable_locales(["en_US.utf8", "ja_JP.UTF-8"], gen) == ["be_BY@latin", "pt_BR.UTF-8"]
+    assert system.installable_locales([], tmp_path / "missing") == []
+
+
+def test_install_locale_command():
+    cmd = system.install_locale_command("pt_BR.UTF-8")
+    assert cmd[0] == system.TERMINAL
+    assert cmd[1] == r"sudo sed -i 's/^#\s\?\(pt_BR\.UTF-8 UTF-8\)/\1/' /etc/locale.gen && sudo locale-gen"
+    with pytest.raises(ValueError):
+        system.install_locale_command("pt_BR'; rm -rf ~")
+
+
+def test_locale_description(tmp_path):
+    (tmp_path / "pt_BR").write_text('LC_IDENTIFICATION\nlanguage   "Brazilian Portuguese"\nterritory  "Brazil"\n')
+    assert system.locale_description("pt_BR.UTF-8", tmp_path) == "Brazilian Portuguese (Brazil)"
+    assert system.locale_description("xx_YY.UTF-8", tmp_path) == ""
