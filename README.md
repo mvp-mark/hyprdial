@@ -138,11 +138,20 @@ To try it without installing: `python3 -m omarchy_settings` from the project fol
 
 ### As a pacman package
 
-`packaging/arch/PKGBUILD` builds a system-wide package from a release tag (the app in
-`/usr/share/omarchy-settings`, `/usr/bin/omarchy-settings`, the launcher entry; translations compiled at build time):
+Each [release](https://github.com/mvp-mark/omarchy-settings/releases) carries a ready package (`arch=any`, so it
+fits every machine). It installs system-wide, with the app in `/usr/share/omarchy-settings`,
+`/usr/bin/omarchy-settings` and the launcher entry:
 
 ```bash
-cd packaging/arch && makepkg -si
+sudo pacman -U https://github.com/mvp-mark/omarchy-settings/releases/download/v0.5.0/omarchy-settings-0.5.0-1-any.pkg.tar.zst
+```
+
+Or build it yourself from `packaging/arch/PKGBUILD`, which takes the release tag's source and compiles the
+translations:
+
+```bash
+git clone https://github.com/mvp-mark/omarchy-settings
+cd omarchy-settings/packaging/arch && makepkg -si
 ```
 
 Publishing it on the AUR is described in [packaging/arch/README.md](packaging/arch/README.md).

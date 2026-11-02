@@ -33,4 +33,6 @@ repository (empty the first time, which creates the `omarchy-settings` package) 
 3. Pin the checksum of GitHub's tarball:
    `curl -sL https://github.com/mvp-mark/omarchy-settings/archive/refs/tags/vX.Y.Z.tar.gz | sha256sum`,
    put it in `sha256sums`, run `makepkg --printsrcinfo > .SRCINFO`, commit and push.
-4. `packaging/arch/publish-aur.sh`.
+4. Build the package (`makepkg -f` here) and attach the `.pkg.tar.zst` to the GitHub release, with the PKGBUILD;
+   the main README's `pacman -U` line points at it, so update the version there too.
+5. `packaging/arch/publish-aur.sh`.
