@@ -145,6 +145,8 @@ To try it without installing: `python3 -m omarchy_settings` from the project fol
 cd packaging/arch && makepkg -si
 ```
 
+Publishing it on the AUR is described in [packaging/arch/README.md](packaging/arch/README.md).
+
 It can live next to an `./install.sh` copy: the one in `~/.local/bin` comes first in `PATH`, so remove it
 (`rm ~/.local/bin/omarchy-settings`) to use the package.
 
@@ -216,7 +218,7 @@ omarchy_settings/
   pages/             one module per page (hyprland.py holds Appearance and Input), plus the groups they share
                      (ethernet, wifi, bluetooth, webapps, autostart), the search dialog and dependencies
 data/                .desktop
-packaging/arch/      PKGBUILD
+packaging/arch/      PKGBUILD, .SRCINFO and the AUR publishing script
 docs/screenshots/    images used by this README
 po/                  template (.pot) and translations (.po)
 tests/               pytest + fixtures
@@ -226,7 +228,9 @@ pyproject.toml       ruff and pytest settings
 
 ## Next steps
 
-- Publishing the package on the AUR, and more languages.
+- The package on the AUR: everything is ready in `packaging/arch/` (see its README); it needs the maintainer's
+  AUR account.
+- Native speakers' review of the Spanish, French and German translations, and more languages.
 
 ## License
 

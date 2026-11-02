@@ -24,3 +24,16 @@ def test_dependencies_follow_deps_py():
 
 def test_version_matches_the_app():
     assert re.search(r"^pkgver=(\S+)", PKGBUILD, re.M).group(1) == __version__
+
+
+def test_srcinfo_matches_the_pkgbuild():
+    srcinfo = (Path(__file__).parent.parent / "packaging" / "arch" / ".SRCINFO").read_text()
+    fields = {}
+    for line in srcinfo.splitlines():
+        key, sep, value = line.strip().partition(" = ")
+        if sep:
+            fields.setdefault(key, []).append(value)
+    for name in ("pkgver", "pkgrel"):
+        assert fields[name] == [re.search(rf"^{name}=(\S+)", PKGBUILD, re.M).group(1)]
+    assert fields["sha256sums"] == array("sha256sums")
+    assert sorted(fields["depends"]) == sorted(array("depends"))
