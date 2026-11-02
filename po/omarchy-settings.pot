@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:29-0400\n"
+"POT-Creation-Date: 2026-11-02 03:31-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,87 +18,91 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: omarchy_settings/app.py:35
+#: omarchy_settings/app.py:36
 msgid "Style"
 msgstr ""
 
-#: omarchy_settings/app.py:35
+#: omarchy_settings/app.py:36
 msgid "Hardware"
 msgstr ""
 
-#: omarchy_settings/app.py:35 omarchy_settings/app.py:54
+#: omarchy_settings/app.py:36 omarchy_settings/app.py:56
 msgid "System"
 msgstr ""
 
-#: omarchy_settings/app.py:37
+#: omarchy_settings/app.py:38
 msgid "Themes"
 msgstr ""
 
-#: omarchy_settings/app.py:38
+#: omarchy_settings/app.py:39
 msgid "Appearance"
 msgstr ""
 
-#: omarchy_settings/app.py:39
+#: omarchy_settings/app.py:40
 msgid "Bar and fonts"
 msgstr ""
 
-#: omarchy_settings/app.py:40 omarchy_settings/pages/monitors.py:234
+#: omarchy_settings/app.py:41 omarchy_settings/pages/monitors.py:234
 msgid "Displays"
 msgstr ""
 
-#: omarchy_settings/app.py:41 omarchy_settings/pages/sound.py:179
+#: omarchy_settings/app.py:42 omarchy_settings/pages/sound.py:179
 msgid "Sound"
 msgstr ""
 
-#: omarchy_settings/app.py:42 omarchy_settings/pages/bar.py:48
+#: omarchy_settings/app.py:43 omarchy_settings/pages/bar.py:48
 msgid "Power"
 msgstr ""
 
-#: omarchy_settings/app.py:43 omarchy_settings/pages/sound.py:202
+#: omarchy_settings/app.py:44 omarchy_settings/pages/sound.py:202
 msgid "Input"
 msgstr ""
 
-#: omarchy_settings/app.py:44
+#: omarchy_settings/app.py:45
 msgid "Connectivity"
 msgstr ""
 
-#: omarchy_settings/app.py:45
+#: omarchy_settings/app.py:46
 msgid "Apps"
 msgstr ""
 
-#: omarchy_settings/app.py:46
+#: omarchy_settings/app.py:47
 msgid "Shortcuts"
 msgstr ""
 
-#: omarchy_settings/app.py:50
+#: omarchy_settings/app.py:51
 msgid "Accessibility"
 msgstr ""
 
-#: omarchy_settings/app.py:60 omarchy_settings/app.py:95
+#: omarchy_settings/app.py:55 omarchy_settings/pages/wifi.py:38
+msgid "Security"
+msgstr ""
+
+#: omarchy_settings/app.py:62 omarchy_settings/app.py:97
 msgid "Omarchy Settings"
 msgstr ""
 
-#: omarchy_settings/app.py:68
+#: omarchy_settings/app.py:70
 msgid "Dependencies…"
 msgstr ""
 
-#: omarchy_settings/app.py:69
+#: omarchy_settings/app.py:71
 msgid "Restore app defaults…"
 msgstr ""
 
-#: omarchy_settings/app.py:76
+#: omarchy_settings/app.py:78
 msgid "Search settings (Ctrl+F)"
 msgstr ""
 
-#: omarchy_settings/app.py:80
+#: omarchy_settings/app.py:82
 msgid "Main menu"
 msgstr ""
 
-#: omarchy_settings/app.py:185
+#: omarchy_settings/app.py:187
 msgid "Restore app defaults?"
 msgstr ""
 
-#: omarchy_settings/app.py:187
+#: omarchy_settings/app.py:189
 msgid ""
 "Removes every Hyprland, display, shortcut, power button and startup command "
 "setting made in this app, returning to Omarchy's own. The bar, theme, "
@@ -106,7 +110,7 @@ msgid ""
 "is kept, and you can undo right after."
 msgstr ""
 
-#: omarchy_settings/app.py:191 omarchy_settings/pages/bar.py:157
+#: omarchy_settings/app.py:193 omarchy_settings/pages/bar.py:157
 #: omarchy_settings/pages/bar.py:219 omarchy_settings/pages/bar.py:407
 #: omarchy_settings/pages/hyprland.py:126
 #: omarchy_settings/pages/monitors.py:424
@@ -115,20 +119,20 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: omarchy_settings/app.py:198
+#: omarchy_settings/app.py:200
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr ""
 
-#: omarchy_settings/app.py:202
+#: omarchy_settings/app.py:204
 msgid "App defaults restored"
 msgstr ""
 
-#: omarchy_settings/app.py:202 omarchy_settings/pages/themes.py:257
+#: omarchy_settings/app.py:204 omarchy_settings/pages/themes.py:257
 msgid "Undo"
 msgstr ""
 
-#: omarchy_settings/app.py:207
+#: omarchy_settings/app.py:209
 msgid "Settings brought back"
 msgstr ""
 
@@ -419,7 +423,8 @@ msgid "Could not change {name}"
 msgstr ""
 
 #: omarchy_settings/pages/autostart.py:110 omarchy_settings/pages/power.py:310
-#: omarchy_settings/pages/power.py:321 omarchy_settings/pages/webapps.py:127
+#: omarchy_settings/pages/power.py:321 omarchy_settings/pages/security.py:53
+#: omarchy_settings/pages/security.py:71 omarchy_settings/pages/webapps.py:127
 #: omarchy_settings/pages/webapps.py:147
 msgid "Remove"
 msgstr ""
@@ -2174,7 +2179,7 @@ msgid "Hibernation"
 msgstr ""
 
 #: omarchy_settings/pages/power.py:76 omarchy_settings/pages/power.py:310
-#: omarchy_settings/pages/power.py:321
+#: omarchy_settings/pages/power.py:321 omarchy_settings/pages/security.py:57
 msgid "Set up"
 msgstr ""
 
@@ -2323,6 +2328,65 @@ msgstr ""
 
 #: omarchy_settings/pages/search.py:137
 msgid "Nothing found"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:16
+msgid "Fingerprint"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:16
+msgid "Unlock sudo and password prompts with your finger"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:17
+msgid "Security key (FIDO2)"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:17
+msgid "Unlock sudo and password prompts with a hardware key"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:18
+msgid "SSH server"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:18
+msgid "Lets you sign in to this computer from another one"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:27
+msgid "Sign-in and access"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:28
+msgid ""
+"Each one opens a terminal, which asks for your password and shows what it "
+"does."
+msgstr ""
+
+#: omarchy_settings/pages/security.py:48
+msgid "Running"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:48
+msgid "Set up, but not running"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:50
+msgid "Ready to use"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:57
+msgid "Set up again"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:69 omarchy_settings/pages/webapps.py:145
+#, python-brace-format
+msgid "Remove {name}?"
+msgstr ""
+
+#: omarchy_settings/pages/security.py:70
+msgid "Opens a terminal that undoes the setup; it asks for your password."
 msgstr ""
 
 #: omarchy_settings/pages/shortcuts.py:101
@@ -2988,11 +3052,6 @@ msgstr ""
 msgid "{name} added to the app launcher"
 msgstr ""
 
-#: omarchy_settings/pages/webapps.py:145
-#, python-brace-format
-msgid "Remove {name}?"
-msgstr ""
-
 #: omarchy_settings/pages/webapps.py:146
 msgid ""
 "Removes it from the app launcher. The site itself and its data in the "
@@ -3032,10 +3091,6 @@ msgstr ""
 
 #: omarchy_settings/pages/wifi.py:37
 msgid "Network name (SSID)"
-msgstr ""
-
-#: omarchy_settings/pages/wifi.py:38
-msgid "Security"
 msgstr ""
 
 #: omarchy_settings/pages/wifi.py:39

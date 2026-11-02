@@ -22,6 +22,7 @@ from .pages.hyprland import AppearancePage, InputPage
 from .pages.monitors import MonitorsPage
 from .pages.power import PowerPage
 from .pages.search import SearchDialog
+from .pages.security import SecurityPage
 from .pages.shortcuts import ShortcutsPage
 from .pages.sound import SoundPage
 from .pages.system import SystemPage
@@ -51,6 +52,7 @@ PAGES = [
         "preferences-desktop-accessibility-symbolic",
         AccessibilityPage,
     ),
+    ("system", "security", lambda: _("Security"), "security-high-symbolic", SecurityPage),
     ("system", "system", lambda: _("System"), "computer-symbolic", SystemPage),
 ]
 

@@ -12,7 +12,7 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
 ## Pages
 
 The pages sit in a sidebar grouped like Omarchy's menu: **Style** (themes, appearance, bar and fonts), **Hardware**
-(displays, sound, power, input, connectivity) and **System** (apps, shortcuts, accessibility, system). On a narrow window the sidebar
+(displays, sound, power, input, connectivity) and **System** (apps, shortcuts, accessibility, security, system). On a narrow window the sidebar
 and the page take turns, with a back button. Buttons, switches and selections use the current Omarchy theme's
 accent color and follow it when the theme changes.
 
@@ -29,6 +29,7 @@ accent color and follow it when the theme changes.
 | Bar and fonts | Omarchy shell bar: show/hide, position, transparency, clock format; widgets per section (reorder, move between sections, remove, add); optional Waybar (see below); system font | `omarchy-bar`, `omarchy-plugin-enable/disable`, `omarchy-toggle-bar`, `omarchy-font-set` |
 | Connectivity | Wired (Ethernet): status, link speed, address, gateway and DNS, plain-language diagnosis (no cable, 10 Mb/s link, no DHCP address), connect/disconnect, IPv4 automatic (DHCP) or manual, custom DNS, auto-connect; Wi-Fi: radio on/off, available networks with signal and security, connect (password asked in a dialog, hidden networks too), saved networks with IPv4/DNS settings and forget, impala for advanced cases; Bluetooth: on/off, paired devices with battery level, connect/disconnect, forget, search and pair (pairing codes shown or confirmed in a dialog), bluetui for advanced cases | `nmcli` (NetworkManager), libnm for saving Wi-Fi passwords (never on a command line), `/sys/class/net`, `omarchy-bluetooth-power` and `omarchy-bluetooth-device` (results read back with `bluetoothctl`), `bluetoothctl` for pairing through an interactive session with a KeyboardDisplay agent |
 | Accessibility | Text size; pointer size (GTK apps, Hyprland and apps started later); animations on/off | `omarchy-display-text-size`, `gsettings` and `hyprctl setcursor` live + `XCURSOR_SIZE`/`HYPRCURSOR_SIZE` in the generated file, `hyprctl eval` |
+| Security | Fingerprint (with a reader), security key (FIDO2) and SSH server: set up, set up again or remove, with the same conditions as Omarchy's Setup and Remove menus; whether the SSH server is running | `omarchy-setup-security-*` and `omarchy-remove-security-*` in a floating terminal |
 | System | Time zone (searchable) and automatic time (NTP); system language (among those generated); notifications: do not disturb and recent notifications; printers (opens the CUPS web interface); about this computer (Omarchy version, kernel, processor, memory), whether an Omarchy update is available, "Update Omarchy", "Create a snapshot now" (restored from the boot menu) | `timedatectl`, `localectl` (both ask for the password through polkit), `omarchy-shell notifications`, CUPS at `localhost:631`, `omarchy-update-available`, `omarchy-update` and `omarchy-snapshot create` in a floating terminal |
 
 Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
@@ -136,7 +137,7 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `shell.py`, `displays.py`, `accessibility.py`, `input.py`, `network.py`, `wifi.py`, `bluetooth.py`, `apps.py`, `webapps.py`, `autostart.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `shell.py`, `displays.py`, `accessibility.py`, `input.py`, `security.py`, `network.py`, `wifi.py`, `bluetooth.py`, `apps.py`, `webapps.py`, `autostart.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -160,6 +161,7 @@ omarchy_settings/
   nm.py              saving a Wi-Fi password through libnm, never on a command line
   bluetooth.py       Bluetooth through bluetoothctl: devices, scan, commands, pairing output parser (no GTK)
   sound.py           output/input devices and app streams through pactl (no GTK)
+  security.py        fingerprint, FIDO2 and SSH server setups, as Omarchy's menu offers them (no GTK)
   shell.py           Omarchy shell: bar, widgets, idle, font (no GTK)
   accessibility.py   pointer size (no GTK)
   displays.py        display brightness and text size (no GTK)
