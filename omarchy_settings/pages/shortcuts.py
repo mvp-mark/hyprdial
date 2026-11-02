@@ -1,4 +1,5 @@
 """Shortcuts page: Omarchy's (change key, disable, restore) and the user's own shortcuts."""
+
 from __future__ import annotations
 
 import copy
@@ -25,10 +26,29 @@ CSS = b"""
 }
 .oms-keycaps.dim { opacity: 0.45; }
 """
-MODIFIER_KEYS = {"Shift_L", "Shift_R", "Control_L", "Control_R", "Alt_L", "Alt_R", "Super_L", "Super_R",
-                 "Meta_L", "Meta_R", "Hyper_L", "Hyper_R", "ISO_Level3_Shift", "Caps_Lock", "Num_Lock"}
-GDK_MODS = [(Gdk.ModifierType.SUPER_MASK, "SUPER"), (Gdk.ModifierType.SHIFT_MASK, "SHIFT"),
-            (Gdk.ModifierType.CONTROL_MASK, "CTRL"), (Gdk.ModifierType.ALT_MASK, "ALT")]
+MODIFIER_KEYS = {
+    "Shift_L",
+    "Shift_R",
+    "Control_L",
+    "Control_R",
+    "Alt_L",
+    "Alt_R",
+    "Super_L",
+    "Super_R",
+    "Meta_L",
+    "Meta_R",
+    "Hyper_L",
+    "Hyper_R",
+    "ISO_Level3_Shift",
+    "Caps_Lock",
+    "Num_Lock",
+}
+GDK_MODS = [
+    (Gdk.ModifierType.SUPER_MASK, "SUPER"),
+    (Gdk.ModifierType.SHIFT_MASK, "SHIFT"),
+    (Gdk.ModifierType.CONTROL_MASK, "CTRL"),
+    (Gdk.ModifierType.ALT_MASK, "ALT"),
+]
 
 _css_installed = False
 
@@ -39,8 +59,9 @@ def install_css() -> None:
         return
     provider = Gtk.CssProvider()
     provider.load_from_data(CSS)
-    Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), provider,
-                                              Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+    Gtk.StyleContext.add_provider_for_display(
+        Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    )
     _css_installed = True
 
 
@@ -124,8 +145,11 @@ class KeyDialog(Adw.AlertDialog):
         return kb.join_keys([m for m, b in self.mod_buttons.items() if b.get_active()], self.key)
 
     def custom(self) -> dict:
-        return {"desc": self.desc_row.get_text().strip(), "kind": kb.KINDS[self.kind_row.get_selected()][0],
-                "command": self.cmd_row.get_text().strip()}
+        return {
+            "desc": self.desc_row.get_text().strip(),
+            "kind": kb.KINDS[self.kind_row.get_selected()][0],
+            "command": self.cmd_row.get_text().strip(),
+        }
 
     def _set_recording(self, on: bool) -> None:
         self.recording = on
@@ -159,8 +183,10 @@ class KeyDialog(Adw.AlertDialog):
         self.preview.append(keycaps_box(keys))
         msg, blocked = ("", False)
         if self.recording:
-            msg = _("Press the combination. If the system already uses it, it may not reach this window: "
-                    "select the modifiers above and record just the key.")
+            msg = _(
+                "Press the combination. If the system already uses it, it may not reach this window: "
+                "select the modifiers above and record just the key."
+            )
         elif keys:
             msg, blocked = self.conflicts(keys)
             if not msg and not any(b.get_active() for b in self.mod_buttons.values()) and len(self.key) == 1:
@@ -187,8 +213,12 @@ class ShortcutsPage(Adw.PreferencesPage):
         self.expanders: dict[str, Adw.ExpanderRow] = {}
         self._busy = False
 
-        top = Adw.PreferencesGroup(description=_("The default shortcuts come from Omarchy. Changes made here are stored "
-                                                 "in ~/.config/hypr/omarchy-settings.lua and can be undone with ↶."))
+        top = Adw.PreferencesGroup(
+            description=_(
+                "The default shortcuts come from Omarchy. Changes made here are stored "
+                "in ~/.config/hypr/omarchy-settings.lua and can be undone with ↶."
+            )
+        )
         header = Gtk.Box(spacing=8)
         self.search = Gtk.SearchEntry(hexpand=True, placeholder_text=_("Search by name or key (e.g. browser, super+b)"))
         self.search.connect("search-changed", lambda _e: self._filter())
@@ -200,8 +230,15 @@ class ShortcutsPage(Adw.PreferencesPage):
         self.add(top)
 
         self.footer = Adw.PreferencesGroup()
-        self.footer.add(button_row(_("Restore all shortcuts"), _("Undoes every change and deletes your own shortcuts"),
-                                   _("Restore"), self._confirm_reset, "destructive-action"))
+        self.footer.add(
+            button_row(
+                _("Restore all shortcuts"),
+                _("Undoes every change and deletes your own shortcuts"),
+                _("Restore"),
+                self._confirm_reset,
+                "destructive-action",
+            )
+        )
         self.add(self.footer)
         self.reload()
 
@@ -224,8 +261,12 @@ class ShortcutsPage(Adw.PreferencesPage):
         custom = Adw.PreferencesGroup(title=_("Your shortcuts"))
         items = self.store.bindings.get("custom", [])
         if not items:
-            custom.add(Adw.ActionRow(title=_("No shortcuts of your own"),
-                                     subtitle=_("Use “New shortcut” to open an app or run a command")))
+            custom.add(
+                Adw.ActionRow(
+                    title=_("No shortcuts of your own"),
+                    subtitle=_("Use “New shortcut” to open an app or run a command"),
+                )
+            )
         for index, item in enumerate(items):
             row = self._custom_row(index, item)
             custom.add(row)
@@ -238,9 +279,11 @@ class ShortcutsPage(Adw.PreferencesPage):
             if not cat_entries:
                 continue
             changed = sum(e.override is not None for e in cat_entries)
-            exp = Adw.ExpanderRow(title=kb.CATEGORIES[cat],
-                                  subtitle=self._category_subtitle(len(cat_entries), changed),
-                                  expanded=expanded.get(cat, False))
+            exp = Adw.ExpanderRow(
+                title=kb.CATEGORIES[cat],
+                subtitle=self._category_subtitle(len(cat_entries), changed),
+                expanded=expanded.get(cat, False),
+            )
             for e in cat_entries:
                 row = self._entry_row(e)
                 exp.add_row(row)
@@ -278,14 +321,22 @@ class ShortcutsPage(Adw.PreferencesPage):
             row.set_subtitle(_("Before: {keys}").format(keys=" + ".join(kb.keycaps(e.keys))))
         row.add_suffix(keycaps_box(e.current_keys or e.keys, dim=disabled))
 
-        edit = Gtk.Button(icon_name="document-edit-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                          sensitive=e.action is not None and not disabled,
-                          tooltip_text=_("Change the key") if e.action else e.locked)
+        edit = Gtk.Button(
+            icon_name="document-edit-symbolic",
+            valign=Gtk.Align.CENTER,
+            css_classes=["flat"],
+            sensitive=e.action is not None and not disabled,
+            tooltip_text=_("Change the key") if e.action else e.locked,
+        )
         edit.connect("clicked", lambda _b: self._edit_entry(e))
         row.add_suffix(edit)
         if e.override is not None:
-            undo = Gtk.Button(icon_name="edit-undo-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                              tooltip_text=_("Back to Omarchy's default"))
+            undo = Gtk.Button(
+                icon_name="edit-undo-symbolic",
+                valign=Gtk.Align.CENTER,
+                css_classes=["flat"],
+                tooltip_text=_("Back to Omarchy's default"),
+            )
             undo.connect("clicked", lambda _b: self._restore(e))
             row.add_suffix(undo)
         switch = Gtk.Switch(active=not disabled, valign=Gtk.Align.CENTER, tooltip_text=_("Enabled"))
@@ -297,11 +348,13 @@ class ShortcutsPage(Adw.PreferencesPage):
         kind = dict(kb.KINDS).get(item["kind"], "")
         row = Adw.ActionRow(title=item["desc"], subtitle=f"{kind}: {item['command']}", use_markup=False)
         row.add_suffix(keycaps_box(item["keys"]))
-        edit = Gtk.Button(icon_name="document-edit-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                          tooltip_text=_("Edit"))
+        edit = Gtk.Button(
+            icon_name="document-edit-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"], tooltip_text=_("Edit")
+        )
         edit.connect("clicked", lambda _b: self._edit_custom(index))
-        delete = Gtk.Button(icon_name="user-trash-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                            tooltip_text=_("Delete"))
+        delete = Gtk.Button(
+            icon_name="user-trash-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"], tooltip_text=_("Delete")
+        )
         delete.connect("clicked", lambda _b: self._delete_custom(index))
         row.add_suffix(edit)
         row.add_suffix(delete)
@@ -358,11 +411,16 @@ class ShortcutsPage(Adw.PreferencesPage):
                 state["overrides"].pop(e.keys, None)
             else:
                 state["overrides"][e.keys] = {"desc": e.desc, "keys": keys, "action": e.action}
-            self._apply(state, _("“{name}” is now {keys}").format(name=e.desc, keys=" + ".join(kb.keycaps(keys))),
-                        expect=keys)
+            self._apply(
+                state, _("“{name}” is now {keys}").format(name=e.desc, keys=" + ".join(kb.keycaps(keys))), expect=keys
+            )
 
-        KeyDialog(_("Key for “{name}”").format(name=e.desc), e.current_keys or e.keys, self._conflict_check(ignore=e.keys),
-                  save).present(self.win)
+        KeyDialog(
+            _("Key for “{name}”").format(name=e.desc),
+            e.current_keys or e.keys,
+            self._conflict_check(ignore=e.keys),
+            save,
+        ).present(self.win)
 
     def _toggle(self, e: kb.Entry, on: bool) -> None:
         if self._busy:
@@ -404,8 +462,13 @@ class ShortcutsPage(Adw.PreferencesPage):
                 state["custom"][index] = new
             self._apply(state, _("Shortcut “{name}” saved").format(name=new["desc"]), expect=keys)
 
-        KeyDialog(_("New shortcut") if index is None else _("Edit shortcut"), item.get("keys"),
-                  self._conflict_check(ignore_custom=index), save, custom=item).present(self.win)
+        KeyDialog(
+            _("New shortcut") if index is None else _("Edit shortcut"),
+            item.get("keys"),
+            self._conflict_check(ignore_custom=index),
+            save,
+            custom=item,
+        ).present(self.win)
 
     def _delete_custom(self, index: int) -> None:
         state = copy.deepcopy(self.store.bindings)
@@ -413,14 +476,17 @@ class ShortcutsPage(Adw.PreferencesPage):
         self._apply(state, _("Shortcut “{name}” deleted").format(name=item["desc"]))
 
     def _confirm_reset(self) -> None:
-        dialog = Adw.AlertDialog(heading=_("Restore all shortcuts?"),
-                                 body=_("Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."))
+        dialog = Adw.AlertDialog(
+            heading=_("Restore all shortcuts?"),
+            body=_("Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."),
+        )
         dialog.add_response("cancel", _("Cancel"))
         dialog.add_response("reset", _("Restore"))
         dialog.set_response_appearance("reset", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.set_close_response("cancel")
-        dialog.connect("response", lambda _d, r: r == "reset" and self._apply(kb.empty_state(),
-                                                                              _("Shortcuts restored")))
+        dialog.connect(
+            "response", lambda _d, r: r == "reset" and self._apply(kb.empty_state(), _("Shortcuts restored"))
+        )
         dialog.present(self.win)
 
     def _apply(self, state: dict, ok_msg: str, expect: str | None = None) -> None:

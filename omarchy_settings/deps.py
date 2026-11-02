@@ -2,6 +2,7 @@
 
 Command line: python3 -m omarchy_settings.deps [--missing] [--group required|optional|dev] [--exclude PKG]...
 """
+
 from __future__ import annotations
 
 import sys
@@ -30,8 +31,15 @@ def dependencies() -> list[Dep]:
         Dep("impala", "optional", _("Wi-Fi manager opened by the Connectivity page")),
         Dep("bluetui", "optional", _("Bluetooth manager opened by the Connectivity page")),
         Dep("wiremix", "optional", _("Audio mixer opened by the Sound page")),
-        Dep("waybar", "optional", _("Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar "
-                                    "doesn't start it or replace the current bar"), default=False),
+        Dep(
+            "waybar",
+            "optional",
+            _(
+                "Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar "
+                "doesn't start it or replace the current bar"
+            ),
+            default=False,
+        ),
         Dep("python-pytest", "dev", _("Runs the project's tests"), default=False),
     ]
 

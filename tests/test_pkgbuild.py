@@ -22,6 +22,5 @@ def test_dependencies_follow_deps_py():
     assert set(array("optdepends")) == packages("optional")
 
 
-
 def test_version_matches_the_app():
     assert re.search(r"^pkgver=(\S+)", PKGBUILD, re.M).group(1) == __version__

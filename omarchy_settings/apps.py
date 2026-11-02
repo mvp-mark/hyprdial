@@ -3,6 +3,7 @@
 Browser, terminal and editor go through `omarchy default`, the same commands as Omarchy's menu. File manager, PDF
 and image apps go through xdg-mime, choosing among the installed apps that declare they open that type.
 """
+
 from __future__ import annotations
 
 import os
@@ -16,15 +17,31 @@ APP_DIRS = [Path("/usr/share/applications"), core.HOME / ".local/share/applicati
 
 # kind -> [(omarchy name, label, how to tell it's installed: "bin:<cmd>" or "app:<desktop file>")]
 DEFAULT_APPS = {
-    "browser": [("chromium", "Chromium", "app:chromium.desktop"), ("chrome", "Chrome", "app:google-chrome.desktop"),
-                ("brave", "Brave", "app:brave-browser.desktop"), ("brave-origin", "Brave Origin", "app:brave-origin.desktop"),
-                ("edge", "Edge", "app:microsoft-edge.desktop"), ("firefox", "Firefox", "app:firefox.desktop"),
-                ("zen", "Zen", "app:zen.desktop")],
-    "terminal": [("alacritty", "Alacritty", "bin:alacritty"), ("foot", "Foot", "bin:foot"),
-                 ("ghostty", "Ghostty", "bin:ghostty"), ("kitty", "Kitty", "bin:kitty")],
-    "editor": [("nvim", "Neovim", "bin:nvim"), ("code", "VSCode", "bin:code"), ("cursor", "Cursor", "bin:cursor"),
-               ("zed", "Zed", "bin:zeditor"), ("sublime_text", "Sublime Text", "bin:sublime_text"),
-               ("helix", "Helix", "bin:helix"), ("vim", "Vim", "bin:vim"), ("emacs", "Emacs", "bin:emacs")],
+    "browser": [
+        ("chromium", "Chromium", "app:chromium.desktop"),
+        ("chrome", "Chrome", "app:google-chrome.desktop"),
+        ("brave", "Brave", "app:brave-browser.desktop"),
+        ("brave-origin", "Brave Origin", "app:brave-origin.desktop"),
+        ("edge", "Edge", "app:microsoft-edge.desktop"),
+        ("firefox", "Firefox", "app:firefox.desktop"),
+        ("zen", "Zen", "app:zen.desktop"),
+    ],
+    "terminal": [
+        ("alacritty", "Alacritty", "bin:alacritty"),
+        ("foot", "Foot", "bin:foot"),
+        ("ghostty", "Ghostty", "bin:ghostty"),
+        ("kitty", "Kitty", "bin:kitty"),
+    ],
+    "editor": [
+        ("nvim", "Neovim", "bin:nvim"),
+        ("code", "VSCode", "bin:code"),
+        ("cursor", "Cursor", "bin:cursor"),
+        ("zed", "Zed", "bin:zeditor"),
+        ("sublime_text", "Sublime Text", "bin:sublime_text"),
+        ("helix", "Helix", "bin:helix"),
+        ("vim", "Vim", "bin:vim"),
+        ("emacs", "Emacs", "bin:emacs"),
+    ],
 }
 
 
@@ -55,8 +72,11 @@ def set_default_app(kind: str, name: str) -> tuple[bool, str]:
 
 # ------------------------------------------------------------------ apps by file type
 # kind -> MIME types set together; the first one picks the candidates and the current app
-MIME_KINDS = {"files": ["inode/directory"], "pdf": ["application/pdf"],
-              "images": ["image/png", "image/jpeg", "image/webp", "image/gif"]}
+MIME_KINDS = {
+    "files": ["inode/directory"],
+    "pdf": ["application/pdf"],
+    "images": ["image/png", "image/jpeg", "image/webp", "image/gif"],
+}
 
 
 @dataclass
@@ -100,8 +120,9 @@ def desktop_apps(dirs: list[Path] | None = None) -> dict[str, DesktopApp]:
             except OSError:
                 continue
             hidden = fields.get("NoDisplay") == "true" or fields.get("Hidden") == "true"
-            apps[f.name] = DesktopApp(f.name, fields.get("Name", f.stem),
-                                      [m for m in fields.get("MimeType", "").split(";") if m], hidden)
+            apps[f.name] = DesktopApp(
+                f.name, fields.get("Name", f.stem), [m for m in fields.get("MimeType", "").split(";") if m], hidden
+            )
     return apps
 
 
@@ -114,8 +135,10 @@ def mime_choices(kind: str, apps: dict[str, DesktopApp] | None = None) -> tuple[
     found.sort(key=lambda a: a.name.casefold())
     names = [a.name for a in found]
     # two apps called "Document Viewer": tell them apart by their file name (org.gnome.Evince -> Evince)
-    choices = [(a.id, a.name if names.count(a.name) == 1 else f"{a.name} ({a.id.removesuffix('.desktop').split('.')[-1]})")
-               for a in found]
+    choices = [
+        (a.id, a.name if names.count(a.name) == 1 else f"{a.name} ({a.id.removesuffix('.desktop').split('.')[-1]})")
+        for a in found
+    ]
     return choices, current
 
 

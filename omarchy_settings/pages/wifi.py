@@ -1,4 +1,5 @@
 """Wi-Fi group: radio, available networks, password and hidden networks, saved networks with IPv4 settings."""
+
 from __future__ import annotations
 
 import gi
@@ -6,11 +7,10 @@ import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 gi.require_version("NM", "1.0")
-from gi.repository import Adw, GLib, Gtk, NM  # noqa: E402
+from gi.repository import NM, Adw, GLib, Gtk  # noqa: E402
 
-from .. import core
+from .. import core, wifi
 from .. import network as net
-from .. import wifi
 from ..i18n import _, ngettext
 from ..ui import bg, button_row
 from .ipv4 import Ipv4Fields, invalid_message
@@ -21,7 +21,8 @@ KEY_MGMT = {"psk": "wpa-psk", "sae": "sae"}
 
 def security_label(kind: str, security: str) -> str:
     return {"open": _("Open"), "owe": _("Open (encrypted)"), "enterprise": _("Enterprise (802.1X)")}.get(
-        kind, security or _("Secured"))
+        kind, security or _("Secured")
+    )
 
 
 def save_with_password(ssid: str, password: str, kind: str, hidden: bool, iface: str, done) -> None:
@@ -108,8 +109,9 @@ class PasswordDialog(Adw.AlertDialog):
         length = len(self.password.get_text())
         ok_password = not needs_password or 8 <= length <= 63
         ok_name = self.ssid is not None or bool(self.name.get_text().strip())
-        self.hint.set_label(_("WPA passwords have 8 to 63 characters.") if needs_password and length and
-                            not ok_password else "")
+        self.hint.set_label(
+            _("WPA passwords have 8 to 63 characters.") if needs_password and length and not ok_password else ""
+        )
         self.set_response_enabled("connect", ok_password and ok_name)
 
     def _activate(self) -> None:
@@ -121,8 +123,9 @@ class PasswordDialog(Adw.AlertDialog):
     def _on_response(self, _d, response: str) -> None:
         if response == "connect":
             ssid = self.ssid or self.name.get_text().strip()
-            self.on_connect(ssid, self.password.get_text() if self.kind() != "open" else "", self.kind(),
-                            self.ssid is None)
+            self.on_connect(
+                ssid, self.password.get_text() if self.kind() != "open" else "", self.kind(), self.ssid is None
+            )
 
 
 class WifiGroup(Adw.PreferencesGroup):
@@ -135,8 +138,12 @@ class WifiGroup(Adw.PreferencesGroup):
         self.busy = False
         self.iface = ""
         self.expanded = {"networks": True, "saved": False}
-        scan = Gtk.Button(icon_name="view-refresh-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                          tooltip_text=_("Search for networks"))
+        scan = Gtk.Button(
+            icon_name="view-refresh-symbolic",
+            valign=Gtk.Align.CENTER,
+            css_classes=["flat"],
+            tooltip_text=_("Search for networks"),
+        )
         scan.connect("clicked", lambda _b: self.refresh(rescan=True))
         self.set_header_suffix(scan)
         self._timer = 0
@@ -169,12 +176,18 @@ class WifiGroup(Adw.PreferencesGroup):
             if dev is None:
                 return {"error": _("No Wi-Fi adapter found")}
             radio = wifi.radio_enabled()
-            info = net.parse_fields(core.out(["nmcli", "-t", "-f", "GENERAL.CONNECTION,IP4.ADDRESS", "device",
-                                              "show", dev[0]]))
-            return {"iface": dev[0], "state": dev[1], "radio": radio,
-                    "connection": (info.get("GENERAL.CONNECTION") or [""])[0],
-                    "ip": (info.get("IP4.ADDRESS") or [""])[0].split("/")[0],
-                    "networks": wifi.scan(rescan) if radio else [], "saved": wifi.saved()}
+            info = net.parse_fields(
+                core.out(["nmcli", "-t", "-f", "GENERAL.CONNECTION,IP4.ADDRESS", "device", "show", dev[0]])
+            )
+            return {
+                "iface": dev[0],
+                "state": dev[1],
+                "radio": radio,
+                "connection": (info.get("GENERAL.CONNECTION") or [""])[0],
+                "ip": (info.get("IP4.ADDRESS") or [""])[0].split("/")[0],
+                "networks": wifi.scan(rescan) if radio else [],
+                "saved": wifi.saved(),
+            }
 
         bg(load, self._rebuild)
 
@@ -216,27 +229,43 @@ class WifiGroup(Adw.PreferencesGroup):
 
         saved_by_ssid = {s.ssid: s for s in data["saved"]}
         if data["radio"]:
-            networks = Adw.ExpanderRow(title=_("Available networks"), expanded=self.expanded["networks"],
-                                       subtitle=ngettext("{n} found", "{n} found", len(data["networks"])).format(n=len(data["networks"])))
+            networks = Adw.ExpanderRow(
+                title=_("Available networks"),
+                expanded=self.expanded["networks"],
+                subtitle=ngettext("{n} found", "{n} found", len(data["networks"])).format(n=len(data["networks"])),
+            )
             networks.connect("notify::expanded", lambda e, _p: self.expanded.update(networks=e.get_expanded()))
             if not data["networks"]:
-                networks.add_row(Adw.ActionRow(title=_("No networks found"),
-                                               subtitle=_("Use the refresh button above to search again")))
+                networks.add_row(
+                    Adw.ActionRow(
+                        title=_("No networks found"), subtitle=_("Use the refresh button above to search again")
+                    )
+                )
             for n in data["networks"]:
                 networks.add_row(self._network_row(n, saved_by_ssid.get(n.ssid)))
             self._add(networks)
-            self._add(button_row(_("Hidden network"), _("Connect to a network that doesn't broadcast its name"),
-                                 _("Connect…"), lambda: self._ask_password(None)))
+            self._add(
+                button_row(
+                    _("Hidden network"),
+                    _("Connect to a network that doesn't broadcast its name"),
+                    _("Connect…"),
+                    lambda: self._ask_password(None),
+                )
+            )
 
         if data["saved"]:
-            saved = Adw.ExpanderRow(title=_("Saved networks"), expanded=self.expanded["saved"],
-                                    subtitle=ngettext("{n} saved", "{n} saved", len(data["saved"])).format(n=len(data["saved"])))
+            saved = Adw.ExpanderRow(
+                title=_("Saved networks"),
+                expanded=self.expanded["saved"],
+                subtitle=ngettext("{n} saved", "{n} saved", len(data["saved"])).format(n=len(data["saved"])),
+            )
             saved.connect("notify::expanded", lambda e, _p: self.expanded.update(saved=e.get_expanded()))
             for s in data["saved"]:
                 saved.add_row(self._saved_row(s))
             self._add(saved)
-        self._add(button_row(_("Advanced"), _("Full Wi-Fi manager (impala)"), _("Open"),
-                             lambda: self.open_tui("impala")))
+        self._add(
+            button_row(_("Advanced"), _("Full Wi-Fi manager (impala)"), _("Open"), lambda: self.open_tui("impala"))
+        )
 
     def _network_row(self, n: wifi.Network, saved: wifi.Saved | None) -> Adw.ActionRow:
         if n.in_use:
@@ -255,16 +284,24 @@ class WifiGroup(Adw.PreferencesGroup):
         return row
 
     def _saved_row(self, s: wifi.Saved) -> Adw.ActionRow:
-        subtitle = _("Connected") if s.active else (_("Connects automatically") if s.autoconnect
-                                                     else _("Doesn't connect automatically"))
+        subtitle = (
+            _("Connected")
+            if s.active
+            else (_("Connects automatically") if s.autoconnect else _("Doesn't connect automatically"))
+        )
         if s.name != s.ssid:  # several profiles can exist for the same network
             subtitle += " · " + _("profile “{name}”").format(name=s.name)
         row = Adw.ActionRow(title=s.ssid, subtitle=subtitle, use_markup=False)
-        settings = Gtk.Button(icon_name="emblem-system-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                              tooltip_text=_("IPv4 settings"))
+        settings = Gtk.Button(
+            icon_name="emblem-system-symbolic",
+            valign=Gtk.Align.CENTER,
+            css_classes=["flat"],
+            tooltip_text=_("IPv4 settings"),
+        )
         settings.connect("clicked", lambda _b: self._edit_saved(s))
-        forget = Gtk.Button(icon_name="user-trash-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                            tooltip_text=_("Forget"))
+        forget = Gtk.Button(
+            icon_name="user-trash-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"], tooltip_text=_("Forget")
+        )
         forget.connect("clicked", lambda _b: self._confirm_forget(s))
         row.add_suffix(settings)
         row.add_suffix(forget)
@@ -329,14 +366,20 @@ class WifiGroup(Adw.PreferencesGroup):
                     # a failed new network is not kept, so a wrong password isn't left saved
                     bg(lambda: core.run(wifi.forget(uuid)))
                     reason = wifi.failure_reason(err)
-                    messages = {"wrong-password": _("Wrong password for {ssid}"),
-                                "not-found": _("Network {ssid} not found"),
-                                "unavailable": _("Wi-Fi is off or unavailable")}
-                    self.win.toast(messages[reason].format(ssid=ssid) if reason in messages
-                                   else _("Failed: {error}").format(error=err))
+                    messages = {
+                        "wrong-password": _("Wrong password for {ssid}"),
+                        "not-found": _("Network {ssid} not found"),
+                        "unavailable": _("Wi-Fi is off or unavailable"),
+                    }
+                    self.win.toast(
+                        messages[reason].format(ssid=ssid)
+                        if reason in messages
+                        else _("Failed: {error}").format(error=err)
+                    )
 
-                self._run([wifi.connect_saved(uuid, self.iface)], _("Connected to {name}").format(name=ssid),
-                          on_fail=failed)
+                self._run(
+                    [wifi.connect_saved(uuid, self.iface)], _("Connected to {name}").format(name=ssid), on_fail=failed
+                )
 
             save_with_password(ssid, password, kind, hidden, self.iface, saved)
 
@@ -377,12 +420,15 @@ class WifiGroup(Adw.PreferencesGroup):
         bg(lambda: net.read_profile(s.uuid), show)
 
     def _confirm_forget(self, s: wifi.Saved) -> None:
-        dialog = Adw.AlertDialog(heading=_("Forget “{ssid}”?").format(ssid=s.ssid),
-                                 body=_("The saved password and settings are deleted."))
+        dialog = Adw.AlertDialog(
+            heading=_("Forget “{ssid}”?").format(ssid=s.ssid), body=_("The saved password and settings are deleted.")
+        )
         dialog.add_response("cancel", _("Cancel"))
         dialog.add_response("forget", _("Forget"))
         dialog.set_response_appearance("forget", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.set_close_response("cancel")
-        dialog.connect("response", lambda _d, r: r == "forget" and self._run(
-            [wifi.forget(s.uuid)], _("{ssid} forgotten").format(ssid=s.ssid)))
+        dialog.connect(
+            "response",
+            lambda _d, r: r == "forget" and self._run([wifi.forget(s.uuid)], _("{ssid} forgotten").format(ssid=s.ssid)),
+        )
         dialog.present(self.win)

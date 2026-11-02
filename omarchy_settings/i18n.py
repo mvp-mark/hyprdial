@@ -4,6 +4,7 @@ The language follows the system (LANGUAGE, LC_ALL, LC_MESSAGES, LANG). Source st
 also the fallback when there is no catalog for the system language. Catalogs live in omarchy_settings/locale and
 are compiled from po/*.po by install.sh.
 """
+
 from __future__ import annotations
 
 import gettext

@@ -4,6 +4,7 @@ A theme is a folder in $OMARCHY_PATH/themes/<slug>; ~/.config/omarchy/themes/<sl
 or just overlay files of the official one, as omarchy-theme-set does. The current theme lives in
 ~/.local/state/omarchy/current.
 """
+
 from __future__ import annotations
 
 import os
@@ -66,8 +67,15 @@ def list_themes(user_dir: Path = USER_THEMES, omarchy_dir: Path = OMARCHY_THEMES
             slugs.update(p.name for p in root.iterdir() if p.is_dir() and not p.name.startswith("."))
     themes = []
     for slug in sorted(slugs):
-        themes.append(Theme(slug, display_name(slug), _first(slug, "preview.png", roots),
-                            read_colors(_first(slug, "colors.toml", roots)), (user_dir / slug).is_dir()))
+        themes.append(
+            Theme(
+                slug,
+                display_name(slug),
+                _first(slug, "preview.png", roots),
+                read_colors(_first(slug, "colors.toml", roots)),
+                (user_dir / slug).is_dir(),
+            )
+        )
     return themes
 
 

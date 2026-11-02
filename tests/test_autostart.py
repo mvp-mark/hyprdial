@@ -16,8 +16,10 @@ def test_entries_filter_and_override(tmp_path):
     desktop(user, "mine.desktop", "Name=Mine\nExec=mine\n")
     found = autostart.entries(user, [system], {"Hyprland"})
     assert [(e.id, e.name, e.enabled, e.system) for e in found] == [
-        ("a.desktop", "Applet", False, True), ("mine.desktop", "Mine", True, False),
-        ("off.desktop", "Off by GNOME key", False, True)]
+        ("a.desktop", "Applet", False, True),
+        ("mine.desktop", "Mine", True, False),
+        ("off.desktop", "Off by GNOME key", False, True),
+    ]
 
 
 def test_toggle_system_entry_uses_a_bare_override(tmp_path):
@@ -49,17 +51,19 @@ def test_set_key_replaces_once_and_removes():
 
 def test_lua_commands(tmp_path):
     lua = tmp_path / "autostart.lua"
-    lua.write_text('-- o.launch_on_start("commented")\no.launch_on_start("syncthing")\n'
-                   "o.exec_on_start('foo --bar') -- note\n")
+    lua.write_text(
+        '-- o.launch_on_start("commented")\no.launch_on_start("syncthing")\no.exec_on_start(\'foo --bar\') -- note\n'
+    )
     assert autostart.lua_commands(lua) == ["syncthing", "foo --bar"]
     assert autostart.lua_commands(tmp_path / "missing.lua") == []
 
 
 def test_own_commands_go_to_the_generated_file(tmp_path, monkeypatch):
     monkeypatch.setattr(core, "run", lambda args, timeout=10: None)
-    store = core.HyprStore(managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua",
-                           state=tmp_path / "state.json")
-    store.set_extra("autostart", ['discord --start-minimized', 'say "hi"'], reload=False)
+    store = core.HyprStore(
+        managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua", state=tmp_path / "state.json"
+    )
+    store.set_extra("autostart", ["discord --start-minimized", 'say "hi"'], reload=False)
     text = (tmp_path / "omarchy-settings.lua").read_text()
     assert 'pcall(function() o.launch_on_start("discord --start-minimized") end)' in text
     assert 'o.launch_on_start("say \\"hi\\"")' in text

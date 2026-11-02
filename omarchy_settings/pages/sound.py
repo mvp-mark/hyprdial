@@ -1,6 +1,7 @@
 """Sound page: output and input devices, their volume, per-app volume, test sound and the full mixer (wiremix).
 
 Updates live from `pactl subscribe` while the page is visible."""
+
 from __future__ import annotations
 
 import subprocess
@@ -34,8 +35,9 @@ class VolumeRow(Adw.ActionRow):
         self._syncing = False
         if icon:
             theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
-            self.add_prefix(Gtk.Image(icon_name=icon if theme.has_icon(icon) else "audio-x-generic-symbolic",
-                                      pixel_size=24))
+            self.add_prefix(
+                Gtk.Image(icon_name=icon if theme.has_icon(icon) else "audio-x-generic-symbolic", pixel_size=24)
+            )
         self.scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 1)
         self.scale.set_draw_value(True)
         self.scale.set_value_pos(Gtk.PositionType.RIGHT)
@@ -43,8 +45,12 @@ class VolumeRow(Adw.ActionRow):
         self.scale.set_size_request(240, -1)
         self.scale.set_valign(Gtk.Align.CENTER)
         self.scale.connect("value-changed", self._on_volume)
-        self.mute = Gtk.ToggleButton(icon_name="audio-volume-high-symbolic", valign=Gtk.Align.CENTER,
-                                     tooltip_text=_("Mute"), css_classes=["flat"])
+        self.mute = Gtk.ToggleButton(
+            icon_name="audio-volume-high-symbolic",
+            valign=Gtk.Align.CENTER,
+            tooltip_text=_("Mute"),
+            css_classes=["flat"],
+        )
         self.mute.connect("toggled", self._on_mute)
         self.add_suffix(self.scale)
         self.add_suffix(self.mute)
@@ -106,8 +112,9 @@ class Watcher:
         if self.proc is not None:
             return
         try:
-            self.proc = subprocess.Popen(["pactl", "subscribe"], stdout=subprocess.PIPE,
-                                         stderr=subprocess.DEVNULL, text=True)
+            self.proc = subprocess.Popen(
+                ["pactl", "subscribe"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True
+            )
         except OSError:
             return
         threading.Thread(target=self._read, args=(self.proc,), daemon=True).start()
@@ -160,8 +167,10 @@ class DeviceGroup(Adw.PreferencesGroup):
         if self._syncing or not 0 <= i < len(self.names):
             return
         device = self.devices[i]
-        bg(lambda: sound.set_default(self.kind, device),
-           lambda ok: None if ok is True else self.page.win.toast(_("Could not change the device")))
+        bg(
+            lambda: sound.set_default(self.kind, device),
+            lambda ok: None if ok is True else self.page.win.toast(_("Could not change the device")),
+        )
 
 
 class StreamGroup(Adw.PreferencesGroup):
@@ -205,35 +214,54 @@ class SoundPage(Adw.PreferencesPage):
 
         if not core.have("pactl"):
             group = Adw.PreferencesGroup(title=_("Sound"))
-            group.add(Adw.ActionRow(title=_("pactl is not installed"),
-                                    subtitle=_("It comes with PipeWire's PulseAudio support (pipewire-pulse)")))
+            group.add(
+                Adw.ActionRow(
+                    title=_("pactl is not installed"),
+                    subtitle=_("It comes with PipeWire's PulseAudio support (pipewire-pulse)"),
+                )
+            )
             self.add(group)
             return
 
-        self.output = DeviceGroup(self, "sink", _("Output"), _("Output device"), _("Volume"),
-                                  _("No output device"))
+        self.output = DeviceGroup(self, "sink", _("Output"), _("Output device"), _("Volume"), _("No output device"))
         self.add(self.output)
         test = sound.find_test_sound()
         if test is not None and core.have("pw-play"):
-            self.output.add(button_row(_("Test sound"), _("Plays a short sound on the output device"),
-                                       _("Play"), lambda: bg(lambda: sound.play(test))))
-        self.output.add(switch_row(_("Allow volume above 100%"), _("Louder, but the sound may distort"),
-                                   self.overamp, self._set_overamp))
+            self.output.add(
+                button_row(
+                    _("Test sound"),
+                    _("Plays a short sound on the output device"),
+                    _("Play"),
+                    lambda: bg(lambda: sound.play(test)),
+                )
+            )
+        self.output.add(
+            switch_row(
+                _("Allow volume above 100%"), _("Louder, but the sound may distort"), self.overamp, self._set_overamp
+            )
+        )
 
-        self.input = DeviceGroup(self, "source", _("Input"), _("Microphone"), _("Input volume"),
-                                 _("No microphone"))
+        self.input = DeviceGroup(self, "source", _("Input"), _("Microphone"), _("Input volume"), _("No microphone"))
         self.add(self.input)
 
-        self.playing = StreamGroup("sink-input", _("Apps playing"), _("Volume of each app playing sound."),
-                                   _("Nothing is playing"))
+        self.playing = StreamGroup(
+            "sink-input", _("Apps playing"), _("Volume of each app playing sound."), _("Nothing is playing")
+        )
         self.add(self.playing)
-        self.recording = StreamGroup("source-output", _("Using the microphone"),
-                                     _("Apps recording sound right now."), _("No app is using the microphone"))
+        self.recording = StreamGroup(
+            "source-output",
+            _("Using the microphone"),
+            _("Apps recording sound right now."),
+            _("No app is using the microphone"),
+        )
         self.add(self.recording)
 
         advanced = Adw.PreferencesGroup(title=_("Advanced"))
-        advanced.add(button_row(_("Full mixer"), _("Profiles, moving an app to another device (wiremix)"),
-                                _("Open"), self._mixer))
+        advanced.add(
+            button_row(
+                _("Full mixer"), _("Profiles, moving an app to another device (wiremix)"), _("Open"), self._mixer
+            )
+        )
         self.add(advanced)
 
         self.watcher = Watcher(self._schedule_refresh)

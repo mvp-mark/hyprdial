@@ -1,4 +1,5 @@
 """Apps page: default apps (browser, terminal, editor, files, PDF, images), web apps and startup apps."""
+
 from __future__ import annotations
 
 import gi
@@ -13,8 +14,14 @@ from ..ui import bg
 from .autostart import StartupGroup
 from .webapps import WebAppsGroup
 
-KIND_TITLES = {"browser": _("Web browser"), "terminal": _("Terminal"), "editor": _("Text editor"),
-               "files": _("File manager"), "pdf": _("PDF documents"), "images": _("Images")}
+KIND_TITLES = {
+    "browser": _("Web browser"),
+    "terminal": _("Terminal"),
+    "editor": _("Text editor"),
+    "files": _("File manager"),
+    "pdf": _("PDF documents"),
+    "images": _("Images"),
+}
 MIME_SUBTITLES = {"images": _("PNG, JPEG, WebP and GIF")}
 
 

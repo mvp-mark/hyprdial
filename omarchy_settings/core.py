@@ -4,6 +4,7 @@ Strategy: nothing managed by Omarchy is modified. User settings live in
 ~/.config/hypr/omarchy-settings.lua (generated) and a single `require(...)` line is
 inserted into hyprland.lua, after the user's files, so these values have the last word.
 """
+
 from __future__ import annotations
 
 import json
@@ -164,8 +165,9 @@ def monitor_call(rule: dict) -> str:
     return f"hl.monitor({{ {fields} }})"
 
 
-def render(values: dict[str, str], monitors: dict[str, dict], bindings: dict | None = None,
-           extras: dict | None = None) -> str:
+def render(
+    values: dict[str, str], monitors: dict[str, dict], bindings: dict | None = None, extras: dict | None = None
+) -> str:
     from . import autostart, keybinds, power  # imported here: they depend on this module
 
     parts = [HEADER]
@@ -287,8 +289,12 @@ class HyprStore:
         """
         self.flush()
         with self._lock:
-            previous = {"values": self.values, "monitors": self.monitors, "bindings": self.bindings,
-                        "extras": self.extras}
+            previous = {
+                "values": self.values,
+                "monitors": self.monitors,
+                "bindings": self.bindings,
+                "extras": self.extras,
+            }
             self.values, self.monitors, self.bindings, self.extras = {}, {}, {"overrides": {}, "custom": []}, {}
         backup = None
         if self.managed.exists():
@@ -356,9 +362,13 @@ class HyprStore:
         tmp.write_text(render(self.values, self.monitors, self.bindings, self.extras))
         os.replace(tmp, self.managed)
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
-        self.state_file.write_text(json.dumps({"hypr": self.values, "monitors": self.monitors,
-                                               "bindings": self.bindings, "extras": self.extras},
-                                              indent=2, ensure_ascii=False))
+        self.state_file.write_text(
+            json.dumps(
+                {"hypr": self.values, "monitors": self.monitors, "bindings": self.bindings, "extras": self.extras},
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
         self.ensure_required()
 
     def ensure_required(self) -> None:

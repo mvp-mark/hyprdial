@@ -17,3 +17,18 @@ jobs:
 
       - name: Run tests
         run: python -m pytest -q -rs
+
+  lint:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Install ruff
+        run: pacman -Syu --noconfirm --needed ruff git
+
+      - uses: actions/checkout@v4
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Formatting
+        run: ruff format --check .

@@ -13,10 +13,14 @@ def wb(tmp_path, monkeypatch):
     theme.mkdir(parents=True)
     (theme / "colors.toml").write_text('background = "#000000"\nforeground = "#ffffff"\naccent = "#ff0000"\n')
     paths = {
-        "CONFIG_DIR": tmp_path / "waybar", "CONFIG": tmp_path / "waybar" / "config.jsonc",
-        "STYLE": tmp_path / "waybar" / "style.css", "THEME_DIR": theme,
-        "TEMPLATE": tmp_path / "themed" / "waybar.css.tpl", "RENDERED": theme / "waybar.css",
-        "THEME_HOOK": tmp_path / "hooks" / "theme-set.d" / "x", "BOOT_HOOK": tmp_path / "hooks" / "post-boot.d" / "x",
+        "CONFIG_DIR": tmp_path / "waybar",
+        "CONFIG": tmp_path / "waybar" / "config.jsonc",
+        "STYLE": tmp_path / "waybar" / "style.css",
+        "THEME_DIR": theme,
+        "TEMPLATE": tmp_path / "themed" / "waybar.css.tpl",
+        "RENDERED": theme / "waybar.css",
+        "THEME_HOOK": tmp_path / "hooks" / "theme-set.d" / "x",
+        "BOOT_HOOK": tmp_path / "hooks" / "post-boot.d" / "x",
     }
     for name, value in paths.items():
         monkeypatch.setattr(waybar, name, value)

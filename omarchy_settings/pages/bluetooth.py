@@ -1,4 +1,5 @@
 """Bluetooth group: adapter on/off, paired devices (connect, disconnect, forget, battery), search and pairing."""
+
 from __future__ import annotations
 
 import os
@@ -38,8 +39,13 @@ class PairSession:
 
     def start(self) -> bool:
         try:
-            self.proc = subprocess.Popen(["bluetoothctl"], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                         stderr=subprocess.STDOUT, start_new_session=True)
+            self.proc = subprocess.Popen(
+                ["bluetoothctl"],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
         except OSError:
             return False
         threading.Thread(target=self._read, daemon=True).start()
@@ -142,8 +148,11 @@ class BluetoothGroup(Adw.PreferencesGroup):
         def load() -> dict:
             on = bt.powered()
             if on is None:
-                return {"error": _("No Bluetooth adapter found") if core.have("bluetoothctl")
-                        else _("bluetoothctl is not installed")}
+                return {
+                    "error": _("No Bluetooth adapter found")
+                    if core.have("bluetoothctl")
+                    else _("bluetoothctl is not installed")
+                }
             return {"on": on, "devices": [d for d in bt.devices() if d.paired] if on else []}
 
         bg(load, self._rebuild)
@@ -171,21 +180,32 @@ class BluetoothGroup(Adw.PreferencesGroup):
             return
 
         connected = [d for d in data["devices"] if d.connected]
-        status = _("Off") if not data["on"] else (
-            ngettext("{n} device connected", "{n} devices connected", len(connected)).format(n=len(connected))
-            if connected else _("On, nothing connected"))
+        status = (
+            _("Off")
+            if not data["on"]
+            else (
+                ngettext("{n} device connected", "{n} devices connected", len(connected)).format(n=len(connected))
+                if connected
+                else _("On, nothing connected")
+            )
+        )
         power = Adw.SwitchRow(title="Bluetooth", subtitle=status, active=data["on"])
         power.connect("notify::active", lambda r, _p: self._set_power(r.get_active()))
         self._add(power)
 
         if data["on"]:
-            paired = Adw.ExpanderRow(title=_("Paired devices"), expanded=self.expanded["paired"],
-                                     subtitle=ngettext("{n} paired", "{n} paired", len(data["devices"])).format(
-                                         n=len(data["devices"])))
+            paired = Adw.ExpanderRow(
+                title=_("Paired devices"),
+                expanded=self.expanded["paired"],
+                subtitle=ngettext("{n} paired", "{n} paired", len(data["devices"])).format(n=len(data["devices"])),
+            )
             paired.connect("notify::expanded", lambda e, _p: self.expanded.update(paired=e.get_expanded()))
             if not data["devices"]:
-                paired.add_row(Adw.ActionRow(title=_("No paired devices"),
-                                             subtitle=_("Put the device in pairing mode and search below")))
+                paired.add_row(
+                    Adw.ActionRow(
+                        title=_("No paired devices"), subtitle=_("Put the device in pairing mode and search below")
+                    )
+                )
             for d in data["devices"]:
                 paired.add_row(self._paired_row(d))
             self._add(paired)
@@ -194,22 +214,32 @@ class BluetoothGroup(Adw.PreferencesGroup):
 
     def _add_nearby(self) -> None:
         if self.scanning:
-            row = Adw.ActionRow(title=_("Searching for devices…"),
-                                subtitle=_("Put the device in pairing mode now"))
+            row = Adw.ActionRow(title=_("Searching for devices…"), subtitle=_("Put the device in pairing mode now"))
             row.add_suffix(Gtk.Spinner(spinning=True, valign=Gtk.Align.CENTER))
             self._add(row)
             return
         if self.nearby is None:
-            self._add(button_row(_("Pair a new device"), _("Searches for {n} seconds").format(n=bt.SCAN_SECONDS),
-                                 _("Search"), self._scan))
+            self._add(
+                button_row(
+                    _("Pair a new device"),
+                    _("Searches for {n} seconds").format(n=bt.SCAN_SECONDS),
+                    _("Search"),
+                    self._scan,
+                )
+            )
             return
-        nearby = Adw.ExpanderRow(title=_("Nearby devices"), expanded=self.expanded["nearby"],
-                                 subtitle=ngettext("{n} found", "{n} found", len(self.nearby)).format(
-                                     n=len(self.nearby)))
+        nearby = Adw.ExpanderRow(
+            title=_("Nearby devices"),
+            expanded=self.expanded["nearby"],
+            subtitle=ngettext("{n} found", "{n} found", len(self.nearby)).format(n=len(self.nearby)),
+        )
         nearby.connect("notify::expanded", lambda e, _p: self.expanded.update(nearby=e.get_expanded()))
         if not self.nearby:
-            nearby.add_row(Adw.ActionRow(title=_("No devices found"),
-                                         subtitle=_("Check that the device is in pairing mode and search again")))
+            nearby.add_row(
+                Adw.ActionRow(
+                    title=_("No devices found"), subtitle=_("Check that the device is in pairing mode and search again")
+                )
+            )
         for d in self.nearby:
             row = Adw.ActionRow(title=d.name, subtitle=d.mac, use_markup=False)
             row.add_prefix(Gtk.Image(icon_name=bt.KIND_ICONS[d.kind]))
@@ -226,8 +256,11 @@ class BluetoothGroup(Adw.PreferencesGroup):
         self._add(nearby)
 
     def _add_advanced(self) -> None:
-        self._add(button_row(_("Advanced"), _("Full Bluetooth manager (bluetui)"), _("Open"),
-                             lambda: self.open_tui("bluetui")))
+        self._add(
+            button_row(
+                _("Advanced"), _("Full Bluetooth manager (bluetui)"), _("Open"), lambda: self.open_tui("bluetui")
+            )
+        )
 
     def _paired_row(self, d: bt.Device) -> Adw.ActionRow:
         subtitle = _("Connected") if d.connected else _("Not connected")
@@ -241,8 +274,9 @@ class BluetoothGroup(Adw.PreferencesGroup):
         btn = Gtk.Button(label=_("Disconnect") if d.connected else _("Connect"), valign=Gtk.Align.CENTER)
         btn.connect("clicked", lambda _b: self._toggle(d))
         row.add_suffix(btn)
-        forget = Gtk.Button(icon_name="user-trash-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                            tooltip_text=_("Forget"))
+        forget = Gtk.Button(
+            icon_name="user-trash-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"], tooltip_text=_("Forget")
+        )
         forget.connect("clicked", lambda _b: self._confirm_forget(d))
         row.add_suffix(forget)
         return row
@@ -279,14 +313,17 @@ class BluetoothGroup(Adw.PreferencesGroup):
             self._run(bt.connect(d.mac), _("{name} connected").format(name=d.name))
 
     def _confirm_forget(self, d: bt.Device) -> None:
-        dialog = Adw.AlertDialog(heading=_("Forget “{name}”?").format(name=d.name),
-                                 body=_("To use it again, you'll have to pair it again."))
+        dialog = Adw.AlertDialog(
+            heading=_("Forget “{name}”?").format(name=d.name), body=_("To use it again, you'll have to pair it again.")
+        )
         dialog.add_response("cancel", _("Cancel"))
         dialog.add_response("forget", _("Forget"))
         dialog.set_response_appearance("forget", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.set_close_response("cancel")
-        dialog.connect("response", lambda _d, r: r == "forget" and self._run(
-            bt.forget(d.mac), _("{name} forgotten").format(name=d.name)))
+        dialog.connect(
+            "response",
+            lambda _d, r: r == "forget" and self._run(bt.forget(d.mac), _("{name} forgotten").format(name=d.name)),
+        )
         dialog.present(self.win)
 
     def _scan(self) -> None:
@@ -357,12 +394,17 @@ class BluetoothGroup(Adw.PreferencesGroup):
         elif kind == "connect-failed":
             self._finish(_("{name} paired, but it didn't connect; try Connect").format(name=d.name))
         elif kind == "failed":
-            messages = {"not-found": _("{name} is no longer in range; search again"),
-                        "rejected": _("{name} rejected the pairing"),
-                        "timeout": _("Pairing with {name} took too long"),
-                        "already": _("{name} is already paired")}
+            messages = {
+                "not-found": _("{name} is no longer in range; search again"),
+                "rejected": _("{name} rejected the pairing"),
+                "timeout": _("Pairing with {name} took too long"),
+                "already": _("{name} is already paired"),
+            }
             reason = event[1]
-            self._finish(messages[reason].format(name=d.name) if reason in messages
-                         else _("Could not pair with {name}").format(name=d.name))
+            self._finish(
+                messages[reason].format(name=d.name)
+                if reason in messages
+                else _("Could not pair with {name}").format(name=d.name)
+            )
         elif kind == "ended":
             self._finish(_("Could not pair with {name}").format(name=d.name))

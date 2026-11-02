@@ -4,6 +4,7 @@ The bar belongs to omarchy-shell (Quickshell). Position, transparency and widget
 `omarchy-bar` and `omarchy-plugin-*` commands, which talk to the running shell; only the idle settings are
 written straight to ~/.config/omarchy/shell.json, the same way Omarchy's commands do it.
 """
+
 from __future__ import annotations
 
 import json
@@ -43,6 +44,7 @@ def idle_label(seconds: int) -> str:
         return ngettext("{n} minute", "{n} minutes", seconds // 60).format(n=seconds // 60)
     return ngettext("{n} second", "{n} seconds", seconds).format(n=seconds)
 
+
 # Translatable names for Omarchy's widgets; third-party widgets use the catalog name.
 WIDGET_NAMES = {
     "omarchy.active-window": (_("Active window"), _("Title of the focused window")),
@@ -66,6 +68,7 @@ WIDGET_NAMES = {
     "omarchy.weather": (_("Weather"), _("Temperature with details on click")),
     "omarchy.workspaces": (_("Workspaces"), _("Workspace numbers")),
 }
+
 
 def clock_formats() -> list[tuple[str, str]]:
     """(Qt format, label with an example using the current time)."""
@@ -131,8 +134,9 @@ def widget_catalog() -> dict[str, tuple[str, str]]:
     result = {}
     for item in catalog if isinstance(catalog, list) else []:
         if isinstance(item, dict) and item.get("barWidget"):
-            result[item["id"]] = WIDGET_NAMES.get(item["id"], (item.get("name") or item["id"],
-                                                                item.get("description") or ""))
+            result[item["id"]] = WIDGET_NAMES.get(
+                item["id"], (item.get("name") or item["id"], item.get("description") or "")
+            )
     return result
 
 
@@ -154,20 +158,39 @@ class BarPage(Adw.PreferencesPage):
         bar = config.get("bar") or {}
 
         self.bar_group = Adw.PreferencesGroup(title=_("Bar"))
-        self.bar_group.add(switch_row(_("Show the bar"), _("You can also toggle it with the Omarchy shortcut"),
-                                      not BAR_OFF_FLAG.exists(), self._set_visible))
+        self.bar_group.add(
+            switch_row(
+                _("Show the bar"),
+                _("You can also toggle it with the Omarchy shortcut"),
+                not BAR_OFF_FLAG.exists(),
+                self._set_visible,
+            )
+        )
         positions = [p for p, _label in POSITIONS]
         position = bar.get("position", "top")
-        self.bar_group.add(combo_row(_("Position"), "", [label for _pos, label in POSITIONS],
-                                     positions.index(position) if position in positions else 0,
-                                     lambda i: self._bar(["position", positions[i]], _("Bar position changed"),
-                                                         rebuild=True)))
-        self.bar_group.add(switch_row(_("Transparent background"), _("Shows the wallpaper behind the bar"),
-                                      bool(bar.get("transparent")),
-                                      lambda on: self._bar(["transparent", "true" if on else "false"])))
+        self.bar_group.add(
+            combo_row(
+                _("Position"),
+                "",
+                [label for _pos, label in POSITIONS],
+                positions.index(position) if position in positions else 0,
+                lambda i: self._bar(["position", positions[i]], _("Bar position changed"), rebuild=True),
+            )
+        )
+        self.bar_group.add(
+            switch_row(
+                _("Transparent background"),
+                _("Shows the wallpaper behind the bar"),
+                bool(bar.get("transparent")),
+                lambda on: self._bar(["transparent", "true" if on else "false"]),
+            )
+        )
         self._add_clock_row(config)
-        self.bar_group.add(button_row(_("Restart the shell"), _("Use it if the bar freezes or disappears"), _("Restart"),
-                                      self._restart_shell))
+        self.bar_group.add(
+            button_row(
+                _("Restart the shell"), _("Use it if the bar freezes or disappears"), _("Restart"), self._restart_shell
+            )
+        )
         self.add(self.bar_group)
 
         self.add_group = Adw.PreferencesGroup(title=_("Add widget"))
@@ -177,25 +200,43 @@ class BarPage(Adw.PreferencesPage):
 
         self.waybar_group = Adw.PreferencesGroup(
             title=_("Waybar"),
-            description=_("Optional alternative bar. Omarchy doesn't manage Waybar; its colors follow the "
-                          "Omarchy theme."))
+            description=_(
+                "Optional alternative bar. Omarchy doesn't manage Waybar; its colors follow the Omarchy theme."
+            ),
+        )
         self.waybar_rows: list[Gtk.Widget] = []
         self.add(self.waybar_group)
         self._fill_waybar()
 
-        self.font_group = Adw.PreferencesGroup(title=_("System font"),
-                                               description=_("Applied to the terminal, bar and other Omarchy apps."))
+        self.font_group = Adw.PreferencesGroup(
+            title=_("System font"), description=_("Applied to the terminal, bar and other Omarchy apps.")
+        )
         self.add(self.font_group)
         if core.have("omarchy-font-set"):
-            bg(lambda: ([f.strip() for f in core.out(["omarchy-font-list"]).splitlines() if f.strip()],
-                        core.out(["omarchy-font-current"])), self._populate_fonts)
+            bg(
+                lambda: (
+                    [f.strip() for f in core.out(["omarchy-font-list"]).splitlines() if f.strip()],
+                    core.out(["omarchy-font-current"]),
+                ),
+                self._populate_fonts,
+            )
         else:
-            self.font_group.add(Adw.ActionRow(title=_("omarchy-font-set not found"),
-                                              subtitle=_("Update Omarchy to change fonts from here")))
+            self.font_group.add(
+                Adw.ActionRow(
+                    title=_("omarchy-font-set not found"), subtitle=_("Update Omarchy to change fonts from here")
+                )
+            )
 
         self.restore_group = restore = Adw.PreferencesGroup()
-        restore.add(button_row(_("Restore default bar"), _("Returns position, transparency and widgets to Omarchy's default"),
-                               _("Restore"), self._confirm_defaults, "destructive-action"))
+        restore.add(
+            button_row(
+                _("Restore default bar"),
+                _("Returns position, transparency and widgets to Omarchy's default"),
+                _("Restore"),
+                self._confirm_defaults,
+                "destructive-action",
+            )
+        )
         self.add(restore)
 
         if not core.have("omarchy-bar"):
@@ -220,8 +261,9 @@ class BarPage(Adw.PreferencesPage):
         bg(lambda: command(["omarchy-toggle-bar", "off" if on else "on"]))
 
     def _add_clock_row(self, config: dict) -> None:
-        clock = next((w for items in bar_layout(config).values() for w in items if w.get("id") == "omarchy.clock"),
-                     None)
+        clock = next(
+            (w for items in bar_layout(config).values() for w in items if w.get("id") == "omarchy.clock"), None
+        )
         if clock is None:
             return
         formats = clock_formats()
@@ -229,10 +271,15 @@ class BarPage(Adw.PreferencesPage):
         if current not in [f for f, _label in formats]:
             formats.append((current, _("Custom — {format}").format(format=current)))
         values = [f for f, _label in formats]
-        self.bar_group.add(combo_row(_("Clock format"), _("Click the clock to see the alternate format"),
-                                     [label for _fmt, label in formats], values.index(current),
-                                     lambda i: self._bar(["set", "omarchy.clock", "format", values[i]],
-                                                         _("Clock format changed"))))
+        self.bar_group.add(
+            combo_row(
+                _("Clock format"),
+                _("Click the clock to see the alternate format"),
+                [label for _fmt, label in formats],
+                values.index(current),
+                lambda i: self._bar(["set", "omarchy.clock", "format", values[i]], _("Clock format changed")),
+            )
+        )
 
     def _restart_shell(self) -> None:
         self.win.toast(_("Restarting the shell…"))
@@ -244,14 +291,17 @@ class BarPage(Adw.PreferencesPage):
         bg(lambda: command(["omarchy-restart-shell"]), done)
 
     def _confirm_defaults(self) -> None:
-        dialog = Adw.AlertDialog(heading=_("Restore the default bar?"),
-                                 body=_("The position, transparency and widget list return to Omarchy's default."))
+        dialog = Adw.AlertDialog(
+            heading=_("Restore the default bar?"),
+            body=_("The position, transparency and widget list return to Omarchy's default."),
+        )
         dialog.add_response("cancel", _("Cancel"))
         dialog.add_response("restore", _("Restore"))
         dialog.set_response_appearance("restore", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.set_close_response("cancel")
-        dialog.connect("response", lambda _d, r: r == "restore" and self._bar(["defaults"], _("Bar restored"),
-                                                                               rebuild=True))
+        dialog.connect(
+            "response", lambda _d, r: r == "restore" and self._bar(["defaults"], _("Bar restored"), rebuild=True)
+        )
         dialog.present(self.win)
 
     # -- widgets
@@ -263,8 +313,11 @@ class BarPage(Adw.PreferencesPage):
         config = read_shell()
         layout = bar_layout(config)
         vertical = (config.get("bar") or {}).get("position") in ("left", "right")
-        titles = ([_("Widgets at the top"), _("Widgets in the middle"), _("Widgets at the bottom")] if vertical
-                  else [_("Widgets on the left"), _("Widgets in the center"), _("Widgets on the right")])
+        titles = (
+            [_("Widgets at the top"), _("Widgets in the middle"), _("Widgets at the bottom")]
+            if vertical
+            else [_("Widgets on the left"), _("Widgets in the center"), _("Widgets on the right")]
+        )
 
         # PreferencesPage only appends: remove everything after "Bar" and add it back in order
         tail = [self.add_group, self.waybar_group, self.font_group, self.restore_group]
@@ -289,17 +342,27 @@ class BarPage(Adw.PreferencesPage):
         name, desc = self.catalog.get(wid, WIDGET_NAMES.get(wid, (wid, "")))
         row = Adw.ActionRow(title=name, subtitle=desc)
         si = SECTIONS.index(section)
-        before, after = ("go-up-symbolic", "go-down-symbolic") if not vertical else ("go-previous-symbolic",
-                                                                                   "go-next-symbolic")
-        to_prev, to_next = ("go-previous-symbolic", "go-next-symbolic") if not vertical else ("go-up-symbolic",
-                                                                                              "go-down-symbolic")
+        before, after = (
+            ("go-up-symbolic", "go-down-symbolic") if not vertical else ("go-previous-symbolic", "go-next-symbolic")
+        )
+        to_prev, to_next = (
+            ("go-previous-symbolic", "go-next-symbolic") if not vertical else ("go-up-symbolic", "go-down-symbolic")
+        )
         buttons = [
-            (to_prev, _("Move to the previous section"), si > 0,
-             lambda: self._move(wid, section, pos, SECTIONS[si - 1], len(layout[SECTIONS[si - 1]]))),
+            (
+                to_prev,
+                _("Move to the previous section"),
+                si > 0,
+                lambda: self._move(wid, section, pos, SECTIONS[si - 1], len(layout[SECTIONS[si - 1]])),
+            ),
             (before, _("Move earlier"), pos > 0, lambda: self._move(wid, section, pos, section, pos - 1)),
             (after, _("Move later"), pos < count - 1, lambda: self._move(wid, section, pos, section, pos + 1)),
-            (to_next, _("Move to the next section"), si < len(SECTIONS) - 1,
-             lambda: self._move(wid, section, pos, SECTIONS[si + 1], 0)),
+            (
+                to_next,
+                _("Move to the next section"),
+                si < len(SECTIONS) - 1,
+                lambda: self._move(wid, section, pos, SECTIONS[si + 1], 0),
+            ),
             ("list-remove-symbolic", _("Remove from the bar"), True, lambda: self._remove(wid, name)),
         ]
         box = Gtk.Box(spacing=2, valign=Gtk.Align.CENTER)
@@ -312,28 +375,46 @@ class BarPage(Adw.PreferencesPage):
         return row
 
     def _move(self, wid: str, from_section: str, from_index: int, section: str, index: int) -> None:
-        self._bar(["move", wid, "--from-section", from_section, "--from-index", str(from_index),
-                   "--section", section, "--index", str(index)], rebuild=True)
+        self._bar(
+            [
+                "move",
+                wid,
+                "--from-section",
+                from_section,
+                "--from-index",
+                str(from_index),
+                "--section",
+                section,
+                "--index",
+                str(index),
+            ],
+            rebuild=True,
+        )
 
     def _remove(self, wid: str, name: str) -> None:
         def done(res) -> None:
             ok, msg = res if isinstance(res, tuple) else (False, str(res))
-            self.win.toast(_("{name} removed from the bar").format(name=name) if ok
-                           else _("Failed: {error}").format(error=msg))
+            self.win.toast(
+                _("{name} removed from the bar").format(name=name) if ok else _("Failed: {error}").format(error=msg)
+            )
             GLib.timeout_add(300, self._refresh_widgets)
 
         bg(lambda: command(["omarchy-plugin-disable", wid]), done)
 
     def _fill_available(self, layout: dict) -> None:
         present = {i["id"] for items in layout.values() for i in items}
-        available = sorted(((wid, n, d) for wid, (n, d) in self.catalog.items() if wid not in present),
-                           key=lambda t: t[1].lower())
+        available = sorted(
+            ((wid, n, d) for wid, (n, d) in self.catalog.items() if wid not in present), key=lambda t: t[1].lower()
+        )
         expanded = self.add_expander.get_expanded()
         self.add_group.remove(self.add_expander)
-        self.add_expander = Adw.ExpanderRow(title=_("Available widgets"), expanded=expanded,
-                                            subtitle=ngettext("{n} not on the bar", "{n} not on the bar", len(available)).format(n=len(available))
-                                            if available
-                                            else _("Every widget is already on the bar"))
+        self.add_expander = Adw.ExpanderRow(
+            title=_("Available widgets"),
+            expanded=expanded,
+            subtitle=ngettext("{n} not on the bar", "{n} not on the bar", len(available)).format(n=len(available))
+            if available
+            else _("Every widget is already on the bar"),
+        )
         for wid, name, desc in available:
             self.add_expander.add_row(button_row(name, desc, _("Add"), lambda w=wid, n=name: self._add(w, n)))
         self.add_group.add(self.add_expander)
@@ -341,8 +422,9 @@ class BarPage(Adw.PreferencesPage):
     def _add(self, wid: str, name: str) -> None:
         def done(res) -> None:
             ok, msg = res if isinstance(res, tuple) else (False, str(res))
-            self.win.toast(_("{name} added to the bar").format(name=name) if ok
-                           else _("Failed: {error}").format(error=msg))
+            self.win.toast(
+                _("{name} added to the bar").format(name=name) if ok else _("Failed: {error}").format(error=msg)
+            )
             GLib.timeout_add(300, self._refresh_widgets)
 
         bg(lambda: command(["omarchy-plugin-enable", wid]), done)
@@ -358,26 +440,58 @@ class BarPage(Adw.PreferencesPage):
             self.waybar_group.add(row)
 
         if not waybar.installed():
-            add(button_row(_("Waybar is not installed"), _("Install it to use it instead of the Omarchy bar"),
-                           _("Install"), self._install_waybar, "suggested-action"))
+            add(
+                button_row(
+                    _("Waybar is not installed"),
+                    _("Install it to use it instead of the Omarchy bar"),
+                    _("Install"),
+                    self._install_waybar,
+                    "suggested-action",
+                )
+            )
             return
-        add(switch_row(_("Use Waybar instead of the Omarchy bar"),
-                       _("Starts Waybar now and at login, and hides the Omarchy bar"),
-                       waybar.enabled(), self._set_waybar))
+        add(
+            switch_row(
+                _("Use Waybar instead of the Omarchy bar"),
+                _("Starts Waybar now and at login, and hides the Omarchy bar"),
+                waybar.enabled(),
+                self._set_waybar,
+            )
+        )
         positions = list(waybar.POSITIONS)
         current = waybar.read_position() if waybar.has_config() else "top"
         labels = dict(POSITIONS)
-        add(combo_row(_("Waybar position"), "", [labels[p] for p in positions], positions.index(current),
-                      lambda i: self._waybar_position(positions[i])))
-        add(button_row(_("Restart Waybar"), _("Applies changes made to its files"), _("Restart"),
-                       self._restart_waybar))
-        add(button_row(_("Edit config.jsonc"), _("Modules and layout"), _("Open"),
-                       lambda: self._edit_waybar(waybar.CONFIG)))
-        add(button_row(_("Edit style.css"), _("Sizes, fonts and spacing; colors come from the theme"), _("Open"),
-                       lambda: self._edit_waybar(waybar.STYLE)))
-        add(button_row(_("Restore Waybar files"), _("Recreates config.jsonc and style.css; the current ones are "
-                                                    "kept as .omarchy-settings.bak"),
-                       _("Restore"), self._reset_waybar))
+        add(
+            combo_row(
+                _("Waybar position"),
+                "",
+                [labels[p] for p in positions],
+                positions.index(current),
+                lambda i: self._waybar_position(positions[i]),
+            )
+        )
+        add(button_row(_("Restart Waybar"), _("Applies changes made to its files"), _("Restart"), self._restart_waybar))
+        add(
+            button_row(
+                _("Edit config.jsonc"), _("Modules and layout"), _("Open"), lambda: self._edit_waybar(waybar.CONFIG)
+            )
+        )
+        add(
+            button_row(
+                _("Edit style.css"),
+                _("Sizes, fonts and spacing; colors come from the theme"),
+                _("Open"),
+                lambda: self._edit_waybar(waybar.STYLE),
+            )
+        )
+        add(
+            button_row(
+                _("Restore Waybar files"),
+                _("Recreates config.jsonc and style.css; the current ones are kept as .omarchy-settings.bak"),
+                _("Restore"),
+                self._reset_waybar,
+            )
+        )
 
     def _install_waybar(self) -> None:
         self.win.toast(_("Installing Waybar…"))
@@ -415,8 +529,12 @@ class BarPage(Adw.PreferencesPage):
             waybar.stop()
             return waybar.start() if was_running or waybar.enabled() else False
 
-        bg(work, lambda started: self.win.toast(_("Waybar restarted") if started is True
-                                                 else _("Waybar isn't in use; turn it on above")))
+        bg(
+            work,
+            lambda started: self.win.toast(
+                _("Waybar restarted") if started is True else _("Waybar isn't in use; turn it on above")
+            ),
+        )
 
     def _edit_waybar(self, path) -> None:
         waybar.ensure_config()
@@ -433,12 +551,19 @@ class BarPage(Adw.PreferencesPage):
     # -- fonts
     def _populate_fonts(self, result) -> None:
         if isinstance(result, Exception) or not result[0]:
-            self.font_group.add(Adw.ActionRow(title=_("No fonts listed"), subtitle=_("omarchy-font-list returned nothing")))
+            self.font_group.add(
+                Adw.ActionRow(title=_("No fonts listed"), subtitle=_("omarchy-font-list returned nothing"))
+            )
             return
         fonts, current = result
         selected = fonts.index(current) if current in fonts else 0
-        row = combo_row(_("Font"), _("Current: {font}").format(font=current or _("unknown")), fonts, selected,
-                        lambda i: self._set_font(fonts[i]))
+        row = combo_row(
+            _("Font"),
+            _("Current: {font}").format(font=current or _("unknown")),
+            fonts,
+            selected,
+            lambda i: self._set_font(fonts[i]),
+        )
         self.font_group.add(row)
 
     def _set_font(self, name: str) -> None:

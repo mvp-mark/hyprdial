@@ -3,6 +3,7 @@
 Device state comes from `nmcli device`, link speed and carrier from /sys/class/net. Settings are stored in the
 NetworkManager profile the device uses (or would use); a profile is created only when the device has none.
 """
+
 from __future__ import annotations
 
 import ipaddress
@@ -105,31 +106,51 @@ def wired_devices() -> list[Wired]:
         if len(parts) < 4 or parts[1] != "ethernet":
             continue
         name = parts[0]
-        info = parse_fields(core.out(["nmcli", "-t", "-f", "GENERAL.HWADDR,IP4.ADDRESS,IP4.GATEWAY,IP4.DNS",
-                                      "device", "show", name]))
+        info = parse_fields(
+            core.out(["nmcli", "-t", "-f", "GENERAL.HWADDR,IP4.ADDRESS,IP4.GATEWAY,IP4.DNS", "device", "show", name])
+        )
         speed = _read_sys(name, "speed")
-        devices.append(Wired(
-            device=name, state=parts[2], connection=parts[3],
-            carrier=_read_sys(name, "carrier") == "1",
-            speed=int(speed) if speed.lstrip("-").isdigit() and int(speed) > 0 else None,
-            mac=_first(info, "GENERAL.HWADDR"), addresses=info.get("IP4.ADDRESS", []),
-            gateway=_first(info, "IP4.GATEWAY"), dns=info.get("IP4.DNS", []),
-        ))
+        devices.append(
+            Wired(
+                device=name,
+                state=parts[2],
+                connection=parts[3],
+                carrier=_read_sys(name, "carrier") == "1",
+                speed=int(speed) if speed.lstrip("-").isdigit() and int(speed) > 0 else None,
+                mac=_first(info, "GENERAL.HWADDR"),
+                addresses=info.get("IP4.ADDRESS", []),
+                gateway=_first(info, "IP4.GATEWAY"),
+                dns=info.get("IP4.DNS", []),
+            )
+        )
     return devices
 
 
 def read_profile(uuid: str) -> Profile | None:
-    fields = parse_fields(core.out([
-        "nmcli", "-t", "-f",
-        "connection.uuid,connection.id,connection.autoconnect,ipv4.method,ipv4.addresses,ipv4.gateway,ipv4.dns",
-        "connection", "show", "uuid", uuid]))
+    fields = parse_fields(
+        core.out(
+            [
+                "nmcli",
+                "-t",
+                "-f",
+                "connection.uuid,connection.id,connection.autoconnect,ipv4.method,ipv4.addresses,ipv4.gateway,ipv4.dns",
+                "connection",
+                "show",
+                "uuid",
+                uuid,
+            ]
+        )
+    )
     if not _first(fields, "connection.uuid"):
         return None
     return Profile(
-        uuid=_first(fields, "connection.uuid"), name=_first(fields, "connection.id"),
+        uuid=_first(fields, "connection.uuid"),
+        name=_first(fields, "connection.id"),
         method=_first(fields, "ipv4.method") or "auto",
-        addresses=_split_list(fields.get("ipv4.addresses", [])), gateway=_first(fields, "ipv4.gateway"),
-        dns=_split_list(fields.get("ipv4.dns", [])), autoconnect=_first(fields, "connection.autoconnect") != "no",
+        addresses=_split_list(fields.get("ipv4.addresses", [])),
+        gateway=_first(fields, "ipv4.gateway"),
+        dns=_split_list(fields.get("ipv4.dns", [])),
+        autoconnect=_first(fields, "connection.autoconnect") != "no",
     )
 
 
@@ -144,8 +165,12 @@ def profile_for(device: str) -> Profile | None:
             candidates.append(parts[0])
     unbound = None
     for uuid in candidates:
-        bound = _first(parse_fields(core.out(["nmcli", "-t", "-f", "connection.interface-name", "connection",
-                                              "show", "uuid", uuid])), "connection.interface-name")
+        bound = _first(
+            parse_fields(
+                core.out(["nmcli", "-t", "-f", "connection.interface-name", "connection", "show", "uuid", uuid])
+            ),
+            "connection.interface-name",
+        )
         if bound == device:
             return read_profile(uuid)
         if not bound and unbound is None:
@@ -195,9 +220,18 @@ def normalize(method: str, address: str, gateway: str, dns: str) -> dict:
 
 
 def settings_args(settings: dict, autoconnect: bool) -> list[str]:
-    args = ["connection.autoconnect", "yes" if autoconnect else "no", "ipv4.method", settings["method"],
-            "ipv4.addresses", settings["address"], "ipv4.gateway", settings["gateway"],
-            "ipv4.dns", ",".join(settings["dns"])]
+    args = [
+        "connection.autoconnect",
+        "yes" if autoconnect else "no",
+        "ipv4.method",
+        settings["method"],
+        "ipv4.addresses",
+        settings["address"],
+        "ipv4.gateway",
+        settings["gateway"],
+        "ipv4.dns",
+        ",".join(settings["dns"]),
+    ]
     # custom DNS replaces the one from DHCP; without custom DNS, use the network's
     args += ["ipv4.ignore-auto-dns", "yes" if settings["dns"] else "no"]
     return args
@@ -207,11 +241,25 @@ def save_commands(device: str, profile: Profile | None, settings: dict, autoconn
     """Commands that store the settings and bring the connection up with them."""
     if profile is None:
         name = f"Wired connection ({device})"
-        return [["nmcli", "connection", "add", "type", "ethernet", "ifname", device, "con-name", name,
-                 *settings_args(settings, autoconnect)],
-                ["nmcli", "--wait", str(CONNECT_TIMEOUT), "connection", "up", "id", name, "ifname", device]]
-    return [["nmcli", "connection", "modify", "uuid", profile.uuid, *settings_args(settings, autoconnect)],
-            ["nmcli", "--wait", str(CONNECT_TIMEOUT), "connection", "up", "uuid", profile.uuid, "ifname", device]]
+        return [
+            [
+                "nmcli",
+                "connection",
+                "add",
+                "type",
+                "ethernet",
+                "ifname",
+                device,
+                "con-name",
+                name,
+                *settings_args(settings, autoconnect),
+            ],
+            ["nmcli", "--wait", str(CONNECT_TIMEOUT), "connection", "up", "id", name, "ifname", device],
+        ]
+    return [
+        ["nmcli", "connection", "modify", "uuid", profile.uuid, *settings_args(settings, autoconnect)],
+        ["nmcli", "--wait", str(CONNECT_TIMEOUT), "connection", "up", "uuid", profile.uuid, "ifname", device],
+    ]
 
 
 def run_all(commands: list[list[str]]) -> tuple[bool, str, int]:

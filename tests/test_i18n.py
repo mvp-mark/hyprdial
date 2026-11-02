@@ -10,12 +10,13 @@ import pytest
 
 ROOT = Path(__file__).parent.parent
 PO_DIR = ROOT / "po"
-needs_gettext = pytest.mark.skipif(not shutil.which("msgfmt") or not shutil.which("xgettext"),
-                                   reason="gettext tools not installed")
+needs_gettext = pytest.mark.skipif(
+    not shutil.which("msgfmt") or not shutil.which("xgettext"), reason="gettext tools not installed"
+)
 
 
 def unquote(line: str) -> str:
-    body = line[line.index('"') + 1:line.rindex('"')]
+    body = line[line.index('"') + 1 : line.rindex('"')]
     return re.sub(r"\\(.)", lambda m: {"n": "\n", "t": "\t"}.get(m.group(1), m.group(1)), body)
 
 
@@ -58,8 +59,19 @@ def test_catalog_covers_every_message(po, tmp_path):
     """Every marked string has a translation, and no translation is left unused."""
     sources = sorted(str(p) for p in (ROOT / "omarchy_settings").rglob("*.py"))
     pot = tmp_path / "messages.pot"
-    subprocess.run(["xgettext", "--language=Python", "--keyword=_", "--keyword=ngettext:1,2",
-                    "--from-code=UTF-8", "-o", str(pot), *sources], check=True)
+    subprocess.run(
+        [
+            "xgettext",
+            "--language=Python",
+            "--keyword=_",
+            "--keyword=ngettext:1,2",
+            "--from-code=UTF-8",
+            "-o",
+            str(pot),
+            *sources,
+        ],
+        check=True,
+    )
     wanted = {e["msgid"] for e in parse_po(pot)}
     have = {e["msgid"]: e for e in parse_po(po)}
     assert wanted - set(have) == set(), "missing translations"
@@ -81,6 +93,11 @@ def test_compiled_catalog_translates(tmp_path):
 
 def test_unknown_language_falls_back_to_english():
     env = {**os.environ, "LANGUAGE": "xx", "LC_ALL": "C.UTF-8", "LANG": "C.UTF-8", "PYTHONPATH": str(ROOT)}
-    out = subprocess.run([sys.executable, "-c", "from omarchy_settings.i18n import _; print(_('Themes'))"],
-                         env=env, capture_output=True, text=True, check=True).stdout.strip()
+    out = subprocess.run(
+        [sys.executable, "-c", "from omarchy_settings.i18n import _; print(_('Themes'))"],
+        env=env,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
     assert out == "Themes"

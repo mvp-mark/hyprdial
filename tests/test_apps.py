@@ -1,10 +1,4 @@
-import subprocess
-
-import pytest
-
-from omarchy_settings import apps, core
-
-
+from omarchy_settings import apps
 
 
 def test_default_apps_only_installed(commands, tmp_path, monkeypatch):
@@ -45,8 +39,12 @@ def test_mime_choices(commands, tmp_path):
     desktop = apps.desktop_apps([system, user])
     commands.answers["xdg-mime query default application/pdf"] = "org.gnome.Evince.desktop"
     assert apps.mime_choices("pdf", desktop) == (
-        [("org.gnome.Evince.desktop", "Document Viewer (Evince)"),
-         ("org.gnome.Papers.desktop", "Document Viewer (Papers)")], "org.gnome.Evince.desktop")
+        [
+            ("org.gnome.Evince.desktop", "Document Viewer (Evince)"),
+            ("org.gnome.Papers.desktop", "Document Viewer (Papers)"),
+        ],
+        "org.gnome.Evince.desktop",
+    )
     commands.answers["xdg-mime query default application/pdf"] = "helper.desktop"  # hidden, but in use: listed
     assert ("helper.desktop", "Helper") in apps.mime_choices("pdf", desktop)[0]
     assert apps.mime_choices("images", desktop)[0] == [("imv.desktop", "Image Viewer")]
@@ -54,4 +52,6 @@ def test_mime_choices(commands, tmp_path):
 
 def test_set_mime_default_sets_every_type(commands):
     apps.set_mime_default("images", "imv.desktop")
-    assert commands.calls == [["xdg-mime", "default", "imv.desktop", "image/png", "image/jpeg", "image/webp", "image/gif"]]
+    assert commands.calls == [
+        ["xdg-mime", "default", "imv.desktop", "image/png", "image/jpeg", "image/webp", "image/gif"]
+    ]

@@ -1,4 +1,5 @@
 """Wired (Ethernet) group: status, diagnosis, reconnect, and IPv4 settings (DHCP or manual, DNS)."""
+
 from __future__ import annotations
 
 import gi
@@ -33,21 +34,28 @@ def status_text(w: net.Wired) -> str:
 
 def diagnosis_text(code: str) -> tuple[str, str]:
     return {
-        "no-cable": (_("No cable detected"),
-                     _("Check that the cable is firmly plugged in at both ends.")),
-        "slow-link": (_("The link is running at 10 Mb/s"),
-                      _("A gigabit port stuck at 10 Mb/s usually means a damaged cable or a bad port. "
-                        "Try another cable or another port on the router.")),
-        "no-address": (_("No address from the network"),
-                       _("Nothing on the cable answered the request for an address (DHCP). Check that the other "
-                         "end is a router, or set a manual address below.")),
+        "no-cable": (_("No cable detected"), _("Check that the cable is firmly plugged in at both ends.")),
+        "slow-link": (
+            _("The link is running at 10 Mb/s"),
+            _(
+                "A gigabit port stuck at 10 Mb/s usually means a damaged cable or a bad port. "
+                "Try another cable or another port on the router."
+            ),
+        ),
+        "no-address": (
+            _("No address from the network"),
+            _(
+                "Nothing on the cable answered the request for an address (DHCP). Check that the other "
+                "end is a router, or set a manual address below."
+            ),
+        ),
     }.get(code, ("", ""))
 
 
 class DeviceRows:
     """Rows for one Ethernet port: built once; refresh() only updates their text."""
 
-    def __init__(self, group: "EthernetGroup", w: net.Wired, profile: net.Profile | None, title: str):
+    def __init__(self, group: EthernetGroup, w: net.Wired, profile: net.Profile | None, title: str):
         self.group, self.device, self.profile = group, w.device, profile
         self.rows: list[Gtk.Widget] = []
 
@@ -65,8 +73,13 @@ class DeviceRows:
 
         self.details = Adw.ExpanderRow(title=_("Details"))
         self.detail_labels: dict[str, Gtk.Label] = {}
-        for key, label in (("mac", _("Hardware address")), ("ip", _("IPv4 address")),
-                           ("gateway", _("Gateway")), ("dns", _("DNS servers")), ("speed", _("Link speed"))):
+        for key, label in (
+            ("mac", _("Hardware address")),
+            ("ip", _("IPv4 address")),
+            ("gateway", _("Gateway")),
+            ("dns", _("DNS servers")),
+            ("speed", _("Link speed")),
+        ):
             row = Adw.ActionRow(title=label)
             value = Gtk.Label(selectable=True, css_classes=["dim-label"], xalign=1)
             row.add_suffix(value)
@@ -81,8 +94,7 @@ class DeviceRows:
     def refresh(self, w: net.Wired) -> None:
         self.wired = w
         self.status.set_subtitle(status_text(w))
-        self.icon.set_from_icon_name("network-wired-symbolic" if w.connected
-                                     else "network-wired-disconnected-symbolic")
+        self.icon.set_from_icon_name("network-wired-symbolic" if w.connected else "network-wired-disconnected-symbolic")
         self.action_btn.set_label(_("Disconnect") if w.connected or w.connecting else _("Connect"))
         self.action_btn.set_sensitive(w.carrier or w.connected)
         title, help_text = diagnosis_text(net.diagnosis(w))
@@ -117,8 +129,9 @@ class EthernetGroup(Adw.PreferencesGroup):
         self.devices: dict[str, DeviceRows] = {}
         self.extra_rows: list[Gtk.Widget] = []
         self.busy = False
-        refresh = Gtk.Button(icon_name="view-refresh-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                             tooltip_text=_("Refresh"))
+        refresh = Gtk.Button(
+            icon_name="view-refresh-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"], tooltip_text=_("Refresh")
+        )
         refresh.connect("clicked", lambda _b: self.refresh())
         self.set_header_suffix(refresh)
         self.connect("map", lambda _w: self._start_timer())
@@ -187,8 +200,11 @@ class EthernetGroup(Adw.PreferencesGroup):
     # -- actions
     def toggle_connection(self, d: DeviceRows) -> None:
         connected = d.wired.connected or d.wired.connecting
-        self._run(lambda: net.disconnect(d.device) if connected else net.connect(d.device),
-                  _("Disconnected") if connected else _("Connected"), d)
+        self._run(
+            lambda: net.disconnect(d.device) if connected else net.connect(d.device),
+            _("Disconnected") if connected else _("Connected"),
+            d,
+        )
 
     def save(self, d: DeviceRows) -> None:
         try:

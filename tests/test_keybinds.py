@@ -29,10 +29,18 @@ def test_from_modmask_builds_canonical_order():
     assert kb.from_modmask(0, "PRINT") == "PRINT"
 
 
-@pytest.mark.parametrize("key, label", [
-    ("code:10", "1"), ("code:19", "0"), ("code:20", "-"), ("RETURN", "Enter"),
-    ("XF86AudioRaiseVolume", "Volume +"), ("b", "B"), ("code:99", "Code:99"),
-])
+@pytest.mark.parametrize(
+    "key, label",
+    [
+        ("code:10", "1"),
+        ("code:19", "0"),
+        ("code:20", "-"),
+        ("RETURN", "Enter"),
+        ("XF86AudioRaiseVolume", "Volume +"),
+        ("b", "B"),
+        ("code:99", "Code:99"),
+    ],
+)
 def test_key_label(key, label):
     assert kb.key_label(key) == label
 
@@ -66,15 +74,18 @@ def test_escaped_quotes_inside_action(sources):
     assert by_desc(sources, "Make webcam overlay smaller").action.endswith('\\"quoted\\""')
 
 
-@pytest.mark.parametrize("expr, free", [
-    ('{ omarchy = "terminal" }', set()),
-    ("hl.dsp.window.resize({ x = -100, y = 0, relative = true })", set()),
-    ('universal_clipboard_shortcut("CTRL", "C")', {"universal_clipboard_shortcut"}),
-    ("function() local zoom = hl.get_config('z') or 1 hl.config({ c = zoom + 1 }) end", set()),
-    ("function(a, b) return a + b + c end", {"c"}),
-    ('"omarchy-toggle-" .. toggle', {"toggle"}),
-    ("for _, w in ipairs(list) do end", {"list"}),
-])
+@pytest.mark.parametrize(
+    "expr, free",
+    [
+        ('{ omarchy = "terminal" }', set()),
+        ("hl.dsp.window.resize({ x = -100, y = 0, relative = true })", set()),
+        ('universal_clipboard_shortcut("CTRL", "C")', {"universal_clipboard_shortcut"}),
+        ("function() local zoom = hl.get_config('z') or 1 hl.config({ c = zoom + 1 }) end", set()),
+        ("function(a, b) return a + b + c end", {"c"}),
+        ('"omarchy-toggle-" .. toggle', {"toggle"}),
+        ("for _, w in ipairs(list) do end", {"list"}),
+    ],
+)
 def test_free_names(expr, free):
     assert kb.free_names(expr) == free
 
@@ -91,13 +102,17 @@ def live(modmask, key, desc, keycode=0):
 
 
 def test_build_entries_matches_sources_and_reconstructs_loops(sources):
-    entries = kb.build_entries([
-        live(64, "RETURN", "Terminal"),
-        live(64, "", "Expand window left"),        # code:20, no 'key' from hyprctl
-        live(64, "", "Switch to workspace 3"),     # generated in a loop
-        live(64, "C", "Universal copy"),
-        live(64, "F12", "Something else"),         # only exists live
-    ], sources, kb.empty_state())
+    entries = kb.build_entries(
+        [
+            live(64, "RETURN", "Terminal"),
+            live(64, "", "Expand window left"),  # code:20, no 'key' from hyprctl
+            live(64, "", "Switch to workspace 3"),  # generated in a loop
+            live(64, "C", "Universal copy"),
+            live(64, "F12", "Something else"),  # only exists live
+        ],
+        sources,
+        kb.empty_state(),
+    )
     e = {x.desc: x for x in entries}
     assert e["Terminal"].action == '{ omarchy = "terminal" }' and e["Terminal"].category == "applications"
     assert e["Expand window left"].keys == "SUPER + code:20" and e["Expand window left"].action
@@ -124,13 +139,17 @@ def test_build_entries_with_overrides_and_custom(sources):
 
 def test_render_unbinds_first_and_wraps_in_pcall():
     state = {
-        "overrides": {"SUPER + W": {"desc": "Close"},
-                      "SUPER + RETURN": {"desc": "Term", "keys": "SUPER + T", "action": '{ omarchy = "terminal" }'}},
+        "overrides": {
+            "SUPER + W": {"desc": "Close"},
+            "SUPER + RETURN": {"desc": "Term", "keys": "SUPER + T", "action": '{ omarchy = "terminal" }'},
+        },
         "custom": [{"keys": "SUPER + G", "desc": 'Gimp "2"', "kind": "tui", "command": "btop"}],
     }
     lines = [line for line in kb.render(state) if line.startswith("pcall")]
-    assert lines[:2] == ['pcall(function() hl.unbind("SUPER + RETURN") end)',
-                         'pcall(function() hl.unbind("SUPER + W") end)']
+    assert lines[:2] == [
+        'pcall(function() hl.unbind("SUPER + RETURN") end)',
+        'pcall(function() hl.unbind("SUPER + W") end)',
+    ]
     assert lines[2] == 'pcall(function() o.bind("SUPER + T", "Term", { omarchy = "terminal" }) end)'
     assert lines[3] == 'pcall(function() o.bind("SUPER + G", "Gimp \\"2\\"", { tui = "btop" }) end)'
 
@@ -139,9 +158,14 @@ def test_render_empty_state_is_empty():
     assert kb.render(kb.empty_state()) == []
 
 
-@pytest.mark.parametrize("kind, expected", [
-    ("launch", '{ launch = "gimp" }'), ("tui", '{ tui = "gimp" }'), ("command", '"gimp"'),
-])
+@pytest.mark.parametrize(
+    "kind, expected",
+    [
+        ("launch", '{ launch = "gimp" }'),
+        ("tui", '{ tui = "gimp" }'),
+        ("command", '"gimp"'),
+    ],
+)
 def test_custom_action(kind, expected):
     assert kb.custom_action(kind, "gimp") == expected
 

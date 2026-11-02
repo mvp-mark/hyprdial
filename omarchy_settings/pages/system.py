@@ -1,4 +1,5 @@
 """System page: date and time, language, notifications, printers and about (with Omarchy updates)."""
+
 from __future__ import annotations
 
 import gi
@@ -11,11 +12,31 @@ from .. import core, system
 from ..i18n import _
 from ..ui import bg, button_row, switch_row
 
-LANGUAGES = {"en": _("English"), "pt": _("Portuguese"), "es": _("Spanish"), "fr": _("French"), "de": _("German"),
-             "it": _("Italian"), "nl": _("Dutch"), "pl": _("Polish"), "ru": _("Russian"), "uk": _("Ukrainian"),
-             "ja": _("Japanese"), "zh": _("Chinese"), "ko": _("Korean"), "tr": _("Turkish"), "sv": _("Swedish")}
-ABOUT_TITLES = {"omarchy": _("Omarchy version"), "hostname": _("Computer name"), "kernel": _("Kernel"),
-                "cpu": _("Processor"), "cores": _("Threads"), "memory": _("Memory")}
+LANGUAGES = {
+    "en": _("English"),
+    "pt": _("Portuguese"),
+    "es": _("Spanish"),
+    "fr": _("French"),
+    "de": _("German"),
+    "it": _("Italian"),
+    "nl": _("Dutch"),
+    "pl": _("Polish"),
+    "ru": _("Russian"),
+    "uk": _("Ukrainian"),
+    "ja": _("Japanese"),
+    "zh": _("Chinese"),
+    "ko": _("Korean"),
+    "tr": _("Turkish"),
+    "sv": _("Swedish"),
+}
+ABOUT_TITLES = {
+    "omarchy": _("Omarchy version"),
+    "hostname": _("Computer name"),
+    "kernel": _("Kernel"),
+    "cpu": _("Processor"),
+    "cores": _("Threads"),
+    "memory": _("Memory"),
+}
 
 
 def locale_label(loc: str) -> str:
@@ -44,7 +65,8 @@ class SystemPage(Adw.PreferencesPage):
             bg(lambda: (system.time_settings(), system.timezones()), self._populate_time)
 
         self.lang_group = Adw.PreferencesGroup(
-            title=_("Language"), description=_("Used by apps, this one included, after you log out and back in."))
+            title=_("Language"), description=_("Used by apps, this one included, after you log out and back in.")
+        )
         self.add(self.lang_group)
         if core.have("localectl"):
             bg(system.locale_settings, self._populate_language)
@@ -56,11 +78,18 @@ class SystemPage(Adw.PreferencesPage):
 
         printers = Adw.PreferencesGroup(title=_("Printers"))
         if core.have("lpstat"):
-            printers.add(button_row(_("Manage printers"), _("Add printers and see the print queue in the browser (CUPS)"), _("Open"),
-                                    lambda: core.spawn(["xdg-open", system.PRINTERS_URL])))
+            printers.add(
+                button_row(
+                    _("Manage printers"),
+                    _("Add printers and see the print queue in the browser (CUPS)"),
+                    _("Open"),
+                    lambda: core.spawn(["xdg-open", system.PRINTERS_URL]),
+                )
+            )
         else:
-            printers.add(Adw.ActionRow(title=_("CUPS is not installed"),
-                                       subtitle=_("Install the cups package to use printers")))
+            printers.add(
+                Adw.ActionRow(title=_("CUPS is not installed"), subtitle=_("Install the cups package to use printers"))
+            )
         self.add(printers)
 
         self.about_group = Adw.PreferencesGroup(title=_("About this computer"))
@@ -72,7 +101,9 @@ class SystemPage(Adw.PreferencesPage):
         """Adds an Apply button to combo, enabled only when the choice differs from what is in use."""
         btn = Gtk.Button(label=_("Apply"), valign=Gtk.Align.CENTER, css_classes=["suggested-action"], sensitive=False)
         state = {"current": current}
-        combo.connect("notify::selected", lambda r, _p: btn.set_sensitive(options[r.get_selected()] != state["current"]))
+        combo.connect(
+            "notify::selected", lambda r, _p: btn.set_sensitive(options[r.get_selected()] != state["current"])
+        )
 
         def clicked(_b) -> None:
             choice = options[combo.get_selected()]
@@ -113,12 +144,19 @@ class SystemPage(Adw.PreferencesPage):
             subtitle = _("Synchronized") if settings["synced"] else _("Keeps the clock right through the internet")
 
             def set_ntp(on: bool) -> None:
-                bg(lambda: system.set_ntp(on), lambda res: None if not isinstance(res, Exception) and res[0]
-                   else self.win.toast(_("Could not change automatic time")))
+                bg(
+                    lambda: system.set_ntp(on),
+                    lambda res: (
+                        None
+                        if not isinstance(res, Exception) and res[0]
+                        else self.win.toast(_("Could not change automatic time"))
+                    ),
+                )
 
             self.time_group.add(switch_row(_("Set the time automatically"), subtitle, settings["ntp"], set_ntp))
-        self.time_group.add(Adw.ActionRow(title=_("Clock format"),
-                                          subtitle=_("12 or 24 hours: Bar and fonts → Clock format")))
+        self.time_group.add(
+            Adw.ActionRow(title=_("Clock format"), subtitle=_("12 or 24 hours: Bar and fonts → Clock format"))
+        )
 
     # -- language
     def _populate_language(self, result) -> None:
@@ -132,8 +170,12 @@ class SystemPage(Adw.PreferencesPage):
 
         self._apply_row(row, available, current, system.set_locale)
         self.lang_group.add(row)
-        self.lang_group.add(Adw.ActionRow(title=_("Only languages generated on this system are listed"),
-                                          subtitle=_("Others need to be enabled in /etc/locale.gen first")))
+        self.lang_group.add(
+            Adw.ActionRow(
+                title=_("Only languages generated on this system are listed"),
+                subtitle=_("Others need to be enabled in /etc/locale.gen first"),
+            )
+        )
 
     # -- notifications
     def _populate_notifications(self, on) -> None:
@@ -142,13 +184,19 @@ class SystemPage(Adw.PreferencesPage):
             return
 
         def set_dnd(value: bool) -> None:
-            bg(lambda: system.set_dnd(value), lambda ok: None if ok is True
-               else self.win.toast(_("Could not change Do not disturb")))
+            bg(
+                lambda: system.set_dnd(value),
+                lambda ok: None if ok is True else self.win.toast(_("Could not change Do not disturb")),
+            )
 
-        self.notify_group.add(switch_row(_("Do not disturb"), _("Hides notifications; critical ones still show"),
-                                         on, set_dnd))
-        self.notify_group.add(button_row(_("Recent notifications"), _("Shows them again on screen"), _("Show"),
-                                         lambda: bg(system.show_history)))
+        self.notify_group.add(
+            switch_row(_("Do not disturb"), _("Hides notifications; critical ones still show"), on, set_dnd)
+        )
+        self.notify_group.add(
+            button_row(
+                _("Recent notifications"), _("Shows them again on screen"), _("Show"), lambda: bg(system.show_history)
+            )
+        )
 
     # -- about
     def _populate_about(self, info) -> None:
@@ -159,19 +207,29 @@ class SystemPage(Adw.PreferencesPage):
             row.add_suffix(Gtk.Label(label=value, selectable=True, css_classes=["dim-label"], xalign=1, wrap=True))
             self.about_group.add(row)
         if core.have(system.UPDATE_COMMAND[0]):
-            row = button_row(_("Update Omarchy"), _("Checking for updates…"), _("Update"),
-                             lambda: core.spawn(system.UPDATE_COMMAND))
+            row = button_row(
+                _("Update Omarchy"), _("Checking for updates…"), _("Update"), lambda: core.spawn(system.UPDATE_COMMAND)
+            )
             self.about_group.add(row)
             if core.have("omarchy-update-available"):
                 bg(system.update_status, lambda res: self._show_update(row, res))
             else:
                 row.set_subtitle(_("Opens a terminal with the update"))
         if system.can_snapshot():
-            self.about_group.add(button_row(
-                _("Create a snapshot now"), _("A restore point of the system; asks for your password in a terminal"),
-                _("Create"), lambda: core.spawn(system.SNAPSHOT_COMMAND)))
-            self.about_group.add(Adw.ActionRow(title=_("Going back to a snapshot"),
-                                               subtitle=_("Choose it in the boot menu when the computer starts")))
+            self.about_group.add(
+                button_row(
+                    _("Create a snapshot now"),
+                    _("A restore point of the system; asks for your password in a terminal"),
+                    _("Create"),
+                    lambda: core.spawn(system.SNAPSHOT_COMMAND),
+                )
+            )
+            self.about_group.add(
+                Adw.ActionRow(
+                    title=_("Going back to a snapshot"),
+                    subtitle=_("Choose it in the boot menu when the computer starts"),
+                )
+            )
 
     def _show_update(self, row: Adw.ActionRow, res) -> None:
         state, detail = (None, "") if isinstance(res, Exception) else res

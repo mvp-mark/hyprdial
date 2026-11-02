@@ -20,8 +20,11 @@ def test_fold_ignores_case_and_accents():
 
 
 def test_title_prefix_ranks_first():
-    assert [e.title for e in search.search(ENTRIES, "screen")] == ["Screensaver after", "Lock the screen after",
-                                                                   "Night light"]
+    assert [e.title for e in search.search(ENTRIES, "screen")] == [
+        "Screensaver after",
+        "Lock the screen after",
+        "Night light",
+    ]
 
 
 def test_every_word_must_match_and_accents_are_optional():

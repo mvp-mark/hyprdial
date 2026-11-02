@@ -49,17 +49,26 @@ def test_parse_info_reads_battery_and_kind():
     assert (d.name, d.paired, d.connected, d.battery, d.kind) == ("MX Master 3", True, True, 85, "mouse")
 
 
-@pytest.mark.parametrize("icon, kind", [("audio-headset", "audio"), ("audio-card", "audio"),
-                                        ("input-keyboard", "keyboard"), ("input-gaming", "gamepad"),
-                                        ("phone", "phone"), ("", "other")])
+@pytest.mark.parametrize(
+    "icon, kind",
+    [
+        ("audio-headset", "audio"),
+        ("audio-card", "audio"),
+        ("input-keyboard", "keyboard"),
+        ("input-gaming", "gamepad"),
+        ("phone", "phone"),
+        ("", "other"),
+    ],
+)
 def test_kind(icon, kind):
     assert bt.Device("m", "n", icon=icon).kind == kind
 
 
 def test_devices_sorted_and_scan_skips_paired_and_unnamed(btctl):
     answers, calls = btctl
-    answers["bluetoothctl devices"] = (f"Device {PHONE} Pixel\nDevice {MOUSE} MX Master 3\n"
-                                       f"Device {ANON} AA-BB-CC-DD-EE-03\nnot a device line\n")
+    answers["bluetoothctl devices"] = (
+        f"Device {PHONE} Pixel\nDevice {MOUSE} MX Master 3\nDevice {ANON} AA-BB-CC-DD-EE-03\nnot a device line\n"
+    )
     answers[f"bluetoothctl info {MOUSE}"] = INFO_MOUSE
     answers[f"bluetoothctl info {PHONE}"] = f"Device {PHONE}\n\tName: Pixel\n\tIcon: phone\n\tPaired: no\n"
     answers[f"bluetoothctl info {ANON}"] = f"Device {ANON}\n\tName: AA-BB-CC-DD-EE-03\n\tPaired: no\n"
@@ -71,7 +80,8 @@ def test_devices_sorted_and_scan_skips_paired_and_unnamed(btctl):
 def test_run_detects_failure_despite_exit_zero(btctl):
     answers, _calls = btctl
     answers[f"bluetoothctl --timeout 20 connect {MOUSE}"] = (
-        f"Attempting to connect to {MOUSE}\nFailed to connect: org.bluez.Error.Failed br-connection-page-timeout\n")
+        f"Attempting to connect to {MOUSE}\nFailed to connect: org.bluez.Error.Failed br-connection-page-timeout\n"
+    )
     ok, error = bt.run(bt.connect(MOUSE))
     assert not ok and error.startswith("Failed to connect")
     answers[f"bluetoothctl disconnect {MOUSE}"] = "Attempting to disconnect\nSuccessful disconnected\n"
@@ -87,8 +97,13 @@ def feed_all(parser, *chunks):
 
 def test_pair_parser_just_works_then_connect():
     p = bt.PairParser()
-    events = feed_all(p, "Agent registered\n[\x1b[0;93mCHG\x1b[0m] Device AA Connected: yes\n",
-                      "Pairing succ", "essful\n", "Connection successful\n")
+    events = feed_all(
+        p,
+        "Agent registered\n[\x1b[0;93mCHG\x1b[0m] Device AA Connected: yes\n",
+        "Pairing succ",
+        "essful\n",
+        "Connection successful\n",
+    )
     assert events == [("paired",), ("connected",)]
 
 
@@ -105,5 +120,7 @@ def test_pair_parser_failures():
     assert p.feed("Failed to pair: org.bluez.Error.AuthenticationFailed\n") == [("failed", "rejected")]
     assert bt.PairParser().feed(f"Device {MOUSE} not available\n") == [("failed", "not-found")]
     paired = bt.PairParser()
-    assert paired.feed("Pairing successful\nFailed to connect: org.bluez.Error.Failed\n") == \
-        [("paired",), ("connect-failed",)]
+    assert paired.feed("Pairing successful\nFailed to connect: org.bluez.Error.Failed\n") == [
+        ("paired",),
+        ("connect-failed",),
+    ]

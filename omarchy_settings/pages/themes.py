@@ -1,4 +1,5 @@
 """Themes and wallpapers page: gallery with previews, colors and filters; wallpaper grid of the current theme."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -35,8 +36,9 @@ def install_css() -> None:
     if not _css_installed:
         provider = Gtk.CssProvider()
         provider.load_from_data(CSS)
-        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), provider,
-                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
         _css_installed = True
 
 
@@ -56,8 +58,9 @@ def load_thumbnails(paths: list[Path], size: tuple[int, int]) -> dict[Path, GdkP
 
 def texture(pixbuf: GdkPixbuf.Pixbuf) -> Gdk.Texture:
     fmt = Gdk.MemoryFormat.R8G8B8A8 if pixbuf.get_has_alpha() else Gdk.MemoryFormat.R8G8B8
-    return Gdk.MemoryTexture.new(pixbuf.get_width(), pixbuf.get_height(), fmt, pixbuf.read_pixel_bytes(),
-                                 pixbuf.get_rowstride())
+    return Gdk.MemoryTexture.new(
+        pixbuf.get_width(), pixbuf.get_height(), fmt, pixbuf.read_pixel_bytes(), pixbuf.get_rowstride()
+    )
 
 
 def swatch_strip(colors: list[str]) -> Gtk.DrawingArea:
@@ -88,8 +91,9 @@ def thumb_card(size: tuple[int, int], title: str | None = None, extra: Gtk.Widge
     picture = Gtk.Picture(content_fit=Gtk.ContentFit.COVER, css_classes=["oms-thumb", "card"])
     picture.set_size_request(*size)
     overlay.set_child(picture)
-    badge = Gtk.Label(label=_("Current"), css_classes=["oms-badge"], halign=Gtk.Align.START,
-                      valign=Gtk.Align.START, visible=False)
+    badge = Gtk.Label(
+        label=_("Current"), css_classes=["oms-badge"], halign=Gtk.Align.START, valign=Gtk.Align.START, visible=False
+    )
     overlay.add_overlay(badge)
     card.append(overlay)
     if title is not None:
@@ -113,7 +117,8 @@ class ThemesPage(Adw.PreferencesPage):
         self.applying = False
 
         self.theme_group = Adw.PreferencesGroup(
-            title=_("Theme"), description=_("Changes the colors of the system, terminal, bar and editor at once."))
+            title=_("Theme"), description=_("Changes the colors of the system, terminal, bar and editor at once.")
+        )
         tools = Gtk.Box(spacing=8, margin_bottom=8)
         self.search = Gtk.SearchEntry(hexpand=True, placeholder_text=_("Search themes"))
         self.search.connect("search-changed", lambda _e: self.flow.invalidate_filter())
@@ -128,28 +133,51 @@ class ThemesPage(Adw.PreferencesPage):
         tools.append(modes)
         self.theme_group.add(tools)
 
-        self.flow = Gtk.FlowBox(selection_mode=Gtk.SelectionMode.NONE, homogeneous=True,
-                                max_children_per_line=4, min_children_per_line=1, row_spacing=8, column_spacing=8,
-                                activate_on_single_click=True)
+        self.flow = Gtk.FlowBox(
+            selection_mode=Gtk.SelectionMode.NONE,
+            homogeneous=True,
+            max_children_per_line=4,
+            min_children_per_line=1,
+            row_spacing=8,
+            column_spacing=8,
+            activate_on_single_click=True,
+        )
         self.flow.set_filter_func(self._filter)
         self.flow.connect("child-activated", self._on_theme_activated)
         self.theme_group.add(self.flow)
         self.add(self.theme_group)
 
         self.wall_group = Adw.PreferencesGroup(title=_("Wallpaper"))
-        self.wall_flow = Gtk.FlowBox(selection_mode=Gtk.SelectionMode.NONE, homogeneous=True,
-                                     max_children_per_line=6, min_children_per_line=2, row_spacing=6,
-                                     column_spacing=6, activate_on_single_click=True)
+        self.wall_flow = Gtk.FlowBox(
+            selection_mode=Gtk.SelectionMode.NONE,
+            homogeneous=True,
+            max_children_per_line=6,
+            min_children_per_line=2,
+            row_spacing=6,
+            column_spacing=6,
+            activate_on_single_click=True,
+        )
         self.wall_flow.connect("child-activated", self._on_wall_activated)
         self.wall_group.add(self.wall_flow)
         self.add(self.wall_group)
         # separate group: in a PreferencesGroup rows always come before other widgets, and the grid must come first
         wall_actions = Adw.PreferencesGroup()
-        wall_actions.add(button_row(_("Next wallpaper"), _("Cycles through the current theme's backgrounds"),
-                                    _("Change"), self._next_wallpaper))
-        wall_actions.add(button_row(_("Your wallpapers"),
-                                    _("Images in this folder appear here for the current theme"),
-                                    _("Open folder"), self._open_user_folder))
+        wall_actions.add(
+            button_row(
+                _("Next wallpaper"),
+                _("Cycles through the current theme's backgrounds"),
+                _("Change"),
+                self._next_wallpaper,
+            )
+        )
+        wall_actions.add(
+            button_row(
+                _("Your wallpapers"),
+                _("Images in this folder appear here for the current theme"),
+                _("Open folder"),
+                self._open_user_folder,
+            )
+        )
         self.add(wall_actions)
 
         bg(td.list_themes, self._populate_themes)
@@ -158,8 +186,9 @@ class ThemesPage(Adw.PreferencesPage):
     # ------------------------------------------------------------------ themes
     def _populate_themes(self, themes) -> None:
         if isinstance(themes, Exception) or not themes:
-            self.theme_group.add(Adw.ActionRow(title=_("No themes found"),
-                                               subtitle=_("Omarchy's theme folder could not be read")))
+            self.theme_group.add(
+                Adw.ActionRow(title=_("No themes found"), subtitle=_("Omarchy's theme folder could not be read"))
+            )
             return
         self.themes = themes
         for theme in themes:
@@ -171,8 +200,10 @@ class ThemesPage(Adw.PreferencesPage):
             self.cards[theme.slug] = (card, picture, badge)
         self._mark_current_theme(td.current_slug())
         previews = {t.preview: t.slug for t in themes if t.preview}
-        bg(lambda: load_thumbnails(list(previews), THEME_THUMB),
-           lambda pix: self._set_textures(pix, {p: self.cards[s][1] for p, s in previews.items()}))
+        bg(
+            lambda: load_thumbnails(list(previews), THEME_THUMB),
+            lambda pix: self._set_textures(pix, {p: self.cards[s][1] for p, s in previews.items()}),
+        )
 
     @staticmethod
     def _set_textures(pixbufs, pictures: dict) -> None:
@@ -266,13 +297,19 @@ class ThemesPage(Adw.PreferencesPage):
 
     def _on_wall_activated(self, _flow, child: Gtk.FlowBoxChild) -> None:
         path = child.path
-        bg(lambda: core.run(["omarchy-theme-bg-set", str(path)]),
-           lambda _r: (self._mark_current_wallpaper(td.current_wallpaper()),
-                       self.win.toast(_("Wallpaper: {name}").format(name=path.name))))
+        bg(
+            lambda: core.run(["omarchy-theme-bg-set", str(path)]),
+            lambda _r: (
+                self._mark_current_wallpaper(td.current_wallpaper()),
+                self.win.toast(_("Wallpaper: {name}").format(name=path.name)),
+            ),
+        )
 
     def _next_wallpaper(self) -> None:
-        bg(lambda: core.run(["omarchy-theme-bg-next"]),
-           lambda _r: (self._mark_current_wallpaper(td.current_wallpaper()), self.win.toast(_("Wallpaper changed"))))
+        bg(
+            lambda: core.run(["omarchy-theme-bg-next"]),
+            lambda _r: (self._mark_current_wallpaper(td.current_wallpaper()), self.win.toast(_("Wallpaper changed"))),
+        )
 
     def _open_user_folder(self) -> None:
         folder = td.USER_BACKGROUNDS / (td.current_slug() or "")

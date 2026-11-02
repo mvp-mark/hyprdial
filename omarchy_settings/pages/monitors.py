@@ -1,4 +1,5 @@
-"""Displays page: drag-and-drop arrangement, resolution, refresh rate, scale, rotation, VRR, mirroring and brightness."""
+"""Displays page: drag-and-drop arrangement, resolution, refresh rate, scale, rotation, VRR, mirroring, brightness."""
+
 from __future__ import annotations
 
 import re
@@ -65,8 +66,12 @@ class MonitorLayout(Gtk.DrawingArea):
         drag.connect("drag-end", self._on_end)
         self.add_controller(drag)
         motion = Gtk.EventControllerMotion()
-        motion.connect("motion", lambda _c, x, y: self.set_cursor_from_name(
-            "grabbing" if self._drag else "grab" if self._hit(x, y) is not None else None))
+        motion.connect(
+            "motion",
+            lambda _c, x, y: self.set_cursor_from_name(
+                "grabbing" if self._drag else "grab" if self._hit(x, y) is not None else None
+            ),
+        )
         self.add_controller(motion)
 
     def set_rects(self, rects: list[layout.Rect]) -> None:
@@ -121,7 +126,7 @@ class MonitorLayout(Gtk.DrawingArea):
         x = min(max(start.x + dx / k, -ox / k), (self.get_width() - ox) / k - start.w)
         y = min(max(start.y + dy / k, -oy / k), (self.get_height() - oy) / k - start.h)
         moved = start.moved(round(x), round(y))
-        self.rects[i] = layout.snap(moved, self.rects[:i] + self.rects[i + 1:], self.SNAP_PX / k)
+        self.rects[i] = layout.snap(moved, self.rects[:i] + self.rects[i + 1 :], self.SNAP_PX / k)
         self.queue_draw()
 
     def _on_end(self, _gesture, _dx, _dy) -> None:
@@ -129,7 +134,7 @@ class MonitorLayout(Gtk.DrawingArea):
             return
         i, start = self._drag
         self._drag, self._view = None, None
-        self.rects[i] = layout.settle(self.rects[i], self.rects[:i] + self.rects[i + 1:])
+        self.rects[i] = layout.settle(self.rects[i], self.rects[:i] + self.rects[i + 1 :])
         self.rects = layout.normalize(self.rects)
         self.set_cursor_from_name("grab")
         self.queue_draw()
@@ -141,8 +146,11 @@ class MonitorLayout(Gtk.DrawingArea):
             return
         k, ox, oy = self._view_now()
         fg = self.get_color()
-        accent = Adw.StyleManager.get_default().get_accent_color_rgba() \
-            if hasattr(Adw.StyleManager, "get_accent_color_rgba") else None
+        accent = (
+            Adw.StyleManager.get_default().get_accent_color_rgba()
+            if hasattr(Adw.StyleManager, "get_accent_color_rgba")
+            else None
+        )
         dragged = self._drag[0] if self._drag else None
         for i, r in enumerate(self.rects):
             x, y, w, h = ox + r.x * k, oy + r.y * k, r.w * k, r.h * k
@@ -208,8 +216,10 @@ class MonitorsPage(Adw.PreferencesPage):
         self.add(display)
 
         footer = Adw.PreferencesGroup(
-            description=_("Settings are stored in ~/.config/hypr/omarchy-settings.lua and take priority over "
-                          "monitors.lua. 'Restore' returns to what is in monitors.lua."),
+            description=_(
+                "Settings are stored in ~/.config/hypr/omarchy-settings.lua and take priority over "
+                "monitors.lua. 'Restore' returns to what is in monitors.lua."
+            ),
         )
         self.add(footer)
         self.footer = footer
@@ -249,8 +259,10 @@ class MonitorsPage(Adw.PreferencesPage):
             return None
         group = Adw.PreferencesGroup(
             title=_("Arrangement"),
-            description=_("Drag the displays with the mouse; they snap to each other's edges. "
-                          "The position is applied when you let go."),
+            description=_(
+                "Drag the displays with the mouse; they snap to each other's edges. "
+                "The position is applied when you let go."
+            ),
         )
         frame = Gtk.Frame()
         self.layout = MonitorLayout(rects, self._on_arranged)
@@ -265,8 +277,12 @@ class MonitorsPage(Adw.PreferencesPage):
             rule = self._rule(mon)
             if rule.get("disabled") or rule.get("mirror"):
                 continue
-            w, h = layout.logical_size(str(rule.get("mode", "")), to_float(rule.get("scale"), 1.0),
-                                       int(rule.get("transform", 0)), (mon["width"], mon["height"]))
+            w, h = layout.logical_size(
+                str(rule.get("mode", "")),
+                to_float(rule.get("scale"), 1.0),
+                int(rule.get("transform", 0)),
+                (mon["width"], mon["height"]),
+            )
             x, y = self._position(rule, mon)
             rects.append(layout.Rect(mon["name"], x, y, w, h))
         return rects
@@ -305,8 +321,14 @@ class MonitorsPage(Adw.PreferencesPage):
             desc += " · " + _("adjusted by this app")
         group = Adw.PreferencesGroup(title=name, description=desc)
 
-        group.add(switch_row(_("Enabled"), _("Turning it off removes the display from the desktop"), not disabled,
-                             lambda on: self._set_enabled(mon, on)))
+        group.add(
+            switch_row(
+                _("Enabled"),
+                _("Turning it off removes the display from the desktop"),
+                not disabled,
+                lambda on: self._set_enabled(mon, on),
+            )
+        )
         if disabled:
             group.add(self._restore_row(name))
             return group
@@ -316,44 +338,90 @@ class MonitorsPage(Adw.PreferencesPage):
         if current_mode and current_mode not in modes:
             modes.insert(0, current_mode)
         if modes:
-            group.add(combo_row(_("Resolution and refresh rate"), _("Modes the display advertises"), modes,
-                                modes.index(current_mode) if current_mode in modes else 0,
-                                lambda i: self._change(mon, mode=modes[i])))
+            group.add(
+                combo_row(
+                    _("Resolution and refresh rate"),
+                    _("Modes the display advertises"),
+                    modes,
+                    modes.index(current_mode) if current_mode in modes else 0,
+                    lambda i: self._change(mon, mode=modes[i]),
+                )
+            )
 
         scales = list(SCALES)
         current_scale = to_float(rule.get("scale"), 1.0)
         if not any(abs(s - current_scale) < 0.001 for s in scales):
             scales.append(current_scale)
             scales.sort()
-        group.add(combo_row(_("Scale"), _("Interface size on this display"), [scale_label(s) for s in scales],
-                            min(range(len(scales)), key=lambda i: abs(scales[i] - current_scale)),
-                            lambda i: self._change(mon, scale=scales[i])))
+        group.add(
+            combo_row(
+                _("Scale"),
+                _("Interface size on this display"),
+                [scale_label(s) for s in scales],
+                min(range(len(scales)), key=lambda i: abs(scales[i] - current_scale)),
+                lambda i: self._change(mon, scale=scales[i]),
+            )
+        )
 
-        group.add(combo_row(_("Rotation"), _("For portrait displays use 90° or 270°"), TRANSFORMS,
-                            int(rule.get("transform", 0)), lambda i: self._change(mon, transform=i)))
+        group.add(
+            combo_row(
+                _("Rotation"),
+                _("For portrait displays use 90° or 270°"),
+                TRANSFORMS,
+                int(rule.get("transform", 0)),
+                lambda i: self._change(mon, transform=i),
+            )
+        )
 
         x, y = self._position(rule, mon)
-        xrow = spin_row(_("Horizontal position (X)"), _("In logical pixels; you can also drag it in Arrangement"),
-                        -16384, 16384, 10, x, lambda v: self._move(mon, x=v))
-        yrow = spin_row(_("Vertical position (Y)"), _("In logical pixels"), -16384, 16384, 10, y,
-                        lambda v: self._move(mon, y=v))
+        xrow = spin_row(
+            _("Horizontal position (X)"),
+            _("In logical pixels; you can also drag it in Arrangement"),
+            -16384,
+            16384,
+            10,
+            x,
+            lambda v: self._move(mon, x=v),
+        )
+        yrow = spin_row(
+            _("Vertical position (Y)"), _("In logical pixels"), -16384, 16384, 10, y, lambda v: self._move(mon, y=v)
+        )
         self.pos_rows[name] = (xrow, yrow)
         group.add(xrow)
         group.add(yrow)
 
-        group.add(combo_row(_("Variable refresh rate (VRR / FreeSync)"), _("Reduces tearing in games and videos"), VRR,
-                            int(rule.get("vrr", 0)), lambda i: self._change(mon, vrr=i)))
+        group.add(
+            combo_row(
+                _("Variable refresh rate (VRR / FreeSync)"),
+                _("Reduces tearing in games and videos"),
+                VRR,
+                int(rule.get("vrr", 0)),
+                lambda i: self._change(mon, vrr=i),
+            )
+        )
 
         others = [m["name"] for m in self.monitors if m["name"] != name]
         if others:
             options = [_("Don't mirror")] + others
             current = rule.get("mirror")
-            group.add(combo_row(_("Mirror"), _("Shows the same content as another display"), options,
-                                options.index(current) if current in options else 0,
-                                lambda i: self._change(mon, mirror=options[i] if i else None)))
+            group.add(
+                combo_row(
+                    _("Mirror"),
+                    _("Shows the same content as another display"),
+                    options,
+                    options.index(current) if current in options else 0,
+                    lambda i: self._change(mon, mirror=options[i] if i else None),
+                )
+            )
 
-        group.add(switch_row(_("10-bit color"), _("Only enable it if the display and cable support it"),
-                             rule.get("bitdepth") == 10, lambda on: self._change(mon, bitdepth=10 if on else None)))
+        group.add(
+            switch_row(
+                _("10-bit color"),
+                _("Only enable it if the display and cable support it"),
+                rule.get("bitdepth") == 10,
+                lambda on: self._change(mon, bitdepth=10 if on else None),
+            )
+        )
 
         if core.have("omarchy-brightness-display"):
             # brightness arrives later (DDC is slow); 'Restore' stays the last row
@@ -363,8 +431,12 @@ class MonitorsPage(Adw.PreferencesPage):
         return group
 
     def _restore_row(self, name: str) -> Adw.ActionRow:
-        return button_row(_("Restore this display"), _("Returns to what is in monitors.lua"), _("Restore"),
-                          lambda: self._restore(name))
+        return button_row(
+            _("Restore this display"),
+            _("Returns to what is in monitors.lua"),
+            _("Restore"),
+            lambda: self._restore(name),
+        )
 
     @staticmethod
     def _position(rule: dict, mon: dict) -> tuple[int, int]:
@@ -437,9 +509,13 @@ class MonitorsPage(Adw.PreferencesPage):
         dialog.set_close_response("revert")
 
         def body() -> None:
-            dialog.set_body(ngettext("Changes to {name} will be reverted in {seconds} second.",
-                                     "Changes to {name} will be reverted in {seconds} seconds.",
-                                     remaining[0]).format(name=name, seconds=remaining[0]))
+            dialog.set_body(
+                ngettext(
+                    "Changes to {name} will be reverted in {seconds} second.",
+                    "Changes to {name} will be reverted in {seconds} seconds.",
+                    remaining[0],
+                ).format(name=name, seconds=remaining[0])
+            )
 
         def tick() -> bool:
             remaining[0] -= 1
@@ -491,8 +567,11 @@ class MonitorsPage(Adw.PreferencesPage):
 
         def apply() -> bool:
             self._bright_timers[name] = 0
-            bg(lambda: core.run(["omarchy-brightness-display", "--no-osd", "--monitor", name, f"{int(value)}%"],
-                                timeout=15))
+            bg(
+                lambda: core.run(
+                    ["omarchy-brightness-display", "--no-osd", "--monitor", name, f"{int(value)}%"], timeout=15
+                )
+            )
             return False
 
         self._bright_timers[name] = GLib.timeout_add(300, apply)
@@ -500,8 +579,11 @@ class MonitorsPage(Adw.PreferencesPage):
     def _add_text_size(self, group: Adw.PreferencesGroup, size) -> None:
         if not isinstance(size, int):
             return
-        group.add(spin_row(_("Text size"), _("Shell, GTK apps and terminals (default 12)"), 9, 20, 1, size,
-                           self._set_text_size))
+        group.add(
+            spin_row(
+                _("Text size"), _("Shell, GTK apps and terminals (default 12)"), 9, 20, 1, size, self._set_text_size
+            )
+        )
 
     def _set_text_size(self, size: int) -> None:
         if self._text_timer:

@@ -1,4 +1,5 @@
 """Web apps (no GTK, testable): the launchers made by `omarchy webapp install`, listed, added and removed."""
+
 from __future__ import annotations
 
 import re
@@ -46,8 +47,11 @@ def web_apps(directory: Path = DESKTOP_DIR, icon_dir: Path = ICON_DIR) -> list[W
             continue
         exec_line = fields.get("Exec", "")
         if any(launcher in exec_line for launcher in LAUNCHERS):
-            found.append(WebApp(f.stem, fields.get("Name", f.stem), url_of(exec_line),
-                                icon_for(fields.get("Icon", ""), icon_dir)))
+            found.append(
+                WebApp(
+                    f.stem, fields.get("Name", f.stem), url_of(exec_line), icon_for(fields.get("Icon", ""), icon_dir)
+                )
+            )
     return sorted(found, key=lambda a: a.title.casefold())
 
 

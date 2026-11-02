@@ -1,4 +1,5 @@
 """Power page: power profile, night light (on/off, warmth, schedule), power button and idle."""
+
 from __future__ import annotations
 
 import gi
@@ -12,11 +13,18 @@ from ..i18n import _
 from ..ui import bg, combo_row, switch_row
 from .bar import IDLE_TIMES, STAY_AWAKE_FLAG, command, idle_label, read_shell, write_idle
 
-PROFILE_LABELS = {"power-saver": (_("Power saver"), _("Less heat and noise, lower performance")),
-                  "balanced": (_("Balanced"), _("Performance when needed, saves power otherwise")),
-                  "performance": (_("Performance"), _("Highest performance, more power and heat"))}
-BUTTON_ACTIONS = [("menu", _("Show the system menu")), ("lock", _("Lock the screen")),
-                  ("suspend", _("Suspend")), ("shutdown", _("Shut down")), ("nothing", _("Do nothing"))]
+PROFILE_LABELS = {
+    "power-saver": (_("Power saver"), _("Less heat and noise, lower performance")),
+    "balanced": (_("Balanced"), _("Performance when needed, saves power otherwise")),
+    "performance": (_("Performance"), _("Highest performance, more power and heat")),
+}
+BUTTON_ACTIONS = [
+    ("menu", _("Show the system menu")),
+    ("lock", _("Lock the screen")),
+    ("suspend", _("Suspend")),
+    ("shutdown", _("Shut down")),
+    ("nothing", _("Do nothing")),
+]
 
 
 class PowerPage(Adw.PreferencesPage):
@@ -34,8 +42,9 @@ class PowerPage(Adw.PreferencesPage):
         else:
             self.profile_group.add(Adw.ActionRow(title=_("power-profiles-daemon is not installed")))
 
-        self.night_group = Adw.PreferencesGroup(title=_("Night light"),
-                                                description=_("Warmer screen colors to reduce blue light."))
+        self.night_group = Adw.PreferencesGroup(
+            title=_("Night light"), description=_("Warmer screen colors to reduce blue light.")
+        )
         self.add(self.night_group)
         if core.have("hyprsunset"):
             bg(lambda: (power.temperature(), self._read_schedule()), self._populate_night)
@@ -45,9 +54,15 @@ class PowerPage(Adw.PreferencesPage):
         button = Adw.PreferencesGroup(title=_("Power button"))
         current = self.store.extras.get("power_button", "menu")
         keys = [k for k, _label in BUTTON_ACTIONS]
-        button.add(combo_row(_("When the power button is pressed"), _("Works on the lock screen too"),
-                             [label for _k, label in BUTTON_ACTIONS], keys.index(current) if current in keys else 0,
-                             lambda i: self._set_button(keys[i])))
+        button.add(
+            combo_row(
+                _("When the power button is pressed"),
+                _("Works on the lock screen too"),
+                [label for _k, label in BUTTON_ACTIONS],
+                keys.index(current) if current in keys else 0,
+                lambda i: self._set_button(keys[i]),
+            )
+        )
         self.add(button)
 
         self._idle_group(read_shell())
@@ -67,8 +82,10 @@ class PowerPage(Adw.PreferencesPage):
         def changed(r, _p) -> None:
             name = available[r.get_selected()]
             r.set_subtitle(PROFILE_LABELS[name][1])
-            bg(lambda: power.set_profile(name),
-               lambda ok: None if ok is True else self.win.toast(_("Could not change the power profile")))
+            bg(
+                lambda: power.set_profile(name),
+                lambda ok: None if ok is True else self.win.toast(_("Could not change the power profile")),
+            )
 
         row.connect("notify::selected", changed)
         self.profile_group.add(row)
@@ -87,8 +104,9 @@ class PowerPage(Adw.PreferencesPage):
         scheduled = bool(self.store.extras.get("nightlight_schedule")) and schedule is not None
         warmth = self.store.extras.get("nightlight_temp") or (schedule[2] if schedule else power.DEFAULT_TEMP)
 
-        self.night_switch = switch_row(_("Night light"), _("Turns it on or off now"), power.nightlight_on(temp),
-                                       self._set_night)
+        self.night_switch = switch_row(
+            _("Night light"), _("Turns it on or off now"), power.nightlight_on(temp), self._set_night
+        )
         self.night_group.add(self.night_switch)
 
         row = Adw.ActionRow(title=_("Warmth"), subtitle=_("Lower is warmer"))
@@ -104,9 +122,13 @@ class PowerPage(Adw.PreferencesPage):
         self.night_group.add(row)
 
         start, end = (schedule[0], schedule[1]) if schedule else ("20:00", "07:00")
-        self.schedule = Adw.ExpanderRow(title=_("Turn on automatically"), show_enable_switch=True,
-                                        enable_expansion=scheduled, expanded=scheduled,
-                                        subtitle=_("Every day at the times below"))
+        self.schedule = Adw.ExpanderRow(
+            title=_("Turn on automatically"),
+            show_enable_switch=True,
+            enable_expansion=scheduled,
+            expanded=scheduled,
+            subtitle=_("Every day at the times below"),
+        )
         self.start = Adw.EntryRow(title=_("Turns on at (HH:MM)"), text=start, show_apply_button=True)
         self.end = Adw.EntryRow(title=_("Turns off at (HH:MM)"), text=end, show_apply_button=True)
         for entry in (self.start, self.end):
@@ -118,8 +140,10 @@ class PowerPage(Adw.PreferencesPage):
 
     def _set_night(self, on: bool) -> None:
         temp = int(self.warmth.get_value()) if on else power.OFF_TEMP
-        bg(lambda: power.set_temperature(temp),
-           lambda ok: None if ok is True else self.win.toast(_("Could not change the night light")))
+        bg(
+            lambda: power.set_temperature(temp),
+            lambda ok: None if ok is True else self.win.toast(_("Could not change the night light")),
+        )
 
     def _on_warmth(self, scale: Gtk.Scale) -> None:
         if self._temp_timer:
@@ -182,34 +206,59 @@ class PowerPage(Adw.PreferencesPage):
                 self.store.set_extra("nightlight_schedule", True)
                 core.run(["omarchy-restart-hyprsunset"], timeout=15)
 
-            bg(work, lambda r: self.win.toast(
-                _("Night light scheduled from {start} to {end}").format(start=times[0], end=times[1])
-                if not isinstance(r, Exception) else _("Could not save the schedule")))
+            bg(
+                work,
+                lambda r: self.win.toast(
+                    _("Night light scheduled from {start} to {end}").format(start=times[0], end=times[1])
+                    if not isinstance(r, Exception)
+                    else _("Could not save the schedule")
+                ),
+            )
         else:
+
             def work() -> None:
                 power.restore_schedule()
                 self.store.set_extra("nightlight_schedule", None)
                 core.run(["omarchy-restart-hyprsunset"], timeout=15)
 
-            bg(work, lambda r: self.win.toast(_("Night light schedule turned off")
-                                              if not isinstance(r, Exception) else _("Could not save the schedule")))
+            bg(
+                work,
+                lambda r: self.win.toast(
+                    _("Night light schedule turned off")
+                    if not isinstance(r, Exception)
+                    else _("Could not save the schedule")
+                ),
+            )
 
     # -- power button
     def _set_button(self, action: str) -> None:
-        bg(lambda: self.store.set_extra("power_button", None if action == "menu" else action),
-           lambda r: self.win.toast(_("Power button changed") if not isinstance(r, Exception)
-                                    else _("Could not save the setting")))
+        bg(
+            lambda: self.store.set_extra("power_button", None if action == "menu" else action),
+            lambda r: self.win.toast(
+                _("Power button changed") if not isinstance(r, Exception) else _("Could not save the setting")
+            ),
+        )
 
     # -- idle
     def _idle_group(self, config: dict) -> None:
         idle = config.get("idle") if isinstance(config.get("idle"), dict) else {}
-        self.idle_group = Adw.PreferencesGroup(title=_("Idle"),
-                                               description=_("Counted from the moment you stop using the computer."))
+        self.idle_group = Adw.PreferencesGroup(
+            title=_("Idle"), description=_("Counted from the moment you stop using the computer.")
+        )
         self.idle_group.add(self._idle_row("screensaver", _("Screensaver after"), "", idle.get("screensaver", 150)))
-        self.idle_group.add(self._idle_row("lock", _("Lock the screen after"), _("Asks for the password to come back"),
-                                           idle.get("lock", 300)))
-        self.idle_group.add(switch_row(_("Stay awake"), _("Pauses the screensaver and lock until you turn this off"),
-                                       STAY_AWAKE_FLAG.exists(), self._set_stay_awake))
+        self.idle_group.add(
+            self._idle_row(
+                "lock", _("Lock the screen after"), _("Asks for the password to come back"), idle.get("lock", 300)
+            )
+        )
+        self.idle_group.add(
+            switch_row(
+                _("Stay awake"),
+                _("Pauses the screensaver and lock until you turn this off"),
+                STAY_AWAKE_FLAG.exists(),
+                self._set_stay_awake,
+            )
+        )
         self.add(self.idle_group)
 
     def _idle_row(self, key: str, title: str, subtitle: str, current) -> Adw.ComboRow:
@@ -222,8 +271,10 @@ class PowerPage(Adw.PreferencesPage):
             values.insert(-1, current)
 
         def on_select(i: int) -> None:
-            bg(lambda: write_idle(key, values[i]),
-               lambda ok: None if ok is True else self.win.toast(_("Could not write shell.json")))
+            bg(
+                lambda: write_idle(key, values[i]),
+                lambda ok: None if ok is True else self.win.toast(_("Could not write shell.json")),
+            )
 
         return combo_row(title, subtitle, [idle_label(s) for s in values], values.index(current), on_select)
 

@@ -4,6 +4,7 @@ Active shortcuts come from `hyprctl binds -j`, which in Lua mode doesn't say wha
 recovered by reading the o.bind(...) calls in Omarchy's files and the user's bindings.lua; only shortcuts found
 that way can change keys. Any active shortcut can be disabled.
 """
+
 from __future__ import annotations
 
 import json
@@ -20,8 +21,17 @@ DEFAULT_DIR = OMARCHY_PATH / "default" / "hypr" / "bindings"
 USER_FILE = core.CONF_DIR / "hypr" / "bindings.lua"
 
 MOD_BITS = [(64, "SUPER"), (1, "SHIFT"), (4, "CTRL"), (8, "ALT")]
-MOD_ALIASES = {"SUPER": "SUPER", "MOD4": "SUPER", "WIN": "SUPER", "LOGO": "SUPER", "SHIFT": "SHIFT",
-               "CTRL": "CTRL", "CONTROL": "CTRL", "ALT": "ALT", "MOD1": "ALT"}
+MOD_ALIASES = {
+    "SUPER": "SUPER",
+    "MOD4": "SUPER",
+    "WIN": "SUPER",
+    "LOGO": "SUPER",
+    "SHIFT": "SHIFT",
+    "CTRL": "CTRL",
+    "CONTROL": "CTRL",
+    "ALT": "ALT",
+    "MOD1": "ALT",
+}
 
 CATEGORIES = {
     "applications": _("Applications"),
@@ -38,12 +48,34 @@ CATEGORY_ORDER = list(CATEGORIES)
 KINDS = [("launch", _("Open app")), ("command", _("Run command")), ("tui", _("Open in terminal"))]
 
 KEY_NAMES = {
-    "RETURN": "Enter", "SPACE": _("Space"), "ESCAPE": "Esc", "TAB": "Tab", "BACKSPACE": "Backspace",
-    "DELETE": "Delete", "PRINT": "Print", "SLASH": "/", "COMMA": ",", "PERIOD": ".", "MINUS": "-",
-    "EQUAL": "=", "LEFT": "←", "RIGHT": "→", "UP": "↑", "DOWN": "↓", "HOME": "Home", "END": "End",
-    "XF86AUDIORAISEVOLUME": "Volume +", "XF86AUDIOLOWERVOLUME": "Volume −", "XF86AUDIOMUTE": _("Mute"),
-    "XF86AUDIOMICMUTE": _("Mic mute"), "XF86MONBRIGHTNESSUP": _("Brightness +"), "XF86MONBRIGHTNESSDOWN": _("Brightness −"),
-    "XF86AUDIOPLAY": "Play", "XF86AUDIOPAUSE": _("Pause"), "XF86AUDIONEXT": _("Next"), "XF86AUDIOPREV": _("Previous"),
+    "RETURN": "Enter",
+    "SPACE": _("Space"),
+    "ESCAPE": "Esc",
+    "TAB": "Tab",
+    "BACKSPACE": "Backspace",
+    "DELETE": "Delete",
+    "PRINT": "Print",
+    "SLASH": "/",
+    "COMMA": ",",
+    "PERIOD": ".",
+    "MINUS": "-",
+    "EQUAL": "=",
+    "LEFT": "←",
+    "RIGHT": "→",
+    "UP": "↑",
+    "DOWN": "↓",
+    "HOME": "Home",
+    "END": "End",
+    "XF86AUDIORAISEVOLUME": "Volume +",
+    "XF86AUDIOLOWERVOLUME": "Volume −",
+    "XF86AUDIOMUTE": _("Mute"),
+    "XF86AUDIOMICMUTE": _("Mic mute"),
+    "XF86MONBRIGHTNESSUP": _("Brightness +"),
+    "XF86MONBRIGHTNESSDOWN": _("Brightness −"),
+    "XF86AUDIOPLAY": "Play",
+    "XF86AUDIOPAUSE": _("Pause"),
+    "XF86AUDIONEXT": _("Next"),
+    "XF86AUDIOPREV": _("Previous"),
 }
 
 # Keycodes used by Omarchy (physical position, independent of the layout)
@@ -153,11 +185,47 @@ def find_binds(text: str) -> list[tuple[str, list[str]]]:
     return calls
 
 
-LUA_KEYWORDS = {"and", "break", "do", "else", "elseif", "end", "false", "for", "function", "goto", "if", "in",
-                "local", "nil", "not", "or", "repeat", "return", "then", "true", "until", "while"}
+LUA_KEYWORDS = {
+    "and",
+    "break",
+    "do",
+    "else",
+    "elseif",
+    "end",
+    "false",
+    "for",
+    "function",
+    "goto",
+    "if",
+    "in",
+    "local",
+    "nil",
+    "not",
+    "or",
+    "repeat",
+    "return",
+    "then",
+    "true",
+    "until",
+    "while",
+}
 # Names that exist in any config file; anything else would be local to the source file.
-GLOBAL_NAMES = {"hl", "o", "string", "table", "math", "os", "tostring", "tonumber", "ipairs", "pairs", "type",
-                "print", "select", "unpack"}
+GLOBAL_NAMES = {
+    "hl",
+    "o",
+    "string",
+    "table",
+    "math",
+    "os",
+    "tostring",
+    "tonumber",
+    "ipairs",
+    "pairs",
+    "type",
+    "print",
+    "select",
+    "unpack",
+}
 
 
 def free_names(expr: str) -> set[str]:
@@ -174,11 +242,14 @@ def free_names(expr: str) -> set[str]:
     text = "".join(code)
     declared, used = set(), set()
     for m in re.finditer(r"[A-Za-z_]\w*", text):
-        name, before, after = m.group(), text[:m.start()].rstrip(), text[m.end():].lstrip()
+        name, before, after = m.group(), text[: m.start()].rstrip(), text[m.end() :].lstrip()
         if name in LUA_KEYWORDS or before.endswith((".", ":")) and not before.endswith(".."):
             continue
-        if re.search(r"\b(local|for)\s*$", before) or re.search(r"\bfunction\s*\([\w\s,]*$", before) \
-                or re.search(r"\bfor\s+[\w\s,]*$", before):
+        if (
+            re.search(r"\b(local|for)\s*$", before)
+            or re.search(r"\bfunction\s*\([\w\s,]*$", before)
+            or re.search(r"\bfor\s+[\w\s,]*$", before)
+        ):
             declared.add(name)  # local x / for x, y in / function(a, b)
         elif after.startswith("=") and not after.startswith("=="):
             if before.endswith(("{", ",")):
@@ -240,8 +311,11 @@ def live_binds() -> list[dict]:
         data = json.loads(core.out(["hyprctl", "binds", "-j"]))
     except (ValueError, TypeError):
         return []
-    return [b for b in data if isinstance(b, dict) and not b.get("mouse") and not b.get("submap")] \
-        if isinstance(data, list) else []
+    return (
+        [b for b in data if isinstance(b, dict) and not b.get("mouse") and not b.get("submap")]
+        if isinstance(data, list)
+        else []
+    )
 
 
 def guess_category(desc: str) -> str:
@@ -315,19 +389,25 @@ def build_entries(live: list[dict], sources: list[SourceBind], state: dict) -> l
         desc = b.get("description") or (src.desc if src else "") or text
         category = src.category if src else guess_category(desc)
         if src is None:
-            entries[c] = Entry(text, desc, category, locked=_("Generated in a loop by Omarchy; it can only be disabled"))
+            entries[c] = Entry(
+                text, desc, category, locked=_("Generated in a loop by Omarchy; it can only be disabled")
+            )
         elif not src.movable:
-            entries[c] = Entry(src.keys, desc, category,
-                               locked=_("Uses an internal Omarchy function; it can only be disabled"))
+            entries[c] = Entry(
+                src.keys, desc, category, locked=_("Uses an internal Omarchy function; it can only be disabled")
+            )
         else:
             entries[c] = Entry(src.keys, desc, category, src.action)
 
     for orig, override in overrides.items():
         src = by_canon.get(canon(orig))
-        entries[canon(orig)] = Entry(orig, override.get("desc") or (src.desc if src else orig),
-                                     src.category if src else guess_category(override.get("desc", "")),
-                                     action=override.get("action") or (src.action if src and src.movable else None),
-                                     override=dict(override))
+        entries[canon(orig)] = Entry(
+            orig,
+            override.get("desc") or (src.desc if src else orig),
+            src.category if src else guess_category(override.get("desc", "")),
+            action=override.get("action") or (src.action if src and src.movable else None),
+            override=dict(override),
+        )
     return sorted(entries.values(), key=lambda e: (CATEGORY_ORDER.index(e.category), e.desc.lower()))
 
 
@@ -350,9 +430,12 @@ def render(state: dict) -> list[str]:
     for orig in sorted(overrides):
         o = overrides[orig]
         if o.get("keys") and o.get("action"):
-            lines.append(f"pcall(function() o.bind({core.lua(o['keys'])}, {core.lua(o.get('desc') or '')}, "
-                         f"{o['action']}) end)")
+            lines.append(
+                f"pcall(function() o.bind({core.lua(o['keys'])}, {core.lua(o.get('desc') or '')}, {o['action']}) end)"
+            )
     for c in custom:
-        lines.append(f"pcall(function() o.bind({core.lua(c['keys'])}, {core.lua(c['desc'])}, "
-                     f"{custom_action(c['kind'], c['command'])}) end)")
+        lines.append(
+            f"pcall(function() o.bind({core.lua(c['keys'])}, {core.lua(c['desc'])}, "
+            f"{custom_action(c['kind'], c['command'])}) end)"
+        )
     return lines

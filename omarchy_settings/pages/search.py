@@ -1,4 +1,5 @@
 """Search dialog (Ctrl+F): finds any setting by name across the pages and jumps to it."""
+
 from __future__ import annotations
 
 import gi
@@ -35,14 +36,17 @@ def collect(stack: Adw.ViewStack) -> list[search.Entry]:
     for page in stack.get_pages():
         name, page_title = page.get_name(), page.get_title()
 
-        def walk(widget: Gtk.Widget) -> None:
+        def walk(widget: Gtk.Widget, name=name, page_title=page_title) -> None:
             if isinstance(widget, Adw.PreferencesRow) and widget.get_title():
                 group = ancestor(widget, Adw.PreferencesGroup)
                 subtitle = widget.get_subtitle() if isinstance(widget, (Adw.ActionRow, Adw.ExpanderRow)) else ""
-                entries.append(search.Entry(widget.get_title(), subtitle or "", name, page_title,
-                                            group.get_title() if group else "", widget))
+                entries.append(
+                    search.Entry(
+                        widget.get_title(), subtitle or "", name, page_title, group.get_title() if group else "", widget
+                    )
+                )
             for child in children(widget):
-                walk(child)
+                walk(child, name, page_title)
 
         walk(page.get_child())
     return search.unique(entries)
@@ -54,8 +58,9 @@ def reveal(stack: Adw.ViewStack, entry: search.Entry) -> None:
     if not _css_loaded:
         provider = Gtk.CssProvider()
         provider.load_from_string(HIGHLIGHT_CSS)
-        Gtk.StyleContext.add_provider_for_display(stack.get_display(), provider,
-                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        Gtk.StyleContext.add_provider_for_display(
+            stack.get_display(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
         _css_loaded = True
     row = entry.widget
     stack.set_visible_child_name(entry.page)
@@ -88,11 +93,18 @@ class SearchDialog(Adw.Dialog):
         self.entry = Gtk.SearchEntry(placeholder_text=_("Search settings"), hexpand=True)
         self.entry.connect("search-changed", lambda _e: self._update())
         self.entry.connect("activate", lambda _e: self._open(0))
-        self.list = Gtk.ListBox(css_classes=["boxed-list"], selection_mode=Gtk.SelectionMode.NONE,
-                                margin_start=12, margin_end=12, margin_top=6, margin_bottom=12)
+        self.list = Gtk.ListBox(
+            css_classes=["boxed-list"],
+            selection_mode=Gtk.SelectionMode.NONE,
+            margin_start=12,
+            margin_end=12,
+            margin_top=6,
+            margin_bottom=12,
+        )
         self.list.connect("row-activated", lambda _l, row: self._open(row.get_index()))
-        self.status = Adw.StatusPage(icon_name="system-search-symbolic", vexpand=True,
-                                     title=_("Type the name of a setting"))
+        self.status = Adw.StatusPage(
+            icon_name="system-search-symbolic", vexpand=True, title=_("Type the name of a setting")
+        )
         scrolled = Gtk.ScrolledWindow(vexpand=True, child=self.list, hscrollbar_policy=Gtk.PolicyType.NEVER)
         self.body = Gtk.Stack()
         self.body.add_named(self.status, "status")

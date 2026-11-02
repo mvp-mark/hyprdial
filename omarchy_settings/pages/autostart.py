@@ -1,4 +1,5 @@
 """Startup apps group of the Apps page: XDG autostart switches, own commands and the user's autostart.lua."""
+
 from __future__ import annotations
 
 import gi
@@ -16,25 +17,36 @@ EXTRAS_KEY = "autostart"
 
 class StartupGroup(Adw.PreferencesGroup):
     def __init__(self, win):
-        super().__init__(title=_("Startup apps"),
-                         description=_("Started when you log in. Omarchy starts some apps by itself (the bar, "
-                                       "Fcitx 5…), so one that is off here may still run."))
+        super().__init__(
+            title=_("Startup apps"),
+            description=_(
+                "Started when you log in. Omarchy starts some apps by itself (the bar, "
+                "Fcitx 5…), so one that is off here may still run."
+            ),
+        )
         self.win = win
         self.store = win.store
         self.rows: list[Gtk.Widget] = []
 
-        self.commands = Adw.ExpanderRow(title=_("Your commands"),
-                                        subtitle=_("Run at login through Hyprland"))
-        self.add_command = Adw.EntryRow(title=_("Add a command (e.g. discord --start-minimized)"),
-                                        show_apply_button=True)
+        self.commands = Adw.ExpanderRow(title=_("Your commands"), subtitle=_("Run at login through Hyprland"))
+        self.add_command = Adw.EntryRow(
+            title=_("Add a command (e.g. discord --start-minimized)"), show_apply_button=True
+        )
         self.add_command.connect("apply", lambda r: self._add(r.get_text()))
         self.commands.add_row(self.add_command)
         self.command_rows: list[Gtk.Widget] = []
 
-        self.lua = Adw.ExpanderRow(title=_("In autostart.lua"), subtitle=str(autostart.AUTOSTART_LUA).replace(
-            str(core.HOME), "~"))
-        self.lua.add_row(button_row(_("Edit the file"), _("Changes there are yours; this app only reads them"),
-                                    _("Open"), lambda: core.open_in_editor(autostart.AUTOSTART_LUA)))
+        self.lua = Adw.ExpanderRow(
+            title=_("In autostart.lua"), subtitle=str(autostart.AUTOSTART_LUA).replace(str(core.HOME), "~")
+        )
+        self.lua.add_row(
+            button_row(
+                _("Edit the file"),
+                _("Changes there are yours; this app only reads them"),
+                _("Open"),
+                lambda: core.open_in_editor(autostart.AUTOSTART_LUA),
+            )
+        )
         self.lua_rows: list[Gtk.Widget] = []
 
         self.add(self.commands)
@@ -94,15 +106,17 @@ class StartupGroup(Adw.PreferencesGroup):
         self.command_rows = []
         for cmd in self._current():
             row = Adw.ActionRow(title=cmd, use_markup=False, css_classes=["monospace"])
-            remove = Gtk.Button(icon_name="user-trash-symbolic", tooltip_text=_("Remove"), css_classes=["flat"],
-                                valign=Gtk.Align.CENTER)
+            remove = Gtk.Button(
+                icon_name="user-trash-symbolic", tooltip_text=_("Remove"), css_classes=["flat"], valign=Gtk.Align.CENTER
+            )
             remove.connect("clicked", lambda _b, cmd=cmd: self._save([c for c in self._current() if c != cmd]))
             row.add_suffix(remove)
             self.command_rows.append(row)
             self.commands.add_row(row)
         n = len(self.command_rows)
-        self.commands.set_subtitle(ngettext("{n} command", "{n} commands", n).format(n=n) if n else
-                                   _("Run at login through Hyprland"))
+        self.commands.set_subtitle(
+            ngettext("{n} command", "{n} commands", n).format(n=n) if n else _("Run at login through Hyprland")
+        )
 
     def _add(self, text: str) -> None:
         cmd = autostart.valid_command(text)

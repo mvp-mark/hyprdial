@@ -1,4 +1,5 @@
 """Shared fixtures: a fake command runner standing in for core.run/out/have."""
+
 import subprocess
 
 import pytest

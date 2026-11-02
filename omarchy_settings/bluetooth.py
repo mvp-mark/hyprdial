@@ -3,6 +3,7 @@
 Reading and simple commands run bluetoothctl once per call. Pairing needs an agent that can show or confirm a
 code, so it runs one interactive bluetoothctl fed through stdin; PairParser turns its output into events.
 """
+
 from __future__ import annotations
 
 import re
@@ -31,13 +32,25 @@ class Device:
         icon = self.icon
         if icon.startswith("audio"):
             return "audio"
-        return {"input-mouse": "mouse", "input-tablet": "mouse", "input-keyboard": "keyboard",
-                "input-gaming": "gamepad", "phone": "phone", "computer": "computer"}.get(icon, "other")
+        return {
+            "input-mouse": "mouse",
+            "input-tablet": "mouse",
+            "input-keyboard": "keyboard",
+            "input-gaming": "gamepad",
+            "phone": "phone",
+            "computer": "computer",
+        }.get(icon, "other")
 
 
-KIND_ICONS = {"audio": "audio-headphones-symbolic", "mouse": "input-mouse-symbolic",
-              "keyboard": "input-keyboard-symbolic", "gamepad": "input-gaming-symbolic",
-              "phone": "phone-symbolic", "computer": "computer-symbolic", "other": "bluetooth-symbolic"}
+KIND_ICONS = {
+    "audio": "audio-headphones-symbolic",
+    "mouse": "input-mouse-symbolic",
+    "keyboard": "input-keyboard-symbolic",
+    "gamepad": "input-gaming-symbolic",
+    "phone": "phone-symbolic",
+    "computer": "computer-symbolic",
+    "other": "bluetooth-symbolic",
+}
 
 
 def clean(text: str) -> str:
@@ -67,9 +80,15 @@ def parse_info(mac: str, text: str) -> Device:
         if sep and key not in fields:
             fields[key] = value.strip()
     battery = re.search(r"\((\d+)\)", fields.get("Battery Percentage", ""))
-    return Device(mac=mac, name=fields.get("Alias") or fields.get("Name") or mac, icon=fields.get("Icon", ""),
-                  paired=fields.get("Paired") == "yes", trusted=fields.get("Trusted") == "yes",
-                  connected=fields.get("Connected") == "yes", battery=int(battery.group(1)) if battery else None)
+    return Device(
+        mac=mac,
+        name=fields.get("Alias") or fields.get("Name") or mac,
+        icon=fields.get("Icon", ""),
+        paired=fields.get("Paired") == "yes",
+        trusted=fields.get("Trusted") == "yes",
+        connected=fields.get("Connected") == "yes",
+        battery=int(battery.group(1)) if battery else None,
+    )
 
 
 def listed() -> list[tuple[str, str]]:

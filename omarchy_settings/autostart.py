@@ -4,6 +4,7 @@ Two sources: XDG autostart entries (system ones in /etc/xdg/autostart, the user'
 off with a user file that says Hidden=true, as the XDG spec has it; and the user's own commands, written to the
 generated file with o.launch_on_start. Commands in ~/.config/hypr/autostart.lua are read only.
 """
+
 from __future__ import annotations
 
 import os
@@ -50,8 +51,9 @@ def read(path: Path) -> dict[str, str] | None:
         return None
 
 
-def entries(user_dir: Path = USER_DIR, sys_dirs: list[Path] | None = None,
-            current: set[str] | None = None) -> list[Entry]:
+def entries(
+    user_dir: Path = USER_DIR, sys_dirs: list[Path] | None = None, current: set[str] | None = None
+) -> list[Entry]:
     current = desktops() if current is None else current
     found: dict[str, tuple[dict, bool]] = {}
     for directory in system_dirs() if sys_dirs is None else sys_dirs:
@@ -69,8 +71,9 @@ def entries(user_dir: Path = USER_DIR, sys_dirs: list[Path] | None = None,
         if fields.get("Type", "Application") != "Application" or not applies(fields, current):
             continue
         enabled = fields.get("Hidden") != "true" and fields.get("X-GNOME-Autostart-enabled") != "false"
-        result.append(Entry(file, fields.get("Name", file.removesuffix(".desktop")), fields.get("Comment", ""),
-                            enabled, system))
+        result.append(
+            Entry(file, fields.get("Name", file.removesuffix(".desktop")), fields.get("Comment", ""), enabled, system)
+        )
     return sorted(result, key=lambda e: e.name.casefold())
 
 

@@ -1,5 +1,3 @@
-import subprocess
-
 import pytest
 
 from omarchy_settings import core, power
@@ -14,8 +12,6 @@ PROFILES_OUT = """* performance:
   power-saver:
     CpuDriver:\tamd_pstate
 """
-
-
 
 
 @pytest.fixture
@@ -47,13 +43,16 @@ def test_schedule_round_trip():
 
 
 def test_omarchy_default_file_has_no_schedule():
-    default = ("profile {\n    time = 07:00\n    identity = true\n}\n\n"
-               "# profile {\n#     time = 20:00\n#     temperature = 4000\n# }\n")
+    default = (
+        "profile {\n    time = 07:00\n    identity = true\n}\n\n"
+        "# profile {\n#     time = 20:00\n#     temperature = 4000\n# }\n"
+    )
     assert power.parse_schedule(default) is None
 
 
-@pytest.mark.parametrize("text, expected", [("7:05", "07:05"), (" 20:00 ", "20:00"), ("24:00", None),
-                                            ("12:60", None), ("8h", None)])
+@pytest.mark.parametrize(
+    "text, expected", [("7:05", "07:05"), (" 20:00 ", "20:00"), ("24:00", None), ("12:60", None), ("8h", None)]
+)
 def test_valid_time(text, expected):
     assert power.valid_time(text) == expected
 
@@ -80,12 +79,12 @@ def test_render_extras():
 
 def test_store_persists_extras(tmp_path, monkeypatch):
     monkeypatch.setattr(core, "run", lambda args, timeout=10: None)
-    paths = dict(managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua",
-                 state=tmp_path / "state.json")
+    paths = dict(
+        managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua", state=tmp_path / "state.json"
+    )
     store = core.HyprStore(**paths)
     store.set_extra("power_button", "lock")
     assert 'o.bind("XF86PowerOff", "Power button", "omarchy-system-lock"' in paths["managed"].read_text()
     assert core.HyprStore(**paths).extras == {"power_button": "lock"}
     store.set_extra("power_button", None)
     assert "XF86PowerOff" not in paths["managed"].read_text()
-

@@ -1,4 +1,5 @@
 """Network and Bluetooth page (Ethernet, Wi-Fi and Bluetooth settings, Omarchy's TUIs)."""
+
 from __future__ import annotations
 
 import gi

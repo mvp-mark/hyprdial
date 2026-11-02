@@ -3,6 +3,7 @@
 Coordinates are Hyprland logical pixels: the mode size divided by the scale, with width and
 height swapped when the display is rotated 90° or 270°.
 """
+
 from __future__ import annotations
 
 import re

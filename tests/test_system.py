@@ -5,15 +5,17 @@ import pytest
 from omarchy_settings import core, system
 
 
-
-
 def test_time_settings(commands):
-    commands.answers["timedatectl show"] = "Timezone=America/Manaus\nLocalRTC=no\nCanNTP=yes\nNTP=yes\nNTPSynchronized=no\n"
+    commands.answers["timedatectl show"] = (
+        "Timezone=America/Manaus\nLocalRTC=no\nCanNTP=yes\nNTP=yes\nNTPSynchronized=no\n"
+    )
     assert system.time_settings() == {"timezone": "America/Manaus", "ntp": True, "can_ntp": True, "synced": False}
 
 
 def test_locale_settings_skip_c(commands):
-    commands.answers["localectl status"] = "System Locale: LANG=pt_BR.UTF-8\n                LC_TIME=en_US.UTF-8\n    VC Keymap: br"
+    commands.answers["localectl status"] = (
+        "System Locale: LANG=pt_BR.UTF-8\n                LC_TIME=en_US.UTF-8\n    VC Keymap: br"
+    )
     commands.answers["localectl list-locales"] = "C.UTF-8\nen_US.UTF-8\npt_BR.UTF-8\n"
     assert system.locale_settings() == ("pt_BR.UTF-8", ["en_US.UTF-8", "pt_BR.UTF-8"])
 
@@ -22,8 +24,11 @@ def test_set_commands(commands):
     assert system.set_timezone("Europe/Lisbon") == (True, "")
     system.set_ntp(False)
     system.set_locale("en_US.UTF-8")
-    assert commands.calls == [["timedatectl", "set-timezone", "Europe/Lisbon"], ["timedatectl", "set-ntp", "false"],
-                     ["localectl", "set-locale", "LANG=en_US.UTF-8"]]
+    assert commands.calls == [
+        ["timedatectl", "set-timezone", "Europe/Lisbon"],
+        ["timedatectl", "set-ntp", "false"],
+        ["localectl", "set-locale", "LANG=en_US.UTF-8"],
+    ]
 
 
 def test_dnd(commands):
@@ -43,11 +48,14 @@ def test_about_drops_empty_values(commands, monkeypatch):
     assert "cpu" not in dict(system.about()) and "memory" not in dict(system.about())
 
 
-@pytest.mark.parametrize("code, stdout, expected", [
-    (0, "omarchy 4.0.6-1 -> 4.0.7-1\n", ("available", "omarchy 4.0.6-1 -> 4.0.7-1")),
-    (1, "Omarchy is up to date\n", ("current", "")),
-    (1, "", (None, "")),  # failed some other way
-])
+@pytest.mark.parametrize(
+    "code, stdout, expected",
+    [
+        (0, "omarchy 4.0.6-1 -> 4.0.7-1\n", ("available", "omarchy 4.0.6-1 -> 4.0.7-1")),
+        (1, "Omarchy is up to date\n", ("current", "")),
+        (1, "", (None, "")),  # failed some other way
+    ],
+)
 def test_update_status(monkeypatch, code, stdout, expected):
     monkeypatch.setattr(core, "run", lambda args, timeout=10: subprocess.CompletedProcess(args, code, stdout, ""))
     assert system.update_status() == expected

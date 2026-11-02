@@ -4,7 +4,7 @@ import pytest
 
 from omarchy_settings import core
 
-MAIN = '''dofile("bootstrap.lua")
+MAIN = """dofile("bootstrap.lua")
 require("default.hypr.omarchy")
 require("hypr.monitors")
 require("hypr.autostart")
@@ -13,7 +13,7 @@ require("hypr.autostart")
 require("default.hypr.toggles")
 
 o.window(".*", { idle_inhibit = "fullscreen" })
-'''
+"""
 
 
 @pytest.fixture
@@ -40,9 +40,18 @@ def store(tmp_path, calls):
 
 
 # ------------------------------------------------------------------ conversion to Lua
-@pytest.mark.parametrize("value, expected", [
-    (True, "true"), (5, "5"), (1.0, "1"), (0.92, "0.92"), (1.333333, "1.333333"), ("br", '"br"'), ('a"b', '"a\\"b"'),
-])
+@pytest.mark.parametrize(
+    "value, expected",
+    [
+        (True, "true"),
+        (5, "5"),
+        (1.0, "1"),
+        (0.92, "0.92"),
+        (1.333333, "1.333333"),
+        ("br", '"br"'),
+        ('a"b', '"a\\"b"'),
+    ],
+)
 def test_lua_literals(value, expected):
     assert core.lua(value) == expected
 
@@ -58,8 +67,9 @@ def test_option_lua_recovers_types(text, expected):
 
 
 def test_config_call_nests_sections_and_maps_hyphens():
-    code = core.config_call({"decoration:blur:enabled": "true", "input:touchpad:tap-to-click": "false",
-                             "general:gaps_in": "5"})
+    code = core.config_call(
+        {"decoration:blur:enabled": "true", "input:touchpad:tap-to-click": "false", "general:gaps_in": "5"}
+    )
     assert code == (
         "hl.config({\n"
         "  decoration = {\n    blur = {\n      enabled = true,\n    },\n  },\n"
@@ -71,15 +81,34 @@ def test_config_call_nests_sections_and_maps_hyphens():
 
 def test_monitor_call_keeps_field_order():
     rule = {"scale": 1.25, "output": "DP-1", "vrr": 1, "mode": "2560x1440@164.83", "position": "0x0"}
-    assert core.monitor_call(rule) == \
-        'hl.monitor({ output = "DP-1", mode = "2560x1440@164.83", position = "0x0", scale = 1.25, vrr = 1 })'
+    assert (
+        core.monitor_call(rule)
+        == 'hl.monitor({ output = "DP-1", mode = "2560x1440@164.83", position = "0x0", scale = 1.25, vrr = 1 })'
+    )
 
 
 def test_live_rule_from_hyprctl_monitor():
-    mon = {"name": "DP-1", "width": 2560, "height": 1440, "refreshRate": 164.83299, "x": 0, "y": 0,
-           "scale": 1.0, "transform": 0, "vrr": True, "mirrorOf": "none", "disabled": False}
-    assert core.live_rule(mon) == {"output": "DP-1", "mode": "2560x1440@164.83", "position": "0x0",
-                                   "scale": 1.0, "transform": 0, "vrr": 1}
+    mon = {
+        "name": "DP-1",
+        "width": 2560,
+        "height": 1440,
+        "refreshRate": 164.83299,
+        "x": 0,
+        "y": 0,
+        "scale": 1.0,
+        "transform": 0,
+        "vrr": True,
+        "mirrorOf": "none",
+        "disabled": False,
+    }
+    assert core.live_rule(mon) == {
+        "output": "DP-1",
+        "mode": "2560x1440@164.83",
+        "position": "0x0",
+        "scale": 1.0,
+        "transform": 0,
+        "vrr": 1,
+    }
 
 
 def test_live_option_parses_each_hyprctl_field(monkeypatch):
@@ -169,8 +198,9 @@ def test_corrupt_state_starts_empty(tmp_path, calls):
 
 def test_reset_all_backs_up_and_restore_undoes(tmp_path, monkeypatch):
     monkeypatch.setattr(core, "run", lambda args, timeout=10: None)
-    paths = dict(managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua",
-                 state=tmp_path / "state.json")
+    paths = dict(
+        managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua", state=tmp_path / "state.json"
+    )
     store = core.HyprStore(**paths)
     store.set("general:gaps_in", 3)
     store.set_extra("power_button", "suspend")

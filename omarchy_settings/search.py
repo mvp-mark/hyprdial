@@ -1,4 +1,5 @@
 """Settings search: matching and ranking (no GTK, testable). The window collects the entries from its rows."""
+
 from __future__ import annotations
 
 import unicodedata

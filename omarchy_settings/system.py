@@ -3,6 +3,7 @@
 Time zone, NTP and language go through timedatectl/localectl, which ask for the password through polkit (the
 Omarchy shell shows the prompt).
 """
+
 from __future__ import annotations
 
 import os
@@ -11,12 +12,17 @@ from pathlib import Path
 
 from . import core
 
+
 # ------------------------------------------------------------------ date and time
 def time_settings() -> dict:
     """{"timezone": "America/Manaus", "ntp": True, "can_ntp": True, "synced": True}"""
     fields = dict(line.split("=", 1) for line in core.out(["timedatectl", "show"]).splitlines() if "=" in line)
-    return {"timezone": fields.get("Timezone", ""), "ntp": fields.get("NTP") == "yes",
-            "can_ntp": fields.get("CanNTP") == "yes", "synced": fields.get("NTPSynchronized") == "yes"}
+    return {
+        "timezone": fields.get("Timezone", ""),
+        "ntp": fields.get("NTP") == "yes",
+        "can_ntp": fields.get("CanNTP") == "yes",
+        "synced": fields.get("NTPSynchronized") == "yes",
+    }
 
 
 def timezones() -> list[str]:
@@ -86,14 +92,19 @@ def read_first(path: str, prefix: str) -> str:
 
 def memory_gib() -> str:
     kib = read_first("/proc/meminfo", "MemTotal").split()
-    return f"{int(kib[0]) / 1024 ** 2:.1f} GiB" if kib and kib[0].isdigit() else ""
+    return f"{int(kib[0]) / 1024**2:.1f} GiB" if kib and kib[0].isdigit() else ""
 
 
 def about() -> list[tuple[str, str]]:
     """(key, value) pairs; keys are translated by the page."""
-    info = [("omarchy", core.out(["omarchy", "version"])), ("hostname", platform.node()),
-            ("kernel", platform.release()), ("cpu", read_first("/proc/cpuinfo", "model name")),
-            ("cores", str(os.cpu_count() or "")), ("memory", memory_gib())]
+    info = [
+        ("omarchy", core.out(["omarchy", "version"])),
+        ("hostname", platform.node()),
+        ("kernel", platform.release()),
+        ("cpu", read_first("/proc/cpuinfo", "model name")),
+        ("cores", str(os.cpu_count() or "")),
+        ("memory", memory_gib()),
+    ]
     return [(k, v) for k, v in info if v]
 
 

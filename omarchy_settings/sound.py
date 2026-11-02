@@ -1,4 +1,5 @@
 """Sound (no GTK, testable): devices and app streams read from `pactl -f json`, and the commands that change them."""
+
 from __future__ import annotations
 
 import json
@@ -64,10 +65,18 @@ def is_monitor(source: dict) -> bool:
 
 
 def parse_devices(data: list[dict]) -> list[Device]:
-    return [Device(d["index"], d.get("name", ""), d.get("description") or d.get("name", ""),
-                   volume_of(d.get("volume", {})), bool(d.get("mute")),
-                   str(d.get("properties", {}).get("object.id", "")))
-            for d in data if "index" in d and not is_monitor(d)]
+    return [
+        Device(
+            d["index"],
+            d.get("name", ""),
+            d.get("description") or d.get("name", ""),
+            volume_of(d.get("volume", {})),
+            bool(d.get("mute")),
+            str(d.get("properties", {}).get("object.id", "")),
+        )
+        for d in data
+        if "index" in d and not is_monitor(d)
+    ]
 
 
 def parse_streams(data: list[dict]) -> list[Stream]:
@@ -86,9 +95,14 @@ def parse_streams(data: list[dict]) -> list[Stream]:
 
 
 def snapshot() -> Snapshot:
-    return Snapshot(parse_devices(_list("sink")), parse_devices(_list("source")),
-                    core.out(["pactl", "get-default-sink"]), core.out(["pactl", "get-default-source"]),
-                    parse_streams(_list("sink-input")), parse_streams(_list("source-output")))
+    return Snapshot(
+        parse_devices(_list("sink")),
+        parse_devices(_list("source")),
+        core.out(["pactl", "get-default-sink"]),
+        core.out(["pactl", "get-default-source"]),
+        parse_streams(_list("sink-input")),
+        parse_streams(_list("source-output")),
+    )
 
 
 def ok(r) -> bool:

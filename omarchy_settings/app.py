@@ -1,4 +1,5 @@
 """Main window and entry point."""
+
 from __future__ import annotations
 
 import sys
@@ -11,8 +12,8 @@ from gi.repository import Adw, Gio, GObject, Gtk  # noqa: E402
 
 from . import __version__
 from .core import HyprStore
-from .pages.apps import AppsPage
 from .i18n import _
+from .pages.apps import AppsPage
 from .pages.bar import BarPage
 from .pages.connectivity import ConnectivityPage
 from .pages.dependencies import DependenciesDialog
@@ -44,16 +45,20 @@ class Window(Adw.ApplicationWindow):
         menu.append(_("Dependencies…"), "win.dependencies")
         menu.append(_("Restore app defaults…"), "win.restore-defaults")
         header.pack_end(Gtk.MenuButton(icon_name="open-menu-symbolic", menu_model=menu, tooltip_text=_("Main menu")))
-        find = Gtk.Button(icon_name="system-search-symbolic", tooltip_text=_("Search settings (Ctrl+F)"),
-                          action_name="win.search")
+        find = Gtk.Button(
+            icon_name="system-search-symbolic", tooltip_text=_("Search settings (Ctrl+F)"), action_name="win.search"
+        )
         header.pack_start(find)
         action = Gio.SimpleAction(name="search")
         action.connect("activate", lambda *_args: self.show_search())
         self.add_action(action)
         # bubble phase: the shortcut recorder, which captures keys, gets Ctrl+F first
         keys = Gtk.ShortcutController(propagation_phase=Gtk.PropagationPhase.BUBBLE)
-        keys.add_shortcut(Gtk.Shortcut(trigger=Gtk.ShortcutTrigger.parse_string("<Control>f"),
-                                       action=Gtk.NamedAction.new("win.search")))
+        keys.add_shortcut(
+            Gtk.Shortcut(
+                trigger=Gtk.ShortcutTrigger.parse_string("<Control>f"), action=Gtk.NamedAction.new("win.search")
+            )
+        )
         self.add_controller(keys)
         action = Gio.SimpleAction(name="dependencies")
         action.connect("activate", lambda *_args: self.show_dependencies())
@@ -102,9 +107,12 @@ class Window(Adw.ApplicationWindow):
     def confirm_restore_defaults(self) -> None:
         dialog = Adw.AlertDialog(
             heading=_("Restore app defaults?"),
-            body=_("Removes every Hyprland, display, shortcut, power button and startup command setting made in "
-                   "this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. A backup of "
-                   "the generated file is kept, and you can undo right after."))
+            body=_(
+                "Removes every Hyprland, display, shortcut, power button and startup command setting made in "
+                "this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. "
+                "A backup of the generated file is kept, and you can undo right after."
+            ),
+        )
         dialog.add_response("cancel", _("Cancel"))
         dialog.add_response("restore", _("Restore"))
         dialog.set_response_appearance("restore", Adw.ResponseAppearance.DESTRUCTIVE)
@@ -120,8 +128,13 @@ class Window(Adw.ApplicationWindow):
             previous, _backup = result
             self.reload_pages()
             toast = Adw.Toast(title=_("App defaults restored"), button_label=_("Undo"), timeout=10)
-            toast.connect("button-clicked", lambda _t: bg(lambda: self.store.restore(previous), lambda _r: (
-                self.reload_pages(), self.toast(_("Settings brought back")))))
+            toast.connect(
+                "button-clicked",
+                lambda _t: bg(
+                    lambda: self.store.restore(previous),
+                    lambda _r: (self.reload_pages(), self.toast(_("Settings brought back"))),
+                ),
+            )
             self.toasts.add_toast(toast)
 
         bg(self.store.reset_all, done)

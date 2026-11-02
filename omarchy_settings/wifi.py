@@ -4,6 +4,7 @@ Listing, scanning, connecting to saved or open networks and forgetting go throug
 a password is saved by the page through libnm instead, so the password never shows up in a command line;
 nmcli then brings it up and reports why it failed (e.g. a wrong password).
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -76,16 +77,32 @@ def device() -> tuple[str, str] | None:
 
 def scan(rescan: bool = False) -> list[Network]:
     """Visible networks, one per SSID (the strongest access point), hidden ones left out; in use first."""
-    out = core.out(["nmcli", "-t", "-f", "IN-USE,SSID,SIGNAL,SECURITY,FREQ", "device", "wifi", "list",
-                    "--rescan", "yes" if rescan else "no"], timeout=30)
+    out = core.out(
+        [
+            "nmcli",
+            "-t",
+            "-f",
+            "IN-USE,SSID,SIGNAL,SECURITY,FREQ",
+            "device",
+            "wifi",
+            "list",
+            "--rescan",
+            "yes" if rescan else "no",
+        ],
+        timeout=30,
+    )
     best: dict[str, Network] = {}
     for line in out.splitlines():
         parts = split_terse(line)
         if len(parts) < 5 or not parts[1]:
             continue
-        net = Network(ssid=parts[1], signal=int(parts[2]) if parts[2].isdigit() else 0,
-                      security="" if parts[3] in ("", "--") else parts[3], in_use=parts[0] == "*",
-                      frequency=parts[4])
+        net = Network(
+            ssid=parts[1],
+            signal=int(parts[2]) if parts[2].isdigit() else 0,
+            security="" if parts[3] in ("", "--") else parts[3],
+            in_use=parts[0] == "*",
+            frequency=parts[4],
+        )
         old = best.get(net.ssid)
         if old is None or net.in_use or (not old.in_use and net.signal > old.signal):
             best[net.ssid] = net
@@ -98,8 +115,9 @@ def saved() -> list[Saved]:
         parts = split_terse(line)
         if len(parts) < 5 or parts[2] != "802-11-wireless":
             continue
-        fields = parse_fields(core.out(["nmcli", "-t", "-f", "802-11-wireless.ssid", "connection", "show", "uuid",
-                                        parts[0]]))
+        fields = parse_fields(
+            core.out(["nmcli", "-t", "-f", "802-11-wireless.ssid", "connection", "show", "uuid", parts[0]])
+        )
         ssid = (fields.get("802-11-wireless.ssid") or [parts[1]])[0]
         result.append(Saved(parts[0], parts[1], ssid, parts[3] == "yes", bool(parts[4])))
     return sorted(result, key=lambda s: (not s.active, s.ssid.lower()))

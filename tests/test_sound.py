@@ -1,9 +1,8 @@
 import json
-import subprocess
 
 import pytest
 
-from omarchy_settings import core, sound
+from omarchy_settings import sound
 
 
 def vol(percent):
@@ -11,41 +10,79 @@ def vol(percent):
     return {"front-left": {"value": v}, "front-right": {"value": v}}
 
 
-SINKS = [{"index": 64, "name": "usb.analog", "description": "USB Audio", "mute": False, "volume": vol(64)},
-         {"index": 78, "name": "hdmi", "description": "HDMI [Monitor]", "mute": True, "volume": vol(100),
-          "properties": {"object.id": "44"}}]
-SOURCES = [{"index": 63, "name": "mic.analog", "description": "Microphone", "mute": False, "volume": vol(71),
-            "monitor_of_sink": None},
-           {"index": 65, "name": "usb.analog.monitor", "description": "Monitor of USB Audio", "mute": False,
-            "volume": vol(100), "monitor_of_sink": None}]
+SINKS = [
+    {"index": 64, "name": "usb.analog", "description": "USB Audio", "mute": False, "volume": vol(64)},
+    {
+        "index": 78,
+        "name": "hdmi",
+        "description": "HDMI [Monitor]",
+        "mute": True,
+        "volume": vol(100),
+        "properties": {"object.id": "44"},
+    },
+]
+SOURCES = [
+    {
+        "index": 63,
+        "name": "mic.analog",
+        "description": "Microphone",
+        "mute": False,
+        "volume": vol(71),
+        "monitor_of_sink": None,
+    },
+    {
+        "index": 65,
+        "name": "usb.analog.monitor",
+        "description": "Monitor of USB Audio",
+        "mute": False,
+        "volume": vol(100),
+        "monitor_of_sink": None,
+    },
+]
 SINK_INPUTS = [
-    {"index": 227, "mute": False, "volume": vol(124),
-     "properties": {"application.name": "Zen", "media.name": "A video", "application.icon_name": "zen"}},
-    {"index": 300, "mute": True, "volume": vol(50),
-     "properties": {"application.process.binary": "mpv", "media.name": "Playback"}},
+    {
+        "index": 227,
+        "mute": False,
+        "volume": vol(124),
+        "properties": {"application.name": "Zen", "media.name": "A video", "application.icon_name": "zen"},
+    },
+    {
+        "index": 300,
+        "mute": True,
+        "volume": vol(50),
+        "properties": {"application.process.binary": "mpv", "media.name": "Playback"},
+    },
 ]
 SOURCE_OUTPUTS = [
-    {"index": 6713, "mute": False, "volume": vol(100),
-     "properties": {"application.name": "Chromium input", "media.name": "RecordStream"}},
-    {"index": 7000, "mute": False, "volume": vol(100),
-     "properties": {"application.name": "Volume Control", "application.id": "org.PulseAudio.pavucontrol"}},
+    {
+        "index": 6713,
+        "mute": False,
+        "volume": vol(100),
+        "properties": {"application.name": "Chromium input", "media.name": "RecordStream"},
+    },
+    {
+        "index": 7000,
+        "mute": False,
+        "volume": vol(100),
+        "properties": {"application.name": "Volume Control", "application.id": "org.PulseAudio.pavucontrol"},
+    },
 ]
 
 
 @pytest.fixture
 def commands(commands):
     """The shared fake, answering pactl with the lists above."""
-    commands.answers.update({
-        "pactl -f json list sinks": json.dumps(SINKS),
-        "pactl -f json list sources": json.dumps(SOURCES),
-        "pactl -f json list sink-inputs": json.dumps(SINK_INPUTS),
-        "pactl -f json list source-outputs": json.dumps(SOURCE_OUTPUTS),
-        "pactl get-default-sink": "usb.analog\n",
-        "pactl get-default-source": "mic.analog\n",
-    })
+    commands.answers.update(
+        {
+            "pactl -f json list sinks": json.dumps(SINKS),
+            "pactl -f json list sources": json.dumps(SOURCES),
+            "pactl -f json list sink-inputs": json.dumps(SINK_INPUTS),
+            "pactl -f json list source-outputs": json.dumps(SOURCE_OUTPUTS),
+            "pactl get-default-sink": "usb.analog\n",
+            "pactl get-default-source": "mic.analog\n",
+        }
+    )
     return commands
-
-
 
 
 def test_volume_is_the_channel_average():
@@ -79,8 +116,11 @@ def test_commands(commands):
     assert sound.set_default("sink", sound.Device(78, "hdmi", "HDMI", 1.0, False))
     assert sound.set_volume("sink-input", 227, 0.8)
     assert sound.set_mute("source", 63, True)
-    assert commands.calls == [["pactl", "set-default-sink", "hdmi"], ["pactl", "set-sink-input-volume", "227", "80%"],
-                     ["pactl", "set-source-mute", "63", "1"]]
+    assert commands.calls == [
+        ["pactl", "set-default-sink", "hdmi"],
+        ["pactl", "set-sink-input-volume", "227", "80%"],
+        ["pactl", "set-source-mute", "63", "1"],
+    ]
 
 
 def test_find_test_sound(tmp_path):

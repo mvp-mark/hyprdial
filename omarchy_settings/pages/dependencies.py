@@ -1,4 +1,5 @@
 """Dependencies dialog: shows what is installed and installs what is missing (password through polkit)."""
+
 from __future__ import annotations
 
 import gi
@@ -77,8 +78,9 @@ class DependenciesDialog(Adw.PreferencesDialog):
         elif not selected:
             self.install_btn.set_label(_("Select packages to install"))
         else:
-            self.install_btn.set_label(ngettext("Install {n} package", "Install {n} packages",
-                                                len(selected)).format(n=len(selected)))
+            self.install_btn.set_label(
+                ngettext("Install {n} package", "Install {n} packages", len(selected)).format(n=len(selected))
+            )
         self.install_btn.set_sensitive(bool(selected))
 
     def _install(self) -> None:
