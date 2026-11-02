@@ -71,8 +71,13 @@ def powered() -> bool | None:
     return "Powered: yes" in text
 
 
+OMARCHY_POWER = "omarchy-bluetooth-power"  # also unblocks the radio (rfkill) before powering on
+OMARCHY_DEVICE = "omarchy-bluetooth-device"  # powers on and trusts before connecting
+
+
 def set_power(on: bool) -> bool:
-    r = core.run(["bluetoothctl", "power", "on" if on else "off"])
+    command = [OMARCHY_POWER] if core.have(OMARCHY_POWER) else ["bluetoothctl", "power"]
+    r = core.run([*command, "on" if on else "off"], timeout=15)
     return bool(r and r.returncode == 0)
 
 
@@ -132,6 +137,17 @@ def disconnect(mac: str) -> list[str]:
 
 def forget(mac: str) -> list[str]:
     return ["bluetoothctl", "remove", mac]
+
+
+def device_action(action: str, mac: str) -> tuple[bool, str]:
+    """connect, disconnect or forget: (ok, error). Omarchy's command hides bluetoothctl's errors, so the result is
+    read back from the device; "no-change" means it didn't do what was asked."""
+    if not core.have(OMARCHY_DEVICE):
+        return run({"connect": connect, "disconnect": disconnect, "forget": forget}[action](mac))
+    core.run([OMARCHY_DEVICE, action, mac], timeout=60)
+    device = parse_info(mac, core.out(["bluetoothctl", "info", mac]))
+    ok = {"connect": device.connected, "disconnect": not device.connected, "forget": not device.paired}[action]
+    return ok, "" if ok else "no-change"
 
 
 def run(args: list[str]) -> tuple[bool, str]:

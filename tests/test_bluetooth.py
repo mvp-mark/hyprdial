@@ -88,6 +88,22 @@ def test_run_detects_failure_despite_exit_zero(btctl):
     assert bt.run(bt.disconnect(MOUSE)) == (True, "")
 
 
+def test_power_goes_through_omarchy(btctl):
+    _answers, calls = btctl
+    assert bt.set_power(True)
+    assert calls == [["omarchy-bluetooth-power", "on"]]
+
+
+def test_device_action_checks_the_result(btctl):
+    answers, calls = btctl
+    answers[f"bluetoothctl info {MOUSE}"] = INFO_MOUSE
+    assert bt.device_action("connect", MOUSE) == (True, "")
+    assert calls[0] == ["omarchy-bluetooth-device", "connect", MOUSE]
+    assert bt.device_action("disconnect", MOUSE) == (False, "no-change")  # still connected
+    answers[f"bluetoothctl info {MOUSE}"] = f"Device {MOUSE} not available"
+    assert bt.device_action("forget", MOUSE) == (True, "")
+
+
 def feed_all(parser, *chunks):
     events = []
     for chunk in chunks:

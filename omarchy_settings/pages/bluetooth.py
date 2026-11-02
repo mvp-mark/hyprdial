@@ -199,17 +199,22 @@ class BluetoothGroup(Adw.PreferencesGroup):
         return row
 
     # -- actions
-    def _run(self, args: list[str], ok_message: str) -> None:
+    def _run(self, action: str, d: bt.Device, ok_message: str) -> None:
         self.busy = True
 
         def done(result) -> None:
             self.busy = False
             ok, error = (False, str(result)) if isinstance(result, Exception) else result
-            self.win.toast(ok_message if ok else _("Failed: {error}").format(error=error))
+            if ok:
+                self.win.toast(ok_message)
+            elif error == "no-change":
+                self.win.toast(_("{name} didn't respond").format(name=d.name))
+            else:
+                self.win.toast(_("Failed: {error}").format(error=error))
             self.snapshot = None
             self.refresh()
 
-        bg(lambda: bt.run(args), done)
+        bg(lambda: bt.device_action(action, d.mac), done)
 
     def _set_power(self, on: bool) -> None:
         def done(ok) -> None:
@@ -224,10 +229,10 @@ class BluetoothGroup(Adw.PreferencesGroup):
 
     def _toggle(self, d: bt.Device) -> None:
         if d.connected:
-            self._run(bt.disconnect(d.mac), _("{name} disconnected").format(name=d.name))
+            self._run("disconnect", d, _("{name} disconnected").format(name=d.name))
         else:
             self.win.toast(_("Connecting to {name}…").format(name=d.name))
-            self._run(bt.connect(d.mac), _("{name} connected").format(name=d.name))
+            self._run("connect", d, _("{name} connected").format(name=d.name))
 
     def _confirm_forget(self, d: bt.Device) -> None:
         confirm(
@@ -235,7 +240,7 @@ class BluetoothGroup(Adw.PreferencesGroup):
             heading=_("Forget “{name}”?").format(name=d.name),
             body=_("To use it again, you'll have to pair it again."),
             action=_("Forget"),
-            on_confirm=lambda: self._run(bt.forget(d.mac), _("{name} forgotten").format(name=d.name)),
+            on_confirm=lambda: self._run("forget", d, _("{name} forgotten").format(name=d.name)),
         )
 
     def _scan(self) -> None:

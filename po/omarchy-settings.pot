@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:18-0400\n"
+"POT-Creation-Date: 2026-11-02 03:23-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,15 +42,15 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-#: omarchy_settings/app.py:86 omarchy_settings/pages/monitors.py:249
+#: omarchy_settings/app.py:86 omarchy_settings/pages/monitors.py:237
 msgid "Displays"
 msgstr ""
 
-#: omarchy_settings/app.py:87 omarchy_settings/pages/sound.py:211
+#: omarchy_settings/app.py:87 omarchy_settings/pages/sound.py:179
 msgid "Sound"
 msgstr ""
 
-#: omarchy_settings/app.py:88 omarchy_settings/pages/bar.py:63
+#: omarchy_settings/app.py:88 omarchy_settings/pages/bar.py:48
 msgid "Power"
 msgstr ""
 
@@ -86,10 +86,10 @@ msgid ""
 "is kept, and you can undo right after."
 msgstr ""
 
-#: omarchy_settings/app.py:116 omarchy_settings/pages/bar.py:235
-#: omarchy_settings/pages/bar.py:298 omarchy_settings/pages/bar.py:486
+#: omarchy_settings/app.py:116 omarchy_settings/pages/bar.py:157
+#: omarchy_settings/pages/bar.py:219 omarchy_settings/pages/bar.py:407
 #: omarchy_settings/pages/hyprland.py:128
-#: omarchy_settings/pages/monitors.py:439
+#: omarchy_settings/pages/monitors.py:427
 #: omarchy_settings/pages/shortcuts.py:237
 #: omarchy_settings/pages/shortcuts.py:483
 msgid "Restore"
@@ -210,8 +210,8 @@ msgstr ""
 msgid "Space"
 msgstr ""
 
-#: omarchy_settings/keybinds.py:71 omarchy_settings/pages/sound.py:51
-#: omarchy_settings/pages/sound.py:77
+#: omarchy_settings/keybinds.py:71 omarchy_settings/pages/sound.py:49
+#: omarchy_settings/pages/sound.py:75
 msgid "Mute"
 msgstr ""
 
@@ -331,10 +331,10 @@ msgstr ""
 msgid "Changes there are yours; this app only reads them"
 msgstr ""
 
-#: omarchy_settings/pages/autostart.py:46 omarchy_settings/pages/bar.py:471
-#: omarchy_settings/pages/bar.py:478 omarchy_settings/pages/bluetooth.py:249
-#: omarchy_settings/pages/sound.py:252 omarchy_settings/pages/system.py:85
-#: omarchy_settings/pages/wifi.py:23 omarchy_settings/pages/wifi.py:255
+#: omarchy_settings/pages/autostart.py:46 omarchy_settings/pages/bar.py:392
+#: omarchy_settings/pages/bar.py:399 omarchy_settings/pages/bluetooth.py:178
+#: omarchy_settings/pages/sound.py:220 omarchy_settings/pages/system.py:85
+#: omarchy_settings/pages/wifi.py:22 omarchy_settings/pages/wifi.py:212
 msgid "Open"
 msgstr ""
 
@@ -372,811 +372,812 @@ msgstr ""
 msgid "It will start the next time you log in"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:32
+#: omarchy_settings/pages/bar.py:18
 msgid "Top"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:32
+#: omarchy_settings/pages/bar.py:18
 msgid "Bottom"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:32
+#: omarchy_settings/pages/bar.py:18
 msgid "Left side"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:32
+#: omarchy_settings/pages/bar.py:18
 msgid "Right side"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:38
+#: omarchy_settings/pages/bar.py:23
 msgid "Never"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:40
+#: omarchy_settings/pages/bar.py:25
 msgid "2½ minutes"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:42
+#: omarchy_settings/pages/bar.py:27
 #, python-brace-format
 msgid "{n} hour"
 msgid_plural "{n} hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/bar.py:44
+#: omarchy_settings/pages/bar.py:29
 #, python-brace-format
 msgid "{n} minute"
 msgid_plural "{n} minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/bar.py:45
+#: omarchy_settings/pages/bar.py:30
 #, python-brace-format
 msgid "{n} second"
 msgid_plural "{n} seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/bar.py:50
+#: omarchy_settings/pages/bar.py:35
 msgid "Active window"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:50
+#: omarchy_settings/pages/bar.py:35
 msgid "Title of the focused window"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:51
+#: omarchy_settings/pages/bar.py:36
 msgid "AI agents"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:51
+#: omarchy_settings/pages/bar.py:36
 msgid "Claude Code, Codex and Fireworks usage and limits"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:52
+#: omarchy_settings/pages/bar.py:37
 msgid "Audio"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:52
+#: omarchy_settings/pages/bar.py:37
 msgid "Volume, sound output and per-app mixer"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:53
+#: omarchy_settings/pages/bar.py:38
 msgid "Devices and connection"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:54
+#: omarchy_settings/pages/bar.py:39
 msgid "Clock"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:54
+#: omarchy_settings/pages/bar.py:39
 msgid "Date and time, with a calendar on click"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:55
+#: omarchy_settings/pages/bar.py:40
 msgid "Sync status and recent files"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:56
+#: omarchy_settings/pages/bar.py:41
 msgid "Indicators"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:56
+#: omarchy_settings/pages/bar.py:41
 msgid "States like screen recording and do not disturb"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:57 omarchy_settings/pages/hyprland.py:451
+#: omarchy_settings/pages/bar.py:42 omarchy_settings/pages/hyprland.py:451
 msgid "Keyboard layout"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:57
+#: omarchy_settings/pages/bar.py:42
 msgid "Current layout; click to switch"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:58
+#: omarchy_settings/pages/bar.py:43
 msgid "Media"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:58
+#: omarchy_settings/pages/bar.py:43
 msgid "Controls for the music or video playing"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:59
+#: omarchy_settings/pages/bar.py:44
 msgid "Omarchy menu"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:59
+#: omarchy_settings/pages/bar.py:44
 msgid "Opens the command menu"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:60 omarchy_settings/pages/sound.py:234
+#: omarchy_settings/pages/bar.py:45 omarchy_settings/pages/sound.py:202
 msgid "Microphone"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:60
+#: omarchy_settings/pages/bar.py:45
 msgid "Microphone state and mute button"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:61 omarchy_settings/pages/monitors.py:214
+#: omarchy_settings/pages/bar.py:46 omarchy_settings/pages/monitors.py:202
 msgid "Display"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:61
+#: omarchy_settings/pages/bar.py:46
 msgid "Brightness and display controls"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:62
+#: omarchy_settings/pages/bar.py:47
 msgid "Network"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:62
+#: omarchy_settings/pages/bar.py:47
 msgid "Wi-Fi and connection state"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:63
+#: omarchy_settings/pages/bar.py:48
 msgid "Battery, power profile and system usage"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:64
+#: omarchy_settings/pages/bar.py:49
 msgid "Spacer"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:64
+#: omarchy_settings/pages/bar.py:49
 msgid "Blank space"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:65
+#: omarchy_settings/pages/bar.py:50
 msgid "Updates"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:65
+#: omarchy_settings/pages/bar.py:50
 msgid "Tells you when an Omarchy update is available"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:66
+#: omarchy_settings/pages/bar.py:51
 msgid "VPN status and connection switching"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:67
+#: omarchy_settings/pages/bar.py:52
 msgid "System tray"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:67
+#: omarchy_settings/pages/bar.py:52
 msgid "Icons of background apps"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:68
+#: omarchy_settings/pages/bar.py:53
 msgid "Weather"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:68
+#: omarchy_settings/pages/bar.py:53
 msgid "Temperature with details on click"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:69
+#: omarchy_settings/pages/bar.py:54
 msgid "Workspaces"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:69
+#: omarchy_settings/pages/bar.py:54
 msgid "Workspace numbers"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:80
+#: omarchy_settings/pages/bar.py:65
 #, python-brace-format
 msgid "Weekday and time — {example}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:81
+#: omarchy_settings/pages/bar.py:66
 #, python-brace-format
 msgid "Time only — {example}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:82
+#: omarchy_settings/pages/bar.py:67
 #, python-brace-format
 msgid "Day, date and time — {example}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:83
+#: omarchy_settings/pages/bar.py:68
 #, python-brace-format
 msgid "Full date and time — {example}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:84
+#: omarchy_settings/pages/bar.py:69
 #, python-brace-format
 msgid "12-hour format — {example}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:146
-msgid "command not found"
-msgstr ""
-
-#: omarchy_settings/pages/bar.py:160
+#: omarchy_settings/pages/bar.py:88
 msgid "Bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:163
+#: omarchy_settings/pages/bar.py:91
 msgid "Show the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:164
+#: omarchy_settings/pages/bar.py:92
 msgid "You can also toggle it with the Omarchy shortcut"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:173
+#: omarchy_settings/pages/bar.py:101
 msgid "Position"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:177
+#: omarchy_settings/pages/bar.py:105
 msgid "Bar position changed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:182
+#: omarchy_settings/pages/bar.py:110
 msgid "Transparent background"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:183
+#: omarchy_settings/pages/bar.py:111
 msgid "Shows the wallpaper behind the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:191
+#: omarchy_settings/pages/bar.py:119
 msgid "Restart the shell"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:191
+#: omarchy_settings/pages/bar.py:119
 msgid "Use it if the bar freezes or disappears"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:191 omarchy_settings/pages/bar.py:468
+#: omarchy_settings/pages/bar.py:119 omarchy_settings/pages/bar.py:389
 msgid "Restart"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:196
+#: omarchy_settings/pages/bar.py:124
 msgid "Add widget"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:197 omarchy_settings/pages/bar.py:407
+#: omarchy_settings/pages/bar.py:125 omarchy_settings/pages/bar.py:328
 msgid "Available widgets"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:197
+#: omarchy_settings/pages/bar.py:125
 msgid "Loading…"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:202
+#: omarchy_settings/pages/bar.py:130
 msgid "Waybar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:204
+#: omarchy_settings/pages/bar.py:132
 msgid ""
 "Optional alternative bar. Omarchy doesn't manage Waybar; its colors follow "
 "the Omarchy theme."
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:212
+#: omarchy_settings/pages/bar.py:140
 msgid "System font"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:212
+#: omarchy_settings/pages/bar.py:140
 msgid "Applied to the terminal, bar and other Omarchy apps."
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:226
+#: omarchy_settings/pages/bar.py:148
 msgid "omarchy-font-set not found"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:226
+#: omarchy_settings/pages/bar.py:148
 msgid "Update Omarchy to change fonts from here"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:233
+#: omarchy_settings/pages/bar.py:155
 msgid "Restore default bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:234
+#: omarchy_settings/pages/bar.py:156
 msgid "Returns position, transparency and widgets to Omarchy's default"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:243
+#: omarchy_settings/pages/bar.py:165
 msgid "omarchy-bar not found: update Omarchy to use this page."
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:251 omarchy_settings/pages/bar.py:289
-#: omarchy_settings/pages/bar.py:393 omarchy_settings/pages/bar.py:421
-#: omarchy_settings/pages/bar.py:504 omarchy_settings/pages/bluetooth.py:279
+#: omarchy_settings/pages/bar.py:173 omarchy_settings/pages/bar.py:210
+#: omarchy_settings/pages/bar.py:314 omarchy_settings/pages/bar.py:342
+#: omarchy_settings/pages/bar.py:425 omarchy_settings/pages/bluetooth.py:213
 #: omarchy_settings/pages/ethernet.py:223 omarchy_settings/pages/system.py:117
-#: omarchy_settings/pages/wifi.py:312 omarchy_settings/pages/wifi.py:350
-#: omarchy_settings/pages/wifi.py:365
+#: omarchy_settings/pages/wifi.py:269 omarchy_settings/pages/wifi.py:307
+#: omarchy_settings/pages/wifi.py:322
 #, python-brace-format
 msgid "Failed: {error}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:251
+#: omarchy_settings/pages/bar.py:173
 msgid "unknown error"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:272
+#: omarchy_settings/pages/bar.py:193
 #, python-brace-format
 msgid "Custom — {format}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:276 omarchy_settings/pages/system.py:156
+#: omarchy_settings/pages/bar.py:197 omarchy_settings/pages/system.py:156
 msgid "Clock format"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:277
+#: omarchy_settings/pages/bar.py:198
 msgid "Click the clock to see the alternate format"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:280
+#: omarchy_settings/pages/bar.py:201
 msgid "Clock format changed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:285
+#: omarchy_settings/pages/bar.py:206
 msgid "Restarting the shell…"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:289
+#: omarchy_settings/pages/bar.py:210
 msgid "Shell restarted"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:296
+#: omarchy_settings/pages/bar.py:217
 msgid "Restore the default bar?"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:297
+#: omarchy_settings/pages/bar.py:218
 msgid "The position, transparency and widget list return to Omarchy's default."
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:299
+#: omarchy_settings/pages/bar.py:220
 msgid "Bar restored"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:312
+#: omarchy_settings/pages/bar.py:233
 msgid "Widgets at the top"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:312
+#: omarchy_settings/pages/bar.py:233
 msgid "Widgets in the middle"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:312
+#: omarchy_settings/pages/bar.py:233
 msgid "Widgets at the bottom"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:314
+#: omarchy_settings/pages/bar.py:235
 msgid "Widgets on the left"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:314
+#: omarchy_settings/pages/bar.py:235
 msgid "Widgets in the center"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:314
+#: omarchy_settings/pages/bar.py:235
 msgid "Widgets on the right"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:327
+#: omarchy_settings/pages/bar.py:248
 msgid "Empty"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:327
+#: omarchy_settings/pages/bar.py:248
 msgid "Move widgets here with the arrows"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:349
+#: omarchy_settings/pages/bar.py:270
 msgid "Move to the previous section"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:353
+#: omarchy_settings/pages/bar.py:274
 msgid "Move earlier"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:354
+#: omarchy_settings/pages/bar.py:275
 msgid "Move later"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:357
+#: omarchy_settings/pages/bar.py:278
 msgid "Move to the next section"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:361
+#: omarchy_settings/pages/bar.py:282
 msgid "Remove from the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:393
+#: omarchy_settings/pages/bar.py:314
 #, python-brace-format
 msgid "{name} removed from the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:409
+#: omarchy_settings/pages/bar.py:330
 #, python-brace-format
 msgid "{n} not on the bar"
 msgid_plural "{n} not on the bar"
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/bar.py:411
+#: omarchy_settings/pages/bar.py:332
 msgid "Every widget is already on the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:414 omarchy_settings/pages/webapps.py:46
+#: omarchy_settings/pages/bar.py:335 omarchy_settings/pages/webapps.py:46
 msgid "Add"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:421
+#: omarchy_settings/pages/bar.py:342
 #, python-brace-format
 msgid "{name} added to the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:440
+#: omarchy_settings/pages/bar.py:361
 msgid "Waybar is not installed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:441
+#: omarchy_settings/pages/bar.py:362
 msgid "Install it to use it instead of the Omarchy bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:442
+#: omarchy_settings/pages/bar.py:363
 msgid "Install"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:450
+#: omarchy_settings/pages/bar.py:371
 msgid "Use Waybar instead of the Omarchy bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:451
+#: omarchy_settings/pages/bar.py:372
 msgid "Starts Waybar now and at login, and hides the Omarchy bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:461
+#: omarchy_settings/pages/bar.py:382
 msgid "Waybar position"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:468
+#: omarchy_settings/pages/bar.py:389
 msgid "Restart Waybar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:468
+#: omarchy_settings/pages/bar.py:389
 msgid "Applies changes made to its files"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:471
+#: omarchy_settings/pages/bar.py:392
 msgid "Edit config.jsonc"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:471
+#: omarchy_settings/pages/bar.py:392
 msgid "Modules and layout"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:476
+#: omarchy_settings/pages/bar.py:397
 msgid "Edit style.css"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:477
+#: omarchy_settings/pages/bar.py:398
 msgid "Sizes, fonts and spacing; colors come from the theme"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:484
+#: omarchy_settings/pages/bar.py:405
 msgid "Restore Waybar files"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:485
+#: omarchy_settings/pages/bar.py:406
 msgid ""
 "Recreates config.jsonc and style.css; the current ones are kept as .omarchy-"
 "settings.bak"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:492
+#: omarchy_settings/pages/bar.py:413
 msgid "Installing Waybar…"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:496
+#: omarchy_settings/pages/bar.py:417
 msgid "Waybar installed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:496
+#: omarchy_settings/pages/bar.py:417
 msgid "Waybar was not installed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:506
+#: omarchy_settings/pages/bar.py:427
 msgid "Using Waybar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:506
+#: omarchy_settings/pages/bar.py:427
 msgid "Using the Omarchy bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:518
+#: omarchy_settings/pages/bar.py:439
 msgid "Waybar position changed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:530
+#: omarchy_settings/pages/bar.py:451
 msgid "Waybar restarted"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:530
+#: omarchy_settings/pages/bar.py:451
 msgid "Waybar isn't in use; turn it on above"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:544
+#: omarchy_settings/pages/bar.py:465
 msgid "Waybar files restored"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:550
+#: omarchy_settings/pages/bar.py:471
 msgid "No fonts listed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:550
+#: omarchy_settings/pages/bar.py:471
 msgid "omarchy-font-list returned nothing"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:556
+#: omarchy_settings/pages/bar.py:477
 msgid "Font"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:557
+#: omarchy_settings/pages/bar.py:478
 #, python-brace-format
 msgid "Current: {font}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:557
+#: omarchy_settings/pages/bar.py:478
 msgid "unknown"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:565 omarchy_settings/pages/themes.py:246
+#: omarchy_settings/pages/bar.py:486 omarchy_settings/pages/themes.py:246
 #, python-brace-format
 msgid "Applying {name}…"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:569
+#: omarchy_settings/pages/bar.py:490
 #, python-brace-format
 msgid "Font {name} applied"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:569 omarchy_settings/pages/themes.py:253
+#: omarchy_settings/pages/bar.py:490 omarchy_settings/pages/themes.py:253
 #, python-brace-format
 msgid "Failed to apply {name}"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:101
+#: omarchy_settings/pages/bluetooth.py:30
 #, python-brace-format
 msgid "Check that “{name}” shows the same code, then confirm."
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:103
+#: omarchy_settings/pages/bluetooth.py:32
 #, python-brace-format
 msgid "Type this code on “{name}” and press Enter."
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:104
+#: omarchy_settings/pages/bluetooth.py:33
 msgid "Pairing code"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:106
-#: omarchy_settings/pages/shortcuts.py:131 omarchy_settings/pages/wifi.py:95
-#: omarchy_settings/pages/wifi.py:387 omarchy_settings/ui.py:150
+#: omarchy_settings/pages/bluetooth.py:35
+#: omarchy_settings/pages/shortcuts.py:131 omarchy_settings/pages/wifi.py:54
+#: omarchy_settings/pages/wifi.py:344 omarchy_settings/ui.py:155
 msgid "Cancel"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:108
+#: omarchy_settings/pages/bluetooth.py:37
 msgid "Confirm"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:117
+#: omarchy_settings/pages/bluetooth.py:46
 msgid "Bluetooth"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:140
+#: omarchy_settings/pages/bluetooth.py:69
 msgid "No Bluetooth adapter found"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:142
+#: omarchy_settings/pages/bluetooth.py:71
 msgid "bluetoothctl is not installed"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:172
-#: omarchy_settings/pages/monitors.py:29 omarchy_settings/pages/wifi.py:204
+#: omarchy_settings/pages/bluetooth.py:101
+#: omarchy_settings/pages/monitors.py:29 omarchy_settings/pages/wifi.py:161
 msgid "Off"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:175
+#: omarchy_settings/pages/bluetooth.py:104
 #, python-brace-format
 msgid "{n} device connected"
 msgid_plural "{n} devices connected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/bluetooth.py:177
+#: omarchy_settings/pages/bluetooth.py:106
 msgid "On, nothing connected"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:186
+#: omarchy_settings/pages/bluetooth.py:115
 msgid "Paired devices"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:188
+#: omarchy_settings/pages/bluetooth.py:117
 #, python-brace-format
 msgid "{n} paired"
 msgid_plural "{n} paired"
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/bluetooth.py:194
+#: omarchy_settings/pages/bluetooth.py:123
 msgid "No paired devices"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:194
+#: omarchy_settings/pages/bluetooth.py:123
 msgid "Put the device in pairing mode and search below"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:205
+#: omarchy_settings/pages/bluetooth.py:134
 msgid "Searching for devices…"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:205
+#: omarchy_settings/pages/bluetooth.py:134
 msgid "Put the device in pairing mode now"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:212
+#: omarchy_settings/pages/bluetooth.py:141
 msgid "Pair a new device"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:213
+#: omarchy_settings/pages/bluetooth.py:142
 #, python-brace-format
 msgid "Searches for {n} seconds"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:214
+#: omarchy_settings/pages/bluetooth.py:143
 msgid "Search"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:220
+#: omarchy_settings/pages/bluetooth.py:149
 msgid "Nearby devices"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:222 omarchy_settings/pages/wifi.py:223
+#: omarchy_settings/pages/bluetooth.py:151 omarchy_settings/pages/wifi.py:180
 #, python-brace-format
 msgid "{n} found"
 msgid_plural "{n} found"
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/bluetooth.py:228
+#: omarchy_settings/pages/bluetooth.py:157
 msgid "No devices found"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:228
+#: omarchy_settings/pages/bluetooth.py:157
 msgid "Check that the device is in pairing mode and search again"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:234
+#: omarchy_settings/pages/bluetooth.py:163
 msgid "Pair"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:238
+#: omarchy_settings/pages/bluetooth.py:167
 msgid "Search again"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:249
-#: omarchy_settings/pages/hyprland.py:251 omarchy_settings/pages/sound.py:249
-#: omarchy_settings/pages/wifi.py:255
+#: omarchy_settings/pages/bluetooth.py:178
+#: omarchy_settings/pages/hyprland.py:251 omarchy_settings/pages/sound.py:217
+#: omarchy_settings/pages/wifi.py:212
 msgid "Advanced"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:249
+#: omarchy_settings/pages/bluetooth.py:178
 msgid "Full Bluetooth manager (bluetui)"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:254
+#: omarchy_settings/pages/bluetooth.py:183
 #: omarchy_settings/pages/ethernet.py:24 omarchy_settings/pages/ethernet.py:193
-#: omarchy_settings/pages/wifi.py:260 omarchy_settings/pages/wifi.py:276
+#: omarchy_settings/pages/wifi.py:217 omarchy_settings/pages/wifi.py:233
 msgid "Connected"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:254 omarchy_settings/pages/wifi.py:213
+#: omarchy_settings/pages/bluetooth.py:183 omarchy_settings/pages/wifi.py:170
 msgid "Not connected"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:262
-#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:269
+#: omarchy_settings/pages/bluetooth.py:191
+#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:226
 msgid "Disconnect"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:262
-#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:96
-#: omarchy_settings/pages/wifi.py:269
+#: omarchy_settings/pages/bluetooth.py:191
+#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:55
+#: omarchy_settings/pages/wifi.py:226
 msgid "Connect"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:266
-#: omarchy_settings/pages/bluetooth.py:308 omarchy_settings/pages/wifi.py:291
-#: omarchy_settings/pages/wifi.py:415
+#: omarchy_settings/pages/bluetooth.py:195
+#: omarchy_settings/pages/bluetooth.py:242 omarchy_settings/pages/wifi.py:248
+#: omarchy_settings/pages/wifi.py:372
 msgid "Forget"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:288
+#: omarchy_settings/pages/bluetooth.py:211
+#, python-brace-format
+msgid "{name} didn't respond"
+msgstr ""
+
+#: omarchy_settings/pages/bluetooth.py:222
 msgid "Could not change Bluetooth"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:298
+#: omarchy_settings/pages/bluetooth.py:232
 #, python-brace-format
 msgid "{name} disconnected"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:300
+#: omarchy_settings/pages/bluetooth.py:234
 #, python-brace-format
 msgid "Connecting to {name}…"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:301
+#: omarchy_settings/pages/bluetooth.py:235
 #, python-brace-format
 msgid "{name} connected"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:306
+#: omarchy_settings/pages/bluetooth.py:240
 #, python-brace-format
 msgid "Forget “{name}”?"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:307
+#: omarchy_settings/pages/bluetooth.py:241
 msgid "To use it again, you'll have to pair it again."
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:309
+#: omarchy_settings/pages/bluetooth.py:243
 #, python-brace-format
 msgid "{name} forgotten"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:330
+#: omarchy_settings/pages/bluetooth.py:264
 msgid "Could not start bluetoothctl"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:332
+#: omarchy_settings/pages/bluetooth.py:266
 #, python-brace-format
 msgid "Pairing with {name}…"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:366
+#: omarchy_settings/pages/bluetooth.py:300
 msgid "Pairing canceled"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:371
+#: omarchy_settings/pages/bluetooth.py:305
 #, python-brace-format
 msgid "{name} asks for a PIN typed here; pair it with Advanced (bluetui)"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:376
+#: omarchy_settings/pages/bluetooth.py:310
 #, python-brace-format
 msgid "{name} paired and connected"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:378
+#: omarchy_settings/pages/bluetooth.py:312
 #, python-brace-format
 msgid "{name} paired, but it didn't connect; try Connect"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:381
+#: omarchy_settings/pages/bluetooth.py:315
 #, python-brace-format
 msgid "{name} is no longer in range; search again"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:382
+#: omarchy_settings/pages/bluetooth.py:316
 #, python-brace-format
 msgid "{name} rejected the pairing"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:383
+#: omarchy_settings/pages/bluetooth.py:317
 #, python-brace-format
 msgid "Pairing with {name} took too long"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:384
+#: omarchy_settings/pages/bluetooth.py:318
 #, python-brace-format
 msgid "{name} is already paired"
 msgstr ""
 
-#: omarchy_settings/pages/bluetooth.py:390
-#: omarchy_settings/pages/bluetooth.py:393
+#: omarchy_settings/pages/bluetooth.py:324
+#: omarchy_settings/pages/bluetooth.py:327
 #, python-brace-format
 msgid "Could not pair with {name}"
 msgstr ""
@@ -1303,7 +1304,7 @@ msgstr ""
 msgid "Link speed"
 msgstr ""
 
-#: omarchy_settings/pages/ethernet.py:113 omarchy_settings/pages/wifi.py:287
+#: omarchy_settings/pages/ethernet.py:113 omarchy_settings/pages/wifi.py:244
 msgid "IPv4 settings"
 msgstr ""
 
@@ -1328,7 +1329,7 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: omarchy_settings/pages/ethernet.py:147 omarchy_settings/pages/wifi.py:159
+#: omarchy_settings/pages/ethernet.py:147 omarchy_settings/pages/wifi.py:118
 msgid "NetworkManager (nmcli) is not available"
 msgstr ""
 
@@ -1340,7 +1341,7 @@ msgstr ""
 msgid "Cable"
 msgstr ""
 
-#: omarchy_settings/pages/ethernet.py:193 omarchy_settings/pages/wifi.py:326
+#: omarchy_settings/pages/ethernet.py:193 omarchy_settings/pages/wifi.py:283
 msgid "Disconnected"
 msgstr ""
 
@@ -1852,354 +1853,354 @@ msgstr ""
 msgid "Fullscreen only"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:217
+#: omarchy_settings/pages/monitors.py:205
 msgid "Reload"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:217
+#: omarchy_settings/pages/monitors.py:205
 msgid "Reads the connected displays again"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:222
+#: omarchy_settings/pages/monitors.py:210
 msgid ""
 "Settings are stored in ~/.config/hypr/omarchy-settings.lua and take priority "
 "over monitors.lua. 'Restore' returns to what is in monitors.lua."
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:249
+#: omarchy_settings/pages/monitors.py:237
 msgid "hyprctl found no displays."
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:263
+#: omarchy_settings/pages/monitors.py:251
 msgid "Arrangement"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:265
+#: omarchy_settings/pages/monitors.py:253
 msgid ""
 "Drag the displays with the mouse; they snap to each other's edges. The "
 "position is applied when you let go."
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:310
+#: omarchy_settings/pages/monitors.py:298
 msgid "Display positions applied"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:321
+#: omarchy_settings/pages/monitors.py:309
 msgid "disabled"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:323
+#: omarchy_settings/pages/monitors.py:311
 msgid "adjusted by this app"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:328
+#: omarchy_settings/pages/monitors.py:316
 #: omarchy_settings/pages/shortcuts.py:342
 msgid "Enabled"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:329
+#: omarchy_settings/pages/monitors.py:317
 msgid "Turning it off removes the display from the desktop"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:345
+#: omarchy_settings/pages/monitors.py:333
 msgid "Resolution and refresh rate"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:346
+#: omarchy_settings/pages/monitors.py:334
 msgid "Modes the display advertises"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:360
+#: omarchy_settings/pages/monitors.py:348
 msgid "Scale"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:361
+#: omarchy_settings/pages/monitors.py:349
 msgid "Interface size on this display"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:370
+#: omarchy_settings/pages/monitors.py:358
 msgid "Rotation"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:371
+#: omarchy_settings/pages/monitors.py:359
 msgid "For portrait displays use 90° or 270°"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:380
+#: omarchy_settings/pages/monitors.py:368
 msgid "Horizontal position (X)"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:381
+#: omarchy_settings/pages/monitors.py:369
 msgid "In logical pixels; you can also drag it in Arrangement"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:389
+#: omarchy_settings/pages/monitors.py:377
 msgid "Vertical position (Y)"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:389
+#: omarchy_settings/pages/monitors.py:377
 msgid "In logical pixels"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:397
+#: omarchy_settings/pages/monitors.py:385
 msgid "Variable refresh rate (VRR / FreeSync)"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:398
+#: omarchy_settings/pages/monitors.py:386
 msgid "Reduces tearing in games and videos"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:407
+#: omarchy_settings/pages/monitors.py:395
 msgid "Don't mirror"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:411
+#: omarchy_settings/pages/monitors.py:399
 msgid "Mirror"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:412
+#: omarchy_settings/pages/monitors.py:400
 msgid "Shows the same content as another display"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:421
+#: omarchy_settings/pages/monitors.py:409
 msgid "10-bit color"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:422
+#: omarchy_settings/pages/monitors.py:410
 msgid "Only enable it if the display and cable support it"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:437
+#: omarchy_settings/pages/monitors.py:425
 msgid "Restore this display"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:438
+#: omarchy_settings/pages/monitors.py:426
 msgid "Returns to what is in monitors.lua"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:474
+#: omarchy_settings/pages/monitors.py:462
 msgid "The only active display can't be turned off"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:491
+#: omarchy_settings/pages/monitors.py:479
 #, python-brace-format
 msgid "{name} already uses monitors.lua"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:494
+#: omarchy_settings/pages/monitors.py:482
 #, python-brace-format
 msgid "{name} restored"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:506
+#: omarchy_settings/pages/monitors.py:494
 msgid "Keep these display settings?"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:507
+#: omarchy_settings/pages/monitors.py:495
 msgid "Revert"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:508
+#: omarchy_settings/pages/monitors.py:496
 msgid "Keep"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:516
+#: omarchy_settings/pages/monitors.py:504
 #, python-brace-format
 msgid "Changes to {name} will be reverted in {seconds} second."
 msgid_plural "Changes to {name} will be reverted in {seconds} seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/monitors.py:538
+#: omarchy_settings/pages/monitors.py:526
 msgid "Display settings reverted"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:554
+#: omarchy_settings/pages/monitors.py:542
 msgid "Brightness"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:554
+#: omarchy_settings/pages/monitors.py:542
 msgid "Via DDC/CI"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:583
+#: omarchy_settings/pages/monitors.py:567
 msgid "Text size"
 msgstr ""
 
-#: omarchy_settings/pages/monitors.py:583
+#: omarchy_settings/pages/monitors.py:567
 msgid "Shell, GTK apps and terminals (default 12)"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:17
+#: omarchy_settings/pages/power.py:18
 msgid "Power saver"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:17
+#: omarchy_settings/pages/power.py:18
 msgid "Less heat and noise, lower performance"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:18
+#: omarchy_settings/pages/power.py:19
 msgid "Balanced"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:18
+#: omarchy_settings/pages/power.py:19
 msgid "Performance when needed, saves power otherwise"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:19
+#: omarchy_settings/pages/power.py:20
 msgid "Performance"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:19
+#: omarchy_settings/pages/power.py:20
 msgid "Highest performance, more power and heat"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:22
+#: omarchy_settings/pages/power.py:23
 msgid "Show the system menu"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:23
+#: omarchy_settings/pages/power.py:24
 msgid "Lock the screen"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:24
+#: omarchy_settings/pages/power.py:25
 msgid "Suspend"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:25
+#: omarchy_settings/pages/power.py:26
 msgid "Shut down"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:26
+#: omarchy_settings/pages/power.py:27
 msgid "Do nothing"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:38
+#: omarchy_settings/pages/power.py:39
 msgid "Power profile"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:46 omarchy_settings/pages/power.py:108
+#: omarchy_settings/pages/power.py:47 omarchy_settings/pages/power.py:106
 msgid "Night light"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:46
+#: omarchy_settings/pages/power.py:47
 msgid "Warmer screen colors to reduce blue light."
 msgstr ""
 
-#: omarchy_settings/pages/power.py:54
+#: omarchy_settings/pages/power.py:55
 msgid "Power button"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:59
+#: omarchy_settings/pages/power.py:60
 msgid "When the power button is pressed"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:60
+#: omarchy_settings/pages/power.py:61
 msgid "Works on the lock screen too"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:73
+#: omarchy_settings/pages/power.py:74
 msgid "No power profiles available"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:76
+#: omarchy_settings/pages/power.py:77
 msgid "Profile"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:87
+#: omarchy_settings/pages/power.py:88
 msgid "Could not change the power profile"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:108
+#: omarchy_settings/pages/power.py:106
 msgid "Turns it on or off now"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:112
+#: omarchy_settings/pages/power.py:110
 msgid "Warmth"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:112
+#: omarchy_settings/pages/power.py:110
 msgid "Lower is warmer"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:126
+#: omarchy_settings/pages/power.py:124
 msgid "Turn on automatically"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:130
+#: omarchy_settings/pages/power.py:128
 msgid "Every day at the times below"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:132
+#: omarchy_settings/pages/power.py:130
 msgid "Turns on at (HH:MM)"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:133
+#: omarchy_settings/pages/power.py:131
 msgid "Turns off at (HH:MM)"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:145
+#: omarchy_settings/pages/power.py:143
 msgid "Could not change the night light"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:170
+#: omarchy_settings/pages/power.py:168
 msgid "Use times like 20:00 and 07:00"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:174
+#: omarchy_settings/pages/power.py:172
 msgid "The start and end times must be different"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:206
+#: omarchy_settings/pages/power.py:204
 #, python-brace-format
 msgid "Night light scheduled from {start} to {end}"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:208 omarchy_settings/pages/power.py:223
+#: omarchy_settings/pages/power.py:206 omarchy_settings/pages/power.py:221
 msgid "Could not save the schedule"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:221
+#: omarchy_settings/pages/power.py:219
 msgid "Night light schedule turned off"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:232
+#: omarchy_settings/pages/power.py:230
 msgid "Power button changed"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:232
+#: omarchy_settings/pages/power.py:230
 msgid "Could not save the setting"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:240
+#: omarchy_settings/pages/power.py:238
 msgid "Idle"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:240
+#: omarchy_settings/pages/power.py:238
 msgid "Counted from the moment you stop using the computer."
 msgstr ""
 
-#: omarchy_settings/pages/power.py:242
+#: omarchy_settings/pages/power.py:240
 msgid "Screensaver after"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:245
+#: omarchy_settings/pages/power.py:243
 msgid "Lock the screen after"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:245
+#: omarchy_settings/pages/power.py:243
 msgid "Asks for the password to come back"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:250
+#: omarchy_settings/pages/power.py:248
 msgid "Stay awake"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:251
+#: omarchy_settings/pages/power.py:249
 msgid "Pauses the screensaver and lock until you turn this off"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:270
+#: omarchy_settings/pages/power.py:268
 msgid "Could not write shell.json"
 msgstr ""
 
@@ -2227,7 +2228,7 @@ msgstr ""
 msgid "Command (e.g. firefox, gimp, btop)"
 msgstr ""
 
-#: omarchy_settings/pages/shortcuts.py:132 omarchy_settings/pages/wifi.py:388
+#: omarchy_settings/pages/shortcuts.py:132 omarchy_settings/pages/wifi.py:345
 msgid "Save"
 msgstr ""
 
@@ -2403,95 +2404,95 @@ msgstr ""
 msgid "Hyprland didn't accept that shortcut; nothing was changed"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:77
+#: omarchy_settings/pages/sound.py:75
 msgid "Unmute"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:166
+#: omarchy_settings/pages/sound.py:134
 msgid "Could not change the device"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:212
+#: omarchy_settings/pages/sound.py:180
 msgid "It comes with PipeWire's PulseAudio support (pipewire-pulse)"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:216
+#: omarchy_settings/pages/sound.py:184
 msgid "Output"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:216
+#: omarchy_settings/pages/sound.py:184
 msgid "Output device"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:216
+#: omarchy_settings/pages/sound.py:184
 msgid "Volume"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:216
+#: omarchy_settings/pages/sound.py:184
 msgid "No output device"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:222
+#: omarchy_settings/pages/sound.py:190
 msgid "Test sound"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:223
+#: omarchy_settings/pages/sound.py:191
 msgid "Plays a short sound on the output device"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:224
+#: omarchy_settings/pages/sound.py:192
 msgid "Play"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:230
+#: omarchy_settings/pages/sound.py:198
 msgid "Allow volume above 100%"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:230
+#: omarchy_settings/pages/sound.py:198
 msgid "Louder, but the sound may distort"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:234
+#: omarchy_settings/pages/sound.py:202
 msgid "Input"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:234
+#: omarchy_settings/pages/sound.py:202
 msgid "Input volume"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:234
+#: omarchy_settings/pages/sound.py:202
 msgid "No microphone"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:238
+#: omarchy_settings/pages/sound.py:206
 msgid "Apps playing"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:238
+#: omarchy_settings/pages/sound.py:206
 msgid "Volume of each app playing sound."
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:238
+#: omarchy_settings/pages/sound.py:206
 msgid "Nothing is playing"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:243
+#: omarchy_settings/pages/sound.py:211
 msgid "Using the microphone"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:244
+#: omarchy_settings/pages/sound.py:212
 msgid "Apps recording sound right now."
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:245
+#: omarchy_settings/pages/sound.py:213
 msgid "No app is using the microphone"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:252
+#: omarchy_settings/pages/sound.py:220
 msgid "Full mixer"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:252
+#: omarchy_settings/pages/sound.py:220
 msgid "Profiles, moving an app to another device (wiremix)"
 msgstr ""
 
@@ -2907,178 +2908,182 @@ msgstr ""
 msgid "Could not remove {name}"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:23
+#: omarchy_settings/pages/wifi.py:22
 msgid "Open (encrypted)"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:23
+#: omarchy_settings/pages/wifi.py:22
 msgid "Enterprise (802.1X)"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:24
+#: omarchy_settings/pages/wifi.py:23
 msgid "Secured"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:74
+#: omarchy_settings/pages/wifi.py:33
 #, python-brace-format
 msgid "Connect to “{ssid}”"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:74 omarchy_settings/pages/wifi.py:237
+#: omarchy_settings/pages/wifi.py:33 omarchy_settings/pages/wifi.py:194
 msgid "Hidden network"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:78
+#: omarchy_settings/pages/wifi.py:37
 msgid "Network name (SSID)"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:79
+#: omarchy_settings/pages/wifi.py:38
 msgid "Security"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:80
+#: omarchy_settings/pages/wifi.py:39
 msgid "None"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:81
+#: omarchy_settings/pages/wifi.py:40
 msgid "Password"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:113
+#: omarchy_settings/pages/wifi.py:72
 msgid "WPA passwords have 8 to 63 characters."
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:133 omarchy_settings/pages/wifi.py:214
+#: omarchy_settings/pages/wifi.py:92 omarchy_settings/pages/wifi.py:171
 msgid "Wi-Fi"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:145
+#: omarchy_settings/pages/wifi.py:104
 msgid "Search for networks"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:165
+#: omarchy_settings/pages/wifi.py:124
 msgid "No Wi-Fi adapter found"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:207 omarchy_settings/pages/wifi.py:331
-#: omarchy_settings/pages/wifi.py:334 omarchy_settings/pages/wifi.py:369
+#: omarchy_settings/pages/wifi.py:164 omarchy_settings/pages/wifi.py:288
+#: omarchy_settings/pages/wifi.py:291 omarchy_settings/pages/wifi.py:326
 #, python-brace-format
 msgid "Connected to {name}"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:211
+#: omarchy_settings/pages/wifi.py:168
 msgid "Connecting…"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:221
+#: omarchy_settings/pages/wifi.py:178
 msgid "Available networks"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:229
+#: omarchy_settings/pages/wifi.py:186
 msgid "No networks found"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:229
+#: omarchy_settings/pages/wifi.py:186
 msgid "Use the refresh button above to search again"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:238
+#: omarchy_settings/pages/wifi.py:195
 msgid "Connect to a network that doesn't broadcast its name"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:239
+#: omarchy_settings/pages/wifi.py:196
 msgid "Connect…"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:246
+#: omarchy_settings/pages/wifi.py:203
 msgid "Saved networks"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:248
+#: omarchy_settings/pages/wifi.py:205
 #, python-brace-format
 msgid "{n} saved"
 msgid_plural "{n} saved"
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/wifi.py:255
+#: omarchy_settings/pages/wifi.py:212
 msgid "Full Wi-Fi manager (impala)"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:262
+#: omarchy_settings/pages/wifi.py:219
 msgid "Saved"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:278
+#: omarchy_settings/pages/wifi.py:235
 msgid "Connects automatically"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:278
+#: omarchy_settings/pages/wifi.py:235
 msgid "Doesn't connect automatically"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:281
+#: omarchy_settings/pages/wifi.py:238
 #, python-brace-format
 msgid "profile “{name}”"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:330 omarchy_settings/pages/wifi.py:333
-#: omarchy_settings/pages/wifi.py:344
+#: omarchy_settings/pages/wifi.py:287 omarchy_settings/pages/wifi.py:290
+#: omarchy_settings/pages/wifi.py:301
 #, python-brace-format
 msgid "Connecting to {ssid}…"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:336
+#: omarchy_settings/pages/wifi.py:293
 msgid "Enterprise (802.1X) networks need more settings; use Advanced (impala)"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:358
+#: omarchy_settings/pages/wifi.py:315
 #, python-brace-format
 msgid "Wrong password for {ssid}"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:359
+#: omarchy_settings/pages/wifi.py:316
 #, python-brace-format
 msgid "Network {ssid} not found"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:360
+#: omarchy_settings/pages/wifi.py:317
 msgid "Wi-Fi is off or unavailable"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:379
+#: omarchy_settings/pages/wifi.py:336
 #, python-brace-format
 msgid "Could not read the settings of {ssid}"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:381
+#: omarchy_settings/pages/wifi.py:338
 msgid "When the network is in range"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:403
+#: omarchy_settings/pages/wifi.py:360
 msgid "Settings saved"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:413
+#: omarchy_settings/pages/wifi.py:370
 #, python-brace-format
 msgid "Forget “{ssid}”?"
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:414
+#: omarchy_settings/pages/wifi.py:371
 msgid "The saved password and settings are deleted."
 msgstr ""
 
-#: omarchy_settings/pages/wifi.py:416
+#: omarchy_settings/pages/wifi.py:373
 #, python-brace-format
 msgid "{ssid} forgotten"
 msgstr ""
 
-#: omarchy_settings/ui.py:163
+#: omarchy_settings/shell.py:82
+msgid "command not found"
+msgstr ""
+
+#: omarchy_settings/ui.py:168
 #, python-brace-format
 msgid "{name} is not installed"
 msgstr ""
 
-#: omarchy_settings/ui.py:169
+#: omarchy_settings/ui.py:174
 #, python-brace-format
 msgid "{cmd} is not installed; install it from ☰ → Dependencies"
 msgstr ""
