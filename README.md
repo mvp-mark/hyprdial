@@ -22,7 +22,8 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
   settings**, each setting marked with a bar of the accent color.
 - **Safe by design**: one generated file for Hyprland settings, backups before touching your files, Undo where it
   matters, passwords asked by the system in a visible terminal or a polkit prompt.
-- **Your language**: the interface follows the system language (English and Brazilian Portuguese included).
+- **Your language**: the interface follows the system language: English, Brazilian Portuguese, Spanish, French
+  and German.
 
 ![Moving through the pages, searching for "night" and listing the changed settings](docs/screenshots/demo.gif)
 
@@ -150,19 +151,20 @@ It can live next to an `./install.sh` copy: the one in `~/.local/bin` comes firs
 ## Language
 
 The interface follows the system language (`LANGUAGE`, `LC_ALL`, `LC_MESSAGES`, `LANG`). Source strings are in
-English, which is also the fallback when there is no translation; a Brazilian Portuguese translation is included
-(`po/pt_BR.po`) and is also used for other Portuguese variants. Dates follow the system's regional format
-(`LC_TIME`). To try another language without changing the system: `LANGUAGE=pt_BR omarchy-settings`.
+English, which is also the fallback when there is no translation. Included translations: Brazilian Portuguese
+(`po/pt_BR.po`, also used for other Portuguese variants), Spanish (`po/es.po`), French (`po/fr.po`) and German
+(`po/de.po`). The Spanish, French and German ones are new and have not been reviewed by native speakers yet;
+corrections are welcome. Dates follow the system's regional format (`LC_TIME`). To try another language without
+changing the system: `LANGUAGE=de omarchy-settings`.
 
 `install.sh` compiles the catalogs with `msgfmt` (`gettext` package). To update or add a language:
 
 ```bash
 xgettext --language=Python --keyword=_ --keyword=ngettext:1,2 --from-code=UTF-8 \
   -o po/omarchy-settings.pot $(find omarchy_settings -name '*.py')
-msgmerge -U po/pt_BR.po po/omarchy-settings.pot       # update an existing translation
-msginit -i po/omarchy-settings.pot -l de -o po/de.po  # or create a new one
+for po in po/*.po; do msgmerge -U "$po" po/omarchy-settings.pot; done  # update the translations
+msginit -i po/omarchy-settings.pot -l it -o po/it.po                       # or add a language
 ./install.sh
-pyproject.toml       ruff and pytest settings
 ```
 
 Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
@@ -211,13 +213,15 @@ omarchy_settings/
   i18n.py            translation (gettext) in the system language
   ui.py              widget helpers
   app.py             main window
-  pages/             themes, hyprland, monitors, sound, power, shortcuts, apps, bar, connectivity, system, search
+  pages/             one module per page (hyprland.py holds Appearance and Input), plus the groups they share
+                     (ethernet, wifi, bluetooth, webapps, autostart), the search dialog and dependencies
 data/                .desktop
 packaging/arch/      PKGBUILD
 docs/screenshots/    images used by this README
 po/                  template (.pot) and translations (.po)
 tests/               pytest + fixtures
 install.sh
+pyproject.toml       ruff and pytest settings
 ```
 
 ## Next steps

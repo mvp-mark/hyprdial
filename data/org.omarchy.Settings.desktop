@@ -2,8 +2,14 @@
 Type=Application
 Name=Omarchy Settings
 Name[pt_BR]=Configurações do Omarchy
+Name[es]=Configuración de Omarchy
+Name[fr]=Paramètres d'Omarchy
+Name[de]=Omarchy-Einstellungen
 Comment=Graphical settings for Omarchy
 Comment[pt_BR]=Interface gráfica de configuração para o Omarchy
+Comment[es]=Configuración gráfica para Omarchy
+Comment[fr]=Paramètres graphiques pour Omarchy
+Comment[de]=Grafische Einstellungen für Omarchy
 Exec=omarchy-settings
 Icon=preferences-system-symbolic
 Terminal=false
