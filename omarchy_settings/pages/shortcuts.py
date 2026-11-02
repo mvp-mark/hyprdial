@@ -25,6 +25,11 @@ CSS = b"""
   font-weight: 600;
 }
 .oms-keycaps.dim { opacity: 0.45; }
+.oms-pointer-pad {
+  border: 1px dashed alpha(currentColor, 0.35);
+  border-radius: 12px;
+  min-height: 64px;
+}
 """
 MODIFIER_KEYS = {
     "Shift_L",
@@ -81,16 +86,21 @@ def keycaps_box(keys: str | None, dim: bool = False) -> Gtk.Box:
 
 
 class KeyDialog(Adw.AlertDialog):
-    """Key picker: records the pressed combination, with modifiers adjustable by hand.
+    """Key picker: records the pressed combination (a key, a mouse button or the wheel),
+    with modifiers adjustable by hand.
 
     Hyprland intercepts combinations that are already in use, so they may not reach this window;
-    in that case select the modifiers and record just the final key.
+    in that case select the modifiers and record just the final key or button.
+    drag: the action moves or resizes windows, so it has to stay on a mouse button.
     """
 
-    def __init__(self, heading: str, keys: str | None, conflicts, on_save, custom: dict | None = None):
+    def __init__(
+        self, heading: str, keys: str | None, conflicts, on_save, custom: dict | None = None, drag: bool = False
+    ):
         super().__init__(heading=heading)
         self.conflicts = conflicts  # function: keys -> (message, blocks)
         self.on_save = on_save
+        self.drag = drag
         mods, self.key = kb.split_keys(keys) if keys else (["SUPER"], "")
         self.recording = False
 
@@ -122,6 +132,16 @@ class KeyDialog(Adw.AlertDialog):
         self.record_btn = Gtk.Button(halign=Gtk.Align.CENTER, css_classes=["pill"])
         self.record_btn.connect("clicked", lambda _b: self._set_recording(not self.recording))
         body.append(self.record_btn)
+        self.pad = Gtk.Label(
+            label=_("Click or scroll here"), css_classes=["oms-pointer-pad", "dim-label"], visible=False
+        )
+        clicks = Gtk.GestureClick(button=0)
+        clicks.connect("pressed", self._on_click)
+        self.pad.add_controller(clicks)
+        wheel = Gtk.EventControllerScroll(flags=Gtk.EventControllerScrollFlags.BOTH_AXES)
+        wheel.connect("scroll", self._on_scroll)
+        self.pad.add_controller(wheel)
+        body.append(self.pad)
         self.preview = Gtk.Box(halign=Gtk.Align.CENTER)
         body.append(self.preview)
         self.message = Gtk.Label(wrap=True, justify=Gtk.Justification.CENTER, css_classes=["dim-label"])
@@ -154,6 +174,7 @@ class KeyDialog(Adw.AlertDialog):
     def _set_recording(self, on: bool) -> None:
         self.recording = on
         self.record_btn.set_label(_("Press the key…") if on else _("Record another key"))
+        self.pad.set_visible(on)
         if on:
             self.record_btn.add_css_class("suggested-action")
         else:
@@ -169,11 +190,33 @@ class KeyDialog(Adw.AlertDialog):
         # base key, without the effect of Shift (Shift+1 records "1", not "!")
         ok, _keys, keyvals = Gdk.Display.get_default().map_keycode(keycode)
         base = keyvals[0] if ok and keyvals else keyval
-        self.key = (Gdk.keyval_name(Gdk.keyval_to_lower(base)) or name).upper()
-        for mask, mod in GDK_MODS:
-            self.mod_buttons[mod].set_active(bool(state & mask))
-        self._set_recording(False)
+        self._record((Gdk.keyval_name(Gdk.keyval_to_lower(base)) or name).upper(), state)
         return True
+
+    def _on_click(self, gesture, _n, _x, _y) -> None:
+        code = kb.GTK_BUTTONS.get(gesture.get_current_button())
+        if self.recording and code:
+            gesture.set_state(Gtk.EventSequenceState.CLAIMED)
+            self._record(f"mouse:{code}", gesture.get_current_event_state())
+
+    def _on_scroll(self, ctl, dx, dy) -> bool:
+        if not self.recording or not (dx or dy):
+            return False
+        if abs(dy) >= abs(dx):
+            key = "mouse_down" if dy > 0 else "mouse_up"
+        else:
+            key = "mouse_right" if dx > 0 else "mouse_left"
+        self._record(key, ctl.get_current_event_state())
+        return True
+
+    def _record(self, key: str, state) -> None:
+        """Modifiers held during the event replace the selected ones; with none held, the selection stays."""
+        self.key = key
+        held = [mod for mask, mod in GDK_MODS if state & mask]
+        if held:
+            for _mask, mod in GDK_MODS:
+                self.mod_buttons[mod].set_active(mod in held)
+        self._set_recording(False)
 
     def _update(self) -> None:
         child = self.preview.get_first_child()
@@ -184,11 +227,14 @@ class KeyDialog(Adw.AlertDialog):
         msg, blocked = ("", False)
         if self.recording:
             msg = _(
-                "Press the combination. If the system already uses it, it may not reach this window: "
-                "select the modifiers above and record just the key."
+                "Press the keys, or click or scroll in the box, with a modifier. If the system already uses "
+                "the combination, it may not reach this window: select the modifiers above and record just "
+                "the key or button."
             )
         elif keys:
-            msg, blocked = self.conflicts(keys)
+            mods = [m for m, b in self.mod_buttons.items() if b.get_active()]
+            problem = kb.pointer_problem(mods, self.key, self.drag)
+            msg, blocked = (problem, True) if problem else self.conflicts(keys)
             if not msg and not any(b.get_active() for b in self.mod_buttons.values()) and len(self.key) == 1:
                 msg = _("Without a modifier, this key stops working for typing.")
         if self.is_custom and not (self.desc_row.get_text().strip() and self.cmd_row.get_text().strip()):
@@ -422,6 +468,7 @@ class ShortcutsPage(Adw.PreferencesPage):
             e.current_keys or e.keys,
             self._conflict_check(ignore=e.keys),
             save,
+            drag=kb.is_drag(e.action),
         ).present(self.win)
 
     def _toggle(self, e: kb.Entry, on: bool) -> None:

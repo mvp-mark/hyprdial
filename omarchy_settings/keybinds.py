@@ -129,6 +129,33 @@ def key_label(key: str) -> str:
     return key.upper() if len(key) == 1 else key[:1].upper() + key[1:]
 
 
+# GTK button numbers -> Linux input codes, the way Hyprland names them (mouse:272 is the left button)
+GTK_BUTTONS = {1: 272, 2: 274, 3: 273, 8: 275, 9: 276}
+WHEEL = {"MOUSE_UP", "MOUSE_DOWN", "MOUSE_LEFT", "MOUSE_RIGHT"}
+
+
+def is_button(key: str) -> bool:
+    return re.fullmatch(r"mouse:\d+", key, re.IGNORECASE) is not None
+
+
+def is_pointer(key: str) -> bool:
+    return is_button(key) or key.upper() in WHEEL
+
+
+def is_drag(action: str | None) -> bool:
+    """Move and resize window binds: Hyprland only runs them from a held mouse button."""
+    return bool(action) and re.search(r"\bmouse\s*=\s*true\b", action) is not None
+
+
+def pointer_problem(mods: list[str], key: str, drag: bool) -> str | None:
+    """Why this combination can't be saved, for shortcuts on (or needing) the mouse."""
+    if drag and not is_button(key):
+        return _("This shortcut needs a mouse button.")
+    if is_pointer(key) and not mods:
+        return _("Mouse shortcuts need a modifier, or normal clicking and scrolling stop working.")
+    return None
+
+
 def keycaps(text: str) -> list[str]:
     mods, key = split_keys(text)
     return [m.capitalize() if m != "CTRL" else "Ctrl" for m in mods] + [key_label(key)]

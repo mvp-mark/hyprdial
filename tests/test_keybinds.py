@@ -195,3 +195,26 @@ def test_real_omarchy_bindings_still_parse():
     assert len(sources) > 50
     assert all(kb.split_keys(s.keys)[1] for s in sources)
     assert sum(s.movable for s in sources) > len(sources) * 0.9
+
+
+def test_drag_binds_are_recognised():
+    assert kb.is_drag("hl.dsp.window.drag(), { mouse = true }")
+    assert not kb.is_drag('hl.dsp.focus({ workspace = "e+1" })')
+    assert not kb.is_drag(None)
+
+
+@pytest.mark.parametrize(
+    ("mods", "key", "drag", "blocked"),
+    [
+        (["SUPER"], "mouse:273", True, False),
+        (["SUPER"], "M", True, True),
+        (["SUPER"], "mouse_down", True, True),
+        ([], "mouse:274", False, True),
+        ([], "mouse_up", False, True),
+        (["ALT"], "mouse_up", False, False),
+        (["SUPER"], "B", False, False),
+        ([], "F5", False, False),
+    ],
+)
+def test_pointer_problem(mods, key, drag, blocked):
+    assert (kb.pointer_problem(mods, key, drag) is not None) == blocked

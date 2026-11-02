@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 11:28-0400\n"
+"POT-Creation-Date: 2026-11-02 11:42-0400\n"
 "PO-Revision-Date: 2026-11-02 04:00-0400\n"
 "Last-Translator: omarchy-settings contributors\n"
 "Language-Team: German\n"
@@ -111,8 +111,8 @@ msgstr "Entfernt alle in dieser App vorgenommenen Einstellungen für Hyprland, B
 #: omarchy_settings/pages/bar.py:220 omarchy_settings/pages/bar.py:427
 #: omarchy_settings/pages/hyprland.py:126
 #: omarchy_settings/pages/monitors.py:424
-#: omarchy_settings/pages/shortcuts.py:237
-#: omarchy_settings/pages/shortcuts.py:485
+#: omarchy_settings/pages/shortcuts.py:283
+#: omarchy_settings/pages/shortcuts.py:532
 msgid "Restore"
 msgstr "Wiederherstellen"
 
@@ -294,11 +294,19 @@ msgstr "Nach links scrollen"
 msgid "Scroll right"
 msgstr "Nach rechts scrollen"
 
-#: omarchy_settings/keybinds.py:486
+#: omarchy_settings/keybinds.py:153
+msgid "This shortcut needs a mouse button."
+msgstr "Dieses Tastenkürzel braucht eine Maustaste."
+
+#: omarchy_settings/keybinds.py:155
+msgid "Mouse shortcuts need a modifier, or normal clicking and scrolling stop working."
+msgstr "Mauskürzel brauchen eine Zusatztaste, sonst funktionieren normales Klicken und Scrollen nicht mehr."
+
+#: omarchy_settings/keybinds.py:513
 msgid "Not found in Omarchy's files; it can only be disabled"
 msgstr "Nicht in den Dateien von Omarchy; kann nur deaktiviert werden"
 
-#: omarchy_settings/keybinds.py:489
+#: omarchy_settings/keybinds.py:516
 msgid "Uses an internal Omarchy function; it can only be disabled"
 msgstr "Nutzt eine interne Omarchy-Funktion; kann nur deaktiviert werden"
 
@@ -1050,7 +1058,7 @@ msgid "Pairing code"
 msgstr "Kopplungscode"
 
 #: omarchy_settings/pages/bluetooth.py:35
-#: omarchy_settings/pages/shortcuts.py:131 omarchy_settings/pages/wifi.py:54
+#: omarchy_settings/pages/shortcuts.py:151 omarchy_settings/pages/wifi.py:54
 #: omarchy_settings/pages/wifi.py:344 omarchy_settings/ui.py:174
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -1842,7 +1850,7 @@ msgid "Going to the workspace you are on returns to the previous one"
 msgstr "Zur aktuellen Arbeitsfläche zu wechseln kehrt zur vorherigen zurück"
 
 #: omarchy_settings/pages/hyprland.py:334
-#: omarchy_settings/pages/shortcuts.py:340
+#: omarchy_settings/pages/shortcuts.py:386
 msgid "Back to Omarchy's default"
 msgstr "Zurück zum Omarchy-Standard"
 
@@ -1997,7 +2005,7 @@ msgid "adjusted by this app"
 msgstr "von dieser App angepasst"
 
 #: omarchy_settings/pages/monitors.py:313
-#: omarchy_settings/pages/shortcuts.py:344
+#: omarchy_settings/pages/shortcuts.py:390
 msgid "Enabled"
 msgstr "Aktiviert"
 
@@ -2421,185 +2429,189 @@ msgstr "{name} entfernen?"
 msgid "Opens a terminal that undoes the setup; it asks for your password."
 msgstr "Öffnet ein Terminal, das die Einrichtung rückgängig macht; es fragt nach deinem Passwort."
 
-#: omarchy_settings/pages/shortcuts.py:101
+#: omarchy_settings/pages/shortcuts.py:111
 msgid "Name (shown in the shortcut list)"
 msgstr "Name (in der Liste der Tastenkürzel angezeigt)"
 
-#: omarchy_settings/pages/shortcuts.py:102
+#: omarchy_settings/pages/shortcuts.py:112
 msgid "What to do"
 msgstr "Was passieren soll"
 
-#: omarchy_settings/pages/shortcuts.py:106
+#: omarchy_settings/pages/shortcuts.py:116
 msgid "Command (e.g. firefox, gimp, btop)"
 msgstr "Befehl (z. B. firefox, gimp, btop)"
 
-#: omarchy_settings/pages/shortcuts.py:132 omarchy_settings/pages/wifi.py:345
+#: omarchy_settings/pages/shortcuts.py:136
+msgid "Click or scroll here"
+msgstr "Hier klicken oder scrollen"
+
+#: omarchy_settings/pages/shortcuts.py:152 omarchy_settings/pages/wifi.py:345
 msgid "Save"
 msgstr "Speichern"
 
-#: omarchy_settings/pages/shortcuts.py:156
+#: omarchy_settings/pages/shortcuts.py:176
 msgid "Press the key…"
 msgstr "Drücke die Taste…"
 
-#: omarchy_settings/pages/shortcuts.py:156
+#: omarchy_settings/pages/shortcuts.py:176
 msgid "Record another key"
 msgstr "Andere Taste aufnehmen"
 
-#: omarchy_settings/pages/shortcuts.py:187
-msgid "Press the combination. If the system already uses it, it may not reach this window: select the modifiers above and record just the key."
-msgstr "Drücke die Kombination. Wenn das System sie schon nutzt, kommt sie eventuell nicht in diesem Fenster an: Wähle oben die Zusatztasten und nimm nur die Taste auf."
+#: omarchy_settings/pages/shortcuts.py:230
+msgid "Press the keys, or click or scroll in the box, with a modifier. If the system already uses the combination, it may not reach this window: select the modifiers above and record just the key or button."
+msgstr "Drücke die Tasten oder klicke bzw. scrolle im Feld, mit einer Zusatztaste. Wenn das System die Kombination schon verwendet, erreicht sie dieses Fenster eventuell nicht: Wähle oben die Zusatztasten und nimm nur die Taste oder den Mausknopf auf."
 
-#: omarchy_settings/pages/shortcuts.py:193
+#: omarchy_settings/pages/shortcuts.py:239
 msgid "Without a modifier, this key stops working for typing."
 msgstr "Ohne Zusatztaste funktioniert diese Taste nicht mehr zum Tippen."
 
-#: omarchy_settings/pages/shortcuts.py:218
+#: omarchy_settings/pages/shortcuts.py:264
 msgid "The default shortcuts come from Omarchy. Changes made here are stored in ~/.config/hypr/omarchy-settings.lua and can be undone with ↶."
 msgstr "Die Standard-Tastenkürzel kommen von Omarchy. Hier vorgenommene Änderungen werden in ~/.config/hypr/omarchy-settings.lua gespeichert und lassen sich mit ↶ rückgängig machen."
 
-#: omarchy_settings/pages/shortcuts.py:223
+#: omarchy_settings/pages/shortcuts.py:269
 msgid "Search by name or key (e.g. browser, super+b)"
 msgstr "Nach Name oder Taste suchen (z. B. Browser, super+b)"
 
-#: omarchy_settings/pages/shortcuts.py:225
-#: omarchy_settings/pages/shortcuts.py:468
+#: omarchy_settings/pages/shortcuts.py:271
+#: omarchy_settings/pages/shortcuts.py:515
 msgid "New shortcut"
 msgstr "Neues Tastenkürzel"
 
-#: omarchy_settings/pages/shortcuts.py:235
+#: omarchy_settings/pages/shortcuts.py:281
 msgid "Restore all shortcuts"
 msgstr "Alle Tastenkürzel wiederherstellen"
 
-#: omarchy_settings/pages/shortcuts.py:236
+#: omarchy_settings/pages/shortcuts.py:282
 msgid "Undoes every change and deletes your own shortcuts"
 msgstr "Macht alle Änderungen rückgängig und löscht deine eigenen Tastenkürzel"
 
-#: omarchy_settings/pages/shortcuts.py:252
+#: omarchy_settings/pages/shortcuts.py:298
 msgid "Could not read the shortcuts"
 msgstr "Tastenkürzel konnten nicht gelesen werden"
 
-#: omarchy_settings/pages/shortcuts.py:261
+#: omarchy_settings/pages/shortcuts.py:307
 msgid "Your shortcuts"
 msgstr "Deine Tastenkürzel"
 
-#: omarchy_settings/pages/shortcuts.py:266
+#: omarchy_settings/pages/shortcuts.py:312
 msgid "No shortcuts of your own"
 msgstr "Keine eigenen Tastenkürzel"
 
-#: omarchy_settings/pages/shortcuts.py:267
+#: omarchy_settings/pages/shortcuts.py:313
 msgid "Use “New shortcut” to open an app or run a command"
 msgstr "Nutze „Neues Tastenkürzel“, um eine App zu öffnen oder einen Befehl auszuführen"
 
-#: omarchy_settings/pages/shortcuts.py:277
+#: omarchy_settings/pages/shortcuts.py:323
 msgid "Omarchy shortcuts"
 msgstr "Omarchy-Tastenkürzel"
 
-#: omarchy_settings/pages/shortcuts.py:300
+#: omarchy_settings/pages/shortcuts.py:346
 #, python-brace-format
 msgid "{n} shortcut"
 msgid_plural "{n} shortcuts"
 msgstr[0] "{n} Tastenkürzel"
 msgstr[1] "{n} Tastenkürzel"
 
-#: omarchy_settings/pages/shortcuts.py:302
+#: omarchy_settings/pages/shortcuts.py:348
 #, python-brace-format
 msgid "{n} changed"
 msgid_plural "{n} changed"
 msgstr[0] "{n} geändert"
 msgstr[1] "{n} geändert"
 
-#: omarchy_settings/pages/shortcuts.py:321
+#: omarchy_settings/pages/shortcuts.py:367
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: omarchy_settings/pages/shortcuts.py:323
+#: omarchy_settings/pages/shortcuts.py:369
 #, python-brace-format
 msgid "Before: {keys}"
 msgstr "Vorher: {keys}"
 
-#: omarchy_settings/pages/shortcuts.py:331
+#: omarchy_settings/pages/shortcuts.py:377
 msgid "Change the key"
 msgstr "Taste ändern"
 
-#: omarchy_settings/pages/shortcuts.py:354
+#: omarchy_settings/pages/shortcuts.py:400
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: omarchy_settings/pages/shortcuts.py:358
+#: omarchy_settings/pages/shortcuts.py:404
 msgid "Delete"
 msgstr "Löschen"
 
-#: omarchy_settings/pages/shortcuts.py:393
+#: omarchy_settings/pages/shortcuts.py:439
 #, python-brace-format
 msgid "Already used by your shortcut “{name}”."
 msgstr "Wird schon von deinem Tastenkürzel „{name}“ genutzt."
 
-#: omarchy_settings/pages/shortcuts.py:395
+#: omarchy_settings/pages/shortcuts.py:441
 #, python-brace-format
 msgid "Already used by “{name}”, which will be disabled."
 msgstr "Wird schon von „{name}“ genutzt, das deaktiviert wird."
 
-#: omarchy_settings/pages/shortcuts.py:417
+#: omarchy_settings/pages/shortcuts.py:463
 #, python-brace-format
 msgid "“{name}” is now {keys}"
 msgstr "„{name}“ ist jetzt {keys}"
 
-#: omarchy_settings/pages/shortcuts.py:421
+#: omarchy_settings/pages/shortcuts.py:467
 #, python-brace-format
 msgid "Key for “{name}”"
 msgstr "Taste für „{name}“"
 
-#: omarchy_settings/pages/shortcuts.py:433
+#: omarchy_settings/pages/shortcuts.py:480
 msgid "Those keys are used by another shortcut; change its key first"
 msgstr "Diese Tasten nutzt ein anderes Tastenkürzel; ändere zuerst dessen Taste"
 
-#: omarchy_settings/pages/shortcuts.py:439
+#: omarchy_settings/pages/shortcuts.py:486
 #, python-brace-format
 msgid "“{name}” enabled"
 msgstr "„{name}“ aktiviert"
 
-#: omarchy_settings/pages/shortcuts.py:439
+#: omarchy_settings/pages/shortcuts.py:486
 #, python-brace-format
 msgid "“{name}” disabled"
 msgstr "„{name}“ deaktiviert"
 
-#: omarchy_settings/pages/shortcuts.py:446
+#: omarchy_settings/pages/shortcuts.py:493
 #, python-brace-format
 msgid "The original key is used by “{name}”"
 msgstr "Die ursprüngliche Taste nutzt „{name}“"
 
-#: omarchy_settings/pages/shortcuts.py:450
+#: omarchy_settings/pages/shortcuts.py:497
 #, python-brace-format
 msgid "“{name}” is back to the default"
 msgstr "„{name}“ ist wieder auf dem Standard"
 
-#: omarchy_settings/pages/shortcuts.py:465
+#: omarchy_settings/pages/shortcuts.py:512
 #, python-brace-format
 msgid "Shortcut “{name}” saved"
 msgstr "Tastenkürzel „{name}“ gespeichert"
 
-#: omarchy_settings/pages/shortcuts.py:468
+#: omarchy_settings/pages/shortcuts.py:515
 msgid "Edit shortcut"
 msgstr "Tastenkürzel bearbeiten"
 
-#: omarchy_settings/pages/shortcuts.py:478
+#: omarchy_settings/pages/shortcuts.py:525
 #, python-brace-format
 msgid "Shortcut “{name}” deleted"
 msgstr "Tastenkürzel „{name}“ gelöscht"
 
-#: omarchy_settings/pages/shortcuts.py:483
+#: omarchy_settings/pages/shortcuts.py:530
 msgid "Restore all shortcuts?"
 msgstr "Alle Tastenkürzel wiederherstellen?"
 
-#: omarchy_settings/pages/shortcuts.py:484
+#: omarchy_settings/pages/shortcuts.py:531
 msgid "Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."
 msgstr "Die Omarchy-Tastenkürzel kehren zum Standard zurück und deine eigenen werden gelöscht."
 
-#: omarchy_settings/pages/shortcuts.py:486
+#: omarchy_settings/pages/shortcuts.py:533
 msgid "Shortcuts restored"
 msgstr "Tastenkürzel wiederhergestellt"
 
-#: omarchy_settings/pages/shortcuts.py:503
+#: omarchy_settings/pages/shortcuts.py:550
 msgid "Hyprland didn't accept that shortcut; nothing was changed"
 msgstr "Hyprland hat das Tastenkürzel nicht akzeptiert; nichts wurde geändert"
 
