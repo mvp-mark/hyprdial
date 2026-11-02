@@ -18,7 +18,7 @@ optdepends=('impala: Wi-Fi manager opened by the Connectivity page'
             'wiremix: audio mixer opened by the Sound page'
             "waybar: alternative bar (Omarchy uses the Omarchy shell bar)")
 source=("$_name-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('fd9105ae80684fd7de8e83b17c721cf2aeed34223007282dd54171a8fdf11cd5')
 
 build() {
   cd "$_name-$pkgver"

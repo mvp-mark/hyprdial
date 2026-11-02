@@ -15,6 +15,6 @@ pkgbase = omarchy-settings-gui
 	optdepends = wiremix: audio mixer opened by the Sound page
 	optdepends = waybar: alternative bar (Omarchy uses the Omarchy shell bar)
 	source = omarchy-settings-0.5.3.tar.gz::https://github.com/mvp-mark/omarchy-settings/archive/refs/tags/v0.5.3.tar.gz
-	sha256sums = SKIP
+	sha256sums = fd9105ae80684fd7de8e83b17c721cf2aeed34223007282dd54171a8fdf11cd5
 
 pkgname = omarchy-settings-gui
