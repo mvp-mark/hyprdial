@@ -55,9 +55,24 @@ def test_find_binds_skips_comments_and_strings():
     assert kb.find_binds(text) == [("o.bind", ['"SUPER + A"', '"Real"', '"cmd, with comma"'])]
 
 
-def test_parse_source_skips_computed_keys(sources):
-    assert all("workspace" not in (s.desc or "") for s in sources)
+def test_parse_source_unrolls_numeric_loops(sources):
+    ws = by_desc(sources, "Switch to workspace 10")
+    assert ws.keys == "SUPER + code:19" and ws.action == 'hl.dsp.focus({ workspace = "10" })' and ws.movable
     assert by_desc(sources, "Expand window left").keys == "SUPER + code:20"
+
+
+def test_expand_loops_keeps_strings_and_folds_constants():
+    text = (
+        "for n = 1, 2 do\n"
+        '  local key = "code:" .. tostring(n + 9)\n'
+        '  o.bind("SUPER + " .. key, "Panel " .. n, "toggle n " .. n)\n'
+        "end\n"
+    )
+    binds = kb.parse_source(text, "other")
+    assert [(b.keys, b.desc, b.action) for b in binds] == [
+        ("SUPER + code:10", "Panel 1", '"toggle n 1"'),
+        ("SUPER + code:11", "Panel 2", '"toggle n 2"'),
+    ]
 
 
 def test_parse_source_handles_multiline_and_spacing(sources):
@@ -106,7 +121,7 @@ def test_build_entries_matches_sources_and_reconstructs_loops(sources):
         [
             live(64, "RETURN", "Terminal"),
             live(64, "", "Expand window left"),  # code:20, no 'key' from hyprctl
-            live(64, "", "Switch to workspace 3"),  # generated in a loop
+            live(64, "", "Switch to workspace 3"),  # generated in a loop, unrolled when reading the sources
             live(64, "C", "Universal copy"),
             live(64, "F12", "Something else"),  # only exists live
         ],
@@ -117,7 +132,7 @@ def test_build_entries_matches_sources_and_reconstructs_loops(sources):
     assert e["Terminal"].action == '{ omarchy = "terminal" }' and e["Terminal"].category == "applications"
     assert e["Expand window left"].keys == "SUPER + code:20" and e["Expand window left"].action
     assert e["Switch to workspace 3"].keys == "SUPER + code:12"
-    assert e["Switch to workspace 3"].action is None and "loop" in e["Switch to workspace 3"].locked
+    assert e["Switch to workspace 3"].action == 'hl.dsp.focus({ workspace = "3" })'
     assert e["Universal copy"].action is None and "internal" in e["Universal copy"].locked
     assert e["Something else"].category == "other"
 

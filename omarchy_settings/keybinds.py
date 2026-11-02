@@ -278,9 +278,93 @@ class SourceBind:
         return not free_names(self.action)
 
 
+# ------------------------------------------------------------------ numeric for loops
+LOOP = re.compile(r"\bfor\s+([A-Za-z_]\w*)\s*=\s*(\d+)\s*,\s*(\d+)\s+do\b")
+
+
+def _code_tokens(text: str):
+    """(start, end, is_code) pieces: strings and comments apart from the code around them."""
+    i, start = 0, 0
+    while i < len(text):
+        skipped = _skip(text, i)
+        if skipped is not None:
+            if start < i:
+                yield start, i, True
+            yield i, skipped, False
+            i = start = skipped
+        else:
+            i += 1
+    if start < len(text):
+        yield start, len(text), True
+
+
+def _block_end(text: str, i: int) -> int | None:
+    """Index right after the `end` closing the block whose body starts at i."""
+    depth = 1
+    for start, end, is_code in _code_tokens(text[i:]):
+        if not is_code:
+            continue
+        for m in re.finditer(r"\b(function|do|then|end|elseif|repeat|until)\b", text[i + start : i + end]):
+            word = m.group(1)
+            if word in ("function", "do", "repeat") or word == "then":
+                depth += 1
+            elif word == "elseif":
+                depth -= 1  # its "then" opens nothing new
+            elif word in ("end", "until"):
+                depth -= 1
+                if depth == 0:
+                    return i + start + m.end()
+    return None
+
+
+def _substitute(code: str, name: str, value: str) -> str:
+    """Replaces a variable in the code only, never inside strings or comments."""
+    return "".join(
+        re.sub(rf"(?<![\w.]){re.escape(name)}\b(?!\s*=[^=])", value, code[a:b]) if is_code else code[a:b]
+        for a, b, is_code in _code_tokens(code)
+    )
+
+
+def _fold(expr: str) -> str:
+    """Simplifies what a loop leaves behind: tostring(5 + 9) -> "14", "a" .. "b" -> "ab", "a" .. 3 -> "a3"."""
+    while True:
+        new = re.sub(
+            r"tostring\(\s*(\d+)\s*([+-])\s*(\d+)\s*\)",
+            lambda m: f'"{int(m[1]) + int(m[3]) if m[2] == "+" else int(m[1]) - int(m[3])}"',
+            expr,
+        )
+        new = re.sub(r"tostring\(\s*(\d+)\s*\)", r'"\1"', new)
+        new = re.sub(r'"([^"\\]*)"\s*\.\.\s*"([^"\\]*)"', r'"\1\2"', new)
+        new = re.sub(r'"([^"\\]*)"\s*\.\.\s*(\d+)\b', r'"\1\2"', new)
+        if new == expr:
+            return new
+        expr = new
+
+
+def expand_loops(text: str) -> str:
+    """Unrolls `for i = 1, 10 do ... end`, so the shortcuts made inside have literal keys like any other.
+
+    Locals the body sets to a constant (local key = "code:" .. tostring(i + 9)) are inlined as well."""
+    while (m := LOOP.search(text)) is not None:
+        body_start = m.end()
+        end = _block_end(text, body_start)
+        if end is None:
+            break
+        body = text[body_start : end - len("end")]
+        name, first, last = m.group(1), int(m.group(2)), int(m.group(3))
+        copies = []
+        for value in range(first, last + 1):
+            copy = _fold(_substitute(body, name, str(value)))
+            for local in re.finditer(r"\blocal\s+([A-Za-z_]\w*)\s*=\s*(\"[^\"\\]*\")\s*\n", copy):
+                copy = _fold(_substitute(copy.replace(local.group(0), "", 1), local.group(1), local.group(2)))
+            copies.append(copy)
+        text = text[: m.start()] + "do\n" + "\n".join(copies) + "\nend" + text[end:]
+    return text
+
+
 def parse_source(text: str, category: str) -> list[SourceBind]:
     result = []
-    for name, args in find_binds(text):
+    for name, args in find_binds(expand_loops(text)):
         if len(args) < 3:
             continue
         keys, desc = lua_string(args[0]), lua_string(args[1])
@@ -389,9 +473,7 @@ def build_entries(live: list[dict], sources: list[SourceBind], state: dict) -> l
         desc = b.get("description") or (src.desc if src else "") or text
         category = src.category if src else guess_category(desc)
         if src is None:
-            entries[c] = Entry(
-                text, desc, category, locked=_("Generated in a loop by Omarchy; it can only be disabled")
-            )
+            entries[c] = Entry(text, desc, category, locked=_("Not found in Omarchy's files; it can only be disabled"))
         elif not src.movable:
             entries[c] = Entry(
                 src.keys, desc, category, locked=_("Uses an internal Omarchy function; it can only be disabled")
