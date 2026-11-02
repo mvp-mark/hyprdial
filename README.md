@@ -169,3 +169,7 @@ install.sh
   they can only be disabled.
 - Removing a single Spacer from the bar (today removal applies to all of them).
 - Publishing the package on the AUR, and more languages.
+
+## License
+
+[MIT](LICENSE).
