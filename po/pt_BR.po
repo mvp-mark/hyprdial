@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:01-0400\n"
+"POT-Creation-Date: 2026-11-02 03:02-0400\n"
 "PO-Revision-Date: 2026-11-01 12:00-0400\n"
 "Last-Translator: Marcus Vinícius Peixoto Paulo\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -80,7 +80,8 @@ msgstr "Remove todas as configurações de Hyprland, telas, atalhos e botão de 
 #: omarchy_settings/pages/bluetooth.py:100
 #: omarchy_settings/pages/bluetooth.py:284
 #: omarchy_settings/pages/shortcuts.py:110
-#: omarchy_settings/pages/shortcuts.py:418 omarchy_settings/pages/wifi.py:94
+#: omarchy_settings/pages/shortcuts.py:418
+#: omarchy_settings/pages/webapps.py:132 omarchy_settings/pages/wifi.py:94
 #: omarchy_settings/pages/wifi.py:356 omarchy_settings/pages/wifi.py:382
 msgid "Cancel"
 msgstr "Cancelar"
@@ -243,52 +244,52 @@ msgstr "Gerado em laço pelo Omarchy; só dá para desativar"
 msgid "Uses an internal Omarchy function; it can only be disabled"
 msgstr "Usa uma função interna do Omarchy; só dá para desativar"
 
-#: omarchy_settings/pages/apps.py:14
+#: omarchy_settings/pages/apps.py:15
 msgid "Web browser"
 msgstr "Navegador"
 
-#: omarchy_settings/pages/apps.py:14
+#: omarchy_settings/pages/apps.py:15
 msgid "Terminal"
 msgstr "Terminal"
 
-#: omarchy_settings/pages/apps.py:14
+#: omarchy_settings/pages/apps.py:15
 msgid "Text editor"
 msgstr "Editor de texto"
 
-#: omarchy_settings/pages/apps.py:15
+#: omarchy_settings/pages/apps.py:16
 msgid "File manager"
 msgstr "Gerenciador de arquivos"
 
-#: omarchy_settings/pages/apps.py:15
+#: omarchy_settings/pages/apps.py:16
 msgid "PDF documents"
 msgstr "Documentos PDF"
 
-#: omarchy_settings/pages/apps.py:15
+#: omarchy_settings/pages/apps.py:16
 msgid "Images"
 msgstr "Imagens"
 
-#: omarchy_settings/pages/apps.py:16
+#: omarchy_settings/pages/apps.py:17
 msgid "PNG, JPEG, WebP and GIF"
 msgstr "PNG, JPEG, WebP e GIF"
 
-#: omarchy_settings/pages/apps.py:27
+#: omarchy_settings/pages/apps.py:28
 #, python-brace-format
 msgid "Now: {name}"
 msgstr "Atual: {name}"
 
-#: omarchy_settings/pages/apps.py:37
+#: omarchy_settings/pages/apps.py:38
 msgid "Default apps"
 msgstr "Aplicativos padrão"
 
-#: omarchy_settings/pages/apps.py:37
+#: omarchy_settings/pages/apps.py:38
 msgid "Only installed apps are listed."
 msgstr "Só os aplicativos instalados aparecem."
 
-#: omarchy_settings/pages/apps.py:68
+#: omarchy_settings/pages/apps.py:71
 msgid "Default app changed"
 msgstr "Aplicativo padrão alterado"
 
-#: omarchy_settings/pages/apps.py:68
+#: omarchy_settings/pages/apps.py:71
 msgid "Could not change the default app"
 msgstr "Não foi possível mudar o aplicativo padrão"
 
@@ -717,7 +718,7 @@ msgstr[1] "{n} fora da barra"
 msgid "Every widget is already on the bar"
 msgstr "Todos os widgets já estão na barra"
 
-#: omarchy_settings/pages/bar.py:338
+#: omarchy_settings/pages/bar.py:338 omarchy_settings/pages/webapps.py:40
 msgid "Add"
 msgstr "Adicionar"
 
@@ -1700,7 +1701,7 @@ msgstr "Estilo {name} aplicado"
 msgid "Hyprland options restored"
 msgstr "Opções do Hyprland restauradas"
 
-#: omarchy_settings/pages/ipv4.py:25
+#: omarchy_settings/pages/ipv4.py:25 omarchy_settings/pages/webapps.py:32
 msgid "Address"
 msgstr "Endereço"
 
@@ -2714,6 +2715,90 @@ msgstr "Wallpaper: {name}"
 #: omarchy_settings/pages/themes.py:275
 msgid "Wallpaper changed"
 msgstr "Wallpaper alterado"
+
+#: omarchy_settings/pages/webapps.py:14
+msgid "Type a name"
+msgstr "Digite um nome"
+
+#: omarchy_settings/pages/webapps.py:14
+msgid "The name can't contain \"/\""
+msgstr "O nome não pode conter \"/\""
+
+#: omarchy_settings/pages/webapps.py:15
+msgid "There is already a web app with this name"
+msgstr "Já existe um web app com esse nome"
+
+#: omarchy_settings/pages/webapps.py:15
+msgid "Type a web address (https://…)"
+msgstr "Digite um endereço da web (https://…)"
+
+#: omarchy_settings/pages/webapps.py:29 omarchy_settings/pages/webapps.py:95
+msgid "Add web app"
+msgstr "Adicionar web app"
+
+#: omarchy_settings/pages/webapps.py:31
+msgid "Name"
+msgstr "Nome"
+
+#: omarchy_settings/pages/webapps.py:33
+msgid "Icon (optional)"
+msgstr "Ícone (opcional)"
+
+#: omarchy_settings/pages/webapps.py:34
+msgid "Leave the icon empty to use the site's own icon, or type an image address or an icon name."
+msgstr "Deixe o ícone vazio para usar o ícone do próprio site, ou digite o endereço de uma imagem ou o nome de um ícone."
+
+#: omarchy_settings/pages/webapps.py:69
+msgid "Couldn't get the site's icon. Type an image address or an icon name."
+msgstr "Não foi possível obter o ícone do site. Digite o endereço de uma imagem ou o nome de um ícone."
+
+#: omarchy_settings/pages/webapps.py:71
+msgid "Could not add the web app"
+msgstr "Não foi possível adicionar o web app"
+
+#: omarchy_settings/pages/webapps.py:87
+msgid "Web apps"
+msgstr "Web apps"
+
+#: omarchy_settings/pages/webapps.py:87
+msgid "Sites that open in their own window, from the app launcher."
+msgstr "Sites que abrem em janela própria, pelo lançador de apps."
+
+#: omarchy_settings/pages/webapps.py:93
+msgid "Omarchy's web app commands were not found"
+msgstr "Os comandos de web app do Omarchy não foram encontrados"
+
+#: omarchy_settings/pages/webapps.py:113 omarchy_settings/pages/webapps.py:133
+msgid "Remove"
+msgstr "Remover"
+
+#: omarchy_settings/pages/webapps.py:120
+msgid "No web apps yet"
+msgstr "Nenhum web app ainda"
+
+#: omarchy_settings/pages/webapps.py:125
+#, python-brace-format
+msgid "{name} added to the app launcher"
+msgstr "{name} adicionado ao lançador de apps"
+
+#: omarchy_settings/pages/webapps.py:129
+#, python-brace-format
+msgid "Remove {name}?"
+msgstr "Remover {name}?"
+
+#: omarchy_settings/pages/webapps.py:130
+msgid "Removes it from the app launcher. The site itself and its data in the browser are kept."
+msgstr "Tira do lançador de apps. O site e os dados dele no navegador são mantidos."
+
+#: omarchy_settings/pages/webapps.py:142
+#, python-brace-format
+msgid "{name} removed"
+msgstr "{name} removido"
+
+#: omarchy_settings/pages/webapps.py:142
+#, python-brace-format
+msgid "Could not remove {name}"
+msgstr "Não foi possível remover {name}"
 
 #: omarchy_settings/pages/wifi.py:23
 msgid "Open (encrypted)"

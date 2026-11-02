@@ -1,4 +1,4 @@
-"""Apps page: default apps (browser, terminal, editor, files, PDF, images)."""
+"""Apps page: default apps (browser, terminal, editor, files, PDF, images) and web apps."""
 from __future__ import annotations
 
 import gi
@@ -10,6 +10,7 @@ from gi.repository import Adw, Gtk  # noqa: E402
 from .. import apps, core
 from ..i18n import _
 from ..ui import bg
+from .webapps import WebAppsGroup
 
 KIND_TITLES = {"browser": _("Web browser"), "terminal": _("Terminal"), "editor": _("Text editor"),
                "files": _("File manager"), "pdf": _("PDF documents"), "images": _("Images")}
@@ -37,6 +38,8 @@ class AppsPage(Adw.PreferencesPage):
         self.defaults = Adw.PreferencesGroup(title=_("Default apps"), description=_("Only installed apps are listed."))
         self.add(self.defaults)
         bg(self._read_defaults, self._populate_defaults)
+
+        self.add(WebAppsGroup(win))
 
     # -- default apps
     @staticmethod
