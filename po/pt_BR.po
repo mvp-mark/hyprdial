@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:23-0400\n"
+"POT-Creation-Date: 2026-11-02 03:25-0400\n"
 "PO-Revision-Date: 2026-11-01 12:00-0400\n"
 "Last-Translator: Marcus Vinícius Peixoto Paulo\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -12,71 +12,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: omarchy_settings/app.py:35 omarchy_settings/app.py:41
-msgid "Omarchy Settings"
-msgstr "Configurações do Omarchy"
+#: omarchy_settings/app.py:34
+msgid "Style"
+msgstr "Estilo"
 
-#: omarchy_settings/app.py:45
-msgid "Dependencies…"
-msgstr "Dependências…"
+#: omarchy_settings/app.py:34
+msgid "Hardware"
+msgstr "Hardware"
 
-#: omarchy_settings/app.py:46
-msgid "Restore app defaults…"
-msgstr "Restaurar padrões do app…"
-
-#: omarchy_settings/app.py:47
-msgid "Main menu"
-msgstr "Menu principal"
-
-#: omarchy_settings/app.py:49
-msgid "Search settings (Ctrl+F)"
-msgstr "Pesquisar configurações (Ctrl+F)"
-
-#: omarchy_settings/app.py:84
-msgid "Themes"
-msgstr "Temas"
-
-#: omarchy_settings/app.py:86 omarchy_settings/pages/monitors.py:237
-msgid "Displays"
-msgstr "Monitores"
-
-#: omarchy_settings/app.py:87 omarchy_settings/pages/sound.py:179
-msgid "Sound"
-msgstr "Som"
-
-#: omarchy_settings/app.py:88 omarchy_settings/pages/bar.py:48
-msgid "Power"
-msgstr "Energia"
-
-#: omarchy_settings/app.py:89
-msgid "Shortcuts"
-msgstr "Atalhos"
-
-#: omarchy_settings/app.py:90
-msgid "Apps"
-msgstr "Apps"
-
-#: omarchy_settings/app.py:91
-msgid "Bar and fonts"
-msgstr "Barra e fontes"
-
-#: omarchy_settings/app.py:92
-msgid "Connectivity"
-msgstr "Conectividade"
-
-#: omarchy_settings/app.py:93
+#: omarchy_settings/app.py:34 omarchy_settings/app.py:45
 msgid "System"
 msgstr "Sistema"
 
-#: omarchy_settings/app.py:110
+#: omarchy_settings/app.py:36
+msgid "Themes"
+msgstr "Temas"
+
+#: omarchy_settings/app.py:38
+msgid "Bar and fonts"
+msgstr "Barra e fontes"
+
+#: omarchy_settings/app.py:39 omarchy_settings/pages/monitors.py:237
+msgid "Displays"
+msgstr "Monitores"
+
+#: omarchy_settings/app.py:40 omarchy_settings/pages/sound.py:179
+msgid "Sound"
+msgstr "Som"
+
+#: omarchy_settings/app.py:41 omarchy_settings/pages/bar.py:48
+msgid "Power"
+msgstr "Energia"
+
+#: omarchy_settings/app.py:42
+msgid "Connectivity"
+msgstr "Conectividade"
+
+#: omarchy_settings/app.py:43
+msgid "Apps"
+msgstr "Apps"
+
+#: omarchy_settings/app.py:44
+msgid "Shortcuts"
+msgstr "Atalhos"
+
+#: omarchy_settings/app.py:51 omarchy_settings/app.py:85
+msgid "Omarchy Settings"
+msgstr "Configurações do Omarchy"
+
+#: omarchy_settings/app.py:58
+msgid "Dependencies…"
+msgstr "Dependências…"
+
+#: omarchy_settings/app.py:59
+msgid "Restore app defaults…"
+msgstr "Restaurar padrões do app…"
+
+#: omarchy_settings/app.py:66
+msgid "Search settings (Ctrl+F)"
+msgstr "Pesquisar configurações (Ctrl+F)"
+
+#: omarchy_settings/app.py:70
+msgid "Main menu"
+msgstr "Menu principal"
+
+#: omarchy_settings/app.py:174
 msgid "Restore app defaults?"
 msgstr "Restaurar os padrões do app?"
 
-#: omarchy_settings/app.py:112
+#: omarchy_settings/app.py:176
 msgid "Removes every Hyprland, display, shortcut, power button and startup command setting made in this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. A backup of the generated file is kept, and you can undo right after."
 msgstr "Remove todas as configurações de Hyprland, telas, atalhos, botão de energia e comandos de início feitas neste app, voltando às do Omarchy. Barra, tema, rede e sistema não são alterados. Um backup do arquivo gerado é guardado, e dá para desfazer logo em seguida."
 
-#: omarchy_settings/app.py:116 omarchy_settings/pages/bar.py:157
+#: omarchy_settings/app.py:180 omarchy_settings/pages/bar.py:157
 #: omarchy_settings/pages/bar.py:219 omarchy_settings/pages/bar.py:407
 #: omarchy_settings/pages/hyprland.py:128
 #: omarchy_settings/pages/monitors.py:427
@@ -85,20 +93,20 @@ msgstr "Remove todas as configurações de Hyprland, telas, atalhos, botão de e
 msgid "Restore"
 msgstr "Restaurar"
 
-#: omarchy_settings/app.py:123
+#: omarchy_settings/app.py:187
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr "Não foi possível restaurar: {error}"
 
-#: omarchy_settings/app.py:127
+#: omarchy_settings/app.py:191
 msgid "App defaults restored"
 msgstr "Padrões do app restaurados"
 
-#: omarchy_settings/app.py:127 omarchy_settings/pages/themes.py:257
+#: omarchy_settings/app.py:191 omarchy_settings/pages/themes.py:257
 msgid "Undo"
 msgstr "Desfazer"
 
-#: omarchy_settings/app.py:132
+#: omarchy_settings/app.py:196
 msgid "Settings brought back"
 msgstr "Configurações de volta"
 
@@ -2178,15 +2186,15 @@ msgstr "Pausa proteção de tela e bloqueio até desligar isto"
 msgid "Could not write shell.json"
 msgstr "Não foi possível gravar shell.json"
 
-#: omarchy_settings/pages/search.py:88 omarchy_settings/pages/search.py:93
+#: omarchy_settings/pages/search.py:92 omarchy_settings/pages/search.py:97
 msgid "Search settings"
 msgstr "Pesquisar configurações"
 
-#: omarchy_settings/pages/search.py:106 omarchy_settings/pages/search.py:133
+#: omarchy_settings/pages/search.py:110 omarchy_settings/pages/search.py:137
 msgid "Type the name of a setting"
 msgstr "Digite o nome de uma configuração"
 
-#: omarchy_settings/pages/search.py:133
+#: omarchy_settings/pages/search.py:137
 msgid "Nothing found"
 msgstr "Nada encontrado"
 

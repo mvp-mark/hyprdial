@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:23-0400\n"
+"POT-Creation-Date: 2026-11-02 03:25-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,67 +18,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: omarchy_settings/app.py:35 omarchy_settings/app.py:41
-msgid "Omarchy Settings"
+#: omarchy_settings/app.py:34
+msgid "Style"
 msgstr ""
 
-#: omarchy_settings/app.py:45
-msgid "Dependencies…"
+#: omarchy_settings/app.py:34
+msgid "Hardware"
 msgstr ""
 
-#: omarchy_settings/app.py:46
-msgid "Restore app defaults…"
-msgstr ""
-
-#: omarchy_settings/app.py:47
-msgid "Main menu"
-msgstr ""
-
-#: omarchy_settings/app.py:49
-msgid "Search settings (Ctrl+F)"
-msgstr ""
-
-#: omarchy_settings/app.py:84
-msgid "Themes"
-msgstr ""
-
-#: omarchy_settings/app.py:86 omarchy_settings/pages/monitors.py:237
-msgid "Displays"
-msgstr ""
-
-#: omarchy_settings/app.py:87 omarchy_settings/pages/sound.py:179
-msgid "Sound"
-msgstr ""
-
-#: omarchy_settings/app.py:88 omarchy_settings/pages/bar.py:48
-msgid "Power"
-msgstr ""
-
-#: omarchy_settings/app.py:89
-msgid "Shortcuts"
-msgstr ""
-
-#: omarchy_settings/app.py:90
-msgid "Apps"
-msgstr ""
-
-#: omarchy_settings/app.py:91
-msgid "Bar and fonts"
-msgstr ""
-
-#: omarchy_settings/app.py:92
-msgid "Connectivity"
-msgstr ""
-
-#: omarchy_settings/app.py:93
+#: omarchy_settings/app.py:34 omarchy_settings/app.py:45
 msgid "System"
 msgstr ""
 
-#: omarchy_settings/app.py:110
+#: omarchy_settings/app.py:36
+msgid "Themes"
+msgstr ""
+
+#: omarchy_settings/app.py:38
+msgid "Bar and fonts"
+msgstr ""
+
+#: omarchy_settings/app.py:39 omarchy_settings/pages/monitors.py:237
+msgid "Displays"
+msgstr ""
+
+#: omarchy_settings/app.py:40 omarchy_settings/pages/sound.py:179
+msgid "Sound"
+msgstr ""
+
+#: omarchy_settings/app.py:41 omarchy_settings/pages/bar.py:48
+msgid "Power"
+msgstr ""
+
+#: omarchy_settings/app.py:42
+msgid "Connectivity"
+msgstr ""
+
+#: omarchy_settings/app.py:43
+msgid "Apps"
+msgstr ""
+
+#: omarchy_settings/app.py:44
+msgid "Shortcuts"
+msgstr ""
+
+#: omarchy_settings/app.py:51 omarchy_settings/app.py:85
+msgid "Omarchy Settings"
+msgstr ""
+
+#: omarchy_settings/app.py:58
+msgid "Dependencies…"
+msgstr ""
+
+#: omarchy_settings/app.py:59
+msgid "Restore app defaults…"
+msgstr ""
+
+#: omarchy_settings/app.py:66
+msgid "Search settings (Ctrl+F)"
+msgstr ""
+
+#: omarchy_settings/app.py:70
+msgid "Main menu"
+msgstr ""
+
+#: omarchy_settings/app.py:174
 msgid "Restore app defaults?"
 msgstr ""
 
-#: omarchy_settings/app.py:112
+#: omarchy_settings/app.py:176
 msgid ""
 "Removes every Hyprland, display, shortcut, power button and startup command "
 "setting made in this app, returning to Omarchy's own. The bar, theme, "
@@ -86,7 +94,7 @@ msgid ""
 "is kept, and you can undo right after."
 msgstr ""
 
-#: omarchy_settings/app.py:116 omarchy_settings/pages/bar.py:157
+#: omarchy_settings/app.py:180 omarchy_settings/pages/bar.py:157
 #: omarchy_settings/pages/bar.py:219 omarchy_settings/pages/bar.py:407
 #: omarchy_settings/pages/hyprland.py:128
 #: omarchy_settings/pages/monitors.py:427
@@ -95,20 +103,20 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: omarchy_settings/app.py:123
+#: omarchy_settings/app.py:187
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr ""
 
-#: omarchy_settings/app.py:127
+#: omarchy_settings/app.py:191
 msgid "App defaults restored"
 msgstr ""
 
-#: omarchy_settings/app.py:127 omarchy_settings/pages/themes.py:257
+#: omarchy_settings/app.py:191 omarchy_settings/pages/themes.py:257
 msgid "Undo"
 msgstr ""
 
-#: omarchy_settings/app.py:132
+#: omarchy_settings/app.py:196
 msgid "Settings brought back"
 msgstr ""
 
@@ -2204,15 +2212,15 @@ msgstr ""
 msgid "Could not write shell.json"
 msgstr ""
 
-#: omarchy_settings/pages/search.py:88 omarchy_settings/pages/search.py:93
+#: omarchy_settings/pages/search.py:92 omarchy_settings/pages/search.py:97
 msgid "Search settings"
 msgstr ""
 
-#: omarchy_settings/pages/search.py:106 omarchy_settings/pages/search.py:133
+#: omarchy_settings/pages/search.py:110 omarchy_settings/pages/search.py:137
 msgid "Type the name of a setting"
 msgstr ""
 
-#: omarchy_settings/pages/search.py:133
+#: omarchy_settings/pages/search.py:137
 msgid "Nothing found"
 msgstr ""
 

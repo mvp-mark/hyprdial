@@ -8,7 +8,7 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, Gio, GObject, Gtk  # noqa: E402
+from gi.repository import Adw, Gio, Gtk  # noqa: E402
 
 from . import __version__
 from .core import HyprStore
@@ -29,26 +29,118 @@ from .ui import bg, confirm
 
 APP_ID = "org.omarchy.Settings"
 
+# Sidebar sections, in the spirit of Omarchy's menu (Style, Hardware, System). Titles are functions so they are
+# translated when the window is built.
+SECTIONS = {"style": lambda: _("Style"), "hardware": lambda: _("Hardware"), "system": lambda: _("System")}
+PAGES = [
+    ("style", "themes", lambda: _("Themes"), "preferences-desktop-theme-symbolic", ThemesPage),
+    ("style", "hyprland", lambda: "Hyprland", "preferences-system-symbolic", HyprlandPage),
+    ("style", "bar", lambda: _("Bar and fonts"), "preferences-desktop-font-symbolic", BarPage),
+    ("hardware", "monitors", lambda: _("Displays"), "preferences-desktop-display-symbolic", MonitorsPage),
+    ("hardware", "sound", lambda: _("Sound"), "audio-volume-high-symbolic", SoundPage),
+    ("hardware", "power", lambda: _("Power"), "system-shutdown-symbolic", PowerPage),
+    ("hardware", "connectivity", lambda: _("Connectivity"), "network-wireless-symbolic", ConnectivityPage),
+    ("system", "apps", lambda: _("Apps"), "view-app-grid-symbolic", AppsPage),
+    ("system", "shortcuts", lambda: _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic", ShortcutsPage),
+    ("system", "system", lambda: _("System"), "computer-symbolic", SystemPage),
+]
+
 
 class Window(Adw.ApplicationWindow):
     def __init__(self, app: Adw.Application):
-        super().__init__(application=app, title=_("Omarchy Settings"), default_width=900, default_height=720)
+        super().__init__(application=app, title=_("Omarchy Settings"), default_width=1000, default_height=720)
         self.store = HyprStore()
 
-        self.stack = Adw.ViewStack()
+        self.stack = Adw.ViewStack(vexpand=True)
         self._add_pages()
 
-        title = Adw.ViewSwitcherTitle(stack=self.stack, title=_("Omarchy Settings"))
-        header = Adw.HeaderBar()
-        header.set_title_widget(title)
         menu = Gio.Menu()
         menu.append(_("Dependencies…"), "win.dependencies")
         menu.append(_("Restore app defaults…"), "win.restore-defaults")
-        header.pack_end(Gtk.MenuButton(icon_name="open-menu-symbolic", menu_model=menu, tooltip_text=_("Main menu")))
-        find = Gtk.Button(
-            icon_name="system-search-symbolic", tooltip_text=_("Search settings (Ctrl+F)"), action_name="win.search"
+        self._add_actions()
+
+        # sidebar: the pages by section, like Omarchy's menu
+        sidebar_header = Adw.HeaderBar()
+        sidebar_header.pack_start(
+            Gtk.Button(
+                icon_name="system-search-symbolic", tooltip_text=_("Search settings (Ctrl+F)"), action_name="win.search"
+            )
         )
-        header.pack_start(find)
+        sidebar_header.pack_end(
+            Gtk.MenuButton(icon_name="open-menu-symbolic", menu_model=menu, tooltip_text=_("Main menu"))
+        )
+        self.sidebar = Gtk.ListBox(css_classes=["navigation-sidebar"])
+        self.sidebar.set_header_func(self._section_header)
+        self.sidebar.connect("row-activated", lambda _l, row: self.show_page(row.page_name))
+        self._fill_sidebar()
+        sidebar_view = Adw.ToolbarView(
+            content=Gtk.ScrolledWindow(child=self.sidebar, hscrollbar_policy=Gtk.PolicyType.NEVER)
+        )
+        sidebar_view.add_top_bar(sidebar_header)
+
+        content_view = Adw.ToolbarView(content=self.stack)
+        content_view.add_top_bar(Adw.HeaderBar())
+        self.content = Adw.NavigationPage(child=content_view, title="")
+        self.split = Adw.NavigationSplitView(
+            sidebar=Adw.NavigationPage(child=sidebar_view, title=_("Omarchy Settings")),
+            content=self.content,
+            min_sidebar_width=200,
+            max_sidebar_width=260,
+        )
+        # narrow windows show one pane at a time, with a back button
+        narrow = Adw.Breakpoint.new(Adw.BreakpointCondition.parse("max-width: 640sp"))
+        narrow.add_setter(self.split, "collapsed", True)
+        self.add_breakpoint(narrow)
+
+        self.stack.connect("notify::visible-child-name", lambda *_a: self._sync_sidebar())
+        self._sync_sidebar()
+
+        self.toasts = Adw.ToastOverlay()
+        self.toasts.set_child(self.split)
+        self.set_content(self.toasts)
+        self.connect("close-request", self._on_close)
+
+    def _add_pages(self) -> None:
+        for _section, name, title, icon, page in PAGES:
+            self.stack.add_titled_with_icon(page(self), name, title(), icon)
+
+    def _fill_sidebar(self) -> None:
+        for section, name, title, icon, _page in PAGES:
+            box = Gtk.Box(spacing=12, margin_top=6, margin_bottom=6, margin_start=6, margin_end=6)
+            box.append(Gtk.Image(icon_name=icon))
+            box.append(Gtk.Label(label=title(), xalign=0, ellipsize=3))  # 3 = Pango.EllipsizeMode.END
+            row = Gtk.ListBoxRow(child=box)
+            row.page_name, row.section = name, section
+            self.sidebar.append(row)
+
+    @staticmethod
+    def _section_header(row: Gtk.ListBoxRow, before: Gtk.ListBoxRow | None) -> None:
+        if before is not None and before.section == row.section:
+            row.set_header(None)
+            return
+        label = Gtk.Label(label=SECTIONS[row.section](), xalign=0, css_classes=["heading", "dim-label"])
+        label.set_margin_start(12)
+        label.set_margin_top(6 if before is None else 18)
+        label.set_margin_bottom(6)
+        row.set_header(label)
+
+    def show_page(self, name: str) -> None:
+        self.stack.set_visible_child_name(name)
+        self.split.set_show_content(True)
+
+    def _sync_sidebar(self) -> None:
+        """Keeps the sidebar selection and the content title on the visible page (search changes it too)."""
+        name = self.stack.get_visible_child_name()
+        row = self.sidebar.get_first_child()
+        while row is not None:
+            if getattr(row, "page_name", None) == name:
+                self.sidebar.select_row(row)
+                break
+            row = row.get_next_sibling()
+        page = self.stack.get_page(self.stack.get_visible_child()) if self.stack.get_visible_child() else None
+        self.content.set_title(page.get_title() if page else "")
+
+    def _add_actions(self) -> None:
         action = Gio.SimpleAction(name="search")
         action.connect("activate", lambda *_args: self.show_search())
         self.add_action(action)
@@ -66,34 +158,6 @@ class Window(Adw.ApplicationWindow):
         action = Gio.SimpleAction(name="restore-defaults")
         action.connect("activate", lambda *_args: self.confirm_restore_defaults())
         self.add_action(action)
-        bottom = Adw.ViewSwitcherBar(stack=self.stack)
-        title.bind_property("title-visible", bottom, "reveal", GObject.BindingFlags.SYNC_CREATE)
-
-        view = Adw.ToolbarView()
-        view.add_top_bar(header)
-        view.set_content(self.stack)
-        view.add_bottom_bar(bottom)
-
-        self.toasts = Adw.ToastOverlay()
-        self.toasts.set_child(view)
-        self.set_content(self.toasts)
-        self.connect("close-request", self._on_close)
-
-    def _add_pages(self) -> None:
-        pages = [
-            (ThemesPage(self), "themes", _("Themes"), "preferences-desktop-theme-symbolic"),
-            (HyprlandPage(self), "hyprland", "Hyprland", "preferences-system-symbolic"),
-            (MonitorsPage(self), "monitors", _("Displays"), "preferences-desktop-display-symbolic"),
-            (SoundPage(self), "sound", _("Sound"), "audio-volume-high-symbolic"),
-            (PowerPage(self), "power", _("Power"), "system-shutdown-symbolic"),
-            (ShortcutsPage(self), "shortcuts", _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic"),
-            (AppsPage(self), "apps", _("Apps"), "view-app-grid-symbolic"),
-            (BarPage(self), "bar", _("Bar and fonts"), "preferences-desktop-font-symbolic"),
-            (ConnectivityPage(self), "connectivity", _("Connectivity"), "network-wireless-symbolic"),
-            (SystemPage(self), "system", _("System"), "computer-symbolic"),
-        ]
-        for page, name, title, icon in pages:
-            self.stack.add_titled_with_icon(page, name, title, icon)
 
     def reload_pages(self) -> None:
         """Builds the pages again so they show the settings as they are now."""

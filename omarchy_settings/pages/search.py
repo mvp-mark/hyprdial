@@ -63,7 +63,11 @@ def reveal(stack: Adw.ViewStack, entry: search.Entry) -> None:
         )
         _css_loaded = True
     row = entry.widget
-    stack.set_visible_child_name(entry.page)
+    root = stack.get_root()
+    if hasattr(root, "show_page"):
+        root.show_page(entry.page)  # also leaves the sidebar on narrow windows
+    else:
+        stack.set_visible_child_name(entry.page)
     parent = row.get_parent()
     while parent is not None:
         if isinstance(parent, Adw.ExpanderRow):

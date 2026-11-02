@@ -11,6 +11,10 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
 
 ## Pages
 
+The pages sit in a sidebar grouped like Omarchy's menu: **Style** (themes, Hyprland, bar and fonts), **Hardware**
+(displays, sound, power, connectivity) and **System** (apps, shortcuts, system). On a narrow window the sidebar
+and the page take turns, with a back button.
+
 | Page | What it does | How it applies changes |
 |---|---|---|
 | Themes | Theme gallery with previews and color swatches, search and dark/light filter, current theme highlighted; all wallpapers of the current theme (yours included) with the one in use marked | `omarchy-theme-set`, `omarchy-theme-bg-set`, `omarchy-theme-bg-next` |
