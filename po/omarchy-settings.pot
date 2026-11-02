@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:02-0400\n"
+"POT-Creation-Date: 2026-11-02 03:06-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,10 +80,10 @@ msgstr ""
 
 #: omarchy_settings/app.py:105
 msgid ""
-"Removes every Hyprland, display, shortcut and power button setting made in "
-"this app, returning to Omarchy's own. The bar, theme, network and system "
-"settings are not touched. A backup of the generated file is kept, and you "
-"can undo right after."
+"Removes every Hyprland, display, shortcut, power button and startup command "
+"setting made in this app, returning to Omarchy's own. The bar, theme, "
+"network and system settings are not touched. A backup of the generated file "
+"is kept, and you can undo right after."
 msgstr ""
 
 #: omarchy_settings/app.py:108 omarchy_settings/pages/bar.py:249
@@ -256,53 +256,129 @@ msgstr ""
 msgid "Uses an internal Omarchy function; it can only be disabled"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:15
+#: omarchy_settings/pages/apps.py:16
 msgid "Web browser"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:15
+#: omarchy_settings/pages/apps.py:16
 msgid "Terminal"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:15
+#: omarchy_settings/pages/apps.py:16
 msgid "Text editor"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:16
+#: omarchy_settings/pages/apps.py:17
 msgid "File manager"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:16
+#: omarchy_settings/pages/apps.py:17
 msgid "PDF documents"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:16
+#: omarchy_settings/pages/apps.py:17
 msgid "Images"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:17
+#: omarchy_settings/pages/apps.py:18
 msgid "PNG, JPEG, WebP and GIF"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:28
+#: omarchy_settings/pages/apps.py:29
 #, python-brace-format
 msgid "Now: {name}"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:38
+#: omarchy_settings/pages/apps.py:39
 msgid "Default apps"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:38
+#: omarchy_settings/pages/apps.py:39
 msgid "Only installed apps are listed."
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:71
+#: omarchy_settings/pages/apps.py:73
 msgid "Default app changed"
 msgstr ""
 
-#: omarchy_settings/pages/apps.py:71
+#: omarchy_settings/pages/apps.py:73
 msgid "Could not change the default app"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:19
+msgid "Startup apps"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:20
+msgid ""
+"Started when you log in. Omarchy starts some apps by itself (the bar, Fcitx "
+"5…), so one that is off here may still run."
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:26
+msgid "Your commands"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:27
+#: omarchy_settings/pages/autostart.py:105
+msgid "Run at login through Hyprland"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:28
+msgid "Add a command (e.g. discord --start-minimized)"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:34
+msgid "In autostart.lua"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:36
+msgid "Edit the file"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:36
+msgid "Changes there are yours; this app only reads them"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:37 omarchy_settings/pages/bar.py:374
+#: omarchy_settings/pages/bar.py:376 omarchy_settings/pages/bluetooth.py:229
+#: omarchy_settings/pages/sound.py:236 omarchy_settings/pages/system.py:59
+#: omarchy_settings/pages/wifi.py:23 omarchy_settings/pages/wifi.py:238
+msgid "Open"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:66
+msgid "No commands in the file"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:69
+#: omarchy_settings/pages/autostart.py:104
+#, python-brace-format
+msgid "{n} command"
+msgid_plural "{n} commands"
+msgstr[0] ""
+msgstr[1] ""
+
+#: omarchy_settings/pages/autostart.py:80
+#, python-brace-format
+msgid "Could not change {name}"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:97 omarchy_settings/pages/webapps.py:113
+#: omarchy_settings/pages/webapps.py:133
+msgid "Remove"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:110
+msgid "Type a command"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:113
+msgid "This command is already there"
+msgstr ""
+
+#: omarchy_settings/pages/autostart.py:117
+msgid "It will start the next time you log in"
 msgstr ""
 
 #: omarchy_settings/pages/bar.py:31
@@ -779,13 +855,6 @@ msgstr ""
 
 #: omarchy_settings/pages/bar.py:374
 msgid "Modules and layout"
-msgstr ""
-
-#: omarchy_settings/pages/bar.py:374 omarchy_settings/pages/bar.py:376
-#: omarchy_settings/pages/bluetooth.py:229 omarchy_settings/pages/sound.py:236
-#: omarchy_settings/pages/system.py:59 omarchy_settings/pages/wifi.py:23
-#: omarchy_settings/pages/wifi.py:238
-msgid "Open"
 msgstr ""
 
 #: omarchy_settings/pages/bar.py:376
@@ -2798,10 +2867,6 @@ msgstr ""
 
 #: omarchy_settings/pages/webapps.py:93
 msgid "Omarchy's web app commands were not found"
-msgstr ""
-
-#: omarchy_settings/pages/webapps.py:113 omarchy_settings/pages/webapps.py:133
-msgid "Remove"
 msgstr ""
 
 #: omarchy_settings/pages/webapps.py:120

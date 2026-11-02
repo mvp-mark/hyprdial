@@ -102,8 +102,8 @@ class Window(Adw.ApplicationWindow):
     def confirm_restore_defaults(self) -> None:
         dialog = Adw.AlertDialog(
             heading=_("Restore app defaults?"),
-            body=_("Removes every Hyprland, display, shortcut and power button setting made in this app, returning "
-                   "to Omarchy's own. The bar, theme, network and system settings are not touched. A backup of "
+            body=_("Removes every Hyprland, display, shortcut, power button and startup command setting made in "
+                   "this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. A backup of "
                    "the generated file is kept, and you can undo right after."))
         dialog.add_response("cancel", _("Cancel"))
         dialog.add_response("restore", _("Restore"))

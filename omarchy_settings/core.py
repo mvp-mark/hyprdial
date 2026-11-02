@@ -166,7 +166,7 @@ def monitor_call(rule: dict) -> str:
 
 def render(values: dict[str, str], monitors: dict[str, dict], bindings: dict | None = None,
            extras: dict | None = None) -> str:
-    from . import keybinds, power  # imported here: both depend on this module
+    from . import autostart, keybinds, power  # imported here: they depend on this module
 
     parts = [HEADER]
     if values:
@@ -174,6 +174,7 @@ def render(values: dict[str, str], monitors: dict[str, dict], bindings: dict | N
     parts.extend(monitor_call(monitors[name]) for name in sorted(monitors))
     parts.extend(keybinds.render(bindings or {}))
     parts.extend(power.render_extras(extras or {}))
+    parts.extend(autostart.render_extras(extras or {}))
     return "\n".join(parts) + "\n"
 
 
