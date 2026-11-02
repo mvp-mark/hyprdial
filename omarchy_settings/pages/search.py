@@ -11,6 +11,7 @@ from gi.repository import Adw, GLib, Graphene, Gtk  # noqa: E402
 
 from .. import search
 from ..i18n import _
+from ..ui import is_changed
 
 HIGHLIGHT_CSS = ".search-hit { background-color: alpha(@accent_bg_color, 0.35); }"
 _css_loaded = False
@@ -88,8 +89,11 @@ def reveal(stack: Adw.ViewStack, entry: search.Entry) -> None:
 
 
 class SearchDialog(Adw.Dialog):
-    def __init__(self, stack: Adw.ViewStack):
-        super().__init__(title=_("Search settings"), content_width=520, content_height=560)
+    """Search box over every setting; with changed_only, the fixed list of settings that differ from Omarchy's."""
+
+    def __init__(self, stack: Adw.ViewStack, changed_only: bool = False):
+        title = _("Changed settings") if changed_only else _("Search settings")
+        super().__init__(title=title, content_width=520, content_height=560)
         self.stack = stack
         self.entries = collect(stack)
         self.results: list[search.Entry] = []
@@ -115,27 +119,34 @@ class SearchDialog(Adw.Dialog):
         self.body.add_named(scrolled, "results")
 
         header = Adw.HeaderBar()
-        header.set_title_widget(self.entry)
         view = Adw.ToolbarView(content=self.body)
         view.add_top_bar(header)
         self.set_child(view)
+        if changed_only:
+            self.status.set_icon_name("emblem-ok-symbolic")
+            self.status.set_title(_("Nothing changed"))
+            self.status.set_description(_("Every setting this app manages is as Omarchy ships it."))
+            self._show([e for e in self.entries if is_changed(e.widget)])
+            return
+        header.set_title_widget(self.entry)
         self.set_focus(self.entry)
         self.entry.set_key_capture_widget(view)
 
     def _update(self) -> None:
-        self.list.remove_all()
         query = self.entry.get_text()
-        self.results = search.search(self.entries, query)
+        self._show(search.search(self.entries, query))
+        if not self.results:
+            self.status.set_title(_("Nothing found") if query.strip() else _("Type the name of a setting"))
+
+    def _show(self, results: list[search.Entry]) -> None:
+        self.list.remove_all()
+        self.results = results
         for e in self.results:
             where = " › ".join(p for p in (e.page_title, e.group) if p and p != e.title)
             row = Adw.ActionRow(title=e.title, subtitle=where, activatable=True, use_markup=False)
             row.add_suffix(Gtk.Image(icon_name="go-next-symbolic"))
             self.list.append(row)
-        if self.results:
-            self.body.set_visible_child_name("results")
-        else:
-            self.status.set_title(_("Nothing found") if query.strip() else _("Type the name of a setting"))
-            self.body.set_visible_child_name("status")
+        self.body.set_visible_child_name("results" if self.results else "status")
 
     def _open(self, index: int) -> None:
         if 0 <= index < len(self.results):

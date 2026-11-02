@@ -17,7 +17,7 @@ from gi.repository import Adw, GLib, Gtk  # noqa: E402
 from .. import core
 from .. import input as input_devices
 from ..i18n import _
-from ..ui import bg, button_row, switch_row, to_bool, to_float
+from ..ui import bg, button_row, set_changed, switch_row, to_bool, to_float
 
 # Quick styles: keys missing from a style go back to Omarchy's default.
 PRESET_KEYS = (
@@ -337,6 +337,8 @@ class HyprOptionsPage(Adw.PreferencesPage):
         undo.set_visible(self.store.get(key) is not None)
         undo.connect("clicked", lambda _b: self._reset_keys([key]))
         row.add_suffix(undo)
+        set_changed(row, undo.get_visible())
+        undo.connect("notify::visible", lambda b, _p: set_changed(row, b.get_visible()))
         self.controls[key] = (set_widget, default, undo)
 
     def _changed(self, key: str, value) -> None:

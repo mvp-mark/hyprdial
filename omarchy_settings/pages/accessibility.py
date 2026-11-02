@@ -11,7 +11,7 @@ from gi.repository import Adw  # noqa: E402
 from .. import accessibility as a11y
 from .. import core, displays
 from ..i18n import _
-from ..ui import Debouncer, bg, combo_row, spin_row
+from ..ui import Debouncer, bg, combo_row, set_changed, spin_row
 from .hyprland import HyprOptionsPage
 
 
@@ -41,17 +41,19 @@ class AccessibilityPage(HyprOptionsPage):
             return
         sizes = list(a11y.CURSOR_SIZES)
         labels = [_("Default ({size})").format(size=n) if n == a11y.DEFAULT_CURSOR else str(n) for n in sizes]
-        self.seeing.add(
-            combo_row(
-                _("Pointer size"),
-                _("In pixels; apps opened from now on use it too"),
-                labels,
-                sizes.index(size) if size in sizes else 0,
-                lambda i: self._set_cursor(sizes[i]),
-            )
+        self.cursor_row = combo_row(
+            _("Pointer size"),
+            _("In pixels; apps opened from now on use it too"),
+            labels,
+            sizes.index(size) if size in sizes else 0,
+            lambda i: self._set_cursor(sizes[i]),
         )
+        set_changed(self.cursor_row, size != a11y.DEFAULT_CURSOR)
+        self.seeing.add(self.cursor_row)
 
     def _set_cursor(self, size: int) -> None:
+        set_changed(self.cursor_row, size != a11y.DEFAULT_CURSOR)
+
         def work() -> None:
             a11y.set_cursor_size(size)
             self.store.set_extra("cursor_size", None if size == a11y.DEFAULT_CURSOR else size, reload=False)

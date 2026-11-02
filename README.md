@@ -32,6 +32,9 @@ accent color and follow it when the theme changes.
 | Security | Fingerprint (with a reader), security key (FIDO2) and SSH server: set up, set up again or remove, with the same conditions as Omarchy's Setup and Remove menus; whether the SSH server is running | `omarchy-setup-security-*` and `omarchy-remove-security-*` in a floating terminal |
 | System | Time zone (searchable) and automatic time (NTP); system language (among those generated); notifications: do not disturb and recent notifications; printers (opens the CUPS web interface); about this computer (Omarchy version, kernel, processor, memory), whether an Omarchy update is available, "Update Omarchy", "Create a snapshot now" (restored from the boot menu) | `timedatectl`, `localectl` (both ask for the password through polkit), `omarchy-shell notifications`, CUPS at `localhost:631`, `omarchy-update-available`, `omarchy-update` and `omarchy-snapshot create` in a floating terminal |
 
+Settings that differ from Omarchy's default are marked with a bar of the accent color, and **☰ → Changed
+settings** lists them all, each one a click away.
+
 Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
 matter, and choosing a result opens its page, expands what is around it and highlights it.
 

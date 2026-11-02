@@ -96,6 +96,25 @@ def on_ui_thread(fn: Callable, *args) -> None:
     GLib.idle_add(lambda: fn(*args) or False)
 
 
+# A bar of the accent color on the row's left edge, like KDE's "highlight changed settings"; it takes no space, so
+# titles stay aligned.
+CHANGED_CSS = "row.changed { box-shadow: inset 3px 0 @accent_bg_color; }"
+
+
+def set_changed(row: Gtk.Widget, on: bool) -> None:
+    """Marks a row whose setting differs from Omarchy's default; "Changed settings" lists the marked rows."""
+    if on:
+        row.add_css_class("changed")
+        row.set_tooltip_text(_("Changed from Omarchy's default"))
+    else:
+        row.remove_css_class("changed")
+        row.set_tooltip_text(None)
+
+
+def is_changed(row: Gtk.Widget) -> bool:
+    return row.has_css_class("changed")
+
+
 class Debouncer:
     """Calls fn with the latest arguments once they stop coming for delay_ms (sliders, typing).
 
@@ -185,6 +204,9 @@ class ThemeAccent:
         self.td = td
         self.provider = Gtk.CssProvider()
         Gtk.StyleContext.add_provider_for_display(display, self.provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        base = Gtk.CssProvider()
+        base.load_from_string(CHANGED_CSS)
+        Gtk.StyleContext.add_provider_for_display(display, base, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         self.apply()
         # omarchy-theme-set swaps ~/.local/state/omarchy/current/theme: watch its parent folder
         self.monitor = Gio.File.new_for_path(str(td.STATE)).monitor_directory(Gio.FileMonitorFlags.NONE, None)

@@ -12,7 +12,7 @@ from gi.repository import Adw, Gdk, GLib, Gtk  # noqa: E402
 
 from .. import keybinds as kb
 from ..i18n import _, ngettext
-from ..ui import bg, button_row, confirm
+from ..ui import bg, button_row, confirm, set_changed
 
 CSS = b"""
 .oms-keycap {
@@ -269,6 +269,7 @@ class ShortcutsPage(Adw.PreferencesPage):
             )
         for index, item in enumerate(items):
             row = self._custom_row(index, item)
+            set_changed(row, True)
             custom.add(row)
             self.rows.append((row, f"{item['desc']} {item['command']} {self._hay(item['keys'])}".lower(), None))
         self._add_group(custom)
@@ -314,6 +315,7 @@ class ShortcutsPage(Adw.PreferencesPage):
 
     def _entry_row(self, e: kb.Entry) -> Adw.ActionRow:
         row = Adw.ActionRow(title=e.desc, use_markup=False)
+        set_changed(row, e.override is not None)
         disabled = e.override is not None and not e.override.get("keys")
         if disabled:
             row.set_subtitle(_("Disabled"))

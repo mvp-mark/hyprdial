@@ -10,7 +10,7 @@ from gi.repository import Adw, Gtk  # noqa: E402
 
 from .. import autostart, core
 from ..i18n import _, ngettext
-from ..ui import bg, button_row
+from ..ui import bg, button_row, set_changed
 
 EXTRAS_KEY = "autostart"
 
@@ -29,6 +29,7 @@ class StartupGroup(Adw.PreferencesGroup):
         self.rows: list[Gtk.Widget] = []
 
         self.commands = Adw.ExpanderRow(title=_("Your commands"), subtitle=_("Run at login through Hyprland"))
+        set_changed(self.commands, False)
         self.add_command = Adw.EntryRow(
             title=_("Add a command (e.g. discord --start-minimized)"), show_apply_button=True
         )
@@ -117,6 +118,7 @@ class StartupGroup(Adw.PreferencesGroup):
         self.commands.set_subtitle(
             ngettext("{n} command", "{n} commands", n).format(n=n) if n else _("Run at login through Hyprland")
         )
+        set_changed(self.commands, bool(n))
 
     def _add(self, text: str) -> None:
         cmd = autostart.valid_command(text)

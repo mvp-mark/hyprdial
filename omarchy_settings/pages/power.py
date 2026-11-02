@@ -11,7 +11,17 @@ from gi.repository import Adw, Gtk  # noqa: E402
 from .. import core, power, shell
 from ..i18n import _
 from ..shell import IDLE_TIMES, STAY_AWAKE_FLAG, read_shell, write_idle
-from ..ui import Debouncer, bg, button_row, combo_row, confirm, missing_row, switch_row
+from ..ui import (
+    Debouncer,
+    bg,
+    button_row,
+    combo_row,
+    confirm,
+    missing_row,
+    on_ui_thread,
+    set_changed,
+    switch_row,
+)
 from .bar import idle_label
 
 PROFILE_LABELS = {
@@ -55,15 +65,15 @@ class PowerPage(Adw.PreferencesPage):
         button = Adw.PreferencesGroup(title=_("Power button"))
         current = self.store.extras.get("power_button", "menu")
         keys = [k for k, _label in BUTTON_ACTIONS]
-        button.add(
-            combo_row(
-                _("When the power button is pressed"),
-                _("Works on the lock screen too"),
-                [label for _k, label in BUTTON_ACTIONS],
-                keys.index(current) if current in keys else 0,
-                lambda i: self._set_button(keys[i]),
-            )
+        self.button_row = combo_row(
+            _("When the power button is pressed"),
+            _("Works on the lock screen too"),
+            [label for _k, label in BUTTON_ACTIONS],
+            keys.index(current) if current in keys else 0,
+            lambda i: self._set_button(keys[i]),
         )
+        set_changed(self.button_row, current != "menu")
+        button.add(self.button_row)
         self.add(button)
 
         self._idle_group(read_shell())
@@ -145,6 +155,7 @@ class PowerPage(Adw.PreferencesPage):
             entry.connect("apply", lambda _e: self._save_schedule(True))
             entry.connect("changed", lambda e: e.remove_css_class("error"))
             self.schedule.add_row(entry)
+        set_changed(self.schedule, scheduled)
         self.schedule.connect("notify::enable-expansion", lambda r, _p: self._save_schedule(r.get_enable_expansion()))
         self.night_group.add(self.schedule)
 
@@ -208,6 +219,7 @@ class PowerPage(Adw.PreferencesPage):
             def work() -> None:
                 power.write_schedule(*times, temp)
                 self.store.set_extra("nightlight_schedule", True)
+                on_ui_thread(set_changed, self.schedule, True)
                 power.restart_hyprsunset()
 
             bg(
@@ -223,6 +235,7 @@ class PowerPage(Adw.PreferencesPage):
             def work() -> None:
                 power.restore_schedule()
                 self.store.set_extra("nightlight_schedule", None)
+                on_ui_thread(set_changed, self.schedule, False)
                 power.restart_hyprsunset()
 
             bg(
@@ -236,6 +249,7 @@ class PowerPage(Adw.PreferencesPage):
 
     # -- power button
     def _set_button(self, action: str) -> None:
+        set_changed(self.button_row, action != "menu")
         bg(
             lambda: self.store.set_extra("power_button", None if action == "menu" else action),
             lambda r: self.win.toast(

@@ -67,6 +67,7 @@ class Window(Adw.ApplicationWindow):
         self._add_pages()
 
         menu = Gio.Menu()
+        menu.append(_("Changed settings…"), "win.changed")
         menu.append(_("Dependencies…"), "win.dependencies")
         menu.append(_("Restore app defaults…"), "win.restore-defaults")
         self._add_actions()
@@ -165,6 +166,9 @@ class Window(Adw.ApplicationWindow):
             )
         )
         self.add_controller(keys)
+        action = Gio.SimpleAction(name="changed")
+        action.connect("activate", lambda *_args: SearchDialog(self.stack, changed_only=True).present(self))
+        self.add_action(action)
         action = Gio.SimpleAction(name="dependencies")
         action.connect("activate", lambda *_args: self.show_dependencies())
         self.add_action(action)

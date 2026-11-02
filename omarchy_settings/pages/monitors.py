@@ -13,7 +13,7 @@ from gi.repository import Adw, GLib, Gtk, Pango, PangoCairo  # noqa: E402
 
 from .. import core, displays, layout
 from ..i18n import _, ngettext
-from ..ui import Debouncer, bg, button_row, combo_row, spin_row, switch_row, to_float
+from ..ui import Debouncer, bg, button_row, combo_row, set_changed, spin_row, switch_row, to_float
 
 SCALES = [1, 1.25, 1.333333, 1.5, 1.6, 1.666667, 2, 2.5, 3]
 TRANSFORMS = [
@@ -418,12 +418,14 @@ class MonitorsPage(Adw.PreferencesPage):
         return group
 
     def _restore_row(self, name: str) -> Adw.ActionRow:
-        return button_row(
+        row = button_row(
             _("Restore this display"),
             _("Returns to what is in monitors.lua"),
             _("Restore"),
             lambda: self._restore(name),
         )
+        set_changed(row, self.store.get_monitor(name) is not None)
+        return row
 
     @staticmethod
     def _position(rule: dict, mon: dict) -> tuple[int, int]:
