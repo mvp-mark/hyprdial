@@ -131,6 +131,7 @@ class DeviceGroup(Adw.PreferencesGroup):
         super().__init__(title=title)
         self.page, self.kind, self.empty = page, kind, empty
         self.names: list[str] = []
+        self.devices: list[sound.Device] = []
         self._syncing = False
         self.combo = Adw.ComboRow(title=chooser)
         self.combo.set_model(Gtk.StringList.new([]))
@@ -142,6 +143,7 @@ class DeviceGroup(Adw.PreferencesGroup):
     def update(self, devices: list[sound.Device], default: str, limit: int) -> None:
         self._syncing = True
         names = [d.name for d in devices]
+        self.devices = devices
         if names != self.names:
             self.names = names
             self.combo.set_model(Gtk.StringList.new([d.description for d in devices] or [self.empty]))
@@ -157,8 +159,8 @@ class DeviceGroup(Adw.PreferencesGroup):
         i = row.get_selected()
         if self._syncing or not 0 <= i < len(self.names):
             return
-        name = self.names[i]
-        bg(lambda: sound.set_default(self.kind, name),
+        device = self.devices[i]
+        bg(lambda: sound.set_default(self.kind, device),
            lambda ok: None if ok is True else self.page.win.toast(_("Could not change the device")))
 
 

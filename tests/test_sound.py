@@ -12,7 +12,8 @@ def vol(percent):
 
 
 SINKS = [{"index": 64, "name": "usb.analog", "description": "USB Audio", "mute": False, "volume": vol(64)},
-         {"index": 78, "name": "hdmi", "description": "HDMI [Monitor]", "mute": True, "volume": vol(100)}]
+         {"index": 78, "name": "hdmi", "description": "HDMI [Monitor]", "mute": True, "volume": vol(100),
+          "properties": {"object.id": "44"}}]
 SOURCES = [{"index": 63, "name": "mic.analog", "description": "Microphone", "mute": False, "volume": vol(71),
             "monitor_of_sink": None},
            {"index": 65, "name": "usb.analog.monitor", "description": "Monitor of USB Audio", "mute": False,
@@ -42,6 +43,7 @@ def fake(monkeypatch):
         "pactl get-default-source": "mic.analog\n",
     }
     calls: list[list[str]] = []
+    have: set[str] = set()
 
     def fake_run(args, timeout=10):
         calls.append(args)
@@ -49,7 +51,8 @@ def fake(monkeypatch):
 
     monkeypatch.setattr(core, "out", lambda args, timeout=10: answers.get(" ".join(args), "").strip())
     monkeypatch.setattr(core, "run", fake_run)
-    return answers, calls
+    monkeypatch.setattr(core, "have", lambda cmd: cmd in have)
+    return answers, calls, have
 
 
 def test_volume_is_the_channel_average():
@@ -75,14 +78,14 @@ def test_streams_names_and_generic_media(fake):
 
 
 def test_bad_json_is_empty(fake):
-    answers, _calls = fake
+    answers, _calls, _have = fake
     answers["pactl -f json list sinks"] = "not json"
     assert sound.snapshot().outputs == []
 
 
 def test_commands(fake):
-    _answers, calls = fake
-    assert sound.set_default("sink", "hdmi")
+    _answers, calls, _have = fake
+    assert sound.set_default("sink", sound.Device(78, "hdmi", "HDMI", 1.0, False))
     assert sound.set_volume("sink-input", 227, 0.8)
     assert sound.set_mute("source", 63, True)
     assert calls == [["pactl", "set-default-sink", "hdmi"], ["pactl", "set-sink-input-volume", "227", "80%"],
@@ -94,3 +97,15 @@ def test_find_test_sound(tmp_path):
     (tmp_path / "bell.oga").write_bytes(b"")
     (tmp_path / "complete.oga").write_bytes(b"")
     assert sound.find_test_sound(tmp_path) == tmp_path / "bell.oga"
+
+
+def test_set_default_through_omarchy_moves_the_apps(fake):
+    answers, calls, have = fake
+    have.add("omarchy-audio-output-set-default")
+    hdmi = sound.snapshot().outputs[1]
+    assert hdmi.node_id == "44"
+    calls.clear()
+    assert not sound.set_default("sink", hdmi)  # the command ran but the default is still usb.analog
+    answers["pactl get-default-sink"] = "hdmi"
+    assert sound.set_default("sink", hdmi)
+    assert calls[0] == ["omarchy-audio-output-set-default", "44", "hdmi"]

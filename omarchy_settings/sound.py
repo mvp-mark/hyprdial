@@ -21,6 +21,7 @@ class Device:
     description: str
     volume: float  # 1.0 = 100%
     muted: bool
+    node_id: str = ""  # PipeWire id (wpctl's), not the same as pactl's index
 
 
 @dataclass
@@ -64,7 +65,8 @@ def is_monitor(source: dict) -> bool:
 
 def parse_devices(data: list[dict]) -> list[Device]:
     return [Device(d["index"], d.get("name", ""), d.get("description") or d.get("name", ""),
-                   volume_of(d.get("volume", {})), bool(d.get("mute")))
+                   volume_of(d.get("volume", {})), bool(d.get("mute")),
+                   str(d.get("properties", {}).get("object.id", "")))
             for d in data if "index" in d and not is_monitor(d)]
 
 
@@ -93,8 +95,16 @@ def ok(r) -> bool:
     return r is not None and r.returncode == 0
 
 
-def set_default(kind: str, name: str) -> bool:
-    return ok(core.run(["pactl", f"set-default-{kind}", name]))
+SET_DEFAULT = {"sink": "omarchy-audio-output-set-default", "source": "omarchy-audio-input-set-default"}
+
+
+def set_default(kind: str, device: Device) -> bool:
+    """Omarchy's command also moves the apps playing (or recording) to the new device; pactl alone doesn't."""
+    command = SET_DEFAULT[kind]
+    if device.node_id and core.have(command):
+        core.run([command, device.node_id, device.name])  # always exits 0: check the result below
+        return core.out(["pactl", f"get-default-{kind}"]) == device.name
+    return ok(core.run(["pactl", f"set-default-{kind}", device.name]))
 
 
 def set_volume(kind: str, index: int, fraction: float) -> bool:
