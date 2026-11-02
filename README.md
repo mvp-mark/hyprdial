@@ -7,6 +7,8 @@ Graphical settings app for [Omarchy](https://omarchy.org), built with GTK4 + lib
 **Requires Omarchy with the Lua-based Hyprland configuration** (`~/.config/hypr/hyprland.lua`, Hyprland 0.5x)
 and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are not supported.
 
+![Themes page](docs/screenshots/themes.png)
+
 ## Pages
 
 | Page | What it does | How it applies changes |
@@ -23,6 +25,14 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
 
 Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
 matter, and choosing a result opens its page, expands what is around it and highlights it.
+
+## Screenshots
+
+| | |
+|---|---|
+| ![Hyprland page](docs/screenshots/hyprland.png) Hyprland | ![Displays page](docs/screenshots/monitors.png) Displays |
+| ![Sound page](docs/screenshots/sound.png) Sound | ![Power page](docs/screenshots/power.png) Power |
+| ![System page](docs/screenshots/system.png) System | ![Search dialog](docs/screenshots/search.png) Search (Ctrl+F) |
 
 ## How settings are stored
 
@@ -133,6 +143,7 @@ omarchy_settings/
   app.py             main window
   pages/             themes, hyprland, monitors, sound, power, shortcuts, bar, connectivity, system, search
 data/                .desktop
+docs/screenshots/    images used by this README
 po/                  template (.pot) and translations (.po)
 tests/               pytest + fixtures
 install.sh
