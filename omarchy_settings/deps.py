@@ -29,7 +29,7 @@ def dependencies() -> list[Dep]:
         Dep("gettext", "required", _("Compiles the interface translations")),
         Dep("impala", "optional", _("Wi-Fi manager opened by the Connectivity page")),
         Dep("bluetui", "optional", _("Bluetooth manager opened by the Connectivity page")),
-        Dep("wiremix", "optional", _("Audio mixer opened by the Connectivity page")),
+        Dep("wiremix", "optional", _("Audio mixer opened by the Sound page")),
         Dep("waybar", "optional", _("Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar "
                                     "doesn't start it or replace the current bar"), default=False),
         Dep("python-pytest", "dev", _("Runs the project's tests"), default=False),

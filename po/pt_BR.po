@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 19:22-0400\n"
+"POT-Creation-Date: 2026-11-02 01:45-0400\n"
 "PO-Revision-Date: 2026-11-01 12:00-0400\n"
 "Last-Translator: Marcus Vinícius Peixoto Paulo\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -12,63 +12,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: omarchy_settings/app.py:32 omarchy_settings/app.py:38
+#: omarchy_settings/app.py:33 omarchy_settings/app.py:39
 msgid "Omarchy Settings"
 msgstr "Configurações do Omarchy"
 
-#: omarchy_settings/app.py:42
+#: omarchy_settings/app.py:43
 msgid "Dependencies…"
 msgstr "Dependências…"
 
-#: omarchy_settings/app.py:43
+#: omarchy_settings/app.py:44
 msgid "Restore app defaults…"
 msgstr "Restaurar padrões do app…"
 
-#: omarchy_settings/app.py:44
+#: omarchy_settings/app.py:45
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: omarchy_settings/app.py:45
+#: omarchy_settings/app.py:46
 msgid "Search settings (Ctrl+F)"
 msgstr "Pesquisar configurações (Ctrl+F)"
 
-#: omarchy_settings/app.py:77
+#: omarchy_settings/app.py:78
 msgid "Themes"
 msgstr "Temas"
 
-#: omarchy_settings/app.py:79 omarchy_settings/pages/monitors.py:237
+#: omarchy_settings/app.py:80 omarchy_settings/pages/monitors.py:237
 msgid "Displays"
 msgstr "Monitores"
 
-#: omarchy_settings/app.py:80 omarchy_settings/pages/bar.py:61
+#: omarchy_settings/app.py:81 omarchy_settings/pages/sound.py:203
+msgid "Sound"
+msgstr "Som"
+
+#: omarchy_settings/app.py:82 omarchy_settings/pages/bar.py:61
 msgid "Power"
 msgstr "Energia"
 
-#: omarchy_settings/app.py:81
+#: omarchy_settings/app.py:83
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: omarchy_settings/app.py:82
+#: omarchy_settings/app.py:84
 msgid "Bar and fonts"
 msgstr "Barra e fontes"
 
-#: omarchy_settings/app.py:83
+#: omarchy_settings/app.py:85
 msgid "Connectivity"
 msgstr "Conectividade"
 
-#: omarchy_settings/app.py:84
+#: omarchy_settings/app.py:86
 msgid "System"
 msgstr "Sistema"
 
-#: omarchy_settings/app.py:100
+#: omarchy_settings/app.py:102
 msgid "Restore app defaults?"
 msgstr "Restaurar os padrões do app?"
 
-#: omarchy_settings/app.py:101
+#: omarchy_settings/app.py:103
 msgid "Removes every Hyprland, display, shortcut and power button setting made in this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. A backup of the generated file is kept, and you can undo right after."
 msgstr "Remove todas as configurações de Hyprland, telas, atalhos e botão de energia feitas neste app, voltando às do Omarchy. Barra, tema, rede e sistema não são alterados. Um backup do arquivo gerado é guardado, e dá para desfazer logo em seguida."
 
-#: omarchy_settings/app.py:104 omarchy_settings/pages/bar.py:249
+#: omarchy_settings/app.py:106 omarchy_settings/pages/bar.py:249
 #: omarchy_settings/pages/bluetooth.py:100
 #: omarchy_settings/pages/bluetooth.py:284
 #: omarchy_settings/pages/shortcuts.py:110
@@ -77,7 +81,7 @@ msgstr "Remove todas as configurações de Hyprland, telas, atalhos e botão de 
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: omarchy_settings/app.py:105 omarchy_settings/pages/bar.py:198
+#: omarchy_settings/app.py:107 omarchy_settings/pages/bar.py:198
 #: omarchy_settings/pages/bar.py:250 omarchy_settings/pages/bar.py:380
 #: omarchy_settings/pages/hyprland.py:88 omarchy_settings/pages/monitors.py:366
 #: omarchy_settings/pages/shortcuts.py:204
@@ -85,20 +89,20 @@ msgstr "Cancelar"
 msgid "Restore"
 msgstr "Restaurar"
 
-#: omarchy_settings/app.py:114
+#: omarchy_settings/app.py:116
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr "Não foi possível restaurar: {error}"
 
-#: omarchy_settings/app.py:118
+#: omarchy_settings/app.py:120
 msgid "App defaults restored"
 msgstr "Padrões do app restaurados"
 
-#: omarchy_settings/app.py:118 omarchy_settings/pages/themes.py:226
+#: omarchy_settings/app.py:120 omarchy_settings/pages/themes.py:226
 msgid "Undo"
 msgstr "Desfazer"
 
-#: omarchy_settings/app.py:120
+#: omarchy_settings/app.py:122
 msgid "Settings brought back"
 msgstr "Configurações de volta"
 
@@ -127,8 +131,8 @@ msgid "Bluetooth manager opened by the Connectivity page"
 msgstr "Gerenciador de Bluetooth aberto pela página Conectividade"
 
 #: omarchy_settings/deps.py:32
-msgid "Audio mixer opened by the Connectivity page"
-msgstr "Mixer de áudio aberto pela página Conectividade"
+msgid "Audio mixer opened by the Sound page"
+msgstr "Mixer de áudio aberto pela página Som"
 
 #: omarchy_settings/deps.py:33
 msgid "Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar doesn't start it or replace the current bar"
@@ -198,7 +202,8 @@ msgstr "Abrir no terminal"
 msgid "Space"
 msgstr "Espaço"
 
-#: omarchy_settings/keybinds.py:44
+#: omarchy_settings/keybinds.py:44 omarchy_settings/pages/sound.py:45
+#: omarchy_settings/pages/sound.py:69
 msgid "Mute"
 msgstr "Mudo"
 
@@ -295,7 +300,7 @@ msgstr "Agentes de IA"
 msgid "Claude Code, Codex and Fireworks usage and limits"
 msgstr "Uso e limites do Claude Code, Codex e Fireworks"
 
-#: omarchy_settings/pages/bar.py:50 omarchy_settings/pages/connectivity.py:41
+#: omarchy_settings/pages/bar.py:50
 msgid "Audio"
 msgstr "Áudio"
 
@@ -351,7 +356,7 @@ msgstr "Menu do Omarchy"
 msgid "Opens the command menu"
 msgstr "Abre o menu de comandos"
 
-#: omarchy_settings/pages/bar.py:58
+#: omarchy_settings/pages/bar.py:58 omarchy_settings/pages/sound.py:219
 msgid "Microphone"
 msgstr "Microfone"
 
@@ -709,9 +714,8 @@ msgid "Modules and layout"
 msgstr "Módulos e layout"
 
 #: omarchy_settings/pages/bar.py:374 omarchy_settings/pages/bar.py:376
-#: omarchy_settings/pages/bluetooth.py:229
-#: omarchy_settings/pages/connectivity.py:46 omarchy_settings/pages/wifi.py:23
-#: omarchy_settings/pages/wifi.py:238
+#: omarchy_settings/pages/bluetooth.py:229 omarchy_settings/pages/sound.py:232
+#: omarchy_settings/pages/wifi.py:23 omarchy_settings/pages/wifi.py:238
 msgid "Open"
 msgstr "Abrir"
 
@@ -917,7 +921,8 @@ msgid "Search again"
 msgstr "Procurar de novo"
 
 #: omarchy_settings/pages/bluetooth.py:229
-#: omarchy_settings/pages/hyprland.py:150 omarchy_settings/pages/wifi.py:238
+#: omarchy_settings/pages/hyprland.py:150 omarchy_settings/pages/sound.py:230
+#: omarchy_settings/pages/wifi.py:238
 msgid "Advanced"
 msgstr "Avançado"
 
@@ -1039,42 +1044,11 @@ msgstr "{name} já está pareado"
 msgid "Could not pair with {name}"
 msgstr "Não foi possível parear com {name}"
 
-#: omarchy_settings/pages/connectivity.py:46
-msgid "Full mixer"
-msgstr "Mixer completo"
-
-#: omarchy_settings/pages/connectivity.py:46
-msgid "Devices and per-app volume (wiremix)"
-msgstr "Dispositivos e volume por aplicativo (wiremix)"
-
-#: omarchy_settings/pages/connectivity.py:51
+#: omarchy_settings/pages/connectivity.py:29
+#: omarchy_settings/pages/sound.py:282
 #, python-brace-format
 msgid "{cmd} is not installed; install it from ☰ → Dependencies"
 msgstr "{cmd} não está instalado; instale em ☰ → Dependências"
-
-#: omarchy_settings/pages/connectivity.py:61
-msgid "Output volume"
-msgstr "Volume de saída"
-
-#: omarchy_settings/pages/connectivity.py:61
-msgid "Default device"
-msgstr "Dispositivo padrão"
-
-#: omarchy_settings/pages/connectivity.py:72
-msgid "Mute output"
-msgstr "Saída sem som"
-
-#: omarchy_settings/pages/connectivity.py:72
-msgid "Mutes the default device"
-msgstr "Silencia o dispositivo padrão"
-
-#: omarchy_settings/pages/connectivity.py:74
-msgid "Mute microphone"
-msgstr "Microfone sem som"
-
-#: omarchy_settings/pages/connectivity.py:74
-msgid "Mutes the default input"
-msgstr "Silencia a entrada padrão"
 
 #: omarchy_settings/pages/dependencies.py:20
 msgid "Dependencies"
@@ -2291,6 +2265,102 @@ msgstr "Atalhos restaurados"
 #: omarchy_settings/pages/shortcuts.py:440
 msgid "Hyprland didn't accept that shortcut; nothing was changed"
 msgstr "O Hyprland não aceitou esse atalho; nada foi alterado"
+
+#: omarchy_settings/pages/sound.py:69
+msgid "Unmute"
+msgstr "Ativar som"
+
+#: omarchy_settings/pages/sound.py:160
+msgid "Could not change the device"
+msgstr "Não foi possível trocar o dispositivo"
+
+#: omarchy_settings/pages/sound.py:204
+msgid "pactl is not installed"
+msgstr "O pactl não está instalado"
+
+#: omarchy_settings/pages/sound.py:205
+msgid "It comes with PipeWire's PulseAudio support (pipewire-pulse)"
+msgstr "Ele vem com o suporte a PulseAudio do PipeWire (pipewire-pulse)"
+
+#: omarchy_settings/pages/sound.py:209
+msgid "Output"
+msgstr "Saída"
+
+#: omarchy_settings/pages/sound.py:209
+msgid "Output device"
+msgstr "Dispositivo de saída"
+
+#: omarchy_settings/pages/sound.py:209
+msgid "Volume"
+msgstr "Volume"
+
+#: omarchy_settings/pages/sound.py:210
+msgid "No output device"
+msgstr "Nenhum dispositivo de saída"
+
+#: omarchy_settings/pages/sound.py:214
+msgid "Test sound"
+msgstr "Testar o som"
+
+#: omarchy_settings/pages/sound.py:214
+msgid "Plays a short sound on the output device"
+msgstr "Toca um som curto no dispositivo de saída"
+
+#: omarchy_settings/pages/sound.py:215
+msgid "Play"
+msgstr "Tocar"
+
+#: omarchy_settings/pages/sound.py:216
+msgid "Allow volume above 100%"
+msgstr "Permitir volume acima de 100%"
+
+#: omarchy_settings/pages/sound.py:216
+msgid "Louder, but the sound may distort"
+msgstr "Mais alto, mas o som pode distorcer"
+
+#: omarchy_settings/pages/sound.py:219
+msgid "Input"
+msgstr "Entrada"
+
+#: omarchy_settings/pages/sound.py:219
+msgid "Input volume"
+msgstr "Volume de entrada"
+
+#: omarchy_settings/pages/sound.py:220
+msgid "No microphone"
+msgstr "Nenhum microfone"
+
+#: omarchy_settings/pages/sound.py:223
+msgid "Apps playing"
+msgstr "Apps tocando"
+
+#: omarchy_settings/pages/sound.py:223
+msgid "Volume of each app playing sound."
+msgstr "Volume de cada app que está tocando som."
+
+#: omarchy_settings/pages/sound.py:224
+msgid "Nothing is playing"
+msgstr "Nada está tocando"
+
+#: omarchy_settings/pages/sound.py:226
+msgid "Using the microphone"
+msgstr "Usando o microfone"
+
+#: omarchy_settings/pages/sound.py:227
+msgid "Apps recording sound right now."
+msgstr "Apps gravando som agora."
+
+#: omarchy_settings/pages/sound.py:227
+msgid "No app is using the microphone"
+msgstr "Nenhum app está usando o microfone"
+
+#: omarchy_settings/pages/sound.py:231
+msgid "Full mixer"
+msgstr "Mixer completo"
+
+#: omarchy_settings/pages/sound.py:231
+msgid "Profiles, moving an app to another device (wiremix)"
+msgstr "Perfis, mover um app para outro dispositivo (wiremix)"
 
 #: omarchy_settings/pages/system.py:14
 msgid "English"

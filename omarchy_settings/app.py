@@ -20,6 +20,7 @@ from .pages.monitors import MonitorsPage
 from .pages.power import PowerPage
 from .pages.search import SearchDialog
 from .pages.shortcuts import ShortcutsPage
+from .pages.sound import SoundPage
 from .pages.system import SystemPage
 from .pages.themes import ThemesPage
 from .ui import bg
@@ -77,6 +78,7 @@ class Window(Adw.ApplicationWindow):
             (ThemesPage(self), "themes", _("Themes"), "preferences-desktop-theme-symbolic"),
             (HyprlandPage(self), "hyprland", "Hyprland", "preferences-system-symbolic"),
             (MonitorsPage(self), "monitors", _("Displays"), "preferences-desktop-display-symbolic"),
+            (SoundPage(self), "sound", _("Sound"), "audio-volume-high-symbolic"),
             (PowerPage(self), "power", _("Power"), "system-shutdown-symbolic"),
             (ShortcutsPage(self), "shortcuts", _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic"),
             (BarPage(self), "bar", _("Bar and fonts"), "preferences-desktop-font-symbolic"),
