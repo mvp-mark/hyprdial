@@ -25,7 +25,7 @@ from .pages.shortcuts import ShortcutsPage
 from .pages.sound import SoundPage
 from .pages.system import SystemPage
 from .pages.themes import ThemesPage
-from .ui import bg, confirm
+from .ui import ThemeAccent, bg, confirm
 
 APP_ID = "org.omarchy.Settings"
 
@@ -51,6 +51,7 @@ class Window(Adw.ApplicationWindow):
     def __init__(self, app: Adw.Application):
         super().__init__(application=app, title=_("Omarchy Settings"), default_width=1000, default_height=720)
         self.store = HyprStore()
+        self.accent = ThemeAccent(self.get_display())
 
         self.stack = Adw.ViewStack(vexpand=True)
         self._add_pages()

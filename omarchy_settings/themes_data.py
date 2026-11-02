@@ -114,3 +114,37 @@ def set_wallpaper(path: Path):
 
 def next_wallpaper():
     return core.run(["omarchy-theme-bg-next"])
+
+
+# ------------------------------------------------------------------ accent color
+HEX = re.compile(r"#[0-9a-fA-F]{6}")
+
+
+def readable_on(color: str) -> str:
+    """Black or white, whichever reads better on the color (WCAG relative luminance)."""
+
+    def channel(c: str) -> float:
+        v = int(c, 16) / 255
+        return v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4
+
+    r, g, b = (channel(color[i : i + 2]) for i in (1, 3, 5))
+    luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    return "#000000" if luminance > 0.179 else "#ffffff"
+
+
+def accent(state: Path = STATE) -> tuple[str, str] | None:
+    """(accent color, text color on it) of the current theme, or None when it has none."""
+    color = read_colors(state / "theme" / "colors.toml").get("accent")
+    if not isinstance(color, str) or not HEX.fullmatch(color.strip()):
+        return None
+    color = color.strip().lower()
+    return color, readable_on(color)
+
+
+def accent_css(colors: tuple[str, str]) -> str:
+    """libadwaita's accent colors, both as CSS variables (1.6+) and as named colors (older)."""
+    bg, fg = colors
+    return (
+        f":root {{ --accent-bg-color: {bg}; --accent-color: {bg}; --accent-fg-color: {fg}; }}\n"
+        f"@define-color accent_bg_color {bg};\n@define-color accent_color {bg};\n@define-color accent_fg_color {fg};\n"
+    )

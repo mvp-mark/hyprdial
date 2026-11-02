@@ -59,3 +59,13 @@ def test_wallpapers_and_current(tmp_path):
 def test_missing_state(tmp_path):
     assert td.current_slug(tmp_path) == "" and td.wallpapers(tmp_path, tmp_path) == []
     assert td.current_wallpaper(tmp_path) is None
+
+
+def test_accent_from_the_current_theme(tmp_path):
+    (tmp_path / "theme").mkdir()
+    (tmp_path / "theme" / "colors.toml").write_text('accent = "#7D82D9"\nbackground = "#060B1E"\n')
+    assert td.accent(tmp_path) == ("#7d82d9", "#000000")
+    (tmp_path / "theme" / "colors.toml").write_text('accent = "blue"\n')
+    assert td.accent(tmp_path) is None
+    assert td.readable_on("#1e66f5") == "#ffffff" and td.readable_on("#f9e2af") == "#000000"
+    assert "--accent-bg-color: #7d82d9" in td.accent_css(("#7d82d9", "#000000"))

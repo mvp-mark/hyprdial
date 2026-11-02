@@ -13,7 +13,8 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
 
 The pages sit in a sidebar grouped like Omarchy's menu: **Style** (themes, appearance, bar and fonts), **Hardware**
 (displays, sound, power, input, connectivity) and **System** (apps, shortcuts, system). On a narrow window the sidebar
-and the page take turns, with a back button.
+and the page take turns, with a back button. Buttons, switches and selections use the current Omarchy theme's
+accent color and follow it when the theme changes.
 
 | Page | What it does | How it applies changes |
 |---|---|---|

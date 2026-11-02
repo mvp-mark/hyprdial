@@ -9,7 +9,7 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, GLib, Gtk  # noqa: E402
+from gi.repository import Adw, Gio, GLib, Gtk  # noqa: E402
 
 from . import core
 from .i18n import _
@@ -174,3 +174,23 @@ def launch_tui(win, cmd: str) -> None:
         win.toast(_("{cmd} is not installed; install it from ☰ → Dependencies").format(cmd=cmd))
         return
     core.launch_tui(cmd)
+
+
+class ThemeAccent:
+    """Uses the current Omarchy theme's accent color, and follows it when the theme changes."""
+
+    def __init__(self, display):
+        from . import themes_data as td  # only the window needs it
+
+        self.td = td
+        self.provider = Gtk.CssProvider()
+        Gtk.StyleContext.add_provider_for_display(display, self.provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        self.apply()
+        # omarchy-theme-set swaps ~/.local/state/omarchy/current/theme: watch its parent folder
+        self.monitor = Gio.File.new_for_path(str(td.STATE)).monitor_directory(Gio.FileMonitorFlags.NONE, None)
+        self.reload = Debouncer(500, self.apply)
+        self.monitor.connect("changed", lambda *_a: self.reload())
+
+    def apply(self) -> None:
+        colors = self.td.accent()
+        self.provider.load_from_string(self.td.accent_css(colors) if colors else "")
