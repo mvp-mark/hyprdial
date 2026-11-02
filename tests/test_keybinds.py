@@ -39,6 +39,8 @@ def test_from_modmask_builds_canonical_order():
         ("XF86AudioRaiseVolume", "Volume +"),
         ("b", "B"),
         ("code:99", "Code:99"),
+        ("mouse:273", "Right click"),
+        ("mouse_down", "Scroll down"),
     ],
 )
 def test_key_label(key, label):

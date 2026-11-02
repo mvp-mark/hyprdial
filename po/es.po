@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:48-0400\n"
+"POT-Creation-Date: 2026-11-02 11:28-0400\n"
 "PO-Revision-Date: 2026-11-02 04:00-0400\n"
 "Last-Translator: omarchy-settings contributors\n"
 "Language-Team: Spanish\n"
@@ -258,11 +258,47 @@ msgstr "Siguiente"
 msgid "Previous"
 msgstr "Anterior"
 
-#: omarchy_settings/keybinds.py:476
+#: omarchy_settings/keybinds.py:80
+msgid "Left click"
+msgstr "Clic izquierdo"
+
+#: omarchy_settings/keybinds.py:81
+msgid "Right click"
+msgstr "Clic derecho"
+
+#: omarchy_settings/keybinds.py:82
+msgid "Middle click"
+msgstr "Clic central"
+
+#: omarchy_settings/keybinds.py:83
+msgid "Back button"
+msgstr "Botón atrás"
+
+#: omarchy_settings/keybinds.py:84
+msgid "Forward button"
+msgstr "Botón adelante"
+
+#: omarchy_settings/keybinds.py:85
+msgid "Scroll up"
+msgstr "Desplazar arriba"
+
+#: omarchy_settings/keybinds.py:86
+msgid "Scroll down"
+msgstr "Desplazar abajo"
+
+#: omarchy_settings/keybinds.py:87
+msgid "Scroll left"
+msgstr "Desplazar a la izquierda"
+
+#: omarchy_settings/keybinds.py:88
+msgid "Scroll right"
+msgstr "Desplazar a la derecha"
+
+#: omarchy_settings/keybinds.py:486
 msgid "Not found in Omarchy's files; it can only be disabled"
 msgstr "No está en los archivos de Omarchy; solo se puede desactivar"
 
-#: omarchy_settings/keybinds.py:479
+#: omarchy_settings/keybinds.py:489
 msgid "Uses an internal Omarchy function; it can only be disabled"
 msgstr "Usa una función interna de Omarchy; solo se puede desactivar"
 

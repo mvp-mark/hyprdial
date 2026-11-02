@@ -76,6 +76,16 @@ KEY_NAMES = {
     "XF86AUDIOPAUSE": _("Pause"),
     "XF86AUDIONEXT": _("Next"),
     "XF86AUDIOPREV": _("Previous"),
+    # Mouse buttons by their Linux input code, and the wheel
+    "MOUSE:272": _("Left click"),
+    "MOUSE:273": _("Right click"),
+    "MOUSE:274": _("Middle click"),
+    "MOUSE:275": _("Back button"),
+    "MOUSE:276": _("Forward button"),
+    "MOUSE_UP": _("Scroll up"),
+    "MOUSE_DOWN": _("Scroll down"),
+    "MOUSE_LEFT": _("Scroll left"),
+    "MOUSE_RIGHT": _("Scroll right"),
 }
 
 # Keycodes used by Omarchy (physical position, independent of the layout)
