@@ -139,4 +139,5 @@ def about() -> list[tuple[str, str]]:
     return [(k, v) for k, v in info if v]
 
 
+PRINTERS_URL = "http://localhost:631/printers/"  # CUPS web interface
 UPDATE_COMMAND = ["omarchy-launch-floating-terminal-with-presentation", "omarchy-update"]

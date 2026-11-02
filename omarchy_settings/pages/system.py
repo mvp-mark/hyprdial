@@ -1,4 +1,4 @@
-"""System page: date and time, language, default apps, notifications and about (with Omarchy updates)."""
+"""System page: date and time, language, default apps, notifications, printers and about (with Omarchy updates)."""
 from __future__ import annotations
 
 import gi
@@ -60,6 +60,15 @@ class SystemPage(Adw.PreferencesPage):
         self.add(self.notify_group)
         if core.have("omarchy-shell"):
             bg(system.dnd, self._populate_notifications)
+
+        printers = Adw.PreferencesGroup(title=_("Printers"))
+        if core.have("lpstat"):
+            printers.add(button_row(_("Manage printers"), _("Add printers and see the print queue in the browser (CUPS)"), _("Open"),
+                                    lambda: core.spawn(["xdg-open", system.PRINTERS_URL])))
+        else:
+            printers.add(Adw.ActionRow(title=_("CUPS is not installed"),
+                                       subtitle=_("Install the cups package to use printers")))
+        self.add(printers)
 
         self.about_group = Adw.PreferencesGroup(title=_("About this computer"))
         self.add(self.about_group)
