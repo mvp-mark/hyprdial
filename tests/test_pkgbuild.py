@@ -1,6 +1,7 @@
 import re
 from pathlib import Path
 
+from omarchy_settings import __version__
 from omarchy_settings.deps import dependencies
 
 PKGBUILD = (Path(__file__).parent.parent / "packaging" / "arch" / "PKGBUILD").read_text()
@@ -20,3 +21,7 @@ def test_dependencies_follow_deps_py():
     assert array("makedepends") == ["gettext"]
     assert set(array("optdepends")) == packages("optional")
 
+
+
+def test_version_matches_the_app():
+    assert re.search(r"^pkgver=(\S+)", PKGBUILD, re.M).group(1) == __version__
