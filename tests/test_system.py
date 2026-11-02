@@ -43,21 +43,6 @@ def test_set_commands(fake):
                      ["localectl", "set-locale", "LANG=en_US.UTF-8"]]
 
 
-def test_default_apps_only_installed(fake, tmp_path, monkeypatch):
-    answers, _calls, have = fake
-    (tmp_path / "firefox.desktop").write_text("")
-    (tmp_path / "zen.desktop").write_text("")
-    monkeypatch.setattr(system, "APP_DIRS", [tmp_path])
-    have.update({"foot", "nvim", "zeditor"})
-    answers["omarchy default browser"] = "zen"
-    answers["omarchy default terminal"] = "foot"
-    answers["omarchy default editor"] = "zeditor"
-    apps = system.default_apps()
-    assert apps["browser"] == ([("firefox", "Firefox"), ("zen", "Zen")], "zen")
-    assert apps["terminal"] == ([("foot", "Foot")], "foot")
-    assert apps["editor"] == ([("nvim", "Neovim"), ("zed", "Zed")], "zed")  # the command name maps back
-
-
 def test_dnd(fake):
     answers, calls, _have = fake
     assert system.dnd() is None  # shell not answering

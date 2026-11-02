@@ -1,4 +1,4 @@
-"""System page: date and time, language, default apps, notifications, printers and about (with Omarchy updates)."""
+"""System page: date and time, language, notifications, printers and about (with Omarchy updates)."""
 from __future__ import annotations
 
 import gi
@@ -14,7 +14,6 @@ from ..ui import bg, button_row, switch_row
 LANGUAGES = {"en": _("English"), "pt": _("Portuguese"), "es": _("Spanish"), "fr": _("French"), "de": _("German"),
              "it": _("Italian"), "nl": _("Dutch"), "pl": _("Polish"), "ru": _("Russian"), "uk": _("Ukrainian"),
              "ja": _("Japanese"), "zh": _("Chinese"), "ko": _("Korean"), "tr": _("Turkish"), "sv": _("Swedish")}
-KIND_TITLES = {"browser": _("Web browser"), "terminal": _("Terminal"), "editor": _("Text editor")}
 ABOUT_TITLES = {"omarchy": _("Omarchy version"), "hostname": _("Computer name"), "kernel": _("Kernel"),
                 "cpu": _("Processor"), "cores": _("Threads"), "memory": _("Memory")}
 
@@ -49,12 +48,6 @@ class SystemPage(Adw.PreferencesPage):
         self.add(self.lang_group)
         if core.have("localectl"):
             bg(system.locale_settings, self._populate_language)
-
-        self.apps_group = Adw.PreferencesGroup(title=_("Default apps"),
-                                               description=_("Only installed apps are listed."))
-        self.add(self.apps_group)
-        if core.have("omarchy"):
-            bg(system.default_apps, self._populate_apps)
 
         self.notify_group = Adw.PreferencesGroup(title=_("Notifications"))
         self.add(self.notify_group)
@@ -141,31 +134,6 @@ class SystemPage(Adw.PreferencesPage):
         self.lang_group.add(row)
         self.lang_group.add(Adw.ActionRow(title=_("Only languages generated on this system are listed"),
                                           subtitle=_("Others need to be enabled in /etc/locale.gen first")))
-
-    # -- default apps
-    def _populate_apps(self, apps) -> None:
-        if isinstance(apps, Exception) or not apps:
-            return
-        for kind in ("browser", "terminal", "editor"):
-            if kind not in apps:
-                continue
-            choices, current = apps[kind]
-            names = [name for name, _label in choices]
-            row = Adw.ComboRow(title=KIND_TITLES[kind])
-            row.set_model(Gtk.StringList.new([label for _name, label in choices]))
-            if current in names:
-                row.set_selected(names.index(current))
-            else:
-                row.set_subtitle(_("Now: {name}").format(name=current) if current else "")
-
-            def changed(r, _p, kind=kind, names=names) -> None:
-                name = names[r.get_selected()]
-                bg(lambda: system.set_default_app(kind, name), lambda res: self.win.toast(
-                    _("Default app changed") if not isinstance(res, Exception) and res[0]
-                    else _("Could not change the default app")))
-
-            row.connect("notify::selected", changed)
-            self.apps_group.add(row)
 
     # -- notifications
     def _populate_notifications(self, on) -> None:

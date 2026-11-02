@@ -11,6 +11,7 @@ from gi.repository import Adw, Gio, GObject, Gtk  # noqa: E402
 
 from . import __version__
 from .core import HyprStore
+from .pages.apps import AppsPage
 from .i18n import _
 from .pages.bar import BarPage
 from .pages.connectivity import ConnectivityPage
@@ -81,6 +82,7 @@ class Window(Adw.ApplicationWindow):
             (SoundPage(self), "sound", _("Sound"), "audio-volume-high-symbolic"),
             (PowerPage(self), "power", _("Power"), "system-shutdown-symbolic"),
             (ShortcutsPage(self), "shortcuts", _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic"),
+            (AppsPage(self), "apps", _("Apps"), "view-app-grid-symbolic"),
             (BarPage(self), "bar", _("Bar and fonts"), "preferences-desktop-font-symbolic"),
             (ConnectivityPage(self), "connectivity", _("Connectivity"), "network-wireless-symbolic"),
             (SystemPage(self), "system", _("System"), "computer-symbolic"),

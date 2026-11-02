@@ -1,7 +1,7 @@
-"""Date and time, language, default apps, notifications and system info (no GTK, testable).
+"""Date and time, language, notifications and system info (no GTK, testable).
 
 Time zone, NTP and language go through timedatectl/localectl, which ask for the password through polkit (the
-Omarchy shell shows the prompt). Default apps go through `omarchy default`, the same commands as Omarchy's menu.
+Omarchy shell shows the prompt).
 """
 from __future__ import annotations
 
@@ -55,48 +55,6 @@ def result(r) -> tuple[bool, str]:
     if r is None:
         return False, ""
     return r.returncode == 0, (r.stderr or r.stdout).strip()
-
-
-# ------------------------------------------------------------------ default apps
-APP_DIRS = [Path("/usr/share/applications"), core.HOME / ".local/share/applications"]
-
-# kind -> [(omarchy name, label, how to tell it's installed: "bin:<cmd>" or "app:<desktop file>")]
-DEFAULT_APPS = {
-    "browser": [("chromium", "Chromium", "app:chromium.desktop"), ("chrome", "Chrome", "app:google-chrome.desktop"),
-                ("brave", "Brave", "app:brave-browser.desktop"), ("brave-origin", "Brave Origin", "app:brave-origin.desktop"),
-                ("edge", "Edge", "app:microsoft-edge.desktop"), ("firefox", "Firefox", "app:firefox.desktop"),
-                ("zen", "Zen", "app:zen.desktop")],
-    "terminal": [("alacritty", "Alacritty", "bin:alacritty"), ("foot", "Foot", "bin:foot"),
-                 ("ghostty", "Ghostty", "bin:ghostty"), ("kitty", "Kitty", "bin:kitty")],
-    "editor": [("nvim", "Neovim", "bin:nvim"), ("code", "VSCode", "bin:code"), ("cursor", "Cursor", "bin:cursor"),
-               ("zed", "Zed", "bin:zeditor"), ("sublime_text", "Sublime Text", "bin:sublime_text"),
-               ("helix", "Helix", "bin:helix"), ("vim", "Vim", "bin:vim"), ("emacs", "Emacs", "bin:emacs")],
-}
-
-
-CURRENT_ALIASES = {"zeditor": "zed"}  # `omarchy default editor` prints the command, set takes "zed"
-
-
-def installed(check: str) -> bool:
-    how, name = check.split(":", 1)
-    if how == "bin":
-        return core.have(name)
-    return any((d / name).exists() for d in APP_DIRS)
-
-
-def default_apps() -> dict[str, tuple[list[tuple[str, str]], str]]:
-    """kind -> (installed choices as (name, label), current name). Kinds without choices are left out."""
-    apps = {}
-    for kind, choices in DEFAULT_APPS.items():
-        available = [(name, label) for name, label, check in choices if installed(check)]
-        if available:
-            current = core.out(["omarchy", "default", kind])
-            apps[kind] = (available, CURRENT_ALIASES.get(current, current))
-    return apps
-
-
-def set_default_app(kind: str, name: str) -> tuple[bool, str]:
-    return result(core.run(["omarchy", "default", kind, name], timeout=30))
 
 
 # ------------------------------------------------------------------ notifications

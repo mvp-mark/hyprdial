@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 01:48-0400\n"
+"POT-Creation-Date: 2026-11-02 03:01-0400\n"
 "PO-Revision-Date: 2026-11-01 12:00-0400\n"
 "Last-Translator: Marcus Vinícius Peixoto Paulo\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -12,67 +12,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: omarchy_settings/app.py:33 omarchy_settings/app.py:39
+#: omarchy_settings/app.py:34 omarchy_settings/app.py:40
 msgid "Omarchy Settings"
 msgstr "Configurações do Omarchy"
 
-#: omarchy_settings/app.py:43
+#: omarchy_settings/app.py:44
 msgid "Dependencies…"
 msgstr "Dependências…"
 
-#: omarchy_settings/app.py:44
+#: omarchy_settings/app.py:45
 msgid "Restore app defaults…"
 msgstr "Restaurar padrões do app…"
 
-#: omarchy_settings/app.py:45
+#: omarchy_settings/app.py:46
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: omarchy_settings/app.py:46
+#: omarchy_settings/app.py:47
 msgid "Search settings (Ctrl+F)"
 msgstr "Pesquisar configurações (Ctrl+F)"
 
-#: omarchy_settings/app.py:78
+#: omarchy_settings/app.py:79
 msgid "Themes"
 msgstr "Temas"
 
-#: omarchy_settings/app.py:80 omarchy_settings/pages/monitors.py:237
+#: omarchy_settings/app.py:81 omarchy_settings/pages/monitors.py:237
 msgid "Displays"
 msgstr "Monitores"
 
-#: omarchy_settings/app.py:81 omarchy_settings/pages/sound.py:205
+#: omarchy_settings/app.py:82 omarchy_settings/pages/sound.py:207
 msgid "Sound"
 msgstr "Som"
 
-#: omarchy_settings/app.py:82 omarchy_settings/pages/bar.py:61
+#: omarchy_settings/app.py:83 omarchy_settings/pages/bar.py:61
 msgid "Power"
 msgstr "Energia"
 
-#: omarchy_settings/app.py:83
+#: omarchy_settings/app.py:84
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: omarchy_settings/app.py:84
+#: omarchy_settings/app.py:85
+msgid "Apps"
+msgstr "Apps"
+
+#: omarchy_settings/app.py:86
 msgid "Bar and fonts"
 msgstr "Barra e fontes"
 
-#: omarchy_settings/app.py:85
+#: omarchy_settings/app.py:87
 msgid "Connectivity"
 msgstr "Conectividade"
 
-#: omarchy_settings/app.py:86
+#: omarchy_settings/app.py:88
 msgid "System"
 msgstr "Sistema"
 
-#: omarchy_settings/app.py:102
+#: omarchy_settings/app.py:104
 msgid "Restore app defaults?"
 msgstr "Restaurar os padrões do app?"
 
-#: omarchy_settings/app.py:103
+#: omarchy_settings/app.py:105
 msgid "Removes every Hyprland, display, shortcut and power button setting made in this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. A backup of the generated file is kept, and you can undo right after."
 msgstr "Remove todas as configurações de Hyprland, telas, atalhos e botão de energia feitas neste app, voltando às do Omarchy. Barra, tema, rede e sistema não são alterados. Um backup do arquivo gerado é guardado, e dá para desfazer logo em seguida."
 
-#: omarchy_settings/app.py:106 omarchy_settings/pages/bar.py:249
+#: omarchy_settings/app.py:108 omarchy_settings/pages/bar.py:249
 #: omarchy_settings/pages/bluetooth.py:100
 #: omarchy_settings/pages/bluetooth.py:284
 #: omarchy_settings/pages/shortcuts.py:110
@@ -81,7 +85,7 @@ msgstr "Remove todas as configurações de Hyprland, telas, atalhos e botão de 
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: omarchy_settings/app.py:107 omarchy_settings/pages/bar.py:198
+#: omarchy_settings/app.py:109 omarchy_settings/pages/bar.py:198
 #: omarchy_settings/pages/bar.py:250 omarchy_settings/pages/bar.py:380
 #: omarchy_settings/pages/hyprland.py:88 omarchy_settings/pages/monitors.py:366
 #: omarchy_settings/pages/shortcuts.py:204
@@ -89,20 +93,20 @@ msgstr "Cancelar"
 msgid "Restore"
 msgstr "Restaurar"
 
-#: omarchy_settings/app.py:116
+#: omarchy_settings/app.py:118
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr "Não foi possível restaurar: {error}"
 
-#: omarchy_settings/app.py:120
+#: omarchy_settings/app.py:122
 msgid "App defaults restored"
 msgstr "Padrões do app restaurados"
 
-#: omarchy_settings/app.py:120 omarchy_settings/pages/themes.py:226
+#: omarchy_settings/app.py:122 omarchy_settings/pages/themes.py:226
 msgid "Undo"
 msgstr "Desfazer"
 
-#: omarchy_settings/app.py:122
+#: omarchy_settings/app.py:124
 msgid "Settings brought back"
 msgstr "Configurações de volta"
 
@@ -239,6 +243,55 @@ msgstr "Gerado em laço pelo Omarchy; só dá para desativar"
 msgid "Uses an internal Omarchy function; it can only be disabled"
 msgstr "Usa uma função interna do Omarchy; só dá para desativar"
 
+#: omarchy_settings/pages/apps.py:14
+msgid "Web browser"
+msgstr "Navegador"
+
+#: omarchy_settings/pages/apps.py:14
+msgid "Terminal"
+msgstr "Terminal"
+
+#: omarchy_settings/pages/apps.py:14
+msgid "Text editor"
+msgstr "Editor de texto"
+
+#: omarchy_settings/pages/apps.py:15
+msgid "File manager"
+msgstr "Gerenciador de arquivos"
+
+#: omarchy_settings/pages/apps.py:15
+msgid "PDF documents"
+msgstr "Documentos PDF"
+
+#: omarchy_settings/pages/apps.py:15
+msgid "Images"
+msgstr "Imagens"
+
+#: omarchy_settings/pages/apps.py:16
+msgid "PNG, JPEG, WebP and GIF"
+msgstr "PNG, JPEG, WebP e GIF"
+
+#: omarchy_settings/pages/apps.py:27
+#, python-brace-format
+msgid "Now: {name}"
+msgstr "Atual: {name}"
+
+#: omarchy_settings/pages/apps.py:37
+msgid "Default apps"
+msgstr "Aplicativos padrão"
+
+#: omarchy_settings/pages/apps.py:37
+msgid "Only installed apps are listed."
+msgstr "Só os aplicativos instalados aparecem."
+
+#: omarchy_settings/pages/apps.py:68
+msgid "Default app changed"
+msgstr "Aplicativo padrão alterado"
+
+#: omarchy_settings/pages/apps.py:68
+msgid "Could not change the default app"
+msgstr "Não foi possível mudar o aplicativo padrão"
+
 #: omarchy_settings/pages/bar.py:31
 msgid "Top"
 msgstr "Topo"
@@ -356,7 +409,7 @@ msgstr "Menu do Omarchy"
 msgid "Opens the command menu"
 msgstr "Abre o menu de comandos"
 
-#: omarchy_settings/pages/bar.py:58 omarchy_settings/pages/sound.py:221
+#: omarchy_settings/pages/bar.py:58 omarchy_settings/pages/sound.py:223
 msgid "Microphone"
 msgstr "Microfone"
 
@@ -548,7 +601,7 @@ msgstr "omarchy-bar não encontrado: atualize o Omarchy para usar esta página."
 #: omarchy_settings/pages/bar.py:210 omarchy_settings/pages/bar.py:242
 #: omarchy_settings/pages/bar.py:322 omarchy_settings/pages/bar.py:345
 #: omarchy_settings/pages/bar.py:395 omarchy_settings/pages/bluetooth.py:257
-#: omarchy_settings/pages/ethernet.py:219 omarchy_settings/pages/system.py:95
+#: omarchy_settings/pages/ethernet.py:219 omarchy_settings/pages/system.py:88
 #: omarchy_settings/pages/wifi.py:287 omarchy_settings/pages/wifi.py:325
 #: omarchy_settings/pages/wifi.py:336
 #, python-brace-format
@@ -564,7 +617,7 @@ msgstr "erro desconhecido"
 msgid "Custom — {format}"
 msgstr "Personalizado — {format}"
 
-#: omarchy_settings/pages/bar.py:232 omarchy_settings/pages/system.py:127
+#: omarchy_settings/pages/bar.py:232 omarchy_settings/pages/system.py:120
 msgid "Clock format"
 msgstr "Formato do relógio"
 
@@ -714,8 +767,8 @@ msgid "Modules and layout"
 msgstr "Módulos e layout"
 
 #: omarchy_settings/pages/bar.py:374 omarchy_settings/pages/bar.py:376
-#: omarchy_settings/pages/bluetooth.py:229 omarchy_settings/pages/sound.py:234
-#: omarchy_settings/pages/system.py:66 omarchy_settings/pages/wifi.py:23
+#: omarchy_settings/pages/bluetooth.py:229 omarchy_settings/pages/sound.py:236
+#: omarchy_settings/pages/system.py:59 omarchy_settings/pages/wifi.py:23
 #: omarchy_settings/pages/wifi.py:238
 msgid "Open"
 msgstr "Abrir"
@@ -922,7 +975,7 @@ msgid "Search again"
 msgstr "Procurar de novo"
 
 #: omarchy_settings/pages/bluetooth.py:229
-#: omarchy_settings/pages/hyprland.py:150 omarchy_settings/pages/sound.py:232
+#: omarchy_settings/pages/hyprland.py:150 omarchy_settings/pages/sound.py:234
 #: omarchy_settings/pages/wifi.py:238
 msgid "Advanced"
 msgstr "Avançado"
@@ -1046,7 +1099,7 @@ msgid "Could not pair with {name}"
 msgstr "Não foi possível parear com {name}"
 
 #: omarchy_settings/pages/connectivity.py:29
-#: omarchy_settings/pages/sound.py:284
+#: omarchy_settings/pages/sound.py:286
 #, python-brace-format
 msgid "{cmd} is not installed; install it from ☰ → Dependencies"
 msgstr "{cmd} não está instalado; instale em ☰ → Dependências"
@@ -1182,7 +1235,7 @@ msgid "Save and reconnect"
 msgstr "Salvar e reconectar"
 
 #: omarchy_settings/pages/ethernet.py:105 omarchy_settings/pages/hyprland.py:98
-#: omarchy_settings/pages/system.py:80
+#: omarchy_settings/pages/system.py:73
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -2271,95 +2324,95 @@ msgstr "O Hyprland não aceitou esse atalho; nada foi alterado"
 msgid "Unmute"
 msgstr "Ativar som"
 
-#: omarchy_settings/pages/sound.py:162
+#: omarchy_settings/pages/sound.py:164
 msgid "Could not change the device"
 msgstr "Não foi possível trocar o dispositivo"
 
-#: omarchy_settings/pages/sound.py:206
+#: omarchy_settings/pages/sound.py:208
 msgid "pactl is not installed"
 msgstr "O pactl não está instalado"
 
-#: omarchy_settings/pages/sound.py:207
+#: omarchy_settings/pages/sound.py:209
 msgid "It comes with PipeWire's PulseAudio support (pipewire-pulse)"
 msgstr "Ele vem com o suporte a PulseAudio do PipeWire (pipewire-pulse)"
 
-#: omarchy_settings/pages/sound.py:211
+#: omarchy_settings/pages/sound.py:213
 msgid "Output"
 msgstr "Saída"
 
-#: omarchy_settings/pages/sound.py:211
+#: omarchy_settings/pages/sound.py:213
 msgid "Output device"
 msgstr "Dispositivo de saída"
 
-#: omarchy_settings/pages/sound.py:211
+#: omarchy_settings/pages/sound.py:213
 msgid "Volume"
 msgstr "Volume"
 
-#: omarchy_settings/pages/sound.py:212
+#: omarchy_settings/pages/sound.py:214
 msgid "No output device"
 msgstr "Nenhum dispositivo de saída"
 
-#: omarchy_settings/pages/sound.py:216
+#: omarchy_settings/pages/sound.py:218
 msgid "Test sound"
 msgstr "Testar o som"
 
-#: omarchy_settings/pages/sound.py:216
+#: omarchy_settings/pages/sound.py:218
 msgid "Plays a short sound on the output device"
 msgstr "Toca um som curto no dispositivo de saída"
 
-#: omarchy_settings/pages/sound.py:217
+#: omarchy_settings/pages/sound.py:219
 msgid "Play"
 msgstr "Tocar"
 
-#: omarchy_settings/pages/sound.py:218
+#: omarchy_settings/pages/sound.py:220
 msgid "Allow volume above 100%"
 msgstr "Permitir volume acima de 100%"
 
-#: omarchy_settings/pages/sound.py:218
+#: omarchy_settings/pages/sound.py:220
 msgid "Louder, but the sound may distort"
 msgstr "Mais alto, mas o som pode distorcer"
 
-#: omarchy_settings/pages/sound.py:221
+#: omarchy_settings/pages/sound.py:223
 msgid "Input"
 msgstr "Entrada"
 
-#: omarchy_settings/pages/sound.py:221
+#: omarchy_settings/pages/sound.py:223
 msgid "Input volume"
 msgstr "Volume de entrada"
 
-#: omarchy_settings/pages/sound.py:222
+#: omarchy_settings/pages/sound.py:224
 msgid "No microphone"
 msgstr "Nenhum microfone"
 
-#: omarchy_settings/pages/sound.py:225
+#: omarchy_settings/pages/sound.py:227
 msgid "Apps playing"
 msgstr "Apps tocando"
 
-#: omarchy_settings/pages/sound.py:225
+#: omarchy_settings/pages/sound.py:227
 msgid "Volume of each app playing sound."
 msgstr "Volume de cada app que está tocando som."
 
-#: omarchy_settings/pages/sound.py:226
+#: omarchy_settings/pages/sound.py:228
 msgid "Nothing is playing"
 msgstr "Nada está tocando"
 
-#: omarchy_settings/pages/sound.py:228
+#: omarchy_settings/pages/sound.py:230
 msgid "Using the microphone"
 msgstr "Usando o microfone"
 
-#: omarchy_settings/pages/sound.py:229
+#: omarchy_settings/pages/sound.py:231
 msgid "Apps recording sound right now."
 msgstr "Apps gravando som agora."
 
-#: omarchy_settings/pages/sound.py:229
+#: omarchy_settings/pages/sound.py:231
 msgid "No app is using the microphone"
 msgstr "Nenhum app está usando o microfone"
 
-#: omarchy_settings/pages/sound.py:233
+#: omarchy_settings/pages/sound.py:235
 msgid "Full mixer"
 msgstr "Mixer completo"
 
-#: omarchy_settings/pages/sound.py:233
+#: omarchy_settings/pages/sound.py:235
 msgid "Profiles, moving an app to another device (wiremix)"
 msgstr "Perfis, mover um app para outro dispositivo (wiremix)"
 
@@ -2420,192 +2473,159 @@ msgid "Swedish"
 msgstr "Sueco"
 
 #: omarchy_settings/pages/system.py:17
-msgid "Web browser"
-msgstr "Navegador"
-
-#: omarchy_settings/pages/system.py:17
-msgid "Terminal"
-msgstr "Terminal"
-
-#: omarchy_settings/pages/system.py:17
-msgid "Text editor"
-msgstr "Editor de texto"
-
-#: omarchy_settings/pages/system.py:18
 msgid "Omarchy version"
 msgstr "Versão do Omarchy"
 
-#: omarchy_settings/pages/system.py:18
+#: omarchy_settings/pages/system.py:17
 msgid "Computer name"
 msgstr "Nome do computador"
 
-#: omarchy_settings/pages/system.py:18
+#: omarchy_settings/pages/system.py:17
 msgid "Kernel"
 msgstr "Kernel"
 
-#: omarchy_settings/pages/system.py:19
+#: omarchy_settings/pages/system.py:18
 msgid "Processor"
 msgstr "Processador"
 
-#: omarchy_settings/pages/system.py:19
+#: omarchy_settings/pages/system.py:18
 msgid "Threads"
 msgstr "Threads"
 
-#: omarchy_settings/pages/system.py:19
+#: omarchy_settings/pages/system.py:18
 msgid "Memory"
 msgstr "Memória"
 
-#: omarchy_settings/pages/system.py:42
+#: omarchy_settings/pages/system.py:41
 msgid "Date and time"
 msgstr "Data e hora"
 
-#: omarchy_settings/pages/system.py:48
+#: omarchy_settings/pages/system.py:47
 msgid "Language"
 msgstr "Idioma"
 
-#: omarchy_settings/pages/system.py:48
+#: omarchy_settings/pages/system.py:47
 msgid "Used by apps, this one included, after you log out and back in."
 msgstr "Usado pelos apps, inclusive este, depois de sair e entrar de novo."
 
-#: omarchy_settings/pages/system.py:53
-msgid "Default apps"
-msgstr "Aplicativos padrão"
-
-#: omarchy_settings/pages/system.py:54
-msgid "Only installed apps are listed."
-msgstr "Só os aplicativos instalados aparecem."
-
-#: omarchy_settings/pages/system.py:59
+#: omarchy_settings/pages/system.py:52
 msgid "Notifications"
 msgstr "Notificações"
 
-#: omarchy_settings/pages/system.py:64
+#: omarchy_settings/pages/system.py:57
 msgid "Printers"
 msgstr "Impressoras"
 
-#: omarchy_settings/pages/system.py:66
+#: omarchy_settings/pages/system.py:59
 msgid "Manage printers"
 msgstr "Gerenciar impressoras"
 
-#: omarchy_settings/pages/system.py:66
+#: omarchy_settings/pages/system.py:59
 msgid "Add printers and see the print queue in the browser (CUPS)"
 msgstr "Adicionar impressoras e ver a fila de impressão no navegador (CUPS)"
 
-#: omarchy_settings/pages/system.py:69
+#: omarchy_settings/pages/system.py:62
 msgid "CUPS is not installed"
 msgstr "O CUPS não está instalado"
 
-#: omarchy_settings/pages/system.py:70
+#: omarchy_settings/pages/system.py:63
 msgid "Install the cups package to use printers"
 msgstr "Instale o pacote cups para usar impressoras"
 
-#: omarchy_settings/pages/system.py:73
+#: omarchy_settings/pages/system.py:66
 msgid "About this computer"
 msgstr "Sobre este computador"
 
-#: omarchy_settings/pages/system.py:92
+#: omarchy_settings/pages/system.py:85
 #, python-brace-format
 msgid "Changed to {value}"
 msgstr "Alterado para {value}"
 
-#: omarchy_settings/pages/system.py:95
+#: omarchy_settings/pages/system.py:88
 msgid "Not changed"
 msgstr "Não alterado"
 
-#: omarchy_settings/pages/system.py:108
+#: omarchy_settings/pages/system.py:101
 msgid "Time zone"
 msgstr "Fuso horário"
 
-#: omarchy_settings/pages/system.py:109
+#: omarchy_settings/pages/system.py:102
 msgid "Type to search"
 msgstr "Digite para pesquisar"
 
-#: omarchy_settings/pages/system.py:120
+#: omarchy_settings/pages/system.py:113
 msgid "Synchronized"
 msgstr "Sincronizado"
 
-#: omarchy_settings/pages/system.py:120
+#: omarchy_settings/pages/system.py:113
 msgid "Keeps the clock right through the internet"
 msgstr "Mantém o relógio certo pela internet"
 
-#: omarchy_settings/pages/system.py:124
+#: omarchy_settings/pages/system.py:117
 msgid "Could not change automatic time"
 msgstr "Não foi possível mudar a hora automática"
 
-#: omarchy_settings/pages/system.py:126
+#: omarchy_settings/pages/system.py:119
 msgid "Set the time automatically"
 msgstr "Acertar a hora automaticamente"
 
-#: omarchy_settings/pages/system.py:128
+#: omarchy_settings/pages/system.py:121
 msgid "12 or 24 hours: Bar and fonts → Clock format"
 msgstr "12 ou 24 horas: Barra e fontes → Formato do relógio"
 
-#: omarchy_settings/pages/system.py:136
+#: omarchy_settings/pages/system.py:129
 msgid "No languages listed"
 msgstr "Nenhum idioma listado"
 
-#: omarchy_settings/pages/system.py:138
+#: omarchy_settings/pages/system.py:131
 msgid "System language"
 msgstr "Idioma do sistema"
 
-#: omarchy_settings/pages/system.py:142
+#: omarchy_settings/pages/system.py:135
 msgid "Only languages generated on this system are listed"
 msgstr "Só aparecem os idiomas gerados neste sistema"
 
-#: omarchy_settings/pages/system.py:143
+#: omarchy_settings/pages/system.py:136
 msgid "Others need to be enabled in /etc/locale.gen first"
 msgstr "Outros precisam ser ativados antes em /etc/locale.gen"
 
-#: omarchy_settings/pages/system.py:159
-#, python-brace-format
-msgid "Now: {name}"
-msgstr "Atual: {name}"
-
-#: omarchy_settings/pages/system.py:164
-msgid "Default app changed"
-msgstr "Aplicativo padrão alterado"
-
-#: omarchy_settings/pages/system.py:165
-msgid "Could not change the default app"
-msgstr "Não foi possível mudar o aplicativo padrão"
-
-#: omarchy_settings/pages/system.py:173
+#: omarchy_settings/pages/system.py:141
 msgid "The Omarchy shell isn't answering"
 msgstr "O shell do Omarchy não está respondendo"
 
-#: omarchy_settings/pages/system.py:178
+#: omarchy_settings/pages/system.py:146
 msgid "Could not change Do not disturb"
 msgstr "Não foi possível mudar o Não perturbe"
 
-#: omarchy_settings/pages/system.py:180
+#: omarchy_settings/pages/system.py:148
 msgid "Do not disturb"
 msgstr "Não perturbe"
 
-#: omarchy_settings/pages/system.py:180
+#: omarchy_settings/pages/system.py:148
 msgid "Hides notifications; critical ones still show"
 msgstr "Esconde as notificações; as críticas continuam aparecendo"
 
-#: omarchy_settings/pages/system.py:182
+#: omarchy_settings/pages/system.py:150
 msgid "Recent notifications"
 msgstr "Notificações recentes"
 
-#: omarchy_settings/pages/system.py:182
+#: omarchy_settings/pages/system.py:150
 msgid "Shows them again on screen"
 msgstr "Mostra de novo na tela"
 
-#: omarchy_settings/pages/system.py:182
+#: omarchy_settings/pages/system.py:150
 msgid "Show"
 msgstr "Mostrar"
 
-#: omarchy_settings/pages/system.py:194
+#: omarchy_settings/pages/system.py:162
 msgid "Update Omarchy"
 msgstr "Atualizar o Omarchy"
 
-#: omarchy_settings/pages/system.py:194
+#: omarchy_settings/pages/system.py:162
 msgid "Opens a terminal with the update"
 msgstr "Abre um terminal com a atualização"
 
-#: omarchy_settings/pages/system.py:194
+#: omarchy_settings/pages/system.py:162
 msgid "Update"
 msgstr "Atualizar"
 

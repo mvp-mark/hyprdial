@@ -19,9 +19,10 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
 | Sound | Output and input device (the default one), their volume and mute, volume above 100% (optional), a test sound; volume and mute of each app playing and of each app using the microphone; updates live; full mixer (wiremix) for profiles and moving an app to another device | `omarchy-audio-output-set-default` and `omarchy-audio-input-set-default` (they also move the apps playing or recording), `pactl` (PipeWire), `pactl subscribe` for live updates, `pw-play` |
 | Power | Power profile (power saver, balanced, performance; only those the machine offers); night light on/off, warmth and a daily schedule; what the power button does (system menu, lock, suspend, shut down, nothing); screensaver, lock and "stay awake" | `omarchy-powerprofiles-set` (remembered like the bar does), `hyprctl hyprsunset`, `~/.config/hypr/hyprsunset.conf` profiles (backup at `hyprsunset.conf.omarchy-settings.bak`), `XF86PowerOff` shortcut in the generated file, `idle` in `~/.config/omarchy/shell.json`, `omarchy-toggle-idle` |
 | Shortcuts | Every active shortcut, by category, searchable by name or key; change the key of an Omarchy shortcut (by recording the combination), disable it, restore it with ↶; your own shortcuts to open apps, run commands or open in the terminal; conflict warnings | `hyprctl binds` + parsing `default/hypr/bindings/*.lua`; `hl.unbind`/`o.bind` in the generated file, with reload and verification |
+| Apps | Default apps: browser, terminal and editor, file manager, PDF documents and images (installed ones only) | `omarchy default`, `xdg-mime` (`~/.config/mimeapps.list`) |
 | Bar and fonts | Omarchy shell bar: show/hide, position, transparency, clock format; widgets per section (reorder, move between sections, remove, add); optional Waybar (see below); system font | `omarchy-bar`, `omarchy-plugin-enable/disable`, `omarchy-toggle-bar`, `omarchy-font-set` |
 | Connectivity | Wired (Ethernet): status, link speed, address, gateway and DNS, plain-language diagnosis (no cable, 10 Mb/s link, no DHCP address), connect/disconnect, IPv4 automatic (DHCP) or manual, custom DNS, auto-connect; Wi-Fi: radio on/off, available networks with signal and security, connect (password asked in a dialog, hidden networks too), saved networks with IPv4/DNS settings and forget, impala for advanced cases; Bluetooth: on/off, paired devices with battery level, connect/disconnect, forget, search and pair (pairing codes shown or confirmed in a dialog), bluetui for advanced cases | `nmcli` (NetworkManager), libnm for saving Wi-Fi passwords (never on a command line), `/sys/class/net`, `bluetoothctl` (pairing through an interactive session with a KeyboardDisplay agent) |
-| System | Time zone (searchable) and automatic time (NTP); system language (among those generated); default browser, terminal and editor (installed ones only); notifications: do not disturb and recent notifications; printers (opens the CUPS web interface); about this computer (Omarchy version, kernel, processor, memory) and "Update Omarchy" | `timedatectl`, `localectl` (both ask for the password through polkit), `omarchy default`, `omarchy-shell notifications`, CUPS at `localhost:631`, `omarchy-update` in a floating terminal |
+| System | Time zone (searchable) and automatic time (NTP); system language (among those generated); notifications: do not disturb and recent notifications; printers (opens the CUPS web interface); about this computer (Omarchy version, kernel, processor, memory) and "Update Omarchy" | `timedatectl`, `localectl` (both ask for the password through polkit), `omarchy-shell notifications`, CUPS at `localhost:631`, `omarchy-update` in a floating terminal |
 
 Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
 matter, and choosing a result opens its page, expands what is around it and highlights it.
@@ -127,7 +128,7 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `network.py`, `wifi.py`, `bluetooth.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `network.py`, `wifi.py`, `bluetooth.py`, `apps.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -148,12 +149,13 @@ omarchy_settings/
   bluetooth.py       Bluetooth through bluetoothctl: devices, scan, commands, pairing output parser (no GTK)
   sound.py           output/input devices and app streams through pactl (no GTK)
   power.py           power profile, night light and its schedule, power button (no GTK)
-  system.py          date and time, language, default apps, notifications, system info (no GTK)
+  apps.py            default apps: Omarchy's and by file type (no GTK)
+  system.py          date and time, language, notifications, system info (no GTK)
   search.py          settings search: accent-insensitive matching and ranking (no GTK)
   i18n.py            translation (gettext) in the system language
   ui.py              widget helpers
   app.py             main window
-  pages/             themes, hyprland, monitors, sound, power, shortcuts, bar, connectivity, system, search
+  pages/             themes, hyprland, monitors, sound, power, shortcuts, apps, bar, connectivity, system, search
 data/                .desktop
 packaging/arch/      PKGBUILD
 docs/screenshots/    images used by this README
@@ -164,7 +166,6 @@ install.sh
 
 ## Next steps
 
-- More **default apps** (file manager; apps for PDFs and images).
 - Changing the key of shortcuts Omarchy generates in loops (workspaces 1–0, group windows, bar panels); today
   they can only be disabled.
 - Removing a single Spacer from the bar (today removal applies to all of them).
