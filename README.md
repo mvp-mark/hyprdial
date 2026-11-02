@@ -1,20 +1,66 @@
 # omarchy-settings
 
 [![tests](https://github.com/mvp-mark/omarchy-settings/actions/workflows/tests.yml/badge.svg)](https://github.com/mvp-mark/omarchy-settings/actions/workflows/tests.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Graphical settings app for [Omarchy](https://omarchy.org), built with GTK4 + libadwaita (Python).
+A graphical settings app for [Omarchy](https://omarchy.org), built with GTK4 + libadwaita (Python). It changes
+your system through Omarchy's own commands and never edits what Omarchy ships, so updates keep working and every
+change can be undone.
+
+![Omarchy Settings on the Ethereal theme](docs/screenshots/hero.jpg)
 
 **Requires Omarchy with the Lua-based Hyprland configuration** (`~/.config/hypr/hyprland.lua`, Hyprland 0.5x)
 and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are not supported.
 
-![Themes page](docs/screenshots/themes.png)
+## Highlights
+
+- **Thirteen pages in a sidebar** grouped like Omarchy's menu: Style, Hardware and System.
+- **Follows your theme**: buttons and switches take the current Omarchy theme's accent color, and change with it.
+- **Live changes**: Hyprland options, displays, sound and the night light apply at once; display changes revert
+  by themselves unless you keep them.
+- **Find anything** with **Ctrl+F**, and see what you changed from Omarchy's defaults under **☰ → Changed
+  settings**, each setting marked with a bar of the accent color.
+- **Safe by design**: one generated file for Hyprland settings, backups before touching your files, Undo where it
+  matters, passwords asked by the system in a visible terminal or a polkit prompt.
+- **Your language**: the interface follows the system language (English and Brazilian Portuguese included).
+
+![Moving through the pages, searching for "night" and listing the changed settings](docs/screenshots/demo.gif)
 
 ## Pages
 
-The pages sit in a sidebar grouped like Omarchy's menu: **Style** (themes, appearance, bar and fonts), **Hardware**
-(displays, sound, power, input, connectivity) and **System** (apps, shortcuts, accessibility, security, system). On a narrow window the sidebar
-and the page take turns, with a back button. Buttons, switches and selections use the current Omarchy theme's
-accent color and follow it when the theme changes.
+The pages sit in a sidebar grouped like Omarchy's menu. On a narrow window the sidebar and the page take turns,
+with a back button.
+
+### Style
+
+| | |
+|---|---|
+| ![Themes](docs/screenshots/themes.png) **Themes**: gallery with previews and colors, wallpapers of the current theme | ![Appearance](docs/screenshots/appearance.png) **Appearance**: quick styles, gaps, borders, corners, opacity, blur, shadow |
+| ![Bar and fonts](docs/screenshots/bar.png) **Bar and fonts**: the Omarchy shell bar, its widgets and the system font | |
+
+### Hardware
+
+| | |
+|---|---|
+| ![Displays](docs/screenshots/monitors.png) **Displays**: drag to arrange, resolution, refresh rate, scale, brightness | ![Sound](docs/screenshots/sound.png) **Sound**: devices, volume and the volume of each app |
+| ![Power](docs/screenshots/power.png) **Power**: profile, night light, power button, idle, suspend and hibernation | ![Input](docs/screenshots/input.png) **Input**: keyboard layout and repeat, mouse, touchpad |
+
+**Connectivity** (Ethernet, Wi-Fi and Bluetooth, with pairing) has no picture here: it would show network names
+and addresses.
+
+### System
+
+| | |
+|---|---|
+| ![Apps](docs/screenshots/apps.png) **Apps**: default apps, web apps and startup apps | ![Shortcuts](docs/screenshots/shortcuts.png) **Shortcuts**: change, disable or add shortcuts, with conflict warnings |
+| ![Accessibility](docs/screenshots/accessibility.png) **Accessibility**: text size, pointer size, animations | ![Security](docs/screenshots/security.png) **Security**: fingerprint, FIDO2 key and SSH server |
+| ![System](docs/screenshots/system.png) **System**: time, language, notifications, printers, updates and snapshots | ![Changed settings](docs/screenshots/changed.png) **☰ → Changed settings**: everything that differs from Omarchy's defaults |
+
+Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
+matter, and choosing a result opens its page, expands what is around it and highlights it.
+
+<details>
+<summary><b>What each page does, and how it applies changes</b></summary>
 
 | Page | What it does | How it applies changes |
 |---|---|---|
@@ -32,20 +78,7 @@ accent color and follow it when the theme changes.
 | Security | Fingerprint (with a reader), security key (FIDO2) and SSH server: set up, set up again or remove, with the same conditions as Omarchy's Setup and Remove menus; whether the SSH server is running | `omarchy-setup-security-*` and `omarchy-remove-security-*` in a floating terminal |
 | System | Time zone (searchable) and automatic time (NTP); system language (among those generated); notifications: do not disturb and recent notifications; printers (opens the CUPS web interface); about this computer (Omarchy version, kernel, processor, memory), whether an Omarchy update is available, "Update Omarchy", "Create a snapshot now" (restored from the boot menu) | `timedatectl`, `localectl` (both ask for the password through polkit), `omarchy-shell notifications`, CUPS at `localhost:631`, `omarchy-update-available`, `omarchy-update` and `omarchy-snapshot create` in a floating terminal |
 
-Settings that differ from Omarchy's default are marked with a bar of the accent color, and **☰ → Changed
-settings** lists them all, each one a click away.
-
-Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
-matter, and choosing a result opens its page, expands what is around it and highlights it.
-
-## Screenshots
-
-| | |
-|---|---|
-| ![Appearance page](docs/screenshots/appearance.png) Appearance | ![Displays page](docs/screenshots/monitors.png) Displays |
-| ![Sound page](docs/screenshots/sound.png) Sound | ![Power page](docs/screenshots/power.png) Power |
-| ![Apps page](docs/screenshots/apps.png) Apps | ![System page](docs/screenshots/system.png) System |
-| ![Search dialog](docs/screenshots/search.png) Search (Ctrl+F) | |
+</details>
 
 ## How settings are stored
 
