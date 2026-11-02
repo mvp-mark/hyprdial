@@ -12,7 +12,7 @@ from gi.repository import Adw, Gdk, GLib, Gtk  # noqa: E402
 
 from .. import keybinds as kb
 from ..i18n import _, ngettext
-from ..ui import bg, button_row
+from ..ui import bg, button_row, confirm
 
 CSS = b"""
 .oms-keycap {
@@ -476,18 +476,13 @@ class ShortcutsPage(Adw.PreferencesPage):
         self._apply(state, _("Shortcut “{name}” deleted").format(name=item["desc"]))
 
     def _confirm_reset(self) -> None:
-        dialog = Adw.AlertDialog(
+        confirm(
+            self.win,
             heading=_("Restore all shortcuts?"),
             body=_("Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."),
+            action=_("Restore"),
+            on_confirm=lambda: self._apply(kb.empty_state(), _("Shortcuts restored")),
         )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("reset", _("Restore"))
-        dialog.set_response_appearance("reset", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.set_close_response("cancel")
-        dialog.connect(
-            "response", lambda _d, r: r == "reset" and self._apply(kb.empty_state(), _("Shortcuts restored"))
-        )
-        dialog.present(self.win)
 
     def _apply(self, state: dict, ok_msg: str, expect: str | None = None) -> None:
         """Writes, reloads and checks; if the new shortcut doesn't show up in Hyprland, undoes it."""

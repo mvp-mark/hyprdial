@@ -6,12 +6,12 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, GLib, Gtk  # noqa: E402
+from gi.repository import Adw, Gtk  # noqa: E402
 
 from .. import core
 from .. import network as net
 from ..i18n import _
-from ..ui import bg
+from ..ui import bg, refresh_while_mapped
 from .ipv4 import Ipv4Fields, invalid_message
 
 REFRESH_SECONDS = 5
@@ -134,25 +134,13 @@ class EthernetGroup(Adw.PreferencesGroup):
         )
         refresh.connect("clicked", lambda _b: self.refresh())
         self.set_header_suffix(refresh)
-        self.connect("map", lambda _w: self._start_timer())
-        self.connect("unmap", lambda _w: self._stop_timer())
-        self._timer = 0
+        refresh_while_mapped(self, REFRESH_SECONDS, self._tick)
         self.refresh()
 
     # -- refreshing (only while the page is visible)
-    def _start_timer(self) -> None:
-        if not self._timer:
-            self._timer = GLib.timeout_add_seconds(REFRESH_SECONDS, self._tick)
-
-    def _stop_timer(self) -> None:
-        if self._timer:
-            GLib.source_remove(self._timer)
-            self._timer = 0
-
-    def _tick(self) -> bool:
+    def _tick(self) -> None:
         if not self.busy:
             self.refresh()
-        return True
 
     def refresh(self) -> None:
         if not core.have("nmcli"):

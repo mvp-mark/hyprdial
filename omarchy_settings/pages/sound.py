@@ -16,7 +16,7 @@ from gi.repository import Adw, Gdk, GLib, Gtk  # noqa: E402
 
 from .. import core, sound
 from ..i18n import _
-from ..ui import bg, button_row, switch_row
+from ..ui import Debouncer, bg, button_row, launch_tui, missing_row, switch_row
 
 REFRESH_DELAY = 300  # ms: pactl sends bursts of events; one read covers a whole burst
 USER_GRACE = 1.0  # s: a volume the user just moved isn't overwritten by the events it causes
@@ -30,7 +30,7 @@ class VolumeRow(Adw.ActionRow):
         super().__init__(title=title, subtitle=subtitle, use_markup=False, title_lines=1, subtitle_lines=1)
         self.kind = kind
         self.index: int | None = None
-        self._timer = 0
+        self._volume = Debouncer(150, self._apply_volume)
         self._touched = 0.0
         self._syncing = False
         if icon:
@@ -57,7 +57,7 @@ class VolumeRow(Adw.ActionRow):
 
     def update(self, index: int, volume: float, muted: bool, limit: int) -> None:
         self.index = index
-        if time.monotonic() - self._touched < USER_GRACE or self._timer:
+        if time.monotonic() - self._touched < USER_GRACE or self._volume.pending:
             return
         self._syncing = True
         percent = round(volume * 100)
@@ -80,17 +80,11 @@ class VolumeRow(Adw.ActionRow):
         if self._syncing or self.index is None:
             return
         self._touched = time.monotonic()
-        if self._timer:
-            GLib.source_remove(self._timer)
-        kind, index, value = self.kind, self.index, scale.get_value() / 100
+        self._volume(self.kind, self.index, scale.get_value() / 100)
 
-        def apply() -> bool:
-            self._timer = 0
-            self._touched = time.monotonic()
-            bg(lambda: sound.set_volume(kind, index, value))
-            return False
-
-        self._timer = GLib.timeout_add(150, apply)
+    def _apply_volume(self, kind: str, index: int, value: float) -> None:
+        self._touched = time.monotonic()
+        bg(lambda: sound.set_volume(kind, index, value))
 
     def _on_mute(self, button: Gtk.ToggleButton) -> None:
         self._mute_icon(button.get_active())
@@ -208,18 +202,14 @@ class SoundPage(Adw.PreferencesPage):
         super().__init__()
         self.win = win
         self.store = win.store
-        self._refresh_timer = 0
+        # at most one read per REFRESH_DELAY, even under a steady flow of events
+        self._schedule_refresh = Debouncer(REFRESH_DELAY, self._refresh, restart=False)
         self._loading = False
         self.overamp = bool(self.store.extras.get(OVERAMP_KEY))
 
         if not core.have("pactl"):
             group = Adw.PreferencesGroup(title=_("Sound"))
-            group.add(
-                Adw.ActionRow(
-                    title=_("pactl is not installed"),
-                    subtitle=_("It comes with PipeWire's PulseAudio support (pipewire-pulse)"),
-                )
-            )
+            group.add(missing_row("pactl", _("It comes with PipeWire's PulseAudio support (pipewire-pulse)")))
             self.add(group)
             return
 
@@ -272,17 +262,6 @@ class SoundPage(Adw.PreferencesPage):
     def limit(self) -> int:
         return 150 if self.overamp else 100
 
-    def _schedule_refresh(self) -> None:
-        if self._refresh_timer:
-            return  # at most one read per REFRESH_DELAY, even under a steady flow of events
-
-        def fire() -> bool:
-            self._refresh_timer = 0
-            self._refresh()
-            return False
-
-        self._refresh_timer = GLib.timeout_add(REFRESH_DELAY, fire)
-
     def _refresh(self) -> None:
         if self._loading:
             self._schedule_refresh()  # read again once the running read ends
@@ -310,7 +289,4 @@ class SoundPage(Adw.PreferencesPage):
         self.recording.set_limit(limit)
 
     def _mixer(self) -> None:
-        if not core.have("wiremix"):
-            self.win.toast(_("{cmd} is not installed; install it from ☰ → Dependencies").format(cmd="wiremix"))
-            return
-        core.launch_tui("wiremix")
+        launch_tui(self.win, "wiremix")

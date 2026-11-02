@@ -10,7 +10,7 @@ from gi.repository import Adw, Gtk  # noqa: E402
 
 from .. import core, system
 from ..i18n import _
-from ..ui import bg, button_row, switch_row
+from ..ui import bg, button_row, missing_row, switch_row
 
 LANGUAGES = {
     "en": _("English"),
@@ -87,9 +87,7 @@ class SystemPage(Adw.PreferencesPage):
                 )
             )
         else:
-            printers.add(
-                Adw.ActionRow(title=_("CUPS is not installed"), subtitle=_("Install the cups package to use printers"))
-            )
+            printers.add(missing_row("CUPS", _("Install the cups package to use printers")))
         self.add(printers)
 
         self.about_group = Adw.PreferencesGroup(title=_("About this computer"))

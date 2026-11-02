@@ -12,7 +12,7 @@ from gi.repository import NM, Adw, GLib, Gtk  # noqa: E402
 from .. import core, wifi
 from .. import network as net
 from ..i18n import _, ngettext
-from ..ui import bg, button_row
+from ..ui import bg, button_row, confirm, refresh_while_mapped
 from .ipv4 import Ipv4Fields, invalid_message
 
 REFRESH_SECONDS = 10
@@ -146,25 +146,13 @@ class WifiGroup(Adw.PreferencesGroup):
         )
         scan.connect("clicked", lambda _b: self.refresh(rescan=True))
         self.set_header_suffix(scan)
-        self._timer = 0
-        self.connect("map", lambda _w: self._start_timer())
-        self.connect("unmap", lambda _w: self._stop_timer())
+        refresh_while_mapped(self, REFRESH_SECONDS, self._tick)
         self.refresh()
 
     # -- refreshing
-    def _start_timer(self) -> None:
-        if not self._timer:
-            self._timer = GLib.timeout_add_seconds(REFRESH_SECONDS, self._tick)
-
-    def _stop_timer(self) -> None:
-        if self._timer:
-            GLib.source_remove(self._timer)
-            self._timer = 0
-
-    def _tick(self) -> bool:
+    def _tick(self) -> None:
         if not self.busy:
             self.refresh()
-        return True
 
     def refresh(self, rescan: bool = False) -> None:
         if not core.have("nmcli"):
@@ -420,15 +408,10 @@ class WifiGroup(Adw.PreferencesGroup):
         bg(lambda: net.read_profile(s.uuid), show)
 
     def _confirm_forget(self, s: wifi.Saved) -> None:
-        dialog = Adw.AlertDialog(
-            heading=_("Forget “{ssid}”?").format(ssid=s.ssid), body=_("The saved password and settings are deleted.")
+        confirm(
+            self.win,
+            heading=_("Forget “{ssid}”?").format(ssid=s.ssid),
+            body=_("The saved password and settings are deleted."),
+            action=_("Forget"),
+            on_confirm=lambda: self._run([wifi.forget(s.uuid)], _("{ssid} forgotten").format(ssid=s.ssid)),
         )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("forget", _("Forget"))
-        dialog.set_response_appearance("forget", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.set_close_response("cancel")
-        dialog.connect(
-            "response",
-            lambda _d, r: r == "forget" and self._run([wifi.forget(s.uuid)], _("{ssid} forgotten").format(ssid=s.ssid)),
-        )
-        dialog.present(self.win)

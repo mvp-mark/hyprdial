@@ -10,7 +10,7 @@ from gi.repository import Adw, Gtk  # noqa: E402
 
 from .. import core, webapps
 from ..i18n import _
-from ..ui import bg
+from ..ui import bg, confirm
 
 PROBLEMS = {
     "name": _("Type a name"),
@@ -140,19 +140,13 @@ class WebAppsGroup(Adw.PreferencesGroup):
         self.refresh()
 
     def _confirm_remove(self, app: webapps.WebApp) -> None:
-        dialog = Adw.AlertDialog(
+        confirm(
+            self.win,
             heading=_("Remove {name}?").format(name=app.title),
             body=_("Removes it from the app launcher. The site itself and its data in the browser are kept."),
+            action=_("Remove"),
+            on_confirm=lambda: bg(lambda: webapps.remove(app.name), lambda res: self._removed(app, res)),
         )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("remove", _("Remove"))
-        dialog.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.set_close_response("cancel")
-        dialog.connect(
-            "response",
-            lambda _d, r: r == "remove" and bg(lambda: webapps.remove(app.name), lambda res: self._removed(app, res)),
-        )
-        dialog.present(self.win)
 
     def _removed(self, app: webapps.WebApp, res) -> None:
         ok = not isinstance(res, Exception) and res[0]

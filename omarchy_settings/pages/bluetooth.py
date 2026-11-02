@@ -15,7 +15,7 @@ from gi.repository import Adw, GLib, Gtk  # noqa: E402
 from .. import bluetooth as bt
 from .. import core
 from ..i18n import _, ngettext
-from ..ui import bg, button_row
+from ..ui import bg, button_row, confirm, refresh_while_mapped
 
 REFRESH_SECONDS = 10
 PAIR_TIMEOUT = 60
@@ -124,25 +124,13 @@ class BluetoothGroup(Adw.PreferencesGroup):
         self.expanded = {"paired": True, "nearby": True}
         self.session: PairSession | None = None
         self.code_dialog: CodeDialog | None = None
-        self._timer = 0
-        self.connect("map", lambda _w: self._start_timer())
-        self.connect("unmap", lambda _w: self._stop_timer())
+        refresh_while_mapped(self, REFRESH_SECONDS, self._tick)
         self.refresh()
 
     # -- refreshing
-    def _start_timer(self) -> None:
-        if not self._timer:
-            self._timer = GLib.timeout_add_seconds(REFRESH_SECONDS, self._tick)
-
-    def _stop_timer(self) -> None:
-        if self._timer:
-            GLib.source_remove(self._timer)
-            self._timer = 0
-
-    def _tick(self) -> bool:
+    def _tick(self) -> None:
         if not self.busy and not self.scanning and self.session is None:
             self.refresh()
-        return True
 
     def refresh(self) -> None:
         def load() -> dict:
@@ -313,18 +301,13 @@ class BluetoothGroup(Adw.PreferencesGroup):
             self._run(bt.connect(d.mac), _("{name} connected").format(name=d.name))
 
     def _confirm_forget(self, d: bt.Device) -> None:
-        dialog = Adw.AlertDialog(
-            heading=_("Forget “{name}”?").format(name=d.name), body=_("To use it again, you'll have to pair it again.")
+        confirm(
+            self.win,
+            heading=_("Forget “{name}”?").format(name=d.name),
+            body=_("To use it again, you'll have to pair it again."),
+            action=_("Forget"),
+            on_confirm=lambda: self._run(bt.forget(d.mac), _("{name} forgotten").format(name=d.name)),
         )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("forget", _("Forget"))
-        dialog.set_response_appearance("forget", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.set_close_response("cancel")
-        dialog.connect(
-            "response",
-            lambda _d, r: r == "forget" and self._run(bt.forget(d.mac), _("{name} forgotten").format(name=d.name)),
-        )
-        dialog.present(self.win)
 
     def _scan(self) -> None:
         self.scanning = True

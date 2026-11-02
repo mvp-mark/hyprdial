@@ -6,11 +6,11 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, GLib, Gtk  # noqa: E402
+from gi.repository import Adw, Gtk  # noqa: E402
 
 from .. import core, power
 from ..i18n import _
-from ..ui import bg, combo_row, switch_row
+from ..ui import Debouncer, bg, combo_row, missing_row, switch_row
 from .bar import IDLE_TIMES, STAY_AWAKE_FLAG, command, idle_label, read_shell, write_idle
 
 PROFILE_LABELS = {
@@ -32,7 +32,7 @@ class PowerPage(Adw.PreferencesPage):
         super().__init__()
         self.win = win
         self.store = win.store
-        self._temp_timer = 0
+        self._warmth = Debouncer(300, self._apply_warmth)
         self._syncing = False
 
         self.profile_group = Adw.PreferencesGroup(title=_("Power profile"))
@@ -40,7 +40,7 @@ class PowerPage(Adw.PreferencesPage):
         if core.have("powerprofilesctl"):
             bg(power.profiles, self._populate_profiles)
         else:
-            self.profile_group.add(Adw.ActionRow(title=_("power-profiles-daemon is not installed")))
+            self.profile_group.add(missing_row("power-profiles-daemon"))
 
         self.night_group = Adw.PreferencesGroup(
             title=_("Night light"), description=_("Warmer screen colors to reduce blue light.")
@@ -49,7 +49,7 @@ class PowerPage(Adw.PreferencesPage):
         if core.have("hyprsunset"):
             bg(lambda: (power.temperature(), self._read_schedule()), self._populate_night)
         else:
-            self.night_group.add(Adw.ActionRow(title=_("hyprsunset is not installed")))
+            self.night_group.add(missing_row("hyprsunset"))
 
         button = Adw.PreferencesGroup(title=_("Power button"))
         current = self.store.extras.get("power_button", "menu")
@@ -146,26 +146,20 @@ class PowerPage(Adw.PreferencesPage):
         )
 
     def _on_warmth(self, scale: Gtk.Scale) -> None:
-        if self._temp_timer:
-            GLib.source_remove(self._temp_timer)
+        self._warmth(int(scale.get_value()))
 
-        def apply() -> bool:
-            self._temp_timer = 0
-            temp = int(scale.get_value())
-            on = self.night_switch.get_active()
-            scheduled = self.schedule.get_enable_expansion()
+    def _apply_warmth(self, temp: int) -> None:
+        on = self.night_switch.get_active()
+        scheduled = self.schedule.get_enable_expansion()
 
-            def work() -> None:
-                self.store.set_extra("nightlight_temp", temp, reload=False)
-                if on:
-                    power.set_temperature(temp)
-                if scheduled:
-                    self._write_schedule(temp)
+        def work() -> None:
+            self.store.set_extra("nightlight_temp", temp, reload=False)
+            if on:
+                power.set_temperature(temp)
+            if scheduled:
+                self._write_schedule(temp)
 
-            bg(work)
-            return False
-
-        self._temp_timer = GLib.timeout_add(300, apply)
+        bg(work)
 
     def _schedule_times(self) -> tuple[str, str] | None:
         start, end = power.valid_time(self.start.get_text()), power.valid_time(self.end.get_text())

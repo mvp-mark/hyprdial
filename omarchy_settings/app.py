@@ -25,7 +25,7 @@ from .pages.shortcuts import ShortcutsPage
 from .pages.sound import SoundPage
 from .pages.system import SystemPage
 from .pages.themes import ThemesPage
-from .ui import bg
+from .ui import bg, confirm
 
 APP_ID = "org.omarchy.Settings"
 
@@ -105,20 +105,17 @@ class Window(Adw.ApplicationWindow):
             self.stack.set_visible_child_name(visible)
 
     def confirm_restore_defaults(self) -> None:
-        dialog = Adw.AlertDialog(
+        confirm(
+            self,
             heading=_("Restore app defaults?"),
             body=_(
                 "Removes every Hyprland, display, shortcut, power button and startup command setting made in "
                 "this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. "
                 "A backup of the generated file is kept, and you can undo right after."
             ),
+            action=_("Restore"),
+            on_confirm=lambda: self._restore_defaults(),
         )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("restore", _("Restore"))
-        dialog.set_response_appearance("restore", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.set_close_response("cancel")
-        dialog.connect("response", lambda _d, r: r == "restore" and self._restore_defaults())
-        dialog.present(self)
 
     def _restore_defaults(self) -> None:
         def done(result) -> None:

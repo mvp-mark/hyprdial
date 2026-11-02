@@ -13,7 +13,7 @@ from gi.repository import Adw, GLib, Gtk, Pango, PangoCairo  # noqa: E402
 
 from .. import core, layout
 from ..i18n import _, ngettext
-from ..ui import bg, button_row, combo_row, spin_row, switch_row, to_float
+from ..ui import Debouncer, bg, button_row, combo_row, spin_row, switch_row, to_float
 
 SCALES = [1, 1.25, 1.333333, 1.5, 1.6, 1.666667, 2, 2.5, 3]
 TRANSFORMS = [
@@ -203,8 +203,10 @@ class MonitorsPage(Adw.PreferencesPage):
         self.groups: list[Adw.PreferencesGroup] = []
         self.monitors: list[dict] = []
         self._dialog = None
-        self._bright_timers: dict[str, int] = {}
-        self._text_timer = 0
+        self._brightness: dict[str, Debouncer] = {}
+        self._text_size = Debouncer(
+            600, lambda size: bg(lambda: core.run(["omarchy-display-text-size", str(size)], timeout=30))
+        )
         self.layout: MonitorLayout | None = None
         self.pos_rows: dict[str, tuple[Adw.SpinRow, Adw.SpinRow]] = {}
         self._syncing = False
@@ -562,19 +564,16 @@ class MonitorsPage(Adw.PreferencesPage):
         group.add(self._restore_row(name))
 
     def _on_brightness(self, name: str, value: float) -> None:
-        if self._bright_timers.get(name):
-            GLib.source_remove(self._bright_timers[name])
-
-        def apply() -> bool:
-            self._bright_timers[name] = 0
-            bg(
-                lambda: core.run(
-                    ["omarchy-brightness-display", "--no-osd", "--monitor", name, f"{int(value)}%"], timeout=15
-                )
+        if name not in self._brightness:
+            self._brightness[name] = Debouncer(
+                300,
+                lambda v: bg(
+                    lambda: core.run(
+                        ["omarchy-brightness-display", "--no-osd", "--monitor", name, f"{int(v)}%"], timeout=15
+                    )
+                ),
             )
-            return False
-
-        self._bright_timers[name] = GLib.timeout_add(300, apply)
+        self._brightness[name](value)
 
     def _add_text_size(self, group: Adw.PreferencesGroup, size) -> None:
         if not isinstance(size, int):
@@ -586,12 +585,4 @@ class MonitorsPage(Adw.PreferencesPage):
         )
 
     def _set_text_size(self, size: int) -> None:
-        if self._text_timer:
-            GLib.source_remove(self._text_timer)
-
-        def apply() -> bool:
-            self._text_timer = 0
-            bg(lambda: core.run(["omarchy-display-text-size", str(size)], timeout=30))
-            return False
-
-        self._text_timer = GLib.timeout_add(600, apply)
+        self._text_size(size)

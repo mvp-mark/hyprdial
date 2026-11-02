@@ -11,6 +11,9 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
+from . import core
+from .i18n import _
+
 
 def bg(fn: Callable, done: Callable | None = None) -> None:
     """Runs fn in a thread and hands the result (or the exception) to done on the UI thread."""
@@ -86,3 +89,83 @@ def button_row(title, subtitle, label, on_click, style: str | None = None) -> Ad
     row.add_suffix(btn)
     row.set_activatable_widget(btn)
     return row
+
+
+class Debouncer:
+    """Calls fn with the latest arguments once they stop coming for delay_ms (sliders, typing).
+
+    With restart=False it is a throttle instead: the first call schedules fn and later ones within delay_ms are
+    folded into it, so a steady stream of calls still runs fn every delay_ms."""
+
+    def __init__(self, delay_ms: int, fn: Callable, restart: bool = True):
+        self.delay_ms, self.fn, self.restart = delay_ms, fn, restart
+        self._source = 0
+        self._args: tuple = ()
+
+    @property
+    def pending(self) -> bool:
+        return bool(self._source)
+
+    def __call__(self, *args) -> None:
+        self._args = args
+        if self._source:
+            if not self.restart:
+                return
+            GLib.source_remove(self._source)
+        self._source = GLib.timeout_add(self.delay_ms, self._fire)
+
+    def cancel(self) -> None:
+        if self._source:
+            GLib.source_remove(self._source)
+            self._source = 0
+
+    def _fire(self) -> bool:
+        self._source = 0
+        self.fn(*self._args)
+        return False
+
+
+def refresh_while_mapped(widget: Gtk.Widget, seconds: int, tick: Callable[[], None]) -> None:
+    """Calls tick every few seconds, only while the widget is on screen."""
+    state = {"source": 0}
+
+    def start(_w) -> None:
+        if not state["source"]:
+            state["source"] = GLib.timeout_add_seconds(seconds, lambda: tick() or True)
+
+    def stop(_w) -> None:
+        if state["source"]:
+            GLib.source_remove(state["source"])
+            state["source"] = 0
+
+    widget.connect("map", start)
+    widget.connect("unmap", stop)
+
+
+def confirm(
+    parent: Gtk.Widget, heading: str, body: str, action: str, on_confirm: Callable[[], None], destructive: bool = True
+) -> None:
+    """Asks before doing something hard to undo; on_confirm runs only if the user picks the action."""
+    dialog = Adw.AlertDialog(heading=heading, body=body)
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("confirm", action)
+    dialog.set_response_appearance(
+        "confirm", Adw.ResponseAppearance.DESTRUCTIVE if destructive else Adw.ResponseAppearance.SUGGESTED
+    )
+    dialog.set_default_response("cancel")
+    dialog.set_close_response("cancel")
+    dialog.connect("response", lambda _d, response: response == "confirm" and on_confirm())
+    dialog.present(parent)
+
+
+def missing_row(program: str, hint: str = "") -> Adw.ActionRow:
+    """Shown in place of controls whose program isn't installed."""
+    return Adw.ActionRow(title=_("{name} is not installed").format(name=program), subtitle=hint, use_markup=False)
+
+
+def launch_tui(win, cmd: str) -> None:
+    """Opens one of Omarchy's terminal apps, or says how to install it."""
+    if not core.have(cmd):
+        win.toast(_("{cmd} is not installed; install it from ☰ → Dependencies").format(cmd=cmd))
+        return
+    core.launch_tui(cmd)

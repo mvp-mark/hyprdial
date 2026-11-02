@@ -20,7 +20,7 @@ from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
 from .. import core, deps, waybar
 from ..i18n import _, ngettext
-from ..ui import bg, button_row, combo_row, switch_row
+from ..ui import bg, button_row, combo_row, confirm, switch_row
 
 OMARCHY_PATH = os.environ.get("OMARCHY_PATH", "/usr/share/omarchy")
 SHELL_CONFIG = core.CONF_DIR / "omarchy" / "shell.json"
@@ -291,18 +291,13 @@ class BarPage(Adw.PreferencesPage):
         bg(lambda: command(["omarchy-restart-shell"]), done)
 
     def _confirm_defaults(self) -> None:
-        dialog = Adw.AlertDialog(
+        confirm(
+            self.win,
             heading=_("Restore the default bar?"),
             body=_("The position, transparency and widget list return to Omarchy's default."),
+            action=_("Restore"),
+            on_confirm=lambda: self._bar(["defaults"], _("Bar restored"), rebuild=True),
         )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("restore", _("Restore"))
-        dialog.set_response_appearance("restore", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.set_close_response("cancel")
-        dialog.connect(
-            "response", lambda _d, r: r == "restore" and self._bar(["defaults"], _("Bar restored"), rebuild=True)
-        )
-        dialog.present(self.win)
 
     # -- widgets
     def _on_catalog(self, catalog) -> None:
