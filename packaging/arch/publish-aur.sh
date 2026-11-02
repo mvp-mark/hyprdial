@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Publishes packaging/arch/PKGBUILD to the AUR as "omarchy-settings".
+# Publishes packaging/arch/PKGBUILD to the AUR as "omarchy-settings-gui"
+# (plain omarchy-settings is a package in Omarchy's own repository).
 # Needs an AUR account with your SSH public key (https://aur.archlinux.org/account/), see packaging/arch/README.md.
 #   packaging/arch/publish-aur.sh            first publication and every update
 set -euo pipefail
@@ -18,7 +19,7 @@ mkdir "$build" && cp PKGBUILD "$build/"
 (cd "$build" && makepkg --nodeps --clean --cleanbuild -f >/dev/null)
 
 echo "Cloning the AUR repository (empty the first time)…"
-git -c init.defaultBranch=master clone ssh://aur@aur.archlinux.org/omarchy-settings.git "$WORK/aur"
+git -c init.defaultBranch=master clone ssh://aur@aur.archlinux.org/omarchy-settings-gui.git "$WORK/aur"
 cp PKGBUILD .SRCINFO "$WORK/aur/"
 cd "$WORK/aur"
 git add PKGBUILD .SRCINFO
@@ -28,4 +29,4 @@ if git diff --cached --quiet; then
 fi
 git commit -m "Update to $version"
 git push origin master
-echo "Published omarchy-settings $version: https://aur.archlinux.org/packages/omarchy-settings"
+echo "Published omarchy-settings-gui $version: https://aur.archlinux.org/packages/omarchy-settings-gui"

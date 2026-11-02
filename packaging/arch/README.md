@@ -3,6 +3,10 @@
 `PKGBUILD` builds the package from a release tag; `.SRCINFO` is its metadata in the format the AUR reads, made with
 `makepkg --printsrcinfo` (`tests/test_pkgbuild.py` fails when the two disagree).
 
+The package is called **`omarchy-settings-gui`**: `omarchy-settings` is taken by a package in Omarchy's own
+repository (its defaults, fonts and helpers, required by `omarchy`), and a package with that name would replace it.
+The command stays `omarchy-settings`.
+
 ```bash
 makepkg -si    # build and install from this folder
 ```
@@ -23,7 +27,7 @@ packaging/arch/publish-aur.sh
 ```
 
 It regenerates `.SRCINFO`, builds the package from the published tarball to make sure it works, clones the AUR
-repository (empty the first time, which creates the `omarchy-settings` package) and pushes `PKGBUILD` and
+repository (empty the first time, which creates the `omarchy-settings-gui` package) and pushes `PKGBUILD` and
 `.SRCINFO`. The AUR repository's branch is `master`.
 
 ## A new release

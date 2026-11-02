@@ -139,11 +139,12 @@ To try it without installing: `python3 -m omarchy_settings` from the project fol
 ### As a pacman package
 
 Each [release](https://github.com/mvp-mark/omarchy-settings/releases) carries a ready package (`arch=any`, so it
-fits every machine). It installs system-wide, with the app in `/usr/share/omarchy-settings`,
-`/usr/bin/omarchy-settings` and the launcher entry:
+fits every machine). The package is called `omarchy-settings-gui`, since Omarchy itself has a package named
+`omarchy-settings`. It installs system-wide, with the app in `/usr/share/omarchy-settings-gui`, the
+`omarchy-settings` command and the launcher entry:
 
 ```bash
-sudo pacman -U https://github.com/mvp-mark/omarchy-settings/releases/download/v0.5.2/omarchy-settings-0.5.2-1-any.pkg.tar.zst
+sudo pacman -U https://github.com/mvp-mark/omarchy-settings/releases/download/v0.5.3/omarchy-settings-gui-0.5.3-1-any.pkg.tar.zst
 ```
 
 Or build it yourself from `packaging/arch/PKGBUILD`, which takes the release tag's source and compiles the
@@ -153,6 +154,10 @@ translations:
 git clone https://github.com/mvp-mark/omarchy-settings
 cd omarchy-settings/packaging/arch && makepkg -si
 ```
+
+> **Packages from releases 0.5.0 to 0.5.2 were named `omarchy-settings` and replace Omarchy's own package of that
+> name** (Omarchy's defaults, fonts and helpers). They have been taken down; if you installed one, put Omarchy's back
+> with `sudo pacman -S omarchy-settings` and install `omarchy-settings-gui` instead.
 
 Publishing it on the AUR is described in [packaging/arch/README.md](packaging/arch/README.md).
 

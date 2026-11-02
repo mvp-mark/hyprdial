@@ -37,3 +37,8 @@ def test_srcinfo_matches_the_pkgbuild():
         assert fields[name] == [re.search(rf"^{name}=(\S+)", PKGBUILD, re.M).group(1)]
     assert fields["sha256sums"] == array("sha256sums")
     assert sorted(fields["depends"]) == sorted(array("depends"))
+
+
+def test_name_differs_from_omarchys_own_package():
+    # Omarchy's repository ships a package called omarchy-settings, which the omarchy package depends on
+    assert re.search(r"^pkgname=(\S+)", PKGBUILD, re.M).group(1) == "omarchy-settings-gui"
