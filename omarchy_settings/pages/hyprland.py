@@ -216,14 +216,6 @@ class HyprOptionsPage(Adw.PreferencesPage):
         shadow.add_row(self._spin("decoration:shadow:range", _("Size"), _("In pixels"), 1, 50, 1, 4))
         group.add(shadow)
 
-        group.add(
-            self._switch(
-                "animations:enabled",
-                _("Animations"),
-                _("Transitions when opening, closing and switching workspaces"),
-                True,
-            )
-        )
         self.add(group)
 
     def _keyboard_group(self) -> None:

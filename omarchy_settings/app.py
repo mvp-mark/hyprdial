@@ -13,6 +13,7 @@ from gi.repository import Adw, Gio, Gtk  # noqa: E402
 from . import __version__
 from .core import HyprStore
 from .i18n import _
+from .pages.accessibility import AccessibilityPage
 from .pages.apps import AppsPage
 from .pages.bar import BarPage
 from .pages.connectivity import ConnectivityPage
@@ -43,6 +44,13 @@ PAGES = [
     ("hardware", "connectivity", lambda: _("Connectivity"), "network-wireless-symbolic", ConnectivityPage),
     ("system", "apps", lambda: _("Apps"), "view-app-grid-symbolic", AppsPage),
     ("system", "shortcuts", lambda: _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic", ShortcutsPage),
+    (
+        "system",
+        "accessibility",
+        lambda: _("Accessibility"),
+        "preferences-desktop-accessibility-symbolic",
+        AccessibilityPage,
+    ),
     ("system", "system", lambda: _("System"), "computer-symbolic", SystemPage),
 ]
 

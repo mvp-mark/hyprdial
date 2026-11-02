@@ -194,14 +194,11 @@ class MonitorsPage(Adw.PreferencesPage):
         self.monitors: list[dict] = []
         self._dialog = None
         self._brightness: dict[str, Debouncer] = {}
-        self._text_size = Debouncer(600, lambda size: bg(lambda: displays.set_text_size(size)))
         self.layout: MonitorLayout | None = None
         self.pos_rows: dict[str, tuple[Adw.SpinRow, Adw.SpinRow]] = {}
         self._syncing = False
 
         display = Adw.PreferencesGroup(title=_("Display"))
-        if core.have("omarchy-display-text-size"):
-            bg(displays.text_size, lambda size: self._add_text_size(display, size))
         display.add(button_row(_("Reload"), _("Reads the connected displays again"), _("Reload"), self.refresh))
         self.add(display)
 
@@ -558,15 +555,3 @@ class MonitorsPage(Adw.PreferencesPage):
                 lambda v: bg(lambda: displays.set_brightness(name, int(v))),
             )
         self._brightness[name](value)
-
-    def _add_text_size(self, group: Adw.PreferencesGroup, size) -> None:
-        if not isinstance(size, int):
-            return
-        group.add(
-            spin_row(
-                _("Text size"), _("Shell, GTK apps and terminals (default 12)"), 9, 20, 1, size, self._set_text_size
-            )
-        )
-
-    def _set_text_size(self, size: int) -> None:
-        self._text_size(size)

@@ -12,15 +12,15 @@ and the Omarchy shell. Older installs that use `hyprland.conf` and Waybar are no
 ## Pages
 
 The pages sit in a sidebar grouped like Omarchy's menu: **Style** (themes, appearance, bar and fonts), **Hardware**
-(displays, sound, power, input, connectivity) and **System** (apps, shortcuts, system). On a narrow window the sidebar
+(displays, sound, power, input, connectivity) and **System** (apps, shortcuts, accessibility, system). On a narrow window the sidebar
 and the page take turns, with a back button. Buttons, switches and selections use the current Omarchy theme's
 accent color and follow it when the theme changes.
 
 | Page | What it does | How it applies changes |
 |---|---|---|
 | Themes | Theme gallery with previews and color swatches, search and dark/light filter, current theme highlighted; all wallpapers of the current theme (yours included) with the one in use marked | `omarchy-theme-set`, `omarchy-theme-bg-set`, `omarchy-theme-bg-next` |
-| Appearance | Quick styles (Compact, Omarchy, Comfortable, Elegant); window layout, gaps, border, corners, opacity, dimming, blur, shadow, animations; window and workspace behavior. A ↶ button per option returns it to Omarchy's default | `hyprctl eval` live + generated file |
-| Displays | Drag-and-drop arrangement (snaps to edges); per display: enable/disable, resolution and refresh rate, scale, rotation, position, VRR, mirroring, 10-bit color, brightness (DDC/CI); text size | `hyprctl eval` live + generated file (asks for confirmation and reverts after 15 s), `omarchy-brightness-display`, `omarchy-display-text-size` |
+| Appearance | Quick styles (Compact, Omarchy, Comfortable, Elegant); window layout, gaps, border, corners, opacity, dimming, blur, shadow; window and workspace behavior. A ↶ button per option returns it to Omarchy's default | `hyprctl eval` live + generated file |
+| Displays | Drag-and-drop arrangement (snaps to edges); per display: enable/disable, resolution and refresh rate, scale, rotation, position, VRR, mirroring, 10-bit color, brightness (DDC/CI) | `hyprctl eval` live + generated file (asks for confirmation and reverts after 15 s), `omarchy-brightness-display` |
 | Sound | Output and input device (the default one), their volume and mute, volume above 100% (optional), a test sound; volume and mute of each app playing and of each app using the microphone; updates live; full mixer (wiremix) for profiles and moving an app to another device | `omarchy-audio-output-set-default` and `omarchy-audio-input-set-default` (they also move the apps playing or recording), `pactl` (PipeWire), `pactl subscribe` for live updates, `pw-play` |
 | Power | Power profile (power saver, balanced, performance; only those the machine offers); night light on/off, warmth and a daily schedule; what the power button does (system menu, lock, suspend, shut down, nothing); screensaver, lock and "stay awake" | `omarchy-powerprofiles-set` (remembered like the bar does), `hyprctl hyprsunset`, `~/.config/hypr/hyprsunset.conf` profiles (backup at `hyprsunset.conf.omarchy-settings.bak`), `XF86PowerOff` shortcut in the generated file, `idle` in `~/.config/omarchy/shell.json`, `omarchy-toggle-idle` |
 | Input | Touchpad and touchscreen on/off (when the computer has them); keyboard layout and key repeat; mouse speed, acceleration, scrolling, focus and pointer; touchpad gestures and scrolling (with a touchpad) | `omarchy-toggle-input-device`, `hyprctl eval` live + generated file |
@@ -28,6 +28,7 @@ accent color and follow it when the theme changes.
 | Apps | Default apps: browser, terminal and editor, file manager, PDF documents and images (installed ones only); web apps: list, add (the site's own icon by default) and remove; startup apps: XDG autostart entries on/off, your own commands, the commands in `autostart.lua` (read only) | `omarchy default`, `xdg-mime` (`~/.config/mimeapps.list`), `omarchy-webapp-install`, `omarchy-webapp-remove`, `Hidden=true` overrides in `~/.config/autostart`, `o.launch_on_start` in the generated file |
 | Bar and fonts | Omarchy shell bar: show/hide, position, transparency, clock format; widgets per section (reorder, move between sections, remove, add); optional Waybar (see below); system font | `omarchy-bar`, `omarchy-plugin-enable/disable`, `omarchy-toggle-bar`, `omarchy-font-set` |
 | Connectivity | Wired (Ethernet): status, link speed, address, gateway and DNS, plain-language diagnosis (no cable, 10 Mb/s link, no DHCP address), connect/disconnect, IPv4 automatic (DHCP) or manual, custom DNS, auto-connect; Wi-Fi: radio on/off, available networks with signal and security, connect (password asked in a dialog, hidden networks too), saved networks with IPv4/DNS settings and forget, impala for advanced cases; Bluetooth: on/off, paired devices with battery level, connect/disconnect, forget, search and pair (pairing codes shown or confirmed in a dialog), bluetui for advanced cases | `nmcli` (NetworkManager), libnm for saving Wi-Fi passwords (never on a command line), `/sys/class/net`, `omarchy-bluetooth-power` and `omarchy-bluetooth-device` (results read back with `bluetoothctl`), `bluetoothctl` for pairing through an interactive session with a KeyboardDisplay agent |
+| Accessibility | Text size; pointer size (GTK apps, Hyprland and apps started later); animations on/off | `omarchy-display-text-size`, `gsettings` and `hyprctl setcursor` live + `XCURSOR_SIZE`/`HYPRCURSOR_SIZE` in the generated file, `hyprctl eval` |
 | System | Time zone (searchable) and automatic time (NTP); system language (among those generated); notifications: do not disturb and recent notifications; printers (opens the CUPS web interface); about this computer (Omarchy version, kernel, processor, memory), whether an Omarchy update is available, "Update Omarchy", "Create a snapshot now" (restored from the boot menu) | `timedatectl`, `localectl` (both ask for the password through polkit), `omarchy-shell notifications`, CUPS at `localhost:631`, `omarchy-update-available`, `omarchy-update` and `omarchy-snapshot create` in a floating terminal |
 
 Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
@@ -43,7 +44,7 @@ matter, and choosing a result opens its page, expands what is around it and high
 
 ## How settings are stored
 
-Nothing managed by Omarchy is modified. Hyprland, display, shortcut, power button and startup command settings go to
+Nothing managed by Omarchy is modified. Hyprland, display, shortcut, power button, startup command and pointer size settings go to
 `~/.config/hypr/omarchy-settings.lua`, and **a single line** `require("hypr.omarchy-settings")` is inserted into
 `~/.config/hypr/hyprland.lua` right before Omarchy's toggles (backup at `hyprland.lua.omarchy-settings.bak`), so
 these values take priority over `monitors.lua`, `input.lua` and `looknfeel.lua`. Each page restores only its own
@@ -135,7 +136,7 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `shell.py`, `displays.py`, `input.py`, `network.py`, `wifi.py`, `bluetooth.py`, `apps.py`, `webapps.py`, `autostart.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `shell.py`, `displays.py`, `accessibility.py`, `input.py`, `network.py`, `wifi.py`, `bluetooth.py`, `apps.py`, `webapps.py`, `autostart.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -160,6 +161,7 @@ omarchy_settings/
   bluetooth.py       Bluetooth through bluetoothctl: devices, scan, commands, pairing output parser (no GTK)
   sound.py           output/input devices and app streams through pactl (no GTK)
   shell.py           Omarchy shell: bar, widgets, idle, font (no GTK)
+  accessibility.py   pointer size (no GTK)
   displays.py        display brightness and text size (no GTK)
   power.py           power profile, night light and its schedule, power button (no GTK)
   apps.py            default apps: Omarchy's and by file type (no GTK)
