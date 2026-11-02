@@ -17,7 +17,7 @@ from .pages.apps import AppsPage
 from .pages.bar import BarPage
 from .pages.connectivity import ConnectivityPage
 from .pages.dependencies import DependenciesDialog
-from .pages.hyprland import HyprlandPage
+from .pages.hyprland import AppearancePage, InputPage
 from .pages.monitors import MonitorsPage
 from .pages.power import PowerPage
 from .pages.search import SearchDialog
@@ -34,11 +34,12 @@ APP_ID = "org.omarchy.Settings"
 SECTIONS = {"style": lambda: _("Style"), "hardware": lambda: _("Hardware"), "system": lambda: _("System")}
 PAGES = [
     ("style", "themes", lambda: _("Themes"), "preferences-desktop-theme-symbolic", ThemesPage),
-    ("style", "hyprland", lambda: "Hyprland", "preferences-system-symbolic", HyprlandPage),
+    ("style", "appearance", lambda: _("Appearance"), "preferences-desktop-appearance-symbolic", AppearancePage),
     ("style", "bar", lambda: _("Bar and fonts"), "preferences-desktop-font-symbolic", BarPage),
     ("hardware", "monitors", lambda: _("Displays"), "preferences-desktop-display-symbolic", MonitorsPage),
     ("hardware", "sound", lambda: _("Sound"), "audio-volume-high-symbolic", SoundPage),
     ("hardware", "power", lambda: _("Power"), "system-shutdown-symbolic", PowerPage),
+    ("hardware", "input", lambda: _("Input"), "input-keyboard-symbolic", InputPage),
     ("hardware", "connectivity", lambda: _("Connectivity"), "network-wireless-symbolic", ConnectivityPage),
     ("system", "apps", lambda: _("Apps"), "view-app-grid-symbolic", AppsPage),
     ("system", "shortcuts", lambda: _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic", ShortcutsPage),
@@ -84,7 +85,8 @@ class Window(Adw.ApplicationWindow):
         self.split = Adw.NavigationSplitView(
             sidebar=Adw.NavigationPage(child=sidebar_view, title=_("Omarchy Settings")),
             content=self.content,
-            min_sidebar_width=200,
+            min_sidebar_width=220,
+            sidebar_width_fraction=0.28,
             max_sidebar_width=260,
         )
         # narrow windows show one pane at a time, with a back button

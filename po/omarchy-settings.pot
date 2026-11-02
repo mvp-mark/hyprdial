@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:25-0400\n"
+"POT-Creation-Date: 2026-11-02 03:26-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,12 +26,16 @@ msgstr ""
 msgid "Hardware"
 msgstr ""
 
-#: omarchy_settings/app.py:34 omarchy_settings/app.py:45
+#: omarchy_settings/app.py:34 omarchy_settings/app.py:46
 msgid "System"
 msgstr ""
 
 #: omarchy_settings/app.py:36
 msgid "Themes"
+msgstr ""
+
+#: omarchy_settings/app.py:37
+msgid "Appearance"
 msgstr ""
 
 #: omarchy_settings/app.py:38
@@ -50,43 +54,47 @@ msgstr ""
 msgid "Power"
 msgstr ""
 
-#: omarchy_settings/app.py:42
-msgid "Connectivity"
+#: omarchy_settings/app.py:42 omarchy_settings/pages/sound.py:202
+msgid "Input"
 msgstr ""
 
 #: omarchy_settings/app.py:43
-msgid "Apps"
+msgid "Connectivity"
 msgstr ""
 
 #: omarchy_settings/app.py:44
+msgid "Apps"
+msgstr ""
+
+#: omarchy_settings/app.py:45
 msgid "Shortcuts"
 msgstr ""
 
-#: omarchy_settings/app.py:51 omarchy_settings/app.py:85
+#: omarchy_settings/app.py:52 omarchy_settings/app.py:86
 msgid "Omarchy Settings"
 msgstr ""
 
-#: omarchy_settings/app.py:58
+#: omarchy_settings/app.py:59
 msgid "Dependencies…"
 msgstr ""
 
-#: omarchy_settings/app.py:59
+#: omarchy_settings/app.py:60
 msgid "Restore app defaults…"
 msgstr ""
 
-#: omarchy_settings/app.py:66
+#: omarchy_settings/app.py:67
 msgid "Search settings (Ctrl+F)"
 msgstr ""
 
-#: omarchy_settings/app.py:70
+#: omarchy_settings/app.py:71
 msgid "Main menu"
 msgstr ""
 
-#: omarchy_settings/app.py:174
+#: omarchy_settings/app.py:176
 msgid "Restore app defaults?"
 msgstr ""
 
-#: omarchy_settings/app.py:176
+#: omarchy_settings/app.py:178
 msgid ""
 "Removes every Hyprland, display, shortcut, power button and startup command "
 "setting made in this app, returning to Omarchy's own. The bar, theme, "
@@ -94,29 +102,29 @@ msgid ""
 "is kept, and you can undo right after."
 msgstr ""
 
-#: omarchy_settings/app.py:180 omarchy_settings/pages/bar.py:157
+#: omarchy_settings/app.py:182 omarchy_settings/pages/bar.py:157
 #: omarchy_settings/pages/bar.py:219 omarchy_settings/pages/bar.py:407
-#: omarchy_settings/pages/hyprland.py:128
+#: omarchy_settings/pages/hyprland.py:126
 #: omarchy_settings/pages/monitors.py:427
 #: omarchy_settings/pages/shortcuts.py:237
 #: omarchy_settings/pages/shortcuts.py:483
 msgid "Restore"
 msgstr ""
 
-#: omarchy_settings/app.py:187
+#: omarchy_settings/app.py:189
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr ""
 
-#: omarchy_settings/app.py:191
+#: omarchy_settings/app.py:193
 msgid "App defaults restored"
 msgstr ""
 
-#: omarchy_settings/app.py:191 omarchy_settings/pages/themes.py:257
+#: omarchy_settings/app.py:193 omarchy_settings/pages/themes.py:257
 msgid "Undo"
 msgstr ""
 
-#: omarchy_settings/app.py:196
+#: omarchy_settings/app.py:198
 msgid "Settings brought back"
 msgstr ""
 
@@ -473,7 +481,7 @@ msgstr ""
 msgid "States like screen recording and do not disturb"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:42 omarchy_settings/pages/hyprland.py:451
+#: omarchy_settings/pages/bar.py:42 omarchy_settings/pages/hyprland.py:446
 msgid "Keyboard layout"
 msgstr ""
 
@@ -1062,7 +1070,7 @@ msgid "Search again"
 msgstr ""
 
 #: omarchy_settings/pages/bluetooth.py:178
-#: omarchy_settings/pages/hyprland.py:251 omarchy_settings/pages/sound.py:217
+#: omarchy_settings/pages/hyprland.py:246 omarchy_settings/pages/sound.py:217
 #: omarchy_settings/pages/wifi.py:212
 msgid "Advanced"
 msgstr ""
@@ -1325,7 +1333,7 @@ msgid "Save and reconnect"
 msgstr ""
 
 #: omarchy_settings/pages/ethernet.py:117
-#: omarchy_settings/pages/hyprland.py:142 omarchy_settings/pages/system.py:100
+#: omarchy_settings/pages/hyprland.py:137 omarchy_settings/pages/system.py:100
 msgid "Apply"
 msgstr ""
 
@@ -1366,99 +1374,99 @@ msgstr ""
 msgid "Settings saved, but the connection didn't come up: {error}"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:36
+#: omarchy_settings/pages/hyprland.py:37
 msgid "Compact"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:37
+#: omarchy_settings/pages/hyprland.py:38
 msgid "No gaps or decorations: maximum usable area"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:47
+#: omarchy_settings/pages/hyprland.py:48
 msgid "Omarchy's default look"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:49
+#: omarchy_settings/pages/hyprland.py:50
 msgid "Comfortable"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:50
+#: omarchy_settings/pages/hyprland.py:51
 msgid "More room between windows and soft corners"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:61
+#: omarchy_settings/pages/hyprland.py:62
 msgid "Elegant"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:62
+#: omarchy_settings/pages/hyprland.py:63
 msgid "Rounded corners, shadow, blur and translucent inactive windows"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:79
+#: omarchy_settings/pages/hyprland.py:80
 msgid "Split (default)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:79
+#: omarchy_settings/pages/hyprland.py:80
 msgid "Each new window splits the space of the focused window"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:80
+#: omarchy_settings/pages/hyprland.py:81
 msgid "Main and stack"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:80
+#: omarchy_settings/pages/hyprland.py:81
 msgid "One large window on the left and the others stacked beside it"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:81
+#: omarchy_settings/pages/hyprland.py:82
 msgid "Side scrolling"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:81
+#: omarchy_settings/pages/hyprland.py:82
 msgid "Side-by-side columns that scroll horizontally, niri style"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:86
+#: omarchy_settings/pages/hyprland.py:87
 msgid "Portuguese (Brazil, ABNT2)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:87
+#: omarchy_settings/pages/hyprland.py:88
 msgid "English (US)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:88
+#: omarchy_settings/pages/hyprland.py:89
 msgid "English (US, international with dead keys)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:89
+#: omarchy_settings/pages/hyprland.py:90
 msgid "Portuguese (Portugal)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:90 omarchy_settings/pages/system.py:18
+#: omarchy_settings/pages/hyprland.py:91 omarchy_settings/pages/system.py:18
 msgid "Spanish"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:93
+#: omarchy_settings/pages/hyprland.py:94
 msgid "Device default"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:93
+#: omarchy_settings/pages/hyprland.py:94
 msgid "Adaptive"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:93
+#: omarchy_settings/pages/hyprland.py:94
 msgid "Off (good for games)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:103
+#: omarchy_settings/pages/hyprland.py:104
 msgid "On mouse hover"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:103
+#: omarchy_settings/pages/hyprland.py:104
 msgid "Only on click"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:103
+#: omarchy_settings/pages/hyprland.py:104
 msgid "On click, but the keyboard follows the mouse"
 msgstr ""
 
@@ -1466,328 +1474,346 @@ msgstr ""
 msgid "Restore defaults"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:127
-msgid "Returns every option on this page to Omarchy's default"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:138
+#: omarchy_settings/pages/hyprland.py:133
 msgid "Quick style"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:139
+#: omarchy_settings/pages/hyprland.py:134
 msgid "Applies several settings at once; you can fine-tune each one below."
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:146
+#: omarchy_settings/pages/hyprland.py:141
 msgid "Windows"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:150
+#: omarchy_settings/pages/hyprland.py:145
 msgid "Window layout"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:156
+#: omarchy_settings/pages/hyprland.py:151
 msgid "Gap between windows"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:156
-#: omarchy_settings/pages/hyprland.py:157
-#: omarchy_settings/pages/hyprland.py:221
+#: omarchy_settings/pages/hyprland.py:151
+#: omarchy_settings/pages/hyprland.py:152
+#: omarchy_settings/pages/hyprland.py:216
 msgid "In pixels"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:157
+#: omarchy_settings/pages/hyprland.py:152
 msgid "Margin to the screen edge"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:161
+#: omarchy_settings/pages/hyprland.py:156
 msgid "Border width"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:162
+#: omarchy_settings/pages/hyprland.py:157
 msgid "The color comes from the theme; 0 hides the border"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:171
+#: omarchy_settings/pages/hyprland.py:166
 msgid "Rounded corners"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:171
+#: omarchy_settings/pages/hyprland.py:166
 msgid "Radius in pixels; 0 keeps corners square"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:177
+#: omarchy_settings/pages/hyprland.py:172
 msgid "Resize from the border"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:178
+#: omarchy_settings/pages/hyprland.py:173
 msgid "Drag a window's border with the mouse to resize it"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:186
+#: omarchy_settings/pages/hyprland.py:181
 msgid "Transparency and effects"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:187
+#: omarchy_settings/pages/hyprland.py:182
 msgid "Effects use more GPU; on laptops they can drain the battery."
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:191
+#: omarchy_settings/pages/hyprland.py:186
 msgid "Active window opacity"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:191
+#: omarchy_settings/pages/hyprland.py:186
 msgid "100% is fully opaque"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:197
+#: omarchy_settings/pages/hyprland.py:192
 msgid "Other windows' opacity"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:198
+#: omarchy_settings/pages/hyprland.py:193
 msgid "Below 100% lets you see what is behind"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:206
+#: omarchy_settings/pages/hyprland.py:201
 msgid "Dim unfocused windows"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:206
+#: omarchy_settings/pages/hyprland.py:201
 msgid "Helps you see which window is active"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:209
+#: omarchy_settings/pages/hyprland.py:204
 msgid "Dimming strength"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:211
+#: omarchy_settings/pages/hyprland.py:206
 msgid "Blur"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:211
+#: omarchy_settings/pages/hyprland.py:206
 msgid "Blurs what shows behind translucent windows"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:212
+#: omarchy_settings/pages/hyprland.py:207
 msgid "Enable blur"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:213
+#: omarchy_settings/pages/hyprland.py:208
 msgid "Strength"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:213
+#: omarchy_settings/pages/hyprland.py:208
 msgid "Blur radius"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:215
+#: omarchy_settings/pages/hyprland.py:210
 msgid "Quality"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:215
+#: omarchy_settings/pages/hyprland.py:210
 msgid "More passes = smoother and heavier"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:219
+#: omarchy_settings/pages/hyprland.py:214
 msgid "Shadow"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:219
+#: omarchy_settings/pages/hyprland.py:214
 msgid "Soft shadow around windows"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:220
+#: omarchy_settings/pages/hyprland.py:215
 msgid "Enable shadow"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:221
+#: omarchy_settings/pages/hyprland.py:216
 msgid "Size"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:227
+#: omarchy_settings/pages/hyprland.py:222
 msgid "Animations"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:228
+#: omarchy_settings/pages/hyprland.py:223
 msgid "Transitions when opening, closing and switching workspaces"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:235
+#: omarchy_settings/pages/hyprland.py:230
 msgid "Keyboard"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:237
+#: omarchy_settings/pages/hyprland.py:232
 msgid "Num Lock on at startup"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:241
+#: omarchy_settings/pages/hyprland.py:236
 msgid "Delay before repeating"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:242
+#: omarchy_settings/pages/hyprland.py:237
 msgid "Milliseconds holding a key before it repeats"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:249
+#: omarchy_settings/pages/hyprland.py:244
 msgid "Repeat rate"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:249
+#: omarchy_settings/pages/hyprland.py:244
 msgid "Characters per second"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:251
+#: omarchy_settings/pages/hyprland.py:246
 msgid "Multiple layouts, variants and XKB options"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:252
+#: omarchy_settings/pages/hyprland.py:247
 msgid "Layouts (e.g. br,us)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:253
+#: omarchy_settings/pages/hyprland.py:248
 msgid "Variants (e.g. ,intl)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:254
+#: omarchy_settings/pages/hyprland.py:249
 msgid "Options (e.g. compose:caps,grp:alts_toggle)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:259
+#: omarchy_settings/pages/hyprland.py:254
 msgid "Mouse"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:262
+#: omarchy_settings/pages/hyprland.py:257
 msgid "Pointer speed"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:262
+#: omarchy_settings/pages/hyprland.py:257
 msgid "From -1 (slower) to 1 (faster)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:265
+#: omarchy_settings/pages/hyprland.py:260
 msgid "Acceleration"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:268
-#: omarchy_settings/pages/hyprland.py:281
+#: omarchy_settings/pages/hyprland.py:263
+#: omarchy_settings/pages/hyprland.py:289
 msgid "Natural scrolling"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:268
+#: omarchy_settings/pages/hyprland.py:263
 msgid "Content follows the wheel's movement"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:271
-#: omarchy_settings/pages/hyprland.py:299
+#: omarchy_settings/pages/hyprland.py:266
+#: omarchy_settings/pages/hyprland.py:307
 msgid "Scroll speed"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:271
-#: omarchy_settings/pages/hyprland.py:299
+#: omarchy_settings/pages/hyprland.py:266
+#: omarchy_settings/pages/hyprland.py:307
 msgid "1 is normal"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:273
+#: omarchy_settings/pages/hyprland.py:268
 msgid "Left-handed mode"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:273
+#: omarchy_settings/pages/hyprland.py:268
 msgid "Swaps the left and right buttons"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:275
+#: omarchy_settings/pages/hyprland.py:270
 msgid "Window focus"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:279
-msgid "Touchpad"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:280
-msgid "Tap to click"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:281
-msgid "Like on a phone"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:285
-msgid "Two-finger click = right button"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:286
-msgid "Instead of clicking the bottom-right corner"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:293
-msgid "Disable while typing"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:294
-msgid "Avoids moving the pointer by accident"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:304
-msgid "Behavior"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:308
-msgid "Focus windows that ask for attention"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:309
-msgid "E.g. opening a link brings the browser to the front"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:316
-msgid "Go back to the previous workspace"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:317
-msgid "Going to the workspace you are on returns to the previous one"
-msgstr ""
-
-#: omarchy_settings/pages/hyprland.py:321
+#: omarchy_settings/pages/hyprland.py:271
 msgid "Paste with the middle button"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:322
+#: omarchy_settings/pages/hyprland.py:272
 msgid "Hide the pointer while typing"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:326
+#: omarchy_settings/pages/hyprland.py:276
 msgid "Hide an idle pointer"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:327
+#: omarchy_settings/pages/hyprland.py:277
 msgid "Seconds without moving the mouse; 0 never hides"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:347
+#: omarchy_settings/pages/hyprland.py:287
+#: omarchy_settings/pages/hyprland.py:544
+msgid "Touchpad"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:288
+msgid "Tap to click"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:289
+msgid "Like on a phone"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:293
+msgid "Two-finger click = right button"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:294
+msgid "Instead of clicking the bottom-right corner"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:301
+msgid "Disable while typing"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:302
+msgid "Avoids moving the pointer by accident"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:312
+msgid "Window behavior"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:316
+msgid "Focus windows that ask for attention"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:317
+msgid "E.g. opening a link brings the browser to the front"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:324
+msgid "Go back to the previous workspace"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:325
+msgid "Going to the workspace you are on returns to the previous one"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:342
 #: omarchy_settings/pages/shortcuts.py:338
 msgid "Back to Omarchy's default"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:409
+#: omarchy_settings/pages/hyprland.py:404
 #, python-brace-format
 msgid "Custom ({value})"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:448
+#: omarchy_settings/pages/hyprland.py:443
 msgid "Custom (see Advanced)"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:451
+#: omarchy_settings/pages/hyprland.py:446
 msgid "Test by typing accented characters after switching"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:493
+#: omarchy_settings/pages/hyprland.py:488
 #, python-brace-format
 msgid "{name} style applied"
 msgstr ""
 
-#: omarchy_settings/pages/hyprland.py:526
-msgid "Hyprland options restored"
+#: omarchy_settings/pages/hyprland.py:520
+msgid "Options restored"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:527
+#: omarchy_settings/pages/hyprland.py:534
+msgid "Returns every option on this page to Omarchy's default"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:537
+msgid "Devices"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:544
+msgid "Touchscreen"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:547
+msgid "Turns the device on or off"
+msgstr ""
+
+#: omarchy_settings/pages/hyprland.py:554 omarchy_settings/pages/sound.py:134
+msgid "Could not change the device"
 msgstr ""
 
 #: omarchy_settings/pages/ipv4.py:30 omarchy_settings/pages/webapps.py:37
@@ -2416,10 +2442,6 @@ msgstr ""
 msgid "Unmute"
 msgstr ""
 
-#: omarchy_settings/pages/sound.py:134
-msgid "Could not change the device"
-msgstr ""
-
 #: omarchy_settings/pages/sound.py:180
 msgid "It comes with PipeWire's PulseAudio support (pipewire-pulse)"
 msgstr ""
@@ -2458,10 +2480,6 @@ msgstr ""
 
 #: omarchy_settings/pages/sound.py:198
 msgid "Louder, but the sound may distort"
-msgstr ""
-
-#: omarchy_settings/pages/sound.py:202
-msgid "Input"
 msgstr ""
 
 #: omarchy_settings/pages/sound.py:202

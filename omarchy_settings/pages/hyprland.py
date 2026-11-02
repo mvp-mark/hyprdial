@@ -1,4 +1,4 @@
-"""Hyprland settings page: style, windows, effects, keyboard, mouse, touchpad and behavior.
+"""Hyprland options pages: Appearance (styles, windows, effects, behavior) and Input (keyboard, mouse, touchpad).
 
 Each row shows the value in use (saved state > running Hyprland > default) and, when this app overrides the
 option, a ↶ button that returns just that option to Omarchy's default.
@@ -15,8 +15,9 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, GLib, Gtk  # noqa: E402
 
 from .. import core
+from .. import input as input_devices
 from ..i18n import _
-from ..ui import bg, button_row, to_bool, to_float
+from ..ui import bg, button_row, switch_row, to_bool, to_float
 
 # Quick styles: keys missing from a style go back to Omarchy's default.
 PRESET_KEYS = (
@@ -103,7 +104,12 @@ def keyboard_index(layout: str, variant: str) -> int:
 FOLLOW = [(1, _("On mouse hover")), (0, _("Only on click")), (2, _("On click, but the keyboard follows the mouse"))]
 
 
-class HyprlandPage(Adw.PreferencesPage):
+class HyprOptionsPage(Adw.PreferencesPage):
+    """A page of Hyprland options: each group is a method; reset returns only this page's options."""
+
+    GROUPS: tuple[str, ...] = ()
+    RESET_SUBTITLE = ""
+
     def __init__(self, win):
         super().__init__()
         self.win = win
@@ -112,23 +118,12 @@ class HyprlandPage(Adw.PreferencesPage):
         self.entries: dict[str, Adw.EntryRow] = {}
         self._updating = False
 
-        self._style_group()
-        self._windows_group()
-        self._effects_group()
-        self._keyboard_group()
-        self._mouse_group()
-        self._touchpad_group()
-        self._behavior_group()
+        for group in self.GROUPS:
+            getattr(self, f"_{group}_group")()
 
         reset = Adw.PreferencesGroup()
         reset.add(
-            button_row(
-                _("Restore defaults"),
-                _("Returns every option on this page to Omarchy's default"),
-                _("Restore"),
-                self._reset_all,
-                "destructive-action",
-            )
+            button_row(_("Restore defaults"), self.RESET_SUBTITLE, _("Restore"), self._reset_all, "destructive-action")
         )
         self.add(reset)
 
@@ -273,6 +268,19 @@ class HyprlandPage(Adw.PreferencesPage):
             self._switch("input:left_handed", _("Left-handed mode"), _("Swaps the left and right buttons"), False)
         )
         group.add(self._choice("input:follow_mouse", _("Window focus"), 1, FOLLOW))
+        group.add(self._switch("misc:middle_click_paste", _("Paste with the middle button"), "", True))
+        group.add(self._switch("cursor:hide_on_key_press", _("Hide the pointer while typing"), "", False))
+        group.add(
+            self._spin(
+                "cursor:inactive_timeout",
+                _("Hide an idle pointer"),
+                _("Seconds without moving the mouse; 0 never hides"),
+                0,
+                60,
+                1,
+                0,
+            )
+        )
         self.add(group)
 
     def _touchpad_group(self) -> None:
@@ -301,7 +309,7 @@ class HyprlandPage(Adw.PreferencesPage):
         self.add(group)
 
     def _behavior_group(self) -> None:
-        group = Adw.PreferencesGroup(title=_("Behavior"))
+        group = Adw.PreferencesGroup(title=_("Window behavior"))
         group.add(
             self._switch(
                 "misc:focus_on_activate",
@@ -316,19 +324,6 @@ class HyprlandPage(Adw.PreferencesPage):
                 _("Go back to the previous workspace"),
                 _("Going to the workspace you are on returns to the previous one"),
                 False,
-            )
-        )
-        group.add(self._switch("misc:middle_click_paste", _("Paste with the middle button"), "", True))
-        group.add(self._switch("cursor:hide_on_key_press", _("Hide the pointer while typing"), "", False))
-        group.add(
-            self._spin(
-                "cursor:inactive_timeout",
-                _("Hide an idle pointer"),
-                _("Seconds without moving the mouse; 0 never hides"),
-                0,
-                60,
-                1,
-                0,
             )
         )
         self.add(group)
@@ -521,6 +516,44 @@ class HyprlandPage(Adw.PreferencesPage):
         return False
 
     def _reset_all(self) -> None:
-        self.store.reset_options()
-        GLib.timeout_add(1200, self._sync_from_live, list(self.controls))
-        self.win.toast(_("Hyprland options restored"))
+        self._reset_keys(list(self.controls))
+        self.win.toast(_("Options restored"))
+
+
+class AppearancePage(HyprOptionsPage):
+    """Hyprland's look: quick styles, windows, effects and how windows behave."""
+
+    GROUPS = ("style", "windows", "effects", "behavior")
+    RESET_SUBTITLE = _("Returns every option on this page to Omarchy's default")
+
+
+class InputPage(HyprOptionsPage):
+    """Keyboard, mouse and touchpad; touchpad and touchscreen switches when the computer has them."""
+
+    GROUPS = ("devices", "keyboard", "mouse", "touchpad")
+    RESET_SUBTITLE = _("Returns every option on this page to Omarchy's default")
+
+    def _devices_group(self) -> None:
+        self.devices = Adw.PreferencesGroup(title=_("Devices"), visible=False)
+        self.add(self.devices)
+        bg(input_devices.devices, self._populate_devices)
+
+    def _populate_devices(self, found) -> None:
+        if isinstance(found, Exception) or not found:
+            return
+        titles = {"touchpad": _("Touchpad"), "touchscreen": _("Touchscreen")}
+        for kind, on in found.items():
+            self.devices.add(
+                switch_row(titles[kind], _("Turns the device on or off"), on, lambda v, k=kind: self._set_device(k, v))
+            )
+        self.devices.set_visible(True)
+
+    def _set_device(self, kind: str, on: bool) -> None:
+        bg(
+            lambda: input_devices.set_enabled(kind, on),
+            lambda ok: None if ok is True else self.win.toast(_("Could not change the device")),
+        )
+
+    def _touchpad_group(self) -> None:
+        if input_devices.device("touchpad"):
+            super()._touchpad_group()
