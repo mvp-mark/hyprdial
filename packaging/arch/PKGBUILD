@@ -3,19 +3,22 @@
 # required -> depends (gettext only compiles the translations -> makedepends), optional -> optdepends.
 pkgname=omarchy-settings
 pkgver=0.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Graphical settings app for Omarchy (GTK4 + libadwaita)"
 arch=('any')
 url="https://github.com/mvp-mark/omarchy-settings"
-license=('unknown')
+license=('MIT')
 depends=('python' 'python-gobject' 'gtk4' 'libadwaita')
 makedepends=('gettext')
 optdepends=('impala: Wi-Fi manager opened by the Connectivity page'
             'bluetui: Bluetooth manager opened by the Connectivity page'
             'wiremix: audio mixer opened by the Sound page'
             "waybar: alternative bar (Omarchy uses the Omarchy shell bar)")
-source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('4df940ad13971200e8091ff875497d795f4be556f23a31a5d5cd2a48b8113f6c')
+# v0.2.0 predates the LICENSE file, so it comes from the commit that added it
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz"
+        "LICENSE::https://raw.githubusercontent.com/mvp-mark/omarchy-settings/ec83f5e/LICENSE")
+sha256sums=('4df940ad13971200e8091ff875497d795f4be556f23a31a5d5cd2a48b8113f6c'
+            '2e1a3c944b9e48fca96ddc762b0917494a5360a4d052110a31524904406988f1')
 
 build() {
   cd "$pkgname-$pkgver"
@@ -42,5 +45,6 @@ package() {
   chmod 755 "$pkgdir/usr/bin/$pkgname"
 
   install -Dm644 data/org.omarchy.Settings.desktop "$pkgdir/usr/share/applications/org.omarchy.Settings.desktop"
+  install -Dm644 "$srcdir/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
   install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
 }
