@@ -60,3 +60,27 @@ def test_about_drops_empty_values(fake, monkeypatch):
     assert info["omarchy"] == "4.0.6-1" and info["kernel"]
     monkeypatch.setattr(system, "read_first", lambda path, prefix: "")
     assert "cpu" not in dict(system.about()) and "memory" not in dict(system.about())
+
+
+@pytest.mark.parametrize("code, stdout, expected", [
+    (0, "omarchy 4.0.6-1 -> 4.0.7-1\n", ("available", "omarchy 4.0.6-1 -> 4.0.7-1")),
+    (1, "Omarchy is up to date\n", ("current", "")),
+    (1, "", (None, "")),  # failed some other way
+])
+def test_update_status(monkeypatch, code, stdout, expected):
+    monkeypatch.setattr(core, "run", lambda args, timeout=10: subprocess.CompletedProcess(args, code, stdout, ""))
+    assert system.update_status() == expected
+
+
+def test_update_status_without_the_command(monkeypatch):
+    monkeypatch.setattr(core, "run", lambda args, timeout=10: None)
+    assert system.update_status() == (None, "")
+
+
+def test_snapshot_needs_snapper(fake):
+    _answers, _calls, have = fake
+    have.add("omarchy-snapshot")
+    assert not system.can_snapshot()
+    have.add("snapper")
+    assert system.can_snapshot()
+    assert system.SNAPSHOT_COMMAND[-2:] == ["omarchy-snapshot", "create"]

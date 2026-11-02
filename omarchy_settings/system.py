@@ -99,3 +99,22 @@ def about() -> list[tuple[str, str]]:
 
 PRINTERS_URL = "http://localhost:631/printers/"  # CUPS web interface
 UPDATE_COMMAND = ["omarchy-launch-floating-terminal-with-presentation", "omarchy-update"]
+SNAPSHOT_COMMAND = ["omarchy-launch-floating-terminal-with-presentation", "omarchy-snapshot", "create"]
+
+
+def update_status() -> tuple[str | None, str]:
+    """("available", "omarchy 4.0.6-1 -> 4.0.7-1"), ("current", "") or (None, "") when it can't tell.
+
+    omarchy-update-available lists the updates and exits 0, or says it's up to date and exits 1."""
+    r = core.run(["omarchy-update-available"], timeout=60)
+    if r is None:
+        return None, ""
+    if r.returncode == 0 and r.stdout.strip():
+        return "available", r.stdout.strip().splitlines()[0]
+    if r.returncode == 1 and "up to date" in r.stdout:
+        return "current", ""
+    return None, ""
+
+
+def can_snapshot() -> bool:
+    return core.have("snapper") and core.have("omarchy-snapshot")

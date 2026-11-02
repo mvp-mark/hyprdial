@@ -159,5 +159,26 @@ class SystemPage(Adw.PreferencesPage):
             row.add_suffix(Gtk.Label(label=value, selectable=True, css_classes=["dim-label"], xalign=1, wrap=True))
             self.about_group.add(row)
         if core.have(system.UPDATE_COMMAND[0]):
-            self.about_group.add(button_row(_("Update Omarchy"), _("Opens a terminal with the update"), _("Update"),
-                                            lambda: core.spawn(system.UPDATE_COMMAND), "suggested-action"))
+            row = button_row(_("Update Omarchy"), _("Checking for updates…"), _("Update"),
+                             lambda: core.spawn(system.UPDATE_COMMAND))
+            self.about_group.add(row)
+            if core.have("omarchy-update-available"):
+                bg(system.update_status, lambda res: self._show_update(row, res))
+            else:
+                row.set_subtitle(_("Opens a terminal with the update"))
+        if system.can_snapshot():
+            self.about_group.add(button_row(
+                _("Create a snapshot now"), _("A restore point of the system; asks for your password in a terminal"),
+                _("Create"), lambda: core.spawn(system.SNAPSHOT_COMMAND)))
+            self.about_group.add(Adw.ActionRow(title=_("Going back to a snapshot"),
+                                               subtitle=_("Choose it in the boot menu when the computer starts")))
+
+    def _show_update(self, row: Adw.ActionRow, res) -> None:
+        state, detail = (None, "") if isinstance(res, Exception) else res
+        if state == "available":
+            row.set_subtitle(_("Update available: {version}").format(version=detail))
+            row.get_activatable_widget().add_css_class("suggested-action")
+        elif state == "current":
+            row.set_subtitle(_("Omarchy is up to date"))
+        else:
+            row.set_subtitle(_("Opens a terminal with the update"))

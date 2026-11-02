@@ -2722,11 +2722,44 @@ msgid "Update Omarchy"
 msgstr ""
 
 #: omarchy_settings/pages/system.py:162
-msgid "Opens a terminal with the update"
+msgid "Checking for updates…"
 msgstr ""
 
 #: omarchy_settings/pages/system.py:162
 msgid "Update"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:168 omarchy_settings/pages/system.py:184
+msgid "Opens a terminal with the update"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:171
+msgid "Create a snapshot now"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:171
+msgid "A restore point of the system; asks for your password in a terminal"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:172
+msgid "Create"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:173
+msgid "Going back to a snapshot"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:174
+msgid "Choose it in the boot menu when the computer starts"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:179
+#, python-brace-format
+msgid "Update available: {version}"
+msgstr ""
+
+#: omarchy_settings/pages/system.py:182
+msgid "Omarchy is up to date"
 msgstr ""
 
 #: omarchy_settings/pages/themes.py:91
