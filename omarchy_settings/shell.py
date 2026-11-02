@@ -46,12 +46,9 @@ def bar_layout(config: dict) -> dict[str, list[dict]]:
     return result
 
 
-def write_idle(key: str, seconds: int) -> bool:
-    config = read_shell()
+def write_config(config: dict) -> bool:
+    """Writes shell.json atomically and asks the running shell to read it again."""
     config.setdefault("version", 1)
-    idle = config.get("idle") if isinstance(config.get("idle"), dict) else {}
-    idle[key] = seconds
-    config["idle"] = idle
     try:
         SHELL_CONFIG.parent.mkdir(parents=True, exist_ok=True)
         tmp = SHELL_CONFIG.with_suffix(".tmp")
@@ -61,6 +58,41 @@ def write_idle(key: str, seconds: int) -> bool:
         return False
     core.run(["omarchy-shell", "shell", "reloadConfig"])
     return True
+
+
+def write_idle(key: str, seconds: int) -> bool:
+    config = read_shell()
+    idle = config.get("idle") if isinstance(config.get("idle"), dict) else {}
+    idle[key] = seconds
+    config["idle"] = idle
+    return write_config(config)
+
+
+# ------------------------------------------------------------------ widgets that can repeat
+REPEATABLE = {"omarchy.spacer"}  # omarchy-bar keeps one of each widget; spacers make sense several times
+
+
+def remove_widget_at(section: str, index: int, widget_id: str) -> bool:
+    """Removes one widget from the layout, leaving the others with the same id (omarchy-plugin-disable removes them
+    all). Checks the id first, so a layout changed meanwhile is never cut in the wrong place."""
+    config = read_shell()
+    items = (config.get("bar") or {}).get("layout", {}).get(section)
+    if not isinstance(items, list) or not 0 <= index < len(items):
+        return False
+    item = items[index]
+    if (item.get("id") if isinstance(item, dict) else str(item)) != widget_id:
+        return False
+    del items[index]
+    return write_config(config)
+
+
+def add_widget_copy(widget_id: str, section: str) -> bool:
+    """Adds another copy of a repeatable widget at the end of a section."""
+    config = read_shell()
+    layout = config.setdefault("bar", {}).setdefault("layout", {})
+    items = layout.get(section) if isinstance(layout.get(section), list) else []
+    layout[section] = [*items, {"id": widget_id}]
+    return write_config(config)
 
 
 def widget_catalog() -> dict[str, tuple[str, str]]:

@@ -114,8 +114,8 @@ msgid ""
 "is kept, and you can undo right after."
 msgstr ""
 
-#: omarchy_settings/app.py:197 omarchy_settings/pages/bar.py:157
-#: omarchy_settings/pages/bar.py:219 omarchy_settings/pages/bar.py:407
+#: omarchy_settings/app.py:197 omarchy_settings/pages/bar.py:158
+#: omarchy_settings/pages/bar.py:220 omarchy_settings/pages/bar.py:427
 #: omarchy_settings/pages/hyprland.py:126
 #: omarchy_settings/pages/monitors.py:424
 #: omarchy_settings/pages/shortcuts.py:237
@@ -402,8 +402,8 @@ msgstr ""
 msgid "Changes there are yours; this app only reads them"
 msgstr ""
 
-#: omarchy_settings/pages/autostart.py:47 omarchy_settings/pages/bar.py:392
-#: omarchy_settings/pages/bar.py:399 omarchy_settings/pages/bluetooth.py:178
+#: omarchy_settings/pages/autostart.py:47 omarchy_settings/pages/bar.py:412
+#: omarchy_settings/pages/bar.py:419 omarchy_settings/pages/bluetooth.py:178
 #: omarchy_settings/pages/sound.py:220 omarchy_settings/pages/system.py:85
 #: omarchy_settings/pages/wifi.py:22 omarchy_settings/pages/wifi.py:212
 msgid "Open"
@@ -659,99 +659,99 @@ msgstr ""
 msgid "12-hour format — {example}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:88
+#: omarchy_settings/pages/bar.py:89
 msgid "Bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:91
+#: omarchy_settings/pages/bar.py:92
 msgid "Show the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:92
+#: omarchy_settings/pages/bar.py:93
 msgid "You can also toggle it with the Omarchy shortcut"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:101
+#: omarchy_settings/pages/bar.py:102
 msgid "Position"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:105
+#: omarchy_settings/pages/bar.py:106
 msgid "Bar position changed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:110
+#: omarchy_settings/pages/bar.py:111
 msgid "Transparent background"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:111
+#: omarchy_settings/pages/bar.py:112
 msgid "Shows the wallpaper behind the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:119
+#: omarchy_settings/pages/bar.py:120
 msgid "Restart the shell"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:119
+#: omarchy_settings/pages/bar.py:120
 msgid "Use it if the bar freezes or disappears"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:119 omarchy_settings/pages/bar.py:389
+#: omarchy_settings/pages/bar.py:120 omarchy_settings/pages/bar.py:409
 msgid "Restart"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:124
+#: omarchy_settings/pages/bar.py:125
 msgid "Add widget"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:125 omarchy_settings/pages/bar.py:328
+#: omarchy_settings/pages/bar.py:126 omarchy_settings/pages/bar.py:342
 msgid "Available widgets"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:125
+#: omarchy_settings/pages/bar.py:126
 msgid "Loading…"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:130
+#: omarchy_settings/pages/bar.py:131
 msgid "Waybar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:132
+#: omarchy_settings/pages/bar.py:133
 msgid ""
 "Optional alternative bar. Omarchy doesn't manage Waybar; its colors follow "
 "the Omarchy theme."
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:140
+#: omarchy_settings/pages/bar.py:141
 msgid "System font"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:140
+#: omarchy_settings/pages/bar.py:141
 msgid "Applied to the terminal, bar and other Omarchy apps."
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:148
+#: omarchy_settings/pages/bar.py:149
 msgid "omarchy-font-set not found"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:148
+#: omarchy_settings/pages/bar.py:149
 msgid "Update Omarchy to change fonts from here"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:155
+#: omarchy_settings/pages/bar.py:156
 msgid "Restore default bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:156
+#: omarchy_settings/pages/bar.py:157
 msgid "Returns position, transparency and widgets to Omarchy's default"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:165
+#: omarchy_settings/pages/bar.py:166
 msgid "omarchy-bar not found: update Omarchy to use this page."
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:173 omarchy_settings/pages/bar.py:210
-#: omarchy_settings/pages/bar.py:314 omarchy_settings/pages/bar.py:342
-#: omarchy_settings/pages/bar.py:425 omarchy_settings/pages/bluetooth.py:213
+#: omarchy_settings/pages/bar.py:174 omarchy_settings/pages/bar.py:211
+#: omarchy_settings/pages/bar.py:322 omarchy_settings/pages/bar.py:358
+#: omarchy_settings/pages/bar.py:445 omarchy_settings/pages/bluetooth.py:213
 #: omarchy_settings/pages/ethernet.py:223 omarchy_settings/pages/system.py:117
 #: omarchy_settings/pages/wifi.py:269 omarchy_settings/pages/wifi.py:307
 #: omarchy_settings/pages/wifi.py:322
@@ -759,250 +759,259 @@ msgstr ""
 msgid "Failed: {error}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:173
+#: omarchy_settings/pages/bar.py:174
 msgid "unknown error"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:193
+#: omarchy_settings/pages/bar.py:194
 #, python-brace-format
 msgid "Custom — {format}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:197 omarchy_settings/pages/system.py:156
+#: omarchy_settings/pages/bar.py:198 omarchy_settings/pages/system.py:156
 msgid "Clock format"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:198
+#: omarchy_settings/pages/bar.py:199
 msgid "Click the clock to see the alternate format"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:201
+#: omarchy_settings/pages/bar.py:202
 msgid "Clock format changed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:206
+#: omarchy_settings/pages/bar.py:207
 msgid "Restarting the shell…"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:210
+#: omarchy_settings/pages/bar.py:211
 msgid "Shell restarted"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:217
+#: omarchy_settings/pages/bar.py:218
 msgid "Restore the default bar?"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:218
+#: omarchy_settings/pages/bar.py:219
 msgid "The position, transparency and widget list return to Omarchy's default."
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:220
+#: omarchy_settings/pages/bar.py:221
 msgid "Bar restored"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:233
+#: omarchy_settings/pages/bar.py:234
 msgid "Widgets at the top"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:233
+#: omarchy_settings/pages/bar.py:234
 msgid "Widgets in the middle"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:233
+#: omarchy_settings/pages/bar.py:234
 msgid "Widgets at the bottom"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:235
+#: omarchy_settings/pages/bar.py:236
 msgid "Widgets on the left"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:235
+#: omarchy_settings/pages/bar.py:236
 msgid "Widgets in the center"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:235
+#: omarchy_settings/pages/bar.py:236
 msgid "Widgets on the right"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:248
+#: omarchy_settings/pages/bar.py:249
 msgid "Empty"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:248
+#: omarchy_settings/pages/bar.py:249
 msgid "Move widgets here with the arrows"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:270
+#: omarchy_settings/pages/bar.py:271
 msgid "Move to the previous section"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:274
+#: omarchy_settings/pages/bar.py:275
 msgid "Move earlier"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:275
+#: omarchy_settings/pages/bar.py:276
 msgid "Move later"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:278
+#: omarchy_settings/pages/bar.py:279
 msgid "Move to the next section"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:282
+#: omarchy_settings/pages/bar.py:285
 msgid "Remove from the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:314
+#: omarchy_settings/pages/bar.py:319
+msgid "the bar changed meanwhile; try again"
+msgstr ""
+
+#: omarchy_settings/pages/bar.py:322
 #, python-brace-format
 msgid "{name} removed from the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:330
+#: omarchy_settings/pages/bar.py:344
 #, python-brace-format
 msgid "{n} not on the bar"
 msgid_plural "{n} not on the bar"
 msgstr[0] ""
 msgstr[1] ""
 
-#: omarchy_settings/pages/bar.py:332
+#: omarchy_settings/pages/bar.py:346
 msgid "Every widget is already on the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:335 omarchy_settings/pages/webapps.py:46
+#: omarchy_settings/pages/bar.py:350
+#, python-brace-format
+msgid "{description} (one more)"
+msgstr ""
+
+#: omarchy_settings/pages/bar.py:351 omarchy_settings/pages/webapps.py:46
 msgid "Add"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:342
+#: omarchy_settings/pages/bar.py:358
 #, python-brace-format
 msgid "{name} added to the bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:361
+#: omarchy_settings/pages/bar.py:381
 msgid "Waybar is not installed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:362
+#: omarchy_settings/pages/bar.py:382
 msgid "Install it to use it instead of the Omarchy bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:363
+#: omarchy_settings/pages/bar.py:383
 msgid "Install"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:371
+#: omarchy_settings/pages/bar.py:391
 msgid "Use Waybar instead of the Omarchy bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:372
+#: omarchy_settings/pages/bar.py:392
 msgid "Starts Waybar now and at login, and hides the Omarchy bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:382
+#: omarchy_settings/pages/bar.py:402
 msgid "Waybar position"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:389
+#: omarchy_settings/pages/bar.py:409
 msgid "Restart Waybar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:389
+#: omarchy_settings/pages/bar.py:409
 msgid "Applies changes made to its files"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:392
+#: omarchy_settings/pages/bar.py:412
 msgid "Edit config.jsonc"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:392
+#: omarchy_settings/pages/bar.py:412
 msgid "Modules and layout"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:397
+#: omarchy_settings/pages/bar.py:417
 msgid "Edit style.css"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:398
+#: omarchy_settings/pages/bar.py:418
 msgid "Sizes, fonts and spacing; colors come from the theme"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:405
+#: omarchy_settings/pages/bar.py:425
 msgid "Restore Waybar files"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:406
+#: omarchy_settings/pages/bar.py:426
 msgid ""
 "Recreates config.jsonc and style.css; the current ones are kept as .omarchy-"
 "settings.bak"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:413
+#: omarchy_settings/pages/bar.py:433
 msgid "Installing Waybar…"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:417
+#: omarchy_settings/pages/bar.py:437
 msgid "Waybar installed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:417
+#: omarchy_settings/pages/bar.py:437
 msgid "Waybar was not installed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:427
+#: omarchy_settings/pages/bar.py:447
 msgid "Using Waybar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:427
+#: omarchy_settings/pages/bar.py:447
 msgid "Using the Omarchy bar"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:439
+#: omarchy_settings/pages/bar.py:459
 msgid "Waybar position changed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:451
+#: omarchy_settings/pages/bar.py:471
 msgid "Waybar restarted"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:451
+#: omarchy_settings/pages/bar.py:471
 msgid "Waybar isn't in use; turn it on above"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:465
+#: omarchy_settings/pages/bar.py:485
 msgid "Waybar files restored"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:471
+#: omarchy_settings/pages/bar.py:491
 msgid "No fonts listed"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:471
+#: omarchy_settings/pages/bar.py:491
 msgid "omarchy-font-list returned nothing"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:477
+#: omarchy_settings/pages/bar.py:497
 msgid "Font"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:478
+#: omarchy_settings/pages/bar.py:498
 #, python-brace-format
 msgid "Current: {font}"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:478
+#: omarchy_settings/pages/bar.py:498
 msgid "unknown"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:486 omarchy_settings/pages/themes.py:246
+#: omarchy_settings/pages/bar.py:506 omarchy_settings/pages/themes.py:246
 #, python-brace-format
 msgid "Applying {name}…"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:490
+#: omarchy_settings/pages/bar.py:510
 #, python-brace-format
 msgid "Font {name} applied"
 msgstr ""
 
-#: omarchy_settings/pages/bar.py:490 omarchy_settings/pages/themes.py:253
+#: omarchy_settings/pages/bar.py:510 omarchy_settings/pages/themes.py:253
 #, python-brace-format
 msgid "Failed to apply {name}"
 msgstr ""
@@ -3246,7 +3255,7 @@ msgstr ""
 msgid "{ssid} forgotten"
 msgstr ""
 
-#: omarchy_settings/shell.py:82
+#: omarchy_settings/shell.py:114
 msgid "command not found"
 msgstr ""
 

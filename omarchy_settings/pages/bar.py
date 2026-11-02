@@ -82,6 +82,7 @@ class BarPage(Adw.PreferencesPage):
         self.win = win
         self.catalog: dict[str, tuple[str, str]] = {}
         self.widget_groups: list[Adw.PreferencesGroup] = []
+        self.layout: dict[str, list[dict]] = {}
         config = read_shell()
         bar = config.get("bar") or {}
 
@@ -279,7 +280,12 @@ class BarPage(Adw.PreferencesPage):
                 si < len(SECTIONS) - 1,
                 lambda: self._move(wid, section, pos, SECTIONS[si + 1], 0),
             ),
-            ("list-remove-symbolic", _("Remove from the bar"), True, lambda: self._remove(wid, name)),
+            (
+                "list-remove-symbolic",
+                _("Remove from the bar"),
+                True,
+                lambda: self._remove(wid, name, section, pos, layout),
+            ),
         ]
         box = Gtk.Box(spacing=2, valign=Gtk.Align.CENTER)
         for icon, tip, sensitive, action in buttons:
@@ -307,21 +313,29 @@ class BarPage(Adw.PreferencesPage):
             rebuild=True,
         )
 
-    def _remove(self, wid: str, name: str) -> None:
+    def _remove(self, wid: str, name: str, section: str, pos: int, layout: dict) -> None:
         def done(res) -> None:
+            if isinstance(res, bool):  # a single copy of a repeatable widget
+                res = (res, _("the bar changed meanwhile; try again"))
             ok, msg = res if isinstance(res, tuple) else (False, str(res))
             self.win.toast(
                 _("{name} removed from the bar").format(name=name) if ok else _("Failed: {error}").format(error=msg)
             )
             GLib.timeout_add(300, self._refresh_widgets)
 
-        bg(lambda: shell.disable_widget(wid), done)
+        copies = sum(item["id"] == wid for items in layout.values() for item in items)
+        if wid in shell.REPEATABLE and copies > 1:
+            bg(lambda: shell.remove_widget_at(section, pos, wid), done)  # only this one
+        else:
+            bg(lambda: shell.disable_widget(wid), done)
 
     def _fill_available(self, layout: dict) -> None:
         present = {i["id"] for items in layout.values() for i in items}
         available = sorted(
-            ((wid, n, d) for wid, (n, d) in self.catalog.items() if wid not in present), key=lambda t: t[1].lower()
+            ((wid, n, d) for wid, (n, d) in self.catalog.items() if wid not in present or wid in shell.REPEATABLE),
+            key=lambda t: t[1].lower(),
         )
+        self.layout = layout
         expanded = self.add_expander.get_expanded()
         self.add_group.remove(self.add_expander)
         self.add_expander = Adw.ExpanderRow(
@@ -332,6 +346,8 @@ class BarPage(Adw.PreferencesPage):
             else _("Every widget is already on the bar"),
         )
         for wid, name, desc in available:
+            if wid in present:  # a repeatable widget already on the bar: add one more
+                desc = _("{description} (one more)").format(description=desc)
             self.add_expander.add_row(button_row(name, desc, _("Add"), lambda w=wid, n=name: self._add(w, n)))
         self.add_group.add(self.add_expander)
 
@@ -343,7 +359,11 @@ class BarPage(Adw.PreferencesPage):
             )
             GLib.timeout_add(300, self._refresh_widgets)
 
-        bg(lambda: shell.enable_widget(wid), done)
+        sections = [s for s, items in self.layout.items() if any(i["id"] == wid for i in items)]
+        if sections:  # another copy, at the end of the section that has the last one
+            bg(lambda: (shell.add_widget_copy(wid, sections[-1]), ""), done)
+        else:
+            bg(lambda: shell.enable_widget(wid), done)
 
     # -- Waybar
     def _fill_waybar(self) -> None:
