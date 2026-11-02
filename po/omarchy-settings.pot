@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:28-0400\n"
+"POT-Creation-Date: 2026-11-02 03:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -418,8 +418,9 @@ msgstr[1] ""
 msgid "Could not change {name}"
 msgstr ""
 
-#: omarchy_settings/pages/autostart.py:110
-#: omarchy_settings/pages/webapps.py:127 omarchy_settings/pages/webapps.py:147
+#: omarchy_settings/pages/autostart.py:110 omarchy_settings/pages/power.py:310
+#: omarchy_settings/pages/power.py:321 omarchy_settings/pages/webapps.py:127
+#: omarchy_settings/pages/webapps.py:147
 msgid "Remove"
 msgstr ""
 
@@ -1249,7 +1250,7 @@ msgstr ""
 msgid "Dependencies"
 msgstr ""
 
-#: omarchy_settings/pages/dependencies.py:38
+#: omarchy_settings/pages/dependencies.py:38 omarchy_settings/pages/power.py:76
 msgid "Checking…"
 msgstr ""
 
@@ -2144,7 +2145,7 @@ msgstr ""
 msgid "Power profile"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:47 omarchy_settings/pages/power.py:106
+#: omarchy_settings/pages/power.py:47 omarchy_settings/pages/power.py:118
 msgid "Night light"
 msgstr ""
 
@@ -2164,109 +2165,152 @@ msgstr ""
 msgid "Works on the lock screen too"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:74
+#: omarchy_settings/pages/power.py:71
+msgid "Suspend and hibernate"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:76
+msgid "Hibernation"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:76 omarchy_settings/pages/power.py:310
+#: omarchy_settings/pages/power.py:321
+msgid "Set up"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:86
 msgid "No power profiles available"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:77
+#: omarchy_settings/pages/power.py:89
 msgid "Profile"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:88
+#: omarchy_settings/pages/power.py:100
 msgid "Could not change the power profile"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:106
+#: omarchy_settings/pages/power.py:118
 msgid "Turns it on or off now"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:110
+#: omarchy_settings/pages/power.py:122
 msgid "Warmth"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:110
+#: omarchy_settings/pages/power.py:122
 msgid "Lower is warmer"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:124
+#: omarchy_settings/pages/power.py:136
 msgid "Turn on automatically"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:128
+#: omarchy_settings/pages/power.py:140
 msgid "Every day at the times below"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:130
+#: omarchy_settings/pages/power.py:142
 msgid "Turns on at (HH:MM)"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:131
+#: omarchy_settings/pages/power.py:143
 msgid "Turns off at (HH:MM)"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:143
+#: omarchy_settings/pages/power.py:155
 msgid "Could not change the night light"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:168
+#: omarchy_settings/pages/power.py:180
 msgid "Use times like 20:00 and 07:00"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:172
+#: omarchy_settings/pages/power.py:184
 msgid "The start and end times must be different"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:204
+#: omarchy_settings/pages/power.py:216
 #, python-brace-format
 msgid "Night light scheduled from {start} to {end}"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:206 omarchy_settings/pages/power.py:221
+#: omarchy_settings/pages/power.py:218 omarchy_settings/pages/power.py:233
 msgid "Could not save the schedule"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:219
+#: omarchy_settings/pages/power.py:231
 msgid "Night light schedule turned off"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:230
+#: omarchy_settings/pages/power.py:242
 msgid "Power button changed"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:230
+#: omarchy_settings/pages/power.py:242
 msgid "Could not save the setting"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:238
+#: omarchy_settings/pages/power.py:250
 msgid "Idle"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:238
+#: omarchy_settings/pages/power.py:250
 msgid "Counted from the moment you stop using the computer."
 msgstr ""
 
-#: omarchy_settings/pages/power.py:240
+#: omarchy_settings/pages/power.py:252
 msgid "Screensaver after"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:243
+#: omarchy_settings/pages/power.py:255
 msgid "Lock the screen after"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:243
+#: omarchy_settings/pages/power.py:255
 msgid "Asks for the password to come back"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:248
+#: omarchy_settings/pages/power.py:260
 msgid "Stay awake"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:249
+#: omarchy_settings/pages/power.py:261
 msgid "Pauses the screensaver and lock until you turn this off"
 msgstr ""
 
-#: omarchy_settings/pages/power.py:268
+#: omarchy_settings/pages/power.py:280
 msgid "Could not write shell.json"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:294
+msgid "Suspend in the system menu"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:295
+msgid "Shows Suspend next to Lock and Shut down"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:306
+msgid "Set up: Hibernate saves your session to disk and turns off"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:308
+msgid "Not set up; needs a swap file as big as the memory"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:316
+msgid "Remove hibernation?"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:316
+msgid "Set up hibernation?"
+msgstr ""
+
+#: omarchy_settings/pages/power.py:318
+msgid ""
+"Opens a terminal that asks for your password, changes the swap file and "
+"rebuilds the boot image. It takes a minute or two."
 msgstr ""
 
 #: omarchy_settings/pages/search.py:92 omarchy_settings/pages/search.py:97

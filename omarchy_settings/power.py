@@ -165,3 +165,33 @@ def read_schedule(conf: Path = HYPRSUNSET_CONF) -> tuple[str, str, int] | None:
 
 def restart_hyprsunset() -> None:
     core.run(["omarchy-restart-hyprsunset"], timeout=15)
+
+
+# ------------------------------------------------------------------ suspend and hibernation
+SUSPEND_OFF_FLAG = "suspend-off"  # Omarchy hides Suspend from its system menu while this flag is on
+TERMINAL = "omarchy-launch-floating-terminal-with-presentation"
+
+
+def suspend_in_menu() -> bool:
+    r = core.run(["omarchy-toggle-enabled", SUSPEND_OFF_FLAG])
+    return not (r and r.returncode == 0)
+
+
+def set_suspend_in_menu(on: bool) -> bool:
+    r = core.run(["omarchy-toggle", SUSPEND_OFF_FLAG, "off" if on else "on"])
+    return bool(r and r.returncode == 0)
+
+
+def hibernation_supported(image_size: Path = Path("/sys/power/image_size")) -> bool:
+    return image_size.exists() and core.have("omarchy-hibernation-setup")
+
+
+def hibernation_ready() -> bool:
+    """A swap file big enough and the resume hook in the boot image (omarchy-hibernation-available)."""
+    r = core.run(["omarchy-hibernation-available"])
+    return bool(r and r.returncode == 0)
+
+
+def hibernation_command(ready: bool) -> list[str]:
+    """Runs in a visible terminal: it asks for the password and rebuilds the boot image."""
+    return [TERMINAL, "omarchy-hibernation-remove" if ready else "omarchy-hibernation-setup"]

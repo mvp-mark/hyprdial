@@ -88,3 +88,21 @@ def test_store_persists_extras(tmp_path, monkeypatch):
     assert core.HyprStore(**paths).extras == {"power_button": "lock"}
     store.set_extra("power_button", None)
     assert "XF86PowerOff" not in paths["managed"].read_text()
+
+
+def test_suspend_in_menu_follows_omarchys_flag(commands):
+    commands.codes["omarchy-toggle-enabled suspend-off"] = 1  # flag off: Suspend is in the menu
+    assert power.suspend_in_menu()
+    commands.codes["omarchy-toggle-enabled suspend-off"] = 0
+    assert not power.suspend_in_menu()
+    commands.calls.clear()
+    power.set_suspend_in_menu(True)
+    assert commands.calls == [["omarchy-toggle", "suspend-off", "off"]]
+
+
+def test_hibernation(commands, tmp_path):
+    commands.codes["omarchy-hibernation-available"] = 1
+    assert not power.hibernation_ready()
+    assert power.hibernation_command(False)[-1] == "omarchy-hibernation-setup"
+    assert power.hibernation_command(True)[-1] == "omarchy-hibernation-remove"
+    assert not power.hibernation_supported(tmp_path / "image_size")

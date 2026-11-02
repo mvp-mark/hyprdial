@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 03:28-0400\n"
+"POT-Creation-Date: 2026-11-02 03:29-0400\n"
 "PO-Revision-Date: 2026-11-01 12:00-0400\n"
 "Last-Translator: Marcus Vinícius Peixoto Paulo\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -402,8 +402,9 @@ msgstr[1] "{n} comandos"
 msgid "Could not change {name}"
 msgstr "Não foi possível alterar {name}"
 
-#: omarchy_settings/pages/autostart.py:110
-#: omarchy_settings/pages/webapps.py:127 omarchy_settings/pages/webapps.py:147
+#: omarchy_settings/pages/autostart.py:110 omarchy_settings/pages/power.py:310
+#: omarchy_settings/pages/power.py:321 omarchy_settings/pages/webapps.py:127
+#: omarchy_settings/pages/webapps.py:147
 msgid "Remove"
 msgstr "Remover"
 
@@ -1229,7 +1230,7 @@ msgstr "Não foi possível parear com {name}"
 msgid "Dependencies"
 msgstr "Dependências"
 
-#: omarchy_settings/pages/dependencies.py:38
+#: omarchy_settings/pages/dependencies.py:38 omarchy_settings/pages/power.py:76
 msgid "Checking…"
 msgstr "Verificando…"
 
@@ -2116,7 +2117,7 @@ msgstr "Não fazer nada"
 msgid "Power profile"
 msgstr "Perfil de energia"
 
-#: omarchy_settings/pages/power.py:47 omarchy_settings/pages/power.py:106
+#: omarchy_settings/pages/power.py:47 omarchy_settings/pages/power.py:118
 msgid "Night light"
 msgstr "Luz noturna"
 
@@ -2136,110 +2137,151 @@ msgstr "Ao pressionar o botão de energia"
 msgid "Works on the lock screen too"
 msgstr "Funciona também na tela de bloqueio"
 
-#: omarchy_settings/pages/power.py:74
+#: omarchy_settings/pages/power.py:71
+msgid "Suspend and hibernate"
+msgstr "Suspender e hibernar"
+
+#: omarchy_settings/pages/power.py:76
+msgid "Hibernation"
+msgstr "Hibernação"
+
+#: omarchy_settings/pages/power.py:76 omarchy_settings/pages/power.py:310
+#: omarchy_settings/pages/power.py:321
+msgid "Set up"
+msgstr "Configurar"
+
+#: omarchy_settings/pages/power.py:86
 msgid "No power profiles available"
 msgstr "Nenhum perfil de energia disponível"
 
-#: omarchy_settings/pages/power.py:77
+#: omarchy_settings/pages/power.py:89
 msgid "Profile"
 msgstr "Perfil"
 
-#: omarchy_settings/pages/power.py:88
+#: omarchy_settings/pages/power.py:100
 msgid "Could not change the power profile"
 msgstr "Não foi possível mudar o perfil de energia"
 
-#: omarchy_settings/pages/power.py:106
+#: omarchy_settings/pages/power.py:118
 msgid "Turns it on or off now"
 msgstr "Liga ou desliga agora"
 
-#: omarchy_settings/pages/power.py:110
+#: omarchy_settings/pages/power.py:122
 msgid "Warmth"
 msgstr "Temperatura de cor"
 
-#: omarchy_settings/pages/power.py:110
+#: omarchy_settings/pages/power.py:122
 msgid "Lower is warmer"
 msgstr "Quanto menor, mais quente"
 
-#: omarchy_settings/pages/power.py:124
+#: omarchy_settings/pages/power.py:136
 msgid "Turn on automatically"
 msgstr "Ligar automaticamente"
 
-#: omarchy_settings/pages/power.py:128
+#: omarchy_settings/pages/power.py:140
 msgid "Every day at the times below"
 msgstr "Todos os dias, nos horários abaixo"
 
-#: omarchy_settings/pages/power.py:130
+#: omarchy_settings/pages/power.py:142
 msgid "Turns on at (HH:MM)"
 msgstr "Liga às (HH:MM)"
 
-#: omarchy_settings/pages/power.py:131
+#: omarchy_settings/pages/power.py:143
 msgid "Turns off at (HH:MM)"
 msgstr "Desliga às (HH:MM)"
 
-#: omarchy_settings/pages/power.py:143
+#: omarchy_settings/pages/power.py:155
 msgid "Could not change the night light"
 msgstr "Não foi possível mudar a luz noturna"
 
-#: omarchy_settings/pages/power.py:168
+#: omarchy_settings/pages/power.py:180
 msgid "Use times like 20:00 and 07:00"
 msgstr "Use horários como 20:00 e 07:00"
 
-#: omarchy_settings/pages/power.py:172
+#: omarchy_settings/pages/power.py:184
 msgid "The start and end times must be different"
 msgstr "Os horários de início e fim devem ser diferentes"
 
-#: omarchy_settings/pages/power.py:204
+#: omarchy_settings/pages/power.py:216
 #, python-brace-format
 msgid "Night light scheduled from {start} to {end}"
 msgstr "Luz noturna agendada das {start} às {end}"
 
-#: omarchy_settings/pages/power.py:206 omarchy_settings/pages/power.py:221
+#: omarchy_settings/pages/power.py:218 omarchy_settings/pages/power.py:233
 msgid "Could not save the schedule"
 msgstr "Não foi possível salvar o agendamento"
 
-#: omarchy_settings/pages/power.py:219
+#: omarchy_settings/pages/power.py:231
 msgid "Night light schedule turned off"
 msgstr "Agendamento da luz noturna desligado"
 
-#: omarchy_settings/pages/power.py:230
+#: omarchy_settings/pages/power.py:242
 msgid "Power button changed"
 msgstr "Botão de energia alterado"
 
-#: omarchy_settings/pages/power.py:230
+#: omarchy_settings/pages/power.py:242
 msgid "Could not save the setting"
 msgstr "Não foi possível salvar a configuração"
 
-#: omarchy_settings/pages/power.py:238
+#: omarchy_settings/pages/power.py:250
 msgid "Idle"
 msgstr "Inatividade"
 
-#: omarchy_settings/pages/power.py:238
+#: omarchy_settings/pages/power.py:250
 msgid "Counted from the moment you stop using the computer."
 msgstr "Contado a partir do momento em que você para de usar o computador."
 
-#: omarchy_settings/pages/power.py:240
+#: omarchy_settings/pages/power.py:252
 msgid "Screensaver after"
 msgstr "Proteção de tela após"
 
-#: omarchy_settings/pages/power.py:243
+#: omarchy_settings/pages/power.py:255
 msgid "Lock the screen after"
 msgstr "Bloquear a tela após"
 
-#: omarchy_settings/pages/power.py:243
+#: omarchy_settings/pages/power.py:255
 msgid "Asks for the password to come back"
 msgstr "Pede a senha para voltar"
 
-#: omarchy_settings/pages/power.py:248
+#: omarchy_settings/pages/power.py:260
 msgid "Stay awake"
 msgstr "Manter acordado"
 
-#: omarchy_settings/pages/power.py:249
+#: omarchy_settings/pages/power.py:261
 msgid "Pauses the screensaver and lock until you turn this off"
 msgstr "Pausa proteção de tela e bloqueio até desligar isto"
 
-#: omarchy_settings/pages/power.py:268
+#: omarchy_settings/pages/power.py:280
 msgid "Could not write shell.json"
 msgstr "Não foi possível gravar shell.json"
+
+#: omarchy_settings/pages/power.py:294
+msgid "Suspend in the system menu"
+msgstr "Suspender no menu do sistema"
+
+#: omarchy_settings/pages/power.py:295
+msgid "Shows Suspend next to Lock and Shut down"
+msgstr "Mostra Suspender ao lado de Bloquear e Desligar"
+
+#: omarchy_settings/pages/power.py:306
+msgid "Set up: Hibernate saves your session to disk and turns off"
+msgstr "Configurada: Hibernar salva sua sessão no disco e desliga"
+
+#: omarchy_settings/pages/power.py:308
+msgid "Not set up; needs a swap file as big as the memory"
+msgstr "Não configurada; precisa de um arquivo de swap do tamanho da memória"
+
+#: omarchy_settings/pages/power.py:316
+msgid "Remove hibernation?"
+msgstr "Remover a hibernação?"
+
+#: omarchy_settings/pages/power.py:316
+msgid "Set up hibernation?"
+msgstr "Configurar a hibernação?"
+
+#: omarchy_settings/pages/power.py:318
+msgid "Opens a terminal that asks for your password, changes the swap file and rebuilds the boot image. It takes a minute or two."
+msgstr "Abre um terminal que pede sua senha, altera o arquivo de swap e reconstrói a imagem de boot. Leva um ou dois minutos."
 
 #: omarchy_settings/pages/search.py:92 omarchy_settings/pages/search.py:97
 msgid "Search settings"

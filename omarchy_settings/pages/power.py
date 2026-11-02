@@ -11,7 +11,7 @@ from gi.repository import Adw, Gtk  # noqa: E402
 from .. import core, power, shell
 from ..i18n import _
 from ..shell import IDLE_TIMES, STAY_AWAKE_FLAG, read_shell, write_idle
-from ..ui import Debouncer, bg, combo_row, missing_row, switch_row
+from ..ui import Debouncer, bg, button_row, combo_row, confirm, missing_row, switch_row
 from .bar import idle_label
 
 PROFILE_LABELS = {
@@ -67,6 +67,18 @@ class PowerPage(Adw.PreferencesPage):
         self.add(button)
 
         self._idle_group(read_shell())
+
+        self.sleep_group = Adw.PreferencesGroup(title=_("Suspend and hibernate"))
+        self.add(self.sleep_group)
+        if core.have("omarchy-toggle"):
+            bg(power.suspend_in_menu, self._add_suspend)
+        if power.hibernation_supported():
+            self.hibernate = button_row(_("Hibernation"), _("Checking…"), _("Set up"), self._confirm_hibernation)
+            self.sleep_group.add(self.hibernate)
+            self.hibernation_ready = False
+            # it is set up in a terminal: read it again whenever the page comes back
+            self.connect("map", lambda _w: bg(power.hibernation_ready, self._show_hibernation))
+            bg(power.hibernation_ready, self._show_hibernation)
 
     # -- power profile
     def _populate_profiles(self, result) -> None:
@@ -272,3 +284,41 @@ class PowerPage(Adw.PreferencesPage):
 
     def _set_stay_awake(self, on: bool) -> None:
         bg(lambda: shell.stay_awake(on))
+
+    # -- suspend and hibernate
+    def _add_suspend(self, on) -> None:
+        if isinstance(on, Exception):
+            return
+        self.sleep_group.add(
+            switch_row(
+                _("Suspend in the system menu"),
+                _("Shows Suspend next to Lock and Shut down"),
+                on,
+                lambda v: bg(lambda: power.set_suspend_in_menu(v)),
+            ),
+        )
+
+    def _show_hibernation(self, ready) -> None:
+        if isinstance(ready, Exception):
+            return
+        self.hibernation_ready = ready
+        self.hibernate.set_subtitle(
+            _("Set up: Hibernate saves your session to disk and turns off")
+            if ready
+            else _("Not set up; needs a swap file as big as the memory")
+        )
+        self.hibernate.get_activatable_widget().set_label(_("Remove") if ready else _("Set up"))
+
+    def _confirm_hibernation(self) -> None:
+        ready = self.hibernation_ready
+        confirm(
+            self.win,
+            heading=_("Remove hibernation?") if ready else _("Set up hibernation?"),
+            body=_(
+                "Opens a terminal that asks for your password, changes the swap file and rebuilds the boot image. "
+                "It takes a minute or two."
+            ),
+            action=_("Remove") if ready else _("Set up"),
+            on_confirm=lambda: core.spawn(power.hibernation_command(ready)),
+            destructive=ready,
+        )
