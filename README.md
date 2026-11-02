@@ -89,6 +89,18 @@ the selected packages, asking for your password through polkit.
 
 To try it without installing: `python3 -m omarchy_settings` from the project folder.
 
+### As a pacman package
+
+`packaging/arch/PKGBUILD` builds a system-wide package from a release tag (the app in
+`/usr/share/omarchy-settings`, `/usr/bin/omarchy-settings`, the launcher entry; translations compiled at build time):
+
+```bash
+cd packaging/arch && makepkg -si
+```
+
+It can live next to an `./install.sh` copy: the one in `~/.local/bin` comes first in `PATH`, so remove it
+(`rm ~/.local/bin/omarchy-settings`) to use the package.
+
 ## Language
 
 The interface follows the system language (`LANGUAGE`, `LC_ALL`, `LC_MESSAGES`, `LANG`). Source strings are in
@@ -115,7 +127,7 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `network.py`, `wifi.py`, `bluetooth.py`, `sound.py`, `power.py`, `system.py`, `search.py`) without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `network.py`, `wifi.py`, `bluetooth.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -143,6 +155,7 @@ omarchy_settings/
   app.py             main window
   pages/             themes, hyprland, monitors, sound, power, shortcuts, bar, connectivity, system, search
 data/                .desktop
+packaging/arch/      PKGBUILD
 docs/screenshots/    images used by this README
 po/                  template (.pot) and translations (.po)
 tests/               pytest + fixtures
@@ -155,4 +168,4 @@ install.sh
 - Changing the key of shortcuts Omarchy generates in loops (workspaces 1–0, group windows, bar panels); today
   they can only be disabled.
 - Removing a single Spacer from the bar (today removal applies to all of them).
-- Packaging (PKGBUILD/AUR) and more languages.
+- Publishing the package on the AUR, and more languages.

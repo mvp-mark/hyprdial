@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 .pytest_cache/
 omarchy_settings/locale/
+packaging/arch/src/
+packaging/arch/pkg/
+packaging/arch/*.tar.gz
+packaging/arch/*.pkg.tar.*

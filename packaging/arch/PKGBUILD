@@ -1,0 +1,46 @@
+# Maintainer: Marcus Vinícius Peixoto Paulo <mvp.paulo@gmail.com>
+# Dependencies follow omarchy_settings/deps.py (tests/test_pkgbuild.py checks it):
+# required -> depends (gettext only compiles the translations -> makedepends), optional -> optdepends.
+pkgname=omarchy-settings
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="Graphical settings app for Omarchy (GTK4 + libadwaita)"
+arch=('any')
+url="https://github.com/mvp-mark/omarchy-settings"
+license=('unknown')
+depends=('python' 'python-gobject' 'gtk4' 'libadwaita')
+makedepends=('gettext')
+optdepends=('impala: Wi-Fi manager opened by the Connectivity page'
+            'bluetui: Bluetooth manager opened by the Connectivity page'
+            'wiremix: audio mixer opened by the Sound page'
+            "waybar: alternative bar (Omarchy uses the Omarchy shell bar)")
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "$pkgname-$pkgver"
+  for po in po/*.po; do
+    lang=$(basename "$po" .po)
+    mkdir -p "omarchy_settings/locale/$lang/LC_MESSAGES"
+    msgfmt -o "omarchy_settings/locale/$lang/LC_MESSAGES/$pkgname.mo" "$po"
+  done
+  # pt_PT and other variants without their own catalog use Brazilian Portuguese
+  mkdir -p omarchy_settings/locale/pt/LC_MESSAGES
+  cp omarchy_settings/locale/pt_BR/LC_MESSAGES/$pkgname.mo omarchy_settings/locale/pt/LC_MESSAGES/
+}
+
+package() {
+  cd "$pkgname-$pkgver"
+  local app="/usr/share/$pkgname"
+  install -d "$pkgdir$app"
+  cp -r omarchy_settings "$pkgdir$app/"
+  find "$pkgdir$app" -name __pycache__ -type d -prune -exec rm -rf {} +
+  python -m compileall -q -s "$pkgdir" -p / "$pkgdir$app"
+
+  install -d "$pkgdir/usr/bin"
+  printf '#!/bin/sh\nexec env PYTHONPATH=%s python3 -m omarchy_settings "$@"\n' "$app" > "$pkgdir/usr/bin/$pkgname"
+  chmod 755 "$pkgdir/usr/bin/$pkgname"
+
+  install -Dm644 data/org.omarchy.Settings.desktop "$pkgdir/usr/share/applications/org.omarchy.Settings.desktop"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}
