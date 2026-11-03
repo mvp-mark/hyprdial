@@ -12,7 +12,7 @@ from gi.repository import Adw, Gio, Gtk  # noqa: E402
 
 from .. import __version__, core, system
 from ..i18n import _
-from ..ui import Debouncer, bg, button_row, confirm, missing_row, switch_row
+from ..ui import Debouncer, bg, button_row, missing_row, switch_row
 
 LANGUAGES = {
     "en": _("English"),
@@ -72,6 +72,7 @@ class SystemPage(Adw.PreferencesPage):
         )
         self.add(self.lang_group)
         self.lang_rows: list[Gtk.Widget] = []
+        self.use_after_install: str | None = None  # applied once locale-gen has generated it
         if core.have("localectl"):
             self._load_language()
             # locale-gen rewrites the archive when a language is installed (in the terminal opened below)
@@ -171,7 +172,8 @@ class SystemPage(Adw.PreferencesPage):
         def load():
             current, available = system.locale_settings()
             installable = system.installable_locales(available)
-            return current, available, [(loc, system.locale_description(loc)) for loc in installable]
+            suggested = system.suggest_locale(system.keyboard_layout(), installable)
+            return current, available, [(loc, system.locale_description(loc)) for loc in installable], suggested
 
         bg(load, self._populate_language)
 
@@ -185,7 +187,15 @@ class SystemPage(Adw.PreferencesPage):
         for row in self.lang_rows:
             self.lang_group.remove(row)
         self.lang_rows = []
-        current, available, installable = result
+        current, available, installable, suggested = result
+        pending = next(
+            (loc for loc in available if self.use_after_install and system.same_locale(loc, self.use_after_install)),
+            None,
+        )
+        if pending:
+            # installed with "Install and use": apply it now that locale-gen is done
+            self.use_after_install = None
+            bg(lambda: system.set_locale(pending), lambda res: self._used_installed(pending, res))
         if available:
             row = searchable_combo(_("System language"), available, [locale_label(loc) for loc in available], current)
             self._apply_row(row, available, current, system.set_locale)
@@ -195,25 +205,46 @@ class SystemPage(Adw.PreferencesPage):
         if not installable:
             return
         names = [loc for loc, _desc in installable]
-        combo = searchable_combo(_("Install a language"), names, [locale_label(*item) for item in installable], "")
-        combo.set_subtitle(_("Then choose it above"))
+        combo = searchable_combo(
+            _("Install a language"), names, [locale_label(*item) for item in installable], suggested
+        )
+        combo.set_subtitle(_("Suggested from your keyboard layout") if suggested else _("Type to search"))
         btn = Gtk.Button(label=_("Install"), valign=Gtk.Align.CENTER)
         btn.connect("clicked", lambda _b: self._confirm_install(names[combo.get_selected()]))
         combo.add_suffix(btn)
         self._add_lang_row(combo)
 
     def _confirm_install(self, name: str) -> None:
-        confirm(
-            self.win,
+        dialog = Adw.AlertDialog(
             heading=_("Install {language}?").format(language=name),
             body=_(
                 "Opens a terminal that asks for your password, enables the language in /etc/locale.gen "
-                "and runs locale-gen. It appears in the list above when it finishes."
+                "and runs locale-gen. With “Install and use” it also becomes the system language when it finishes "
+                "(from your next login)."
             ),
-            action=_("Install"),
-            on_confirm=lambda: core.spawn(system.install_locale_command(name)),
-            destructive=False,
         )
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("install", _("Install"))
+        dialog.add_response("use", _("Install and use"))
+        dialog.set_response_appearance("use", Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response("use")
+        dialog.set_close_response("cancel")
+
+        def respond(_d, response: str) -> None:
+            if response in ("install", "use"):
+                self.use_after_install = name if response == "use" else None
+                core.spawn(system.install_locale_command(name))
+
+        dialog.connect("response", respond)
+        dialog.present(self.win)
+
+    def _used_installed(self, name: str, res) -> None:
+        ok, error = (False, str(res)) if isinstance(res, Exception) else res
+        if ok:
+            self.win.toast(_("{language} is the system language from your next login").format(language=name))
+            self._load_language()
+        else:
+            self.win.toast(_("Failed: {error}").format(error=error) if error else _("Not changed"))
 
     # -- notifications
     def _populate_notifications(self, on) -> None:

@@ -70,6 +70,36 @@ def _locale_key(name: str) -> str:
     return name.lower().replace(".utf-8", "").replace(".utf8", "")
 
 
+def same_locale(a: str, b: str) -> bool:
+    return _locale_key(a) == _locale_key(b)
+
+
+def keyboard_layout() -> str:
+    """Hyprland's first keyboard layout ('br' from 'br,us'), or ''."""
+    try:
+        option = json.loads(core.out(["hyprctl", "getoption", "input:kb_layout", "-j"]) or "{}")
+    except ValueError:
+        return ""
+    value = option.get("str", "") if isinstance(option, dict) else ""
+    return value.split(",")[0].strip().lower()
+
+
+# Layouts whose locale isn't simply xx_XX (de -> de_DE, fr -> fr_FR, ...)
+LAYOUT_LOCALES = {
+    "us": "en_US", "gb": "en_GB", "br": "pt_BR", "jp": "ja_JP", "kr": "ko_KR", "cn": "zh_CN", "tw": "zh_TW",
+    "se": "sv_SE", "dk": "da_DK", "no": "nb_NO", "ua": "uk_UA", "cz": "cs_CZ", "gr": "el_GR", "il": "he_IL",
+    "ee": "et_EE", "latam": "es_MX", "ca": "fr_CA", "ch": "de_CH", "at": "de_AT", "be": "fr_BE",
+}  # fmt: skip
+
+
+def suggest_locale(layout: str, names: list[str]) -> str:
+    """The locale a keyboard layout points at (br -> pt_BR.UTF-8), if it is among names; else ''."""
+    if not re.fullmatch(r"[a-z]+", layout):
+        return ""
+    base = LAYOUT_LOCALES.get(layout, f"{layout}_{layout.upper()}")
+    return next((n for n in names if same_locale(n, base + ".UTF-8")), "")
+
+
 def installable_locales(generated: list[str], locale_gen: Path = LOCALE_GEN) -> list[str]:
     """UTF-8 locales listed (commented out) in /etc/locale.gen that aren't generated yet."""
     try:

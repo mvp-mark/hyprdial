@@ -124,3 +124,18 @@ def test_is_newer():
     assert system.is_newer("0.10.0", "0.9.1")
     assert not system.is_newer("0.5.3", "0.5.3")
     assert not system.is_newer("", "0.5.3")
+
+
+def test_keyboard_layout(commands):
+    assert system.keyboard_layout() == ""
+    commands.answers["hyprctl getoption input:kb_layout -j"] = '{"option": "input:kb_layout", "str": "br,us"}'
+    assert system.keyboard_layout() == "br"
+
+
+@pytest.mark.parametrize(
+    ("layout", "expected"),
+    [("br", "pt_BR.UTF-8"), ("de", "de_DE.UTF-8"), ("us", ""), ("zz", ""), ("", ""), ("../x", "")],
+)
+def test_suggest_locale(layout, expected):
+    names = ["de_DE.UTF-8", "hrx_BR.UTF-8", "pt_BR.UTF-8", "es_US.UTF-8"]
+    assert system.suggest_locale(layout, names) == expected
