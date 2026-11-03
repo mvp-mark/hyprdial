@@ -32,11 +32,14 @@ repository (empty the first time, which creates the `omarchy-settings-gui` packa
 
 ## A new release
 
-1. Bump `__version__` in `omarchy_settings/__init__.py` and `pkgver` here (back to `pkgrel=1`, `sha256sums=('SKIP')`).
-2. Commit, push, wait for CI, then tag: `git tag -a vX.Y.Z -m "omarchy-settings X.Y.Z" && git push origin vX.Y.Z`.
-3. Pin the checksum of GitHub's tarball:
-   `curl -sL https://github.com/mvp-mark/omarchy-settings/archive/refs/tags/vX.Y.Z.tar.gz | sha256sum`,
-   put it in `sha256sums`, run `makepkg --printsrcinfo > .SRCINFO`, commit and push.
-4. Build the package (`makepkg -f` here) and attach the `.pkg.tar.zst` to the GitHub release, with the PKGBUILD;
-   the main README's `pacman -U` line points at it, so update the version there too.
-5. `packaging/arch/publish-aur.sh`.
+1. Bump `__version__` in `omarchy_settings/__init__.py` and `pkgver` here (back to `pkgrel=1`,
+   `sha256sums=('SKIP')`, then `makepkg --printsrcinfo > .SRCINFO`), point the main README's `pacman -U` line at
+   the new version, and write the notes in `docs/releases/vX.Y.Z.md`.
+2. Commit, push, then tag: `git tag -a vX.Y.Z -m "omarchy-settings X.Y.Z" && git push origin vX.Y.Z`.
+3. `.github/workflows/release.yml` does the rest: runs the tests, runs `build-release.sh` (checks that the tag,
+   `__version__` and `pkgver` agree and that the package isn't called `omarchy-settings`, pins the tarball's
+   checksum, builds), publishes the release with the package and the PKGBUILD, and commits the pinned checksum to
+   `main` (`git pull` afterwards).
+4. `packaging/arch/publish-aur.sh`.
+
+`packaging/arch/build-release.sh vX.Y.Z` runs the same build locally, into `dist/`.

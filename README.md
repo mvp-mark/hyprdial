@@ -232,7 +232,8 @@ omarchy_settings/
   pages/             one module per page (hyprland.py holds Appearance and Input), plus the groups they share
                      (ethernet, wifi, bluetooth, webapps, autostart), the search dialog and dependencies
 data/                .desktop
-packaging/arch/      PKGBUILD, .SRCINFO and the AUR publishing script
+packaging/arch/      PKGBUILD, .SRCINFO, the release build and the AUR publishing script
+docs/releases/       release notes, one file per tag (the release workflow publishes them)
 docs/screenshots/    images used by this README
 po/                  template (.pot) and translations (.po)
 tests/               pytest + fixtures
