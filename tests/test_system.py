@@ -95,3 +95,32 @@ def test_locale_description(tmp_path):
     (tmp_path / "pt_BR").write_text('LC_IDENTIFICATION\nlanguage   "Brazilian Portuguese"\nterritory  "Brazil"\n')
     assert system.locale_description("pt_BR.UTF-8", tmp_path) == "Brazilian Portuguese (Brazil)"
     assert system.locale_description("xx_YY.UTF-8", tmp_path) == ""
+
+
+def test_app_location(monkeypatch, tmp_path):
+    monkeypatch.setattr(system, "LOCAL_DIR", tmp_path / "local")
+    assert system.app_location(system.PACKAGE_DIR / "omarchy_settings") == "package"
+    assert system.app_location(tmp_path / "local" / "omarchy_settings") == "local"
+    assert system.app_location(tmp_path / "checkout" / "omarchy_settings") == "source"
+
+
+def test_other_copies(commands, monkeypatch, tmp_path):
+    monkeypatch.setattr(system, "LOCAL_DIR", tmp_path)
+    assert system.other_copies("local") == []
+    commands.answers["pacman -Q omarchy-settings-gui"] = "omarchy-settings-gui 0.6.0-1"
+    (tmp_path / "omarchy_settings").mkdir()
+    assert system.other_copies("local") == ["package"]
+    assert system.other_copies("package") == ["local"]
+    assert system.other_copies("source") == ["package", "local"]
+
+
+def test_latest_release(commands):
+    assert system.latest_release() == ""  # offline
+    commands.answers[f"curl -fsS --max-time 5 {system.LATEST_API}"] = '{"tag_name": "v0.6.0", "name": "x"}'
+    assert system.latest_release() == "0.6.0"
+
+
+def test_is_newer():
+    assert system.is_newer("0.10.0", "0.9.1")
+    assert not system.is_newer("0.5.3", "0.5.3")
+    assert not system.is_newer("", "0.5.3")

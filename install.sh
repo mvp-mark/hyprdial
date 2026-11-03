@@ -61,6 +61,12 @@ if ! python3 -c 'import gi; gi.require_version("Adw", "1"); gi.require_version("
   exit 1
 fi
 
+if pacman -Q omarchy-settings-gui &>/dev/null; then
+  echo "Note: the omarchy-settings-gui package is installed too. This copy in $BIN_DIR comes first in PATH, so the"
+  echo "launcher will open it instead of the package's. To keep only the package, remove this copy with:"
+  echo "  rm -r $APP_DIR $BIN_DIR/omarchy-settings"
+fi
+
 mkdir -p "$APP_DIR" "$BIN_DIR" "$DESKTOP_DIR"
 rm -rf "$APP_DIR/omarchy_settings"
 cp -r "$SRC/omarchy_settings" "$APP_DIR/"

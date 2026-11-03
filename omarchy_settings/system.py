@@ -6,6 +6,7 @@ Omarchy shell shows the prompt).
 
 from __future__ import annotations
 
+import json
 import os
 import platform
 import re
@@ -153,6 +154,53 @@ def about() -> list[tuple[str, str]]:
         ("memory", memory_gib()),
     ]
     return [(k, v) for k, v in info if v]
+
+
+# ------------------------------------------------------------------ this app
+PACKAGE = "omarchy-settings-gui"
+RELEASES_URL = "https://github.com/mvp-mark/omarchy-settings/releases"
+LATEST_API = "https://api.github.com/repos/mvp-mark/omarchy-settings/releases/latest"
+PACKAGE_DIR = Path("/usr/share") / PACKAGE
+LOCAL_DIR = Path.home() / ".local/share/omarchy-settings"  # where install.sh puts it
+
+
+HERE = Path(__file__).resolve().parent
+
+
+def app_location(here: Path = HERE) -> str:
+    """'package', 'local' (install.sh) or 'source' (run from a checkout)."""
+    if here.parent == PACKAGE_DIR:
+        return "package"
+    if here.parent == LOCAL_DIR:
+        return "local"
+    return "source"
+
+
+def other_copies(location: str) -> list[str]:
+    """The other installed copies, besides the one running; the launcher opens only one of them."""
+    others = []
+    if location != "package" and core.out(["pacman", "-Q", PACKAGE]):
+        others.append("package")
+    if location != "local" and (LOCAL_DIR / "omarchy_settings").is_dir():
+        others.append("local")
+    return others
+
+
+def latest_release() -> str:
+    """Version of the newest release on GitHub ('0.6.0'), or '' offline."""
+    try:
+        data = json.loads(core.out(["curl", "-fsS", "--max-time", "5", LATEST_API], timeout=8) or "{}")
+    except ValueError:
+        return ""
+    tag = data.get("tag_name", "") if isinstance(data, dict) else ""
+    return tag[1:] if tag.startswith("v") else ""
+
+
+def is_newer(candidate: str, current: str) -> bool:
+    def parts(v: str) -> tuple[int, ...]:
+        return tuple(int(x) for x in re.findall(r"\d+", v))
+
+    return bool(candidate) and parts(candidate) > parts(current)
 
 
 PRINTERS_URL = "http://localhost:631/printers/"  # CUPS web interface

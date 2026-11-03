@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+import shutil
+
 import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, Gtk  # noqa: E402
 
-from .. import core, system
+from .. import __version__, core, system
 from ..i18n import _
 from ..ui import Debouncer, bg, button_row, confirm, missing_row, switch_row
 
@@ -100,7 +102,7 @@ class SystemPage(Adw.PreferencesPage):
 
         self.about_group = Adw.PreferencesGroup(title=_("About this computer"))
         self.add(self.about_group)
-        bg(system.about, self._populate_about)
+        bg(self._load_about, self._populate_about)
 
     # -- helpers
     def _apply_row(self, combo: Adw.ComboRow, options: list[str], current: str, apply) -> None:
@@ -235,9 +237,16 @@ class SystemPage(Adw.PreferencesPage):
         )
 
     # -- about
-    def _populate_about(self, info) -> None:
-        if isinstance(info, Exception):
+    @staticmethod
+    def _load_about():
+        location = system.app_location()
+        return system.about(), location, system.other_copies(location)
+
+    def _populate_about(self, result) -> None:
+        if isinstance(result, Exception):
             return
+        info, location, others = result
+        self._add_app_rows(location, others)
         for key, value in info:
             row = Adw.ActionRow(title=ABOUT_TITLES[key])
             row.add_suffix(Gtk.Label(label=value, selectable=True, css_classes=["dim-label"], xalign=1, wrap=True))
@@ -266,6 +275,49 @@ class SystemPage(Adw.PreferencesPage):
                     subtitle=_("Choose it in the boot menu when the computer starts"),
                 )
             )
+
+    # -- this app
+    def _add_app_rows(self, location: str, others: list[str]) -> None:
+        where = {
+            "package": _("package {name}").format(name=system.PACKAGE),
+            "local": _("installed with install.sh"),
+            "source": _("running from the source folder"),
+        }
+        row = Adw.ActionRow(title=_("Omarchy Settings"), subtitle=f"{__version__} · {where[location]}")
+        self.about_group.add(row)
+        bg(system.latest_release, lambda latest: self._show_latest(row, latest))
+        if not others:
+            return
+        remove = {
+            "package": f"sudo pacman -R {system.PACKAGE}",
+            "local": "rm -r ~/.local/share/omarchy-settings ~/.local/bin/omarchy-settings",
+        }
+        other = {
+            "package": _("the package {name}").format(name=system.PACKAGE),
+            "local": _("a copy from install.sh"),
+        }[others[0]]
+        warning = Adw.ActionRow(
+            title=_("Installed twice"),
+            subtitle=_(
+                "Also installed: {other}. The launcher opens only one of them ({path}); "
+                "remove the one you don't use with {command}"
+            ).format(
+                other=other,
+                path=shutil.which("omarchy-settings") or "omarchy-settings",
+                command=remove[others[0]],
+            ),
+            subtitle_selectable=True,
+        )
+        warning.add_prefix(Gtk.Image(icon_name="dialog-warning-symbolic"))
+        self.about_group.add(warning)
+
+    def _show_latest(self, row: Adw.ActionRow, latest) -> None:
+        if isinstance(latest, Exception) or not system.is_newer(latest, __version__):
+            return
+        row.set_subtitle(row.get_subtitle() + " · " + _("version {version} is available").format(version=latest))
+        btn = Gtk.Button(label=_("See"), valign=Gtk.Align.CENTER)
+        btn.connect("clicked", lambda _b: core.spawn(["xdg-open", system.RELEASES_URL]))
+        row.add_suffix(btn)
 
     def _show_update(self, row: Adw.ActionRow, res) -> None:
         state, detail = (None, "") if isinstance(res, Exception) else res
