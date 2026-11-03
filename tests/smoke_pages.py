@@ -36,18 +36,24 @@ core.run = fake_run
 core.out = lambda args, timeout=10: ""
 core.have = lambda cmd: mode == "empty"
 core.spawn = lambda args: False
-subprocess.Popen = no_process  # long-lived watchers (pactl subscribe, bluetoothctl)
-sys.excepthook = lambda kind, value, tb: errors.append("".join(traceback.format_exception(kind, value, tb)))
-threading.excepthook = lambda a: errors.append(
-    "".join(traceback.format_exception(a.exc_type, a.exc_value, a.exc_traceback))
-)
 
 from omarchy_settings.app import PAGES, Window  # noqa: E402
 
 shown: list[str] = []
 
 
+def collect_errors() -> None:
+    """From here on, errors in GTK callbacks are collected instead of only printed (an import error still stops
+    the script with its traceback)."""
+    sys.excepthook = lambda kind, value, tb: errors.append("".join(traceback.format_exception(kind, value, tb)))
+    threading.excepthook = lambda a: errors.append(
+        "".join(traceback.format_exception(a.exc_type, a.exc_value, a.exc_traceback))
+    )
+
+
 def activate(app: Adw.Application) -> None:
+    collect_errors()
+    subprocess.Popen = no_process  # long-lived watchers (pactl subscribe, bluetoothctl)
     win = Window(app)
     win.store.save = lambda: errors.append("a page saved settings while only being shown")
     win.present()
