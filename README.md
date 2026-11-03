@@ -197,6 +197,9 @@ the translations: every marked string has a translation, no translation is left 
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
 Omarchy isn't installed) and fails if an update changes their format.
+`tests/test_pages_smoke.py` opens the window on a headless Broadway display (`gtk4-broadwayd`, part of `gtk4`) with
+an empty home folder and fake commands, shows every page twice (no command installed; every command answering
+nothing) and fails on any Python error raised inside GTK; it is skipped when Broadway or libadwaita is missing.
 
 ## Layout
 
