@@ -44,6 +44,8 @@ threading.excepthook = lambda a: errors.append(
 
 from omarchy_settings.app import PAGES, Window  # noqa: E402
 
+shown: list[str] = []
+
 
 def activate(app: Adw.Application) -> None:
     win = Window(app)
@@ -53,6 +55,7 @@ def activate(app: Adw.Application) -> None:
 
     def step() -> bool:
         if names:
+            shown.append(names[0])
             win.show_page(names.pop(0))
             return True
         app.quit()
@@ -67,7 +70,9 @@ def activate(app: Adw.Application) -> None:
 
 app = Adw.Application(application_id="org.omarchy.SettingsSmoke", flags=Gio.ApplicationFlags.NON_UNIQUE)
 app.connect("activate", activate)
-app.run([])
+status = app.run([])
+if len(shown) != len(PAGES):
+    errors.append(f"only {len(shown)} of {len(PAGES)} pages were shown (exit status {status})")
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)

@@ -28,7 +28,11 @@ def display(tmp_path_factory):
     runtime.chmod(0o700)
     env = {"XDG_RUNTIME_DIR": str(runtime), "PATH": os.environ.get("PATH", "")}
     server = subprocess.Popen(["gtk4-broadwayd", ":42"], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    time.sleep(1)
+    # :42 listens on broadway43.socket
+    for _ in range(100):
+        if any(runtime.glob("broadway*.socket")) or server.poll() is not None:
+            break
+        time.sleep(0.1)
     yield {**env, "GDK_BACKEND": "broadway", "BROADWAY_DISPLAY": ":42"}
     server.terminate()
     server.wait()
@@ -51,4 +55,4 @@ def test_every_page_shows_without_errors(display, tmp_path, mode):
         text=True,
         timeout=120,
     )
-    assert r.returncode == 0, r.stderr[-4000:]
+    assert r.returncode == 0, (r.stdout + r.stderr)[-4000:]
