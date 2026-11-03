@@ -10,6 +10,7 @@ pkgbase = omarchy-settings-gui
 	depends = python-gobject
 	depends = gtk4
 	depends = libadwaita
+	optdepends = libnm: saves Wi-Fi passwords from the Connectivity page
 	optdepends = impala: Wi-Fi manager opened by the Connectivity page
 	optdepends = bluetui: Bluetooth manager opened by the Connectivity page
 	optdepends = wiremix: audio mixer opened by the Sound page

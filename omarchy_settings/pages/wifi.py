@@ -11,7 +11,6 @@ from gi.repository import Adw, Gtk  # noqa: E402
 from .. import core, wifi
 from .. import network as net
 from ..i18n import _, ngettext
-from ..nm import save_with_password
 from ..ui import bg, button_row, confirm, refresh_while_mapped
 from .ipv4 import Ipv4Fields, invalid_message
 
@@ -326,6 +325,11 @@ class WifiGroup(Adw.PreferencesGroup):
                     [wifi.connect_saved(uuid, self.iface)], _("Connected to {name}").format(name=ssid), on_fail=failed
                 )
 
+            try:  # libnm only comes with NetworkManager; without it the rest of the app still works
+                from ..nm import save_with_password
+            except (ImportError, ValueError):
+                self.win.toast(_("Saving a Wi-Fi password needs libnm; install it from ☰ → Dependencies"))
+                return
             save_with_password(ssid, password, kind, hidden, self.iface, saved)
 
         PasswordDialog(n.ssid if n else None, connect).present(self.win)

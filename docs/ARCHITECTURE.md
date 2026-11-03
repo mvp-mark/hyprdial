@@ -21,7 +21,8 @@ core.py        running commands (run/out/have/spawn) and the generated Hyprland 
 - **Opening another app** (an editor, the browser, a terminal) is fine from a page, through `core.spawn`,
   `core.open_in_editor` or `ui.launch_tui`; reading or changing system state is not.
 - `nm.py` saves Wi-Fi passwords through libnm. It needs PyGObject's NM bindings but no GTK, so it sits outside the
-  unit tests, which run without PyGObject.
+  unit tests, which run without PyGObject. libnm is optional (it comes with NetworkManager), so `nm.py` is imported
+  only when a password is saved; the page smoke test runs without it.
 
 ## Changing the system: Omarchy first
 

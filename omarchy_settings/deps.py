@@ -28,6 +28,7 @@ def dependencies() -> list[Dep]:
         Dep("gtk4", "required", _("Interface toolkit")),
         Dep("libadwaita", "required", _("GNOME widgets and styles (1.5 or newer)")),
         Dep("gettext", "required", _("Compiles the interface translations")),
+        Dep("libnm", "optional", _("Saves Wi-Fi passwords from the Connectivity page")),
         Dep("impala", "optional", _("Wi-Fi manager opened by the Connectivity page")),
         Dep("bluetui", "optional", _("Bluetooth manager opened by the Connectivity page")),
         Dep("wiremix", "optional", _("Audio mixer opened by the Sound page")),

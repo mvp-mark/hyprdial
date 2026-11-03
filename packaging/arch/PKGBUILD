@@ -13,7 +13,8 @@ url="https://github.com/mvp-mark/$_name"
 license=('MIT')
 depends=('python' 'python-gobject' 'gtk4' 'libadwaita')
 makedepends=('gettext')
-optdepends=('impala: Wi-Fi manager opened by the Connectivity page'
+optdepends=('libnm: saves Wi-Fi passwords from the Connectivity page'
+            'impala: Wi-Fi manager opened by the Connectivity page'
             'bluetui: Bluetooth manager opened by the Connectivity page'
             'wiremix: audio mixer opened by the Sound page'
             "waybar: alternative bar (Omarchy uses the Omarchy shell bar)")

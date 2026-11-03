@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 00:12-0400\n"
+"POT-Creation-Date: 2026-11-03 00:18-0400\n"
 "PO-Revision-Date: 2026-11-02 04:00-0400\n"
 "Last-Translator: omarchy-settings contributors\n"
 "Language-Team: French\n"
@@ -71,7 +71,7 @@ msgstr "Raccourcis"
 msgid "Accessibility"
 msgstr "Accessibilité"
 
-#: omarchy_settings/app.py:55 omarchy_settings/pages/wifi.py:38
+#: omarchy_settings/app.py:55 omarchy_settings/pages/wifi.py:37
 msgid "Security"
 msgstr "Sécurité"
 
@@ -151,34 +151,38 @@ msgid "Compiles the interface translations"
 msgstr "Compile les traductions de l'interface"
 
 #: omarchy_settings/deps.py:31
+msgid "Saves Wi-Fi passwords from the Connectivity page"
+msgstr "Enregistre les mots de passe Wi-Fi depuis la page Connectivité"
+
+#: omarchy_settings/deps.py:32
 msgid "Wi-Fi manager opened by the Connectivity page"
 msgstr "Gestionnaire Wi-Fi ouvert par la page Connectivité"
 
-#: omarchy_settings/deps.py:32
+#: omarchy_settings/deps.py:33
 msgid "Bluetooth manager opened by the Connectivity page"
 msgstr "Gestionnaire Bluetooth ouvert par la page Connectivité"
 
-#: omarchy_settings/deps.py:33
+#: omarchy_settings/deps.py:34
 msgid "Audio mixer opened by the Sound page"
 msgstr "Mixeur audio ouvert par la page Son"
 
-#: omarchy_settings/deps.py:38
+#: omarchy_settings/deps.py:39
 msgid "Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar doesn't start it or replace the current bar"
 msgstr "Barre alternative. Omarchy utilise la barre du shell Omarchy ; installer Waybar ne la lance pas et ne remplace pas la barre actuelle"
 
-#: omarchy_settings/deps.py:43
+#: omarchy_settings/deps.py:44
 msgid "Runs the project's tests"
 msgstr "Lance les tests du projet"
 
-#: omarchy_settings/deps.py:48
+#: omarchy_settings/deps.py:49
 msgid "Required"
 msgstr "Requises"
 
-#: omarchy_settings/deps.py:48
+#: omarchy_settings/deps.py:49
 msgid "Optional"
 msgstr "Facultatives"
 
-#: omarchy_settings/deps.py:48
+#: omarchy_settings/deps.py:49
 msgid "Development"
 msgstr "Développement"
 
@@ -437,7 +441,7 @@ msgstr "Les modifications y sont les vôtres ; cette application ne fait que les
 #: omarchy_settings/pages/autostart.py:47 omarchy_settings/pages/bar.py:412
 #: omarchy_settings/pages/bar.py:419 omarchy_settings/pages/bluetooth.py:178
 #: omarchy_settings/pages/sound.py:220 omarchy_settings/pages/system.py:96
-#: omarchy_settings/pages/wifi.py:22 omarchy_settings/pages/wifi.py:212
+#: omarchy_settings/pages/wifi.py:21 omarchy_settings/pages/wifi.py:211
 msgid "Open"
 msgstr "Ouvrir"
 
@@ -783,8 +787,8 @@ msgstr "omarchy-bar introuvable : mettez à jour Omarchy pour utiliser cette pag
 #: omarchy_settings/pages/bar.py:322 omarchy_settings/pages/bar.py:358
 #: omarchy_settings/pages/bar.py:445 omarchy_settings/pages/bluetooth.py:213
 #: omarchy_settings/pages/ethernet.py:223 omarchy_settings/pages/system.py:128
-#: omarchy_settings/pages/system.py:247 omarchy_settings/pages/wifi.py:269
-#: omarchy_settings/pages/wifi.py:307 omarchy_settings/pages/wifi.py:322
+#: omarchy_settings/pages/system.py:247 omarchy_settings/pages/wifi.py:268
+#: omarchy_settings/pages/wifi.py:306 omarchy_settings/pages/wifi.py:321
 #, python-brace-format
 msgid "Failed: {error}"
 msgstr "Échec : {error}"
@@ -1061,7 +1065,7 @@ msgstr "Code d'appairage"
 
 #: omarchy_settings/pages/bluetooth.py:35
 #: omarchy_settings/pages/shortcuts.py:151 omarchy_settings/pages/system.py:226
-#: omarchy_settings/pages/wifi.py:54 omarchy_settings/pages/wifi.py:344
+#: omarchy_settings/pages/wifi.py:53 omarchy_settings/pages/wifi.py:348
 #: omarchy_settings/ui.py:174
 msgid "Cancel"
 msgstr "Annuler"
@@ -1083,7 +1087,7 @@ msgid "bluetoothctl is not installed"
 msgstr "bluetoothctl n'est pas installé"
 
 #: omarchy_settings/pages/bluetooth.py:101
-#: omarchy_settings/pages/monitors.py:29 omarchy_settings/pages/wifi.py:161
+#: omarchy_settings/pages/monitors.py:29 omarchy_settings/pages/wifi.py:160
 msgid "Off"
 msgstr "Désactivé"
 
@@ -1142,7 +1146,7 @@ msgstr "Rechercher"
 msgid "Nearby devices"
 msgstr "Appareils à proximité"
 
-#: omarchy_settings/pages/bluetooth.py:151 omarchy_settings/pages/wifi.py:180
+#: omarchy_settings/pages/bluetooth.py:151 omarchy_settings/pages/wifi.py:179
 #, python-brace-format
 msgid "{n} found"
 msgid_plural "{n} found"
@@ -1167,7 +1171,7 @@ msgstr "Rechercher à nouveau"
 
 #: omarchy_settings/pages/bluetooth.py:178
 #: omarchy_settings/pages/hyprland.py:238 omarchy_settings/pages/sound.py:217
-#: omarchy_settings/pages/wifi.py:212
+#: omarchy_settings/pages/wifi.py:211
 msgid "Advanced"
 msgstr "Avancé"
 
@@ -1177,28 +1181,28 @@ msgstr "Gestionnaire Bluetooth complet (bluetui)"
 
 #: omarchy_settings/pages/bluetooth.py:183
 #: omarchy_settings/pages/ethernet.py:24 omarchy_settings/pages/ethernet.py:193
-#: omarchy_settings/pages/wifi.py:217 omarchy_settings/pages/wifi.py:233
+#: omarchy_settings/pages/wifi.py:216 omarchy_settings/pages/wifi.py:232
 msgid "Connected"
 msgstr "Connecté"
 
-#: omarchy_settings/pages/bluetooth.py:183 omarchy_settings/pages/wifi.py:170
+#: omarchy_settings/pages/bluetooth.py:183 omarchy_settings/pages/wifi.py:169
 msgid "Not connected"
 msgstr "Non connecté"
 
 #: omarchy_settings/pages/bluetooth.py:191
-#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:226
+#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:225
 msgid "Disconnect"
 msgstr "Déconnecter"
 
 #: omarchy_settings/pages/bluetooth.py:191
-#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:55
-#: omarchy_settings/pages/wifi.py:226
+#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:54
+#: omarchy_settings/pages/wifi.py:225
 msgid "Connect"
 msgstr "Connecter"
 
 #: omarchy_settings/pages/bluetooth.py:195
-#: omarchy_settings/pages/bluetooth.py:242 omarchy_settings/pages/wifi.py:248
-#: omarchy_settings/pages/wifi.py:372
+#: omarchy_settings/pages/bluetooth.py:242 omarchy_settings/pages/wifi.py:247
+#: omarchy_settings/pages/wifi.py:376
 msgid "Forget"
 msgstr "Oublier"
 
@@ -1412,7 +1416,7 @@ msgstr "Serveurs DNS"
 msgid "Link speed"
 msgstr "Débit de la liaison"
 
-#: omarchy_settings/pages/ethernet.py:113 omarchy_settings/pages/wifi.py:244
+#: omarchy_settings/pages/ethernet.py:113 omarchy_settings/pages/wifi.py:243
 msgid "IPv4 settings"
 msgstr "Paramètres IPv4"
 
@@ -1437,7 +1441,7 @@ msgstr "Filaire (Ethernet)"
 msgid "Refresh"
 msgstr "Actualiser"
 
-#: omarchy_settings/pages/ethernet.py:147 omarchy_settings/pages/wifi.py:118
+#: omarchy_settings/pages/ethernet.py:147 omarchy_settings/pages/wifi.py:117
 msgid "NetworkManager (nmcli) is not available"
 msgstr "NetworkManager (nmcli) n'est pas disponible"
 
@@ -1449,7 +1453,7 @@ msgstr "Aucun port Ethernet trouvé"
 msgid "Cable"
 msgstr "Câble"
 
-#: omarchy_settings/pages/ethernet.py:193 omarchy_settings/pages/wifi.py:283
+#: omarchy_settings/pages/ethernet.py:193 omarchy_settings/pages/wifi.py:282
 msgid "Disconnected"
 msgstr "Déconnecté"
 
@@ -2448,7 +2452,7 @@ msgstr "Commande (ex. firefox, gimp, btop)"
 msgid "Click or scroll here"
 msgstr "Cliquez ou faites défiler ici"
 
-#: omarchy_settings/pages/shortcuts.py:152 omarchy_settings/pages/wifi.py:345
+#: omarchy_settings/pages/shortcuts.py:152 omarchy_settings/pages/wifi.py:349
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -3163,164 +3167,168 @@ msgstr "{name} retirée"
 msgid "Could not remove {name}"
 msgstr "Impossible de retirer {name}"
 
-#: omarchy_settings/pages/wifi.py:22
+#: omarchy_settings/pages/wifi.py:21
 msgid "Open (encrypted)"
 msgstr "Ouvert (chiffré)"
 
-#: omarchy_settings/pages/wifi.py:22
+#: omarchy_settings/pages/wifi.py:21
 msgid "Enterprise (802.1X)"
 msgstr "Entreprise (802.1X)"
 
-#: omarchy_settings/pages/wifi.py:23
+#: omarchy_settings/pages/wifi.py:22
 msgid "Secured"
 msgstr "Sécurisé"
 
-#: omarchy_settings/pages/wifi.py:33
+#: omarchy_settings/pages/wifi.py:32
 #, python-brace-format
 msgid "Connect to “{ssid}”"
 msgstr "Se connecter à « {ssid} »"
 
-#: omarchy_settings/pages/wifi.py:33 omarchy_settings/pages/wifi.py:194
+#: omarchy_settings/pages/wifi.py:32 omarchy_settings/pages/wifi.py:193
 msgid "Hidden network"
 msgstr "Réseau masqué"
 
-#: omarchy_settings/pages/wifi.py:37
+#: omarchy_settings/pages/wifi.py:36
 msgid "Network name (SSID)"
 msgstr "Nom du réseau (SSID)"
 
-#: omarchy_settings/pages/wifi.py:39
+#: omarchy_settings/pages/wifi.py:38
 msgid "None"
 msgstr "Aucune"
 
-#: omarchy_settings/pages/wifi.py:40
+#: omarchy_settings/pages/wifi.py:39
 msgid "Password"
 msgstr "Mot de passe"
 
-#: omarchy_settings/pages/wifi.py:72
+#: omarchy_settings/pages/wifi.py:71
 msgid "WPA passwords have 8 to 63 characters."
 msgstr "Les mots de passe WPA comptent de 8 à 63 caractères."
 
-#: omarchy_settings/pages/wifi.py:92 omarchy_settings/pages/wifi.py:171
+#: omarchy_settings/pages/wifi.py:91 omarchy_settings/pages/wifi.py:170
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: omarchy_settings/pages/wifi.py:104
+#: omarchy_settings/pages/wifi.py:103
 msgid "Search for networks"
 msgstr "Rechercher des réseaux"
 
-#: omarchy_settings/pages/wifi.py:124
+#: omarchy_settings/pages/wifi.py:123
 msgid "No Wi-Fi adapter found"
 msgstr "Aucun adaptateur Wi-Fi trouvé"
 
-#: omarchy_settings/pages/wifi.py:164 omarchy_settings/pages/wifi.py:288
-#: omarchy_settings/pages/wifi.py:291 omarchy_settings/pages/wifi.py:326
+#: omarchy_settings/pages/wifi.py:163 omarchy_settings/pages/wifi.py:287
+#: omarchy_settings/pages/wifi.py:290 omarchy_settings/pages/wifi.py:325
 #, python-brace-format
 msgid "Connected to {name}"
 msgstr "Connecté à {name}"
 
-#: omarchy_settings/pages/wifi.py:168
+#: omarchy_settings/pages/wifi.py:167
 msgid "Connecting…"
 msgstr "Connexion…"
 
-#: omarchy_settings/pages/wifi.py:178
+#: omarchy_settings/pages/wifi.py:177
 msgid "Available networks"
 msgstr "Réseaux disponibles"
 
-#: omarchy_settings/pages/wifi.py:186
+#: omarchy_settings/pages/wifi.py:185
 msgid "No networks found"
 msgstr "Aucun réseau trouvé"
 
-#: omarchy_settings/pages/wifi.py:186
+#: omarchy_settings/pages/wifi.py:185
 msgid "Use the refresh button above to search again"
 msgstr "Utilisez le bouton d'actualisation ci-dessus pour relancer la recherche"
 
-#: omarchy_settings/pages/wifi.py:195
+#: omarchy_settings/pages/wifi.py:194
 msgid "Connect to a network that doesn't broadcast its name"
 msgstr "Se connecter à un réseau qui ne diffuse pas son nom"
 
-#: omarchy_settings/pages/wifi.py:196
+#: omarchy_settings/pages/wifi.py:195
 msgid "Connect…"
 msgstr "Se connecter…"
 
-#: omarchy_settings/pages/wifi.py:203
+#: omarchy_settings/pages/wifi.py:202
 msgid "Saved networks"
 msgstr "Réseaux enregistrés"
 
-#: omarchy_settings/pages/wifi.py:205
+#: omarchy_settings/pages/wifi.py:204
 #, python-brace-format
 msgid "{n} saved"
 msgid_plural "{n} saved"
 msgstr[0] "{n} enregistré"
 msgstr[1] "{n} enregistrés"
 
-#: omarchy_settings/pages/wifi.py:212
+#: omarchy_settings/pages/wifi.py:211
 msgid "Full Wi-Fi manager (impala)"
 msgstr "Gestionnaire Wi-Fi complet (impala)"
 
-#: omarchy_settings/pages/wifi.py:219
+#: omarchy_settings/pages/wifi.py:218
 msgid "Saved"
 msgstr "Enregistré"
 
-#: omarchy_settings/pages/wifi.py:235
+#: omarchy_settings/pages/wifi.py:234
 msgid "Connects automatically"
 msgstr "Se connecte automatiquement"
 
-#: omarchy_settings/pages/wifi.py:235
+#: omarchy_settings/pages/wifi.py:234
 msgid "Doesn't connect automatically"
 msgstr "Ne se connecte pas automatiquement"
 
-#: omarchy_settings/pages/wifi.py:238
+#: omarchy_settings/pages/wifi.py:237
 #, python-brace-format
 msgid "profile “{name}”"
 msgstr "profil « {name} »"
 
-#: omarchy_settings/pages/wifi.py:287 omarchy_settings/pages/wifi.py:290
-#: omarchy_settings/pages/wifi.py:301
+#: omarchy_settings/pages/wifi.py:286 omarchy_settings/pages/wifi.py:289
+#: omarchy_settings/pages/wifi.py:300
 #, python-brace-format
 msgid "Connecting to {ssid}…"
 msgstr "Connexion à {ssid}…"
 
-#: omarchy_settings/pages/wifi.py:293
+#: omarchy_settings/pages/wifi.py:292
 msgid "Enterprise (802.1X) networks need more settings; use Advanced (impala)"
 msgstr "Les réseaux entreprise (802.1X) demandent plus de réglages ; utilisez Avancé (impala)"
 
-#: omarchy_settings/pages/wifi.py:315
+#: omarchy_settings/pages/wifi.py:314
 #, python-brace-format
 msgid "Wrong password for {ssid}"
 msgstr "Mot de passe incorrect pour {ssid}"
 
-#: omarchy_settings/pages/wifi.py:316
+#: omarchy_settings/pages/wifi.py:315
 #, python-brace-format
 msgid "Network {ssid} not found"
 msgstr "Réseau {ssid} introuvable"
 
-#: omarchy_settings/pages/wifi.py:317
+#: omarchy_settings/pages/wifi.py:316
 msgid "Wi-Fi is off or unavailable"
 msgstr "Le Wi-Fi est désactivé ou indisponible"
 
-#: omarchy_settings/pages/wifi.py:336
+#: omarchy_settings/pages/wifi.py:331
+msgid "Saving a Wi-Fi password needs libnm; install it from ☰ → Dependencies"
+msgstr "Enregistrer un mot de passe Wi-Fi nécessite libnm ; installez-le depuis ☰ → Dépendances"
+
+#: omarchy_settings/pages/wifi.py:340
 #, python-brace-format
 msgid "Could not read the settings of {ssid}"
 msgstr "Impossible de lire les paramètres de {ssid}"
 
-#: omarchy_settings/pages/wifi.py:338
+#: omarchy_settings/pages/wifi.py:342
 msgid "When the network is in range"
 msgstr "Quand le réseau est à portée"
 
-#: omarchy_settings/pages/wifi.py:360
+#: omarchy_settings/pages/wifi.py:364
 msgid "Settings saved"
 msgstr "Paramètres enregistrés"
 
-#: omarchy_settings/pages/wifi.py:370
+#: omarchy_settings/pages/wifi.py:374
 #, python-brace-format
 msgid "Forget “{ssid}”?"
 msgstr "Oublier « {ssid} » ?"
 
-#: omarchy_settings/pages/wifi.py:371
+#: omarchy_settings/pages/wifi.py:375
 msgid "The saved password and settings are deleted."
 msgstr "Le mot de passe et les paramètres enregistrés sont supprimés."
 
-#: omarchy_settings/pages/wifi.py:373
+#: omarchy_settings/pages/wifi.py:377
 #, python-brace-format
 msgid "{ssid} forgotten"
 msgstr "{ssid} oublié"

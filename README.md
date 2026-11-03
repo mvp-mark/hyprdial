@@ -125,7 +125,7 @@ Dependencies, listed in `omarchy_settings/deps.py`:
 | Group | Packages |
 |---|---|
 | Required | `python-gobject`, `gtk4`, `libadwaita` (>= 1.5), `gettext` |
-| Optional | `impala`, `bluetui`, `wiremix` (TUIs opened by the Connectivity and Sound pages), `waybar` |
+| Optional | `libnm` (saves Wi-Fi passwords; comes with NetworkManager), `impala`, `bluetui`, `wiremix` (TUIs opened by the Connectivity and Sound pages), `waybar` |
 | Development | `python-pytest` |
 
 Waybar is offered as an optional alternative bar only: Omarchy uses the Omarchy shell bar, and installing Waybar
