@@ -77,9 +77,12 @@ jobs:
 
       - name: Build and install the RPM (Fedora, openSUSE)
         if: ${{ !startsWith(matrix.image, 'debian') }}
+        shell: bash
+        # --force-resolution: the Tumbleweed image's busybox-gawk gives way to the gawk that rpm-build needs
         run: |
           if command -v dnf; then dnf install -y rpm-build desktop-file-utils; install=(dnf install -y)
-          else zypper --non-interactive install rpm-build desktop-file-utils; install=(zypper --non-interactive install --allow-unsigned-rpm); fi
+          else zypper --non-interactive install --force-resolution rpm-build desktop-file-utils
+            install=(zypper --non-interactive install --allow-unsigned-rpm); fi
           version=$(sed -n 's/^Version: *//p' packaging/rpm/hyprdial.spec)
           mkdir -p ~/rpmbuild/SOURCES
           tar --transform "s,^\.,hyprdial-$version," --exclude=./.git -czf ~/rpmbuild/SOURCES/hyprdial-$version.tar.gz .
