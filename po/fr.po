@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hyprdial\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 23:13-0400\n"
+"POT-Creation-Date: 2026-11-03 23:34-0400\n"
 "PO-Revision-Date: 2026-11-02 04:00-0400\n"
 "Last-Translator: omarchy-settings contributors\n"
 "Language-Team: French\n"
@@ -15,115 +15,123 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: hyprdial/app.py:36
+#: hyprdial/app.py:38
 msgid "Style"
 msgstr "Style"
 
-#: hyprdial/app.py:36
+#: hyprdial/app.py:38
 msgid "Hardware"
 msgstr "Matériel"
 
-#: hyprdial/app.py:36 hyprdial/app.py:56
+#: hyprdial/app.py:38 hyprdial/app.py:60
 msgid "System"
 msgstr "Système"
 
-#: hyprdial/app.py:38
+#: hyprdial/app.py:40
 msgid "Themes"
 msgstr "Thèmes"
 
-#: hyprdial/app.py:39
+#: hyprdial/app.py:41
 msgid "Appearance"
 msgstr "Apparence"
 
-#: hyprdial/app.py:40
+#: hyprdial/app.py:42
 msgid "Bar and fonts"
 msgstr "Barre et polices"
 
-#: hyprdial/app.py:41 hyprdial/pages/monitors.py:234
+#: hyprdial/app.py:43 hyprdial/pages/bar.py:89
+msgid "Bar"
+msgstr "Barre"
+
+#: hyprdial/app.py:44 hyprdial/pages/monitors.py:239
 msgid "Displays"
 msgstr "Écrans"
 
-#: hyprdial/app.py:42 hyprdial/pages/sound.py:179
+#: hyprdial/app.py:45 hyprdial/pages/sound.py:179
 msgid "Sound"
 msgstr "Son"
 
-#: hyprdial/app.py:43 hyprdial/pages/bar.py:48
+#: hyprdial/app.py:46 hyprdial/pages/bar.py:48
 msgid "Power"
 msgstr "Énergie"
 
-#: hyprdial/app.py:44 hyprdial/pages/sound.py:202
+#: hyprdial/app.py:47 hyprdial/pages/sound.py:202
 msgid "Input"
 msgstr "Saisie"
 
-#: hyprdial/app.py:45
+#: hyprdial/app.py:48
 msgid "Connectivity"
 msgstr "Connectivité"
 
-#: hyprdial/app.py:46
+#: hyprdial/app.py:49
 msgid "Apps"
 msgstr "Applications"
 
-#: hyprdial/app.py:47
+#: hyprdial/app.py:50
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
-#: hyprdial/app.py:51
+#: hyprdial/app.py:51 hyprdial/pages/hyprland.py:141
+msgid "Windows"
+msgstr "Fenêtres"
+
+#: hyprdial/app.py:55
 msgid "Accessibility"
 msgstr "Accessibilité"
 
-#: hyprdial/app.py:55 hyprdial/pages/wifi.py:37
+#: hyprdial/app.py:59 hyprdial/pages/wifi.py:37
 msgid "Security"
 msgstr "Sécurité"
 
-#: hyprdial/app.py:81
+#: hyprdial/app.py:87
 msgid "Changed settings…"
 msgstr "Paramètres modifiés…"
 
-#: hyprdial/app.py:82
+#: hyprdial/app.py:88
 msgid "Dependencies…"
 msgstr "Dépendances…"
 
-#: hyprdial/app.py:83
+#: hyprdial/app.py:89
 msgid "Restore app defaults…"
 msgstr "Restaurer les valeurs de l'application…"
 
-#: hyprdial/app.py:90
+#: hyprdial/app.py:96
 msgid "Search settings (Ctrl+F)"
 msgstr "Rechercher des paramètres (Ctrl+F)"
 
-#: hyprdial/app.py:94
+#: hyprdial/app.py:100
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: hyprdial/app.py:204
+#: hyprdial/app.py:210
 msgid "Restore app defaults?"
 msgstr "Restaurer les valeurs de l'application ?"
 
-#: hyprdial/app.py:206
+#: hyprdial/app.py:212
 msgid "Removes every Hyprland, display, shortcut, power button and startup command setting made in this app, returning to the defaults. The bar, theme, network and system settings are not touched. A backup of the generated file is kept, and you can undo right after."
 msgstr "Supprime tous les réglages Hyprland, d'écrans, de raccourcis, du bouton d'alimentation et des commandes de démarrage faits dans cette app, pour revenir aux valeurs par défaut. La barre, le thème, le réseau et le système ne sont pas touchés. Une copie du fichier généré est conservée, et vous pouvez annuler juste après."
 
-#: hyprdial/app.py:210 hyprdial/pages/bar.py:158 hyprdial/pages/bar.py:220
+#: hyprdial/app.py:216 hyprdial/pages/bar.py:158 hyprdial/pages/bar.py:220
 #: hyprdial/pages/bar.py:427 hyprdial/pages/hyprland.py:126
-#: hyprdial/pages/monitors.py:424 hyprdial/pages/shortcuts.py:284
-#: hyprdial/pages/shortcuts.py:533
+#: hyprdial/pages/monitors.py:500 hyprdial/pages/shortcuts.py:284
+#: hyprdial/pages/shortcuts.py:533 hyprdial/pages/waybar.py:78
 msgid "Restore"
 msgstr "Restaurer"
 
-#: hyprdial/app.py:217
+#: hyprdial/app.py:223
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr "Restauration impossible : {error}"
 
-#: hyprdial/app.py:221
+#: hyprdial/app.py:227
 msgid "App defaults restored"
 msgstr "Valeurs de l'application restaurées"
 
-#: hyprdial/app.py:221 hyprdial/pages/themes.py:257
+#: hyprdial/app.py:227 hyprdial/pages/themes.py:257
 msgid "Undo"
 msgstr "Annuler"
 
-#: hyprdial/app.py:226
+#: hyprdial/app.py:232
 msgid "Settings brought back"
 msgstr "Paramètres rétablis"
 
@@ -163,19 +171,39 @@ msgstr "Mixeur audio ouvert par la page Son"
 msgid "Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar doesn't start it or replace the current bar"
 msgstr "Barre alternative. Omarchy utilise la barre du shell Omarchy ; installer Waybar ne la lance pas et ne remplace pas la barre actuelle"
 
+#: hyprdial/deps.py:75
+msgid "The bar, set up on the Bar page"
+msgstr "La barre, réglée dans la page Barre"
+
+#: hyprdial/deps.py:78
+msgid "Locks, turns the screen off and suspends when idle (Power page)"
+msgstr "Verrouille, éteint l'écran et met en veille en cas d'inactivité (page Énergie)"
+
+#: hyprdial/deps.py:79
+msgid "The lock screen"
+msgstr "L'écran de verrouillage"
+
 #: hyprdial/deps.py:80
+msgid "Shows the wallpaper chosen on the Appearance page"
+msgstr "Affiche le fond d'écran choisi dans la page Apparence"
+
+#: hyprdial/deps.py:81
+msgid "Dims the screen before locking"
+msgstr "Assombrit l'écran avant le verrouillage"
+
+#: hyprdial/deps.py:85
 msgid "Runs the project's tests"
 msgstr "Lance les tests du projet"
 
-#: hyprdial/deps.py:95
+#: hyprdial/deps.py:101
 msgid "Required"
 msgstr "Requises"
 
-#: hyprdial/deps.py:95
+#: hyprdial/deps.py:101
 msgid "Optional"
 msgstr "Facultatives"
 
-#: hyprdial/deps.py:95
+#: hyprdial/deps.py:101
 msgid "Development"
 msgstr "Développement"
 
@@ -321,11 +349,11 @@ msgstr "Ce raccourci nécessite un bouton de la souris."
 msgid "Mouse shortcuts need a modifier, or normal clicking and scrolling stop working."
 msgstr "Les raccourcis de la souris nécessitent un modificateur, sinon le clic et le défilement normaux ne fonctionnent plus."
 
-#: hyprdial/keybinds.py:537
+#: hyprdial/keybinds.py:542
 msgid "Not found in the config files; it can only be disabled"
 msgstr "Introuvable dans les fichiers de configuration ; il peut seulement être désactivé"
 
-#: hyprdial/keybinds.py:540
+#: hyprdial/keybinds.py:545
 msgid "Uses something defined in its own file; it can only be disabled"
 msgstr "Utilise quelque chose défini dans son propre fichier ; il peut seulement être désactivé"
 
@@ -390,7 +418,7 @@ msgstr "Gestionnaire de fichiers"
 msgid "PDF documents"
 msgstr "Documents PDF"
 
-#: hyprdial/pages/apps.py:23
+#: hyprdial/pages/apps.py:23 hyprdial/pages/hyprland.py:595
 msgid "Images"
 msgstr "Images"
 
@@ -454,8 +482,10 @@ msgstr "Les modifications y sont les vôtres ; cette application ne fait que les
 
 #: hyprdial/pages/autostart.py:48 hyprdial/pages/bar.py:412
 #: hyprdial/pages/bar.py:419 hyprdial/pages/bluetooth.py:178
-#: hyprdial/pages/sound.py:220 hyprdial/pages/system.py:97
-#: hyprdial/pages/wifi.py:21 hyprdial/pages/wifi.py:211
+#: hyprdial/pages/power.py:117 hyprdial/pages/sound.py:220
+#: hyprdial/pages/system.py:97 hyprdial/pages/waybar.py:69
+#: hyprdial/pages/waybar.py:72 hyprdial/pages/wifi.py:21
+#: hyprdial/pages/wifi.py:211
 msgid "Open"
 msgstr "Ouvrir"
 
@@ -475,8 +505,8 @@ msgstr[1] "{n} commandes"
 msgid "Could not change {name}"
 msgstr "Impossible de modifier {name}"
 
-#: hyprdial/pages/autostart.py:112 hyprdial/pages/power.py:329
-#: hyprdial/pages/power.py:340 hyprdial/pages/security.py:53
+#: hyprdial/pages/autostart.py:112 hyprdial/pages/power.py:389
+#: hyprdial/pages/power.py:400 hyprdial/pages/security.py:53
 #: hyprdial/pages/security.py:71 hyprdial/pages/webapps.py:127
 #: hyprdial/pages/webapps.py:147
 msgid "Remove"
@@ -494,11 +524,11 @@ msgstr "Cette commande y est déjà"
 msgid "It will start the next time you log in"
 msgstr "Elle démarrera à la prochaine ouverture de session"
 
-#: hyprdial/pages/bar.py:18
+#: hyprdial/pages/bar.py:18 hyprdial/pages/waybar.py:16
 msgid "Top"
 msgstr "En haut"
 
-#: hyprdial/pages/bar.py:18
+#: hyprdial/pages/bar.py:18 hyprdial/pages/waybar.py:16
 msgid "Bottom"
 msgstr "En bas"
 
@@ -619,7 +649,7 @@ msgstr "Microphone"
 msgid "Microphone state and mute button"
 msgstr "État du micro et bouton muet"
 
-#: hyprdial/pages/bar.py:46 hyprdial/pages/monitors.py:201
+#: hyprdial/pages/bar.py:46 hyprdial/pages/monitors.py:206
 msgid "Display"
 msgstr "Écran"
 
@@ -675,7 +705,7 @@ msgstr "Météo"
 msgid "Temperature with details on click"
 msgstr "Température, avec les détails au clic"
 
-#: hyprdial/pages/bar.py:54
+#: hyprdial/pages/bar.py:54 hyprdial/pages/monitors.py:256
 msgid "Workspaces"
 msgstr "Espaces de travail"
 
@@ -708,10 +738,6 @@ msgstr "Date complète et heure — {example}"
 msgid "12-hour format — {example}"
 msgstr "Format 12 heures — {example}"
 
-#: hyprdial/pages/bar.py:89
-msgid "Bar"
-msgstr "Barre"
-
 #: hyprdial/pages/bar.py:92
 msgid "Show the bar"
 msgstr "Afficher la barre"
@@ -720,11 +746,11 @@ msgstr "Afficher la barre"
 msgid "You can also toggle it with the Omarchy shortcut"
 msgstr "Vous pouvez aussi l'afficher ou la masquer avec le raccourci d'Omarchy"
 
-#: hyprdial/pages/bar.py:102
+#: hyprdial/pages/bar.py:102 hyprdial/pages/waybar.py:60
 msgid "Position"
 msgstr "Position"
 
-#: hyprdial/pages/bar.py:106
+#: hyprdial/pages/bar.py:106 hyprdial/pages/waybar.py:119
 msgid "Bar position changed"
 msgstr "Position de la barre modifiée"
 
@@ -745,6 +771,7 @@ msgid "Use it if the bar freezes or disappears"
 msgstr "À utiliser si la barre se fige ou disparaît"
 
 #: hyprdial/pages/bar.py:120 hyprdial/pages/bar.py:409
+#: hyprdial/pages/waybar.py:67
 msgid "Restart"
 msgstr "Redémarrer"
 
@@ -756,11 +783,11 @@ msgstr "Ajouter un widget"
 msgid "Available widgets"
 msgstr "Widgets disponibles"
 
-#: hyprdial/pages/bar.py:126
+#: hyprdial/pages/bar.py:126 hyprdial/pages/windows.py:30
 msgid "Loading…"
 msgstr "Chargement…"
 
-#: hyprdial/pages/bar.py:131
+#: hyprdial/pages/bar.py:131 hyprdial/pages/waybar.py:25
 msgid "Waybar"
 msgstr "Waybar"
 
@@ -800,8 +827,9 @@ msgstr "omarchy-bar introuvable : mettez à jour Omarchy pour utiliser cette pag
 #: hyprdial/pages/bar.py:322 hyprdial/pages/bar.py:358
 #: hyprdial/pages/bar.py:445 hyprdial/pages/bluetooth.py:213
 #: hyprdial/pages/ethernet.py:223 hyprdial/pages/system.py:129
-#: hyprdial/pages/system.py:254 hyprdial/pages/wifi.py:268
-#: hyprdial/pages/wifi.py:306 hyprdial/pages/wifi.py:321
+#: hyprdial/pages/system.py:254 hyprdial/pages/waybar.py:105
+#: hyprdial/pages/wifi.py:268 hyprdial/pages/wifi.py:306
+#: hyprdial/pages/wifi.py:321
 #, python-brace-format
 msgid "Failed: {error}"
 msgstr "Échec : {error}"
@@ -933,7 +961,7 @@ msgstr "Ajouter"
 msgid "{name} added to the bar"
 msgstr "{name} ajouté à la barre"
 
-#: hyprdial/pages/bar.py:381
+#: hyprdial/pages/bar.py:381 hyprdial/pages/waybar.py:41
 msgid "Waybar is not installed"
 msgstr "Waybar n'est pas installé"
 
@@ -942,7 +970,7 @@ msgid "Install it to use it instead of the Omarchy bar"
 msgstr "Installez-le pour l'utiliser à la place de la barre d'Omarchy"
 
 #: hyprdial/pages/bar.py:383 hyprdial/pages/system.py:214
-#: hyprdial/pages/system.py:234
+#: hyprdial/pages/system.py:234 hyprdial/pages/waybar.py:41
 msgid "Install"
 msgstr "Installer"
 
@@ -958,23 +986,23 @@ msgstr "Lance Waybar maintenant et à l'ouverture de session, et masque la barre
 msgid "Waybar position"
 msgstr "Position de Waybar"
 
-#: hyprdial/pages/bar.py:409
+#: hyprdial/pages/bar.py:409 hyprdial/pages/waybar.py:67
 msgid "Restart Waybar"
 msgstr "Redémarrer Waybar"
 
-#: hyprdial/pages/bar.py:409
+#: hyprdial/pages/bar.py:409 hyprdial/pages/waybar.py:67
 msgid "Applies changes made to its files"
 msgstr "Applique les modifications faites dans ses fichiers"
 
-#: hyprdial/pages/bar.py:412
+#: hyprdial/pages/bar.py:412 hyprdial/pages/waybar.py:69
 msgid "Edit config.jsonc"
 msgstr "Modifier config.jsonc"
 
-#: hyprdial/pages/bar.py:412
+#: hyprdial/pages/bar.py:412 hyprdial/pages/waybar.py:69
 msgid "Modules and layout"
 msgstr "Modules et disposition"
 
-#: hyprdial/pages/bar.py:417
+#: hyprdial/pages/bar.py:417 hyprdial/pages/waybar.py:72
 msgid "Edit style.css"
 msgstr "Modifier style.css"
 
@@ -982,23 +1010,23 @@ msgstr "Modifier style.css"
 msgid "Sizes, fonts and spacing; colors come from the theme"
 msgstr "Tailles, polices et espacements ; les couleurs viennent du thème"
 
-#: hyprdial/pages/bar.py:425
+#: hyprdial/pages/bar.py:425 hyprdial/pages/waybar.py:76
 msgid "Restore Waybar files"
 msgstr "Restaurer les fichiers de Waybar"
 
-#: hyprdial/pages/bar.py:426
+#: hyprdial/pages/bar.py:426 hyprdial/pages/waybar.py:77
 msgid "Recreates config.jsonc and style.css; the current ones are kept as .hyprdial.bak"
 msgstr "Recrée config.jsonc et style.css ; les fichiers actuels sont gardés en .hyprdial.bak"
 
-#: hyprdial/pages/bar.py:433
+#: hyprdial/pages/bar.py:433 hyprdial/pages/waybar.py:84
 msgid "Installing Waybar…"
 msgstr "Installation de Waybar…"
 
-#: hyprdial/pages/bar.py:437
+#: hyprdial/pages/bar.py:437 hyprdial/pages/waybar.py:88
 msgid "Waybar installed"
 msgstr "Waybar installé"
 
-#: hyprdial/pages/bar.py:437
+#: hyprdial/pages/bar.py:437 hyprdial/pages/waybar.py:88
 msgid "Waybar was not installed"
 msgstr "Waybar n'a pas été installé"
 
@@ -1014,7 +1042,7 @@ msgstr "Barre d'Omarchy utilisée"
 msgid "Waybar position changed"
 msgstr "Position de Waybar modifiée"
 
-#: hyprdial/pages/bar.py:471
+#: hyprdial/pages/bar.py:471 hyprdial/pages/waybar.py:127
 msgid "Waybar restarted"
 msgstr "Waybar redémarré"
 
@@ -1022,7 +1050,7 @@ msgstr "Waybar redémarré"
 msgid "Waybar isn't in use; turn it on above"
 msgstr "Waybar n'est pas utilisé ; activez-le plus haut"
 
-#: hyprdial/pages/bar.py:485
+#: hyprdial/pages/bar.py:485 hyprdial/pages/waybar.py:139
 msgid "Waybar files restored"
 msgstr "Fichiers de Waybar restaurés"
 
@@ -1078,7 +1106,7 @@ msgstr "Code d'appairage"
 
 #: hyprdial/pages/bluetooth.py:35 hyprdial/pages/shortcuts.py:152
 #: hyprdial/pages/system.py:233 hyprdial/pages/wifi.py:53
-#: hyprdial/pages/wifi.py:348 hyprdial/ui.py:174
+#: hyprdial/pages/wifi.py:348 hyprdial/pages/windows.py:99 hyprdial/ui.py:174
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -1310,7 +1338,7 @@ msgstr "Impossible d'appairer {name}"
 msgid "Dependencies"
 msgstr "Dépendances"
 
-#: hyprdial/pages/dependencies.py:38 hyprdial/pages/power.py:76
+#: hyprdial/pages/dependencies.py:38 hyprdial/pages/power.py:78
 msgid "Checking…"
 msgstr "Vérification…"
 
@@ -1594,10 +1622,6 @@ msgstr "Style rapide"
 msgid "Applies several settings at once; you can fine-tune each one below."
 msgstr "Applique plusieurs réglages à la fois ; vous pouvez affiner chacun ci-dessous."
 
-#: hyprdial/pages/hyprland.py:141
-msgid "Windows"
-msgstr "Fenêtres"
-
 #: hyprdial/pages/hyprland.py:145
 msgid "Window layout"
 msgstr "Disposition des fenêtres"
@@ -1715,7 +1739,7 @@ msgstr "Ombre douce autour des fenêtres"
 msgid "Enable shadow"
 msgstr "Activer l'ombre"
 
-#: hyprdial/pages/hyprland.py:216
+#: hyprdial/pages/hyprland.py:216 hyprdial/pages/windows.py:53
 msgid "Size"
 msgstr "Taille"
 
@@ -1819,7 +1843,7 @@ msgstr "Masquer le pointeur inactif"
 msgid "Seconds without moving the mouse; 0 never hides"
 msgstr "Secondes sans bouger la souris ; 0 ne le masque jamais"
 
-#: hyprdial/pages/hyprland.py:279 hyprdial/pages/hyprland.py:538
+#: hyprdial/pages/hyprland.py:279 hyprdial/pages/hyprland.py:659
 msgid "Touchpad"
 msgstr "Pavé tactile"
 
@@ -1893,23 +1917,105 @@ msgstr "Style {name} appliqué"
 msgid "Options restored"
 msgstr "Options restaurées"
 
-#: hyprdial/pages/hyprland.py:521 hyprdial/pages/hyprland.py:528
+#: hyprdial/pages/hyprland.py:521 hyprdial/pages/hyprland.py:649
 msgid "Returns every option on this page to its default"
 msgstr "Remet toutes les options de cette page à leur valeur par défaut"
 
-#: hyprdial/pages/hyprland.py:531
+#: hyprdial/pages/hyprland.py:527 hyprdial/pages/themes.py:150
+msgid "Wallpaper"
+msgstr "Fond d'écran"
+
+#: hyprdial/pages/hyprland.py:530
+msgid "Install it from ☰ → Dependencies"
+msgstr "Installez-le depuis ☰ → Dépendances"
+
+#: hyprdial/pages/hyprland.py:535
+msgid "Your own hyprpaper configuration is in charge"
+msgstr "Votre propre configuration de hyprpaper a la main"
+
+#: hyprdial/pages/hyprland.py:536
+#, python-brace-format
+msgid "Edit {file}, or remove it to choose the wallpaper here"
+msgstr "Modifiez {file}, ou supprimez-le pour choisir le fond d'écran ici"
+
+#: hyprdial/pages/hyprland.py:544
+msgid "Image"
+msgstr "Image"
+
+#: hyprdial/pages/hyprland.py:545
+msgid "None chosen"
+msgstr "Aucune choisie"
+
+#: hyprdial/pages/hyprland.py:548 hyprdial/pages/hyprland.py:580
+#: hyprdial/pages/windows.py:117
+msgid "Choose…"
+msgstr "Choisir…"
+
+#: hyprdial/pages/hyprland.py:555
+msgid "Fill the screen (crop)"
+msgstr "Remplir l'écran (rogner)"
+
+#: hyprdial/pages/hyprland.py:556
+msgid "Fit inside"
+msgstr "Ajuster à l'intérieur"
+
+#: hyprdial/pages/hyprland.py:557
+msgid "Tile"
+msgstr "Mosaïque"
+
+#: hyprdial/pages/hyprland.py:558
+msgid "Stretch"
+msgstr "Étirer"
+
+#: hyprdial/pages/hyprland.py:562
+msgid "How it fits"
+msgstr "Ajustement"
+
+#: hyprdial/pages/hyprland.py:577
+msgid "A different image per display"
+msgstr "Une image différente par écran"
+
+#: hyprdial/pages/hyprland.py:577
+msgid "Instead of the one above"
+msgstr "Au lieu de celle du dessus"
+
+#: hyprdial/pages/hyprland.py:579
+msgid "The image above"
+msgstr "L'image du dessus"
+
+#: hyprdial/pages/hyprland.py:584
+msgid "Use the image above"
+msgstr "Utiliser l'image du dessus"
+
+#: hyprdial/pages/hyprland.py:600
+msgid "Choose a wallpaper"
+msgstr "Choisissez un fond d'écran"
+
+#: hyprdial/pages/hyprland.py:609
+msgid "That file can't be used as a wallpaper"
+msgstr "Ce fichier ne peut pas servir de fond d'écran"
+
+#: hyprdial/pages/hyprland.py:635
+msgid "Could not change the wallpaper"
+msgstr "Impossible de changer le fond d'écran"
+
+#: hyprdial/pages/hyprland.py:637 hyprdial/pages/themes.py:311
+msgid "Wallpaper changed"
+msgstr "Fond d'écran changé"
+
+#: hyprdial/pages/hyprland.py:652
 msgid "Devices"
 msgstr "Appareils"
 
-#: hyprdial/pages/hyprland.py:538
+#: hyprdial/pages/hyprland.py:659
 msgid "Touchscreen"
 msgstr "Écran tactile"
 
-#: hyprdial/pages/hyprland.py:541
+#: hyprdial/pages/hyprland.py:662
 msgid "Turns the device on or off"
 msgstr "Active ou désactive l'appareil"
 
-#: hyprdial/pages/hyprland.py:548 hyprdial/pages/sound.py:134
+#: hyprdial/pages/hyprland.py:669 hyprdial/pages/sound.py:134
 msgid "Could not change the device"
 msgstr "Impossible de modifier l'appareil"
 
@@ -1984,169 +2090,217 @@ msgstr "Activé"
 msgid "Fullscreen only"
 msgstr "Plein écran uniquement"
 
-#: hyprdial/pages/monitors.py:202
+#: hyprdial/pages/monitors.py:207
 msgid "Reload"
 msgstr "Recharger"
 
-#: hyprdial/pages/monitors.py:202
+#: hyprdial/pages/monitors.py:207
 msgid "Reads the connected displays again"
 msgstr "Relit les écrans branchés"
 
-#: hyprdial/pages/monitors.py:207
+#: hyprdial/pages/monitors.py:212
 #, python-brace-format
 msgid "Settings are stored in {file} and take priority over the rest of your config. 'Restore' returns to what your config says."
 msgstr "Les réglages sont enregistrés dans {file} et priment sur le reste de votre configuration. « Restaurer » revient à ce que dit votre configuration."
 
-#: hyprdial/pages/monitors.py:234
+#: hyprdial/pages/monitors.py:239
 msgid "hyprctl found no displays."
 msgstr "hyprctl n'a trouvé aucun écran."
 
-#: hyprdial/pages/monitors.py:248
+#: hyprdial/pages/monitors.py:257
+msgid "Which display shows each workspace, and the one each display starts on."
+msgstr "Quel écran affiche chaque espace de travail, et celui sur lequel chaque écran démarre."
+
+#: hyprdial/pages/monitors.py:263
+#, python-brace-format
+msgid "{display} starts on"
+msgstr "{display} démarre sur"
+
+#: hyprdial/pages/monitors.py:265
+msgid "Hyprland's choice"
+msgstr "Choix de Hyprland"
+
+#: hyprdial/pages/monitors.py:265 hyprdial/pages/monitors.py:279
+#: hyprdial/pages/monitors.py:295
+#, python-brace-format
+msgid "Workspace {n}"
+msgstr "Espace de travail {n}"
+
+#: hyprdial/pages/monitors.py:273
+msgid "Display of each workspace"
+msgstr "Écran de chaque espace de travail"
+
+#: hyprdial/pages/monitors.py:273
+msgid "Workspaces without one open on the focused display"
+msgstr "Les espaces sans écran s'ouvrent sur l'écran actif"
+
+#: hyprdial/pages/monitors.py:281
+msgid "Any display"
+msgstr "N'importe quel écran"
+
+#: hyprdial/pages/monitors.py:291
+msgid "Always there"
+msgstr "Toujours présents"
+
+#: hyprdial/pages/monitors.py:291
+msgid "Workspaces that exist even when empty, e.g. for the bar"
+msgstr "Espaces qui existent même vides, par exemple pour la barre"
+
+#: hyprdial/pages/monitors.py:313 hyprdial/pages/power.py:154
+#: hyprdial/pages/power.py:321
+msgid "Could not save the setting"
+msgstr "Impossible d'enregistrer le réglage"
+
+#: hyprdial/pages/monitors.py:315
+msgid "Workspaces changed"
+msgstr "Espaces de travail modifiés"
+
+#: hyprdial/pages/monitors.py:324
 msgid "Arrangement"
 msgstr "Disposition"
 
-#: hyprdial/pages/monitors.py:250
+#: hyprdial/pages/monitors.py:326
 msgid "Drag the displays with the mouse; they snap to each other's edges. The position is applied when you let go."
 msgstr "Faites glisser les écrans avec la souris ; ils s'alignent sur les bords des autres. La position est appliquée quand vous relâchez."
 
-#: hyprdial/pages/monitors.py:295
+#: hyprdial/pages/monitors.py:371
 msgid "Display positions applied"
 msgstr "Positions des écrans appliquées"
 
-#: hyprdial/pages/monitors.py:306
+#: hyprdial/pages/monitors.py:382
 msgid "disabled"
 msgstr "désactivé"
 
-#: hyprdial/pages/monitors.py:308
+#: hyprdial/pages/monitors.py:384
 msgid "adjusted by this app"
 msgstr "réglé par cette application"
 
-#: hyprdial/pages/monitors.py:313 hyprdial/pages/shortcuts.py:391
+#: hyprdial/pages/monitors.py:389 hyprdial/pages/shortcuts.py:391
 msgid "Enabled"
 msgstr "Activé"
 
-#: hyprdial/pages/monitors.py:314
+#: hyprdial/pages/monitors.py:390
 msgid "Turning it off removes the display from the desktop"
 msgstr "Le désactiver retire l'écran du bureau"
 
-#: hyprdial/pages/monitors.py:330
+#: hyprdial/pages/monitors.py:406
 msgid "Resolution and refresh rate"
 msgstr "Résolution et fréquence de rafraîchissement"
 
-#: hyprdial/pages/monitors.py:331
+#: hyprdial/pages/monitors.py:407
 msgid "Modes the display advertises"
 msgstr "Modes annoncés par l'écran"
 
-#: hyprdial/pages/monitors.py:345
+#: hyprdial/pages/monitors.py:421
 msgid "Scale"
 msgstr "Échelle"
 
-#: hyprdial/pages/monitors.py:346
+#: hyprdial/pages/monitors.py:422
 msgid "Interface size on this display"
 msgstr "Taille de l'interface sur cet écran"
 
-#: hyprdial/pages/monitors.py:355
+#: hyprdial/pages/monitors.py:431
 msgid "Rotation"
 msgstr "Rotation"
 
-#: hyprdial/pages/monitors.py:356
+#: hyprdial/pages/monitors.py:432
 msgid "For portrait displays use 90° or 270°"
 msgstr "Pour un écran en portrait, utilisez 90° ou 270°"
 
-#: hyprdial/pages/monitors.py:365
+#: hyprdial/pages/monitors.py:441
 msgid "Horizontal position (X)"
 msgstr "Position horizontale (X)"
 
-#: hyprdial/pages/monitors.py:366
+#: hyprdial/pages/monitors.py:442
 msgid "In logical pixels; you can also drag it in Arrangement"
 msgstr "En pixels logiques ; vous pouvez aussi le faire glisser dans Disposition"
 
-#: hyprdial/pages/monitors.py:374
+#: hyprdial/pages/monitors.py:450
 msgid "Vertical position (Y)"
 msgstr "Position verticale (Y)"
 
-#: hyprdial/pages/monitors.py:374
+#: hyprdial/pages/monitors.py:450
 msgid "In logical pixels"
 msgstr "En pixels logiques"
 
-#: hyprdial/pages/monitors.py:382
+#: hyprdial/pages/monitors.py:458
 msgid "Variable refresh rate (VRR / FreeSync)"
 msgstr "Fréquence de rafraîchissement variable (VRR / FreeSync)"
 
-#: hyprdial/pages/monitors.py:383
+#: hyprdial/pages/monitors.py:459
 msgid "Reduces tearing in games and videos"
 msgstr "Réduit le déchirement dans les jeux et les vidéos"
 
-#: hyprdial/pages/monitors.py:392
+#: hyprdial/pages/monitors.py:468
 msgid "Don't mirror"
 msgstr "Ne pas dupliquer"
 
-#: hyprdial/pages/monitors.py:396
+#: hyprdial/pages/monitors.py:472
 msgid "Mirror"
 msgstr "Dupliquer"
 
-#: hyprdial/pages/monitors.py:397
+#: hyprdial/pages/monitors.py:473
 msgid "Shows the same content as another display"
 msgstr "Affiche le même contenu qu'un autre écran"
 
-#: hyprdial/pages/monitors.py:406
+#: hyprdial/pages/monitors.py:482
 msgid "10-bit color"
 msgstr "Couleur 10 bits"
 
-#: hyprdial/pages/monitors.py:407
+#: hyprdial/pages/monitors.py:483
 msgid "Only enable it if the display and cable support it"
 msgstr "Activez-la seulement si l'écran et le câble la prennent en charge"
 
-#: hyprdial/pages/monitors.py:422
+#: hyprdial/pages/monitors.py:498
 msgid "Restore this display"
 msgstr "Restaurer cet écran"
 
-#: hyprdial/pages/monitors.py:423
+#: hyprdial/pages/monitors.py:499
 msgid "Returns to what your config says"
 msgstr "Revient à ce que dit votre configuration"
 
-#: hyprdial/pages/monitors.py:461
+#: hyprdial/pages/monitors.py:537
 msgid "The only active display can't be turned off"
 msgstr "Le seul écran actif ne peut pas être désactivé"
 
-#: hyprdial/pages/monitors.py:478
+#: hyprdial/pages/monitors.py:554
 #, python-brace-format
 msgid "{name} already uses your config"
 msgstr "{name} utilise déjà votre configuration"
 
-#: hyprdial/pages/monitors.py:481
+#: hyprdial/pages/monitors.py:557
 #, python-brace-format
 msgid "{name} restored"
 msgstr "{name} restauré"
 
-#: hyprdial/pages/monitors.py:493
+#: hyprdial/pages/monitors.py:569
 msgid "Keep these display settings?"
 msgstr "Conserver ces réglages d'écran ?"
 
-#: hyprdial/pages/monitors.py:494
+#: hyprdial/pages/monitors.py:570
 msgid "Revert"
 msgstr "Rétablir"
 
-#: hyprdial/pages/monitors.py:495
+#: hyprdial/pages/monitors.py:571
 msgid "Keep"
 msgstr "Conserver"
 
-#: hyprdial/pages/monitors.py:503
+#: hyprdial/pages/monitors.py:579
 #, python-brace-format
 msgid "Changes to {name} will be reverted in {seconds} second."
 msgid_plural "Changes to {name} will be reverted in {seconds} seconds."
 msgstr[0] "Les modifications de {name} seront annulées dans {seconds} seconde."
 msgstr[1] "Les modifications de {name} seront annulées dans {seconds} secondes."
 
-#: hyprdial/pages/monitors.py:525
+#: hyprdial/pages/monitors.py:601
 msgid "Display settings reverted"
 msgstr "Réglages d'écran rétablis"
 
-#: hyprdial/pages/monitors.py:541
+#: hyprdial/pages/monitors.py:617
 msgid "Brightness"
 msgstr "Luminosité"
 
-#: hyprdial/pages/monitors.py:541
+#: hyprdial/pages/monitors.py:617
 msgid "Via DDC/CI"
 msgstr "Via DDC/CI"
 
@@ -2198,7 +2352,7 @@ msgstr "Ne rien faire"
 msgid "Power profile"
 msgstr "Profil d'énergie"
 
-#: hyprdial/pages/power.py:57 hyprdial/pages/power.py:133
+#: hyprdial/pages/power.py:57 hyprdial/pages/power.py:193
 msgid "Night light"
 msgstr "Éclairage nocturne"
 
@@ -2206,161 +2360,194 @@ msgstr "Éclairage nocturne"
 msgid "Warmer screen colors to reduce blue light."
 msgstr "Des couleurs plus chaudes pour réduire la lumière bleue."
 
-#: hyprdial/pages/power.py:70
+#: hyprdial/pages/power.py:72
 msgid "Suspend and hibernate"
 msgstr "Veille et hibernation"
 
-#: hyprdial/pages/power.py:76
+#: hyprdial/pages/power.py:78
 msgid "Hibernation"
 msgstr "Hibernation"
 
-#: hyprdial/pages/power.py:76 hyprdial/pages/power.py:329
-#: hyprdial/pages/power.py:340 hyprdial/pages/security.py:57
+#: hyprdial/pages/power.py:78 hyprdial/pages/power.py:389
+#: hyprdial/pages/power.py:400 hyprdial/pages/security.py:57
 msgid "Set up"
 msgstr "Configurer"
 
-#: hyprdial/pages/power.py:84
+#: hyprdial/pages/power.py:86
 msgid "Power button"
 msgstr "Bouton d'alimentation"
 
-#: hyprdial/pages/power.py:88
+#: hyprdial/pages/power.py:90
 msgid "When the power button is pressed"
 msgstr "Quand on appuie sur le bouton d'alimentation"
 
-#: hyprdial/pages/power.py:89
+#: hyprdial/pages/power.py:91
 msgid "Works on the lock screen too"
 msgstr "Fonctionne aussi sur l'écran de verrouillage"
 
-#: hyprdial/pages/power.py:101
+#: hyprdial/pages/power.py:103
+msgid "Lock and idle"
+msgstr "Verrouillage et inactivité"
+
+#: hyprdial/pages/power.py:103 hyprdial/pages/power.py:329
+msgid "Counted from the moment you stop using the computer."
+msgstr "Compté à partir du moment où vous cessez d'utiliser l'ordinateur."
+
+#: hyprdial/pages/power.py:107
+msgid "Install it from ☰ → Dependencies (hyprlock draws the lock screen)"
+msgstr "Installez-le depuis ☰ → Dépendances (hyprlock dessine l'écran de verrouillage)"
+
+#: hyprdial/pages/power.py:111
+msgid "Your own hypridle configuration is in charge"
+msgstr "Votre propre configuration de hypridle a la main"
+
+#: hyprdial/pages/power.py:112
+#, python-brace-format
+msgid "Edit {file}, or remove it to set the times here"
+msgstr "Modifiez {file}, ou supprimez-le pour régler les délais ici"
+
+#: hyprdial/pages/power.py:124
+msgid "Dim the screen after"
+msgstr "Assombrir l'écran après"
+
+#: hyprdial/pages/power.py:124
+msgid "Needs brightnessctl"
+msgstr "Nécessite brightnessctl"
+
+#: hyprdial/pages/power.py:125 hyprdial/pages/power.py:334
+msgid "Lock the screen after"
+msgstr "Verrouiller l'écran après"
+
+#: hyprdial/pages/power.py:125 hyprdial/pages/power.py:334
+msgid "Asks for the password to come back"
+msgstr "Demande le mot de passe pour revenir"
+
+#: hyprdial/pages/power.py:126
+msgid "Turn the screen off after"
+msgstr "Éteindre l'écran après"
+
+#: hyprdial/pages/power.py:127
+msgid "Suspend after"
+msgstr "Mettre en veille après"
+
+#: hyprdial/pages/power.py:154
+msgid "Idle times changed"
+msgstr "Délais d'inactivité modifiés"
+
+#: hyprdial/pages/power.py:161
 msgid "No power profiles available"
 msgstr "Aucun profil d'énergie disponible"
 
-#: hyprdial/pages/power.py:104
+#: hyprdial/pages/power.py:164
 msgid "Profile"
 msgstr "Profil"
 
-#: hyprdial/pages/power.py:115
+#: hyprdial/pages/power.py:175
 msgid "Could not change the power profile"
 msgstr "Impossible de changer le profil d'énergie"
 
-#: hyprdial/pages/power.py:133
+#: hyprdial/pages/power.py:193
 msgid "Turns it on or off now"
 msgstr "L'active ou la désactive maintenant"
 
-#: hyprdial/pages/power.py:137
+#: hyprdial/pages/power.py:197
 msgid "Warmth"
 msgstr "Chaleur"
 
-#: hyprdial/pages/power.py:137
+#: hyprdial/pages/power.py:197
 msgid "Lower is warmer"
 msgstr "Plus bas, c'est plus chaud"
 
-#: hyprdial/pages/power.py:151
+#: hyprdial/pages/power.py:211
 msgid "Turn on automatically"
 msgstr "Activer automatiquement"
 
-#: hyprdial/pages/power.py:155
+#: hyprdial/pages/power.py:215
 msgid "Every day at the times below"
 msgstr "Tous les jours aux heures ci-dessous"
 
-#: hyprdial/pages/power.py:157
+#: hyprdial/pages/power.py:217
 msgid "Turns on at (HH:MM)"
 msgstr "S'active à (HH:MM)"
 
-#: hyprdial/pages/power.py:158
+#: hyprdial/pages/power.py:218
 msgid "Turns off at (HH:MM)"
 msgstr "Se désactive à (HH:MM)"
 
-#: hyprdial/pages/power.py:171
+#: hyprdial/pages/power.py:231
 msgid "Could not change the night light"
 msgstr "Impossible de modifier l'éclairage nocturne"
 
-#: hyprdial/pages/power.py:196
+#: hyprdial/pages/power.py:256
 msgid "Use times like 20:00 and 07:00"
 msgstr "Utilisez des heures comme 20:00 et 07:00"
 
-#: hyprdial/pages/power.py:200
+#: hyprdial/pages/power.py:260
 msgid "The start and end times must be different"
 msgstr "Les heures de début et de fin doivent être différentes"
 
-#: hyprdial/pages/power.py:233
+#: hyprdial/pages/power.py:293
 #, python-brace-format
 msgid "Night light scheduled from {start} to {end}"
 msgstr "Éclairage nocturne programmé de {start} à {end}"
 
-#: hyprdial/pages/power.py:235 hyprdial/pages/power.py:251
+#: hyprdial/pages/power.py:295 hyprdial/pages/power.py:311
 msgid "Could not save the schedule"
 msgstr "Impossible d'enregistrer la programmation"
 
-#: hyprdial/pages/power.py:249
+#: hyprdial/pages/power.py:309
 msgid "Night light schedule turned off"
 msgstr "Programmation de l'éclairage nocturne désactivée"
 
-#: hyprdial/pages/power.py:261
+#: hyprdial/pages/power.py:321
 msgid "Power button changed"
 msgstr "Bouton d'alimentation modifié"
 
-#: hyprdial/pages/power.py:261
-msgid "Could not save the setting"
-msgstr "Impossible d'enregistrer le réglage"
-
-#: hyprdial/pages/power.py:269
+#: hyprdial/pages/power.py:329
 msgid "Idle"
 msgstr "Inactivité"
 
-#: hyprdial/pages/power.py:269
-msgid "Counted from the moment you stop using the computer."
-msgstr "Compté à partir du moment où vous cessez d'utiliser l'ordinateur."
-
-#: hyprdial/pages/power.py:271
+#: hyprdial/pages/power.py:331
 msgid "Screensaver after"
 msgstr "Économiseur d'écran après"
 
-#: hyprdial/pages/power.py:274
-msgid "Lock the screen after"
-msgstr "Verrouiller l'écran après"
-
-#: hyprdial/pages/power.py:274
-msgid "Asks for the password to come back"
-msgstr "Demande le mot de passe pour revenir"
-
-#: hyprdial/pages/power.py:279
+#: hyprdial/pages/power.py:339
 msgid "Stay awake"
 msgstr "Rester éveillé"
 
-#: hyprdial/pages/power.py:280
+#: hyprdial/pages/power.py:340
 msgid "Pauses the screensaver and lock until you turn this off"
 msgstr "Suspend l'économiseur d'écran et le verrouillage jusqu'à ce que vous le désactiviez"
 
-#: hyprdial/pages/power.py:299
+#: hyprdial/pages/power.py:359
 msgid "Could not write shell.json"
 msgstr "Impossible d'écrire shell.json"
 
-#: hyprdial/pages/power.py:313
+#: hyprdial/pages/power.py:373
 msgid "Suspend in the system menu"
 msgstr "Veille dans le menu système"
 
-#: hyprdial/pages/power.py:314
+#: hyprdial/pages/power.py:374
 msgid "Shows Suspend next to Lock and Shut down"
 msgstr "Affiche Mettre en veille à côté de Verrouiller et Éteindre"
 
-#: hyprdial/pages/power.py:325
+#: hyprdial/pages/power.py:385
 msgid "Set up: Hibernate saves your session to disk and turns off"
 msgstr "Configurée : l'hibernation enregistre votre session sur le disque et éteint"
 
-#: hyprdial/pages/power.py:327
+#: hyprdial/pages/power.py:387
 msgid "Not set up; needs a swap file as big as the memory"
 msgstr "Non configurée ; il faut un fichier d'échange aussi grand que la mémoire"
 
-#: hyprdial/pages/power.py:335
+#: hyprdial/pages/power.py:395
 msgid "Remove hibernation?"
 msgstr "Supprimer l'hibernation ?"
 
-#: hyprdial/pages/power.py:335
+#: hyprdial/pages/power.py:395
 msgid "Set up hibernation?"
 msgstr "Configurer l'hibernation ?"
 
-#: hyprdial/pages/power.py:337
+#: hyprdial/pages/power.py:397
 msgid "Opens a terminal that asks for your password, changes the swap file and rebuilds the boot image. It takes a minute or two."
 msgstr "Ouvre un terminal qui demande votre mot de passe, modifie le fichier d'échange et reconstruit l'image de démarrage. Cela prend une ou deux minutes."
 
@@ -2462,6 +2649,7 @@ msgid "Click or scroll here"
 msgstr "Cliquez ou faites défiler ici"
 
 #: hyprdial/pages/shortcuts.py:153 hyprdial/pages/wifi.py:349
+#: hyprdial/pages/windows.py:101
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -2553,11 +2741,12 @@ msgstr "Avant : {keys}"
 msgid "Change the key"
 msgstr "Changer la touche"
 
-#: hyprdial/pages/shortcuts.py:401
+#: hyprdial/pages/shortcuts.py:401 hyprdial/pages/windows.py:197
 msgid "Edit"
 msgstr "Modifier"
 
-#: hyprdial/pages/shortcuts.py:405
+#: hyprdial/pages/shortcuts.py:405 hyprdial/pages/windows.py:202
+#: hyprdial/pages/windows.py:255
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -3055,10 +3244,6 @@ msgstr "Sombres"
 msgid "Light"
 msgstr "Clairs"
 
-#: hyprdial/pages/themes.py:150
-msgid "Wallpaper"
-msgstr "Fond d'écran"
-
 #: hyprdial/pages/themes.py:167
 msgid "Next wallpaper"
 msgstr "Fond d'écran suivant"
@@ -3079,7 +3264,7 @@ msgstr "Vos fonds d'écran"
 msgid "Images in this folder appear here for the current theme"
 msgstr "Les images de ce dossier apparaissent ici pour le thème actuel"
 
-#: hyprdial/pages/themes.py:177
+#: hyprdial/pages/themes.py:177 hyprdial/pages/windows.py:226
 msgid "Open folder"
 msgstr "Ouvrir le dossier"
 
@@ -3109,9 +3294,53 @@ msgstr "Thème {name} appliqué"
 msgid "Wallpaper: {name}"
 msgstr "Fond d'écran : {name}"
 
-#: hyprdial/pages/themes.py:311
-msgid "Wallpaper changed"
-msgstr "Fond d'écran changé"
+#: hyprdial/pages/waybar.py:16
+msgid "Left"
+msgstr "Gauche"
+
+#: hyprdial/pages/waybar.py:16
+msgid "Right"
+msgstr "Droite"
+
+#: hyprdial/pages/waybar.py:25
+msgid "The bar at the edge of the screen: workspaces, clock, network, sound…"
+msgstr "La barre au bord de l'écran : espaces de travail, horloge, réseau, son…"
+
+#: hyprdial/pages/waybar.py:43
+msgid "Install it with your package manager"
+msgstr "Installez-le avec votre gestionnaire de paquets"
+
+#: hyprdial/pages/waybar.py:49
+msgid "Waybar is already started by your config"
+msgstr "Waybar est déjà lancée par votre configuration"
+
+#: hyprdial/pages/waybar.py:50
+msgid "Position and files below still work; leave the switch off to avoid starting it twice"
+msgstr "La position et les fichiers ci-dessous fonctionnent toujours ; laissez l'interrupteur éteint pour ne pas la lancer deux fois"
+
+#: hyprdial/pages/waybar.py:54
+msgid "Start Waybar with Hyprland"
+msgstr "Lancer Waybar avec Hyprland"
+
+#: hyprdial/pages/waybar.py:54
+msgid "Starts it now and at every login"
+msgstr "La lance maintenant et à chaque connexion"
+
+#: hyprdial/pages/waybar.py:72
+msgid "Colors, sizes and fonts"
+msgstr "Couleurs, tailles et polices"
+
+#: hyprdial/pages/waybar.py:107
+msgid "Waybar started"
+msgstr "Waybar lancée"
+
+#: hyprdial/pages/waybar.py:107
+msgid "Waybar stopped"
+msgstr "Waybar arrêtée"
+
+#: hyprdial/pages/waybar.py:127
+msgid "Could not start Waybar"
+msgstr "Impossible de lancer Waybar"
 
 #: hyprdial/pages/webapps.py:16
 msgid "Type a name"
@@ -3354,6 +3583,152 @@ msgstr "Le mot de passe et les paramètres enregistrés sont supprimés."
 msgid "{ssid} forgotten"
 msgstr "{ssid} oublié"
 
+#: hyprdial/pages/windows.py:23
+msgid "Edit rule"
+msgstr "Modifier la règle"
+
+#: hyprdial/pages/windows.py:23 hyprdial/pages/windows.py:166
+msgid "New rule"
+msgstr "Nouvelle règle"
+
+#: hyprdial/pages/windows.py:30
+msgid "Open window"
+msgstr "Fenêtre ouverte"
+
+#: hyprdial/pages/windows.py:32
+msgid "App (window class)"
+msgstr "App (classe de la fenêtre)"
+
+#: hyprdial/pages/windows.py:36
+msgid "When it opens"
+msgstr "À l'ouverture"
+
+#: hyprdial/pages/windows.py:39
+msgid "Float"
+msgstr "Flottante"
+
+#: hyprdial/pages/windows.py:39
+msgid "Over the other windows instead of tiled"
+msgstr "Au-dessus des autres fenêtres au lieu d'être en mosaïque"
+
+#: hyprdial/pages/windows.py:40
+msgid "Center"
+msgstr "Centrer"
+
+#: hyprdial/pages/windows.py:40 hyprdial/pages/windows.py:41
+#: hyprdial/pages/windows.py:54
+msgid "For floating windows"
+msgstr "Pour les fenêtres flottantes"
+
+#: hyprdial/pages/windows.py:41
+msgid "Show on every workspace"
+msgstr "Afficher sur tous les espaces de travail"
+
+#: hyprdial/pages/windows.py:42
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+#: hyprdial/pages/windows.py:43
+msgid "Maximized"
+msgstr "Maximisée"
+
+#: hyprdial/pages/windows.py:44
+msgid "Keep the screen on in fullscreen"
+msgstr "Garder l'écran allumé en plein écran"
+
+#: hyprdial/pages/windows.py:44
+msgid "For videos and games"
+msgstr "Pour les vidéos et les jeux"
+
+#: hyprdial/pages/windows.py:59
+msgid "Width"
+msgstr "Largeur"
+
+#: hyprdial/pages/windows.py:62
+msgid "Height"
+msgstr "Hauteur"
+
+#: hyprdial/pages/windows.py:70
+msgid "Workspace"
+msgstr "Espace de travail"
+
+#: hyprdial/pages/windows.py:71
+msgid "Where it was opened"
+msgstr "Là où elle a été ouverte"
+
+#: hyprdial/pages/windows.py:77
+msgid "Open in the background"
+msgstr "Ouvrir en arrière-plan"
+
+#: hyprdial/pages/windows.py:78
+msgid "Without switching to that workspace"
+msgstr "Sans basculer sur cet espace de travail"
+
+#: hyprdial/pages/windows.py:85
+msgid "Opacity (%)"
+msgstr "Opacité (%)"
+
+#: hyprdial/pages/windows.py:86
+msgid "100 keeps the usual opacity"
+msgstr "100 garde l'opacité habituelle"
+
+#: hyprdial/pages/windows.py:115
+msgid "No open windows; type the class below"
+msgstr "Aucune fenêtre ouverte ; tapez la classe ci-dessous"
+
+#: hyprdial/pages/windows.py:118
+msgid "Fills in the class below"
+msgstr "Remplit la classe ci-dessous"
+
+#: hyprdial/pages/windows.py:163
+msgid "Your rules"
+msgstr "Vos règles"
+
+#: hyprdial/pages/windows.py:164
+msgid "Applied when the app's window opens; windows already open don't change."
+msgstr "Appliquées à l'ouverture de la fenêtre de l'app ; les fenêtres déjà ouvertes ne changent pas."
+
+#: hyprdial/pages/windows.py:173
+msgid "In your config files"
+msgstr "Dans vos fichiers de configuration"
+
+#: hyprdial/pages/windows.py:173
+msgid "Read only; edit the files to change them."
+msgstr "Lecture seule ; modifiez les fichiers pour les changer."
+
+#: hyprdial/pages/windows.py:191
+msgid "No rules yet"
+msgstr "Aucune règle pour l'instant"
+
+#: hyprdial/pages/windows.py:191
+msgid "Use “New rule” to choose how an app's window opens"
+msgstr "Utilisez « Nouvelle règle » pour choisir comment s'ouvre la fenêtre d'une app"
+
+#: hyprdial/pages/windows.py:217
+msgid "No window rules in ~/.config/hypr"
+msgstr "Aucune règle de fenêtre dans ~/.config/hypr"
+
+#: hyprdial/pages/windows.py:237
+msgid "Could not save the rule"
+msgstr "Impossible d'enregistrer la règle"
+
+#: hyprdial/pages/windows.py:248
+msgid "Rule saved; it applies to windows opened from now on"
+msgstr "Règle enregistrée ; elle s'applique aux fenêtres ouvertes à partir de maintenant"
+
+#: hyprdial/pages/windows.py:253
+#, python-brace-format
+msgid "Delete the rule for {app}?"
+msgstr "Supprimer la règle de {app} ?"
+
+#: hyprdial/pages/windows.py:254
+msgid "Windows of this app open as usual again."
+msgstr "Les fenêtres de cette app s'ouvrent de nouveau comme d'habitude."
+
+#: hyprdial/pages/windows.py:256
+msgid "Rule deleted"
+msgstr "Règle supprimée"
+
 #: hyprdial/shell.py:114
 msgid "command not found"
 msgstr "commande introuvable"
@@ -3371,3 +3746,61 @@ msgstr "{name} n'est pas installé"
 #, python-brace-format
 msgid "{cmd} is not installed; install it from ☰ → Dependencies"
 msgstr "{cmd} n'est pas installé ; installez-le depuis ☰ → Dépendances"
+
+#: hyprdial/windowrules.py:45
+msgid "Choose an app or type its class."
+msgstr "Choisissez une app ou tapez sa classe."
+
+#: hyprdial/windowrules.py:47
+msgid "Choose at least one thing to do."
+msgstr "Choisissez au moins une action."
+
+#: hyprdial/windowrules.py:50
+msgid "The size must be two positive numbers."
+msgstr "La taille doit être deux nombres positifs."
+
+#: hyprdial/windowrules.py:52
+msgid "Only floating windows can be shown on every workspace."
+msgstr "Seules les fenêtres flottantes peuvent s'afficher sur tous les espaces de travail."
+
+#: hyprdial/windowrules.py:55
+msgid "The workspace must be a number from 1 to 99."
+msgstr "L'espace de travail doit être un nombre de 1 à 99."
+
+#: hyprdial/windowrules.py:58
+msgid "The opacity must be between 10% and 100%."
+msgstr "L'opacité doit être comprise entre 10 % et 100 %."
+
+#: hyprdial/windowrules.py:103
+msgid "floating"
+msgstr "flottante"
+
+#: hyprdial/windowrules.py:105
+msgid "centered"
+msgstr "centrée"
+
+#: hyprdial/windowrules.py:109
+#, python-brace-format
+msgid "workspace {n}"
+msgstr "espace de travail {n}"
+
+#: hyprdial/windowrules.py:111
+#, python-brace-format
+msgid "opacity {percent}%"
+msgstr "opacité {percent} %"
+
+#: hyprdial/windowrules.py:113
+msgid "on every workspace"
+msgstr "sur tous les espaces de travail"
+
+#: hyprdial/windowrules.py:115
+msgid "fullscreen"
+msgstr "plein écran"
+
+#: hyprdial/windowrules.py:117
+msgid "maximized"
+msgstr "maximisée"
+
+#: hyprdial/windowrules.py:119
+msgid "keeps the screen on in fullscreen"
+msgstr "garde l'écran allumé en plein écran"

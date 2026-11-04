@@ -179,7 +179,8 @@ def monitor_call(rule: dict) -> str:
 def render(
     values: dict[str, str], monitors: dict[str, dict], bindings: dict | None = None, extras: dict | None = None
 ) -> str:
-    from . import accessibility, autostart, keybinds, power  # imported here: they depend on this module
+    # imported here: they depend on this module
+    from . import accessibility, autostart, idle, keybinds, power, wallpaper, waybar, windowrules, workspaces
 
     parts = [HEADER]
     if values:
@@ -189,6 +190,11 @@ def render(
     parts.extend(power.render_extras(extras or {}))
     parts.extend(autostart.render_extras(extras or {}))
     parts.extend(accessibility.render_extras(extras or {}))
+    parts.extend(workspaces.render_extras(extras or {}))
+    parts.extend(windowrules.render_extras(extras or {}))
+    parts.extend(idle.render_extras(extras or {}))
+    parts.extend(wallpaper.render_extras(extras or {}))
+    parts.extend(waybar.render_extras(extras or {}))
     return "\n".join(parts) + "\n"
 
 

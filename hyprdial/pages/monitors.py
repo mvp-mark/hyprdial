@@ -11,7 +11,7 @@ gi.require_version("Adw", "1")
 gi.require_version("PangoCairo", "1.0")
 from gi.repository import Adw, GLib, Gtk, Pango, PangoCairo  # noqa: E402
 
-from .. import core, displays, layout
+from .. import core, displays, layout, workspaces
 from ..i18n import _, ngettext
 from ..ui import Debouncer, bg, button_row, combo_row, set_changed, spin_row, switch_row, to_float
 
@@ -175,6 +175,11 @@ class MonitorLayout(Gtk.DrawingArea):
             PangoCairo.show_layout(cr, text)
 
 
+def persistent_with(state: dict, workspace: str, on: bool) -> list[str]:
+    kept = set(state["persistent"]) - {workspace}
+    return sorted(kept | {workspace} if on else kept, key=int)
+
+
 def rounded(cr, x: float, y: float, w: float, h: float, r: float) -> None:
     r = min(r, w / 2, h / 2)
     cr.new_sub_path()
@@ -238,7 +243,78 @@ class MonitorsPage(Adw.PreferencesPage):
             group = self._monitor_group(mon)
             self.groups.append(group)
             self.add(group)
+        if self.monitors:
+            group = self._workspaces_group([m["name"] for m in self.monitors])
+            self.groups.append(group)
+            self.add(group)
         self.add(self.footer)
+
+    # -- workspaces
+    def _workspaces_group(self, names: list[str]) -> Adw.PreferencesGroup:
+        state = workspaces.normalize(self.store.extras.get("workspaces"))
+        group = Adw.PreferencesGroup(
+            title=_("Workspaces"),
+            description=_("Which display shows each workspace, and the one each display starts on."),
+        )
+        starts = [""] + workspaces.NUMBERS
+        for name in names:
+            current = state["default"].get(name, "")
+            row = combo_row(
+                _("{display} starts on").format(display=name),
+                "",
+                [_("Hyprland's choice")] + [_("Workspace {n}").format(n=n) for n in workspaces.NUMBERS],
+                starts.index(current),
+                lambda i, n=name: self._set_workspaces(lambda s: s["default"].__setitem__(n, starts[i])),
+            )
+            set_changed(row, bool(current))
+            group.add(row)
+
+        displays_row = Adw.ExpanderRow(
+            title=_("Display of each workspace"), subtitle=_("Workspaces without one open on the focused display")
+        )
+        choices = [""] + names
+        for n in workspaces.NUMBERS:
+            current = state["monitor"].get(n, "")
+            row = combo_row(
+                _("Workspace {n}").format(n=n),
+                "",
+                [_("Any display")] + names,
+                choices.index(current) if current in choices else 0,
+                lambda i, n=n: self._set_workspaces(lambda s: s["monitor"].__setitem__(n, choices[i])),
+            )
+            set_changed(row, bool(current))
+            displays_row.add_row(row)
+        set_changed(displays_row, bool(state["monitor"]))
+        group.add(displays_row)
+
+        persistent_row = Adw.ExpanderRow(
+            title=_("Always there"), subtitle=_("Workspaces that exist even when empty, e.g. for the bar")
+        )
+        for n in workspaces.NUMBERS:
+            row = switch_row(
+                _("Workspace {n}").format(n=n),
+                "",
+                n in state["persistent"],
+                lambda on, n=n: self._set_workspaces(lambda s: s.__setitem__("persistent", persistent_with(s, n, on))),
+            )
+            persistent_row.add_row(row)
+        set_changed(persistent_row, bool(state["persistent"]))
+        group.add(persistent_row)
+        return group
+
+    def _set_workspaces(self, change) -> None:
+        state = workspaces.normalize(self.store.extras.get("workspaces"))
+        change(state)
+        state = workspaces.normalize(state)
+        value = None if workspaces.is_empty(state) else state
+
+        def done(res) -> None:
+            if isinstance(res, Exception):
+                self.win.toast(_("Could not save the setting"))
+            else:
+                self.win.toast(_("Workspaces changed"))
+
+        bg(lambda: self.store.set_extra("workspaces", value), done)
 
     def _layout_group(self) -> Adw.PreferencesGroup | None:
         rects = self._rects()

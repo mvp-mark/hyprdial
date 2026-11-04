@@ -207,22 +207,27 @@ def _args(text: str, i: int) -> tuple[list[str], int]:
     return args, i
 
 
-def find_binds(text: str) -> list[tuple[str, list[str]]]:
-    """o.bind(...), o.bind_toggle(...) and hl.bind(...) calls outside strings and comments."""
+def find_calls(text: str, names: tuple[str, ...]) -> list[tuple[str, list[str]]]:
+    """Calls to the named functions ("hl.bind"…) outside strings and comments, with their arguments' text."""
     calls, i = [], 0
     while i < len(text):
         skipped = _skip(text, i)
         if skipped is not None:
             i = skipped
             continue
-        for name in ("o.bind_toggle(", "o.bind(", "hl.bind("):
-            if text.startswith(name, i) and (i == 0 or not re.match(r"[\w.:]", text[i - 1])):
-                args, i = _args(text, i + len(name))
-                calls.append((name[:-1], args))
+        for name in names:
+            if text.startswith(name + "(", i) and (i == 0 or not re.match(r"[\w.:]", text[i - 1])):
+                args, i = _args(text, i + len(name) + 1)
+                calls.append((name, args))
                 break
         else:
             i += 1
     return calls
+
+
+def find_binds(text: str) -> list[tuple[str, list[str]]]:
+    """o.bind(...), o.bind_toggle(...) and hl.bind(...) calls outside strings and comments."""
+    return find_calls(text, ("o.bind_toggle", "o.bind", "hl.bind"))
 
 
 LUA_KEYWORDS = {

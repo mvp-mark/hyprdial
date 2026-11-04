@@ -27,6 +27,8 @@ from .pages.shortcuts import ShortcutsPage
 from .pages.sound import SoundPage
 from .pages.system import SystemPage
 from .pages.themes import ThemesPage
+from .pages.waybar import WaybarPage
+from .pages.windows import WindowsPage
 from .ui import ThemeAccent, bg, confirm
 
 APP_ID = "io.github.mvp_mark.Hyprdial"
@@ -38,6 +40,7 @@ PAGES = [
     ("style", "themes", lambda: _("Themes"), "preferences-desktop-theme-symbolic", ThemesPage),
     ("style", "appearance", lambda: _("Appearance"), "preferences-desktop-appearance-symbolic", AppearancePage),
     ("style", "bar", lambda: _("Bar and fonts"), "preferences-desktop-font-symbolic", BarPage),
+    ("style", "waybar", lambda: _("Bar"), "preferences-desktop-font-symbolic", WaybarPage),
     ("hardware", "monitors", lambda: _("Displays"), "preferences-desktop-display-symbolic", MonitorsPage),
     ("hardware", "sound", lambda: _("Sound"), "audio-volume-high-symbolic", SoundPage),
     ("hardware", "power", lambda: _("Power"), "system-shutdown-symbolic", PowerPage),
@@ -45,6 +48,7 @@ PAGES = [
     ("hardware", "connectivity", lambda: _("Connectivity"), "network-wireless-symbolic", ConnectivityPage),
     ("system", "apps", lambda: _("Apps"), "view-app-grid-symbolic", AppsPage),
     ("system", "shortcuts", lambda: _("Shortcuts"), "preferences-desktop-keyboard-shortcuts-symbolic", ShortcutsPage),
+    ("system", "windows", lambda: _("Windows"), "focus-windows-symbolic", WindowsPage),
     (
         "system",
         "accessibility",
@@ -56,10 +60,12 @@ PAGES = [
     ("system", "system", lambda: _("System"), "computer-symbolic", SystemPage),
 ]
 OMARCHY_ONLY = {"themes", "bar", "security"}  # hidden on plain Hyprland
+PLAIN_ONLY = {"waybar"}  # Omarchy has its own bar (Bar and fonts)
 
 
 def visible_pages() -> list[tuple]:
-    return [p for p in PAGES if host.is_omarchy() or p[1] not in OMARCHY_ONLY]
+    hidden = PLAIN_ONLY if host.is_omarchy() else OMARCHY_ONLY
+    return [p for p in PAGES if p[1] not in hidden]
 
 
 class Window(Adw.ApplicationWindow):
