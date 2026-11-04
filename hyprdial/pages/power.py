@@ -68,10 +68,11 @@ class PowerPage(Adw.PreferencesPage):
             self._idle_group(read_shell())
 
         self.sleep_group = Adw.PreferencesGroup(title=_("Suspend and hibernate"))
-        self.add(self.sleep_group)
-        if core.have("omarchy-toggle"):
+        if host.is_omarchy():  # both options are Omarchy's: its system menu and its hibernation setup
+            self.add(self.sleep_group)
+        if host.is_omarchy() and core.have("omarchy-toggle"):
             bg(power.suspend_in_menu, self._add_suspend)
-        if power.hibernation_supported():
+        if host.is_omarchy() and power.hibernation_supported():
             self.hibernate = button_row(_("Hibernation"), _("Checking…"), _("Set up"), self._confirm_hibernation)
             self.sleep_group.add(self.hibernate)
             self.hibernation_ready = False
