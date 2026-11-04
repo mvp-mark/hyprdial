@@ -2,7 +2,8 @@
 
 The power profile goes through Omarchy's own command, so the bar shows and remembers the same choice. Night
 light talks to hyprsunset like omarchy-toggle-nightlight; its schedule is hyprsunset's own profile file. The
-power button is a Hyprland shortcut (logind is told by Omarchy to ignore it), rendered into the generated file.
+power button is a Hyprland shortcut (logind is told by Omarchy to ignore it), rendered into the generated file;
+on plain Hyprland logind handles the button, so it isn't offered there.
 """
 
 from __future__ import annotations
@@ -12,7 +13,7 @@ import shutil
 import time
 from pathlib import Path
 
-from . import core
+from . import core, host
 
 # ------------------------------------------------------------------ power profile
 PROFILES = ["power-saver", "balanced", "performance"]
@@ -60,7 +61,7 @@ def nightlight_on(temp: int | None) -> bool:
 def set_temperature(temp: int) -> bool:
     """Starts hyprsunset if needed and sets the temperature (resent until it sticks, as Omarchy does)."""
     if temperature() is None:
-        core.spawn(["uwsm-app", "--", "hyprsunset"])
+        core.spawn(host.launch("hyprsunset").split())
     for _ in range(15):
         core.run(["hyprctl", "hyprsunset", "temperature", str(temp)])
         time.sleep(0.2)
@@ -140,19 +141,12 @@ def render_extras(extras: dict) -> list[str]:
     """Lua lines for the generated file: power button and night light schedule autostart."""
     lines = []
     action = extras.get("power_button")
-    if action in POWER_ACTIONS and action != "menu":
+    if action in POWER_ACTIONS and action != "menu" and host.is_omarchy():
         lines += ["", "-- Power button", f"pcall(function() hl.unbind({core.lua(POWER_KEY)}) end)"]
         if POWER_ACTIONS[action]:
-            lines.append(
-                f'pcall(function() o.bind({core.lua(POWER_KEY)}, "Power button", '
-                f"{core.lua(POWER_ACTIONS[action])}, {{ locked = true }}) end)"
-            )
+            lines.append(core.bind_call(POWER_KEY, "Power button", core.lua(POWER_ACTIONS[action]), "locked = true"))
     if extras.get("nightlight_schedule"):
-        lines += [
-            "",
-            "-- Night light schedule (~/.config/hypr/hyprsunset.conf)",
-            'pcall(function() o.launch_on_start("hyprsunset") end)',
-        ]
+        lines += ["", "-- Night light schedule (~/.config/hypr/hyprsunset.conf)", core.on_start_call("hyprsunset")]
     return lines
 
 
@@ -164,7 +158,12 @@ def read_schedule(conf: Path = HYPRSUNSET_CONF) -> tuple[str, str, int] | None:
 
 
 def restart_hyprsunset() -> None:
-    core.run(["omarchy-restart-hyprsunset"], timeout=15)
+    """Restarts hyprsunset so it reads its profile file again."""
+    if core.have("omarchy-restart-hyprsunset"):
+        core.run(["omarchy-restart-hyprsunset"], timeout=15)
+        return
+    core.run(["pkill", "-x", "hyprsunset"])
+    core.spawn(host.launch("hyprsunset").split())
 
 
 # ------------------------------------------------------------------ suspend and hibernation

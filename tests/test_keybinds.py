@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 
+from omarchy_settings import core
 from omarchy_settings import keybinds as kb
 
 FIXTURES = Path(__file__).parent / "fixtures" / "bindings"
@@ -135,7 +136,7 @@ def test_build_entries_matches_sources_and_reconstructs_loops(sources):
     assert e["Expand window left"].keys == "SUPER + code:20" and e["Expand window left"].action
     assert e["Switch to workspace 3"].keys == "SUPER + code:12"
     assert e["Switch to workspace 3"].action == 'hl.dsp.focus({ workspace = "3" })'
-    assert e["Universal copy"].action is None and "internal" in e["Universal copy"].locked
+    assert e["Universal copy"].action is None and "its own file" in e["Universal copy"].locked
     assert e["Something else"].category == "other"
 
 
@@ -218,3 +219,74 @@ def test_drag_binds_are_recognised():
 )
 def test_pointer_problem(mods, key, drag, blocked):
     assert (kb.pointer_problem(mods, key, drag) is not None) == blocked
+
+
+# ------------------------------------------------------------------ plain Hyprland
+def test_hl_bind_sources_keep_their_dispatcher_and_description():
+    text = (
+        'hl.bind("SUPER + Q", hl.dsp.exec_cmd("kitty"), { description = "Terminal" })\n'
+        'hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })\n'
+        '-- hl.bind("SUPER + X", hl.dsp.exec_cmd("no"))\n'
+    )
+    found = kb.parse_source(text, "config")
+    assert [(s.keys, s.desc, s.action) for s in found] == [
+        ("SUPER + Q", "Terminal", 'hl.dsp.exec_cmd("kitty"), { description = "Terminal" }'),
+        ("SUPER + mouse:272", None, "hl.dsp.window.drag(), { mouse = true }"),
+    ]
+    assert kb.is_drag(found[1].action)
+
+
+def test_plain_hyprland_reads_every_config_file_but_the_generated_one(tmp_path, plain_hyprland, monkeypatch):
+    (tmp_path / "conf").mkdir()
+    (tmp_path / "hyprland.lua").write_text('hl.bind("SUPER + Q", hl.dsp.exec_cmd("kitty"))\n')
+    (tmp_path / "conf" / "keys.lua").write_text('hl.bind("SUPER + B", hl.dsp.exec_cmd("firefox"))\n')
+    (tmp_path / core.HYPR_MANAGED.name).write_text('hl.bind("SUPER + T", hl.dsp.exec_cmd("mine"))\n')
+    monkeypatch.setattr(kb, "CONFIG_DIR", tmp_path)
+    assert sorted(s.keys for s in kb.source_binds()) == ["SUPER + B", "SUPER + Q"]
+    assert {s.category for s in kb.source_binds()} == {"config"}
+
+
+def test_plain_hyprland_renders_hl_bind(commands, plain_hyprland):
+    commands.have = {"uwsm-app", "foot"}
+    state = {
+        "overrides": {
+            "SUPER + Q": {"desc": "Terminal", "keys": "SUPER + T", "action": 'hl.dsp.exec_cmd("kitty")'},
+            "SUPER + mouse:272": {
+                "desc": "Move",
+                "keys": "SUPER + mouse:274",
+                "action": "hl.dsp.window.drag(), { mouse = true }",
+            },
+            "ALT + X": {"desc": "Own", "keys": "ALT + Y", "action": 'hl.dsp.exec_cmd("x"), { description = "Own" }'},
+        },
+        "custom": [
+            {"keys": "SUPER + G", "desc": "Gimp", "kind": "launch", "command": "gimp"},
+            {"keys": "SUPER + H", "desc": "Top", "kind": "tui", "command": "btop"},
+            {"keys": "SUPER + J", "desc": "Run", "kind": "command", "command": "notify-send hi"},
+        ],
+    }
+    lines = [line for line in kb.render(state) if line.startswith("pcall") and "unbind" not in line]
+    assert lines == [
+        'pcall(function() hl.bind("ALT + Y", hl.dsp.exec_cmd("x"), { description = "Own" }) end)',
+        'pcall(function() hl.bind("SUPER + T", hl.dsp.exec_cmd("kitty"), { description = "Terminal" }) end)',
+        'pcall(function() hl.bind("SUPER + mouse:274", hl.dsp.window.drag(), '
+        '{ description = "Move", mouse = true }) end)',
+        'pcall(function() hl.bind("SUPER + G", hl.dsp.exec_cmd("uwsm-app -- gimp"), { description = "Gimp" }) end)',
+        'pcall(function() hl.bind("SUPER + H", hl.dsp.exec_cmd("foot btop"), { description = "Top" }) end)',
+        'pcall(function() hl.bind("SUPER + J", hl.dsp.exec_cmd("notify-send hi"), { description = "Run" }) end)',
+    ]
+
+
+def test_options_survive_on_omarchy_too():
+    state = {
+        "overrides": {
+            "SUPER + mouse:272": {
+                "desc": "Move",
+                "keys": "SUPER + mouse:274",
+                "action": "hl.dsp.window.drag(), { mouse = true }",
+            }
+        },
+        "custom": [],
+    }
+    assert kb.render(state)[-1] == (
+        'pcall(function() o.bind("SUPER + mouse:274", "Move", hl.dsp.window.drag(), { mouse = true }) end)'
+    )

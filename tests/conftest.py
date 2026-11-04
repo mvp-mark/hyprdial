@@ -4,19 +4,20 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import core
+from omarchy_settings import core, host
 
 
 class FakeCommands:
     """answers maps a command line ("pactl get-default-sink") to its output; codes to its exit code.
 
-    Commands run (not the ones only read with out) are recorded in calls; have lists the commands that "exist"
-    (all of them with have_all)."""
+    Commands run (not the ones only read with out) are recorded in calls, and the ones started with spawn in
+    spawned; have lists the commands that "exist" (all of them with have_all)."""
 
     def __init__(self):
         self.answers: dict[str, str] = {}
         self.codes: dict[str, int] = {}
         self.calls: list[list[str]] = []
+        self.spawned: list[list[str]] = []
         self.have: set[str] = set()
         self.have_all = False
 
@@ -36,4 +37,16 @@ def commands(monkeypatch):
     monkeypatch.setattr(core, "run", fake.run)
     monkeypatch.setattr(core, "out", fake.out)
     monkeypatch.setattr(core, "have", lambda cmd: fake.have_all or cmd in fake.have)
+    monkeypatch.setattr(core, "spawn", lambda args: fake.spawned.append(args) or True)
     return fake
+
+
+@pytest.fixture(autouse=True)
+def on_omarchy(monkeypatch):
+    """Tests run as on Omarchy unless they ask for plain Hyprland (the `plain_hyprland` fixture)."""
+    monkeypatch.setattr(host, "_detected", "omarchy")
+
+
+@pytest.fixture
+def plain_hyprland(monkeypatch):
+    monkeypatch.setattr(host, "_detected", "hyprland")

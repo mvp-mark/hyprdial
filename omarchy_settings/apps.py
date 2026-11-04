@@ -73,6 +73,7 @@ def set_default_app(kind: str, name: str) -> tuple[bool, str]:
 # ------------------------------------------------------------------ apps by file type
 # kind -> MIME types set together; the first one picks the candidates and the current app
 MIME_KINDS = {
+    "browser": ["x-scheme-handler/https", "x-scheme-handler/http", "text/html"],  # on Omarchy: `omarchy default`
     "files": ["inode/directory"],
     "pdf": ["application/pdf"],
     "images": ["image/png", "image/jpeg", "image/webp", "image/gif"],

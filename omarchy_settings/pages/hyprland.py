@@ -1,7 +1,7 @@
 """Hyprland options pages: Appearance (styles, windows, effects, behavior) and Input (keyboard, mouse, touchpad).
 
 Each row shows the value in use (saved state > running Hyprland > default) and, when this app overrides the
-option, a ↶ button that returns just that option to Omarchy's default.
+option, a ↶ button that returns just that option to its default.
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ from .. import input as input_devices
 from ..i18n import _
 from ..ui import bg, button_row, set_changed, switch_row, to_bool, to_float
 
-# Quick styles: keys missing from a style go back to Omarchy's default.
+# Quick styles: keys missing from a style go back to their default.
 PRESET_KEYS = (
     "general:gaps_in",
     "general:gaps_out",
@@ -45,7 +45,7 @@ PRESETS = [
             "decoration:shadow:enabled": False,
         },
     ),
-    ("Omarchy", _("Omarchy's default look"), {}),
+    (_("Default"), _("The look of your config, without this app's changes"), {}),
     (
         _("Comfortable"),
         _("More room between windows and soft corners"),
@@ -331,7 +331,7 @@ class HyprOptionsPage(Adw.PreferencesPage):
     def _register(self, key: str, row, set_widget: Callable, default) -> None:
         """A ↶ button per option, visible only when this app overrides the value."""
         undo = Gtk.Button(
-            icon_name="edit-undo-symbolic", valign=Gtk.Align.CENTER, tooltip_text=_("Back to Omarchy's default")
+            icon_name="edit-undo-symbolic", valign=Gtk.Align.CENTER, tooltip_text=_("Back to the default")
         )
         undo.add_css_class("flat")
         undo.set_visible(self.store.get(key) is not None)
@@ -518,14 +518,14 @@ class AppearancePage(HyprOptionsPage):
     """Hyprland's look: quick styles, windows, effects and how windows behave."""
 
     GROUPS = ("style", "windows", "effects", "behavior")
-    RESET_SUBTITLE = _("Returns every option on this page to Omarchy's default")
+    RESET_SUBTITLE = _("Returns every option on this page to its default")
 
 
 class InputPage(HyprOptionsPage):
     """Keyboard, mouse and touchpad; touchpad and touchscreen switches when the computer has them."""
 
     GROUPS = ("devices", "keyboard", "mouse", "touchpad")
-    RESET_SUBTITLE = _("Returns every option on this page to Omarchy's default")
+    RESET_SUBTITLE = _("Returns every option on this page to its default")
 
     def _devices_group(self) -> None:
         self.devices = Adw.PreferencesGroup(title=_("Devices"), visible=False)

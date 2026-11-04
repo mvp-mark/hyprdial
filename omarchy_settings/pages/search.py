@@ -125,7 +125,7 @@ class SearchDialog(Adw.Dialog):
         if changed_only:
             self.status.set_icon_name("emblem-ok-symbolic")
             self.status.set_title(_("Nothing changed"))
-            self.status.set_description(_("Every setting this app manages is as Omarchy ships it."))
+            self.status.set_description(_("Every setting this app manages is at its default."))
             self._show([e for e in self.entries if is_changed(e.widget)])
             return
         header.set_title_widget(self.entry)

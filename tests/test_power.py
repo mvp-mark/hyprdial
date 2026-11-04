@@ -106,3 +106,16 @@ def test_hibernation(commands, tmp_path):
     assert power.hibernation_command(False)[-1] == "omarchy-hibernation-setup"
     assert power.hibernation_command(True)[-1] == "omarchy-hibernation-remove"
     assert not power.hibernation_supported(tmp_path / "image_size")
+
+
+def test_plain_hyprland_has_no_power_button_and_starts_hyprsunset_natively(commands, plain_hyprland):
+    commands.have_all = False
+    lines = power.render_extras({"power_button": "lock", "nightlight_schedule": True})
+    assert not any("XF86PowerOff" in line for line in lines)
+    assert 'pcall(function() hl.on("hyprland.start", function() hl.exec_cmd("hyprsunset") end) end)' in lines
+
+
+def test_restart_hyprsunset_without_omarchy(commands):
+    commands.have_all = False
+    power.restart_hyprsunset()
+    assert commands.calls == [["pkill", "-x", "hyprsunset"]] and commands.spawned == [["hyprsunset"]]

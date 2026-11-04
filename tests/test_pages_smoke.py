@@ -38,9 +38,11 @@ def display(tmp_path_factory):
     server.wait()
 
 
+@pytest.mark.parametrize("platform", ["omarchy", "hyprland"])
 @pytest.mark.parametrize("mode", ["missing", "empty"])
-def test_every_page_shows_without_errors(display, tmp_path, mode):
+def test_every_page_shows_without_errors(display, tmp_path, mode, platform):
     env = {
+        "HYPRDIAL_PLATFORM": platform,
         **display,
         "HOME": str(tmp_path),  # no real configuration is read or written
         "PYTHONPATH": str(ROOT),

@@ -10,7 +10,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, Gtk  # noqa: E402
 
-from . import __version__
+from . import __version__, host
 from .core import HyprStore
 from .i18n import _
 from .pages.accessibility import AccessibilityPage
@@ -55,12 +55,19 @@ PAGES = [
     ("system", "security", lambda: _("Security"), "security-high-symbolic", SecurityPage),
     ("system", "system", lambda: _("System"), "computer-symbolic", SystemPage),
 ]
+OMARCHY_ONLY = {"themes", "bar", "security"}  # hidden on plain Hyprland
+
+
+def visible_pages() -> list[tuple]:
+    return [p for p in PAGES if host.is_omarchy() or p[1] not in OMARCHY_ONLY]
 
 
 class Window(Adw.ApplicationWindow):
     def __init__(self, app: Adw.Application):
         super().__init__(application=app, title=_("Omarchy Settings"), default_width=1000, default_height=720)
         self.store = HyprStore()
+        problem = host.config_problem(host.hyprland_version())
+        self.store.read_only = problem is not None
         self.accent = ThemeAccent(self.get_display())
 
         self.stack = Adw.ViewStack(vexpand=True)
@@ -93,6 +100,8 @@ class Window(Adw.ApplicationWindow):
 
         content_view = Adw.ToolbarView(content=self.stack)
         content_view.add_top_bar(Adw.HeaderBar())
+        if problem:
+            content_view.add_top_bar(Adw.Banner(title=problem, revealed=True, use_markup=False))
         self.content = Adw.NavigationPage(child=content_view, title="")
         self.split = Adw.NavigationSplitView(
             sidebar=Adw.NavigationPage(child=sidebar_view, title=_("Omarchy Settings")),
@@ -115,11 +124,11 @@ class Window(Adw.ApplicationWindow):
         self.connect("close-request", self._on_close)
 
     def _add_pages(self) -> None:
-        for _section, name, title, icon, page in PAGES:
+        for _section, name, title, icon, page in visible_pages():
             self.stack.add_titled_with_icon(page(self), name, title(), icon)
 
     def _fill_sidebar(self) -> None:
-        for section, name, title, icon, _page in PAGES:
+        for section, name, title, icon, _page in visible_pages():
             box = Gtk.Box(spacing=12, margin_top=6, margin_bottom=6, margin_start=6, margin_end=6)
             box.append(Gtk.Image(icon_name=icon))
             box.append(Gtk.Label(label=title(), xalign=0, ellipsize=3))  # 3 = Pango.EllipsizeMode.END
@@ -191,7 +200,7 @@ class Window(Adw.ApplicationWindow):
             heading=_("Restore app defaults?"),
             body=_(
                 "Removes every Hyprland, display, shortcut, power button and startup command setting made in "
-                "this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. "
+                "this app, returning to the defaults. The bar, theme, network and system settings are not touched. "
                 "A backup of the generated file is kept, and you can undo right after."
             ),
             action=_("Restore"),

@@ -12,7 +12,7 @@ import platform
 import re
 from pathlib import Path
 
-from . import core
+from . import core, host
 
 
 # ------------------------------------------------------------------ date and time
@@ -61,7 +61,6 @@ def set_locale(lang: str) -> tuple[bool, str]:
 
 LOCALE_GEN = Path("/etc/locale.gen")
 LOCALE_ARCHIVE = Path("/usr/lib/locale/locale-archive")  # rewritten by locale-gen
-TERMINAL = "omarchy-launch-floating-terminal-with-presentation"
 LOCALE_NAME = re.compile(r"[A-Za-z0-9_.@-]+")
 
 
@@ -132,7 +131,7 @@ def install_locale_command(name: str) -> list[str]:
     if not LOCALE_NAME.fullmatch(name):
         raise ValueError(name)
     pattern = name.replace(".", "\\.")  # the only character in LOCALE_NAME that sed treats specially
-    return [TERMINAL, f"sudo sed -i 's/^#\\s\\?\\({pattern} UTF-8\\)/\\1/' {LOCALE_GEN} && sudo locale-gen"]
+    return host.terminal_command(f"sudo sed -i 's/^#\\s\\?\\({pattern} UTF-8\\)/\\1/' {LOCALE_GEN} && sudo locale-gen")
 
 
 def result(r) -> tuple[bool, str]:

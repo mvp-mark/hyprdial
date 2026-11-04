@@ -20,8 +20,8 @@ class StartupGroup(Adw.PreferencesGroup):
         super().__init__(
             title=_("Startup apps"),
             description=_(
-                "Started when you log in. Omarchy starts some apps by itself (the bar, "
-                "Fcitx 5…), so one that is off here may still run."
+                "Started when you log in. Some apps are also started by the system's own config (the bar, "
+                "input methods…), so one that is off here may still run."
             ),
         )
         self.win = win
@@ -38,14 +38,15 @@ class StartupGroup(Adw.PreferencesGroup):
         self.command_rows: list[Gtk.Widget] = []
 
         self.lua = Adw.ExpanderRow(
-            title=_("In autostart.lua"), subtitle=str(autostart.AUTOSTART_LUA).replace(str(core.HOME), "~")
+            title=_("In {file}").format(file=autostart.startup_file().name),
+            subtitle=core.home_path(autostart.startup_file()),
         )
         self.lua.add_row(
             button_row(
                 _("Edit the file"),
                 _("Changes there are yours; this app only reads them"),
                 _("Open"),
-                lambda: core.open_in_editor(autostart.AUTOSTART_LUA),
+                lambda: core.open_in_editor(autostart.startup_file()),
             )
         )
         self.lua_rows: list[Gtk.Widget] = []

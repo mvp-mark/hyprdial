@@ -85,7 +85,7 @@ def test_installable_locales(tmp_path):
 
 def test_install_locale_command():
     cmd = system.install_locale_command("pt_BR.UTF-8")
-    assert cmd[0] == system.TERMINAL
+    assert cmd[0] == "omarchy-launch-floating-terminal-with-presentation"
     assert cmd[1] == r"sudo sed -i 's/^#\s\?\(pt_BR\.UTF-8 UTF-8\)/\1/' /etc/locale.gen && sudo locale-gen"
     with pytest.raises(ValueError):
         system.install_locale_command("pt_BR'; rm -rf ~")
@@ -139,3 +139,10 @@ def test_keyboard_layout(commands):
 def test_suggest_locale(layout, expected):
     names = ["de_DE.UTF-8", "hrx_BR.UTF-8", "pt_BR.UTF-8", "es_US.UTF-8"]
     assert system.suggest_locale(layout, names) == expected
+
+
+def test_install_locale_command_on_plain_hyprland(commands, plain_hyprland):
+    commands.have = {"kitty"}
+    cmd = system.install_locale_command("pt_BR.UTF-8")
+    assert cmd[:3] == ["kitty", "bash", "-c"]
+    assert cmd[3].startswith("sudo sed -i") and cmd[3].endswith('read -rp "Press Enter to close"')

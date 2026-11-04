@@ -3,7 +3,8 @@ error raised in a GTK callback (those are printed, not raised, so a page can bre
 
     python tests/smoke_pages.py missing|empty
 
-missing: no command is installed; empty: every command exists and prints nothing.
+missing: no command is installed; empty: every command exists and prints nothing. HYPRDIAL_PLATFORM picks Omarchy or
+plain Hyprland.
 tests/test_pages_smoke.py runs it under a headless Broadway display, with HOME pointing at an empty folder.
 """
 
@@ -18,7 +19,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GLib  # noqa: E402
 
-from omarchy_settings import core  # noqa: E402
+from omarchy_settings import core, host  # noqa: E402
 
 mode = sys.argv[1]
 errors: list[str] = []
@@ -37,7 +38,7 @@ core.out = lambda args, timeout=10: ""
 core.have = lambda cmd: mode == "empty"
 core.spawn = lambda args: False
 
-from omarchy_settings.app import PAGES, Window  # noqa: E402
+from omarchy_settings.app import Window, visible_pages  # noqa: E402
 
 shown: list[str] = []
 
@@ -57,7 +58,7 @@ def activate(app: Adw.Application) -> None:
     win = Window(app)
     win.store.save = lambda: errors.append("a page saved settings while only being shown")
     win.present()
-    names = [name for _section, name, _title, _icon, _page in PAGES]
+    names = [name for _section, name, _title, _icon, _page in visible_pages()]
 
     def step() -> bool:
         if names:
@@ -77,9 +78,10 @@ def activate(app: Adw.Application) -> None:
 app = Adw.Application(application_id="org.omarchy.SettingsSmoke", flags=Gio.ApplicationFlags.NON_UNIQUE)
 app.connect("activate", activate)
 status = app.run([])
-if len(shown) != len(PAGES):
-    errors.append(f"only {len(shown)} of {len(PAGES)} pages were shown (exit status {status})")
+pages = len(visible_pages())
+if len(shown) != pages:
+    errors.append(f"only {len(shown)} of {pages} pages were shown (exit status {status})")
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
-print(f"{len(PAGES)} pages, no errors ({mode})")
+print(f"{pages} pages, no errors ({mode}, {host.platform()})")

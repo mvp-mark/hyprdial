@@ -68,3 +68,19 @@ def test_own_commands_go_to_the_generated_file(tmp_path, monkeypatch):
     assert 'pcall(function() o.launch_on_start("discord --start-minimized") end)' in text
     assert 'o.launch_on_start("say \\"hi\\"")' in text
     assert autostart.valid_command("  ") is None and autostart.valid_command("a\nb") is None
+
+
+def test_plain_hyprland_starts_commands_natively_and_reads_hyprland_lua(
+    tmp_path, commands, plain_hyprland, monkeypatch
+):
+    commands.have = {"uwsm-app"}
+    assert autostart.render_extras({"autostart": ["discord"]})[-1] == (
+        'pcall(function() hl.on("hyprland.start", function() hl.exec_cmd("uwsm-app -- discord") end) end)'
+    )
+    main = tmp_path / "hyprland.lua"
+    main.write_text(
+        'hl.on("hyprland.start", function()\n  hl.exec_cmd("waybar")\nend)\nhl.bind("A", hl.dsp.exec_cmd("no"))\n'
+    )
+    monkeypatch.setattr(core, "HYPR_MAIN", main)
+    assert autostart.startup_file() == main
+    assert autostart.lua_commands() == ["waybar"]

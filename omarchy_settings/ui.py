@@ -105,7 +105,7 @@ def set_changed(row: Gtk.Widget, on: bool) -> None:
     """Marks a row whose setting differs from Omarchy's default; "Changed settings" lists the marked rows."""
     if on:
         row.add_css_class("changed")
-        row.set_tooltip_text(_("Changed from Omarchy's default"))
+        row.set_tooltip_text(_("Changed from the default"))
     else:
         row.remove_css_class("changed")
         row.set_tooltip_text(None)

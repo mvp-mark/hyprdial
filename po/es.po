@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: omarchy-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 00:18-0400\n"
+"POT-Creation-Date: 2026-11-03 22:20-0400\n"
 "PO-Revision-Date: 2026-11-02 04:00-0400\n"
 "Last-Translator: omarchy-settings contributors\n"
 "Language-Team: Spanish\n"
@@ -75,62 +75,62 @@ msgstr "Accesibilidad"
 msgid "Security"
 msgstr "Seguridad"
 
-#: omarchy_settings/app.py:62 omarchy_settings/app.py:98
+#: omarchy_settings/app.py:67 omarchy_settings/app.py:107
 #: omarchy_settings/pages/system.py:317
 msgid "Omarchy Settings"
 msgstr "Configuración de Omarchy"
 
-#: omarchy_settings/app.py:70
+#: omarchy_settings/app.py:77
 msgid "Changed settings…"
 msgstr "Ajustes cambiados…"
 
-#: omarchy_settings/app.py:71
+#: omarchy_settings/app.py:78
 msgid "Dependencies…"
 msgstr "Dependencias…"
 
-#: omarchy_settings/app.py:72
+#: omarchy_settings/app.py:79
 msgid "Restore app defaults…"
 msgstr "Restaurar valores de la aplicación…"
 
-#: omarchy_settings/app.py:79
+#: omarchy_settings/app.py:86
 msgid "Search settings (Ctrl+F)"
 msgstr "Buscar ajustes (Ctrl+F)"
 
-#: omarchy_settings/app.py:83
+#: omarchy_settings/app.py:90
 msgid "Main menu"
 msgstr "Menú principal"
 
-#: omarchy_settings/app.py:191
+#: omarchy_settings/app.py:200
 msgid "Restore app defaults?"
 msgstr "¿Restaurar los valores de la aplicación?"
 
-#: omarchy_settings/app.py:193
-msgid "Removes every Hyprland, display, shortcut, power button and startup command setting made in this app, returning to Omarchy's own. The bar, theme, network and system settings are not touched. A backup of the generated file is kept, and you can undo right after."
-msgstr "Quita todos los ajustes de Hyprland, pantallas, atajos, botón de encendido y comandos de inicio hechos en esta aplicación y vuelve a los de Omarchy. La barra, el tema, la red y el sistema no se tocan. Se guarda una copia del archivo generado y puedes deshacerlo justo después."
+#: omarchy_settings/app.py:202
+msgid "Removes every Hyprland, display, shortcut, power button and startup command setting made in this app, returning to the defaults. The bar, theme, network and system settings are not touched. A backup of the generated file is kept, and you can undo right after."
+msgstr "Elimina todos los ajustes de Hyprland, pantallas, atajos, botón de encendido y comandos de inicio hechos en esta app, volviendo a los valores predeterminados. La barra, el tema, la red y el sistema no se tocan. Se guarda una copia del archivo generado y puedes deshacerlo justo después."
 
-#: omarchy_settings/app.py:197 omarchy_settings/pages/bar.py:158
+#: omarchy_settings/app.py:206 omarchy_settings/pages/bar.py:158
 #: omarchy_settings/pages/bar.py:220 omarchy_settings/pages/bar.py:427
 #: omarchy_settings/pages/hyprland.py:126
 #: omarchy_settings/pages/monitors.py:424
-#: omarchy_settings/pages/shortcuts.py:283
-#: omarchy_settings/pages/shortcuts.py:532
+#: omarchy_settings/pages/shortcuts.py:284
+#: omarchy_settings/pages/shortcuts.py:533
 msgid "Restore"
 msgstr "Restaurar"
 
-#: omarchy_settings/app.py:204
+#: omarchy_settings/app.py:213
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr "No se pudo restaurar: {error}"
 
-#: omarchy_settings/app.py:208
+#: omarchy_settings/app.py:217
 msgid "App defaults restored"
 msgstr "Valores de la aplicación restaurados"
 
-#: omarchy_settings/app.py:208 omarchy_settings/pages/themes.py:257
+#: omarchy_settings/app.py:217 omarchy_settings/pages/themes.py:257
 msgid "Undo"
 msgstr "Deshacer"
 
-#: omarchy_settings/app.py:213
+#: omarchy_settings/app.py:222
 msgid "Settings brought back"
 msgstr "Ajustes recuperados"
 
@@ -186,134 +186,155 @@ msgstr "Opcionales"
 msgid "Development"
 msgstr "Desarrollo"
 
-#: omarchy_settings/keybinds.py:37
+#: omarchy_settings/host.py:71
+msgid "Hyprland isn't running, so its settings can't be changed from here."
+msgstr "Hyprland no se está ejecutando, así que sus ajustes no se pueden cambiar desde aquí."
+
+#: omarchy_settings/host.py:73
+#, python-brace-format
+msgid "Hyprland {version} is too old; update it to {minimum} or newer to change its settings here."
+msgstr "Hyprland {version} es demasiado antiguo; actualízalo a {minimum} o posterior para cambiar sus ajustes desde aquí."
+
+#: omarchy_settings/host.py:77
+msgid "Your Hyprland configuration is still in hyprland.conf; move it to hyprland.lua to change it here."
+msgstr "Tu configuración de Hyprland sigue en hyprland.conf; pásala a hyprland.lua para cambiarla desde aquí."
+
+#: omarchy_settings/host.py:94
+msgid "Press Enter to close"
+msgstr "Pulsa Enter para cerrar"
+
+#: omarchy_settings/keybinds.py:39
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: omarchy_settings/keybinds.py:38
+#: omarchy_settings/keybinds.py:40
 msgid "Windows and workspaces"
 msgstr "Ventanas y espacios de trabajo"
 
-#: omarchy_settings/keybinds.py:39
+#: omarchy_settings/keybinds.py:41
 msgid "Utilities and captures"
 msgstr "Utilidades y capturas"
 
-#: omarchy_settings/keybinds.py:40
+#: omarchy_settings/keybinds.py:42
 msgid "Clipboard"
 msgstr "Portapapeles"
 
-#: omarchy_settings/keybinds.py:41
+#: omarchy_settings/keybinds.py:43
 msgid "Media, volume and brightness"
 msgstr "Multimedia, volumen y brillo"
 
-#: omarchy_settings/keybinds.py:42
+#: omarchy_settings/keybinds.py:44
 msgid "Voice dictation"
 msgstr "Dictado por voz"
 
-#: omarchy_settings/keybinds.py:43
+#: omarchy_settings/keybinds.py:45
 msgid "From your bindings.lua"
 msgstr "De tu bindings.lua"
 
-#: omarchy_settings/keybinds.py:44
+#: omarchy_settings/keybinds.py:46
+msgid "From your configuration"
+msgstr "De tu configuración"
+
+#: omarchy_settings/keybinds.py:47
 msgid "Other"
 msgstr "Otros"
 
-#: omarchy_settings/keybinds.py:48
+#: omarchy_settings/keybinds.py:51
 msgid "Open app"
 msgstr "Abrir aplicación"
 
-#: omarchy_settings/keybinds.py:48
+#: omarchy_settings/keybinds.py:51
 msgid "Run command"
 msgstr "Ejecutar comando"
 
-#: omarchy_settings/keybinds.py:48
+#: omarchy_settings/keybinds.py:51
 msgid "Open in terminal"
 msgstr "Abrir en la terminal"
 
-#: omarchy_settings/keybinds.py:52
+#: omarchy_settings/keybinds.py:55
 msgid "Space"
 msgstr "Espacio"
 
-#: omarchy_settings/keybinds.py:71 omarchy_settings/pages/sound.py:49
+#: omarchy_settings/keybinds.py:74 omarchy_settings/pages/sound.py:49
 #: omarchy_settings/pages/sound.py:75
 msgid "Mute"
 msgstr "Silenciar"
 
-#: omarchy_settings/keybinds.py:72
+#: omarchy_settings/keybinds.py:75
 msgid "Mic mute"
 msgstr "Silenciar micrófono"
 
-#: omarchy_settings/keybinds.py:73
+#: omarchy_settings/keybinds.py:76
 msgid "Brightness +"
 msgstr "Brillo +"
 
-#: omarchy_settings/keybinds.py:74
+#: omarchy_settings/keybinds.py:77
 msgid "Brightness −"
 msgstr "Brillo −"
 
-#: omarchy_settings/keybinds.py:76
+#: omarchy_settings/keybinds.py:79
 msgid "Pause"
 msgstr "Pausa"
 
-#: omarchy_settings/keybinds.py:77
+#: omarchy_settings/keybinds.py:80
 msgid "Next"
 msgstr "Siguiente"
 
-#: omarchy_settings/keybinds.py:78
+#: omarchy_settings/keybinds.py:81
 msgid "Previous"
 msgstr "Anterior"
 
-#: omarchy_settings/keybinds.py:80
+#: omarchy_settings/keybinds.py:83
 msgid "Left click"
 msgstr "Clic izquierdo"
 
-#: omarchy_settings/keybinds.py:81
+#: omarchy_settings/keybinds.py:84
 msgid "Right click"
 msgstr "Clic derecho"
 
-#: omarchy_settings/keybinds.py:82
+#: omarchy_settings/keybinds.py:85
 msgid "Middle click"
 msgstr "Clic central"
 
-#: omarchy_settings/keybinds.py:83
+#: omarchy_settings/keybinds.py:86
 msgid "Back button"
 msgstr "Botón atrás"
 
-#: omarchy_settings/keybinds.py:84
+#: omarchy_settings/keybinds.py:87
 msgid "Forward button"
 msgstr "Botón adelante"
 
-#: omarchy_settings/keybinds.py:85
+#: omarchy_settings/keybinds.py:88
 msgid "Scroll up"
 msgstr "Desplazar arriba"
 
-#: omarchy_settings/keybinds.py:86
+#: omarchy_settings/keybinds.py:89
 msgid "Scroll down"
 msgstr "Desplazar abajo"
 
-#: omarchy_settings/keybinds.py:87
+#: omarchy_settings/keybinds.py:90
 msgid "Scroll left"
 msgstr "Desplazar a la izquierda"
 
-#: omarchy_settings/keybinds.py:88
+#: omarchy_settings/keybinds.py:91
 msgid "Scroll right"
 msgstr "Desplazar a la derecha"
 
-#: omarchy_settings/keybinds.py:153
+#: omarchy_settings/keybinds.py:156
 msgid "This shortcut needs a mouse button."
 msgstr "Este atajo necesita un botón del ratón."
 
-#: omarchy_settings/keybinds.py:155
+#: omarchy_settings/keybinds.py:158
 msgid "Mouse shortcuts need a modifier, or normal clicking and scrolling stop working."
 msgstr "Los atajos del ratón necesitan un modificador; si no, el clic y el desplazamiento normales dejan de funcionar."
 
-#: omarchy_settings/keybinds.py:513
-msgid "Not found in Omarchy's files; it can only be disabled"
-msgstr "No está en los archivos de Omarchy; solo se puede desactivar"
+#: omarchy_settings/keybinds.py:537
+msgid "Not found in the config files; it can only be disabled"
+msgstr "No se encontró en los archivos de configuración; solo se puede desactivar"
 
-#: omarchy_settings/keybinds.py:516
-msgid "Uses an internal Omarchy function; it can only be disabled"
-msgstr "Usa una función interna de Omarchy; solo se puede desactivar"
+#: omarchy_settings/keybinds.py:540
+msgid "Uses something defined in its own file; it can only be disabled"
+msgstr "Usa algo definido en su propio archivo; solo se puede desactivar"
 
 #: omarchy_settings/pages/accessibility.py:20
 msgid "Turns the animations back on"
@@ -397,11 +418,11 @@ msgstr "Aplicaciones predeterminadas"
 msgid "Only installed apps are listed."
 msgstr "Solo se muestran las aplicaciones instaladas."
 
-#: omarchy_settings/pages/apps.py:80
+#: omarchy_settings/pages/apps.py:83
 msgid "Default app changed"
 msgstr "Aplicación predeterminada cambiada"
 
-#: omarchy_settings/pages/apps.py:80
+#: omarchy_settings/pages/apps.py:83
 msgid "Could not change the default app"
 msgstr "No se pudo cambiar la aplicación predeterminada"
 
@@ -410,15 +431,15 @@ msgid "Startup apps"
 msgstr "Aplicaciones al iniciar"
 
 #: omarchy_settings/pages/autostart.py:23
-msgid "Started when you log in. Omarchy starts some apps by itself (the bar, Fcitx 5…), so one that is off here may still run."
-msgstr "Se inician cuando entras en la sesión. Omarchy inicia algunas aplicaciones por su cuenta (la barra, Fcitx 5…), así que una desactivada aquí aún puede ejecutarse."
+msgid "Started when you log in. Some apps are also started by the system's own config (the bar, input methods…), so one that is off here may still run."
+msgstr "Se inician al entrar en la sesión. Algunas apps también las inicia la configuración del propio sistema (la barra, métodos de entrada…), así que una desactivada aquí puede seguir ejecutándose."
 
 #: omarchy_settings/pages/autostart.py:31
 msgid "Your commands"
 msgstr "Tus comandos"
 
 #: omarchy_settings/pages/autostart.py:31
-#: omarchy_settings/pages/autostart.py:119
+#: omarchy_settings/pages/autostart.py:120
 msgid "Run at login through Hyprland"
 msgstr "Se ejecutan al entrar, a través de Hyprland"
 
@@ -427,57 +448,58 @@ msgid "Add a command (e.g. discord --start-minimized)"
 msgstr "Añadir un comando (p. ej. discord --start-minimized)"
 
 #: omarchy_settings/pages/autostart.py:41
-msgid "In autostart.lua"
-msgstr "En autostart.lua"
+#, python-brace-format
+msgid "In {file}"
+msgstr "En {file}"
 
-#: omarchy_settings/pages/autostart.py:45
+#: omarchy_settings/pages/autostart.py:46
 msgid "Edit the file"
 msgstr "Editar el archivo"
 
-#: omarchy_settings/pages/autostart.py:46
+#: omarchy_settings/pages/autostart.py:47
 msgid "Changes there are yours; this app only reads them"
 msgstr "Los cambios ahí son tuyos; esta aplicación solo los lee"
 
-#: omarchy_settings/pages/autostart.py:47 omarchy_settings/pages/bar.py:412
+#: omarchy_settings/pages/autostart.py:48 omarchy_settings/pages/bar.py:412
 #: omarchy_settings/pages/bar.py:419 omarchy_settings/pages/bluetooth.py:178
 #: omarchy_settings/pages/sound.py:220 omarchy_settings/pages/system.py:96
 #: omarchy_settings/pages/wifi.py:21 omarchy_settings/pages/wifi.py:211
 msgid "Open"
 msgstr "Abrir"
 
-#: omarchy_settings/pages/autostart.py:79
+#: omarchy_settings/pages/autostart.py:80
 msgid "No commands in the file"
 msgstr "No hay comandos en el archivo"
 
-#: omarchy_settings/pages/autostart.py:82
-#: omarchy_settings/pages/autostart.py:119
+#: omarchy_settings/pages/autostart.py:83
+#: omarchy_settings/pages/autostart.py:120
 #, python-brace-format
 msgid "{n} command"
 msgid_plural "{n} commands"
 msgstr[0] "{n} comando"
 msgstr[1] "{n} comandos"
 
-#: omarchy_settings/pages/autostart.py:93
+#: omarchy_settings/pages/autostart.py:94
 #, python-brace-format
 msgid "Could not change {name}"
 msgstr "No se pudo cambiar {name}"
 
-#: omarchy_settings/pages/autostart.py:111 omarchy_settings/pages/power.py:324
-#: omarchy_settings/pages/power.py:335 omarchy_settings/pages/security.py:53
+#: omarchy_settings/pages/autostart.py:112 omarchy_settings/pages/power.py:328
+#: omarchy_settings/pages/power.py:339 omarchy_settings/pages/security.py:53
 #: omarchy_settings/pages/security.py:71 omarchy_settings/pages/webapps.py:127
 #: omarchy_settings/pages/webapps.py:147
 msgid "Remove"
 msgstr "Quitar"
 
-#: omarchy_settings/pages/autostart.py:126
+#: omarchy_settings/pages/autostart.py:127
 msgid "Type a command"
 msgstr "Escribe un comando"
 
-#: omarchy_settings/pages/autostart.py:129
+#: omarchy_settings/pages/autostart.py:130
 msgid "This command is already there"
 msgstr "Ese comando ya está"
 
-#: omarchy_settings/pages/autostart.py:133
+#: omarchy_settings/pages/autostart.py:134
 msgid "It will start the next time you log in"
 msgstr "Se iniciará la próxima vez que entres en la sesión"
 
@@ -1064,7 +1086,7 @@ msgid "Pairing code"
 msgstr "Código de emparejamiento"
 
 #: omarchy_settings/pages/bluetooth.py:35
-#: omarchy_settings/pages/shortcuts.py:151 omarchy_settings/pages/system.py:226
+#: omarchy_settings/pages/shortcuts.py:152 omarchy_settings/pages/system.py:226
 #: omarchy_settings/pages/wifi.py:53 omarchy_settings/pages/wifi.py:348
 #: omarchy_settings/ui.py:174
 msgid "Cancel"
@@ -1302,7 +1324,7 @@ msgstr "No se pudo emparejar con {name}"
 msgid "Dependencies"
 msgstr "Dependencias"
 
-#: omarchy_settings/pages/dependencies.py:38 omarchy_settings/pages/power.py:86
+#: omarchy_settings/pages/dependencies.py:38 omarchy_settings/pages/power.py:75
 msgid "Checking…"
 msgstr "Comprobando…"
 
@@ -1479,8 +1501,12 @@ msgid "No gaps or decorations: maximum usable area"
 msgstr "Sin espacios ni decoraciones: el máximo de área útil"
 
 #: omarchy_settings/pages/hyprland.py:48
-msgid "Omarchy's default look"
-msgstr "El aspecto predeterminado de Omarchy"
+msgid "Default"
+msgstr "Predeterminado"
+
+#: omarchy_settings/pages/hyprland.py:48
+msgid "The look of your config, without this app's changes"
+msgstr "El aspecto de tu configuración, sin los cambios de esta app"
 
 #: omarchy_settings/pages/hyprland.py:50
 msgid "Comfortable"
@@ -1857,9 +1883,9 @@ msgid "Going to the workspace you are on returns to the previous one"
 msgstr "Ir al espacio de trabajo en el que estás vuelve al anterior"
 
 #: omarchy_settings/pages/hyprland.py:334
-#: omarchy_settings/pages/shortcuts.py:386
-msgid "Back to Omarchy's default"
-msgstr "Volver al valor de Omarchy"
+#: omarchy_settings/pages/shortcuts.py:387
+msgid "Back to the default"
+msgstr "Volver al valor predeterminado"
 
 #: omarchy_settings/pages/hyprland.py:398
 #, python-brace-format
@@ -1885,8 +1911,8 @@ msgstr "Opciones restauradas"
 
 #: omarchy_settings/pages/hyprland.py:521
 #: omarchy_settings/pages/hyprland.py:528
-msgid "Returns every option on this page to Omarchy's default"
-msgstr "Devuelve todas las opciones de esta página a los valores de Omarchy"
+msgid "Returns every option on this page to its default"
+msgstr "Devuelve todas las opciones de esta página a su valor predeterminado"
 
 #: omarchy_settings/pages/hyprland.py:531
 msgid "Devices"
@@ -1984,8 +2010,9 @@ msgid "Reads the connected displays again"
 msgstr "Vuelve a leer las pantallas conectadas"
 
 #: omarchy_settings/pages/monitors.py:207
-msgid "Settings are stored in ~/.config/hypr/omarchy-settings.lua and take priority over monitors.lua. 'Restore' returns to what is in monitors.lua."
-msgstr "Los ajustes se guardan en ~/.config/hypr/omarchy-settings.lua y tienen prioridad sobre monitors.lua. «Restaurar» vuelve a lo que hay en monitors.lua."
+#, python-brace-format
+msgid "Settings are stored in {file} and take priority over the rest of your config. 'Restore' returns to what your config says."
+msgstr "Los ajustes se guardan en {file} y tienen prioridad sobre el resto de tu configuración. 'Restaurar' vuelve a lo que dice tu configuración."
 
 #: omarchy_settings/pages/monitors.py:234
 msgid "hyprctl found no displays."
@@ -2012,7 +2039,7 @@ msgid "adjusted by this app"
 msgstr "ajustada por esta aplicación"
 
 #: omarchy_settings/pages/monitors.py:313
-#: omarchy_settings/pages/shortcuts.py:390
+#: omarchy_settings/pages/shortcuts.py:391
 msgid "Enabled"
 msgstr "Activada"
 
@@ -2189,7 +2216,7 @@ msgstr "No hacer nada"
 msgid "Power profile"
 msgstr "Perfil de energía"
 
-#: omarchy_settings/pages/power.py:57 omarchy_settings/pages/power.py:128
+#: omarchy_settings/pages/power.py:57 omarchy_settings/pages/power.py:132
 msgid "Night light"
 msgstr "Luz nocturna"
 
@@ -2197,161 +2224,161 @@ msgstr "Luz nocturna"
 msgid "Warmer screen colors to reduce blue light."
 msgstr "Colores de pantalla más cálidos para reducir la luz azul."
 
-#: omarchy_settings/pages/power.py:65
-msgid "Power button"
-msgstr "Botón de encendido"
-
-#: omarchy_settings/pages/power.py:69
-msgid "When the power button is pressed"
-msgstr "Al pulsar el botón de encendido"
-
 #: omarchy_settings/pages/power.py:70
-msgid "Works on the lock screen too"
-msgstr "También funciona en la pantalla de bloqueo"
-
-#: omarchy_settings/pages/power.py:81
 msgid "Suspend and hibernate"
 msgstr "Suspender e hibernar"
 
-#: omarchy_settings/pages/power.py:86
+#: omarchy_settings/pages/power.py:75
 msgid "Hibernation"
 msgstr "Hibernación"
 
-#: omarchy_settings/pages/power.py:86 omarchy_settings/pages/power.py:324
-#: omarchy_settings/pages/power.py:335 omarchy_settings/pages/security.py:57
+#: omarchy_settings/pages/power.py:75 omarchy_settings/pages/power.py:328
+#: omarchy_settings/pages/power.py:339 omarchy_settings/pages/security.py:57
 msgid "Set up"
 msgstr "Configurar"
 
-#: omarchy_settings/pages/power.py:96
+#: omarchy_settings/pages/power.py:83
+msgid "Power button"
+msgstr "Botón de encendido"
+
+#: omarchy_settings/pages/power.py:87
+msgid "When the power button is pressed"
+msgstr "Al pulsar el botón de encendido"
+
+#: omarchy_settings/pages/power.py:88
+msgid "Works on the lock screen too"
+msgstr "También funciona en la pantalla de bloqueo"
+
+#: omarchy_settings/pages/power.py:100
 msgid "No power profiles available"
 msgstr "No hay perfiles de energía disponibles"
 
-#: omarchy_settings/pages/power.py:99
+#: omarchy_settings/pages/power.py:103
 msgid "Profile"
 msgstr "Perfil"
 
-#: omarchy_settings/pages/power.py:110
+#: omarchy_settings/pages/power.py:114
 msgid "Could not change the power profile"
 msgstr "No se pudo cambiar el perfil de energía"
 
-#: omarchy_settings/pages/power.py:128
+#: omarchy_settings/pages/power.py:132
 msgid "Turns it on or off now"
 msgstr "La enciende o la apaga ahora"
 
-#: omarchy_settings/pages/power.py:132
+#: omarchy_settings/pages/power.py:136
 msgid "Warmth"
 msgstr "Calidez"
 
-#: omarchy_settings/pages/power.py:132
+#: omarchy_settings/pages/power.py:136
 msgid "Lower is warmer"
 msgstr "Más bajo es más cálido"
 
-#: omarchy_settings/pages/power.py:146
+#: omarchy_settings/pages/power.py:150
 msgid "Turn on automatically"
 msgstr "Activar automáticamente"
 
-#: omarchy_settings/pages/power.py:150
+#: omarchy_settings/pages/power.py:154
 msgid "Every day at the times below"
 msgstr "Todos los días a las horas de abajo"
 
-#: omarchy_settings/pages/power.py:152
+#: omarchy_settings/pages/power.py:156
 msgid "Turns on at (HH:MM)"
 msgstr "Se enciende a las (HH:MM)"
 
-#: omarchy_settings/pages/power.py:153
+#: omarchy_settings/pages/power.py:157
 msgid "Turns off at (HH:MM)"
 msgstr "Se apaga a las (HH:MM)"
 
-#: omarchy_settings/pages/power.py:166
+#: omarchy_settings/pages/power.py:170
 msgid "Could not change the night light"
 msgstr "No se pudo cambiar la luz nocturna"
 
-#: omarchy_settings/pages/power.py:191
+#: omarchy_settings/pages/power.py:195
 msgid "Use times like 20:00 and 07:00"
 msgstr "Usa horas como 20:00 y 07:00"
 
-#: omarchy_settings/pages/power.py:195
+#: omarchy_settings/pages/power.py:199
 msgid "The start and end times must be different"
 msgstr "La hora de inicio y la de fin deben ser distintas"
 
-#: omarchy_settings/pages/power.py:228
+#: omarchy_settings/pages/power.py:232
 #, python-brace-format
 msgid "Night light scheduled from {start} to {end}"
 msgstr "Luz nocturna programada de {start} a {end}"
 
-#: omarchy_settings/pages/power.py:230 omarchy_settings/pages/power.py:246
+#: omarchy_settings/pages/power.py:234 omarchy_settings/pages/power.py:250
 msgid "Could not save the schedule"
 msgstr "No se pudo guardar la programación"
 
-#: omarchy_settings/pages/power.py:244
+#: omarchy_settings/pages/power.py:248
 msgid "Night light schedule turned off"
 msgstr "Programación de la luz nocturna desactivada"
 
-#: omarchy_settings/pages/power.py:256
+#: omarchy_settings/pages/power.py:260
 msgid "Power button changed"
 msgstr "Botón de encendido cambiado"
 
-#: omarchy_settings/pages/power.py:256
+#: omarchy_settings/pages/power.py:260
 msgid "Could not save the setting"
 msgstr "No se pudo guardar el ajuste"
 
-#: omarchy_settings/pages/power.py:264
+#: omarchy_settings/pages/power.py:268
 msgid "Idle"
 msgstr "Inactividad"
 
-#: omarchy_settings/pages/power.py:264
+#: omarchy_settings/pages/power.py:268
 msgid "Counted from the moment you stop using the computer."
 msgstr "Se cuenta desde que dejas de usar el ordenador."
 
-#: omarchy_settings/pages/power.py:266
+#: omarchy_settings/pages/power.py:270
 msgid "Screensaver after"
 msgstr "Salvapantallas tras"
 
-#: omarchy_settings/pages/power.py:269
+#: omarchy_settings/pages/power.py:273
 msgid "Lock the screen after"
 msgstr "Bloquear la pantalla tras"
 
-#: omarchy_settings/pages/power.py:269
+#: omarchy_settings/pages/power.py:273
 msgid "Asks for the password to come back"
 msgstr "Pide la contraseña para volver"
 
-#: omarchy_settings/pages/power.py:274
+#: omarchy_settings/pages/power.py:278
 msgid "Stay awake"
 msgstr "Mantener activo"
 
-#: omarchy_settings/pages/power.py:275
+#: omarchy_settings/pages/power.py:279
 msgid "Pauses the screensaver and lock until you turn this off"
 msgstr "Pausa el salvapantallas y el bloqueo hasta que lo desactives"
 
-#: omarchy_settings/pages/power.py:294
+#: omarchy_settings/pages/power.py:298
 msgid "Could not write shell.json"
 msgstr "No se pudo escribir shell.json"
 
-#: omarchy_settings/pages/power.py:308
+#: omarchy_settings/pages/power.py:312
 msgid "Suspend in the system menu"
 msgstr "Suspender en el menú del sistema"
 
-#: omarchy_settings/pages/power.py:309
+#: omarchy_settings/pages/power.py:313
 msgid "Shows Suspend next to Lock and Shut down"
 msgstr "Muestra Suspender junto a Bloquear y Apagar"
 
-#: omarchy_settings/pages/power.py:320
+#: omarchy_settings/pages/power.py:324
 msgid "Set up: Hibernate saves your session to disk and turns off"
 msgstr "Configurada: Hibernar guarda tu sesión en el disco y apaga"
 
-#: omarchy_settings/pages/power.py:322
+#: omarchy_settings/pages/power.py:326
 msgid "Not set up; needs a swap file as big as the memory"
 msgstr "Sin configurar; necesita un archivo de intercambio tan grande como la memoria"
 
-#: omarchy_settings/pages/power.py:330
+#: omarchy_settings/pages/power.py:334
 msgid "Remove hibernation?"
 msgstr "¿Quitar la hibernación?"
 
-#: omarchy_settings/pages/power.py:330
+#: omarchy_settings/pages/power.py:334
 msgid "Set up hibernation?"
 msgstr "¿Configurar la hibernación?"
 
-#: omarchy_settings/pages/power.py:332
+#: omarchy_settings/pages/power.py:336
 msgid "Opens a terminal that asks for your password, changes the swap file and rebuilds the boot image. It takes a minute or two."
 msgstr "Abre una terminal que pide tu contraseña, cambia el archivo de intercambio y reconstruye la imagen de arranque. Tarda uno o dos minutos."
 
@@ -2372,8 +2399,8 @@ msgid "Nothing changed"
 msgstr "No ha cambiado nada"
 
 #: omarchy_settings/pages/search.py:128
-msgid "Every setting this app manages is as Omarchy ships it."
-msgstr "Todos los ajustes que gestiona esta aplicación están como los trae Omarchy."
+msgid "Every setting this app manages is at its default."
+msgstr "Todos los ajustes que gestiona esta app están en su valor predeterminado."
 
 #: omarchy_settings/pages/search.py:139
 msgid "Nothing found"
@@ -2436,189 +2463,194 @@ msgstr "¿Quitar {name}?"
 msgid "Opens a terminal that undoes the setup; it asks for your password."
 msgstr "Abre una terminal que deshace la configuración; pide tu contraseña."
 
-#: omarchy_settings/pages/shortcuts.py:111
+#: omarchy_settings/pages/shortcuts.py:112
 msgid "Name (shown in the shortcut list)"
 msgstr "Nombre (aparece en la lista de atajos)"
 
-#: omarchy_settings/pages/shortcuts.py:112
+#: omarchy_settings/pages/shortcuts.py:113
 msgid "What to do"
 msgstr "Qué hacer"
 
-#: omarchy_settings/pages/shortcuts.py:116
+#: omarchy_settings/pages/shortcuts.py:117
 msgid "Command (e.g. firefox, gimp, btop)"
 msgstr "Comando (p. ej. firefox, gimp, btop)"
 
-#: omarchy_settings/pages/shortcuts.py:136
+#: omarchy_settings/pages/shortcuts.py:137
 msgid "Click or scroll here"
 msgstr "Haz clic o desplázate aquí"
 
-#: omarchy_settings/pages/shortcuts.py:152 omarchy_settings/pages/wifi.py:349
+#: omarchy_settings/pages/shortcuts.py:153 omarchy_settings/pages/wifi.py:349
 msgid "Save"
 msgstr "Guardar"
 
-#: omarchy_settings/pages/shortcuts.py:176
+#: omarchy_settings/pages/shortcuts.py:177
 msgid "Press the key…"
 msgstr "Pulsa la tecla…"
 
-#: omarchy_settings/pages/shortcuts.py:176
+#: omarchy_settings/pages/shortcuts.py:177
 msgid "Record another key"
 msgstr "Grabar otra tecla"
 
-#: omarchy_settings/pages/shortcuts.py:230
+#: omarchy_settings/pages/shortcuts.py:231
 msgid "Press the keys, or click or scroll in the box, with a modifier. If the system already uses the combination, it may not reach this window: select the modifiers above and record just the key or button."
 msgstr "Pulsa las teclas, o haz clic o desplázate en el recuadro, con un modificador. Si el sistema ya usa la combinación, puede que no llegue a esta ventana: selecciona los modificadores de arriba y graba solo la tecla o el botón."
 
-#: omarchy_settings/pages/shortcuts.py:239
+#: omarchy_settings/pages/shortcuts.py:240
 msgid "Without a modifier, this key stops working for typing."
 msgstr "Sin modificador, esta tecla deja de servir para escribir."
 
-#: omarchy_settings/pages/shortcuts.py:264
-msgid "The default shortcuts come from Omarchy. Changes made here are stored in ~/.config/hypr/omarchy-settings.lua and can be undone with ↶."
-msgstr "Los atajos predeterminados vienen de Omarchy. Los cambios hechos aquí se guardan en ~/.config/hypr/omarchy-settings.lua y se pueden deshacer con ↶."
+#: omarchy_settings/pages/shortcuts.py:265
+#, python-brace-format
+msgid "The default shortcuts come from your config files. Changes made here are stored in {file} and can be undone with ↶."
+msgstr "Los atajos predeterminados vienen de tus archivos de configuración. Los cambios hechos aquí se guardan en {file} y se pueden deshacer con ↶."
 
-#: omarchy_settings/pages/shortcuts.py:269
+#: omarchy_settings/pages/shortcuts.py:270
 msgid "Search by name or key (e.g. browser, super+b)"
 msgstr "Buscar por nombre o tecla (p. ej. navegador, super+b)"
 
-#: omarchy_settings/pages/shortcuts.py:271
-#: omarchy_settings/pages/shortcuts.py:515
+#: omarchy_settings/pages/shortcuts.py:272
+#: omarchy_settings/pages/shortcuts.py:516
 msgid "New shortcut"
 msgstr "Nuevo atajo"
 
-#: omarchy_settings/pages/shortcuts.py:281
+#: omarchy_settings/pages/shortcuts.py:282
 msgid "Restore all shortcuts"
 msgstr "Restaurar todos los atajos"
 
-#: omarchy_settings/pages/shortcuts.py:282
+#: omarchy_settings/pages/shortcuts.py:283
 msgid "Undoes every change and deletes your own shortcuts"
 msgstr "Deshace todos los cambios y borra tus propios atajos"
 
-#: omarchy_settings/pages/shortcuts.py:298
+#: omarchy_settings/pages/shortcuts.py:299
 msgid "Could not read the shortcuts"
 msgstr "No se pudieron leer los atajos"
 
-#: omarchy_settings/pages/shortcuts.py:307
+#: omarchy_settings/pages/shortcuts.py:308
 msgid "Your shortcuts"
 msgstr "Tus atajos"
 
-#: omarchy_settings/pages/shortcuts.py:312
+#: omarchy_settings/pages/shortcuts.py:313
 msgid "No shortcuts of your own"
 msgstr "No tienes atajos propios"
 
-#: omarchy_settings/pages/shortcuts.py:313
+#: omarchy_settings/pages/shortcuts.py:314
 msgid "Use “New shortcut” to open an app or run a command"
 msgstr "Usa «Nuevo atajo» para abrir una aplicación o ejecutar un comando"
 
-#: omarchy_settings/pages/shortcuts.py:323
+#: omarchy_settings/pages/shortcuts.py:324
 msgid "Omarchy shortcuts"
 msgstr "Atajos de Omarchy"
 
-#: omarchy_settings/pages/shortcuts.py:346
+#: omarchy_settings/pages/shortcuts.py:324
+msgid "Hyprland shortcuts"
+msgstr "Atajos de Hyprland"
+
+#: omarchy_settings/pages/shortcuts.py:347
 #, python-brace-format
 msgid "{n} shortcut"
 msgid_plural "{n} shortcuts"
 msgstr[0] "{n} atajo"
 msgstr[1] "{n} atajos"
 
-#: omarchy_settings/pages/shortcuts.py:348
+#: omarchy_settings/pages/shortcuts.py:349
 #, python-brace-format
 msgid "{n} changed"
 msgid_plural "{n} changed"
 msgstr[0] "{n} cambiado"
 msgstr[1] "{n} cambiados"
 
-#: omarchy_settings/pages/shortcuts.py:367
+#: omarchy_settings/pages/shortcuts.py:368
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: omarchy_settings/pages/shortcuts.py:369
+#: omarchy_settings/pages/shortcuts.py:370
 #, python-brace-format
 msgid "Before: {keys}"
 msgstr "Antes: {keys}"
 
-#: omarchy_settings/pages/shortcuts.py:377
+#: omarchy_settings/pages/shortcuts.py:378
 msgid "Change the key"
 msgstr "Cambiar la tecla"
 
-#: omarchy_settings/pages/shortcuts.py:400
+#: omarchy_settings/pages/shortcuts.py:401
 msgid "Edit"
 msgstr "Editar"
 
-#: omarchy_settings/pages/shortcuts.py:404
+#: omarchy_settings/pages/shortcuts.py:405
 msgid "Delete"
 msgstr "Borrar"
 
-#: omarchy_settings/pages/shortcuts.py:439
+#: omarchy_settings/pages/shortcuts.py:440
 #, python-brace-format
 msgid "Already used by your shortcut “{name}”."
 msgstr "Ya lo usa tu atajo «{name}»."
 
-#: omarchy_settings/pages/shortcuts.py:441
+#: omarchy_settings/pages/shortcuts.py:442
 #, python-brace-format
 msgid "Already used by “{name}”, which will be disabled."
 msgstr "Ya lo usa «{name}», que se desactivará."
 
-#: omarchy_settings/pages/shortcuts.py:463
+#: omarchy_settings/pages/shortcuts.py:464
 #, python-brace-format
 msgid "“{name}” is now {keys}"
 msgstr "«{name}» ahora es {keys}"
 
-#: omarchy_settings/pages/shortcuts.py:467
+#: omarchy_settings/pages/shortcuts.py:468
 #, python-brace-format
 msgid "Key for “{name}”"
 msgstr "Tecla para «{name}»"
 
-#: omarchy_settings/pages/shortcuts.py:480
+#: omarchy_settings/pages/shortcuts.py:481
 msgid "Those keys are used by another shortcut; change its key first"
 msgstr "Esas teclas las usa otro atajo; cambia primero su tecla"
 
-#: omarchy_settings/pages/shortcuts.py:486
+#: omarchy_settings/pages/shortcuts.py:487
 #, python-brace-format
 msgid "“{name}” enabled"
 msgstr "«{name}» activado"
 
-#: omarchy_settings/pages/shortcuts.py:486
+#: omarchy_settings/pages/shortcuts.py:487
 #, python-brace-format
 msgid "“{name}” disabled"
 msgstr "«{name}» desactivado"
 
-#: omarchy_settings/pages/shortcuts.py:493
+#: omarchy_settings/pages/shortcuts.py:494
 #, python-brace-format
 msgid "The original key is used by “{name}”"
 msgstr "La tecla original la usa «{name}»"
 
-#: omarchy_settings/pages/shortcuts.py:497
+#: omarchy_settings/pages/shortcuts.py:498
 #, python-brace-format
 msgid "“{name}” is back to the default"
 msgstr "«{name}» vuelve al valor predeterminado"
 
-#: omarchy_settings/pages/shortcuts.py:512
+#: omarchy_settings/pages/shortcuts.py:513
 #, python-brace-format
 msgid "Shortcut “{name}” saved"
 msgstr "Atajo «{name}» guardado"
 
-#: omarchy_settings/pages/shortcuts.py:515
+#: omarchy_settings/pages/shortcuts.py:516
 msgid "Edit shortcut"
 msgstr "Editar atajo"
 
-#: omarchy_settings/pages/shortcuts.py:525
+#: omarchy_settings/pages/shortcuts.py:526
 #, python-brace-format
 msgid "Shortcut “{name}” deleted"
 msgstr "Atajo «{name}» borrado"
 
-#: omarchy_settings/pages/shortcuts.py:530
+#: omarchy_settings/pages/shortcuts.py:531
 msgid "Restore all shortcuts?"
 msgstr "¿Restaurar todos los atajos?"
 
-#: omarchy_settings/pages/shortcuts.py:531
-msgid "Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."
-msgstr "Los atajos de Omarchy vuelven a sus valores y se borran tus propios atajos."
+#: omarchy_settings/pages/shortcuts.py:532
+msgid "Changed shortcuts return to their defaults and your own shortcuts are deleted."
+msgstr "Los atajos cambiados vuelven a su valor predeterminado y tus propios atajos se eliminan."
 
-#: omarchy_settings/pages/shortcuts.py:533
+#: omarchy_settings/pages/shortcuts.py:534
 msgid "Shortcuts restored"
 msgstr "Atajos restaurados"
 
-#: omarchy_settings/pages/shortcuts.py:550
+#: omarchy_settings/pages/shortcuts.py:551
 msgid "Hyprland didn't accept that shortcut; nothing was changed"
 msgstr "Hyprland no aceptó ese atajo; no se cambió nada"
 
@@ -3338,8 +3370,8 @@ msgid "command not found"
 msgstr "comando no encontrado"
 
 #: omarchy_settings/ui.py:108
-msgid "Changed from Omarchy's default"
-msgstr "Distinto del valor de Omarchy"
+msgid "Changed from the default"
+msgstr "Cambiado respecto al valor predeterminado"
 
 #: omarchy_settings/ui.py:187
 #, python-brace-format

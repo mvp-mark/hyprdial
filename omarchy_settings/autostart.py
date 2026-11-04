@@ -2,7 +2,8 @@
 
 Two sources: XDG autostart entries (system ones in /etc/xdg/autostart, the user's in ~/.config/autostart), turned
 off with a user file that says Hidden=true, as the XDG spec has it; and the user's own commands, written to the
-generated file with o.launch_on_start. Commands in ~/.config/hypr/autostart.lua are read only.
+generated file (core.on_start_call). Commands in the user's startup file (Omarchy's ~/.config/hypr/autostart.lua,
+or hyprland.lua elsewhere) are read only.
 """
 
 from __future__ import annotations
@@ -12,7 +13,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-from . import core
+from . import core, host
 from .apps import parse_desktop
 
 USER_DIR = core.HOME / ".config/autostart"
@@ -118,8 +119,16 @@ def set_enabled(entry: Entry, on: bool, user_dir: Path = USER_DIR) -> None:
 
 
 # ------------------------------------------------------------------ commands
-def lua_commands(path: Path = AUTOSTART_LUA) -> list[str]:
-    """Uncommented o.launch_on_start / o.exec_on_start calls of the user's own file."""
+STARTUP_CALL = re.compile(r"(?<![\w.])(?:o\.(?:launch|exec)_on_start|hl\.exec_cmd)\(\s*(['\"])(.*?)\1\s*\)")
+
+
+def startup_file() -> Path:
+    return AUTOSTART_LUA if host.is_omarchy() else core.HYPR_MAIN
+
+
+def lua_commands(path: Path | None = None) -> list[str]:
+    """Uncommented o.launch_on_start / o.exec_on_start / hl.exec_cmd calls of the user's startup file."""
+    path = startup_file() if path is None else path
     try:
         text = path.read_text()
     except OSError:
@@ -128,7 +137,7 @@ def lua_commands(path: Path = AUTOSTART_LUA) -> list[str]:
     for line in text.splitlines():
         if line.strip().startswith("--"):
             continue  # commented out; "--" inside a command (foo --bar) is not a comment
-        m = re.search(r"o\.(?:launch|exec)_on_start\(\s*(['\"])(.*?)\1\s*\)", line)
+        m = STARTUP_CALL.search(line)
         if m:
             found.append(m.group(2))
     return found
@@ -138,7 +147,7 @@ def render_extras(extras: dict) -> list[str]:
     commands = [c for c in extras.get("autostart", []) if isinstance(c, str) and c.strip()]
     if not commands:
         return []
-    return ["", "-- Startup apps"] + [f"pcall(function() o.launch_on_start({core.lua(c)}) end)" for c in commands]
+    return ["", "-- Startup apps"] + [core.on_start_call(c) for c in commands]
 
 
 def valid_command(text: str) -> str | None:

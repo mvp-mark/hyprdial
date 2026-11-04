@@ -10,6 +10,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gdk, GLib, Gtk  # noqa: E402
 
+from .. import core, host
 from .. import keybinds as kb
 from ..i18n import _, ngettext
 from ..ui import bg, button_row, confirm, set_changed
@@ -261,9 +262,9 @@ class ShortcutsPage(Adw.PreferencesPage):
 
         top = Adw.PreferencesGroup(
             description=_(
-                "The default shortcuts come from Omarchy. Changes made here are stored "
-                "in ~/.config/hypr/omarchy-settings.lua and can be undone with ↶."
-            )
+                "The default shortcuts come from your config files. Changes made here are stored in {file} "
+                "and can be undone with ↶."
+            ).format(file=core.home_path(core.HYPR_MANAGED))
         )
         header = Gtk.Box(spacing=8)
         self.search = Gtk.SearchEntry(hexpand=True, placeholder_text=_("Search by name or key (e.g. browser, super+b)"))
@@ -320,7 +321,7 @@ class ShortcutsPage(Adw.PreferencesPage):
             self.rows.append((row, f"{item['desc']} {item['command']} {self._hay(item['keys'])}".lower(), None))
         self._add_group(custom)
 
-        omarchy = Adw.PreferencesGroup(title=_("Omarchy shortcuts"))
+        omarchy = Adw.PreferencesGroup(title=_("Omarchy shortcuts") if host.is_omarchy() else _("Hyprland shortcuts"))
         for cat in kb.CATEGORY_ORDER:
             cat_entries = [e for e in entries if e.category == cat]
             if not cat_entries:
@@ -383,7 +384,7 @@ class ShortcutsPage(Adw.PreferencesPage):
                 icon_name="edit-undo-symbolic",
                 valign=Gtk.Align.CENTER,
                 css_classes=["flat"],
-                tooltip_text=_("Back to Omarchy's default"),
+                tooltip_text=_("Back to the default"),
             )
             undo.connect("clicked", lambda _b: self._restore(e))
             row.add_suffix(undo)
@@ -528,7 +529,7 @@ class ShortcutsPage(Adw.PreferencesPage):
         confirm(
             self.win,
             heading=_("Restore all shortcuts?"),
-            body=_("Omarchy's shortcuts return to their defaults and your own shortcuts are deleted."),
+            body=_("Changed shortcuts return to their defaults and your own shortcuts are deleted."),
             action=_("Restore"),
             on_confirm=lambda: self._apply(kb.empty_state(), _("Shortcuts restored")),
         )

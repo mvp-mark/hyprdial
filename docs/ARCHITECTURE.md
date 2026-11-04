@@ -24,6 +24,22 @@ core.py        running commands (run/out/have/spawn) and the generated Hyprland 
   unit tests, which run without PyGObject. libnm is optional (it comes with NetworkManager), so `nm.py` is imported
   only when a password is saved; the page smoke test runs without it.
 
+## Omarchy or plain Hyprland
+
+`host.py` tells them apart: Omarchy has the `omarchy` command and its Lua helpers (`$OMARCHY_PATH/default/hypr/
+helpers.lua`). `HYPRDIAL_PLATFORM=omarchy|hyprland` forces one (tests, trying the other mode by hand).
+
+- **Pages and groups that only make sense on Omarchy** are hidden elsewhere (`app.OMARCHY_ONLY`: themes, bar,
+  security; web apps, the power button and idle times inside their pages). Rows that call an `omarchy-*`
+  command check `core.have` first, so they disappear on their own.
+- **Lua lines for the generated file** come from `core.bind_call` and `core.on_start_call`: Omarchy's `o.bind` /
+  `o.launch_on_start` on Omarchy (its shortcut list and uwsm launching keep working), `hl.bind` /
+  `hl.on("hyprland.start", ...)` elsewhere.
+- **Commands that differ** live in `host.py`: the terminal for sudo prompts, launching apps, opening TUIs.
+- **Hyprland too old (below `host.MIN_HYPRLAND`), not running, or still on hyprland.conf**: the window shows a
+  banner and `HyprStore.read_only` keeps every change in memory; pages that don't write Hyprland's config work.
+- Only `hyprland.lua` is supported: Hyprland 0.55 made it the default and 0.57 drops `hyprland.conf`.
+
 ## Changing the system: Omarchy first
 
 1. **An `omarchy …` command exists** (`omarchy theme set`, `omarchy toggle touchpad`, `omarchy default browser`,
@@ -33,8 +49,8 @@ core.py        running commands (run/out/have/spawn) and the generated Hyprland 
 3. **Hyprland settings** go to the generated `~/.config/hypr/omarchy-settings.lua` only, never into Omarchy's
    files. State lives in `~/.config/omarchy-settings/state.json`.
 4. **Never edit `/usr/share/omarchy`.** Reading it to learn defaults and formats is fine.
-5. **Anything that needs sudo runs in a visible terminal** (`omarchy-launch-floating-terminal-with-presentation`),
-   so the password prompt is the system's own. polkit prompts (`timedatectl`, `localectl`, `pkexec pacman`) are
+5. **Anything that needs sudo runs in a visible terminal** (`host.terminal_command`: Omarchy's floating terminal,
+   or the user's terminal elsewhere), so the password prompt is the system's own. polkit prompts (`timedatectl`, `localectl`, `pkexec pacman`) are
    fine from the window.
 6. **Secrets never go on a command line** (Wi-Fi passwords go through libnm over D-Bus).
 

@@ -204,9 +204,9 @@ class MonitorsPage(Adw.PreferencesPage):
 
         footer = Adw.PreferencesGroup(
             description=_(
-                "Settings are stored in ~/.config/hypr/omarchy-settings.lua and take priority over "
-                "monitors.lua. 'Restore' returns to what is in monitors.lua."
-            ),
+                "Settings are stored in {file} and take priority over the rest of your config. "
+                "'Restore' returns to what your config says."
+            ).format(file=core.home_path(core.HYPR_MANAGED)),
         )
         self.add(footer)
         self.footer = footer

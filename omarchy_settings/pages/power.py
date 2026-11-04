@@ -8,7 +8,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk  # noqa: E402
 
-from .. import core, power, shell
+from .. import core, host, power, shell
 from ..i18n import _
 from ..shell import IDLE_TIMES, STAY_AWAKE_FLAG, read_shell, write_idle
 from ..ui import (
@@ -62,6 +62,24 @@ class PowerPage(Adw.PreferencesPage):
         else:
             self.night_group.add(missing_row("hyprsunset"))
 
+        # elsewhere logind handles the power button, and idle times aren't in the Omarchy shell's settings
+        if host.is_omarchy():
+            self._button_group()
+            self._idle_group(read_shell())
+
+        self.sleep_group = Adw.PreferencesGroup(title=_("Suspend and hibernate"))
+        self.add(self.sleep_group)
+        if core.have("omarchy-toggle"):
+            bg(power.suspend_in_menu, self._add_suspend)
+        if power.hibernation_supported():
+            self.hibernate = button_row(_("Hibernation"), _("Checking…"), _("Set up"), self._confirm_hibernation)
+            self.sleep_group.add(self.hibernate)
+            self.hibernation_ready = False
+            # it is set up in a terminal: read it again whenever the page comes back
+            self.connect("map", lambda _w: bg(power.hibernation_ready, self._show_hibernation))
+            bg(power.hibernation_ready, self._show_hibernation)
+
+    def _button_group(self) -> None:
         button = Adw.PreferencesGroup(title=_("Power button"))
         current = self.store.extras.get("power_button", "menu")
         keys = [k for k, _label in BUTTON_ACTIONS]
@@ -75,20 +93,6 @@ class PowerPage(Adw.PreferencesPage):
         set_changed(self.button_row, current != "menu")
         button.add(self.button_row)
         self.add(button)
-
-        self._idle_group(read_shell())
-
-        self.sleep_group = Adw.PreferencesGroup(title=_("Suspend and hibernate"))
-        self.add(self.sleep_group)
-        if core.have("omarchy-toggle"):
-            bg(power.suspend_in_menu, self._add_suspend)
-        if power.hibernation_supported():
-            self.hibernate = button_row(_("Hibernation"), _("Checking…"), _("Set up"), self._confirm_hibernation)
-            self.sleep_group.add(self.hibernate)
-            self.hibernation_ready = False
-            # it is set up in a terminal: read it again whenever the page comes back
-            self.connect("map", lambda _w: bg(power.hibernation_ready, self._show_hibernation))
-            bg(power.hibernation_ready, self._show_hibernation)
 
     # -- power profile
     def _populate_profiles(self, result) -> None:

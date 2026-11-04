@@ -1,4 +1,4 @@
-"""Apps page: default apps (browser, terminal, editor, files, PDF, images), web apps and startup apps."""
+"""Apps page: default apps (browser, terminal, editor, files, PDF, images), web apps (Omarchy) and startup apps."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk  # noqa: E402
 
-from .. import apps, core
+from .. import apps, core, host
 from ..i18n import _
 from ..ui import bg
 from .autostart import StartupGroup
@@ -47,15 +47,18 @@ class AppsPage(Adw.PreferencesPage):
         self.add(self.defaults)
         bg(self._read_defaults, self._populate_defaults)
 
-        self.add(WebAppsGroup(win))
+        if host.is_omarchy():
+            self.add(WebAppsGroup(win))
         self.add(StartupGroup(win))
 
     # -- default apps
     @staticmethod
     def _read_defaults():
-        by_command = apps.default_apps() if core.have("omarchy") else {}
+        omarchy = host.is_omarchy() and core.have("omarchy")
+        by_command = apps.default_apps() if omarchy else {}
+        kinds = [k for k in apps.MIME_KINDS if k not in by_command]  # Omarchy sets the browser itself
         desktop = apps.desktop_apps()
-        by_type = {kind: apps.mime_choices(kind, desktop) for kind in apps.MIME_KINDS} if core.have("xdg-mime") else {}
+        by_type = {kind: apps.mime_choices(kind, desktop) for kind in kinds} if core.have("xdg-mime") else {}
         return by_command, by_type
 
     def _populate_defaults(self, result) -> None:

@@ -1,8 +1,9 @@
 """Hyprland shortcuts (no GTK, testable).
 
 Active shortcuts come from `hyprctl binds -j`, which in Lua mode doesn't say what each one does. The action is
-recovered by reading the o.bind(...) calls in Omarchy's files and the user's bindings.lua; only shortcuts found
-that way can change keys. Any active shortcut can be disabled.
+recovered by reading the o.bind(...) and hl.bind(...) calls in the config files (on Omarchy, its own files and the
+user's bindings.lua; elsewhere every .lua file in ~/.config/hypr); only shortcuts found that way can change keys.
+Any active shortcut can be disabled.
 """
 
 from __future__ import annotations
@@ -13,12 +14,13 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from . import core
+from . import core, host
 from .i18n import _
 
 OMARCHY_PATH = Path(os.environ.get("OMARCHY_PATH", "/usr/share/omarchy"))
 DEFAULT_DIR = OMARCHY_PATH / "default" / "hypr" / "bindings"
 USER_FILE = core.CONF_DIR / "hypr" / "bindings.lua"
+CONFIG_DIR = core.CONF_DIR / "hypr"
 
 MOD_BITS = [(64, "SUPER"), (1, "SHIFT"), (4, "CTRL"), (8, "ALT")]
 MOD_ALIASES = {
@@ -41,6 +43,7 @@ CATEGORIES = {
     "media": _("Media, volume and brightness"),
     "voxtype": _("Voice dictation"),
     "user": _("From your bindings.lua"),
+    "config": _("From your configuration"),
     "other": _("Other"),
 }
 CATEGORY_ORDER = list(CATEGORIES)
@@ -205,14 +208,14 @@ def _args(text: str, i: int) -> tuple[list[str], int]:
 
 
 def find_binds(text: str) -> list[tuple[str, list[str]]]:
-    """o.bind(...) and o.bind_toggle(...) calls outside strings and comments."""
+    """o.bind(...), o.bind_toggle(...) and hl.bind(...) calls outside strings and comments."""
     calls, i = [], 0
     while i < len(text):
         skipped = _skip(text, i)
         if skipped is not None:
             i = skipped
             continue
-        for name in ("o.bind_toggle(", "o.bind("):
+        for name in ("o.bind_toggle(", "o.bind(", "hl.bind("):
             if text.startswith(name, i) and (i == 0 or not re.match(r"[\w.:]", text[i - 1])):
                 args, i = _args(text, i + len(name))
                 calls.append((name[:-1], args))
@@ -402,18 +405,25 @@ def expand_loops(text: str) -> str:
 def parse_source(text: str, category: str) -> list[SourceBind]:
     result = []
     for name, args in find_binds(expand_loops(text)):
-        if len(args) < 3:
-            continue
-        keys, desc = lua_string(args[0]), lua_string(args[1])
+        if name == "hl.bind":  # hl.bind(keys, dispatcher, { description = ..., ... })
+            if len(args) < 2:
+                continue
+            m = re.search(r"\bdescription\s*=\s*(\"[^\"\\]*\"|'[^'\\]*')", args[2]) if len(args) > 2 else None
+            keys, desc, action = lua_string(args[0]), lua_string(m.group(1)) if m else None, ", ".join(args[1:])
+        else:
+            if len(args) < 3:
+                continue
+            keys, desc, rest = lua_string(args[0]), lua_string(args[1]), ", ".join(args[2:])
+            action = f'"omarchy-toggle-" .. {rest}' if name == "o.bind_toggle" else rest
         if keys is None:
             continue  # computed key (e.g. inside a for loop)
-        rest = ", ".join(args[2:])
-        action = f'"omarchy-toggle-" .. {rest}' if name == "o.bind_toggle" else rest
         result.append(SourceBind(keys, desc, action, category))
     return result
 
 
 def source_binds() -> list[SourceBind]:
+    if not host.is_omarchy():
+        return config_binds()
     binds = []
     for path in sorted(DEFAULT_DIR.glob("*.lua")):
         try:
@@ -424,6 +434,20 @@ def source_binds() -> list[SourceBind]:
         binds += parse_source(USER_FILE.read_text(), "user")
     except OSError:
         pass
+    return binds
+
+
+def config_binds(config_dir: Path | None = None) -> list[SourceBind]:
+    """Plain Hyprland: the shortcuts in every .lua file of the user's config, except the one this app generates."""
+    config_dir = CONFIG_DIR if config_dir is None else config_dir
+    binds = []
+    for path in sorted(config_dir.rglob("*.lua")):
+        if path.name == core.HYPR_MANAGED.name:
+            continue
+        try:
+            binds += parse_source(path.read_text(), "config")
+        except (OSError, UnicodeDecodeError):
+            pass
     return binds
 
 
@@ -510,10 +534,10 @@ def build_entries(live: list[dict], sources: list[SourceBind], state: dict) -> l
         desc = b.get("description") or (src.desc if src else "") or text
         category = src.category if src else guess_category(desc)
         if src is None:
-            entries[c] = Entry(text, desc, category, locked=_("Not found in Omarchy's files; it can only be disabled"))
+            entries[c] = Entry(text, desc, category, locked=_("Not found in the config files; it can only be disabled"))
         elif not src.movable:
             entries[c] = Entry(
-                src.keys, desc, category, locked=_("Uses an internal Omarchy function; it can only be disabled")
+                src.keys, desc, category, locked=_("Uses something defined in its own file; it can only be disabled")
             )
         else:
             entries[c] = Entry(src.keys, desc, category, src.action)
@@ -531,11 +555,25 @@ def build_entries(live: list[dict], sources: list[SourceBind], state: dict) -> l
 
 
 def custom_action(kind: str, command: str) -> str:
+    if host.is_omarchy():
+        if kind == "launch":
+            return f"{{ launch = {core.lua(command)} }}"
+        if kind == "tui":
+            return f"{{ tui = {core.lua(command)} }}"
+        return core.lua(command)
     if kind == "launch":
-        return f"{{ launch = {core.lua(command)} }}"
+        return core.lua(host.launch(command))
     if kind == "tui":
-        return f"{{ tui = {core.lua(command)} }}"
+        return core.lua(host.tui_command(command))
     return core.lua(command)
+
+
+def split_action(action: str) -> tuple[str, str]:
+    """'"cmd", { mouse = true }' -> ('"cmd"', 'mouse = true'): the dispatcher and the fields of its options."""
+    args, _end = _args(action + ")", 0)
+    if len(args) > 1 and args[1].startswith("{") and args[1].endswith("}"):
+        return args[0], args[1][1:-1].strip()
+    return action, ""
 
 
 def render(state: dict) -> list[str]:
@@ -549,12 +587,7 @@ def render(state: dict) -> list[str]:
     for orig in sorted(overrides):
         o = overrides[orig]
         if o.get("keys") and o.get("action"):
-            lines.append(
-                f"pcall(function() o.bind({core.lua(o['keys'])}, {core.lua(o.get('desc') or '')}, {o['action']}) end)"
-            )
+            lines.append(core.bind_call(o["keys"], o.get("desc") or "", *split_action(o["action"])))
     for c in custom:
-        lines.append(
-            f"pcall(function() o.bind({core.lua(c['keys'])}, {core.lua(c['desc'])}, "
-            f"{custom_action(c['kind'], c['command'])}) end)"
-        )
+        lines.append(core.bind_call(c["keys"], c["desc"], custom_action(c["kind"], c["command"])))
     return lines
