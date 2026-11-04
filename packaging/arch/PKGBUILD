@@ -22,7 +22,7 @@ optdepends=('libnm: saves Wi-Fi passwords from the Connectivity page'
             "waybar: alternative bar on Omarchy (which uses the Omarchy shell bar)")
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 # pinned by build-release.sh when the release is made
-sha256sums=('SKIP')
+sha256sums=('77c373ba7b98dbfe78575b80647063c7c631ea5efc2640d8ec1885336f9b6117')
 
 build() {
   cd "$pkgname-$pkgver"

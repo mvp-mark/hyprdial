@@ -19,6 +19,6 @@ pkgbase = hyprdial
 	conflicts = omarchy-settings-gui
 	replaces = omarchy-settings-gui
 	source = hyprdial-1.0.0.tar.gz::https://github.com/mvp-mark/hyprdial/archive/refs/tags/v1.0.0.tar.gz
-	sha256sums = SKIP
+	sha256sums = 77c373ba7b98dbfe78575b80647063c7c631ea5efc2640d8ec1885336f9b6117
 
 pkgname = hyprdial
