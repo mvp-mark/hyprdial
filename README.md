@@ -335,8 +335,8 @@ pyproject.toml       ruff and pytest settings
 
 ## Next steps
 
-- The package on the AUR, COPR and OBS: everything is ready in `packaging/` (see the READMEs there); each needs
-  the maintainer's account.
+- The package on the AUR, COPR and OBS: `packaging/publish-wizard.sh` walks through the accounts and the first
+  publication; each needs the maintainer's account.
 - Native speakers' review of the Spanish, French and German translations, and more languages.
 
 ## License

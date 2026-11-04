@@ -14,6 +14,9 @@ makepkg -si    # build and install from this folder
 
 ## Publishing on the AUR
 
+`packaging/publish-wizard.sh` walks through the AUR, COPR and OBS accounts and the first publication, step by
+step. The rest of this section is the same, by hand.
+
 Once:
 
 1. Create an account at <https://aur.archlinux.org/register>.

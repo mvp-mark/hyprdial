@@ -1,0 +1,4 @@
+<!-- OBS: downloads the Source0 tarball of hyprdial.spec (the GitHub tag of its Version) before each build. -->
+<services>
+  <service name="download_files"/>
+</services>

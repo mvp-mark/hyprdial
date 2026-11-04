@@ -13,6 +13,10 @@ rpmbuild -ba packaging/rpm/hyprdial.spec
 sudo dnf install ~/rpmbuild/RPMS/noarch/hyprdial-*.rpm
 ```
 
+`packaging/publish-wizard.sh` walks through COPR and OBS (and the AUR) step by step. With it, COPR builds from
+the repository itself (`.copr/Makefile`, "make srpm" method, rebuilt on every push) and OBS downloads the tag's
+tarball by itself (`_service`). The sections below do the same by hand.
+
 ## Fedora: COPR
 
 Once: create an account at <https://copr.fedorainfracloud.org>, put the API token from
