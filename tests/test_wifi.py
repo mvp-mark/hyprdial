@@ -2,7 +2,7 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import core, wifi
+from hyprdial import core, wifi
 
 
 @pytest.fixture

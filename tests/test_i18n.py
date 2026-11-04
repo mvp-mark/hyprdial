@@ -57,7 +57,7 @@ def test_placeholders_match(po):
 @pytest.mark.parametrize("po", sorted(PO_DIR.glob("*.po")), ids=lambda p: p.stem)
 def test_catalog_covers_every_message(po, tmp_path):
     """Every marked string has a translation, and no translation is left unused."""
-    sources = sorted(str(p) for p in (ROOT / "omarchy_settings").rglob("*.py"))
+    sources = sorted(str(p) for p in (ROOT / "hyprdial").rglob("*.py"))
     pot = tmp_path / "messages.pot"
     subprocess.run(
         [
@@ -82,10 +82,10 @@ def test_catalog_covers_every_message(po, tmp_path):
 
 @needs_gettext
 def test_compiled_catalog_translates(tmp_path):
-    mo = tmp_path / "pt_BR" / "LC_MESSAGES" / "omarchy-settings.mo"
+    mo = tmp_path / "pt_BR" / "LC_MESSAGES" / "hyprdial.mo"
     mo.parent.mkdir(parents=True)
     subprocess.run(["msgfmt", "--check", "-o", str(mo), str(PO_DIR / "pt_BR.po")], check=True)
-    t = gettext.translation("omarchy-settings", tmp_path, languages=["pt_BR"])
+    t = gettext.translation("hyprdial", tmp_path, languages=["pt_BR"])
     assert t.gettext("Themes") == "Temas"
     assert t.ngettext("{n} shortcut", "{n} shortcuts", 1).format(n=1) == "1 atalho"
     assert t.ngettext("{n} shortcut", "{n} shortcuts", 5).format(n=5) == "5 atalhos"
@@ -94,7 +94,7 @@ def test_compiled_catalog_translates(tmp_path):
 def test_unknown_language_falls_back_to_english():
     env = {**os.environ, "LANGUAGE": "xx", "LC_ALL": "C.UTF-8", "LANG": "C.UTF-8", "PYTHONPATH": str(ROOT)}
     out = subprocess.run(
-        [sys.executable, "-c", "from omarchy_settings.i18n import _; print(_('Themes'))"],
+        [sys.executable, "-c", "from hyprdial.i18n import _; print(_('Themes'))"],
         env=env,
         capture_output=True,
         text=True,

@@ -10,7 +10,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, Gtk  # noqa: E402
 
-from . import __version__, host
+from . import __version__, core, host
 from .core import HyprStore
 from .i18n import _
 from .pages.accessibility import AccessibilityPage
@@ -29,7 +29,7 @@ from .pages.system import SystemPage
 from .pages.themes import ThemesPage
 from .ui import ThemeAccent, bg, confirm
 
-APP_ID = "org.omarchy.Settings"
+APP_ID = "io.github.mvp_mark.Hyprdial"
 
 # Sidebar sections, in the spirit of Omarchy's menu (Style, Hardware, System). Titles are functions so they are
 # translated when the window is built.
@@ -64,7 +64,11 @@ def visible_pages() -> list[tuple]:
 
 class Window(Adw.ApplicationWindow):
     def __init__(self, app: Adw.Application):
-        super().__init__(application=app, title=_("Omarchy Settings"), default_width=1000, default_height=720)
+        super().__init__(application=app, title="Hyprdial", default_width=1000, default_height=720)
+        try:
+            core.migrate_old_names()
+        except OSError:
+            pass  # the old files stay where they were; the app starts with empty settings
         self.store = HyprStore()
         problem = host.config_problem(host.hyprland_version())
         self.store.read_only = problem is not None
@@ -104,7 +108,7 @@ class Window(Adw.ApplicationWindow):
             content_view.add_top_bar(Adw.Banner(title=problem, revealed=True, use_markup=False))
         self.content = Adw.NavigationPage(child=content_view, title="")
         self.split = Adw.NavigationSplitView(
-            sidebar=Adw.NavigationPage(child=sidebar_view, title=_("Omarchy Settings")),
+            sidebar=Adw.NavigationPage(child=sidebar_view, title="Hyprdial"),
             content=self.content,
             min_sidebar_width=220,
             sidebar_width_fraction=0.28,
@@ -252,6 +256,6 @@ class App(Adw.Application):
 
 def main() -> int:
     if "--version" in sys.argv:
-        print(f"omarchy-settings {__version__}")
+        print(f"hyprdial {__version__}")
         return 0
     return App().run(sys.argv)

@@ -2,7 +2,7 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import core, distro, system
+from hyprdial import core, distro, system
 
 
 def test_time_settings(commands):
@@ -99,21 +99,24 @@ def test_locale_description(tmp_path):
 
 def test_app_location(monkeypatch, tmp_path):
     monkeypatch.setattr(system, "LOCAL_DIR", tmp_path / "local")
-    assert system.app_location(system.PACKAGE_DIR / "omarchy_settings") == "package"
-    assert system.app_location(tmp_path / "local" / "omarchy_settings") == "local"
-    assert system.app_location(tmp_path / "checkout" / "omarchy_settings") == "source"
+    assert system.app_location(system.PACKAGE_DIR / "hyprdial") == "package"
+    assert system.app_location(tmp_path / "local" / "hyprdial") == "local"
+    assert system.app_location(tmp_path / "checkout" / "hyprdial") == "source"
 
 
 def test_other_copies(commands, monkeypatch, tmp_path):
     monkeypatch.setattr(system, "LOCAL_DIR", tmp_path)
+    monkeypatch.setattr(system, "OLD_LOCAL_DIR", tmp_path / "old")
     commands.have = {"pacman"}
-    commands.answers["pacman -T omarchy-settings-gui"] = "omarchy-settings-gui"  # pacman -T: not installed
+    commands.answers["pacman -T hyprdial"] = "hyprdial"  # pacman -T: not installed
     assert system.other_copies("local") == []
-    commands.answers["pacman -T omarchy-settings-gui"] = ""
-    (tmp_path / "omarchy_settings").mkdir()
+    commands.answers["pacman -T hyprdial"] = ""
+    (tmp_path / "hyprdial").mkdir()
     assert system.other_copies("local") == ["package"]
     assert system.other_copies("package") == ["local"]
     assert system.other_copies("source") == ["package", "local"]
+    (tmp_path / "old" / "omarchy_settings").mkdir(parents=True)  # install.sh before the rename
+    assert system.other_copies("package") == ["local", "old"]
 
 
 def test_latest_release(commands):
@@ -153,7 +156,7 @@ def test_install_locale_command_on_plain_hyprland(commands, plain_hyprland):
 def test_package_removal(commands, monkeypatch):
     commands.have = {"dnf"}
     monkeypatch.setattr(distro, "_family", "fedora")
-    assert system.package_removal() == "sudo dnf remove omarchy-settings-gui"
+    assert system.package_removal() == "sudo dnf remove hyprdial"
 
 
 def test_language_method(commands, monkeypatch, tmp_path):

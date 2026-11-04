@@ -1,4 +1,4 @@
-from omarchy_settings import apps
+from hyprdial import apps
 
 
 def test_default_apps_only_installed(commands, tmp_path, monkeypatch):

@@ -1,8 +1,8 @@
 """App dependencies (no GTK): single list used by the dependencies dialog and by install.sh.
 
 Names are Arch's; other families have their own in `names` (None: not packaged there, so not listed).
-Command line: python3 -m omarchy_settings.deps [--missing] [--group required|optional|dev] [--exclude PKG]...
-              python3 -m omarchy_settings.deps --install-command   (e.g. "pacman -S --needed"; empty if unknown)
+Command line: python3 -m hyprdial.deps [--missing] [--group required|optional|dev] [--exclude PKG]...
+              python3 -m hyprdial.deps --install-command   (e.g. "pacman -S --needed"; empty if unknown)
 """
 
 from __future__ import annotations

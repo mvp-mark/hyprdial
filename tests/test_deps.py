@@ -2,7 +2,7 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import core, deps, distro
+from hyprdial import core, deps, distro
 
 
 @pytest.fixture

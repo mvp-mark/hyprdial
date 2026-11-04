@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from omarchy_settings import core
-from omarchy_settings import keybinds as kb
+from hyprdial import core
+from hyprdial import keybinds as kb
 
 FIXTURES = Path(__file__).parent / "fixtures" / "bindings"
 

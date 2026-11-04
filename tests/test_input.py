@@ -1,4 +1,4 @@
-from omarchy_settings import input as inp
+from hyprdial import input as inp
 
 
 def test_devices_only_lists_what_exists(commands, tmp_path):

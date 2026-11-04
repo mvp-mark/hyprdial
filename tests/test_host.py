@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from omarchy_settings import host
+from hyprdial import host
 
 
 def test_omarchy_needs_its_command_and_lua_helpers(tmp_path, commands):

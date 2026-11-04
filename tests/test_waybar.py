@@ -3,7 +3,7 @@ import re
 
 import pytest
 
-from omarchy_settings import core, waybar
+from hyprdial import core, waybar
 
 
 @pytest.fixture
@@ -69,7 +69,7 @@ def test_reset_keeps_backup(wb):
     wb.ensure_config()
     wb.CONFIG.write_text('{ "position": "bottom" }')
     wb.reset_config()
-    assert wb.CONFIG.with_name("config.jsonc.omarchy-settings.bak").read_text() == '{ "position": "bottom" }'
+    assert wb.CONFIG.with_name("config.jsonc.hyprdial.bak").read_text() == '{ "position": "bottom" }'
     assert wb.read_position() == "top"
 
 

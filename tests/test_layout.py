@@ -1,4 +1,4 @@
-from omarchy_settings.layout import Rect, logical_size, normalize, overlaps, settle, snap, touches
+from hyprdial.layout import Rect, logical_size, normalize, overlaps, settle, snap, touches
 
 A = Rect("DP-1", 0, 0, 2560, 1440)
 B = Rect("HDMI-A-2", 2560, 0, 1920, 1080)

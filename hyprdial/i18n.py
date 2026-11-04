@@ -1,7 +1,7 @@
 """Interface translation with gettext.
 
 The language follows the system (LANGUAGE, LC_ALL, LC_MESSAGES, LANG). Source strings are in English, which is
-also the fallback when there is no catalog for the system language. Catalogs live in omarchy_settings/locale and
+also the fallback when there is no catalog for the system language. Catalogs live in hyprdial/locale and
 are compiled from po/*.po by install.sh.
 """
 
@@ -11,7 +11,7 @@ import gettext
 import locale
 from pathlib import Path
 
-DOMAIN = "omarchy-settings"
+DOMAIN = "hyprdial"
 LOCALE_DIR = Path(__file__).parent / "locale"
 
 try:

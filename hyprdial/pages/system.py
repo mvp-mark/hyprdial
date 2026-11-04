@@ -320,18 +320,21 @@ class SystemPage(Adw.PreferencesPage):
             "local": _("installed with install.sh"),
             "source": _("running from the source folder"),
         }
-        row = Adw.ActionRow(title=_("Omarchy Settings"), subtitle=f"{__version__} · {where[location]}")
+        row = Adw.ActionRow(title="Hyprdial", subtitle=f"{__version__} · {where[location]}")
         self.about_group.add(row)
         bg(system.latest_release, lambda latest: self._show_latest(row, latest))
         if not others:
             return
         remove = {
             "package": system.package_removal(),
-            "local": "rm -r ~/.local/share/omarchy-settings ~/.local/bin/omarchy-settings",
+            "local": "rm -r ~/.local/share/hyprdial ~/.local/bin/hyprdial ~/.local/bin/omarchy-settings",
+            "old": "rm -r ~/.local/share/omarchy-settings ~/.local/bin/omarchy-settings "
+            "~/.local/share/applications/org.omarchy.Settings.desktop",
         }
         other = {
             "package": _("the package {name}").format(name=system.PACKAGE),
             "local": _("a copy from install.sh"),
+            "old": _("a copy from install.sh with the app's old name, omarchy-settings"),
         }[others[0]]
         warning = Adw.ActionRow(
             title=_("Installed twice"),
@@ -340,7 +343,7 @@ class SystemPage(Adw.PreferencesPage):
                 "remove the one you don't use with {command}"
             ).format(
                 other=other,
-                path=shutil.which("omarchy-settings") or "omarchy-settings",
+                path=shutil.which("hyprdial") or "hyprdial",
                 command=remove[others[0]],
             ),
             subtitle_selectable=True,

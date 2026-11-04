@@ -1,4 +1,4 @@
-from omarchy_settings import accessibility as a11y
+from hyprdial import accessibility as a11y
 
 
 def test_cursor_size(commands):

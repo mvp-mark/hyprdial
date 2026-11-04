@@ -37,7 +37,7 @@ jobs:
         run: ruff format --check .
 
   distros:
-    # The dependency names the app uses on each family (omarchy_settings/deps.py) must exist there, and the app
+    # The dependency names the app uses on each family (hyprdial/deps.py) must exist there, and the app
     # must import with them; the tests then run on that distribution's Python.
     strategy:
       fail-fast: false
@@ -47,9 +47,10 @@ jobs:
     container: ${{ matrix.image }}
     steps:
       - name: Install Python
+        # a font for the page smoke test (Pango crashes without any; the Tumbleweed image has none)
         run: |
           if command -v dnf; then dnf install -y python3 git
-          elif command -v zypper; then zypper --non-interactive install python3 git
+          elif command -v zypper; then zypper --non-interactive install python3 git dejavu-fonts
           else apt-get update && apt-get install -y python3 git; fi
 
       - uses: actions/checkout@v4
@@ -58,7 +59,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import subprocess
-          from omarchy_settings import deps, distro
+          from hyprdial import deps, distro
           print("family:", distro.family())
           packages = [d.package for d in deps.dependencies()]
           print("installing:", " ".join(packages))
@@ -66,7 +67,7 @@ jobs:
           PY
 
       - name: Nothing is reported missing
-        run: test -z "$(python3 -m omarchy_settings.deps --missing | tee /dev/stderr)"
+        run: test -z "$(python3 -m hyprdial.deps --missing | tee /dev/stderr)"
 
       - name: The app's libraries load
         run: python3 -c 'import gi; [gi.require_version(*v) for v in (("Gtk", "4.0"), ("Adw", "1"), ("NM", "1.0"))]; from gi.repository import Adw, Gtk, NM'

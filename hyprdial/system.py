@@ -259,11 +259,12 @@ def about() -> list[tuple[str, str]]:
 
 
 # ------------------------------------------------------------------ this app
-PACKAGE = "omarchy-settings-gui"
-RELEASES_URL = "https://github.com/mvp-mark/omarchy-settings/releases"
-LATEST_API = "https://api.github.com/repos/mvp-mark/omarchy-settings/releases/latest"
+PACKAGE = "hyprdial"
+RELEASES_URL = "https://github.com/mvp-mark/hyprdial/releases"
+LATEST_API = "https://api.github.com/repos/mvp-mark/hyprdial/releases/latest"
 PACKAGE_DIR = Path("/usr/share") / PACKAGE
-LOCAL_DIR = Path.home() / ".local/share/omarchy-settings"  # where install.sh puts it
+LOCAL_DIR = Path.home() / ".local/share/hyprdial"  # where install.sh puts it
+OLD_LOCAL_DIR = Path.home() / ".local/share/omarchy-settings"  # install.sh before the app was renamed
 
 
 HERE = Path(__file__).resolve().parent
@@ -284,8 +285,10 @@ def other_copies(location: str) -> list[str]:
     manager = distro.manager()
     if location != "package" and manager and manager.installed(PACKAGE):
         others.append("package")
-    if location != "local" and (LOCAL_DIR / "omarchy_settings").is_dir():
+    if location != "local" and (LOCAL_DIR / "hyprdial").is_dir():
         others.append("local")
+    if (OLD_LOCAL_DIR / "omarchy_settings").is_dir():
+        others.append("old")
     return others
 
 

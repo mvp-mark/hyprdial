@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from omarchy_settings import core
+from hyprdial import core
 
 MAIN = """dofile("bootstrap.lua")
 require("default.hypr.omarchy")
@@ -33,7 +33,7 @@ def calls(monkeypatch):
 def store(tmp_path, calls):
     main = tmp_path / "hyprland.lua"
     main.write_text(MAIN)
-    s = core.HyprStore(managed=tmp_path / "omarchy-settings.lua", main=main, state=tmp_path / "state.json")
+    s = core.HyprStore(managed=tmp_path / "hyprdial.lua", main=main, state=tmp_path / "state.json")
     yield s
     if s._timer:
         s._timer.cancel()
@@ -128,7 +128,7 @@ def test_require_is_inserted_before_toggles_comment(store):
     store.save()
     text = store.main.read_text()
     assert text.index(core.REQUIRE_LINE) < text.index("-- Toggle config flags") < text.index(core.TOGGLES_LINE)
-    assert store.main.with_name("hyprland.lua.omarchy-settings.bak").read_text() == MAIN
+    assert store.main.with_name("hyprland.lua.hyprdial.bak").read_text() == MAIN
     store.save()
     assert store.main.read_text().count(core.REQUIRE_LINE) == 1
 
@@ -198,9 +198,7 @@ def test_corrupt_state_starts_empty(tmp_path, calls):
 
 def test_reset_all_backs_up_and_restore_undoes(tmp_path, monkeypatch):
     monkeypatch.setattr(core, "run", lambda args, timeout=10: None)
-    paths = dict(
-        managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua", state=tmp_path / "state.json"
-    )
+    paths = dict(managed=tmp_path / "hyprdial.lua", main=tmp_path / "hyprland.lua", state=tmp_path / "state.json")
     store = core.HyprStore(**paths)
     store.set("general:gaps_in", 3)
     store.set_extra("power_button", "suspend")
@@ -211,3 +209,49 @@ def test_reset_all_backs_up_and_restore_undoes(tmp_path, monkeypatch):
     assert core.HyprStore(**paths).extras == {} and core.HyprStore(**paths).values == {}
     store.restore(previous)
     assert paths["managed"].read_text() == before
+
+
+# ------------------------------------------------------------------ the rename from omarchy-settings
+def old_install(tmp_path):
+    main = tmp_path / "hyprland.lua"
+    main.write_text('require("hypr.mine")\n\n-- Added by omarchy-settings\nrequire("hypr.omarchy-settings")\n')
+    (tmp_path / "omarchy-settings.lua").write_text("hl.config({})\n")
+    (tmp_path / "old-state").mkdir()
+    (tmp_path / "old-state" / "state.json").write_text('{"hypr": {"general:gaps_in": "3"}}')
+    return dict(
+        main=main,
+        managed=tmp_path / "hyprdial.lua",
+        state_dir=tmp_path / "state",
+        old_managed=tmp_path / "omarchy-settings.lua",
+        old_state_dir=tmp_path / "old-state",
+    )
+
+
+def test_migrate_old_names_moves_files_and_the_require_line(tmp_path):
+    paths = old_install(tmp_path)
+    assert core.migrate_old_names(**paths)
+    assert paths["main"].read_text() == 'require("hypr.mine")\n\n-- Added by Hyprdial\nrequire("hypr.hyprdial")\n'
+    assert paths["managed"].read_text() == "hl.config({})\n" and not paths["old_managed"].exists()
+    assert (paths["state_dir"] / "state.json").read_text().startswith('{"hypr"') and not paths["old_state_dir"].exists()
+    assert not core.migrate_old_names(**paths)  # only once
+
+
+def test_migrate_keeps_newer_files(tmp_path):
+    paths = old_install(tmp_path)
+    paths["managed"].write_text("new\n")
+    core.migrate_old_names(**paths)
+    assert paths["managed"].read_text() == "new\n" and not paths["old_managed"].exists()
+
+
+def test_migrate_without_an_old_install(tmp_path):
+    main = tmp_path / "hyprland.lua"
+    main.write_text("x\n")
+    paths = dict(
+        main=main,
+        managed=tmp_path / "a.lua",
+        state_dir=tmp_path / "s",
+        old_managed=tmp_path / "b.lua",
+        old_state_dir=tmp_path / "o",
+    )
+    assert not core.migrate_old_names(**paths) and main.read_text() == "x\n"
+    assert not core.migrate_old_names(**{**paths, "main": tmp_path / "missing.lua"})

@@ -1,6 +1,6 @@
 import subprocess
 
-from omarchy_settings import core, webapps
+from hyprdial import core, webapps
 
 
 def write(directory, name, exec_line, icon="x"):

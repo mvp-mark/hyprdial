@@ -1,6 +1,6 @@
 import pytest
 
-from omarchy_settings import core, power
+from hyprdial import core, power
 
 PROFILES_OUT = """* performance:
     CpuDriver:\tamd_pstate
@@ -79,9 +79,7 @@ def test_render_extras():
 
 def test_store_persists_extras(tmp_path, monkeypatch):
     monkeypatch.setattr(core, "run", lambda args, timeout=10: None)
-    paths = dict(
-        managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua", state=tmp_path / "state.json"
-    )
+    paths = dict(managed=tmp_path / "hyprdial.lua", main=tmp_path / "hyprland.lua", state=tmp_path / "state.json")
     store = core.HyprStore(**paths)
     store.set_extra("power_button", "lock")
     assert 'o.bind("XF86PowerOff", "Power button", "omarchy-system-lock"' in paths["managed"].read_text()

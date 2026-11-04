@@ -2,8 +2,8 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import core
-from omarchy_settings import network as net
+from hyprdial import core
+from hyprdial import network as net
 
 
 @pytest.fixture

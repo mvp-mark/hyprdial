@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from omarchy_settings import shell
+from hyprdial import shell
 
 
 @pytest.fixture

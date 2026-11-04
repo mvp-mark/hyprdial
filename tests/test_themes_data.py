@@ -1,4 +1,4 @@
-from omarchy_settings import themes_data as td
+from hyprdial import themes_data as td
 
 
 def make_theme(root, slug, colors='mode = "dark"\naccent = "#112233"\n', preview=True):

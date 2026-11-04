@@ -1,6 +1,6 @@
 import pytest
 
-from omarchy_settings import distro
+from hyprdial import distro
 
 
 @pytest.mark.parametrize(

@@ -1,4 +1,4 @@
-from omarchy_settings import security
+from hyprdial import security
 
 
 def test_states_follow_omarchys_menu(commands):

@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Application
+Name=Hyprdial
+GenericName=Settings
+GenericName[pt_BR]=Configurações
+GenericName[es]=Configuración
+GenericName[fr]=Paramètres
+GenericName[de]=Einstellungen
+Comment=Settings for Hyprland and Omarchy
+Comment[pt_BR]=Configurações para o Hyprland e o Omarchy
+Comment[es]=Configuración para Hyprland y Omarchy
+Comment[fr]=Paramètres pour Hyprland et Omarchy
+Comment[de]=Einstellungen für Hyprland und Omarchy
+Keywords=Hyprland;Omarchy;settings;display;shortcuts;
+Exec=hyprdial
+Icon=preferences-system-symbolic
+Terminal=false
+Categories=Settings;DesktopSettings;GTK;
+StartupWMClass=io.github.mvp_mark.Hyprdial

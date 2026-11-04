@@ -1,51 +1,55 @@
 # Maintainer: Marcus Vinícius Peixoto Paulo <mvp.paulo@gmail.com>
-# Dependencies follow omarchy_settings/deps.py (tests/test_pkgbuild.py checks it):
+# Dependencies follow hyprdial/deps.py (tests/test_pkgbuild.py checks it):
 # required -> depends (gettext only compiles the translations -> makedepends), optional -> optdepends.
-# Omarchy's own repository has a package called omarchy-settings (its defaults and helpers), hence -gui;
-# the command, the source tree and the translation domain keep the plain name.
-_name=omarchy-settings
-pkgname=omarchy-settings-gui
+# Never call it omarchy-settings: that is a package in Omarchy's own repository, which omarchy depends on.
+pkgname=hyprdial
 pkgver=0.6.0
 pkgrel=1
-pkgdesc="Graphical settings app for Omarchy (GTK4 + libadwaita)"
+pkgdesc="Settings app for Hyprland, with Omarchy integration (GTK4 + libadwaita)"
 arch=('any')
-url="https://github.com/mvp-mark/$_name"
+url="https://github.com/mvp-mark/$pkgname"
 license=('MIT')
+# omarchy-settings-gui: the package's name before 1.0
+provides=('omarchy-settings-gui')
+conflicts=('omarchy-settings-gui')
+replaces=('omarchy-settings-gui')
 depends=('python' 'python-gobject' 'gtk4' 'libadwaita')
 makedepends=('gettext')
 optdepends=('libnm: saves Wi-Fi passwords from the Connectivity page'
             'impala: Wi-Fi manager opened by the Connectivity page'
             'bluetui: Bluetooth manager opened by the Connectivity page'
             'wiremix: audio mixer opened by the Sound page'
-            "waybar: alternative bar (Omarchy uses the Omarchy shell bar)")
-source=("$_name-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('fd9105ae80684fd7de8e83b17c721cf2aeed34223007282dd54171a8fdf11cd5')
+            "waybar: alternative bar on Omarchy (which uses the Omarchy shell bar)")
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+# pinned by build-release.sh when the release is made
+sha256sums=('SKIP')
 
 build() {
-  cd "$_name-$pkgver"
+  cd "$pkgname-$pkgver"
   for po in po/*.po; do
     lang=$(basename "$po" .po)
-    mkdir -p "omarchy_settings/locale/$lang/LC_MESSAGES"
-    msgfmt -o "omarchy_settings/locale/$lang/LC_MESSAGES/$_name.mo" "$po"
+    mkdir -p "hyprdial/locale/$lang/LC_MESSAGES"
+    msgfmt -o "hyprdial/locale/$lang/LC_MESSAGES/$pkgname.mo" "$po"
   done
   # pt_PT and other variants without their own catalog use Brazilian Portuguese
-  mkdir -p omarchy_settings/locale/pt/LC_MESSAGES
-  cp omarchy_settings/locale/pt_BR/LC_MESSAGES/$_name.mo omarchy_settings/locale/pt/LC_MESSAGES/
+  mkdir -p hyprdial/locale/pt/LC_MESSAGES
+  cp hyprdial/locale/pt_BR/LC_MESSAGES/$pkgname.mo hyprdial/locale/pt/LC_MESSAGES/
 }
 
 package() {
-  cd "$_name-$pkgver"
+  cd "$pkgname-$pkgver"
   local app="/usr/share/$pkgname"
   install -d "$pkgdir$app"
-  cp -r omarchy_settings "$pkgdir$app/"
+  cp -r hyprdial "$pkgdir$app/"
   find "$pkgdir$app" -name __pycache__ -type d -prune -exec rm -rf {} +
   python -m compileall -q -s "$pkgdir" -p / "$pkgdir$app"
 
   install -d "$pkgdir/usr/bin"
-  printf '#!/bin/sh\nexec env PYTHONPATH=%s python3 -m omarchy_settings "$@"\n' "$app" > "$pkgdir/usr/bin/$_name"
-  chmod 755 "$pkgdir/usr/bin/$_name"
+  printf '#!/bin/sh\nexec env PYTHONPATH=%s python3 -m hyprdial "$@"\n' "$app" > "$pkgdir/usr/bin/$pkgname"
+  chmod 755 "$pkgdir/usr/bin/$pkgname"
+  ln -s $pkgname "$pkgdir/usr/bin/omarchy-settings"  # the command's name before 1.0
 
-  install -Dm644 data/org.omarchy.Settings.desktop "$pkgdir/usr/share/applications/org.omarchy.Settings.desktop"
+  install -Dm644 data/io.github.mvp_mark.Hyprdial.desktop -t "$pkgdir/usr/share/applications/"
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
   install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
 }

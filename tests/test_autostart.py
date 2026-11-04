@@ -1,4 +1,4 @@
-from omarchy_settings import autostart, core
+from hyprdial import autostart, core
 
 
 def desktop(directory, name, body):
@@ -61,10 +61,10 @@ def test_lua_commands(tmp_path):
 def test_own_commands_go_to_the_generated_file(tmp_path, monkeypatch):
     monkeypatch.setattr(core, "run", lambda args, timeout=10: None)
     store = core.HyprStore(
-        managed=tmp_path / "omarchy-settings.lua", main=tmp_path / "hyprland.lua", state=tmp_path / "state.json"
+        managed=tmp_path / "hyprdial.lua", main=tmp_path / "hyprland.lua", state=tmp_path / "state.json"
     )
     store.set_extra("autostart", ["discord --start-minimized", 'say "hi"'], reload=False)
-    text = (tmp_path / "omarchy-settings.lua").read_text()
+    text = (tmp_path / "hyprdial.lua").read_text()
     assert 'pcall(function() o.launch_on_start("discord --start-minimized") end)' in text
     assert 'o.launch_on_start("say \\"hi\\"")' in text
     assert autostart.valid_command("  ") is None and autostart.valid_command("a\nb") is None

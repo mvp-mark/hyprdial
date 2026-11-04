@@ -423,7 +423,7 @@ class BarPage(Adw.PreferencesPage):
         add(
             button_row(
                 _("Restore Waybar files"),
-                _("Recreates config.jsonc and style.css; the current ones are kept as .omarchy-settings.bak"),
+                _("Recreates config.jsonc and style.css; the current ones are kept as .hyprdial.bak"),
                 _("Restore"),
                 self._reset_waybar,
             )

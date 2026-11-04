@@ -19,7 +19,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GLib  # noqa: E402
 
-from omarchy_settings import core, host  # noqa: E402
+from hyprdial import core, host  # noqa: E402
 
 mode = sys.argv[1]
 errors: list[str] = []
@@ -38,7 +38,7 @@ core.out = lambda args, timeout=10: ""
 core.have = lambda cmd: mode == "empty"
 core.spawn = lambda args: False
 
-from omarchy_settings.app import Window, visible_pages  # noqa: E402
+from hyprdial.app import Window, visible_pages  # noqa: E402
 
 shown: list[str] = []
 
@@ -75,7 +75,7 @@ def activate(app: Adw.Application) -> None:
     GLib.timeout_add(1000, start)
 
 
-app = Adw.Application(application_id="org.omarchy.SettingsSmoke", flags=Gio.ApplicationFlags.NON_UNIQUE)
+app = Adw.Application(application_id="io.github.mvp_mark.HyprdialSmoke", flags=Gio.ApplicationFlags.NON_UNIQUE)
 app.connect("activate", activate)
 status = app.run([])
 pages = len(visible_pages())

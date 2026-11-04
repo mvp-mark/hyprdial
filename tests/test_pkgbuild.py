@@ -1,8 +1,8 @@
 import re
 from pathlib import Path
 
-from omarchy_settings import __version__
-from omarchy_settings.deps import dependencies
+from hyprdial import __version__
+from hyprdial.deps import dependencies
 
 PKGBUILD = (Path(__file__).parent.parent / "packaging" / "arch" / "PKGBUILD").read_text()
 
@@ -41,4 +41,9 @@ def test_srcinfo_matches_the_pkgbuild():
 
 def test_name_differs_from_omarchys_own_package():
     # Omarchy's repository ships a package called omarchy-settings, which the omarchy package depends on
-    assert re.search(r"^pkgname=(\S+)", PKGBUILD, re.M).group(1) == "omarchy-settings-gui"
+    assert re.search(r"^pkgname=(\S+)", PKGBUILD, re.M).group(1) == "hyprdial"
+    assert "omarchy-settings" not in array("provides") + array("replaces")
+
+
+def test_replaces_the_package_from_before_the_rename():
+    assert array("replaces") == array("conflicts") == array("provides") == ["omarchy-settings-gui"]

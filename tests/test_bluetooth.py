@@ -2,8 +2,8 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import bluetooth as bt
-from omarchy_settings import core
+from hyprdial import bluetooth as bt
+from hyprdial import core
 
 MOUSE = "AA:BB:CC:DD:EE:01"
 PHONE = "AA:BB:CC:DD:EE:02"

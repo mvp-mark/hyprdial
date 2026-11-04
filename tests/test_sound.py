@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from omarchy_settings import sound
+from hyprdial import sound
 
 
 def vol(percent):

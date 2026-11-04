@@ -1,7 +1,7 @@
 [project]
-name = "omarchy-settings"
+name = "hyprdial"
 dynamic = ["version"]
-description = "Graphical settings app for Omarchy (GTK4 + libadwaita)"
+description = "Settings app for Hyprland, with Omarchy integration (GTK4 + libadwaita)"
 requires-python = ">=3.11"
 license = "MIT"
 

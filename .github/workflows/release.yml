@@ -39,7 +39,7 @@ jobs:
 
       - name: Publish the release
         run: |
-          gh release create "$TAG" --verify-tag --title "omarchy-settings ${TAG#v}" \
+          gh release create "$TAG" --verify-tag --title "Hyprdial ${TAG#v}" \
             --notes-file "docs/releases/$TAG.md" dist/*.pkg.tar.zst dist/PKGBUILD
 
       - name: Pin the checksum on main

@@ -1,5 +1,5 @@
-from omarchy_settings import search
-from omarchy_settings.search import Entry
+from hyprdial import search
+from hyprdial.search import Entry
 
 
 def entry(title, subtitle="", group="", page_title="Page"):

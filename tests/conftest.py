@@ -4,7 +4,7 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import core, distro, host
+from hyprdial import core, distro, host
 
 
 class FakeCommands:

@@ -1,8 +1,8 @@
-pkgbase = omarchy-settings-gui
-	pkgdesc = Graphical settings app for Omarchy (GTK4 + libadwaita)
+pkgbase = hyprdial
+	pkgdesc = Settings app for Hyprland, with Omarchy integration (GTK4 + libadwaita)
 	pkgver = 0.6.0
 	pkgrel = 1
-	url = https://github.com/mvp-mark/omarchy-settings
+	url = https://github.com/mvp-mark/hyprdial
 	arch = any
 	license = MIT
 	makedepends = gettext
@@ -14,8 +14,11 @@ pkgbase = omarchy-settings-gui
 	optdepends = impala: Wi-Fi manager opened by the Connectivity page
 	optdepends = bluetui: Bluetooth manager opened by the Connectivity page
 	optdepends = wiremix: audio mixer opened by the Sound page
-	optdepends = waybar: alternative bar (Omarchy uses the Omarchy shell bar)
-	source = omarchy-settings-0.6.0.tar.gz::https://github.com/mvp-mark/omarchy-settings/archive/refs/tags/v0.6.0.tar.gz
-	sha256sums = fd9105ae80684fd7de8e83b17c721cf2aeed34223007282dd54171a8fdf11cd5
+	optdepends = waybar: alternative bar on Omarchy (which uses the Omarchy shell bar)
+	provides = omarchy-settings-gui
+	conflicts = omarchy-settings-gui
+	replaces = omarchy-settings-gui
+	source = hyprdial-0.6.0.tar.gz::https://github.com/mvp-mark/hyprdial/archive/refs/tags/v0.6.0.tar.gz
+	sha256sums = SKIP
 
-pkgname = omarchy-settings-gui
+pkgname = hyprdial

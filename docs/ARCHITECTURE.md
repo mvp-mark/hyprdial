@@ -1,6 +1,6 @@
 # Architecture
 
-How omarchy-settings is put together, and the rules new code follows.
+How Hyprdial is put together, and the rules new code follows.
 
 ## Layers
 
@@ -55,8 +55,9 @@ all elsewhere (openSUSE ships every locale).
    `omarchy webapp install`, …): use it. Omarchy keeps its own state, notifications and migrations consistent.
 2. **No command, but a user config file**: edit it under `~/.config` (or `~/.local/state` where Omarchy keeps
    state), with a backup the first time when the file isn't ours.
-3. **Hyprland settings** go to the generated `~/.config/hypr/omarchy-settings.lua` only, never into Omarchy's
-   files. State lives in `~/.config/omarchy-settings/state.json`.
+3. **Hyprland settings** go to the generated `~/.config/hypr/hyprdial.lua` only, never into the user's or
+   Omarchy's files. State lives in `~/.config/hyprdial/state.json`. `core.migrate_old_names` moves both from
+   their names before 1.0 (omarchy-settings).
 4. **Never edit `/usr/share/omarchy`.** Reading it to learn defaults and formats is fine.
 5. **Anything that needs sudo runs in a visible terminal** (`host.terminal_command`: Omarchy's floating terminal,
    or the user's terminal elsewhere), so the password prompt is the system's own. polkit prompts (`timedatectl`, `localectl`, `pkexec pacman`) are

@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: omarchy-settings\n"
+"Project-Id-Version: hyprdial\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 22:25-0400\n"
+"POT-Creation-Date: 2026-11-03 22:29-0400\n"
 "PO-Revision-Date: 2026-11-02 04:00-0400\n"
 "Last-Translator: omarchy-settings contributors\n"
 "Language-Team: French\n"
@@ -15,3379 +15,3359 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: omarchy_settings/app.py:36
+#: hyprdial/app.py:36
 msgid "Style"
 msgstr "Style"
 
-#: omarchy_settings/app.py:36
+#: hyprdial/app.py:36
 msgid "Hardware"
 msgstr "Matériel"
 
-#: omarchy_settings/app.py:36 omarchy_settings/app.py:56
+#: hyprdial/app.py:36 hyprdial/app.py:56
 msgid "System"
 msgstr "Système"
 
-#: omarchy_settings/app.py:38
+#: hyprdial/app.py:38
 msgid "Themes"
 msgstr "Thèmes"
 
-#: omarchy_settings/app.py:39
+#: hyprdial/app.py:39
 msgid "Appearance"
 msgstr "Apparence"
 
-#: omarchy_settings/app.py:40
+#: hyprdial/app.py:40
 msgid "Bar and fonts"
 msgstr "Barre et polices"
 
-#: omarchy_settings/app.py:41 omarchy_settings/pages/monitors.py:234
+#: hyprdial/app.py:41 hyprdial/pages/monitors.py:234
 msgid "Displays"
 msgstr "Écrans"
 
-#: omarchy_settings/app.py:42 omarchy_settings/pages/sound.py:179
+#: hyprdial/app.py:42 hyprdial/pages/sound.py:179
 msgid "Sound"
 msgstr "Son"
 
-#: omarchy_settings/app.py:43 omarchy_settings/pages/bar.py:48
+#: hyprdial/app.py:43 hyprdial/pages/bar.py:48
 msgid "Power"
 msgstr "Énergie"
 
-#: omarchy_settings/app.py:44 omarchy_settings/pages/sound.py:202
+#: hyprdial/app.py:44 hyprdial/pages/sound.py:202
 msgid "Input"
 msgstr "Saisie"
 
-#: omarchy_settings/app.py:45
+#: hyprdial/app.py:45
 msgid "Connectivity"
 msgstr "Connectivité"
 
-#: omarchy_settings/app.py:46
+#: hyprdial/app.py:46
 msgid "Apps"
 msgstr "Applications"
 
-#: omarchy_settings/app.py:47
+#: hyprdial/app.py:47
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
-#: omarchy_settings/app.py:51
+#: hyprdial/app.py:51
 msgid "Accessibility"
 msgstr "Accessibilité"
 
-#: omarchy_settings/app.py:55 omarchy_settings/pages/wifi.py:37
+#: hyprdial/app.py:55 hyprdial/pages/wifi.py:37
 msgid "Security"
 msgstr "Sécurité"
 
-#: omarchy_settings/app.py:67 omarchy_settings/app.py:107
-#: omarchy_settings/pages/system.py:323
-msgid "Omarchy Settings"
-msgstr "Paramètres d'Omarchy"
-
-#: omarchy_settings/app.py:77
+#: hyprdial/app.py:81
 msgid "Changed settings…"
 msgstr "Paramètres modifiés…"
 
-#: omarchy_settings/app.py:78
+#: hyprdial/app.py:82
 msgid "Dependencies…"
 msgstr "Dépendances…"
 
-#: omarchy_settings/app.py:79
+#: hyprdial/app.py:83
 msgid "Restore app defaults…"
 msgstr "Restaurer les valeurs de l'application…"
 
-#: omarchy_settings/app.py:86
+#: hyprdial/app.py:90
 msgid "Search settings (Ctrl+F)"
 msgstr "Rechercher des paramètres (Ctrl+F)"
 
-#: omarchy_settings/app.py:90
+#: hyprdial/app.py:94
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: omarchy_settings/app.py:200
+#: hyprdial/app.py:204
 msgid "Restore app defaults?"
 msgstr "Restaurer les valeurs de l'application ?"
 
-#: omarchy_settings/app.py:202
+#: hyprdial/app.py:206
 msgid "Removes every Hyprland, display, shortcut, power button and startup command setting made in this app, returning to the defaults. The bar, theme, network and system settings are not touched. A backup of the generated file is kept, and you can undo right after."
 msgstr "Supprime tous les réglages Hyprland, d'écrans, de raccourcis, du bouton d'alimentation et des commandes de démarrage faits dans cette app, pour revenir aux valeurs par défaut. La barre, le thème, le réseau et le système ne sont pas touchés. Une copie du fichier généré est conservée, et vous pouvez annuler juste après."
 
-#: omarchy_settings/app.py:206 omarchy_settings/pages/bar.py:158
-#: omarchy_settings/pages/bar.py:220 omarchy_settings/pages/bar.py:427
-#: omarchy_settings/pages/hyprland.py:126
-#: omarchy_settings/pages/monitors.py:424
-#: omarchy_settings/pages/shortcuts.py:284
-#: omarchy_settings/pages/shortcuts.py:533
+#: hyprdial/app.py:210 hyprdial/pages/bar.py:158 hyprdial/pages/bar.py:220
+#: hyprdial/pages/bar.py:427 hyprdial/pages/hyprland.py:126
+#: hyprdial/pages/monitors.py:424 hyprdial/pages/shortcuts.py:284
+#: hyprdial/pages/shortcuts.py:533
 msgid "Restore"
 msgstr "Restaurer"
 
-#: omarchy_settings/app.py:213
+#: hyprdial/app.py:217
 #, python-brace-format
 msgid "Could not restore: {error}"
 msgstr "Restauration impossible : {error}"
 
-#: omarchy_settings/app.py:217
+#: hyprdial/app.py:221
 msgid "App defaults restored"
 msgstr "Valeurs de l'application restaurées"
 
-#: omarchy_settings/app.py:217 omarchy_settings/pages/themes.py:257
+#: hyprdial/app.py:221 hyprdial/pages/themes.py:257
 msgid "Undo"
 msgstr "Annuler"
 
-#: omarchy_settings/app.py:222
+#: hyprdial/app.py:226
 msgid "Settings brought back"
 msgstr "Paramètres rétablis"
 
-#: omarchy_settings/deps.py:42
+#: hyprdial/deps.py:42
 msgid "Python bindings for GTK"
 msgstr "Liaisons Python pour GTK"
 
-#: omarchy_settings/deps.py:48
+#: hyprdial/deps.py:48
 msgid "Interface toolkit"
 msgstr "Boîte à outils de l'interface"
 
-#: omarchy_settings/deps.py:54
+#: hyprdial/deps.py:54
 msgid "GNOME widgets and styles (1.5 or newer)"
 msgstr "Widgets et styles GNOME (1.5 ou plus récent)"
 
-#: omarchy_settings/deps.py:57
+#: hyprdial/deps.py:57
 msgid "Compiles the interface translations"
 msgstr "Compile les traductions de l'interface"
 
-#: omarchy_settings/deps.py:61
+#: hyprdial/deps.py:61
 msgid "Saves Wi-Fi passwords from the Connectivity page"
 msgstr "Enregistre les mots de passe Wi-Fi depuis la page Connectivité"
 
-#: omarchy_settings/deps.py:64
+#: hyprdial/deps.py:64
 msgid "Wi-Fi manager opened by the Connectivity page"
 msgstr "Gestionnaire Wi-Fi ouvert par la page Connectivité"
 
-#: omarchy_settings/deps.py:65
+#: hyprdial/deps.py:65
 msgid "Bluetooth manager opened by the Connectivity page"
 msgstr "Gestionnaire Bluetooth ouvert par la page Connectivité"
 
-#: omarchy_settings/deps.py:66
+#: hyprdial/deps.py:66
 msgid "Audio mixer opened by the Sound page"
 msgstr "Mixeur audio ouvert par la page Son"
 
-#: omarchy_settings/deps.py:71
+#: hyprdial/deps.py:71
 msgid "Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar doesn't start it or replace the current bar"
 msgstr "Barre alternative. Omarchy utilise la barre du shell Omarchy ; installer Waybar ne la lance pas et ne remplace pas la barre actuelle"
 
-#: omarchy_settings/deps.py:80
+#: hyprdial/deps.py:80
 msgid "Runs the project's tests"
 msgstr "Lance les tests du projet"
 
-#: omarchy_settings/deps.py:95
+#: hyprdial/deps.py:95
 msgid "Required"
 msgstr "Requises"
 
-#: omarchy_settings/deps.py:95
+#: hyprdial/deps.py:95
 msgid "Optional"
 msgstr "Facultatives"
 
-#: omarchy_settings/deps.py:95
+#: hyprdial/deps.py:95
 msgid "Development"
 msgstr "Développement"
 
-#: omarchy_settings/host.py:71
+#: hyprdial/host.py:71
 msgid "Hyprland isn't running, so its settings can't be changed from here."
 msgstr "Hyprland ne fonctionne pas, ses réglages ne peuvent donc pas être modifiés ici."
 
-#: omarchy_settings/host.py:73
+#: hyprdial/host.py:73
 #, python-brace-format
 msgid "Hyprland {version} is too old; update it to {minimum} or newer to change its settings here."
 msgstr "Hyprland {version} est trop ancien ; mettez-le à jour vers {minimum} ou plus récent pour modifier ses réglages ici."
 
-#: omarchy_settings/host.py:77
+#: hyprdial/host.py:77
 msgid "Your Hyprland configuration is still in hyprland.conf; move it to hyprland.lua to change it here."
 msgstr "Votre configuration Hyprland est encore dans hyprland.conf ; passez-la dans hyprland.lua pour la modifier ici."
 
-#: omarchy_settings/host.py:94
+#: hyprdial/host.py:94
 msgid "Press Enter to close"
 msgstr "Appuyez sur Entrée pour fermer"
 
-#: omarchy_settings/keybinds.py:39
+#: hyprdial/keybinds.py:39
 msgid "Applications"
 msgstr "Applications"
 
-#: omarchy_settings/keybinds.py:40
+#: hyprdial/keybinds.py:40
 msgid "Windows and workspaces"
 msgstr "Fenêtres et espaces de travail"
 
-#: omarchy_settings/keybinds.py:41
+#: hyprdial/keybinds.py:41
 msgid "Utilities and captures"
 msgstr "Utilitaires et captures"
 
-#: omarchy_settings/keybinds.py:42
+#: hyprdial/keybinds.py:42
 msgid "Clipboard"
 msgstr "Presse-papiers"
 
-#: omarchy_settings/keybinds.py:43
+#: hyprdial/keybinds.py:43
 msgid "Media, volume and brightness"
 msgstr "Médias, volume et luminosité"
 
-#: omarchy_settings/keybinds.py:44
+#: hyprdial/keybinds.py:44
 msgid "Voice dictation"
 msgstr "Dictée vocale"
 
-#: omarchy_settings/keybinds.py:45
+#: hyprdial/keybinds.py:45
 msgid "From your bindings.lua"
 msgstr "De votre bindings.lua"
 
-#: omarchy_settings/keybinds.py:46
+#: hyprdial/keybinds.py:46
 msgid "From your configuration"
 msgstr "De votre configuration"
 
-#: omarchy_settings/keybinds.py:47
+#: hyprdial/keybinds.py:47
 msgid "Other"
 msgstr "Autres"
 
-#: omarchy_settings/keybinds.py:51
+#: hyprdial/keybinds.py:51
 msgid "Open app"
 msgstr "Ouvrir une application"
 
-#: omarchy_settings/keybinds.py:51
+#: hyprdial/keybinds.py:51
 msgid "Run command"
 msgstr "Lancer une commande"
 
-#: omarchy_settings/keybinds.py:51
+#: hyprdial/keybinds.py:51
 msgid "Open in terminal"
 msgstr "Ouvrir dans le terminal"
 
-#: omarchy_settings/keybinds.py:55
+#: hyprdial/keybinds.py:55
 msgid "Space"
 msgstr "Espace"
 
-#: omarchy_settings/keybinds.py:74 omarchy_settings/pages/sound.py:49
-#: omarchy_settings/pages/sound.py:75
+#: hyprdial/keybinds.py:74 hyprdial/pages/sound.py:49
+#: hyprdial/pages/sound.py:75
 msgid "Mute"
 msgstr "Muet"
 
-#: omarchy_settings/keybinds.py:75
+#: hyprdial/keybinds.py:75
 msgid "Mic mute"
 msgstr "Micro muet"
 
-#: omarchy_settings/keybinds.py:76
+#: hyprdial/keybinds.py:76
 msgid "Brightness +"
 msgstr "Luminosité +"
 
-#: omarchy_settings/keybinds.py:77
+#: hyprdial/keybinds.py:77
 msgid "Brightness −"
 msgstr "Luminosité −"
 
-#: omarchy_settings/keybinds.py:79
+#: hyprdial/keybinds.py:79
 msgid "Pause"
 msgstr "Pause"
 
-#: omarchy_settings/keybinds.py:80
+#: hyprdial/keybinds.py:80
 msgid "Next"
 msgstr "Suivant"
 
-#: omarchy_settings/keybinds.py:81
+#: hyprdial/keybinds.py:81
 msgid "Previous"
 msgstr "Précédent"
 
-#: omarchy_settings/keybinds.py:83
+#: hyprdial/keybinds.py:83
 msgid "Left click"
 msgstr "Clic gauche"
 
-#: omarchy_settings/keybinds.py:84
+#: hyprdial/keybinds.py:84
 msgid "Right click"
 msgstr "Clic droit"
 
-#: omarchy_settings/keybinds.py:85
+#: hyprdial/keybinds.py:85
 msgid "Middle click"
 msgstr "Clic du milieu"
 
-#: omarchy_settings/keybinds.py:86
+#: hyprdial/keybinds.py:86
 msgid "Back button"
 msgstr "Bouton précédent"
 
-#: omarchy_settings/keybinds.py:87
+#: hyprdial/keybinds.py:87
 msgid "Forward button"
 msgstr "Bouton suivant"
 
-#: omarchy_settings/keybinds.py:88
+#: hyprdial/keybinds.py:88
 msgid "Scroll up"
 msgstr "Défiler vers le haut"
 
-#: omarchy_settings/keybinds.py:89
+#: hyprdial/keybinds.py:89
 msgid "Scroll down"
 msgstr "Défiler vers le bas"
 
-#: omarchy_settings/keybinds.py:90
+#: hyprdial/keybinds.py:90
 msgid "Scroll left"
 msgstr "Défiler vers la gauche"
 
-#: omarchy_settings/keybinds.py:91
+#: hyprdial/keybinds.py:91
 msgid "Scroll right"
 msgstr "Défiler vers la droite"
 
-#: omarchy_settings/keybinds.py:156
+#: hyprdial/keybinds.py:156
 msgid "This shortcut needs a mouse button."
 msgstr "Ce raccourci nécessite un bouton de la souris."
 
-#: omarchy_settings/keybinds.py:158
+#: hyprdial/keybinds.py:158
 msgid "Mouse shortcuts need a modifier, or normal clicking and scrolling stop working."
 msgstr "Les raccourcis de la souris nécessitent un modificateur, sinon le clic et le défilement normaux ne fonctionnent plus."
 
-#: omarchy_settings/keybinds.py:537
+#: hyprdial/keybinds.py:537
 msgid "Not found in the config files; it can only be disabled"
 msgstr "Introuvable dans les fichiers de configuration ; il peut seulement être désactivé"
 
-#: omarchy_settings/keybinds.py:540
+#: hyprdial/keybinds.py:540
 msgid "Uses something defined in its own file; it can only be disabled"
 msgstr "Utilise quelque chose défini dans son propre fichier ; il peut seulement être désactivé"
 
-#: omarchy_settings/pages/accessibility.py:20
+#: hyprdial/pages/accessibility.py:20
 msgid "Turns the animations back on"
 msgstr "Réactive les animations"
 
-#: omarchy_settings/pages/accessibility.py:23
+#: hyprdial/pages/accessibility.py:23
 msgid "Seeing"
 msgstr "Vision"
 
-#: omarchy_settings/pages/accessibility.py:35
+#: hyprdial/pages/accessibility.py:35
 msgid "Text size"
 msgstr "Taille du texte"
 
-#: omarchy_settings/pages/accessibility.py:35
+#: hyprdial/pages/accessibility.py:35
 msgid "Shell, GTK apps and terminals (default 12)"
 msgstr "Shell, applications GTK et terminaux (12 par défaut)"
 
-#: omarchy_settings/pages/accessibility.py:43
+#: hyprdial/pages/accessibility.py:43
 #, python-brace-format
 msgid "Default ({size})"
 msgstr "Par défaut ({size})"
 
-#: omarchy_settings/pages/accessibility.py:45
+#: hyprdial/pages/accessibility.py:45
 msgid "Pointer size"
 msgstr "Taille du pointeur"
 
-#: omarchy_settings/pages/accessibility.py:46
+#: hyprdial/pages/accessibility.py:46
 msgid "In pixels; apps opened from now on use it too"
 msgstr "En pixels ; les applications ouvertes à partir de maintenant l'utilisent aussi"
 
-#: omarchy_settings/pages/accessibility.py:64
+#: hyprdial/pages/accessibility.py:64
 msgid "Motion"
 msgstr "Mouvement"
 
-#: omarchy_settings/pages/accessibility.py:68
+#: hyprdial/pages/accessibility.py:68
 msgid "Animations"
 msgstr "Animations"
 
-#: omarchy_settings/pages/accessibility.py:69
+#: hyprdial/pages/accessibility.py:69
 msgid "Transitions when opening, closing and switching workspaces; turn off to reduce motion"
 msgstr "Transitions à l'ouverture, à la fermeture et au changement d'espace de travail ; désactivez-les pour réduire le mouvement"
 
-#: omarchy_settings/pages/apps.py:18
+#: hyprdial/pages/apps.py:18
 msgid "Web browser"
 msgstr "Navigateur web"
 
-#: omarchy_settings/pages/apps.py:19
+#: hyprdial/pages/apps.py:19
 msgid "Terminal"
 msgstr "Terminal"
 
-#: omarchy_settings/pages/apps.py:20
+#: hyprdial/pages/apps.py:20
 msgid "Text editor"
 msgstr "Éditeur de texte"
 
-#: omarchy_settings/pages/apps.py:21
+#: hyprdial/pages/apps.py:21
 msgid "File manager"
 msgstr "Gestionnaire de fichiers"
 
-#: omarchy_settings/pages/apps.py:22
+#: hyprdial/pages/apps.py:22
 msgid "PDF documents"
 msgstr "Documents PDF"
 
-#: omarchy_settings/pages/apps.py:23
+#: hyprdial/pages/apps.py:23
 msgid "Images"
 msgstr "Images"
 
-#: omarchy_settings/pages/apps.py:25
+#: hyprdial/pages/apps.py:25
 msgid "PNG, JPEG, WebP and GIF"
 msgstr "PNG, JPEG, WebP et GIF"
 
-#: omarchy_settings/pages/apps.py:36
+#: hyprdial/pages/apps.py:36
 #, python-brace-format
 msgid "Now: {name}"
 msgstr "Actuellement : {name}"
 
-#: omarchy_settings/pages/apps.py:46
+#: hyprdial/pages/apps.py:46
 msgid "Default apps"
 msgstr "Applications par défaut"
 
-#: omarchy_settings/pages/apps.py:46
+#: hyprdial/pages/apps.py:46
 msgid "Only installed apps are listed."
 msgstr "Seules les applications installées sont listées."
 
-#: omarchy_settings/pages/apps.py:83
+#: hyprdial/pages/apps.py:83
 msgid "Default app changed"
 msgstr "Application par défaut modifiée"
 
-#: omarchy_settings/pages/apps.py:83
+#: hyprdial/pages/apps.py:83
 msgid "Could not change the default app"
 msgstr "Impossible de changer l'application par défaut"
 
-#: omarchy_settings/pages/autostart.py:21
+#: hyprdial/pages/autostart.py:21
 msgid "Startup apps"
 msgstr "Applications au démarrage"
 
-#: omarchy_settings/pages/autostart.py:23
+#: hyprdial/pages/autostart.py:23
 msgid "Started when you log in. Some apps are also started by the system's own config (the bar, input methods…), so one that is off here may still run."
 msgstr "Lancées à l'ouverture de session. Certaines apps sont aussi lancées par la configuration du système (la barre, les méthodes de saisie…), donc une app désactivée ici peut quand même tourner."
 
-#: omarchy_settings/pages/autostart.py:31
+#: hyprdial/pages/autostart.py:31
 msgid "Your commands"
 msgstr "Vos commandes"
 
-#: omarchy_settings/pages/autostart.py:31
-#: omarchy_settings/pages/autostart.py:120
+#: hyprdial/pages/autostart.py:31 hyprdial/pages/autostart.py:120
 msgid "Run at login through Hyprland"
 msgstr "Lancées à l'ouverture de session, via Hyprland"
 
-#: omarchy_settings/pages/autostart.py:34
+#: hyprdial/pages/autostart.py:34
 msgid "Add a command (e.g. discord --start-minimized)"
 msgstr "Ajouter une commande (ex. discord --start-minimized)"
 
-#: omarchy_settings/pages/autostart.py:41
+#: hyprdial/pages/autostart.py:41
 #, python-brace-format
 msgid "In {file}"
 msgstr "Dans {file}"
 
-#: omarchy_settings/pages/autostart.py:46
+#: hyprdial/pages/autostart.py:46
 msgid "Edit the file"
 msgstr "Modifier le fichier"
 
-#: omarchy_settings/pages/autostart.py:47
+#: hyprdial/pages/autostart.py:47
 msgid "Changes there are yours; this app only reads them"
 msgstr "Les modifications y sont les vôtres ; cette application ne fait que les lire"
 
-#: omarchy_settings/pages/autostart.py:48 omarchy_settings/pages/bar.py:412
-#: omarchy_settings/pages/bar.py:419 omarchy_settings/pages/bluetooth.py:178
-#: omarchy_settings/pages/sound.py:220 omarchy_settings/pages/system.py:97
-#: omarchy_settings/pages/wifi.py:21 omarchy_settings/pages/wifi.py:211
+#: hyprdial/pages/autostart.py:48 hyprdial/pages/bar.py:412
+#: hyprdial/pages/bar.py:419 hyprdial/pages/bluetooth.py:178
+#: hyprdial/pages/sound.py:220 hyprdial/pages/system.py:97
+#: hyprdial/pages/wifi.py:21 hyprdial/pages/wifi.py:211
 msgid "Open"
 msgstr "Ouvrir"
 
-#: omarchy_settings/pages/autostart.py:80
+#: hyprdial/pages/autostart.py:80
 msgid "No commands in the file"
 msgstr "Aucune commande dans le fichier"
 
-#: omarchy_settings/pages/autostart.py:83
-#: omarchy_settings/pages/autostart.py:120
+#: hyprdial/pages/autostart.py:83 hyprdial/pages/autostart.py:120
 #, python-brace-format
 msgid "{n} command"
 msgid_plural "{n} commands"
 msgstr[0] "{n} commande"
 msgstr[1] "{n} commandes"
 
-#: omarchy_settings/pages/autostart.py:94
+#: hyprdial/pages/autostart.py:94
 #, python-brace-format
 msgid "Could not change {name}"
 msgstr "Impossible de modifier {name}"
 
-#: omarchy_settings/pages/autostart.py:112 omarchy_settings/pages/power.py:328
-#: omarchy_settings/pages/power.py:339 omarchy_settings/pages/security.py:53
-#: omarchy_settings/pages/security.py:71 omarchy_settings/pages/webapps.py:127
-#: omarchy_settings/pages/webapps.py:147
+#: hyprdial/pages/autostart.py:112 hyprdial/pages/power.py:328
+#: hyprdial/pages/power.py:339 hyprdial/pages/security.py:53
+#: hyprdial/pages/security.py:71 hyprdial/pages/webapps.py:127
+#: hyprdial/pages/webapps.py:147
 msgid "Remove"
 msgstr "Retirer"
 
-#: omarchy_settings/pages/autostart.py:127
+#: hyprdial/pages/autostart.py:127
 msgid "Type a command"
 msgstr "Saisissez une commande"
 
-#: omarchy_settings/pages/autostart.py:130
+#: hyprdial/pages/autostart.py:130
 msgid "This command is already there"
 msgstr "Cette commande y est déjà"
 
-#: omarchy_settings/pages/autostart.py:134
+#: hyprdial/pages/autostart.py:134
 msgid "It will start the next time you log in"
 msgstr "Elle démarrera à la prochaine ouverture de session"
 
-#: omarchy_settings/pages/bar.py:18
+#: hyprdial/pages/bar.py:18
 msgid "Top"
 msgstr "En haut"
 
-#: omarchy_settings/pages/bar.py:18
+#: hyprdial/pages/bar.py:18
 msgid "Bottom"
 msgstr "En bas"
 
-#: omarchy_settings/pages/bar.py:18
+#: hyprdial/pages/bar.py:18
 msgid "Left side"
 msgstr "Côté gauche"
 
-#: omarchy_settings/pages/bar.py:18
+#: hyprdial/pages/bar.py:18
 msgid "Right side"
 msgstr "Côté droit"
 
-#: omarchy_settings/pages/bar.py:23
+#: hyprdial/pages/bar.py:23
 msgid "Never"
 msgstr "Jamais"
 
-#: omarchy_settings/pages/bar.py:25
+#: hyprdial/pages/bar.py:25
 msgid "2½ minutes"
 msgstr "2 min 30"
 
-#: omarchy_settings/pages/bar.py:27
+#: hyprdial/pages/bar.py:27
 #, python-brace-format
 msgid "{n} hour"
 msgid_plural "{n} hours"
 msgstr[0] "{n} heure"
 msgstr[1] "{n} heures"
 
-#: omarchy_settings/pages/bar.py:29
+#: hyprdial/pages/bar.py:29
 #, python-brace-format
 msgid "{n} minute"
 msgid_plural "{n} minutes"
 msgstr[0] "{n} minute"
 msgstr[1] "{n} minutes"
 
-#: omarchy_settings/pages/bar.py:30
+#: hyprdial/pages/bar.py:30
 #, python-brace-format
 msgid "{n} second"
 msgid_plural "{n} seconds"
 msgstr[0] "{n} seconde"
 msgstr[1] "{n} secondes"
 
-#: omarchy_settings/pages/bar.py:35
+#: hyprdial/pages/bar.py:35
 msgid "Active window"
 msgstr "Fenêtre active"
 
-#: omarchy_settings/pages/bar.py:35
+#: hyprdial/pages/bar.py:35
 msgid "Title of the focused window"
 msgstr "Titre de la fenêtre active"
 
-#: omarchy_settings/pages/bar.py:36
+#: hyprdial/pages/bar.py:36
 msgid "AI agents"
 msgstr "Agents d'IA"
 
-#: omarchy_settings/pages/bar.py:36
+#: hyprdial/pages/bar.py:36
 msgid "Claude Code, Codex and Fireworks usage and limits"
 msgstr "Utilisation et limites de Claude Code, Codex et Fireworks"
 
-#: omarchy_settings/pages/bar.py:37
+#: hyprdial/pages/bar.py:37
 msgid "Audio"
 msgstr "Audio"
 
-#: omarchy_settings/pages/bar.py:37
+#: hyprdial/pages/bar.py:37
 msgid "Volume, sound output and per-app mixer"
 msgstr "Volume, sortie audio et mixeur par application"
 
-#: omarchy_settings/pages/bar.py:38
+#: hyprdial/pages/bar.py:38
 msgid "Devices and connection"
 msgstr "Appareils et connexion"
 
-#: omarchy_settings/pages/bar.py:39
+#: hyprdial/pages/bar.py:39
 msgid "Clock"
 msgstr "Horloge"
 
-#: omarchy_settings/pages/bar.py:39
+#: hyprdial/pages/bar.py:39
 msgid "Date and time, with a calendar on click"
 msgstr "Date et heure, avec un calendrier au clic"
 
-#: omarchy_settings/pages/bar.py:40
+#: hyprdial/pages/bar.py:40
 msgid "Sync status and recent files"
 msgstr "État de synchronisation et fichiers récents"
 
-#: omarchy_settings/pages/bar.py:41
+#: hyprdial/pages/bar.py:41
 msgid "Indicators"
 msgstr "Indicateurs"
 
-#: omarchy_settings/pages/bar.py:41
+#: hyprdial/pages/bar.py:41
 msgid "States like screen recording and do not disturb"
 msgstr "États comme l'enregistrement d'écran et ne pas déranger"
 
-#: omarchy_settings/pages/bar.py:42 omarchy_settings/pages/hyprland.py:440
+#: hyprdial/pages/bar.py:42 hyprdial/pages/hyprland.py:440
 msgid "Keyboard layout"
 msgstr "Disposition du clavier"
 
-#: omarchy_settings/pages/bar.py:42
+#: hyprdial/pages/bar.py:42
 msgid "Current layout; click to switch"
 msgstr "Disposition actuelle ; cliquez pour changer"
 
-#: omarchy_settings/pages/bar.py:43
+#: hyprdial/pages/bar.py:43
 msgid "Media"
 msgstr "Médias"
 
-#: omarchy_settings/pages/bar.py:43
+#: hyprdial/pages/bar.py:43
 msgid "Controls for the music or video playing"
 msgstr "Contrôles de la musique ou de la vidéo en cours"
 
-#: omarchy_settings/pages/bar.py:44
+#: hyprdial/pages/bar.py:44
 msgid "Omarchy menu"
 msgstr "Menu Omarchy"
 
-#: omarchy_settings/pages/bar.py:44
+#: hyprdial/pages/bar.py:44
 msgid "Opens the command menu"
 msgstr "Ouvre le menu des commandes"
 
-#: omarchy_settings/pages/bar.py:45 omarchy_settings/pages/sound.py:202
+#: hyprdial/pages/bar.py:45 hyprdial/pages/sound.py:202
 msgid "Microphone"
 msgstr "Microphone"
 
-#: omarchy_settings/pages/bar.py:45
+#: hyprdial/pages/bar.py:45
 msgid "Microphone state and mute button"
 msgstr "État du micro et bouton muet"
 
-#: omarchy_settings/pages/bar.py:46 omarchy_settings/pages/monitors.py:201
+#: hyprdial/pages/bar.py:46 hyprdial/pages/monitors.py:201
 msgid "Display"
 msgstr "Écran"
 
-#: omarchy_settings/pages/bar.py:46
+#: hyprdial/pages/bar.py:46
 msgid "Brightness and display controls"
 msgstr "Luminosité et réglages de l'écran"
 
-#: omarchy_settings/pages/bar.py:47
+#: hyprdial/pages/bar.py:47
 msgid "Network"
 msgstr "Réseau"
 
-#: omarchy_settings/pages/bar.py:47
+#: hyprdial/pages/bar.py:47
 msgid "Wi-Fi and connection state"
 msgstr "Wi-Fi et état de la connexion"
 
-#: omarchy_settings/pages/bar.py:48
+#: hyprdial/pages/bar.py:48
 msgid "Battery, power profile and system usage"
 msgstr "Batterie, profil d'énergie et utilisation du système"
 
-#: omarchy_settings/pages/bar.py:49
+#: hyprdial/pages/bar.py:49
 msgid "Spacer"
 msgstr "Espaceur"
 
-#: omarchy_settings/pages/bar.py:49
+#: hyprdial/pages/bar.py:49
 msgid "Blank space"
 msgstr "Espace vide"
 
-#: omarchy_settings/pages/bar.py:50
+#: hyprdial/pages/bar.py:50
 msgid "Updates"
 msgstr "Mises à jour"
 
-#: omarchy_settings/pages/bar.py:50
+#: hyprdial/pages/bar.py:50
 msgid "Tells you when an Omarchy update is available"
 msgstr "Vous prévient quand une mise à jour d'Omarchy est disponible"
 
-#: omarchy_settings/pages/bar.py:51
+#: hyprdial/pages/bar.py:51
 msgid "VPN status and connection switching"
 msgstr "État du VPN et changement de connexion"
 
-#: omarchy_settings/pages/bar.py:52
+#: hyprdial/pages/bar.py:52
 msgid "System tray"
 msgstr "Zone de notification"
 
-#: omarchy_settings/pages/bar.py:52
+#: hyprdial/pages/bar.py:52
 msgid "Icons of background apps"
 msgstr "Icônes des applications en arrière-plan"
 
-#: omarchy_settings/pages/bar.py:53
+#: hyprdial/pages/bar.py:53
 msgid "Weather"
 msgstr "Météo"
 
-#: omarchy_settings/pages/bar.py:53
+#: hyprdial/pages/bar.py:53
 msgid "Temperature with details on click"
 msgstr "Température, avec les détails au clic"
 
-#: omarchy_settings/pages/bar.py:54
+#: hyprdial/pages/bar.py:54
 msgid "Workspaces"
 msgstr "Espaces de travail"
 
-#: omarchy_settings/pages/bar.py:54
+#: hyprdial/pages/bar.py:54
 msgid "Workspace numbers"
 msgstr "Numéros des espaces de travail"
 
-#: omarchy_settings/pages/bar.py:65
+#: hyprdial/pages/bar.py:65
 #, python-brace-format
 msgid "Weekday and time — {example}"
 msgstr "Jour de la semaine et heure — {example}"
 
-#: omarchy_settings/pages/bar.py:66
+#: hyprdial/pages/bar.py:66
 #, python-brace-format
 msgid "Time only — {example}"
 msgstr "Heure seule — {example}"
 
-#: omarchy_settings/pages/bar.py:67
+#: hyprdial/pages/bar.py:67
 #, python-brace-format
 msgid "Day, date and time — {example}"
 msgstr "Jour, date et heure — {example}"
 
-#: omarchy_settings/pages/bar.py:68
+#: hyprdial/pages/bar.py:68
 #, python-brace-format
 msgid "Full date and time — {example}"
 msgstr "Date complète et heure — {example}"
 
-#: omarchy_settings/pages/bar.py:69
+#: hyprdial/pages/bar.py:69
 #, python-brace-format
 msgid "12-hour format — {example}"
 msgstr "Format 12 heures — {example}"
 
-#: omarchy_settings/pages/bar.py:89
+#: hyprdial/pages/bar.py:89
 msgid "Bar"
 msgstr "Barre"
 
-#: omarchy_settings/pages/bar.py:92
+#: hyprdial/pages/bar.py:92
 msgid "Show the bar"
 msgstr "Afficher la barre"
 
-#: omarchy_settings/pages/bar.py:93
+#: hyprdial/pages/bar.py:93
 msgid "You can also toggle it with the Omarchy shortcut"
 msgstr "Vous pouvez aussi l'afficher ou la masquer avec le raccourci d'Omarchy"
 
-#: omarchy_settings/pages/bar.py:102
+#: hyprdial/pages/bar.py:102
 msgid "Position"
 msgstr "Position"
 
-#: omarchy_settings/pages/bar.py:106
+#: hyprdial/pages/bar.py:106
 msgid "Bar position changed"
 msgstr "Position de la barre modifiée"
 
-#: omarchy_settings/pages/bar.py:111
+#: hyprdial/pages/bar.py:111
 msgid "Transparent background"
 msgstr "Fond transparent"
 
-#: omarchy_settings/pages/bar.py:112
+#: hyprdial/pages/bar.py:112
 msgid "Shows the wallpaper behind the bar"
 msgstr "Affiche le fond d'écran derrière la barre"
 
-#: omarchy_settings/pages/bar.py:120
+#: hyprdial/pages/bar.py:120
 msgid "Restart the shell"
 msgstr "Redémarrer le shell"
 
-#: omarchy_settings/pages/bar.py:120
+#: hyprdial/pages/bar.py:120
 msgid "Use it if the bar freezes or disappears"
 msgstr "À utiliser si la barre se fige ou disparaît"
 
-#: omarchy_settings/pages/bar.py:120 omarchy_settings/pages/bar.py:409
+#: hyprdial/pages/bar.py:120 hyprdial/pages/bar.py:409
 msgid "Restart"
 msgstr "Redémarrer"
 
-#: omarchy_settings/pages/bar.py:125
+#: hyprdial/pages/bar.py:125
 msgid "Add widget"
 msgstr "Ajouter un widget"
 
-#: omarchy_settings/pages/bar.py:126 omarchy_settings/pages/bar.py:342
+#: hyprdial/pages/bar.py:126 hyprdial/pages/bar.py:342
 msgid "Available widgets"
 msgstr "Widgets disponibles"
 
-#: omarchy_settings/pages/bar.py:126
+#: hyprdial/pages/bar.py:126
 msgid "Loading…"
 msgstr "Chargement…"
 
-#: omarchy_settings/pages/bar.py:131
+#: hyprdial/pages/bar.py:131
 msgid "Waybar"
 msgstr "Waybar"
 
-#: omarchy_settings/pages/bar.py:133
+#: hyprdial/pages/bar.py:133
 msgid "Optional alternative bar. Omarchy doesn't manage Waybar; its colors follow the Omarchy theme."
 msgstr "Barre alternative facultative. Omarchy ne gère pas Waybar ; ses couleurs suivent le thème d'Omarchy."
 
-#: omarchy_settings/pages/bar.py:141
+#: hyprdial/pages/bar.py:141
 msgid "System font"
 msgstr "Police du système"
 
-#: omarchy_settings/pages/bar.py:141
+#: hyprdial/pages/bar.py:141
 msgid "Applied to the terminal, bar and other Omarchy apps."
 msgstr "Appliquée au terminal, à la barre et aux autres applications d'Omarchy."
 
-#: omarchy_settings/pages/bar.py:149
+#: hyprdial/pages/bar.py:149
 msgid "omarchy-font-set not found"
 msgstr "omarchy-font-set introuvable"
 
-#: omarchy_settings/pages/bar.py:149
+#: hyprdial/pages/bar.py:149
 msgid "Update Omarchy to change fonts from here"
 msgstr "Mettez à jour Omarchy pour changer les polices d'ici"
 
-#: omarchy_settings/pages/bar.py:156
+#: hyprdial/pages/bar.py:156
 msgid "Restore default bar"
 msgstr "Restaurer la barre par défaut"
 
-#: omarchy_settings/pages/bar.py:157
+#: hyprdial/pages/bar.py:157
 msgid "Returns position, transparency and widgets to Omarchy's default"
 msgstr "Remet la position, la transparence et les widgets aux valeurs d'Omarchy"
 
-#: omarchy_settings/pages/bar.py:166
+#: hyprdial/pages/bar.py:166
 msgid "omarchy-bar not found: update Omarchy to use this page."
 msgstr "omarchy-bar introuvable : mettez à jour Omarchy pour utiliser cette page."
 
-#: omarchy_settings/pages/bar.py:174 omarchy_settings/pages/bar.py:211
-#: omarchy_settings/pages/bar.py:322 omarchy_settings/pages/bar.py:358
-#: omarchy_settings/pages/bar.py:445 omarchy_settings/pages/bluetooth.py:213
-#: omarchy_settings/pages/ethernet.py:223 omarchy_settings/pages/system.py:129
-#: omarchy_settings/pages/system.py:253 omarchy_settings/pages/wifi.py:268
-#: omarchy_settings/pages/wifi.py:306 omarchy_settings/pages/wifi.py:321
+#: hyprdial/pages/bar.py:174 hyprdial/pages/bar.py:211
+#: hyprdial/pages/bar.py:322 hyprdial/pages/bar.py:358
+#: hyprdial/pages/bar.py:445 hyprdial/pages/bluetooth.py:213
+#: hyprdial/pages/ethernet.py:223 hyprdial/pages/system.py:129
+#: hyprdial/pages/system.py:253 hyprdial/pages/wifi.py:268
+#: hyprdial/pages/wifi.py:306 hyprdial/pages/wifi.py:321
 #, python-brace-format
 msgid "Failed: {error}"
 msgstr "Échec : {error}"
 
-#: omarchy_settings/pages/bar.py:174
+#: hyprdial/pages/bar.py:174
 msgid "unknown error"
 msgstr "erreur inconnue"
 
-#: omarchy_settings/pages/bar.py:194
+#: hyprdial/pages/bar.py:194
 #, python-brace-format
 msgid "Custom — {format}"
 msgstr "Personnalisé — {format}"
 
-#: omarchy_settings/pages/bar.py:198 omarchy_settings/pages/system.py:168
+#: hyprdial/pages/bar.py:198 hyprdial/pages/system.py:168
 msgid "Clock format"
 msgstr "Format de l'horloge"
 
-#: omarchy_settings/pages/bar.py:199
+#: hyprdial/pages/bar.py:199
 msgid "Click the clock to see the alternate format"
 msgstr "Cliquez sur l'horloge pour voir le format alternatif"
 
-#: omarchy_settings/pages/bar.py:202
+#: hyprdial/pages/bar.py:202
 msgid "Clock format changed"
 msgstr "Format de l'horloge modifié"
 
-#: omarchy_settings/pages/bar.py:207
+#: hyprdial/pages/bar.py:207
 msgid "Restarting the shell…"
 msgstr "Redémarrage du shell…"
 
-#: omarchy_settings/pages/bar.py:211
+#: hyprdial/pages/bar.py:211
 msgid "Shell restarted"
 msgstr "Shell redémarré"
 
-#: omarchy_settings/pages/bar.py:218
+#: hyprdial/pages/bar.py:218
 msgid "Restore the default bar?"
 msgstr "Restaurer la barre par défaut ?"
 
-#: omarchy_settings/pages/bar.py:219
+#: hyprdial/pages/bar.py:219
 msgid "The position, transparency and widget list return to Omarchy's default."
 msgstr "La position, la transparence et la liste des widgets reviennent aux valeurs d'Omarchy."
 
-#: omarchy_settings/pages/bar.py:221
+#: hyprdial/pages/bar.py:221
 msgid "Bar restored"
 msgstr "Barre restaurée"
 
-#: omarchy_settings/pages/bar.py:234
+#: hyprdial/pages/bar.py:234
 msgid "Widgets at the top"
 msgstr "Widgets en haut"
 
-#: omarchy_settings/pages/bar.py:234
+#: hyprdial/pages/bar.py:234
 msgid "Widgets in the middle"
 msgstr "Widgets au milieu"
 
-#: omarchy_settings/pages/bar.py:234
+#: hyprdial/pages/bar.py:234
 msgid "Widgets at the bottom"
 msgstr "Widgets en bas"
 
-#: omarchy_settings/pages/bar.py:236
+#: hyprdial/pages/bar.py:236
 msgid "Widgets on the left"
 msgstr "Widgets à gauche"
 
-#: omarchy_settings/pages/bar.py:236
+#: hyprdial/pages/bar.py:236
 msgid "Widgets in the center"
 msgstr "Widgets au centre"
 
-#: omarchy_settings/pages/bar.py:236
+#: hyprdial/pages/bar.py:236
 msgid "Widgets on the right"
 msgstr "Widgets à droite"
 
-#: omarchy_settings/pages/bar.py:249
+#: hyprdial/pages/bar.py:249
 msgid "Empty"
 msgstr "Vide"
 
-#: omarchy_settings/pages/bar.py:249
+#: hyprdial/pages/bar.py:249
 msgid "Move widgets here with the arrows"
 msgstr "Déplacez des widgets ici avec les flèches"
 
-#: omarchy_settings/pages/bar.py:271
+#: hyprdial/pages/bar.py:271
 msgid "Move to the previous section"
 msgstr "Déplacer vers la section précédente"
 
-#: omarchy_settings/pages/bar.py:275
+#: hyprdial/pages/bar.py:275
 msgid "Move earlier"
 msgstr "Déplacer avant"
 
-#: omarchy_settings/pages/bar.py:276
+#: hyprdial/pages/bar.py:276
 msgid "Move later"
 msgstr "Déplacer après"
 
-#: omarchy_settings/pages/bar.py:279
+#: hyprdial/pages/bar.py:279
 msgid "Move to the next section"
 msgstr "Déplacer vers la section suivante"
 
-#: omarchy_settings/pages/bar.py:285
+#: hyprdial/pages/bar.py:285
 msgid "Remove from the bar"
 msgstr "Retirer de la barre"
 
-#: omarchy_settings/pages/bar.py:319
+#: hyprdial/pages/bar.py:319
 msgid "the bar changed meanwhile; try again"
 msgstr "la barre a changé entre-temps ; réessayez"
 
-#: omarchy_settings/pages/bar.py:322
+#: hyprdial/pages/bar.py:322
 #, python-brace-format
 msgid "{name} removed from the bar"
 msgstr "{name} retiré de la barre"
 
-#: omarchy_settings/pages/bar.py:344
+#: hyprdial/pages/bar.py:344
 #, python-brace-format
 msgid "{n} not on the bar"
 msgid_plural "{n} not on the bar"
 msgstr[0] "{n} hors de la barre"
 msgstr[1] "{n} hors de la barre"
 
-#: omarchy_settings/pages/bar.py:346
+#: hyprdial/pages/bar.py:346
 msgid "Every widget is already on the bar"
 msgstr "Tous les widgets sont déjà dans la barre"
 
-#: omarchy_settings/pages/bar.py:350
+#: hyprdial/pages/bar.py:350
 #, python-brace-format
 msgid "{description} (one more)"
 msgstr "{description} (un de plus)"
 
-#: omarchy_settings/pages/bar.py:351 omarchy_settings/pages/webapps.py:46
+#: hyprdial/pages/bar.py:351 hyprdial/pages/webapps.py:46
 msgid "Add"
 msgstr "Ajouter"
 
-#: omarchy_settings/pages/bar.py:358
+#: hyprdial/pages/bar.py:358
 #, python-brace-format
 msgid "{name} added to the bar"
 msgstr "{name} ajouté à la barre"
 
-#: omarchy_settings/pages/bar.py:381
+#: hyprdial/pages/bar.py:381
 msgid "Waybar is not installed"
 msgstr "Waybar n'est pas installé"
 
-#: omarchy_settings/pages/bar.py:382
+#: hyprdial/pages/bar.py:382
 msgid "Install it to use it instead of the Omarchy bar"
 msgstr "Installez-le pour l'utiliser à la place de la barre d'Omarchy"
 
-#: omarchy_settings/pages/bar.py:383 omarchy_settings/pages/system.py:213
-#: omarchy_settings/pages/system.py:233
+#: hyprdial/pages/bar.py:383 hyprdial/pages/system.py:213
+#: hyprdial/pages/system.py:233
 msgid "Install"
 msgstr "Installer"
 
-#: omarchy_settings/pages/bar.py:391
+#: hyprdial/pages/bar.py:391
 msgid "Use Waybar instead of the Omarchy bar"
 msgstr "Utiliser Waybar à la place de la barre d'Omarchy"
 
-#: omarchy_settings/pages/bar.py:392
+#: hyprdial/pages/bar.py:392
 msgid "Starts Waybar now and at login, and hides the Omarchy bar"
 msgstr "Lance Waybar maintenant et à l'ouverture de session, et masque la barre d'Omarchy"
 
-#: omarchy_settings/pages/bar.py:402
+#: hyprdial/pages/bar.py:402
 msgid "Waybar position"
 msgstr "Position de Waybar"
 
-#: omarchy_settings/pages/bar.py:409
+#: hyprdial/pages/bar.py:409
 msgid "Restart Waybar"
 msgstr "Redémarrer Waybar"
 
-#: omarchy_settings/pages/bar.py:409
+#: hyprdial/pages/bar.py:409
 msgid "Applies changes made to its files"
 msgstr "Applique les modifications faites dans ses fichiers"
 
-#: omarchy_settings/pages/bar.py:412
+#: hyprdial/pages/bar.py:412
 msgid "Edit config.jsonc"
 msgstr "Modifier config.jsonc"
 
-#: omarchy_settings/pages/bar.py:412
+#: hyprdial/pages/bar.py:412
 msgid "Modules and layout"
 msgstr "Modules et disposition"
 
-#: omarchy_settings/pages/bar.py:417
+#: hyprdial/pages/bar.py:417
 msgid "Edit style.css"
 msgstr "Modifier style.css"
 
-#: omarchy_settings/pages/bar.py:418
+#: hyprdial/pages/bar.py:418
 msgid "Sizes, fonts and spacing; colors come from the theme"
 msgstr "Tailles, polices et espacements ; les couleurs viennent du thème"
 
-#: omarchy_settings/pages/bar.py:425
+#: hyprdial/pages/bar.py:425
 msgid "Restore Waybar files"
 msgstr "Restaurer les fichiers de Waybar"
 
-#: omarchy_settings/pages/bar.py:426
-msgid "Recreates config.jsonc and style.css; the current ones are kept as .omarchy-settings.bak"
-msgstr "Recrée config.jsonc et style.css ; les fichiers actuels sont gardés en .omarchy-settings.bak"
+#: hyprdial/pages/bar.py:426
+msgid "Recreates config.jsonc and style.css; the current ones are kept as .hyprdial.bak"
+msgstr "Recrée config.jsonc et style.css ; les fichiers actuels sont gardés en .hyprdial.bak"
 
-#: omarchy_settings/pages/bar.py:433
+#: hyprdial/pages/bar.py:433
 msgid "Installing Waybar…"
 msgstr "Installation de Waybar…"
 
-#: omarchy_settings/pages/bar.py:437
+#: hyprdial/pages/bar.py:437
 msgid "Waybar installed"
 msgstr "Waybar installé"
 
-#: omarchy_settings/pages/bar.py:437
+#: hyprdial/pages/bar.py:437
 msgid "Waybar was not installed"
 msgstr "Waybar n'a pas été installé"
 
-#: omarchy_settings/pages/bar.py:447
+#: hyprdial/pages/bar.py:447
 msgid "Using Waybar"
 msgstr "Waybar utilisé"
 
-#: omarchy_settings/pages/bar.py:447
+#: hyprdial/pages/bar.py:447
 msgid "Using the Omarchy bar"
 msgstr "Barre d'Omarchy utilisée"
 
-#: omarchy_settings/pages/bar.py:459
+#: hyprdial/pages/bar.py:459
 msgid "Waybar position changed"
 msgstr "Position de Waybar modifiée"
 
-#: omarchy_settings/pages/bar.py:471
+#: hyprdial/pages/bar.py:471
 msgid "Waybar restarted"
 msgstr "Waybar redémarré"
 
-#: omarchy_settings/pages/bar.py:471
+#: hyprdial/pages/bar.py:471
 msgid "Waybar isn't in use; turn it on above"
 msgstr "Waybar n'est pas utilisé ; activez-le plus haut"
 
-#: omarchy_settings/pages/bar.py:485
+#: hyprdial/pages/bar.py:485
 msgid "Waybar files restored"
 msgstr "Fichiers de Waybar restaurés"
 
-#: omarchy_settings/pages/bar.py:491
+#: hyprdial/pages/bar.py:491
 msgid "No fonts listed"
 msgstr "Aucune police listée"
 
-#: omarchy_settings/pages/bar.py:491
+#: hyprdial/pages/bar.py:491
 msgid "omarchy-font-list returned nothing"
 msgstr "omarchy-font-list n'a rien renvoyé"
 
-#: omarchy_settings/pages/bar.py:497
+#: hyprdial/pages/bar.py:497
 msgid "Font"
 msgstr "Police"
 
-#: omarchy_settings/pages/bar.py:498
+#: hyprdial/pages/bar.py:498
 #, python-brace-format
 msgid "Current: {font}"
 msgstr "Actuelle : {font}"
 
-#: omarchy_settings/pages/bar.py:498
+#: hyprdial/pages/bar.py:498
 msgid "unknown"
 msgstr "inconnue"
 
-#: omarchy_settings/pages/bar.py:506 omarchy_settings/pages/themes.py:246
+#: hyprdial/pages/bar.py:506 hyprdial/pages/themes.py:246
 #, python-brace-format
 msgid "Applying {name}…"
 msgstr "Application de {name}…"
 
-#: omarchy_settings/pages/bar.py:510
+#: hyprdial/pages/bar.py:510
 #, python-brace-format
 msgid "Font {name} applied"
 msgstr "Police {name} appliquée"
 
-#: omarchy_settings/pages/bar.py:510 omarchy_settings/pages/themes.py:253
+#: hyprdial/pages/bar.py:510 hyprdial/pages/themes.py:253
 #, python-brace-format
 msgid "Failed to apply {name}"
 msgstr "Impossible d'appliquer {name}"
 
-#: omarchy_settings/pages/bluetooth.py:30
+#: hyprdial/pages/bluetooth.py:30
 #, python-brace-format
 msgid "Check that “{name}” shows the same code, then confirm."
 msgstr "Vérifiez que « {name} » affiche le même code, puis confirmez."
 
-#: omarchy_settings/pages/bluetooth.py:32
+#: hyprdial/pages/bluetooth.py:32
 #, python-brace-format
 msgid "Type this code on “{name}” and press Enter."
 msgstr "Saisissez ce code sur « {name} » et appuyez sur Entrée."
 
-#: omarchy_settings/pages/bluetooth.py:33
+#: hyprdial/pages/bluetooth.py:33
 msgid "Pairing code"
 msgstr "Code d'appairage"
 
-#: omarchy_settings/pages/bluetooth.py:35
-#: omarchy_settings/pages/shortcuts.py:152 omarchy_settings/pages/system.py:232
-#: omarchy_settings/pages/wifi.py:53 omarchy_settings/pages/wifi.py:348
-#: omarchy_settings/ui.py:174
+#: hyprdial/pages/bluetooth.py:35 hyprdial/pages/shortcuts.py:152
+#: hyprdial/pages/system.py:232 hyprdial/pages/wifi.py:53
+#: hyprdial/pages/wifi.py:348 hyprdial/ui.py:174
 msgid "Cancel"
 msgstr "Annuler"
 
-#: omarchy_settings/pages/bluetooth.py:37
+#: hyprdial/pages/bluetooth.py:37
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: omarchy_settings/pages/bluetooth.py:46
+#: hyprdial/pages/bluetooth.py:46
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: omarchy_settings/pages/bluetooth.py:69
+#: hyprdial/pages/bluetooth.py:69
 msgid "No Bluetooth adapter found"
 msgstr "Aucun adaptateur Bluetooth trouvé"
 
-#: omarchy_settings/pages/bluetooth.py:71
+#: hyprdial/pages/bluetooth.py:71
 msgid "bluetoothctl is not installed"
 msgstr "bluetoothctl n'est pas installé"
 
-#: omarchy_settings/pages/bluetooth.py:101
-#: omarchy_settings/pages/monitors.py:29 omarchy_settings/pages/wifi.py:160
+#: hyprdial/pages/bluetooth.py:101 hyprdial/pages/monitors.py:29
+#: hyprdial/pages/wifi.py:160
 msgid "Off"
 msgstr "Désactivé"
 
-#: omarchy_settings/pages/bluetooth.py:104
+#: hyprdial/pages/bluetooth.py:104
 #, python-brace-format
 msgid "{n} device connected"
 msgid_plural "{n} devices connected"
 msgstr[0] "{n} appareil connecté"
 msgstr[1] "{n} appareils connectés"
 
-#: omarchy_settings/pages/bluetooth.py:106
+#: hyprdial/pages/bluetooth.py:106
 msgid "On, nothing connected"
 msgstr "Activé, rien de connecté"
 
-#: omarchy_settings/pages/bluetooth.py:115
+#: hyprdial/pages/bluetooth.py:115
 msgid "Paired devices"
 msgstr "Appareils appairés"
 
-#: omarchy_settings/pages/bluetooth.py:117
+#: hyprdial/pages/bluetooth.py:117
 #, python-brace-format
 msgid "{n} paired"
 msgid_plural "{n} paired"
 msgstr[0] "{n} appairé"
 msgstr[1] "{n} appairés"
 
-#: omarchy_settings/pages/bluetooth.py:123
+#: hyprdial/pages/bluetooth.py:123
 msgid "No paired devices"
 msgstr "Aucun appareil appairé"
 
-#: omarchy_settings/pages/bluetooth.py:123
+#: hyprdial/pages/bluetooth.py:123
 msgid "Put the device in pairing mode and search below"
 msgstr "Mettez l'appareil en mode appairage et lancez la recherche ci-dessous"
 
-#: omarchy_settings/pages/bluetooth.py:134
+#: hyprdial/pages/bluetooth.py:134
 msgid "Searching for devices…"
 msgstr "Recherche d'appareils…"
 
-#: omarchy_settings/pages/bluetooth.py:134
+#: hyprdial/pages/bluetooth.py:134
 msgid "Put the device in pairing mode now"
 msgstr "Mettez l'appareil en mode appairage maintenant"
 
-#: omarchy_settings/pages/bluetooth.py:141
+#: hyprdial/pages/bluetooth.py:141
 msgid "Pair a new device"
 msgstr "Appairer un nouvel appareil"
 
-#: omarchy_settings/pages/bluetooth.py:142
+#: hyprdial/pages/bluetooth.py:142
 #, python-brace-format
 msgid "Searches for {n} seconds"
 msgstr "Recherche pendant {n} secondes"
 
-#: omarchy_settings/pages/bluetooth.py:143
+#: hyprdial/pages/bluetooth.py:143
 msgid "Search"
 msgstr "Rechercher"
 
-#: omarchy_settings/pages/bluetooth.py:149
+#: hyprdial/pages/bluetooth.py:149
 msgid "Nearby devices"
 msgstr "Appareils à proximité"
 
-#: omarchy_settings/pages/bluetooth.py:151 omarchy_settings/pages/wifi.py:179
+#: hyprdial/pages/bluetooth.py:151 hyprdial/pages/wifi.py:179
 #, python-brace-format
 msgid "{n} found"
 msgid_plural "{n} found"
 msgstr[0] "{n} trouvé"
 msgstr[1] "{n} trouvés"
 
-#: omarchy_settings/pages/bluetooth.py:157
+#: hyprdial/pages/bluetooth.py:157
 msgid "No devices found"
 msgstr "Aucun appareil trouvé"
 
-#: omarchy_settings/pages/bluetooth.py:157
+#: hyprdial/pages/bluetooth.py:157
 msgid "Check that the device is in pairing mode and search again"
 msgstr "Vérifiez que l'appareil est en mode appairage et relancez la recherche"
 
-#: omarchy_settings/pages/bluetooth.py:163
+#: hyprdial/pages/bluetooth.py:163
 msgid "Pair"
 msgstr "Appairer"
 
-#: omarchy_settings/pages/bluetooth.py:167
+#: hyprdial/pages/bluetooth.py:167
 msgid "Search again"
 msgstr "Rechercher à nouveau"
 
-#: omarchy_settings/pages/bluetooth.py:178
-#: omarchy_settings/pages/hyprland.py:238 omarchy_settings/pages/sound.py:217
-#: omarchy_settings/pages/wifi.py:211
+#: hyprdial/pages/bluetooth.py:178 hyprdial/pages/hyprland.py:238
+#: hyprdial/pages/sound.py:217 hyprdial/pages/wifi.py:211
 msgid "Advanced"
 msgstr "Avancé"
 
-#: omarchy_settings/pages/bluetooth.py:178
+#: hyprdial/pages/bluetooth.py:178
 msgid "Full Bluetooth manager (bluetui)"
 msgstr "Gestionnaire Bluetooth complet (bluetui)"
 
-#: omarchy_settings/pages/bluetooth.py:183
-#: omarchy_settings/pages/ethernet.py:24 omarchy_settings/pages/ethernet.py:193
-#: omarchy_settings/pages/wifi.py:216 omarchy_settings/pages/wifi.py:232
+#: hyprdial/pages/bluetooth.py:183 hyprdial/pages/ethernet.py:24
+#: hyprdial/pages/ethernet.py:193 hyprdial/pages/wifi.py:216
+#: hyprdial/pages/wifi.py:232
 msgid "Connected"
 msgstr "Connecté"
 
-#: omarchy_settings/pages/bluetooth.py:183 omarchy_settings/pages/wifi.py:169
+#: hyprdial/pages/bluetooth.py:183 hyprdial/pages/wifi.py:169
 msgid "Not connected"
 msgstr "Non connecté"
 
-#: omarchy_settings/pages/bluetooth.py:191
-#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:225
+#: hyprdial/pages/bluetooth.py:191 hyprdial/pages/ethernet.py:98
+#: hyprdial/pages/wifi.py:225
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: omarchy_settings/pages/bluetooth.py:191
-#: omarchy_settings/pages/ethernet.py:98 omarchy_settings/pages/wifi.py:54
-#: omarchy_settings/pages/wifi.py:225
+#: hyprdial/pages/bluetooth.py:191 hyprdial/pages/ethernet.py:98
+#: hyprdial/pages/wifi.py:54 hyprdial/pages/wifi.py:225
 msgid "Connect"
 msgstr "Connecter"
 
-#: omarchy_settings/pages/bluetooth.py:195
-#: omarchy_settings/pages/bluetooth.py:242 omarchy_settings/pages/wifi.py:247
-#: omarchy_settings/pages/wifi.py:376
+#: hyprdial/pages/bluetooth.py:195 hyprdial/pages/bluetooth.py:242
+#: hyprdial/pages/wifi.py:247 hyprdial/pages/wifi.py:376
 msgid "Forget"
 msgstr "Oublier"
 
-#: omarchy_settings/pages/bluetooth.py:211
+#: hyprdial/pages/bluetooth.py:211
 #, python-brace-format
 msgid "{name} didn't respond"
 msgstr "{name} n'a pas répondu"
 
-#: omarchy_settings/pages/bluetooth.py:222
+#: hyprdial/pages/bluetooth.py:222
 msgid "Could not change Bluetooth"
 msgstr "Impossible de modifier le Bluetooth"
 
-#: omarchy_settings/pages/bluetooth.py:232
+#: hyprdial/pages/bluetooth.py:232
 #, python-brace-format
 msgid "{name} disconnected"
 msgstr "{name} déconnecté"
 
-#: omarchy_settings/pages/bluetooth.py:234
+#: hyprdial/pages/bluetooth.py:234
 #, python-brace-format
 msgid "Connecting to {name}…"
 msgstr "Connexion à {name}…"
 
-#: omarchy_settings/pages/bluetooth.py:235
+#: hyprdial/pages/bluetooth.py:235
 #, python-brace-format
 msgid "{name} connected"
 msgstr "{name} connecté"
 
-#: omarchy_settings/pages/bluetooth.py:240
+#: hyprdial/pages/bluetooth.py:240
 #, python-brace-format
 msgid "Forget “{name}”?"
 msgstr "Oublier « {name} » ?"
 
-#: omarchy_settings/pages/bluetooth.py:241
+#: hyprdial/pages/bluetooth.py:241
 msgid "To use it again, you'll have to pair it again."
 msgstr "Pour le réutiliser, il faudra l'appairer à nouveau."
 
-#: omarchy_settings/pages/bluetooth.py:243
+#: hyprdial/pages/bluetooth.py:243
 #, python-brace-format
 msgid "{name} forgotten"
 msgstr "{name} oublié"
 
-#: omarchy_settings/pages/bluetooth.py:264
+#: hyprdial/pages/bluetooth.py:264
 msgid "Could not start bluetoothctl"
 msgstr "Impossible de lancer bluetoothctl"
 
-#: omarchy_settings/pages/bluetooth.py:266
+#: hyprdial/pages/bluetooth.py:266
 #, python-brace-format
 msgid "Pairing with {name}…"
 msgstr "Appairage avec {name}…"
 
-#: omarchy_settings/pages/bluetooth.py:300
+#: hyprdial/pages/bluetooth.py:300
 msgid "Pairing canceled"
 msgstr "Appairage annulé"
 
-#: omarchy_settings/pages/bluetooth.py:305
+#: hyprdial/pages/bluetooth.py:305
 #, python-brace-format
 msgid "{name} asks for a PIN typed here; pair it with Advanced (bluetui)"
 msgstr "{name} demande un code PIN saisi ici ; appairez-le via Avancé (bluetui)"
 
-#: omarchy_settings/pages/bluetooth.py:310
+#: hyprdial/pages/bluetooth.py:310
 #, python-brace-format
 msgid "{name} paired and connected"
 msgstr "{name} appairé et connecté"
 
-#: omarchy_settings/pages/bluetooth.py:312
+#: hyprdial/pages/bluetooth.py:312
 #, python-brace-format
 msgid "{name} paired, but it didn't connect; try Connect"
 msgstr "{name} appairé, mais pas connecté ; essayez Connecter"
 
-#: omarchy_settings/pages/bluetooth.py:315
+#: hyprdial/pages/bluetooth.py:315
 #, python-brace-format
 msgid "{name} is no longer in range; search again"
 msgstr "{name} n'est plus à portée ; relancez la recherche"
 
-#: omarchy_settings/pages/bluetooth.py:316
+#: hyprdial/pages/bluetooth.py:316
 #, python-brace-format
 msgid "{name} rejected the pairing"
 msgstr "{name} a refusé l'appairage"
 
-#: omarchy_settings/pages/bluetooth.py:317
+#: hyprdial/pages/bluetooth.py:317
 #, python-brace-format
 msgid "Pairing with {name} took too long"
 msgstr "L'appairage avec {name} a pris trop de temps"
 
-#: omarchy_settings/pages/bluetooth.py:318
+#: hyprdial/pages/bluetooth.py:318
 #, python-brace-format
 msgid "{name} is already paired"
 msgstr "{name} est déjà appairé"
 
-#: omarchy_settings/pages/bluetooth.py:324
-#: omarchy_settings/pages/bluetooth.py:327
+#: hyprdial/pages/bluetooth.py:324 hyprdial/pages/bluetooth.py:327
 #, python-brace-format
 msgid "Could not pair with {name}"
 msgstr "Impossible d'appairer {name}"
 
-#: omarchy_settings/pages/dependencies.py:21
+#: hyprdial/pages/dependencies.py:21
 msgid "Dependencies"
 msgstr "Dépendances"
 
-#: omarchy_settings/pages/dependencies.py:38 omarchy_settings/pages/power.py:75
+#: hyprdial/pages/dependencies.py:38 hyprdial/pages/power.py:75
 msgid "Checking…"
 msgstr "Vérification…"
 
-#: omarchy_settings/pages/dependencies.py:56
-#: omarchy_settings/pages/dependencies.py:62
+#: hyprdial/pages/dependencies.py:56 hyprdial/pages/dependencies.py:62
 msgid "Not installed"
 msgstr "Non installé"
 
-#: omarchy_settings/pages/dependencies.py:65
+#: hyprdial/pages/dependencies.py:65
 msgid "Installed"
 msgstr "Installé"
 
-#: omarchy_settings/pages/dependencies.py:80
+#: hyprdial/pages/dependencies.py:80
 msgid "Install what is missing with your package manager"
 msgstr "Installez ce qui manque avec votre gestionnaire de paquets"
 
-#: omarchy_settings/pages/dependencies.py:82
+#: hyprdial/pages/dependencies.py:82
 msgid "Everything is installed"
 msgstr "Tout est installé"
 
-#: omarchy_settings/pages/dependencies.py:84
+#: hyprdial/pages/dependencies.py:84
 msgid "Select packages to install"
 msgstr "Sélectionnez les paquets à installer"
 
-#: omarchy_settings/pages/dependencies.py:87
+#: hyprdial/pages/dependencies.py:87
 #, python-brace-format
 msgid "Install {n} package"
 msgid_plural "Install {n} packages"
 msgstr[0] "Installer {n} paquet"
 msgstr[1] "Installer {n} paquets"
 
-#: omarchy_settings/pages/dependencies.py:97
+#: hyprdial/pages/dependencies.py:97
 msgid "Installing…"
 msgstr "Installation…"
 
-#: omarchy_settings/pages/dependencies.py:102
+#: hyprdial/pages/dependencies.py:102
 msgid "Could not run pkexec"
 msgstr "Impossible de lancer pkexec"
 
-#: omarchy_settings/pages/dependencies.py:104
+#: hyprdial/pages/dependencies.py:104
 #, python-brace-format
 msgid "Installed: {packages}"
 msgstr "Installé : {packages}"
 
-#: omarchy_settings/pages/dependencies.py:106
+#: hyprdial/pages/dependencies.py:106
 msgid "Installation cancelled"
 msgstr "Installation annulée"
 
-#: omarchy_settings/pages/dependencies.py:109
+#: hyprdial/pages/dependencies.py:109
 #, python-brace-format
 msgid "Installation failed: {error}"
 msgstr "L'installation a échoué : {error}"
 
-#: omarchy_settings/pages/ethernet.py:22
+#: hyprdial/pages/ethernet.py:22
 msgid "No cable connected"
 msgstr "Aucun câble branché"
 
-#: omarchy_settings/pages/ethernet.py:26 omarchy_settings/pages/ethernet.py:109
+#: hyprdial/pages/ethernet.py:26 hyprdial/pages/ethernet.py:109
 #, python-brace-format
 msgid "{speed} Mb/s"
 msgstr "{speed} Mb/s"
 
-#: omarchy_settings/pages/ethernet.py:31
+#: hyprdial/pages/ethernet.py:31
 msgid "Cable connected, getting an address…"
 msgstr "Câble branché, obtention d'une adresse…"
 
-#: omarchy_settings/pages/ethernet.py:32
+#: hyprdial/pages/ethernet.py:32
 msgid "Cable connected, not connected to the network"
 msgstr "Câble branché, non connecté au réseau"
 
-#: omarchy_settings/pages/ethernet.py:37
+#: hyprdial/pages/ethernet.py:37
 msgid "No cable detected"
 msgstr "Aucun câble détecté"
 
-#: omarchy_settings/pages/ethernet.py:37
+#: hyprdial/pages/ethernet.py:37
 msgid "Check that the cable is firmly plugged in at both ends."
 msgstr "Vérifiez que le câble est bien branché aux deux extrémités."
 
-#: omarchy_settings/pages/ethernet.py:39
+#: hyprdial/pages/ethernet.py:39
 msgid "The link is running at 10 Mb/s"
 msgstr "La liaison fonctionne à 10 Mb/s"
 
-#: omarchy_settings/pages/ethernet.py:41
+#: hyprdial/pages/ethernet.py:41
 msgid "A gigabit port stuck at 10 Mb/s usually means a damaged cable or a bad port. Try another cable or another port on the router."
 msgstr "Un port gigabit bloqué à 10 Mb/s signale souvent un câble abîmé ou un port défectueux. Essayez un autre câble ou un autre port du routeur."
 
-#: omarchy_settings/pages/ethernet.py:46
+#: hyprdial/pages/ethernet.py:46
 msgid "No address from the network"
 msgstr "Aucune adresse reçue du réseau"
 
-#: omarchy_settings/pages/ethernet.py:48
+#: hyprdial/pages/ethernet.py:48
 msgid "Nothing on the cable answered the request for an address (DHCP). Check that the other end is a router, or set a manual address below."
 msgstr "Rien sur le câble n'a répondu à la demande d'adresse (DHCP). Vérifiez que l'autre extrémité est un routeur, ou définissez une adresse manuelle ci-dessous."
 
-#: omarchy_settings/pages/ethernet.py:74
+#: hyprdial/pages/ethernet.py:74
 msgid "Details"
 msgstr "Détails"
 
-#: omarchy_settings/pages/ethernet.py:77
+#: hyprdial/pages/ethernet.py:77
 msgid "Hardware address"
 msgstr "Adresse matérielle"
 
-#: omarchy_settings/pages/ethernet.py:78
+#: hyprdial/pages/ethernet.py:78
 msgid "IPv4 address"
 msgstr "Adresse IPv4"
 
-#: omarchy_settings/pages/ethernet.py:79
+#: hyprdial/pages/ethernet.py:79
 msgid "Gateway"
 msgstr "Passerelle"
 
-#: omarchy_settings/pages/ethernet.py:80
+#: hyprdial/pages/ethernet.py:80
 msgid "DNS servers"
 msgstr "Serveurs DNS"
 
-#: omarchy_settings/pages/ethernet.py:81
+#: hyprdial/pages/ethernet.py:81
 msgid "Link speed"
 msgstr "Débit de la liaison"
 
-#: omarchy_settings/pages/ethernet.py:113 omarchy_settings/pages/wifi.py:243
+#: hyprdial/pages/ethernet.py:113 hyprdial/pages/wifi.py:243
 msgid "IPv4 settings"
 msgstr "Paramètres IPv4"
 
-#: omarchy_settings/pages/ethernet.py:114
+#: hyprdial/pages/ethernet.py:114
 msgid "When the cable is plugged in"
 msgstr "Quand le câble est branché"
 
-#: omarchy_settings/pages/ethernet.py:116
+#: hyprdial/pages/ethernet.py:116
 msgid "Save and reconnect"
 msgstr "Enregistrer et reconnecter"
 
-#: omarchy_settings/pages/ethernet.py:117
-#: omarchy_settings/pages/hyprland.py:137 omarchy_settings/pages/system.py:112
+#: hyprdial/pages/ethernet.py:117 hyprdial/pages/hyprland.py:137
+#: hyprdial/pages/system.py:112
 msgid "Apply"
 msgstr "Appliquer"
 
-#: omarchy_settings/pages/ethernet.py:127
+#: hyprdial/pages/ethernet.py:127
 msgid "Wired (Ethernet)"
 msgstr "Filaire (Ethernet)"
 
-#: omarchy_settings/pages/ethernet.py:133
+#: hyprdial/pages/ethernet.py:133
 msgid "Refresh"
 msgstr "Actualiser"
 
-#: omarchy_settings/pages/ethernet.py:147 omarchy_settings/pages/wifi.py:117
+#: hyprdial/pages/ethernet.py:147 hyprdial/pages/wifi.py:117
 msgid "NetworkManager (nmcli) is not available"
 msgstr "NetworkManager (nmcli) n'est pas disponible"
 
-#: omarchy_settings/pages/ethernet.py:169
+#: hyprdial/pages/ethernet.py:169
 msgid "No Ethernet port found"
 msgstr "Aucun port Ethernet trouvé"
 
-#: omarchy_settings/pages/ethernet.py:182
+#: hyprdial/pages/ethernet.py:182
 msgid "Cable"
 msgstr "Câble"
 
-#: omarchy_settings/pages/ethernet.py:193 omarchy_settings/pages/wifi.py:282
+#: hyprdial/pages/ethernet.py:193 hyprdial/pages/wifi.py:282
 msgid "Disconnected"
 msgstr "Déconnecté"
 
-#: omarchy_settings/pages/ethernet.py:204
+#: hyprdial/pages/ethernet.py:204
 msgid "Saving and reconnecting…"
 msgstr "Enregistrement et reconnexion…"
 
-#: omarchy_settings/pages/ethernet.py:205
+#: hyprdial/pages/ethernet.py:205
 msgid "Settings saved and connected"
 msgstr "Paramètres enregistrés et connecté"
 
-#: omarchy_settings/pages/ethernet.py:221
+#: hyprdial/pages/ethernet.py:221
 #, python-brace-format
 msgid "Settings saved, but the connection didn't come up: {error}"
 msgstr "Paramètres enregistrés, mais la connexion n'a pas abouti : {error}"
 
-#: omarchy_settings/pages/hyprland.py:37
+#: hyprdial/pages/hyprland.py:37
 msgid "Compact"
 msgstr "Compact"
 
-#: omarchy_settings/pages/hyprland.py:38
+#: hyprdial/pages/hyprland.py:38
 msgid "No gaps or decorations: maximum usable area"
 msgstr "Sans espaces ni décorations : un maximum de surface utile"
 
-#: omarchy_settings/pages/hyprland.py:48
+#: hyprdial/pages/hyprland.py:48
 msgid "Default"
 msgstr "Par défaut"
 
-#: omarchy_settings/pages/hyprland.py:48
+#: hyprdial/pages/hyprland.py:48
 msgid "The look of your config, without this app's changes"
 msgstr "L'apparence de votre configuration, sans les changements de cette app"
 
-#: omarchy_settings/pages/hyprland.py:50
+#: hyprdial/pages/hyprland.py:50
 msgid "Comfortable"
 msgstr "Confortable"
 
-#: omarchy_settings/pages/hyprland.py:51
+#: hyprdial/pages/hyprland.py:51
 msgid "More room between windows and soft corners"
 msgstr "Plus d'espace entre les fenêtres et des coins adoucis"
 
-#: omarchy_settings/pages/hyprland.py:62
+#: hyprdial/pages/hyprland.py:62
 msgid "Elegant"
 msgstr "Élégant"
 
-#: omarchy_settings/pages/hyprland.py:63
+#: hyprdial/pages/hyprland.py:63
 msgid "Rounded corners, shadow, blur and translucent inactive windows"
 msgstr "Coins arrondis, ombre, flou et fenêtres inactives translucides"
 
-#: omarchy_settings/pages/hyprland.py:80
+#: hyprdial/pages/hyprland.py:80
 msgid "Split (default)"
 msgstr "Division (par défaut)"
 
-#: omarchy_settings/pages/hyprland.py:80
+#: hyprdial/pages/hyprland.py:80
 msgid "Each new window splits the space of the focused window"
 msgstr "Chaque nouvelle fenêtre partage l'espace de la fenêtre active"
 
-#: omarchy_settings/pages/hyprland.py:81
+#: hyprdial/pages/hyprland.py:81
 msgid "Main and stack"
 msgstr "Principale et pile"
 
-#: omarchy_settings/pages/hyprland.py:81
+#: hyprdial/pages/hyprland.py:81
 msgid "One large window on the left and the others stacked beside it"
 msgstr "Une grande fenêtre à gauche et les autres empilées à côté"
 
-#: omarchy_settings/pages/hyprland.py:82
+#: hyprdial/pages/hyprland.py:82
 msgid "Side scrolling"
 msgstr "Défilement latéral"
 
-#: omarchy_settings/pages/hyprland.py:82
+#: hyprdial/pages/hyprland.py:82
 msgid "Side-by-side columns that scroll horizontally, niri style"
 msgstr "Colonnes côte à côte qui défilent horizontalement, à la manière de niri"
 
-#: omarchy_settings/pages/hyprland.py:87
+#: hyprdial/pages/hyprland.py:87
 msgid "Portuguese (Brazil, ABNT2)"
 msgstr "Portugais (Brésil, ABNT2)"
 
-#: omarchy_settings/pages/hyprland.py:88
+#: hyprdial/pages/hyprland.py:88
 msgid "English (US)"
 msgstr "Anglais (États-Unis)"
 
-#: omarchy_settings/pages/hyprland.py:89
+#: hyprdial/pages/hyprland.py:89
 msgid "English (US, international with dead keys)"
 msgstr "Anglais (États-Unis, international avec touches mortes)"
 
-#: omarchy_settings/pages/hyprland.py:90
+#: hyprdial/pages/hyprland.py:90
 msgid "Portuguese (Portugal)"
 msgstr "Portugais (Portugal)"
 
-#: omarchy_settings/pages/hyprland.py:91 omarchy_settings/pages/system.py:20
+#: hyprdial/pages/hyprland.py:91 hyprdial/pages/system.py:20
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: omarchy_settings/pages/hyprland.py:94
+#: hyprdial/pages/hyprland.py:94
 msgid "Device default"
 msgstr "Valeur de l'appareil"
 
-#: omarchy_settings/pages/hyprland.py:94
+#: hyprdial/pages/hyprland.py:94
 msgid "Adaptive"
 msgstr "Adaptative"
 
-#: omarchy_settings/pages/hyprland.py:94
+#: hyprdial/pages/hyprland.py:94
 msgid "Off (good for games)"
 msgstr "Désactivée (idéal pour les jeux)"
 
-#: omarchy_settings/pages/hyprland.py:104
+#: hyprdial/pages/hyprland.py:104
 msgid "On mouse hover"
 msgstr "Au survol de la souris"
 
-#: omarchy_settings/pages/hyprland.py:104
+#: hyprdial/pages/hyprland.py:104
 msgid "Only on click"
 msgstr "Seulement au clic"
 
-#: omarchy_settings/pages/hyprland.py:104
+#: hyprdial/pages/hyprland.py:104
 msgid "On click, but the keyboard follows the mouse"
 msgstr "Au clic, mais le clavier suit la souris"
 
-#: omarchy_settings/pages/hyprland.py:126
+#: hyprdial/pages/hyprland.py:126
 msgid "Restore defaults"
 msgstr "Restaurer les valeurs par défaut"
 
-#: omarchy_settings/pages/hyprland.py:133
+#: hyprdial/pages/hyprland.py:133
 msgid "Quick style"
 msgstr "Style rapide"
 
-#: omarchy_settings/pages/hyprland.py:134
+#: hyprdial/pages/hyprland.py:134
 msgid "Applies several settings at once; you can fine-tune each one below."
 msgstr "Applique plusieurs réglages à la fois ; vous pouvez affiner chacun ci-dessous."
 
-#: omarchy_settings/pages/hyprland.py:141
+#: hyprdial/pages/hyprland.py:141
 msgid "Windows"
 msgstr "Fenêtres"
 
-#: omarchy_settings/pages/hyprland.py:145
+#: hyprdial/pages/hyprland.py:145
 msgid "Window layout"
 msgstr "Disposition des fenêtres"
 
-#: omarchy_settings/pages/hyprland.py:151
+#: hyprdial/pages/hyprland.py:151
 msgid "Gap between windows"
 msgstr "Espace entre les fenêtres"
 
-#: omarchy_settings/pages/hyprland.py:151
-#: omarchy_settings/pages/hyprland.py:152
-#: omarchy_settings/pages/hyprland.py:216
+#: hyprdial/pages/hyprland.py:151 hyprdial/pages/hyprland.py:152
+#: hyprdial/pages/hyprland.py:216
 msgid "In pixels"
 msgstr "En pixels"
 
-#: omarchy_settings/pages/hyprland.py:152
+#: hyprdial/pages/hyprland.py:152
 msgid "Margin to the screen edge"
 msgstr "Marge avec le bord de l'écran"
 
-#: omarchy_settings/pages/hyprland.py:156
+#: hyprdial/pages/hyprland.py:156
 msgid "Border width"
 msgstr "Épaisseur de la bordure"
 
-#: omarchy_settings/pages/hyprland.py:157
+#: hyprdial/pages/hyprland.py:157
 msgid "The color comes from the theme; 0 hides the border"
 msgstr "La couleur vient du thème ; 0 masque la bordure"
 
-#: omarchy_settings/pages/hyprland.py:166
+#: hyprdial/pages/hyprland.py:166
 msgid "Rounded corners"
 msgstr "Coins arrondis"
 
-#: omarchy_settings/pages/hyprland.py:166
+#: hyprdial/pages/hyprland.py:166
 msgid "Radius in pixels; 0 keeps corners square"
 msgstr "Rayon en pixels ; 0 garde des coins droits"
 
-#: omarchy_settings/pages/hyprland.py:172
+#: hyprdial/pages/hyprland.py:172
 msgid "Resize from the border"
 msgstr "Redimensionner par la bordure"
 
-#: omarchy_settings/pages/hyprland.py:173
+#: hyprdial/pages/hyprland.py:173
 msgid "Drag a window's border with the mouse to resize it"
 msgstr "Faites glisser la bordure d'une fenêtre avec la souris pour la redimensionner"
 
-#: omarchy_settings/pages/hyprland.py:181
+#: hyprdial/pages/hyprland.py:181
 msgid "Transparency and effects"
 msgstr "Transparence et effets"
 
-#: omarchy_settings/pages/hyprland.py:182
+#: hyprdial/pages/hyprland.py:182
 msgid "Effects use more GPU; on laptops they can drain the battery."
 msgstr "Les effets sollicitent davantage le GPU ; sur un portable, ils peuvent vider la batterie."
 
-#: omarchy_settings/pages/hyprland.py:186
+#: hyprdial/pages/hyprland.py:186
 msgid "Active window opacity"
 msgstr "Opacité de la fenêtre active"
 
-#: omarchy_settings/pages/hyprland.py:186
+#: hyprdial/pages/hyprland.py:186
 msgid "100% is fully opaque"
 msgstr "100% est totalement opaque"
 
-#: omarchy_settings/pages/hyprland.py:192
+#: hyprdial/pages/hyprland.py:192
 msgid "Other windows' opacity"
 msgstr "Opacité des autres fenêtres"
 
-#: omarchy_settings/pages/hyprland.py:193
+#: hyprdial/pages/hyprland.py:193
 msgid "Below 100% lets you see what is behind"
 msgstr "En dessous de 100%, on voit ce qu'il y a derrière"
 
-#: omarchy_settings/pages/hyprland.py:201
+#: hyprdial/pages/hyprland.py:201
 msgid "Dim unfocused windows"
 msgstr "Assombrir les fenêtres inactives"
 
-#: omarchy_settings/pages/hyprland.py:201
+#: hyprdial/pages/hyprland.py:201
 msgid "Helps you see which window is active"
 msgstr "Aide à voir quelle fenêtre est active"
 
-#: omarchy_settings/pages/hyprland.py:204
+#: hyprdial/pages/hyprland.py:204
 msgid "Dimming strength"
 msgstr "Intensité de l'assombrissement"
 
-#: omarchy_settings/pages/hyprland.py:206
+#: hyprdial/pages/hyprland.py:206
 msgid "Blur"
 msgstr "Flou"
 
-#: omarchy_settings/pages/hyprland.py:206
+#: hyprdial/pages/hyprland.py:206
 msgid "Blurs what shows behind translucent windows"
 msgstr "Floute ce qui apparaît derrière les fenêtres translucides"
 
-#: omarchy_settings/pages/hyprland.py:207
+#: hyprdial/pages/hyprland.py:207
 msgid "Enable blur"
 msgstr "Activer le flou"
 
-#: omarchy_settings/pages/hyprland.py:208
+#: hyprdial/pages/hyprland.py:208
 msgid "Strength"
 msgstr "Intensité"
 
-#: omarchy_settings/pages/hyprland.py:208
+#: hyprdial/pages/hyprland.py:208
 msgid "Blur radius"
 msgstr "Rayon du flou"
 
-#: omarchy_settings/pages/hyprland.py:210
+#: hyprdial/pages/hyprland.py:210
 msgid "Quality"
 msgstr "Qualité"
 
-#: omarchy_settings/pages/hyprland.py:210
+#: hyprdial/pages/hyprland.py:210
 msgid "More passes = smoother and heavier"
 msgstr "Plus de passes = plus doux et plus lourd"
 
-#: omarchy_settings/pages/hyprland.py:214
+#: hyprdial/pages/hyprland.py:214
 msgid "Shadow"
 msgstr "Ombre"
 
-#: omarchy_settings/pages/hyprland.py:214
+#: hyprdial/pages/hyprland.py:214
 msgid "Soft shadow around windows"
 msgstr "Ombre douce autour des fenêtres"
 
-#: omarchy_settings/pages/hyprland.py:215
+#: hyprdial/pages/hyprland.py:215
 msgid "Enable shadow"
 msgstr "Activer l'ombre"
 
-#: omarchy_settings/pages/hyprland.py:216
+#: hyprdial/pages/hyprland.py:216
 msgid "Size"
 msgstr "Taille"
 
-#: omarchy_settings/pages/hyprland.py:222
+#: hyprdial/pages/hyprland.py:222
 msgid "Keyboard"
 msgstr "Clavier"
 
-#: omarchy_settings/pages/hyprland.py:224
+#: hyprdial/pages/hyprland.py:224
 msgid "Num Lock on at startup"
 msgstr "Verr. num. activé au démarrage"
 
-#: omarchy_settings/pages/hyprland.py:228
+#: hyprdial/pages/hyprland.py:228
 msgid "Delay before repeating"
 msgstr "Délai avant répétition"
 
-#: omarchy_settings/pages/hyprland.py:229
+#: hyprdial/pages/hyprland.py:229
 msgid "Milliseconds holding a key before it repeats"
 msgstr "Millisecondes d'appui sur une touche avant qu'elle se répète"
 
-#: omarchy_settings/pages/hyprland.py:236
+#: hyprdial/pages/hyprland.py:236
 msgid "Repeat rate"
 msgstr "Vitesse de répétition"
 
-#: omarchy_settings/pages/hyprland.py:236
+#: hyprdial/pages/hyprland.py:236
 msgid "Characters per second"
 msgstr "Caractères par seconde"
 
-#: omarchy_settings/pages/hyprland.py:238
+#: hyprdial/pages/hyprland.py:238
 msgid "Multiple layouts, variants and XKB options"
 msgstr "Plusieurs dispositions, variantes et options XKB"
 
-#: omarchy_settings/pages/hyprland.py:239
+#: hyprdial/pages/hyprland.py:239
 msgid "Layouts (e.g. br,us)"
 msgstr "Dispositions (ex. br,us)"
 
-#: omarchy_settings/pages/hyprland.py:240
+#: hyprdial/pages/hyprland.py:240
 msgid "Variants (e.g. ,intl)"
 msgstr "Variantes (ex. ,intl)"
 
-#: omarchy_settings/pages/hyprland.py:241
+#: hyprdial/pages/hyprland.py:241
 msgid "Options (e.g. compose:caps,grp:alts_toggle)"
 msgstr "Options (ex. compose:caps,grp:alts_toggle)"
 
-#: omarchy_settings/pages/hyprland.py:246
+#: hyprdial/pages/hyprland.py:246
 msgid "Mouse"
 msgstr "Souris"
 
-#: omarchy_settings/pages/hyprland.py:249
+#: hyprdial/pages/hyprland.py:249
 msgid "Pointer speed"
 msgstr "Vitesse du pointeur"
 
-#: omarchy_settings/pages/hyprland.py:249
+#: hyprdial/pages/hyprland.py:249
 msgid "From -1 (slower) to 1 (faster)"
 msgstr "De -1 (plus lent) à 1 (plus rapide)"
 
-#: omarchy_settings/pages/hyprland.py:252
+#: hyprdial/pages/hyprland.py:252
 msgid "Acceleration"
 msgstr "Accélération"
 
-#: omarchy_settings/pages/hyprland.py:255
-#: omarchy_settings/pages/hyprland.py:281
+#: hyprdial/pages/hyprland.py:255 hyprdial/pages/hyprland.py:281
 msgid "Natural scrolling"
 msgstr "Défilement naturel"
 
-#: omarchy_settings/pages/hyprland.py:255
+#: hyprdial/pages/hyprland.py:255
 msgid "Content follows the wheel's movement"
 msgstr "Le contenu suit le mouvement de la molette"
 
-#: omarchy_settings/pages/hyprland.py:258
-#: omarchy_settings/pages/hyprland.py:299
+#: hyprdial/pages/hyprland.py:258 hyprdial/pages/hyprland.py:299
 msgid "Scroll speed"
 msgstr "Vitesse de défilement"
 
-#: omarchy_settings/pages/hyprland.py:258
-#: omarchy_settings/pages/hyprland.py:299
+#: hyprdial/pages/hyprland.py:258 hyprdial/pages/hyprland.py:299
 msgid "1 is normal"
 msgstr "1 est la valeur normale"
 
-#: omarchy_settings/pages/hyprland.py:260
+#: hyprdial/pages/hyprland.py:260
 msgid "Left-handed mode"
 msgstr "Mode gaucher"
 
-#: omarchy_settings/pages/hyprland.py:260
+#: hyprdial/pages/hyprland.py:260
 msgid "Swaps the left and right buttons"
 msgstr "Inverse les boutons gauche et droit"
 
-#: omarchy_settings/pages/hyprland.py:262
+#: hyprdial/pages/hyprland.py:262
 msgid "Window focus"
 msgstr "Focus des fenêtres"
 
-#: omarchy_settings/pages/hyprland.py:263
+#: hyprdial/pages/hyprland.py:263
 msgid "Paste with the middle button"
 msgstr "Coller avec le bouton du milieu"
 
-#: omarchy_settings/pages/hyprland.py:264
+#: hyprdial/pages/hyprland.py:264
 msgid "Hide the pointer while typing"
 msgstr "Masquer le pointeur pendant la saisie"
 
-#: omarchy_settings/pages/hyprland.py:268
+#: hyprdial/pages/hyprland.py:268
 msgid "Hide an idle pointer"
 msgstr "Masquer le pointeur inactif"
 
-#: omarchy_settings/pages/hyprland.py:269
+#: hyprdial/pages/hyprland.py:269
 msgid "Seconds without moving the mouse; 0 never hides"
 msgstr "Secondes sans bouger la souris ; 0 ne le masque jamais"
 
-#: omarchy_settings/pages/hyprland.py:279
-#: omarchy_settings/pages/hyprland.py:538
+#: hyprdial/pages/hyprland.py:279 hyprdial/pages/hyprland.py:538
 msgid "Touchpad"
 msgstr "Pavé tactile"
 
-#: omarchy_settings/pages/hyprland.py:280
+#: hyprdial/pages/hyprland.py:280
 msgid "Tap to click"
 msgstr "Toucher pour cliquer"
 
-#: omarchy_settings/pages/hyprland.py:281
+#: hyprdial/pages/hyprland.py:281
 msgid "Like on a phone"
 msgstr "Comme sur un téléphone"
 
-#: omarchy_settings/pages/hyprland.py:285
+#: hyprdial/pages/hyprland.py:285
 msgid "Two-finger click = right button"
 msgstr "Clic à deux doigts = bouton droit"
 
-#: omarchy_settings/pages/hyprland.py:286
+#: hyprdial/pages/hyprland.py:286
 msgid "Instead of clicking the bottom-right corner"
 msgstr "Au lieu de cliquer dans le coin inférieur droit"
 
-#: omarchy_settings/pages/hyprland.py:293
+#: hyprdial/pages/hyprland.py:293
 msgid "Disable while typing"
 msgstr "Désactiver pendant la saisie"
 
-#: omarchy_settings/pages/hyprland.py:294
+#: hyprdial/pages/hyprland.py:294
 msgid "Avoids moving the pointer by accident"
 msgstr "Évite de déplacer le pointeur par erreur"
 
-#: omarchy_settings/pages/hyprland.py:304
+#: hyprdial/pages/hyprland.py:304
 msgid "Window behavior"
 msgstr "Comportement des fenêtres"
 
-#: omarchy_settings/pages/hyprland.py:308
+#: hyprdial/pages/hyprland.py:308
 msgid "Focus windows that ask for attention"
 msgstr "Donner le focus aux fenêtres qui demandent l'attention"
 
-#: omarchy_settings/pages/hyprland.py:309
+#: hyprdial/pages/hyprland.py:309
 msgid "E.g. opening a link brings the browser to the front"
 msgstr "Ex. ouvrir un lien amène le navigateur au premier plan"
 
-#: omarchy_settings/pages/hyprland.py:316
+#: hyprdial/pages/hyprland.py:316
 msgid "Go back to the previous workspace"
 msgstr "Revenir à l'espace de travail précédent"
 
-#: omarchy_settings/pages/hyprland.py:317
+#: hyprdial/pages/hyprland.py:317
 msgid "Going to the workspace you are on returns to the previous one"
 msgstr "Aller à l'espace de travail actuel ramène au précédent"
 
-#: omarchy_settings/pages/hyprland.py:334
-#: omarchy_settings/pages/shortcuts.py:387
+#: hyprdial/pages/hyprland.py:334 hyprdial/pages/shortcuts.py:387
 msgid "Back to the default"
 msgstr "Revenir à la valeur par défaut"
 
-#: omarchy_settings/pages/hyprland.py:398
+#: hyprdial/pages/hyprland.py:398
 #, python-brace-format
 msgid "Custom ({value})"
 msgstr "Personnalisé ({value})"
 
-#: omarchy_settings/pages/hyprland.py:437
+#: hyprdial/pages/hyprland.py:437
 msgid "Custom (see Advanced)"
 msgstr "Personnalisé (voir Avancé)"
 
-#: omarchy_settings/pages/hyprland.py:440
+#: hyprdial/pages/hyprland.py:440
 msgid "Test by typing accented characters after switching"
 msgstr "Testez en tapant des caractères accentués après le changement"
 
-#: omarchy_settings/pages/hyprland.py:482
+#: hyprdial/pages/hyprland.py:482
 #, python-brace-format
 msgid "{name} style applied"
 msgstr "Style {name} appliqué"
 
-#: omarchy_settings/pages/hyprland.py:514
+#: hyprdial/pages/hyprland.py:514
 msgid "Options restored"
 msgstr "Options restaurées"
 
-#: omarchy_settings/pages/hyprland.py:521
-#: omarchy_settings/pages/hyprland.py:528
+#: hyprdial/pages/hyprland.py:521 hyprdial/pages/hyprland.py:528
 msgid "Returns every option on this page to its default"
 msgstr "Remet toutes les options de cette page à leur valeur par défaut"
 
-#: omarchy_settings/pages/hyprland.py:531
+#: hyprdial/pages/hyprland.py:531
 msgid "Devices"
 msgstr "Appareils"
 
-#: omarchy_settings/pages/hyprland.py:538
+#: hyprdial/pages/hyprland.py:538
 msgid "Touchscreen"
 msgstr "Écran tactile"
 
-#: omarchy_settings/pages/hyprland.py:541
+#: hyprdial/pages/hyprland.py:541
 msgid "Turns the device on or off"
 msgstr "Active ou désactive l'appareil"
 
-#: omarchy_settings/pages/hyprland.py:548 omarchy_settings/pages/sound.py:134
+#: hyprdial/pages/hyprland.py:548 hyprdial/pages/sound.py:134
 msgid "Could not change the device"
 msgstr "Impossible de modifier l'appareil"
 
-#: omarchy_settings/pages/ipv4.py:30 omarchy_settings/pages/webapps.py:37
+#: hyprdial/pages/ipv4.py:30 hyprdial/pages/webapps.py:37
 msgid "Address"
 msgstr "Adresse"
 
-#: omarchy_settings/pages/ipv4.py:31 omarchy_settings/pages/ipv4.py:48
+#: hyprdial/pages/ipv4.py:31 hyprdial/pages/ipv4.py:48
 msgid "Automatic (DHCP)"
 msgstr "Automatique (DHCP)"
 
-#: omarchy_settings/pages/ipv4.py:31 omarchy_settings/pages/ipv4.py:48
+#: hyprdial/pages/ipv4.py:31 hyprdial/pages/ipv4.py:48
 msgid "Manual"
 msgstr "Manuelle"
 
-#: omarchy_settings/pages/ipv4.py:35
+#: hyprdial/pages/ipv4.py:35
 msgid "IP address (e.g. 192.168.1.50/24)"
 msgstr "Adresse IP (ex. 192.168.1.50/24)"
 
-#: omarchy_settings/pages/ipv4.py:37
+#: hyprdial/pages/ipv4.py:37
 msgid "Gateway (e.g. 192.168.1.1)"
 msgstr "Passerelle (ex. 192.168.1.1)"
 
-#: omarchy_settings/pages/ipv4.py:38
+#: hyprdial/pages/ipv4.py:38
 msgid "DNS servers, comma separated (optional)"
 msgstr "Serveurs DNS, séparés par des virgules (facultatif)"
 
-#: omarchy_settings/pages/ipv4.py:40
+#: hyprdial/pages/ipv4.py:40
 msgid "Connect automatically"
 msgstr "Se connecter automatiquement"
 
-#: omarchy_settings/pages/ipv4.py:76
+#: hyprdial/pages/ipv4.py:76
 #, python-brace-format
 msgid "Invalid IP address: {value}"
 msgstr "Adresse IP invalide : {value}"
 
-#: omarchy_settings/pages/ipv4.py:77
+#: hyprdial/pages/ipv4.py:77
 #, python-brace-format
 msgid "Invalid gateway: {value}"
 msgstr "Passerelle invalide : {value}"
 
-#: omarchy_settings/pages/ipv4.py:78
+#: hyprdial/pages/ipv4.py:78
 #, python-brace-format
 msgid "Invalid DNS server: {value}"
 msgstr "Serveur DNS invalide : {value}"
 
-#: omarchy_settings/pages/monitors.py:20
+#: hyprdial/pages/monitors.py:20
 msgid "Normal"
 msgstr "Normale"
 
-#: omarchy_settings/pages/monitors.py:24
+#: hyprdial/pages/monitors.py:24
 msgid "Flipped"
 msgstr "Retournée"
 
-#: omarchy_settings/pages/monitors.py:25
+#: hyprdial/pages/monitors.py:25
 msgid "Flipped + 90°"
 msgstr "Retournée + 90°"
 
-#: omarchy_settings/pages/monitors.py:26
+#: hyprdial/pages/monitors.py:26
 msgid "Flipped + 180°"
 msgstr "Retournée + 180°"
 
-#: omarchy_settings/pages/monitors.py:27
+#: hyprdial/pages/monitors.py:27
 msgid "Flipped + 270°"
 msgstr "Retournée + 270°"
 
-#: omarchy_settings/pages/monitors.py:29
+#: hyprdial/pages/monitors.py:29
 msgid "On"
 msgstr "Activé"
 
-#: omarchy_settings/pages/monitors.py:29
+#: hyprdial/pages/monitors.py:29
 msgid "Fullscreen only"
 msgstr "Plein écran uniquement"
 
-#: omarchy_settings/pages/monitors.py:202
+#: hyprdial/pages/monitors.py:202
 msgid "Reload"
 msgstr "Recharger"
 
-#: omarchy_settings/pages/monitors.py:202
+#: hyprdial/pages/monitors.py:202
 msgid "Reads the connected displays again"
 msgstr "Relit les écrans branchés"
 
-#: omarchy_settings/pages/monitors.py:207
+#: hyprdial/pages/monitors.py:207
 #, python-brace-format
 msgid "Settings are stored in {file} and take priority over the rest of your config. 'Restore' returns to what your config says."
 msgstr "Les réglages sont enregistrés dans {file} et priment sur le reste de votre configuration. « Restaurer » revient à ce que dit votre configuration."
 
-#: omarchy_settings/pages/monitors.py:234
+#: hyprdial/pages/monitors.py:234
 msgid "hyprctl found no displays."
 msgstr "hyprctl n'a trouvé aucun écran."
 
-#: omarchy_settings/pages/monitors.py:248
+#: hyprdial/pages/monitors.py:248
 msgid "Arrangement"
 msgstr "Disposition"
 
-#: omarchy_settings/pages/monitors.py:250
+#: hyprdial/pages/monitors.py:250
 msgid "Drag the displays with the mouse; they snap to each other's edges. The position is applied when you let go."
 msgstr "Faites glisser les écrans avec la souris ; ils s'alignent sur les bords des autres. La position est appliquée quand vous relâchez."
 
-#: omarchy_settings/pages/monitors.py:295
+#: hyprdial/pages/monitors.py:295
 msgid "Display positions applied"
 msgstr "Positions des écrans appliquées"
 
-#: omarchy_settings/pages/monitors.py:306
+#: hyprdial/pages/monitors.py:306
 msgid "disabled"
 msgstr "désactivé"
 
-#: omarchy_settings/pages/monitors.py:308
+#: hyprdial/pages/monitors.py:308
 msgid "adjusted by this app"
 msgstr "réglé par cette application"
 
-#: omarchy_settings/pages/monitors.py:313
-#: omarchy_settings/pages/shortcuts.py:391
+#: hyprdial/pages/monitors.py:313 hyprdial/pages/shortcuts.py:391
 msgid "Enabled"
 msgstr "Activé"
 
-#: omarchy_settings/pages/monitors.py:314
+#: hyprdial/pages/monitors.py:314
 msgid "Turning it off removes the display from the desktop"
 msgstr "Le désactiver retire l'écran du bureau"
 
-#: omarchy_settings/pages/monitors.py:330
+#: hyprdial/pages/monitors.py:330
 msgid "Resolution and refresh rate"
 msgstr "Résolution et fréquence de rafraîchissement"
 
-#: omarchy_settings/pages/monitors.py:331
+#: hyprdial/pages/monitors.py:331
 msgid "Modes the display advertises"
 msgstr "Modes annoncés par l'écran"
 
-#: omarchy_settings/pages/monitors.py:345
+#: hyprdial/pages/monitors.py:345
 msgid "Scale"
 msgstr "Échelle"
 
-#: omarchy_settings/pages/monitors.py:346
+#: hyprdial/pages/monitors.py:346
 msgid "Interface size on this display"
 msgstr "Taille de l'interface sur cet écran"
 
-#: omarchy_settings/pages/monitors.py:355
+#: hyprdial/pages/monitors.py:355
 msgid "Rotation"
 msgstr "Rotation"
 
-#: omarchy_settings/pages/monitors.py:356
+#: hyprdial/pages/monitors.py:356
 msgid "For portrait displays use 90° or 270°"
 msgstr "Pour un écran en portrait, utilisez 90° ou 270°"
 
-#: omarchy_settings/pages/monitors.py:365
+#: hyprdial/pages/monitors.py:365
 msgid "Horizontal position (X)"
 msgstr "Position horizontale (X)"
 
-#: omarchy_settings/pages/monitors.py:366
+#: hyprdial/pages/monitors.py:366
 msgid "In logical pixels; you can also drag it in Arrangement"
 msgstr "En pixels logiques ; vous pouvez aussi le faire glisser dans Disposition"
 
-#: omarchy_settings/pages/monitors.py:374
+#: hyprdial/pages/monitors.py:374
 msgid "Vertical position (Y)"
 msgstr "Position verticale (Y)"
 
-#: omarchy_settings/pages/monitors.py:374
+#: hyprdial/pages/monitors.py:374
 msgid "In logical pixels"
 msgstr "En pixels logiques"
 
-#: omarchy_settings/pages/monitors.py:382
+#: hyprdial/pages/monitors.py:382
 msgid "Variable refresh rate (VRR / FreeSync)"
 msgstr "Fréquence de rafraîchissement variable (VRR / FreeSync)"
 
-#: omarchy_settings/pages/monitors.py:383
+#: hyprdial/pages/monitors.py:383
 msgid "Reduces tearing in games and videos"
 msgstr "Réduit le déchirement dans les jeux et les vidéos"
 
-#: omarchy_settings/pages/monitors.py:392
+#: hyprdial/pages/monitors.py:392
 msgid "Don't mirror"
 msgstr "Ne pas dupliquer"
 
-#: omarchy_settings/pages/monitors.py:396
+#: hyprdial/pages/monitors.py:396
 msgid "Mirror"
 msgstr "Dupliquer"
 
-#: omarchy_settings/pages/monitors.py:397
+#: hyprdial/pages/monitors.py:397
 msgid "Shows the same content as another display"
 msgstr "Affiche le même contenu qu'un autre écran"
 
-#: omarchy_settings/pages/monitors.py:406
+#: hyprdial/pages/monitors.py:406
 msgid "10-bit color"
 msgstr "Couleur 10 bits"
 
-#: omarchy_settings/pages/monitors.py:407
+#: hyprdial/pages/monitors.py:407
 msgid "Only enable it if the display and cable support it"
 msgstr "Activez-la seulement si l'écran et le câble la prennent en charge"
 
-#: omarchy_settings/pages/monitors.py:422
+#: hyprdial/pages/monitors.py:422
 msgid "Restore this display"
 msgstr "Restaurer cet écran"
 
-#: omarchy_settings/pages/monitors.py:423
+#: hyprdial/pages/monitors.py:423
 msgid "Returns to what is in monitors.lua"
 msgstr "Revient au contenu de monitors.lua"
 
-#: omarchy_settings/pages/monitors.py:461
+#: hyprdial/pages/monitors.py:461
 msgid "The only active display can't be turned off"
 msgstr "Le seul écran actif ne peut pas être désactivé"
 
-#: omarchy_settings/pages/monitors.py:478
+#: hyprdial/pages/monitors.py:478
 #, python-brace-format
 msgid "{name} already uses monitors.lua"
 msgstr "{name} utilise déjà monitors.lua"
 
-#: omarchy_settings/pages/monitors.py:481
+#: hyprdial/pages/monitors.py:481
 #, python-brace-format
 msgid "{name} restored"
 msgstr "{name} restauré"
 
-#: omarchy_settings/pages/monitors.py:493
+#: hyprdial/pages/monitors.py:493
 msgid "Keep these display settings?"
 msgstr "Conserver ces réglages d'écran ?"
 
-#: omarchy_settings/pages/monitors.py:494
+#: hyprdial/pages/monitors.py:494
 msgid "Revert"
 msgstr "Rétablir"
 
-#: omarchy_settings/pages/monitors.py:495
+#: hyprdial/pages/monitors.py:495
 msgid "Keep"
 msgstr "Conserver"
 
-#: omarchy_settings/pages/monitors.py:503
+#: hyprdial/pages/monitors.py:503
 #, python-brace-format
 msgid "Changes to {name} will be reverted in {seconds} second."
 msgid_plural "Changes to {name} will be reverted in {seconds} seconds."
 msgstr[0] "Les modifications de {name} seront annulées dans {seconds} seconde."
 msgstr[1] "Les modifications de {name} seront annulées dans {seconds} secondes."
 
-#: omarchy_settings/pages/monitors.py:525
+#: hyprdial/pages/monitors.py:525
 msgid "Display settings reverted"
 msgstr "Réglages d'écran rétablis"
 
-#: omarchy_settings/pages/monitors.py:541
+#: hyprdial/pages/monitors.py:541
 msgid "Brightness"
 msgstr "Luminosité"
 
-#: omarchy_settings/pages/monitors.py:541
+#: hyprdial/pages/monitors.py:541
 msgid "Via DDC/CI"
 msgstr "Via DDC/CI"
 
-#: omarchy_settings/pages/power.py:28
+#: hyprdial/pages/power.py:28
 msgid "Power saver"
 msgstr "Économie d'énergie"
 
-#: omarchy_settings/pages/power.py:28
+#: hyprdial/pages/power.py:28
 msgid "Less heat and noise, lower performance"
 msgstr "Moins de chaleur et de bruit, performances réduites"
 
-#: omarchy_settings/pages/power.py:29
+#: hyprdial/pages/power.py:29
 msgid "Balanced"
 msgstr "Équilibré"
 
-#: omarchy_settings/pages/power.py:29
+#: hyprdial/pages/power.py:29
 msgid "Performance when needed, saves power otherwise"
 msgstr "Des performances quand il le faut, des économies le reste du temps"
 
-#: omarchy_settings/pages/power.py:30
+#: hyprdial/pages/power.py:30
 msgid "Performance"
 msgstr "Performances"
 
-#: omarchy_settings/pages/power.py:30
+#: hyprdial/pages/power.py:30
 msgid "Highest performance, more power and heat"
 msgstr "Performances maximales, plus de consommation et de chaleur"
 
-#: omarchy_settings/pages/power.py:33
+#: hyprdial/pages/power.py:33
 msgid "Show the system menu"
 msgstr "Afficher le menu système"
 
-#: omarchy_settings/pages/power.py:34
+#: hyprdial/pages/power.py:34
 msgid "Lock the screen"
 msgstr "Verrouiller l'écran"
 
-#: omarchy_settings/pages/power.py:35
+#: hyprdial/pages/power.py:35
 msgid "Suspend"
 msgstr "Mettre en veille"
 
-#: omarchy_settings/pages/power.py:36
+#: hyprdial/pages/power.py:36
 msgid "Shut down"
 msgstr "Éteindre"
 
-#: omarchy_settings/pages/power.py:37
+#: hyprdial/pages/power.py:37
 msgid "Do nothing"
 msgstr "Ne rien faire"
 
-#: omarchy_settings/pages/power.py:49
+#: hyprdial/pages/power.py:49
 msgid "Power profile"
 msgstr "Profil d'énergie"
 
-#: omarchy_settings/pages/power.py:57 omarchy_settings/pages/power.py:132
+#: hyprdial/pages/power.py:57 hyprdial/pages/power.py:132
 msgid "Night light"
 msgstr "Éclairage nocturne"
 
-#: omarchy_settings/pages/power.py:57
+#: hyprdial/pages/power.py:57
 msgid "Warmer screen colors to reduce blue light."
 msgstr "Des couleurs plus chaudes pour réduire la lumière bleue."
 
-#: omarchy_settings/pages/power.py:70
+#: hyprdial/pages/power.py:70
 msgid "Suspend and hibernate"
 msgstr "Veille et hibernation"
 
-#: omarchy_settings/pages/power.py:75
+#: hyprdial/pages/power.py:75
 msgid "Hibernation"
 msgstr "Hibernation"
 
-#: omarchy_settings/pages/power.py:75 omarchy_settings/pages/power.py:328
-#: omarchy_settings/pages/power.py:339 omarchy_settings/pages/security.py:57
+#: hyprdial/pages/power.py:75 hyprdial/pages/power.py:328
+#: hyprdial/pages/power.py:339 hyprdial/pages/security.py:57
 msgid "Set up"
 msgstr "Configurer"
 
-#: omarchy_settings/pages/power.py:83
+#: hyprdial/pages/power.py:83
 msgid "Power button"
 msgstr "Bouton d'alimentation"
 
-#: omarchy_settings/pages/power.py:87
+#: hyprdial/pages/power.py:87
 msgid "When the power button is pressed"
 msgstr "Quand on appuie sur le bouton d'alimentation"
 
-#: omarchy_settings/pages/power.py:88
+#: hyprdial/pages/power.py:88
 msgid "Works on the lock screen too"
 msgstr "Fonctionne aussi sur l'écran de verrouillage"
 
-#: omarchy_settings/pages/power.py:100
+#: hyprdial/pages/power.py:100
 msgid "No power profiles available"
 msgstr "Aucun profil d'énergie disponible"
 
-#: omarchy_settings/pages/power.py:103
+#: hyprdial/pages/power.py:103
 msgid "Profile"
 msgstr "Profil"
 
-#: omarchy_settings/pages/power.py:114
+#: hyprdial/pages/power.py:114
 msgid "Could not change the power profile"
 msgstr "Impossible de changer le profil d'énergie"
 
-#: omarchy_settings/pages/power.py:132
+#: hyprdial/pages/power.py:132
 msgid "Turns it on or off now"
 msgstr "L'active ou la désactive maintenant"
 
-#: omarchy_settings/pages/power.py:136
+#: hyprdial/pages/power.py:136
 msgid "Warmth"
 msgstr "Chaleur"
 
-#: omarchy_settings/pages/power.py:136
+#: hyprdial/pages/power.py:136
 msgid "Lower is warmer"
 msgstr "Plus bas, c'est plus chaud"
 
-#: omarchy_settings/pages/power.py:150
+#: hyprdial/pages/power.py:150
 msgid "Turn on automatically"
 msgstr "Activer automatiquement"
 
-#: omarchy_settings/pages/power.py:154
+#: hyprdial/pages/power.py:154
 msgid "Every day at the times below"
 msgstr "Tous les jours aux heures ci-dessous"
 
-#: omarchy_settings/pages/power.py:156
+#: hyprdial/pages/power.py:156
 msgid "Turns on at (HH:MM)"
 msgstr "S'active à (HH:MM)"
 
-#: omarchy_settings/pages/power.py:157
+#: hyprdial/pages/power.py:157
 msgid "Turns off at (HH:MM)"
 msgstr "Se désactive à (HH:MM)"
 
-#: omarchy_settings/pages/power.py:170
+#: hyprdial/pages/power.py:170
 msgid "Could not change the night light"
 msgstr "Impossible de modifier l'éclairage nocturne"
 
-#: omarchy_settings/pages/power.py:195
+#: hyprdial/pages/power.py:195
 msgid "Use times like 20:00 and 07:00"
 msgstr "Utilisez des heures comme 20:00 et 07:00"
 
-#: omarchy_settings/pages/power.py:199
+#: hyprdial/pages/power.py:199
 msgid "The start and end times must be different"
 msgstr "Les heures de début et de fin doivent être différentes"
 
-#: omarchy_settings/pages/power.py:232
+#: hyprdial/pages/power.py:232
 #, python-brace-format
 msgid "Night light scheduled from {start} to {end}"
 msgstr "Éclairage nocturne programmé de {start} à {end}"
 
-#: omarchy_settings/pages/power.py:234 omarchy_settings/pages/power.py:250
+#: hyprdial/pages/power.py:234 hyprdial/pages/power.py:250
 msgid "Could not save the schedule"
 msgstr "Impossible d'enregistrer la programmation"
 
-#: omarchy_settings/pages/power.py:248
+#: hyprdial/pages/power.py:248
 msgid "Night light schedule turned off"
 msgstr "Programmation de l'éclairage nocturne désactivée"
 
-#: omarchy_settings/pages/power.py:260
+#: hyprdial/pages/power.py:260
 msgid "Power button changed"
 msgstr "Bouton d'alimentation modifié"
 
-#: omarchy_settings/pages/power.py:260
+#: hyprdial/pages/power.py:260
 msgid "Could not save the setting"
 msgstr "Impossible d'enregistrer le réglage"
 
-#: omarchy_settings/pages/power.py:268
+#: hyprdial/pages/power.py:268
 msgid "Idle"
 msgstr "Inactivité"
 
-#: omarchy_settings/pages/power.py:268
+#: hyprdial/pages/power.py:268
 msgid "Counted from the moment you stop using the computer."
 msgstr "Compté à partir du moment où vous cessez d'utiliser l'ordinateur."
 
-#: omarchy_settings/pages/power.py:270
+#: hyprdial/pages/power.py:270
 msgid "Screensaver after"
 msgstr "Économiseur d'écran après"
 
-#: omarchy_settings/pages/power.py:273
+#: hyprdial/pages/power.py:273
 msgid "Lock the screen after"
 msgstr "Verrouiller l'écran après"
 
-#: omarchy_settings/pages/power.py:273
+#: hyprdial/pages/power.py:273
 msgid "Asks for the password to come back"
 msgstr "Demande le mot de passe pour revenir"
 
-#: omarchy_settings/pages/power.py:278
+#: hyprdial/pages/power.py:278
 msgid "Stay awake"
 msgstr "Rester éveillé"
 
-#: omarchy_settings/pages/power.py:279
+#: hyprdial/pages/power.py:279
 msgid "Pauses the screensaver and lock until you turn this off"
 msgstr "Suspend l'économiseur d'écran et le verrouillage jusqu'à ce que vous le désactiviez"
 
-#: omarchy_settings/pages/power.py:298
+#: hyprdial/pages/power.py:298
 msgid "Could not write shell.json"
 msgstr "Impossible d'écrire shell.json"
 
-#: omarchy_settings/pages/power.py:312
+#: hyprdial/pages/power.py:312
 msgid "Suspend in the system menu"
 msgstr "Veille dans le menu système"
 
-#: omarchy_settings/pages/power.py:313
+#: hyprdial/pages/power.py:313
 msgid "Shows Suspend next to Lock and Shut down"
 msgstr "Affiche Mettre en veille à côté de Verrouiller et Éteindre"
 
-#: omarchy_settings/pages/power.py:324
+#: hyprdial/pages/power.py:324
 msgid "Set up: Hibernate saves your session to disk and turns off"
 msgstr "Configurée : l'hibernation enregistre votre session sur le disque et éteint"
 
-#: omarchy_settings/pages/power.py:326
+#: hyprdial/pages/power.py:326
 msgid "Not set up; needs a swap file as big as the memory"
 msgstr "Non configurée ; il faut un fichier d'échange aussi grand que la mémoire"
 
-#: omarchy_settings/pages/power.py:334
+#: hyprdial/pages/power.py:334
 msgid "Remove hibernation?"
 msgstr "Supprimer l'hibernation ?"
 
-#: omarchy_settings/pages/power.py:334
+#: hyprdial/pages/power.py:334
 msgid "Set up hibernation?"
 msgstr "Configurer l'hibernation ?"
 
-#: omarchy_settings/pages/power.py:336
+#: hyprdial/pages/power.py:336
 msgid "Opens a terminal that asks for your password, changes the swap file and rebuilds the boot image. It takes a minute or two."
 msgstr "Ouvre un terminal qui demande votre mot de passe, modifie le fichier d'échange et reconstruit l'image de démarrage. Cela prend une ou deux minutes."
 
-#: omarchy_settings/pages/search.py:95
+#: hyprdial/pages/search.py:95
 msgid "Changed settings"
 msgstr "Paramètres modifiés"
 
-#: omarchy_settings/pages/search.py:95 omarchy_settings/pages/search.py:101
+#: hyprdial/pages/search.py:95 hyprdial/pages/search.py:101
 msgid "Search settings"
 msgstr "Rechercher des paramètres"
 
-#: omarchy_settings/pages/search.py:114 omarchy_settings/pages/search.py:139
+#: hyprdial/pages/search.py:114 hyprdial/pages/search.py:139
 msgid "Type the name of a setting"
 msgstr "Saisissez le nom d'un paramètre"
 
-#: omarchy_settings/pages/search.py:127
+#: hyprdial/pages/search.py:127
 msgid "Nothing changed"
 msgstr "Rien n'a changé"
 
-#: omarchy_settings/pages/search.py:128
+#: hyprdial/pages/search.py:128
 msgid "Every setting this app manages is at its default."
 msgstr "Tous les réglages gérés par cette app sont à leur valeur par défaut."
 
-#: omarchy_settings/pages/search.py:139
+#: hyprdial/pages/search.py:139
 msgid "Nothing found"
 msgstr "Aucun résultat"
 
-#: omarchy_settings/pages/security.py:16
+#: hyprdial/pages/security.py:16
 msgid "Fingerprint"
 msgstr "Empreinte digitale"
 
-#: omarchy_settings/pages/security.py:16
+#: hyprdial/pages/security.py:16
 msgid "Unlock sudo and password prompts with your finger"
 msgstr "Déverrouille sudo et les demandes de mot de passe avec votre doigt"
 
-#: omarchy_settings/pages/security.py:17
+#: hyprdial/pages/security.py:17
 msgid "Security key (FIDO2)"
 msgstr "Clé de sécurité (FIDO2)"
 
-#: omarchy_settings/pages/security.py:17
+#: hyprdial/pages/security.py:17
 msgid "Unlock sudo and password prompts with a hardware key"
 msgstr "Déverrouille sudo et les demandes de mot de passe avec une clé matérielle"
 
-#: omarchy_settings/pages/security.py:18
+#: hyprdial/pages/security.py:18
 msgid "SSH server"
 msgstr "Serveur SSH"
 
-#: omarchy_settings/pages/security.py:18
+#: hyprdial/pages/security.py:18
 msgid "Lets you sign in to this computer from another one"
 msgstr "Permet de se connecter à cet ordinateur depuis un autre"
 
-#: omarchy_settings/pages/security.py:27
+#: hyprdial/pages/security.py:27
 msgid "Sign-in and access"
 msgstr "Connexion et accès"
 
-#: omarchy_settings/pages/security.py:28
+#: hyprdial/pages/security.py:28
 msgid "Each one opens a terminal, which asks for your password and shows what it does."
 msgstr "Chacun ouvre un terminal, qui demande votre mot de passe et montre ce qu'il fait."
 
-#: omarchy_settings/pages/security.py:48
+#: hyprdial/pages/security.py:48
 msgid "Running"
 msgstr "En cours d'exécution"
 
-#: omarchy_settings/pages/security.py:48
+#: hyprdial/pages/security.py:48
 msgid "Set up, but not running"
 msgstr "Configuré, mais arrêté"
 
-#: omarchy_settings/pages/security.py:50
+#: hyprdial/pages/security.py:50
 msgid "Ready to use"
 msgstr "Prêt à l'emploi"
 
-#: omarchy_settings/pages/security.py:57
+#: hyprdial/pages/security.py:57
 msgid "Set up again"
 msgstr "Reconfigurer"
 
-#: omarchy_settings/pages/security.py:69 omarchy_settings/pages/webapps.py:145
+#: hyprdial/pages/security.py:69 hyprdial/pages/webapps.py:145
 #, python-brace-format
 msgid "Remove {name}?"
 msgstr "Supprimer {name} ?"
 
-#: omarchy_settings/pages/security.py:70
+#: hyprdial/pages/security.py:70
 msgid "Opens a terminal that undoes the setup; it asks for your password."
 msgstr "Ouvre un terminal qui annule la configuration ; il demande votre mot de passe."
 
-#: omarchy_settings/pages/shortcuts.py:112
+#: hyprdial/pages/shortcuts.py:112
 msgid "Name (shown in the shortcut list)"
 msgstr "Nom (affiché dans la liste des raccourcis)"
 
-#: omarchy_settings/pages/shortcuts.py:113
+#: hyprdial/pages/shortcuts.py:113
 msgid "What to do"
 msgstr "Action"
 
-#: omarchy_settings/pages/shortcuts.py:117
+#: hyprdial/pages/shortcuts.py:117
 msgid "Command (e.g. firefox, gimp, btop)"
 msgstr "Commande (ex. firefox, gimp, btop)"
 
-#: omarchy_settings/pages/shortcuts.py:137
+#: hyprdial/pages/shortcuts.py:137
 msgid "Click or scroll here"
 msgstr "Cliquez ou faites défiler ici"
 
-#: omarchy_settings/pages/shortcuts.py:153 omarchy_settings/pages/wifi.py:349
+#: hyprdial/pages/shortcuts.py:153 hyprdial/pages/wifi.py:349
 msgid "Save"
 msgstr "Enregistrer"
 
-#: omarchy_settings/pages/shortcuts.py:177
+#: hyprdial/pages/shortcuts.py:177
 msgid "Press the key…"
 msgstr "Appuyez sur la touche…"
 
-#: omarchy_settings/pages/shortcuts.py:177
+#: hyprdial/pages/shortcuts.py:177
 msgid "Record another key"
 msgstr "Enregistrer une autre touche"
 
-#: omarchy_settings/pages/shortcuts.py:231
+#: hyprdial/pages/shortcuts.py:231
 msgid "Press the keys, or click or scroll in the box, with a modifier. If the system already uses the combination, it may not reach this window: select the modifiers above and record just the key or button."
 msgstr "Appuyez sur les touches, ou cliquez ou faites défiler dans la zone, avec un modificateur. Si le système utilise déjà la combinaison, elle risque de ne pas atteindre cette fenêtre : sélectionnez les modificateurs ci-dessus et enregistrez seulement la touche ou le bouton."
 
-#: omarchy_settings/pages/shortcuts.py:240
+#: hyprdial/pages/shortcuts.py:240
 msgid "Without a modifier, this key stops working for typing."
 msgstr "Sans modificateur, cette touche ne servira plus pour taper."
 
-#: omarchy_settings/pages/shortcuts.py:265
+#: hyprdial/pages/shortcuts.py:265
 #, python-brace-format
 msgid "The default shortcuts come from your config files. Changes made here are stored in {file} and can be undone with ↶."
 msgstr "Les raccourcis par défaut viennent de vos fichiers de configuration. Les changements faits ici sont enregistrés dans {file} et peuvent être annulés avec ↶."
 
-#: omarchy_settings/pages/shortcuts.py:270
+#: hyprdial/pages/shortcuts.py:270
 msgid "Search by name or key (e.g. browser, super+b)"
 msgstr "Rechercher par nom ou touche (ex. navigateur, super+b)"
 
-#: omarchy_settings/pages/shortcuts.py:272
-#: omarchy_settings/pages/shortcuts.py:516
+#: hyprdial/pages/shortcuts.py:272 hyprdial/pages/shortcuts.py:516
 msgid "New shortcut"
 msgstr "Nouveau raccourci"
 
-#: omarchy_settings/pages/shortcuts.py:282
+#: hyprdial/pages/shortcuts.py:282
 msgid "Restore all shortcuts"
 msgstr "Restaurer tous les raccourcis"
 
-#: omarchy_settings/pages/shortcuts.py:283
+#: hyprdial/pages/shortcuts.py:283
 msgid "Undoes every change and deletes your own shortcuts"
 msgstr "Annule toutes les modifications et supprime vos propres raccourcis"
 
-#: omarchy_settings/pages/shortcuts.py:299
+#: hyprdial/pages/shortcuts.py:299
 msgid "Could not read the shortcuts"
 msgstr "Impossible de lire les raccourcis"
 
-#: omarchy_settings/pages/shortcuts.py:308
+#: hyprdial/pages/shortcuts.py:308
 msgid "Your shortcuts"
 msgstr "Vos raccourcis"
 
-#: omarchy_settings/pages/shortcuts.py:313
+#: hyprdial/pages/shortcuts.py:313
 msgid "No shortcuts of your own"
 msgstr "Aucun raccourci personnel"
 
-#: omarchy_settings/pages/shortcuts.py:314
+#: hyprdial/pages/shortcuts.py:314
 msgid "Use “New shortcut” to open an app or run a command"
 msgstr "Utilisez « Nouveau raccourci » pour ouvrir une application ou lancer une commande"
 
-#: omarchy_settings/pages/shortcuts.py:324
+#: hyprdial/pages/shortcuts.py:324
 msgid "Omarchy shortcuts"
 msgstr "Raccourcis d'Omarchy"
 
-#: omarchy_settings/pages/shortcuts.py:324
+#: hyprdial/pages/shortcuts.py:324
 msgid "Hyprland shortcuts"
 msgstr "Raccourcis Hyprland"
 
-#: omarchy_settings/pages/shortcuts.py:347
+#: hyprdial/pages/shortcuts.py:347
 #, python-brace-format
 msgid "{n} shortcut"
 msgid_plural "{n} shortcuts"
 msgstr[0] "{n} raccourci"
 msgstr[1] "{n} raccourcis"
 
-#: omarchy_settings/pages/shortcuts.py:349
+#: hyprdial/pages/shortcuts.py:349
 #, python-brace-format
 msgid "{n} changed"
 msgid_plural "{n} changed"
 msgstr[0] "{n} modifié"
 msgstr[1] "{n} modifiés"
 
-#: omarchy_settings/pages/shortcuts.py:368
+#: hyprdial/pages/shortcuts.py:368
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: omarchy_settings/pages/shortcuts.py:370
+#: hyprdial/pages/shortcuts.py:370
 #, python-brace-format
 msgid "Before: {keys}"
 msgstr "Avant : {keys}"
 
-#: omarchy_settings/pages/shortcuts.py:378
+#: hyprdial/pages/shortcuts.py:378
 msgid "Change the key"
 msgstr "Changer la touche"
 
-#: omarchy_settings/pages/shortcuts.py:401
+#: hyprdial/pages/shortcuts.py:401
 msgid "Edit"
 msgstr "Modifier"
 
-#: omarchy_settings/pages/shortcuts.py:405
+#: hyprdial/pages/shortcuts.py:405
 msgid "Delete"
 msgstr "Supprimer"
 
-#: omarchy_settings/pages/shortcuts.py:440
+#: hyprdial/pages/shortcuts.py:440
 #, python-brace-format
 msgid "Already used by your shortcut “{name}”."
 msgstr "Déjà utilisé par votre raccourci « {name} »."
 
-#: omarchy_settings/pages/shortcuts.py:442
+#: hyprdial/pages/shortcuts.py:442
 #, python-brace-format
 msgid "Already used by “{name}”, which will be disabled."
 msgstr "Déjà utilisé par « {name} », qui sera désactivé."
 
-#: omarchy_settings/pages/shortcuts.py:464
+#: hyprdial/pages/shortcuts.py:464
 #, python-brace-format
 msgid "“{name}” is now {keys}"
 msgstr "« {name} » est maintenant {keys}"
 
-#: omarchy_settings/pages/shortcuts.py:468
+#: hyprdial/pages/shortcuts.py:468
 #, python-brace-format
 msgid "Key for “{name}”"
 msgstr "Touche pour « {name} »"
 
-#: omarchy_settings/pages/shortcuts.py:481
+#: hyprdial/pages/shortcuts.py:481
 msgid "Those keys are used by another shortcut; change its key first"
 msgstr "Ces touches sont utilisées par un autre raccourci ; changez d'abord sa touche"
 
-#: omarchy_settings/pages/shortcuts.py:487
+#: hyprdial/pages/shortcuts.py:487
 #, python-brace-format
 msgid "“{name}” enabled"
 msgstr "« {name} » activé"
 
-#: omarchy_settings/pages/shortcuts.py:487
+#: hyprdial/pages/shortcuts.py:487
 #, python-brace-format
 msgid "“{name}” disabled"
 msgstr "« {name} » désactivé"
 
-#: omarchy_settings/pages/shortcuts.py:494
+#: hyprdial/pages/shortcuts.py:494
 #, python-brace-format
 msgid "The original key is used by “{name}”"
 msgstr "La touche d'origine est utilisée par « {name} »"
 
-#: omarchy_settings/pages/shortcuts.py:498
+#: hyprdial/pages/shortcuts.py:498
 #, python-brace-format
 msgid "“{name}” is back to the default"
 msgstr "« {name} » est revenu à sa valeur par défaut"
 
-#: omarchy_settings/pages/shortcuts.py:513
+#: hyprdial/pages/shortcuts.py:513
 #, python-brace-format
 msgid "Shortcut “{name}” saved"
 msgstr "Raccourci « {name} » enregistré"
 
-#: omarchy_settings/pages/shortcuts.py:516
+#: hyprdial/pages/shortcuts.py:516
 msgid "Edit shortcut"
 msgstr "Modifier le raccourci"
 
-#: omarchy_settings/pages/shortcuts.py:526
+#: hyprdial/pages/shortcuts.py:526
 #, python-brace-format
 msgid "Shortcut “{name}” deleted"
 msgstr "Raccourci « {name} » supprimé"
 
-#: omarchy_settings/pages/shortcuts.py:531
+#: hyprdial/pages/shortcuts.py:531
 msgid "Restore all shortcuts?"
 msgstr "Restaurer tous les raccourcis ?"
 
-#: omarchy_settings/pages/shortcuts.py:532
+#: hyprdial/pages/shortcuts.py:532
 msgid "Changed shortcuts return to their defaults and your own shortcuts are deleted."
 msgstr "Les raccourcis modifiés reviennent à leur valeur par défaut et vos propres raccourcis sont supprimés."
 
-#: omarchy_settings/pages/shortcuts.py:534
+#: hyprdial/pages/shortcuts.py:534
 msgid "Shortcuts restored"
 msgstr "Raccourcis restaurés"
 
-#: omarchy_settings/pages/shortcuts.py:551
+#: hyprdial/pages/shortcuts.py:551
 msgid "Hyprland didn't accept that shortcut; nothing was changed"
 msgstr "Hyprland n'a pas accepté ce raccourci ; rien n'a été modifié"
 
-#: omarchy_settings/pages/sound.py:75
+#: hyprdial/pages/sound.py:75
 msgid "Unmute"
 msgstr "Réactiver le son"
 
-#: omarchy_settings/pages/sound.py:180
+#: hyprdial/pages/sound.py:180
 msgid "It comes with PipeWire's PulseAudio support (pipewire-pulse)"
 msgstr "Il est fourni avec la compatibilité PulseAudio de PipeWire (pipewire-pulse)"
 
-#: omarchy_settings/pages/sound.py:184
+#: hyprdial/pages/sound.py:184
 msgid "Output"
 msgstr "Sortie"
 
-#: omarchy_settings/pages/sound.py:184
+#: hyprdial/pages/sound.py:184
 msgid "Output device"
 msgstr "Périphérique de sortie"
 
-#: omarchy_settings/pages/sound.py:184
+#: hyprdial/pages/sound.py:184
 msgid "Volume"
 msgstr "Volume"
 
-#: omarchy_settings/pages/sound.py:184
+#: hyprdial/pages/sound.py:184
 msgid "No output device"
 msgstr "Aucun périphérique de sortie"
 
-#: omarchy_settings/pages/sound.py:190
+#: hyprdial/pages/sound.py:190
 msgid "Test sound"
 msgstr "Tester le son"
 
-#: omarchy_settings/pages/sound.py:191
+#: hyprdial/pages/sound.py:191
 msgid "Plays a short sound on the output device"
 msgstr "Joue un son court sur le périphérique de sortie"
 
-#: omarchy_settings/pages/sound.py:192
+#: hyprdial/pages/sound.py:192
 msgid "Play"
 msgstr "Jouer"
 
-#: omarchy_settings/pages/sound.py:198
+#: hyprdial/pages/sound.py:198
 msgid "Allow volume above 100%"
 msgstr "Autoriser un volume au-delà de 100%"
 
-#: omarchy_settings/pages/sound.py:198
+#: hyprdial/pages/sound.py:198
 msgid "Louder, but the sound may distort"
 msgstr "Plus fort, mais le son peut saturer"
 
-#: omarchy_settings/pages/sound.py:202
+#: hyprdial/pages/sound.py:202
 msgid "Input volume"
 msgstr "Volume d'entrée"
 
-#: omarchy_settings/pages/sound.py:202
+#: hyprdial/pages/sound.py:202
 msgid "No microphone"
 msgstr "Aucun microphone"
 
-#: omarchy_settings/pages/sound.py:206
+#: hyprdial/pages/sound.py:206
 msgid "Apps playing"
 msgstr "Applications qui jouent du son"
 
-#: omarchy_settings/pages/sound.py:206
+#: hyprdial/pages/sound.py:206
 msgid "Volume of each app playing sound."
 msgstr "Volume de chaque application qui joue du son."
 
-#: omarchy_settings/pages/sound.py:206
+#: hyprdial/pages/sound.py:206
 msgid "Nothing is playing"
 msgstr "Rien n'est en cours de lecture"
 
-#: omarchy_settings/pages/sound.py:211
+#: hyprdial/pages/sound.py:211
 msgid "Using the microphone"
 msgstr "Utilisent le microphone"
 
-#: omarchy_settings/pages/sound.py:212
+#: hyprdial/pages/sound.py:212
 msgid "Apps recording sound right now."
 msgstr "Applications qui enregistrent du son en ce moment."
 
-#: omarchy_settings/pages/sound.py:213
+#: hyprdial/pages/sound.py:213
 msgid "No app is using the microphone"
 msgstr "Aucune application n'utilise le microphone"
 
-#: omarchy_settings/pages/sound.py:220
+#: hyprdial/pages/sound.py:220
 msgid "Full mixer"
 msgstr "Mixeur complet"
 
-#: omarchy_settings/pages/sound.py:220
+#: hyprdial/pages/sound.py:220
 msgid "Profiles, moving an app to another device (wiremix)"
 msgstr "Profils, déplacer une application vers un autre périphérique (wiremix)"
 
-#: omarchy_settings/pages/system.py:18
+#: hyprdial/pages/system.py:18
 msgid "English"
 msgstr "Anglais"
 
-#: omarchy_settings/pages/system.py:19
+#: hyprdial/pages/system.py:19
 msgid "Portuguese"
 msgstr "Portugais"
 
-#: omarchy_settings/pages/system.py:21
+#: hyprdial/pages/system.py:21
 msgid "French"
 msgstr "Français"
 
-#: omarchy_settings/pages/system.py:22
+#: hyprdial/pages/system.py:22
 msgid "German"
 msgstr "Allemand"
 
-#: omarchy_settings/pages/system.py:23
+#: hyprdial/pages/system.py:23
 msgid "Italian"
 msgstr "Italien"
 
-#: omarchy_settings/pages/system.py:24
+#: hyprdial/pages/system.py:24
 msgid "Dutch"
 msgstr "Néerlandais"
 
-#: omarchy_settings/pages/system.py:25
+#: hyprdial/pages/system.py:25
 msgid "Polish"
 msgstr "Polonais"
 
-#: omarchy_settings/pages/system.py:26
+#: hyprdial/pages/system.py:26
 msgid "Russian"
 msgstr "Russe"
 
-#: omarchy_settings/pages/system.py:27
+#: hyprdial/pages/system.py:27
 msgid "Ukrainian"
 msgstr "Ukrainien"
 
-#: omarchy_settings/pages/system.py:28
+#: hyprdial/pages/system.py:28
 msgid "Japanese"
 msgstr "Japonais"
 
-#: omarchy_settings/pages/system.py:29
+#: hyprdial/pages/system.py:29
 msgid "Chinese"
 msgstr "Chinois"
 
-#: omarchy_settings/pages/system.py:30
+#: hyprdial/pages/system.py:30
 msgid "Korean"
 msgstr "Coréen"
 
-#: omarchy_settings/pages/system.py:31
+#: hyprdial/pages/system.py:31
 msgid "Turkish"
 msgstr "Turc"
 
-#: omarchy_settings/pages/system.py:32
+#: hyprdial/pages/system.py:32
 msgid "Swedish"
 msgstr "Suédois"
 
-#: omarchy_settings/pages/system.py:35
+#: hyprdial/pages/system.py:35
 msgid "Omarchy version"
 msgstr "Version d'Omarchy"
 
-#: omarchy_settings/pages/system.py:36
+#: hyprdial/pages/system.py:36
 msgid "Computer name"
 msgstr "Nom de l'ordinateur"
 
-#: omarchy_settings/pages/system.py:37
+#: hyprdial/pages/system.py:37
 msgid "Kernel"
 msgstr "Noyau"
 
-#: omarchy_settings/pages/system.py:38
+#: hyprdial/pages/system.py:38
 msgid "Processor"
 msgstr "Processeur"
 
-#: omarchy_settings/pages/system.py:39
+#: hyprdial/pages/system.py:39
 msgid "Threads"
 msgstr "Threads"
 
-#: omarchy_settings/pages/system.py:40
+#: hyprdial/pages/system.py:40
 msgid "Memory"
 msgstr "Mémoire"
 
-#: omarchy_settings/pages/system.py:65
+#: hyprdial/pages/system.py:65
 msgid "Date and time"
 msgstr "Date et heure"
 
-#: omarchy_settings/pages/system.py:71
+#: hyprdial/pages/system.py:71
 msgid "Language"
 msgstr "Langue"
 
-#: omarchy_settings/pages/system.py:71
+#: hyprdial/pages/system.py:71
 msgid "Used by apps, this one included, after you log out and back in."
 msgstr "Utilisée par les applications, celle-ci comprise, après une déconnexion et une reconnexion."
 
-#: omarchy_settings/pages/system.py:86
+#: hyprdial/pages/system.py:86
 msgid "Notifications"
 msgstr "Notifications"
 
-#: omarchy_settings/pages/system.py:91
+#: hyprdial/pages/system.py:91
 msgid "Printers"
 msgstr "Imprimantes"
 
-#: omarchy_settings/pages/system.py:95
+#: hyprdial/pages/system.py:95
 msgid "Manage printers"
 msgstr "Gérer les imprimantes"
 
-#: omarchy_settings/pages/system.py:96
+#: hyprdial/pages/system.py:96
 msgid "Add printers and see the print queue in the browser (CUPS)"
 msgstr "Ajouter des imprimantes et voir la file d'impression dans le navigateur (CUPS)"
 
-#: omarchy_settings/pages/system.py:102
+#: hyprdial/pages/system.py:102
 msgid "Install the cups package to use printers"
 msgstr "Installez le paquet cups pour utiliser des imprimantes"
 
-#: omarchy_settings/pages/system.py:105
+#: hyprdial/pages/system.py:105
 msgid "About this computer"
 msgstr "À propos de cet ordinateur"
 
-#: omarchy_settings/pages/system.py:126
+#: hyprdial/pages/system.py:126
 #, python-brace-format
 msgid "Changed to {value}"
 msgstr "Changé en {value}"
 
-#: omarchy_settings/pages/system.py:129 omarchy_settings/pages/system.py:253
+#: hyprdial/pages/system.py:129 hyprdial/pages/system.py:253
 msgid "Not changed"
 msgstr "Inchangé"
 
-#: omarchy_settings/pages/system.py:142
+#: hyprdial/pages/system.py:142
 msgid "Time zone"
 msgstr "Fuseau horaire"
 
-#: omarchy_settings/pages/system.py:143 omarchy_settings/pages/system.py:212
+#: hyprdial/pages/system.py:143 hyprdial/pages/system.py:212
 msgid "Type to search"
 msgstr "Tapez pour rechercher"
 
-#: omarchy_settings/pages/system.py:154
+#: hyprdial/pages/system.py:154
 msgid "Synchronized"
 msgstr "Synchronisée"
 
-#: omarchy_settings/pages/system.py:154
+#: hyprdial/pages/system.py:154
 msgid "Keeps the clock right through the internet"
 msgstr "Garde l'horloge à l'heure via internet"
 
-#: omarchy_settings/pages/system.py:162
+#: hyprdial/pages/system.py:162
 msgid "Could not change automatic time"
 msgstr "Impossible de modifier l'heure automatique"
 
-#: omarchy_settings/pages/system.py:166
+#: hyprdial/pages/system.py:166
 msgid "Set the time automatically"
 msgstr "Régler l'heure automatiquement"
 
-#: omarchy_settings/pages/system.py:168
+#: hyprdial/pages/system.py:168
 msgid "12 or 24 hours: Bar and fonts → Clock format"
 msgstr "12 ou 24 heures : Barre et polices → Format de l'horloge"
 
-#: omarchy_settings/pages/system.py:201
+#: hyprdial/pages/system.py:201
 msgid "System language"
 msgstr "Langue du système"
 
-#: omarchy_settings/pages/system.py:205
+#: hyprdial/pages/system.py:205
 msgid "No languages listed"
 msgstr "Aucune langue listée"
 
-#: omarchy_settings/pages/system.py:210
+#: hyprdial/pages/system.py:210
 msgid "Install a language"
 msgstr "Installer une langue"
 
-#: omarchy_settings/pages/system.py:212
+#: hyprdial/pages/system.py:212
 msgid "Suggested from your keyboard layout"
 msgstr "Suggérée d'après la disposition du clavier"
 
-#: omarchy_settings/pages/system.py:220
+#: hyprdial/pages/system.py:220
 #, python-brace-format
 msgid "Install {language}?"
 msgstr "Installer {language} ?"
 
-#: omarchy_settings/pages/system.py:222
+#: hyprdial/pages/system.py:222
 msgid "Opens a terminal that asks for your password, enables the language in /etc/locale.gen and runs locale-gen. With “Install and use” it also becomes the system language when it finishes (from your next login)."
 msgstr "Ouvre un terminal qui demande votre mot de passe, active la langue dans /etc/locale.gen et lance locale-gen. Avec « Installer et utiliser », elle devient aussi la langue du système une fois terminé (à partir de la prochaine connexion)."
 
-#: omarchy_settings/pages/system.py:228
+#: hyprdial/pages/system.py:228
 msgid "Opens a terminal that asks for your password and installs the language's package. With “Install and use” it also becomes the system language when it finishes (from your next login)."
 msgstr "Ouvre un terminal qui demande votre mot de passe et installe le paquet de la langue. Avec « Installer et utiliser », elle devient aussi la langue du système une fois terminé (à partir de la prochaine connexion)."
 
-#: omarchy_settings/pages/system.py:234
+#: hyprdial/pages/system.py:234
 msgid "Install and use"
 msgstr "Installer et utiliser"
 
-#: omarchy_settings/pages/system.py:250
+#: hyprdial/pages/system.py:250
 #, python-brace-format
 msgid "{language} is the system language from your next login"
 msgstr "{language} est la langue du système à partir de la prochaine connexion"
 
-#: omarchy_settings/pages/system.py:258
+#: hyprdial/pages/system.py:258
 msgid "The Omarchy shell isn't answering"
 msgstr "Le shell d'Omarchy ne répond pas"
 
-#: omarchy_settings/pages/system.py:264
+#: hyprdial/pages/system.py:264
 msgid "Could not change Do not disturb"
 msgstr "Impossible de modifier Ne pas déranger"
 
-#: omarchy_settings/pages/system.py:268
+#: hyprdial/pages/system.py:268
 msgid "Do not disturb"
 msgstr "Ne pas déranger"
 
-#: omarchy_settings/pages/system.py:268
+#: hyprdial/pages/system.py:268
 msgid "Hides notifications; critical ones still show"
 msgstr "Masque les notifications ; les critiques s'affichent quand même"
 
-#: omarchy_settings/pages/system.py:272
+#: hyprdial/pages/system.py:272
 msgid "Recent notifications"
 msgstr "Notifications récentes"
 
-#: omarchy_settings/pages/system.py:272
+#: hyprdial/pages/system.py:272
 msgid "Shows them again on screen"
 msgstr "Les affiche de nouveau à l'écran"
 
-#: omarchy_settings/pages/system.py:272
+#: hyprdial/pages/system.py:272
 msgid "Show"
 msgstr "Afficher"
 
-#: omarchy_settings/pages/system.py:293
+#: hyprdial/pages/system.py:293
 msgid "Update Omarchy"
 msgstr "Mettre à jour Omarchy"
 
-#: omarchy_settings/pages/system.py:293
+#: hyprdial/pages/system.py:293
 msgid "Checking for updates…"
 msgstr "Recherche de mises à jour…"
 
-#: omarchy_settings/pages/system.py:293
+#: hyprdial/pages/system.py:293
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: omarchy_settings/pages/system.py:299 omarchy_settings/pages/system.py:367
+#: hyprdial/pages/system.py:299 hyprdial/pages/system.py:370
 msgid "Opens a terminal with the update"
 msgstr "Ouvre un terminal avec la mise à jour"
 
-#: omarchy_settings/pages/system.py:303
+#: hyprdial/pages/system.py:303
 msgid "Create a snapshot now"
 msgstr "Créer un instantané maintenant"
 
-#: omarchy_settings/pages/system.py:304
+#: hyprdial/pages/system.py:304
 msgid "A restore point of the system; asks for your password in a terminal"
 msgstr "Un point de restauration du système ; demande votre mot de passe dans un terminal"
 
-#: omarchy_settings/pages/system.py:305
+#: hyprdial/pages/system.py:305
 msgid "Create"
 msgstr "Créer"
 
-#: omarchy_settings/pages/system.py:311
+#: hyprdial/pages/system.py:311
 msgid "Going back to a snapshot"
 msgstr "Revenir à un instantané"
 
-#: omarchy_settings/pages/system.py:312
+#: hyprdial/pages/system.py:312
 msgid "Choose it in the boot menu when the computer starts"
 msgstr "Choisissez-le dans le menu de démarrage au lancement de l'ordinateur"
 
-#: omarchy_settings/pages/system.py:319
+#: hyprdial/pages/system.py:319
 #, python-brace-format
 msgid "package {name}"
 msgstr "paquet {name}"
 
-#: omarchy_settings/pages/system.py:320
+#: hyprdial/pages/system.py:320
 msgid "installed with install.sh"
 msgstr "installé avec install.sh"
 
-#: omarchy_settings/pages/system.py:321
+#: hyprdial/pages/system.py:321
 msgid "running from the source folder"
 msgstr "lancé depuis le dossier des sources"
 
-#: omarchy_settings/pages/system.py:333
+#: hyprdial/pages/system.py:335
 #, python-brace-format
 msgid "the package {name}"
 msgstr "le paquet {name}"
 
-#: omarchy_settings/pages/system.py:334
+#: hyprdial/pages/system.py:336
 msgid "a copy from install.sh"
 msgstr "une copie d'install.sh"
 
-#: omarchy_settings/pages/system.py:337
+#: hyprdial/pages/system.py:337
+msgid "a copy from install.sh with the app's old name, omarchy-settings"
+msgstr "une copie d'install.sh avec l'ancien nom de l'app, omarchy-settings"
+
+#: hyprdial/pages/system.py:340
 msgid "Installed twice"
 msgstr "Installé deux fois"
 
-#: omarchy_settings/pages/system.py:339
+#: hyprdial/pages/system.py:342
 #, python-brace-format
 msgid "Also installed: {other}. The launcher opens only one of them ({path}); remove the one you don't use with {command}"
 msgstr "Également installé : {other}. Le lanceur n'ouvre que l'un des deux ({path}) ; supprimez celui que vous n'utilisez pas avec {command}"
 
-#: omarchy_settings/pages/system.py:354
+#: hyprdial/pages/system.py:357
 #, python-brace-format
 msgid "version {version} is available"
 msgstr "version {version} disponible"
 
-#: omarchy_settings/pages/system.py:355
+#: hyprdial/pages/system.py:358
 msgid "See"
 msgstr "Voir"
 
-#: omarchy_settings/pages/system.py:362
+#: hyprdial/pages/system.py:365
 #, python-brace-format
 msgid "Update available: {version}"
 msgstr "Mise à jour disponible : {version}"
 
-#: omarchy_settings/pages/system.py:365
+#: hyprdial/pages/system.py:368
 msgid "Omarchy is up to date"
 msgstr "Omarchy est à jour"
 
-#: omarchy_settings/pages/themes.py:95
+#: hyprdial/pages/themes.py:95
 msgid "Current"
 msgstr "Actuel"
 
-#: omarchy_settings/pages/themes.py:120
+#: hyprdial/pages/themes.py:120
 msgid "Theme"
 msgstr "Thème"
 
-#: omarchy_settings/pages/themes.py:120
+#: hyprdial/pages/themes.py:120
 msgid "Changes the colors of the system, terminal, bar and editor at once."
 msgstr "Change à la fois les couleurs du système, du terminal, de la barre et de l'éditeur."
 
-#: omarchy_settings/pages/themes.py:123
+#: hyprdial/pages/themes.py:123
 msgid "Search themes"
 msgstr "Rechercher des thèmes"
 
-#: omarchy_settings/pages/themes.py:128
+#: hyprdial/pages/themes.py:128
 msgid "All"
 msgstr "Tous"
 
-#: omarchy_settings/pages/themes.py:128
+#: hyprdial/pages/themes.py:128
 msgid "Dark"
 msgstr "Sombres"
 
-#: omarchy_settings/pages/themes.py:128
+#: hyprdial/pages/themes.py:128
 msgid "Light"
 msgstr "Clairs"
 
-#: omarchy_settings/pages/themes.py:150
+#: hyprdial/pages/themes.py:150
 msgid "Wallpaper"
 msgstr "Fond d'écran"
 
-#: omarchy_settings/pages/themes.py:167
+#: hyprdial/pages/themes.py:167
 msgid "Next wallpaper"
 msgstr "Fond d'écran suivant"
 
-#: omarchy_settings/pages/themes.py:168
+#: hyprdial/pages/themes.py:168
 msgid "Cycles through the current theme's backgrounds"
 msgstr "Fait défiler les fonds du thème actuel"
 
-#: omarchy_settings/pages/themes.py:169
+#: hyprdial/pages/themes.py:169
 msgid "Change"
 msgstr "Changer"
 
-#: omarchy_settings/pages/themes.py:175
+#: hyprdial/pages/themes.py:175
 msgid "Your wallpapers"
 msgstr "Vos fonds d'écran"
 
-#: omarchy_settings/pages/themes.py:176
+#: hyprdial/pages/themes.py:176
 msgid "Images in this folder appear here for the current theme"
 msgstr "Les images de ce dossier apparaissent ici pour le thème actuel"
 
-#: omarchy_settings/pages/themes.py:177
+#: hyprdial/pages/themes.py:177
 msgid "Open folder"
 msgstr "Ouvrir le dossier"
 
-#: omarchy_settings/pages/themes.py:190
+#: hyprdial/pages/themes.py:190
 msgid "No themes found"
 msgstr "Aucun thème trouvé"
 
-#: omarchy_settings/pages/themes.py:190
+#: hyprdial/pages/themes.py:190
 msgid "Omarchy's theme folder could not be read"
 msgstr "Impossible de lire le dossier des thèmes d'Omarchy"
 
-#: omarchy_settings/pages/themes.py:196
+#: hyprdial/pages/themes.py:196
 msgid "Dark theme"
 msgstr "Thème sombre"
 
-#: omarchy_settings/pages/themes.py:196
+#: hyprdial/pages/themes.py:196
 msgid "Light theme"
 msgstr "Thème clair"
 
-#: omarchy_settings/pages/themes.py:255
+#: hyprdial/pages/themes.py:255
 #, python-brace-format
 msgid "Theme {name} applied"
 msgstr "Thème {name} appliqué"
 
-#: omarchy_settings/pages/themes.py:304
+#: hyprdial/pages/themes.py:304
 #, python-brace-format
 msgid "Wallpaper: {name}"
 msgstr "Fond d'écran : {name}"
 
-#: omarchy_settings/pages/themes.py:311
+#: hyprdial/pages/themes.py:311
 msgid "Wallpaper changed"
 msgstr "Fond d'écran changé"
 
-#: omarchy_settings/pages/webapps.py:16
+#: hyprdial/pages/webapps.py:16
 msgid "Type a name"
 msgstr "Saisissez un nom"
 
-#: omarchy_settings/pages/webapps.py:17
+#: hyprdial/pages/webapps.py:17
 msgid "The name can't contain \"/\""
 msgstr "Le nom ne peut pas contenir « / »"
 
-#: omarchy_settings/pages/webapps.py:18
+#: hyprdial/pages/webapps.py:18
 msgid "There is already a web app with this name"
 msgstr "Une application web porte déjà ce nom"
 
-#: omarchy_settings/pages/webapps.py:19
+#: hyprdial/pages/webapps.py:19
 msgid "Type a web address (https://…)"
 msgstr "Saisissez une adresse web (https://…)"
 
-#: omarchy_settings/pages/webapps.py:34 omarchy_settings/pages/webapps.py:108
+#: hyprdial/pages/webapps.py:34 hyprdial/pages/webapps.py:108
 msgid "Add web app"
 msgstr "Ajouter une application web"
 
-#: omarchy_settings/pages/webapps.py:36
+#: hyprdial/pages/webapps.py:36
 msgid "Name"
 msgstr "Nom"
 
-#: omarchy_settings/pages/webapps.py:38
+#: hyprdial/pages/webapps.py:38
 msgid "Icon (optional)"
 msgstr "Icône (facultative)"
 
-#: omarchy_settings/pages/webapps.py:40
+#: hyprdial/pages/webapps.py:40
 msgid "Leave the icon empty to use the site's own icon, or type an image address or an icon name."
 msgstr "Laissez l'icône vide pour utiliser celle du site, ou saisissez l'adresse d'une image ou le nom d'une icône."
 
-#: omarchy_settings/pages/webapps.py:80
+#: hyprdial/pages/webapps.py:80
 msgid "Couldn't get the site's icon. Type an image address or an icon name."
 msgstr "Impossible de récupérer l'icône du site. Saisissez l'adresse d'une image ou le nom d'une icône."
 
-#: omarchy_settings/pages/webapps.py:82
+#: hyprdial/pages/webapps.py:82
 msgid "Could not add the web app"
 msgstr "Impossible d'ajouter l'application web"
 
-#: omarchy_settings/pages/webapps.py:99
+#: hyprdial/pages/webapps.py:99
 msgid "Web apps"
 msgstr "Applications web"
 
-#: omarchy_settings/pages/webapps.py:99
+#: hyprdial/pages/webapps.py:99
 msgid "Sites that open in their own window, from the app launcher."
 msgstr "Des sites qui s'ouvrent dans leur propre fenêtre, depuis le lanceur d'applications."
 
-#: omarchy_settings/pages/webapps.py:105
+#: hyprdial/pages/webapps.py:105
 msgid "Omarchy's web app commands were not found"
 msgstr "Les commandes d'applications web d'Omarchy sont introuvables"
 
-#: omarchy_settings/pages/webapps.py:134
+#: hyprdial/pages/webapps.py:134
 msgid "No web apps yet"
 msgstr "Aucune application web pour l'instant"
 
-#: omarchy_settings/pages/webapps.py:139
+#: hyprdial/pages/webapps.py:139
 #, python-brace-format
 msgid "{name} added to the app launcher"
 msgstr "{name} ajoutée au lanceur d'applications"
 
-#: omarchy_settings/pages/webapps.py:146
+#: hyprdial/pages/webapps.py:146
 msgid "Removes it from the app launcher. The site itself and its data in the browser are kept."
 msgstr "La retire du lanceur d'applications. Le site et ses données dans le navigateur sont conservés."
 
-#: omarchy_settings/pages/webapps.py:154
+#: hyprdial/pages/webapps.py:154
 #, python-brace-format
 msgid "{name} removed"
 msgstr "{name} retirée"
 
-#: omarchy_settings/pages/webapps.py:154
+#: hyprdial/pages/webapps.py:154
 #, python-brace-format
 msgid "Could not remove {name}"
 msgstr "Impossible de retirer {name}"
 
-#: omarchy_settings/pages/wifi.py:21
+#: hyprdial/pages/wifi.py:21
 msgid "Open (encrypted)"
 msgstr "Ouvert (chiffré)"
 
-#: omarchy_settings/pages/wifi.py:21
+#: hyprdial/pages/wifi.py:21
 msgid "Enterprise (802.1X)"
 msgstr "Entreprise (802.1X)"
 
-#: omarchy_settings/pages/wifi.py:22
+#: hyprdial/pages/wifi.py:22
 msgid "Secured"
 msgstr "Sécurisé"
 
-#: omarchy_settings/pages/wifi.py:32
+#: hyprdial/pages/wifi.py:32
 #, python-brace-format
 msgid "Connect to “{ssid}”"
 msgstr "Se connecter à « {ssid} »"
 
-#: omarchy_settings/pages/wifi.py:32 omarchy_settings/pages/wifi.py:193
+#: hyprdial/pages/wifi.py:32 hyprdial/pages/wifi.py:193
 msgid "Hidden network"
 msgstr "Réseau masqué"
 
-#: omarchy_settings/pages/wifi.py:36
+#: hyprdial/pages/wifi.py:36
 msgid "Network name (SSID)"
 msgstr "Nom du réseau (SSID)"
 
-#: omarchy_settings/pages/wifi.py:38
+#: hyprdial/pages/wifi.py:38
 msgid "None"
 msgstr "Aucune"
 
-#: omarchy_settings/pages/wifi.py:39
+#: hyprdial/pages/wifi.py:39
 msgid "Password"
 msgstr "Mot de passe"
 
-#: omarchy_settings/pages/wifi.py:71
+#: hyprdial/pages/wifi.py:71
 msgid "WPA passwords have 8 to 63 characters."
 msgstr "Les mots de passe WPA comptent de 8 à 63 caractères."
 
-#: omarchy_settings/pages/wifi.py:91 omarchy_settings/pages/wifi.py:170
+#: hyprdial/pages/wifi.py:91 hyprdial/pages/wifi.py:170
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: omarchy_settings/pages/wifi.py:103
+#: hyprdial/pages/wifi.py:103
 msgid "Search for networks"
 msgstr "Rechercher des réseaux"
 
-#: omarchy_settings/pages/wifi.py:123
+#: hyprdial/pages/wifi.py:123
 msgid "No Wi-Fi adapter found"
 msgstr "Aucun adaptateur Wi-Fi trouvé"
 
-#: omarchy_settings/pages/wifi.py:163 omarchy_settings/pages/wifi.py:287
-#: omarchy_settings/pages/wifi.py:290 omarchy_settings/pages/wifi.py:325
+#: hyprdial/pages/wifi.py:163 hyprdial/pages/wifi.py:287
+#: hyprdial/pages/wifi.py:290 hyprdial/pages/wifi.py:325
 #, python-brace-format
 msgid "Connected to {name}"
 msgstr "Connecté à {name}"
 
-#: omarchy_settings/pages/wifi.py:167
+#: hyprdial/pages/wifi.py:167
 msgid "Connecting…"
 msgstr "Connexion…"
 
-#: omarchy_settings/pages/wifi.py:177
+#: hyprdial/pages/wifi.py:177
 msgid "Available networks"
 msgstr "Réseaux disponibles"
 
-#: omarchy_settings/pages/wifi.py:185
+#: hyprdial/pages/wifi.py:185
 msgid "No networks found"
 msgstr "Aucun réseau trouvé"
 
-#: omarchy_settings/pages/wifi.py:185
+#: hyprdial/pages/wifi.py:185
 msgid "Use the refresh button above to search again"
 msgstr "Utilisez le bouton d'actualisation ci-dessus pour relancer la recherche"
 
-#: omarchy_settings/pages/wifi.py:194
+#: hyprdial/pages/wifi.py:194
 msgid "Connect to a network that doesn't broadcast its name"
 msgstr "Se connecter à un réseau qui ne diffuse pas son nom"
 
-#: omarchy_settings/pages/wifi.py:195
+#: hyprdial/pages/wifi.py:195
 msgid "Connect…"
 msgstr "Se connecter…"
 
-#: omarchy_settings/pages/wifi.py:202
+#: hyprdial/pages/wifi.py:202
 msgid "Saved networks"
 msgstr "Réseaux enregistrés"
 
-#: omarchy_settings/pages/wifi.py:204
+#: hyprdial/pages/wifi.py:204
 #, python-brace-format
 msgid "{n} saved"
 msgid_plural "{n} saved"
 msgstr[0] "{n} enregistré"
 msgstr[1] "{n} enregistrés"
 
-#: omarchy_settings/pages/wifi.py:211
+#: hyprdial/pages/wifi.py:211
 msgid "Full Wi-Fi manager (impala)"
 msgstr "Gestionnaire Wi-Fi complet (impala)"
 
-#: omarchy_settings/pages/wifi.py:218
+#: hyprdial/pages/wifi.py:218
 msgid "Saved"
 msgstr "Enregistré"
 
-#: omarchy_settings/pages/wifi.py:234
+#: hyprdial/pages/wifi.py:234
 msgid "Connects automatically"
 msgstr "Se connecte automatiquement"
 
-#: omarchy_settings/pages/wifi.py:234
+#: hyprdial/pages/wifi.py:234
 msgid "Doesn't connect automatically"
 msgstr "Ne se connecte pas automatiquement"
 
-#: omarchy_settings/pages/wifi.py:237
+#: hyprdial/pages/wifi.py:237
 #, python-brace-format
 msgid "profile “{name}”"
 msgstr "profil « {name} »"
 
-#: omarchy_settings/pages/wifi.py:286 omarchy_settings/pages/wifi.py:289
-#: omarchy_settings/pages/wifi.py:300
+#: hyprdial/pages/wifi.py:286 hyprdial/pages/wifi.py:289
+#: hyprdial/pages/wifi.py:300
 #, python-brace-format
 msgid "Connecting to {ssid}…"
 msgstr "Connexion à {ssid}…"
 
-#: omarchy_settings/pages/wifi.py:292
+#: hyprdial/pages/wifi.py:292
 msgid "Enterprise (802.1X) networks need more settings; use Advanced (impala)"
 msgstr "Les réseaux entreprise (802.1X) demandent plus de réglages ; utilisez Avancé (impala)"
 
-#: omarchy_settings/pages/wifi.py:314
+#: hyprdial/pages/wifi.py:314
 #, python-brace-format
 msgid "Wrong password for {ssid}"
 msgstr "Mot de passe incorrect pour {ssid}"
 
-#: omarchy_settings/pages/wifi.py:315
+#: hyprdial/pages/wifi.py:315
 #, python-brace-format
 msgid "Network {ssid} not found"
 msgstr "Réseau {ssid} introuvable"
 
-#: omarchy_settings/pages/wifi.py:316
+#: hyprdial/pages/wifi.py:316
 msgid "Wi-Fi is off or unavailable"
 msgstr "Le Wi-Fi est désactivé ou indisponible"
 
-#: omarchy_settings/pages/wifi.py:331
+#: hyprdial/pages/wifi.py:331
 msgid "Saving a Wi-Fi password needs libnm; install it from ☰ → Dependencies"
 msgstr "Enregistrer un mot de passe Wi-Fi nécessite libnm ; installez-le depuis ☰ → Dépendances"
 
-#: omarchy_settings/pages/wifi.py:340
+#: hyprdial/pages/wifi.py:340
 #, python-brace-format
 msgid "Could not read the settings of {ssid}"
 msgstr "Impossible de lire les paramètres de {ssid}"
 
-#: omarchy_settings/pages/wifi.py:342
+#: hyprdial/pages/wifi.py:342
 msgid "When the network is in range"
 msgstr "Quand le réseau est à portée"
 
-#: omarchy_settings/pages/wifi.py:364
+#: hyprdial/pages/wifi.py:364
 msgid "Settings saved"
 msgstr "Paramètres enregistrés"
 
-#: omarchy_settings/pages/wifi.py:374
+#: hyprdial/pages/wifi.py:374
 #, python-brace-format
 msgid "Forget “{ssid}”?"
 msgstr "Oublier « {ssid} » ?"
 
-#: omarchy_settings/pages/wifi.py:375
+#: hyprdial/pages/wifi.py:375
 msgid "The saved password and settings are deleted."
 msgstr "Le mot de passe et les paramètres enregistrés sont supprimés."
 
-#: omarchy_settings/pages/wifi.py:377
+#: hyprdial/pages/wifi.py:377
 #, python-brace-format
 msgid "{ssid} forgotten"
 msgstr "{ssid} oublié"
 
-#: omarchy_settings/shell.py:114
+#: hyprdial/shell.py:114
 msgid "command not found"
 msgstr "commande introuvable"
 
-#: omarchy_settings/ui.py:108
+#: hyprdial/ui.py:108
 msgid "Changed from the default"
 msgstr "Modifié par rapport à la valeur par défaut"
 
-#: omarchy_settings/ui.py:187
+#: hyprdial/ui.py:187
 #, python-brace-format
 msgid "{name} is not installed"
 msgstr "{name} n'est pas installé"
 
-#: omarchy_settings/ui.py:193
+#: hyprdial/ui.py:193
 #, python-brace-format
 msgid "{cmd} is not installed; install it from ☰ → Dependencies"
 msgstr "{cmd} n'est pas installé ; installez-le depuis ☰ → Dépendances"
