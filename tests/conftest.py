@@ -1,10 +1,15 @@
 """Shared fixtures: a fake command runner standing in for core.run/out/have."""
 
+import os
 import subprocess
 
-import pytest
+# The tests compare English texts: keep the interface in English whatever the system language is (i18n reads it
+# when hyprdial is first imported, just below).
+os.environ["LANGUAGE"] = "C"
 
-from hyprdial import core, distro, host
+import pytest  # noqa: E402
+
+from hyprdial import core, distro, host  # noqa: E402
 
 
 class FakeCommands:
