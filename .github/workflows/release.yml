@@ -48,7 +48,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           cp packaging/arch/PKGBUILD packaging/arch/.SRCINFO /tmp/
           git fetch origin main
-          git checkout -B main origin/main
+          git checkout -f -B main origin/main  # -f: the build changed PKGBUILD and .SRCINFO, copied above
           if [ "$(sed -n 's/^pkgver=//p' packaging/arch/PKGBUILD)" != "${TAG#v}" ]; then
             echo "main has moved past $TAG; not pinning"
             exit 0
