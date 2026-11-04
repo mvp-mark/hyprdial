@@ -1,7 +1,7 @@
 # RPM for Fedora and openSUSE (COPR, OBS). Dependencies follow hyprdial/deps.py; CI builds and installs it on both
 # (.github/workflows/tests.yml, job "distros").
 Name:           hyprdial
-Version:        1.0.0
+Version:        1.1.0
 Release:        1%{?dist}
 Summary:        Settings app for Hyprland, with Omarchy integration
 License:        MIT
@@ -15,14 +15,15 @@ BuildRequires:  desktop-file-utils
 Requires:       python3
 Requires:       python3-gobject
 Recommends:     waybar
-Recommends:     hypridle
-Recommends:     hyprlock
-Recommends:     hyprpaper
 Recommends:     brightnessctl
 %if 0%{?suse_version}
 Requires:       typelib(Gtk) = 4.0
 Requires:       typelib(Adw) = 1
 Recommends:     typelib(NM) = 1.0
+# Fedora has these only in third-party repositories
+Recommends:     hypridle
+Recommends:     hyprlock
+Recommends:     hyprpaper
 %else
 Requires:       gtk4
 Requires:       libadwaita
@@ -69,5 +70,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/io.github.mvp_mark.Hy
 %{_datadir}/applications/io.github.mvp_mark.Hyprdial.desktop
 
 %changelog
+* Wed Nov 04 2026 Marcus Vinícius Peixoto Paulo <mvp.paulo@gmail.com> - 1.1.0-1
+- Window rules, workspaces, lock and idle, wallpaper and Waybar on plain Hyprland
+
 * Tue Nov 03 2026 Marcus Vinícius Peixoto Paulo <mvp.paulo@gmail.com> - 1.0.0-1
 - First RPM: omarchy-settings renamed to Hyprdial, runs on plain Hyprland

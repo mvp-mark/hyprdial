@@ -29,7 +29,7 @@ Hyprdial was called **omarchy-settings** before 1.0. Updating moves its files to
 **Arch, Omarchy** (ready package from the [latest release](https://github.com/mvp-mark/hyprdial/releases/latest)):
 
 ```bash
-sudo pacman -U https://github.com/mvp-mark/hyprdial/releases/download/v1.0.0/hyprdial-1.0.0-1-any.pkg.tar.zst
+sudo pacman -U https://github.com/mvp-mark/hyprdial/releases/download/v1.1.0/hyprdial-1.1.0-1-any.pkg.tar.zst
 ```
 
 **Any supported distribution** (from the source, for your user only):
@@ -44,8 +44,10 @@ dependencies per distribution) are under [Installation details](#installation-de
 
 ## Highlights
 
-- **A sidebar of pages** grouped like Omarchy's menu: Style, Hardware and System. Ten pages on any Hyprland,
-  thirteen on Omarchy.
+- **A sidebar of pages** grouped like Omarchy's menu: Style, Hardware and System. Twelve pages on any Hyprland,
+  fourteen on Omarchy.
+- **Window rules without regex**: pick an open window and choose what happens when it opens (float, size,
+  workspace, opacity, fullscreen…). Workspaces get a display and a start workspace per display.
 - **Shortcuts without editing Lua**: record a new key combination (keys, mouse buttons or the wheel), disable a
   shortcut or add your own to open an app or run a command, with warnings when keys are already taken.
 - **Displays by drag and drop**: arrange monitors, pick resolution, refresh rate, scale and rotation.
@@ -63,14 +65,23 @@ dependencies per distribution) are under [Installation details](#installation-de
 
 | | Plain Hyprland | Omarchy |
 |---|---|---|
-| Pages | Appearance, Displays, Sound, Power, Input, Connectivity, Apps, Shortcuts, Accessibility, System | the same, plus Themes, Bar and fonts, Security |
+| Pages | Appearance, Bar (Waybar), Displays, Sound, Power, Input, Connectivity, Apps, Shortcuts, Windows, Accessibility, System | the same, with Bar and fonts (the Omarchy shell bar) instead of Bar, plus Themes and Security |
 | Shortcuts read from | every `.lua` file in `~/.config/hypr` (`hl.bind` calls) | Omarchy's binding files and your `bindings.lua` |
 | Shortcuts and startup apps written with | Hyprland's Lua API (`hl.bind`, `hl.on("hyprland.start")`) | Omarchy's helpers (`o.bind`, `o.launch_on_start`), so they show in its menus |
+| Window rules | `hl.window_rule` | `o.window` (Omarchy's wrapper) |
+| Lock, idle and wallpaper | hypridle and hyprpaper, through the app's own `hyprdial-idle.conf` and `hyprdial-paper.conf` | the Omarchy shell and themes do it |
 | Password prompts | your terminal (`xdg-terminal-exec`, kitty, foot, alacritty…) | Omarchy's floating terminal |
-| Also on Omarchy only | | web apps, power button, idle times, hibernation, Omarchy updates and snapshots |
+| Also on Omarchy only | | web apps, power button, Omarchy's idle times, hibernation, Omarchy updates and snapshots |
 
 Hyprdial tells them apart by Omarchy's `omarchy` command and Lua helpers. `HYPRDIAL_PLATFORM=hyprland hyprdial`
 shows the plain Hyprland version on an Omarchy machine.
+
+### On plain Hyprland
+
+| | |
+|---|---|
+| ![Windows](docs/screenshots/plain-windows.png) **Windows**: rules for what happens when an app's window opens | ![New rule](docs/screenshots/plain-rule.png) **New rule**: pick an open window, then what to do with it |
+| ![Workspaces](docs/screenshots/plain-workspaces.png) **Workspaces** on the Displays page: display and start workspace | ![Bar](docs/screenshots/plain-bar.png) **Bar**: Waybar started with Hyprland, position and files |
 
 ## Pages
 
@@ -82,14 +93,14 @@ On a narrow window the sidebar and the page take turns, with a back button. Page
 | | |
 |---|---|
 | ![Themes](docs/screenshots/themes.png) **Themes** *(Omarchy)*: gallery with previews and colors, wallpapers of the current theme | ![Appearance](docs/screenshots/appearance.png) **Appearance**: quick styles, gaps, borders, corners, opacity, blur, shadow |
-| ![Bar and fonts](docs/screenshots/bar.png) **Bar and fonts** *(Omarchy)*: the Omarchy shell bar, its widgets and the system font | |
+| ![Bar and fonts](docs/screenshots/bar.png) **Bar and fonts** *(Omarchy)*: the Omarchy shell bar, its widgets and the system font | **Bar** *(plain Hyprland)*: Waybar started with Hyprland, its position and files. **Appearance** there also picks the wallpaper (hyprpaper) |
 
 ### Hardware
 
 | | |
 |---|---|
-| ![Displays](docs/screenshots/monitors.png) **Displays**: drag to arrange, resolution, refresh rate, scale; brightness *(Omarchy)* | ![Sound](docs/screenshots/sound.png) **Sound**: devices, volume and the volume of each app |
-| ![Power](docs/screenshots/power.png) **Power**: profile, night light; power button, idle and hibernation *(Omarchy)* | ![Input](docs/screenshots/input.png) **Input**: keyboard layout and repeat, mouse, touchpad |
+| ![Displays](docs/screenshots/monitors.png) **Displays**: drag to arrange, resolution, refresh rate, scale, workspaces; brightness *(Omarchy)* | ![Sound](docs/screenshots/sound.png) **Sound**: devices, volume and the volume of each app |
+| ![Power](docs/screenshots/power.png) **Power**: profile, night light, lock and idle; power button and hibernation *(Omarchy)* | ![Input](docs/screenshots/input.png) **Input**: keyboard layout and repeat, mouse, touchpad |
 
 **Connectivity** (Ethernet, Wi-Fi and Bluetooth, with pairing) has no picture here: it would show network names
 and addresses.
@@ -100,6 +111,7 @@ and addresses.
 |---|---|
 | ![Apps](docs/screenshots/apps.png) **Apps**: default apps, startup apps, web apps *(Omarchy)* | ![Shortcuts](docs/screenshots/shortcuts.png) **Shortcuts**: change, disable or add shortcuts, with conflict warnings |
 | ![Accessibility](docs/screenshots/accessibility.png) **Accessibility**: pointer size, animations; text size *(Omarchy)* | ![Security](docs/screenshots/security.png) **Security** *(Omarchy)*: fingerprint, FIDO2 key and SSH server |
+| ![Windows](docs/screenshots/plain-windows.png) **Windows**: window rules, yours and the ones in your config files | |
 | ![System](docs/screenshots/system.png) **System**: time, language, printers; notifications, updates and snapshots *(Omarchy)* | ![Changed settings](docs/screenshots/changed.png) **☰ → Changed settings**: everything that differs from the defaults |
 
 Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
@@ -111,14 +123,16 @@ matter, and choosing a result opens its page, expands what is around it and high
 | Page | What it does | How it applies changes |
 |---|---|---|
 | Themes | Theme gallery with previews and color swatches, search and dark/light filter, current theme highlighted; all wallpapers of the current theme (yours included) with the one in use marked | `omarchy-theme-set`, `omarchy-theme-bg-set`, `omarchy-theme-bg-next` |
-| Appearance | Quick styles (Compact, Default, Comfortable, Elegant); window layout, gaps, border, corners, opacity, dimming, blur, shadow; window and workspace behavior. A ↶ button per option returns it to its default | `hyprctl eval` live + generated file |
-| Displays | Drag-and-drop arrangement (snaps to edges); per display: enable/disable, resolution and refresh rate, scale, rotation, position, VRR, mirroring, 10-bit color, brightness (DDC/CI) | `hyprctl eval` live + generated file (asks for confirmation and reverts after 15 s), `omarchy-brightness-display` |
+| Appearance | Quick styles (Compact, Default, Comfortable, Elegant); window layout, gaps, border, corners, opacity, dimming, blur, shadow; window and workspace behavior. A ↶ button per option returns it to its default. On plain Hyprland, the wallpaper: one image or one per display, and how it fits | `hyprctl eval` live + generated file; `hyprctl hyprpaper wallpaper` live + `~/.config/hypr/hyprdial-paper.conf`, started with `hyprpaper -c` |
+| Displays | Drag-and-drop arrangement (snaps to edges); per display: enable/disable, resolution and refresh rate, scale, rotation, position, VRR, mirroring, 10-bit color, brightness (DDC/CI); workspaces: the display of workspaces 1–10, the one each display starts on, the ones that always exist | `hyprctl eval` live + generated file (asks for confirmation and reverts after 15 s), `omarchy-brightness-display`, `hl.workspace_rule` in the generated file |
 | Sound | Output and input device (the default one), their volume and mute, volume above 100% (optional), a test sound; volume and mute of each app playing and of each app using the microphone; updates live; full mixer (wiremix) for profiles and moving an app to another device | `omarchy-audio-output-set-default` and `omarchy-audio-input-set-default` (they also move the apps playing or recording), `pactl` (PipeWire), `pactl subscribe` for live updates, `pw-play` |
-| Power | Power profile (power saver, balanced, performance; only those the machine offers); night light on/off, warmth and a daily schedule; what the power button does (system menu, lock, suspend, shut down, nothing); screensaver, lock and "stay awake"; Suspend in the system menu on/off; hibernation set up or removed (in a terminal) | `omarchy-powerprofiles-set` (remembered like the bar does), `hyprctl hyprsunset`, `~/.config/hypr/hyprsunset.conf` profiles (backup at `hyprsunset.conf.hyprdial.bak`), `XF86PowerOff` shortcut in the generated file, `idle` in `~/.config/omarchy/shell.json`, `omarchy-toggle-idle`, `omarchy-toggle suspend-off`, `omarchy-hibernation-setup`/`-remove` |
+| Power | Power profile (power saver, balanced, performance; only those the machine offers); night light on/off, warmth and a daily schedule; what the power button does (system menu, lock, suspend, shut down, nothing); screensaver, lock and "stay awake"; Suspend in the system menu on/off; hibernation set up or removed (in a terminal). On plain Hyprland: when to dim, lock, turn the screen off and suspend | `omarchy-powerprofiles-set` (remembered like the bar does), `hyprctl hyprsunset`, `~/.config/hypr/hyprsunset.conf` profiles (backup at `hyprsunset.conf.hyprdial.bak`), `XF86PowerOff` shortcut in the generated file, `idle` in `~/.config/omarchy/shell.json`, `omarchy-toggle-idle`; on plain Hyprland `~/.config/hypr/hyprdial-idle.conf`, started with `hypridle -c`, `omarchy-toggle suspend-off`, `omarchy-hibernation-setup`/`-remove` |
 | Input | Touchpad and touchscreen on/off (when the computer has them); keyboard layout and key repeat; mouse speed, acceleration, scrolling, focus and pointer; touchpad gestures and scrolling (with a touchpad) | `omarchy-toggle-input-device`, `hyprctl eval` live + generated file |
 | Shortcuts | Every active shortcut, by category, searchable by name or key; change the key of a shortcut from Omarchy's or your config files (by recording the combination: keys, mouse buttons or the wheel, with a modifier; moving and resizing windows stay on a mouse button), including the ones Omarchy generates in loops (workspaces 1–10, group windows, bar panels), disable it, restore it with ↶; your own shortcuts to open apps, run commands or open in the terminal; conflict warnings | `hyprctl binds` + parsing `o.bind`/`hl.bind` calls: Omarchy's `default/hypr/bindings/*.lua` and your `bindings.lua`, or every `.lua` file in `~/.config/hypr` on plain Hyprland (numeric `for` loops unrolled); `hl.unbind` and `o.bind` (Omarchy) or `hl.bind` in the generated file, with reload and verification |
+| Windows | Your rules for what happens when an app's window opens: float, center, size, workspace (in the background or not), opacity, every workspace, fullscreen, maximized, keep the screen on in fullscreen; chosen from the open windows or a typed class; the rules in your `.lua` files, read only | `hyprctl clients`, `hl.window_rule` (`o.window` on Omarchy) in the generated file |
 | Apps | Default apps: browser, terminal and editor, file manager, PDF documents and images (installed ones only); web apps: list, add (the site's own icon by default) and remove; startup apps: XDG autostart entries on/off, your own commands, the commands in `autostart.lua` on Omarchy or `hyprland.lua` elsewhere (read only) | `omarchy default` (the browser goes through `xdg-mime` on plain Hyprland), `xdg-mime` (`~/.config/mimeapps.list`), `omarchy-webapp-install`, `omarchy-webapp-remove`, `Hidden=true` overrides in `~/.config/autostart`, `o.launch_on_start` (Omarchy) or `hl.on("hyprland.start")` in the generated file |
 | Bar and fonts | Omarchy shell bar: show/hide, position, transparency, clock format; widgets per section (reorder, move between sections, remove, add; spacers can repeat, and each one is removed on its own); optional Waybar (see below); system font | `omarchy-bar`, `omarchy-plugin-enable/disable`, the layout in `~/.config/omarchy/shell.json` for a single spacer, `omarchy-toggle-bar`, `omarchy-font-set` |
+| Bar (plain Hyprland) | Waybar on/off with Hyprland, position, restart, edit or restore its files (neutral starter files, nothing of Omarchy's) | `waybar`, `~/.config/waybar/config.jsonc` and `style.css`, `hl.on("hyprland.start")` in the generated file |
 | Connectivity | Wired (Ethernet): status, link speed, address, gateway and DNS, plain-language diagnosis (no cable, 10 Mb/s link, no DHCP address), connect/disconnect, IPv4 automatic (DHCP) or manual, custom DNS, auto-connect; Wi-Fi: radio on/off, available networks with signal and security, connect (password asked in a dialog, hidden networks too), saved networks with IPv4/DNS settings and forget, impala for advanced cases; Bluetooth: on/off, paired devices with battery level, connect/disconnect, forget, search and pair (pairing codes shown or confirmed in a dialog), bluetui for advanced cases | `nmcli` (NetworkManager), libnm for saving Wi-Fi passwords (never on a command line), `/sys/class/net`, `omarchy-bluetooth-power` and `omarchy-bluetooth-device` (results read back with `bluetoothctl`), `bluetoothctl` for pairing through an interactive session with a KeyboardDisplay agent |
 | Accessibility | Text size; pointer size (GTK apps, Hyprland and apps started later); animations on/off | `omarchy-display-text-size`, `gsettings` and `hyprctl setcursor` live + `XCURSOR_SIZE`/`HYPRCURSOR_SIZE` in the generated file, `hyprctl eval` |
 | Security | Fingerprint (with a reader), security key (FIDO2) and SSH server: set up, set up again or remove, with the same conditions as Omarchy's Setup and Remove menus; whether the SSH server is running | `omarchy-setup-security-*` and `omarchy-remove-security-*` in a floating terminal |
@@ -179,7 +193,8 @@ Dependencies, listed in `hyprdial/deps.py`:
 | Group | Arch | Fedora | openSUSE | Debian |
 |---|---|---|---|---|
 | Required | `python-gobject`, `gtk4`, `libadwaita` (>= 1.5), `gettext` | `python3-gobject`, `gtk4`, `libadwaita`, `gettext` | `python3-gobject`, `typelib-1_0-Gtk-4_0`, `typelib-1_0-Adw-1`, `gettext-tools` | `python3-gi`, `gir1.2-gtk-4.0`, `gir1.2-adw-1`, `gettext` |
-| Optional | `libnm`, `impala`, `bluetui`, `wiremix`, `waybar` (Omarchy) | `NetworkManager-libnm` | `typelib-1_0-NM-1_0` | `gir1.2-nm-1.0` |
+| Optional | `libnm`, `impala`, `bluetui`, `wiremix`, `waybar` | `NetworkManager-libnm`, `waybar` | `typelib-1_0-NM-1_0`, `waybar` | `gir1.2-nm-1.0`, `waybar` |
+| Optional, plain Hyprland | `hypridle`, `hyprlock`, `hyprpaper`, `brightnessctl` | `brightnessctl` (the others only from third-party repositories) | the same as Arch | the same as Arch |
 | Development | `python-pytest` | `python3-pytest` | `python3-pytest` | `python3-pytest` |
 
 `libnm` saves Wi-Fi passwords (it comes with NetworkManager); `impala`, `bluetui` and `wiremix` are TUIs opened by
@@ -205,7 +220,7 @@ machine). It installs system-wide, with the app in `/usr/share/hyprdial`, the `h
 before 1.0:
 
 ```bash
-sudo pacman -U https://github.com/mvp-mark/hyprdial/releases/download/v1.0.0/hyprdial-1.0.0-1-any.pkg.tar.zst
+sudo pacman -U https://github.com/mvp-mark/hyprdial/releases/download/v1.1.0/hyprdial-1.1.0-1-any.pkg.tar.zst
 ```
 
 Or build it yourself from `packaging/arch/PKGBUILD`, which takes the release tag's source and compiles the
@@ -256,7 +271,7 @@ Omarchy's shortcut names are shown as Omarchy itself writes them (in English).
 python3 -m pytest
 ```
 
-They cover the non-UI parts (`core.py`, `host.py`, `distro.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `shell.py`, `displays.py`, `accessibility.py`, `input.py`, `security.py`, `network.py`, `wifi.py`, `bluetooth.py`, `apps.py`, `webapps.py`, `autostart.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
+They cover the non-UI parts (`core.py`, `host.py`, `distro.py`, `windowrules.py`, `workspaces.py`, `idle.py`, `wallpaper.py`, `layout.py`, `keybinds.py`, `deps.py`, `themes_data.py`, `waybar.py`, `shell.py`, `displays.py`, `accessibility.py`, `input.py`, `security.py`, `network.py`, `wifi.py`, `bluetooth.py`, `apps.py`, `webapps.py`, `autostart.py`, `sound.py`, `power.py`, `system.py`, `search.py`) and that the PKGBUILD's dependencies match `deps.py`, without touching the running Hyprland, and
 the translations: every marked string has a translation, no translation is left unused, and the placeholders
 (`{name}`…) match between English and the translation.
 `tests/fixtures/` holds trimmed copies of Omarchy's shortcut files; an extra test reads the real files (skipped if
@@ -293,6 +308,10 @@ hyprdial/
   accessibility.py   pointer size (no GTK)
   displays.py        display brightness and text size (no GTK)
   power.py           power profile, night light and its schedule, power button (no GTK)
+  idle.py            lock and idle on plain Hyprland through hypridle (no GTK)
+  wallpaper.py       wallpaper on plain Hyprland through hyprpaper (no GTK)
+  windowrules.py     window rules: open windows, validation, generation, the user's rules (no GTK)
+  workspaces.py      workspace rules: display, start workspace, always there (no GTK)
   apps.py            default apps: Omarchy's and by file type (no GTK)
   autostart.py       startup apps: XDG autostart entries and own commands (no GTK)
   webapps.py         web apps: listing the launchers, checking the form, install/remove (no GTK)

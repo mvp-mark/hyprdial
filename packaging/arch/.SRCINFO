@@ -1,6 +1,6 @@
 pkgbase = hyprdial
 	pkgdesc = Settings app for Hyprland, with Omarchy integration (GTK4 + libadwaita)
-	pkgver = 1.0.0
+	pkgver = 1.1.0
 	pkgrel = 1
 	url = https://github.com/mvp-mark/hyprdial
 	arch = any
@@ -22,7 +22,7 @@ pkgbase = hyprdial
 	provides = omarchy-settings-gui
 	conflicts = omarchy-settings-gui
 	replaces = omarchy-settings-gui
-	source = hyprdial-1.0.0.tar.gz::https://github.com/mvp-mark/hyprdial/archive/refs/tags/v1.0.0.tar.gz
+	source = hyprdial-1.1.0.tar.gz::https://github.com/mvp-mark/hyprdial/archive/refs/tags/v1.1.0.tar.gz
 	sha256sums = 77c373ba7b98dbfe78575b80647063c7c631ea5efc2640d8ec1885336f9b6117
 
 pkgname = hyprdial

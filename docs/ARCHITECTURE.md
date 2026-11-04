@@ -39,6 +39,10 @@ helpers.lua`). `HYPRDIAL_PLATFORM=omarchy|hyprland` forces one (tests, trying th
 - **Commands that differ** live in `host.py`: the terminal for sudo prompts, launching apps, opening TUIs.
 - **Hyprland too old (below `host.MIN_HYPRLAND`), not running, or still on hyprland.conf**: the window shows a
   banner and `HyprStore.read_only` keeps every change in memory; pages that don't write Hyprland's config work.
+- **hypridle and hyprpaper read hyprlang, not Lua**: `idle.py` and `wallpaper.py` write the app's own
+  `hyprdial-idle.conf` and `hyprdial-paper.conf` and start the tools with `-c` from the generated file. A
+  `hypridle.conf`/`hyprpaper.conf` of the user's, or an instance the app didn't start, stays in charge: the page
+  says so and changes nothing.
 - Only `hyprland.lua` is supported: Hyprland 0.55 made it the default and 0.57 drops `hyprland.conf`.
 
 ## Distributions

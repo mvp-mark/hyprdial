@@ -32,6 +32,7 @@ class Dep:
 
 
 ARCH_ONLY = {"fedora": None, "suse": None, "debian": None}
+NOT_IN_FEDORA = {"fedora": None}  # only in third-party repositories there (COPR)
 
 
 def all_dependencies() -> list[Dep]:
@@ -79,10 +80,17 @@ def all_dependencies() -> list[Dep]:
             "hypridle",
             "optional",
             _("Locks, turns the screen off and suspends when idle (Power page)"),
+            names=NOT_IN_FEDORA,
             plain_only=True,
         ),
-        Dep("hyprlock", "optional", _("The lock screen"), plain_only=True),
-        Dep("hyprpaper", "optional", _("Shows the wallpaper chosen on the Appearance page"), plain_only=True),
+        Dep("hyprlock", "optional", _("The lock screen"), names=NOT_IN_FEDORA, plain_only=True),
+        Dep(
+            "hyprpaper",
+            "optional",
+            _("Shows the wallpaper chosen on the Appearance page"),
+            names=NOT_IN_FEDORA,
+            plain_only=True,
+        ),
         Dep("brightnessctl", "optional", _("Dims the screen before locking"), plain_only=True),
         Dep(
             "python-pytest",
