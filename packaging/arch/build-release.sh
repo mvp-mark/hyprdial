@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Builds the package for a release tag, the way .github/workflows/release.yml does it:
 #   packaging/arch/build-release.sh v0.6.0 [out-dir]
-# Checks that the tag, __version__ and pkgver agree and that the package is called hyprdial (never like Omarchy's
+# Checks that the tag, __version__, pkgver and the RPM spec's Version agree and that the package is called hyprdial (never like Omarchy's
 # own omarchy-settings), pins the checksum of GitHub's tarball for the tag in PKGBUILD and .SRCINFO, and builds.
 # out-dir (default: dist/ at the repository root) gets the .pkg.tar.zst and the pinned PKGBUILD.
 set -euo pipefail
@@ -21,6 +21,8 @@ pkgrel=$(sed -n 's/^pkgrel=//p' "$HERE/PKGBUILD")
 [[ $tag == v* ]] || fail "the tag must look like vX.Y.Z, got $tag"
 [[ $app_version == "$version" ]] || fail "__version__ is $app_version, the tag is $tag"
 [[ $pkgver == "$version" ]] || fail "pkgver is $pkgver, the tag is $tag"
+rpm_version=$(sed -n 's/^Version: *//p' "$ROOT/packaging/rpm/hyprdial.spec")
+[[ $rpm_version == "$version" ]] || fail "the RPM spec's Version is $rpm_version, the tag is $tag"
 # Omarchy's repository has a package called omarchy-settings; one with that name would replace it
 [[ $pkgname == hyprdial ]] || fail "pkgname is $pkgname, expected hyprdial"
 [[ -s $ROOT/docs/releases/$tag.md ]] || fail "missing release notes: docs/releases/$tag.md"
