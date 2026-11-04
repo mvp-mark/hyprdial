@@ -8,7 +8,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk  # noqa: E402
 
-from .. import core, host, power, shell
+from .. import core, host, idle, power, shell
 from ..i18n import _
 from ..shell import IDLE_TIMES, STAY_AWAKE_FLAG, read_shell, write_idle
 from ..ui import (
@@ -66,6 +66,8 @@ class PowerPage(Adw.PreferencesPage):
         if host.is_omarchy():
             self._button_group()
             self._idle_group(read_shell())
+        else:
+            self._plain_idle_group()
 
         self.sleep_group = Adw.PreferencesGroup(title=_("Suspend and hibernate"))
         if host.is_omarchy():  # both options are Omarchy's: its system menu and its hibernation setup
@@ -94,6 +96,64 @@ class PowerPage(Adw.PreferencesPage):
         set_changed(self.button_row, current != "menu")
         button.add(self.button_row)
         self.add(button)
+
+    # -- lock and idle on plain Hyprland (hypridle)
+    def _plain_idle_group(self) -> None:
+        group = Adw.PreferencesGroup(
+            title=_("Lock and idle"), description=_("Counted from the moment you stop using the computer.")
+        )
+        self.add(group)
+        if not idle.available():
+            group.add(missing_row("hypridle", _("Install it from ☰ → Dependencies (hyprlock draws the lock screen)")))
+            return
+        if idle.owner() == "user":
+            row = Adw.ActionRow(
+                title=_("Your own hypridle configuration is in charge"),
+                subtitle=_("Edit {file}, or remove it to set the times here").format(
+                    file=core.home_path(idle.USER_CONF)
+                ),
+            )
+            if idle.USER_CONF.exists():
+                btn = Gtk.Button(label=_("Open"), valign=Gtk.Align.CENTER)
+                btn.connect("clicked", lambda _b: core.open_in_editor(idle.USER_CONF))
+                row.add_suffix(btn)
+            group.add(row)
+            return
+        values = idle.settings(self.store.extras)
+        steps = [
+            ("dim", _("Dim the screen after"), _("Needs brightnessctl")),
+            ("lock", _("Lock the screen after"), _("Asks for the password to come back")),
+            ("screen_off", _("Turn the screen off after"), ""),
+            ("suspend", _("Suspend after"), ""),
+        ]
+        for key, title, subtitle in steps:
+            if key == "dim" and not core.have("brightnessctl"):
+                continue
+            times = sorted(set(IDLE_TIMES) | {values[key]}, key=lambda s: s or 10**9)
+            row = combo_row(
+                title,
+                subtitle if key != "dim" else "",
+                [idle_label(s) for s in times],
+                times.index(values[key]),
+                lambda i, k=key, ts=times: self._set_idle(k, ts[i]),
+            )
+            set_changed(row, key in (self.store.extras.get("idle") or {}) and values[key] != idle.DEFAULTS[key])
+            group.add(row)
+
+    def _set_idle(self, key: str, seconds: int) -> None:
+        values = {**idle.settings(self.store.extras), key: seconds}
+
+        def work() -> None:
+            idle.write(values)
+            self.store.set_extra("idle", values, reload=False)
+            idle.restart()
+
+        bg(
+            work,
+            lambda r: self.win.toast(
+                _("Idle times changed") if not isinstance(r, Exception) else _("Could not save the setting")
+            ),
+        )
 
     # -- power profile
     def _populate_profiles(self, result) -> None:

@@ -28,8 +28,10 @@ def test_fedora_requires_follow_deps_py(plain_hyprland):  # Omarchy (and its Way
     assert requires("Recommends", "fedora") == names("fedora", "optional")
 
 
-def test_opensuse_requires_the_same_typelibs():
+def test_opensuse_requires_the_same_typelibs(plain_hyprland):
     # openSUSE packages provide typelib(Gtk) = 4.0 and so on; deps.py names the packages that provide them
     assert requires("Requires", "suse") == {"python3", "python3-gobject", "typelib(Gtk) = 4.0", "typelib(Adw) = 1"}
-    assert requires("Recommends", "suse") == {"typelib(NM) = 1.0"}
+    assert requires("Recommends", "suse") == {"typelib(NM) = 1.0"} | (
+        names("suse", "optional") - {"typelib-1_0-NM-1_0"}
+    )
     assert {"typelib-1_0-Gtk-4_0", "typelib-1_0-Adw-1"} <= names("suse", "required")

@@ -14,6 +14,11 @@ BuildRequires:  python3
 BuildRequires:  desktop-file-utils
 Requires:       python3
 Requires:       python3-gobject
+Recommends:     waybar
+Recommends:     hypridle
+Recommends:     hyprlock
+Recommends:     hyprpaper
+Recommends:     brightnessctl
 %if 0%{?suse_version}
 Requires:       typelib(Gtk) = 4.0
 Requires:       typelib(Adw) = 1

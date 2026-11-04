@@ -2,7 +2,7 @@ import subprocess
 
 import pytest
 
-from hyprdial import core, deps, distro
+from hyprdial import core, deps, distro, host
 
 
 @pytest.fixture
@@ -86,8 +86,11 @@ def test_other_families_have_their_own_names_and_skip_arch_only_packages():
     assert names(None) == names("arch")  # unknown: Arch's names, for the user to translate
 
 
-def test_waybar_is_listed_only_on_omarchy(plain_hyprland):
-    assert "waybar" not in names("arch")
+def test_idle_lock_and_wallpaper_tools_are_listed_only_on_plain_hyprland(monkeypatch):
+    plain = {"hypridle", "hyprlock", "hyprpaper", "brightnessctl"}
+    assert not names("arch") & plain and "waybar" in names("arch")
+    monkeypatch.setattr(host, "_detected", "hyprland")
+    assert plain | {"waybar"} <= names("arch")
 
 
 def test_fedora_and_suse_check_capabilities_with_rpm(commands, monkeypatch):

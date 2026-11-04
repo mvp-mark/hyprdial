@@ -1,11 +1,14 @@
-"""Waybar as an alternative to the Omarchy shell bar (no GTK, testable).
+"""Waybar (no GTK, testable): the bar on plain Hyprland, an alternative to the Omarchy shell bar on Omarchy.
 
-Current Omarchy doesn't manage Waybar. This module creates a starter configuration in ~/.config/waybar, makes
+On Omarchy, which doesn't manage Waybar, this module creates a starter configuration in ~/.config/waybar, makes
 its style follow the Omarchy theme and runs Waybar instead of the shell bar:
 
 - colors: a user template (~/.config/omarchy/themed/waybar.css.tpl) that Omarchy itself renders into
   ~/.local/state/omarchy/current/theme/waybar.css on every theme change; style.css imports it;
 - Omarchy hooks: theme-set.d reloads Waybar after a theme change and post-boot.d starts it at login.
+
+On plain Hyprland the starter files use neutral colors and nothing of Omarchy's, and the generated Hyprland file
+starts Waybar at login (extras["waybar"]).
 """
 
 from __future__ import annotations
@@ -15,7 +18,7 @@ import shutil
 import tomllib
 from pathlib import Path
 
-from . import core
+from . import core, host
 
 CONFIG_DIR = core.CONF_DIR / "waybar"
 CONFIG = CONFIG_DIR / "config.jsonc"
@@ -119,6 +122,81 @@ STARTER_CONFIG_TEMPLATE = """// Starter configuration created by Hyprdial. Feel 
 STARTER_CONFIG = re.sub(r"@(\w+)@", lambda m: ICONS[m.group(1)], STARTER_CONFIG_TEMPLATE)
 
 
+PLAIN_CONFIG = """// Starter configuration created by Hyprdial. Feel free to edit it.
+// Documentation: https://github.com/Alexays/Waybar/wiki
+{
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "spacing": 4,
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["tray", "network", "pulseaudio", "cpu", "battery"],
+
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "format": "{name}"
+  },
+  "clock": {
+    "format": "{:%a %H:%M}",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+  "tray": { "spacing": 8 },
+  "network": {
+    "format-wifi": "{essid}",
+    "format-ethernet": "wired",
+    "format-disconnected": "offline",
+    "tooltip-format": "{ifname} {ipaddr}"
+  },
+  "pulseaudio": {
+    "format": "vol {volume}%",
+    "format-muted": "muted"
+  },
+  "cpu": { "format": "cpu {usage}%", "interval": 5 },
+  "battery": {
+    "format": "bat {capacity}%",
+    "states": { "warning": 20, "critical": 10 }
+  }
+}
+"""
+
+PLAIN_STYLE = """/* Starter style created by Hyprdial. Feel free to edit it. */
+* {
+  font-family: sans-serif;
+  font-size: 13px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(30, 30, 36, 0.92);
+  color: #e6e6eb;
+}
+
+#workspaces button {
+  color: #8a8a96;
+  padding: 0 6px;
+}
+
+#workspaces button.active {
+  color: #ffffff;
+}
+
+#clock, #tray, #network, #pulseaudio, #cpu, #battery {
+  padding: 0 8px;
+}
+
+#battery.warning {
+  color: #e5c07b;
+}
+
+#battery.critical, #pulseaudio.muted, #network.disconnected {
+  color: #e06c75;
+}
+"""
+
+
 def starter_style() -> str:
     # an absolute path avoids depending on where Waybar resolves relative imports
     return f"""/* Starter style created by Hyprdial. Colors come from the Omarchy theme. */
@@ -219,6 +297,12 @@ def _write_hook(path: Path, script: str) -> None:
 def ensure_config() -> None:
     """Creates the config, style, color template and theme hook, without overwriting what already exists."""
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    if not host.is_omarchy():
+        if not CONFIG.exists():
+            CONFIG.write_text(PLAIN_CONFIG)
+        if not STYLE.exists():
+            STYLE.write_text(PLAIN_STYLE)
+        return
     if not CONFIG.exists():
         CONFIG.write_text(STARTER_CONFIG)
     if not STYLE.exists():
@@ -288,3 +372,10 @@ def set_enabled(on: bool) -> None:
         BOOT_HOOK.unlink(missing_ok=True)
         stop()
         core.run(["omarchy-toggle-bar", "off"])  # shows the shell bar again
+
+
+def render_extras(extras: dict) -> list[str]:
+    """Plain Hyprland: starts Waybar at login (on Omarchy a post-boot hook does it)."""
+    if host.is_omarchy() or not extras.get("waybar"):
+        return []
+    return ["", "-- Bar", core.on_start_call("waybar")]

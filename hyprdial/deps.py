@@ -23,12 +23,12 @@ class Dep:
     purpose: str
     default: bool = True  # preselected for installation when missing
     names: dict[str, str | None] = field(default_factory=dict)  # family -> package name there
-    omarchy_only: bool = False
+    plain_only: bool = False  # Omarchy covers it itself (idle, lock screen, wallpaper)
 
     def on(self, family: str | None) -> Dep | None:
         """This dependency with the package name of a family, or None when it isn't packaged there."""
         name = self.names.get(family, self.package) if family else self.package
-        return None if name is None else Dep(name, self.group, self.purpose, self.default)
+        return None if name is None else Dep(name, self.group, self.purpose, self.default, plain_only=self.plain_only)
 
 
 ARCH_ONLY = {"fedora": None, "suse": None, "debian": None}
@@ -70,10 +70,20 @@ def all_dependencies() -> list[Dep]:
             _(
                 "Alternative bar. Omarchy uses the Omarchy shell bar; installing Waybar "
                 "doesn't start it or replace the current bar"
-            ),
-            default=False,
-            omarchy_only=True,
+            )
+            if host.is_omarchy()
+            else _("The bar, set up on the Bar page"),
+            default=not host.is_omarchy(),
         ),
+        Dep(
+            "hypridle",
+            "optional",
+            _("Locks, turns the screen off and suspends when idle (Power page)"),
+            plain_only=True,
+        ),
+        Dep("hyprlock", "optional", _("The lock screen"), plain_only=True),
+        Dep("hyprpaper", "optional", _("Shows the wallpaper chosen on the Appearance page"), plain_only=True),
+        Dep("brightnessctl", "optional", _("Dims the screen before locking"), plain_only=True),
         Dep(
             "python-pytest",
             "dev",
@@ -87,7 +97,8 @@ def all_dependencies() -> list[Dep]:
 def dependencies(family: str | None = None) -> list[Dep]:
     """The dependencies with this system's package names (or those of family)."""
     family = distro.family() if family is None else family
-    deps = [d.on(family) for d in all_dependencies() if host.is_omarchy() or not d.omarchy_only]
+    omarchy = host.is_omarchy()
+    deps = [d.on(family) for d in all_dependencies() if not (d.plain_only and omarchy)]
     return [d for d in deps if d is not None]
 
 

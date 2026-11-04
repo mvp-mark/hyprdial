@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-from hyprdial import __version__
+from hyprdial import __version__, host
 from hyprdial.deps import dependencies
 
 PKGBUILD = (Path(__file__).parent.parent / "packaging" / "arch" / "PKGBUILD").read_text()
@@ -16,10 +16,19 @@ def packages(group):
     return {d.package for d in dependencies() if d.group == group}
 
 
+def plain_packages(group):
+    host._detected = "hyprland"
+    try:
+        return packages(group)
+    finally:
+        host._detected = "omarchy"
+
+
 def test_dependencies_follow_deps_py():
     assert set(array("depends")) | set(array("makedepends")) == packages("required") | {"python"}
     assert array("makedepends") == ["gettext"]
-    assert set(array("optdepends")) == packages("optional")
+    # one package for Omarchy and plain Hyprland: the optional dependencies of both
+    assert set(array("optdepends")) == packages("optional") | plain_packages("optional")
 
 
 def test_version_matches_the_app():

@@ -12,12 +12,12 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, GLib, Gtk  # noqa: E402
+from gi.repository import Adw, Gio, GLib, Gtk  # noqa: E402
 
-from .. import core
+from .. import core, host, wallpaper
 from .. import input as input_devices
 from ..i18n import _
-from ..ui import bg, button_row, set_changed, switch_row, to_bool, to_float
+from ..ui import bg, button_row, combo_row, missing_row, set_changed, switch_row, to_bool, to_float
 
 # Quick styles: keys missing from a style go back to their default.
 PRESET_KEYS = (
@@ -517,8 +517,129 @@ class HyprOptionsPage(Adw.PreferencesPage):
 class AppearancePage(HyprOptionsPage):
     """Hyprland's look: quick styles, windows, effects and how windows behave."""
 
-    GROUPS = ("style", "windows", "effects", "behavior")
+    GROUPS = ("wallpaper", "style", "windows", "effects", "behavior")
     RESET_SUBTITLE = _("Returns every option on this page to its default")
+
+    # -- wallpaper on plain Hyprland (Omarchy's themes have their own)
+    def _wallpaper_group(self) -> None:
+        if host.is_omarchy():
+            return
+        self.paper = Adw.PreferencesGroup(title=_("Wallpaper"))
+        self.add(self.paper)
+        if not wallpaper.available():
+            self.paper.add(missing_row("hyprpaper", _("Install it from ☰ → Dependencies")))
+            return
+        if wallpaper.owner() == "user":
+            self.paper.add(
+                Adw.ActionRow(
+                    title=_("Your own hyprpaper configuration is in charge"),
+                    subtitle=_("Edit {file}, or remove it to choose the wallpaper here").format(
+                        file=core.home_path(wallpaper.USER_CONF)
+                    ),
+                )
+            )
+            return
+        values = wallpaper.settings(self.store.extras)
+        self.paper_row = Adw.ActionRow(
+            title=_("Image"),
+            subtitle=values["path"] or _("None chosen"),
+            subtitle_selectable=True,
+        )
+        choose = Gtk.Button(label=_("Choose…"), valign=Gtk.Align.CENTER)
+        choose.connect("clicked", lambda _b: self._choose_wallpaper(None))
+        self.paper_row.add_suffix(choose)
+        set_changed(self.paper_row, bool(values["path"]))
+        self.paper.add(self.paper_row)
+        fits = list(wallpaper.FITS)
+        labels = {
+            "cover": _("Fill the screen (crop)"),
+            "contain": _("Fit inside"),
+            "tile": _("Tile"),
+            "fill": _("Stretch"),
+        }
+        self.paper.add(
+            combo_row(
+                _("How it fits"),
+                "",
+                [labels[f] for f in fits],
+                fits.index(values["fit"]),
+                lambda i: self._set_wallpaper(fit=fits[i]),
+            )
+        )
+        bg(core.list_monitors, self._wallpaper_monitors)
+
+    def _wallpaper_monitors(self, monitors) -> None:
+        names = [] if isinstance(monitors, Exception) else [m["name"] for m in monitors]
+        self.monitor_names = names
+        if len(names) < 2:
+            return
+        values = wallpaper.settings(self.store.extras)
+        expander = Adw.ExpanderRow(title=_("A different image per display"), subtitle=_("Instead of the one above"))
+        for name in names:
+            row = Adw.ActionRow(title=name, subtitle=values["monitors"].get(name) or _("The image above"))
+            choose = Gtk.Button(icon_name="document-open-symbolic", tooltip_text=_("Choose…"), valign=Gtk.Align.CENTER)
+            choose.add_css_class("flat")
+            choose.connect("clicked", lambda _b, n=name: self._choose_wallpaper(n))
+            clear = Gtk.Button(
+                icon_name="edit-undo-symbolic", tooltip_text=_("Use the image above"), valign=Gtk.Align.CENTER
+            )
+            clear.add_css_class("flat")
+            clear.connect("clicked", lambda _b, n=name: self._set_wallpaper(monitor=n, path=""))
+            row.add_suffix(choose)
+            row.add_suffix(clear)
+            set_changed(row, name in values["monitors"])
+            expander.add_row(row)
+        self.paper.add(expander)
+
+    def _choose_wallpaper(self, monitor: str | None) -> None:
+        images = Gtk.FileFilter(name=_("Images"))
+        for suffix in wallpaper.IMAGES:
+            images.add_suffix(suffix.lstrip("."))
+        filters = Gio.ListStore.new(Gtk.FileFilter)
+        filters.append(images)
+        dialog = Gtk.FileDialog(title=_("Choose a wallpaper"), filters=filters, default_filter=images)
+
+        def picked(dlg, result) -> None:
+            try:
+                file = dlg.open_finish(result)
+            except GLib.Error:
+                return  # cancelled
+            path = file.get_path() if file else None
+            if not path or wallpaper.problem(path):
+                self.win.toast(_("That file can't be used as a wallpaper"))
+                return
+            self._set_wallpaper(monitor=monitor, path=path)
+
+        dialog.open(self.win, None, picked)
+
+    def _set_wallpaper(self, monitor: str | None = None, path: str | None = None, fit: str | None = None) -> None:
+        values = wallpaper.settings(self.store.extras)
+        if fit:
+            values["fit"] = fit
+        if path is not None and monitor is None:
+            values["path"] = path
+        elif monitor is not None:
+            if path:
+                values["monitors"][monitor] = path
+            else:
+                values["monitors"].pop(monitor, None)
+        names = getattr(self, "monitor_names", [])
+
+        def work() -> bool:
+            wallpaper.write(values)
+            self.store.set_extra("wallpaper", values, reload=False)
+            return wallpaper.apply(values, names)
+
+        def done(ok) -> None:
+            if isinstance(ok, Exception) or not ok:
+                self.win.toast(_("Could not change the wallpaper"))
+                return
+            self.win.toast(_("Wallpaper changed"))
+            if monitor is None and path is not None:
+                self.paper_row.set_subtitle(path)
+                set_changed(self.paper_row, True)
+
+        bg(work, done)
 
 
 class InputPage(HyprOptionsPage):

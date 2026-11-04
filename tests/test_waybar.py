@@ -83,3 +83,24 @@ def test_enable_and_disable(wb, monkeypatch):
     wb.set_enabled(False)
     assert not wb.enabled()
     assert wb.calls == [["pkill", "-x", "waybar"], ["omarchy-toggle-bar", "off"]]
+
+
+def test_plain_hyprland_starter_files_have_nothing_of_omarchy(tmp_path, monkeypatch, plain_hyprland):
+    monkeypatch.setattr(waybar, "CONFIG_DIR", tmp_path)
+    monkeypatch.setattr(waybar, "CONFIG", tmp_path / "config.jsonc")
+    monkeypatch.setattr(waybar, "STYLE", tmp_path / "style.css")
+    waybar.ensure_config()
+    text = (tmp_path / "config.jsonc").read_text() + (tmp_path / "style.css").read_text()
+    assert "omarchy" not in text.lower() and "@import" not in text
+    assert waybar.read_position() == "top"
+
+
+def test_plain_hyprland_starts_waybar_at_login(commands, plain_hyprland):
+    assert waybar.render_extras({}) == []
+    assert waybar.render_extras({"waybar": True})[-1] == (
+        'pcall(function() hl.on("hyprland.start", function() hl.exec_cmd("waybar") end) end)'
+    )
+
+
+def test_omarchy_starts_waybar_with_its_hook():
+    assert waybar.render_extras({"waybar": True}) == []

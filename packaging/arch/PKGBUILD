@@ -19,7 +19,11 @@ optdepends=('libnm: saves Wi-Fi passwords from the Connectivity page'
             'impala: Wi-Fi manager opened by the Connectivity page'
             'bluetui: Bluetooth manager opened by the Connectivity page'
             'wiremix: audio mixer opened by the Sound page'
-            "waybar: alternative bar on Omarchy (which uses the Omarchy shell bar)")
+            'waybar: the bar on plain Hyprland, an alternative to the Omarchy shell bar on Omarchy'
+            'hypridle: lock, screen off and suspend when idle on plain Hyprland'
+            'hyprlock: the lock screen on plain Hyprland'
+            'hyprpaper: the wallpaper on plain Hyprland'
+            'brightnessctl: dims the screen before locking on plain Hyprland')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 # pinned by build-release.sh when the release is made
 sha256sums=('77c373ba7b98dbfe78575b80647063c7c631ea5efc2640d8ec1885336f9b6117')
