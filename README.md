@@ -1,50 +1,81 @@
 # Hyprdial
 
 [![tests](https://github.com/mvp-mark/hyprdial/actions/workflows/tests.yml/badge.svg)](https://github.com/mvp-mark/hyprdial/actions/workflows/tests.yml)
+[![release](https://img.shields.io/github/v/release/mvp-mark/hyprdial)](https://github.com/mvp-mark/hyprdial/releases/latest)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-A graphical settings app for [Hyprland](https://hypr.land), built with GTK4 + libadwaita (Python), with full
-integration for [Omarchy](https://omarchy.org). It writes its settings to one generated file and never edits your
-own config files or what Omarchy ships, so updates keep working and every change can be undone.
+**A graphical settings app for [Hyprland](https://hypr.land).** Configure your displays, keyboard and mouse,
+shortcuts, window look, sound, power, network, startup apps, language and more from windows, switches and sliders,
+instead of editing `hyprland.lua` by hand. Built with GTK4 and libadwaita (Python), with extra pages when it runs
+on [Omarchy](https://omarchy.org).
 
 ![Hyprdial on Omarchy's Ethereal theme](docs/screenshots/hero.jpg)
 
-**Requires Hyprland 0.56 or newer with the Lua configuration** (`~/.config/hypr/hyprland.lua`). With an older
-Hyprland, or a config still in `hyprland.conf`, the app opens with a notice and changes nothing in Hyprland.
-
-- **On Omarchy** every page is shown, and the app goes through Omarchy's own commands: themes, the Omarchy shell
-  bar, web apps, security setups, updates. Shortcuts and startup apps are written with Omarchy's helpers, so they
-  appear in its menus.
-- **On plain Hyprland** the Omarchy-only pages and options are hidden; shortcuts and startup apps use Hyprland's
-  own Lua API (`hl.bind`, `hl.on("hyprland.start")`), and the shortcut list comes from your `.lua` files.
-- **Distributions**: Arch and its derivatives, Fedora and openSUSE Tumbleweed (dependencies are installed with the
-  system's package manager); Debian and Ubuntu once they ship Hyprland 0.56. NixOS isn't supported: there the
-  configuration is declared in Nix, not written by apps.
+- **For any Hyprland 0.56 or newer** with the Lua configuration (`~/.config/hypr/hyprland.lua`). With an older
+  Hyprland, or a config still in `hyprland.conf`, it opens with a notice and changes nothing in Hyprland.
+- **Your config stays yours**: settings go to one generated file, `~/.config/hypr/hyprdial.lua`, loaded by a single
+  `require` line in `hyprland.lua`. Your own files are never rewritten, and every change can be undone.
+- **Changes apply live**, without restarting Hyprland; display changes revert by themselves unless you keep them.
+- **On Omarchy** it also covers themes, the Omarchy shell bar, web apps, security setups and updates, through
+  Omarchy's own commands (the screenshots here are from Omarchy).
+- **Linux distributions**: Arch and derivatives, Fedora and openSUSE Tumbleweed; Debian and Ubuntu once they ship
+  Hyprland 0.56. NixOS isn't supported: there the configuration is declared in Nix, not written by apps.
 
 Hyprdial was called **omarchy-settings** before 1.0. Updating moves its files to the new names by itself (see
 [How settings are stored](#how-settings-are-stored)), and the `omarchy-settings` command keeps working.
 
+## Install
+
+**Arch, Omarchy** (ready package from the [latest release](https://github.com/mvp-mark/hyprdial/releases/latest)):
+
+```bash
+sudo pacman -U https://github.com/mvp-mark/hyprdial/releases/download/v1.0.0/hyprdial-1.0.0-1-any.pkg.tar.zst
+```
+
+**Any supported distribution** (from the source, for your user only):
+
+```bash
+git clone https://github.com/mvp-mark/hyprdial
+cd hyprdial && ./install.sh --deps   # installs what is missing with pacman, dnf or zypper, then the app
+```
+
+Then open **Hyprdial** from your app launcher, or run `hyprdial`. More options (RPM, building the package,
+dependencies per distribution) are under [Installation details](#installation-details).
+
 ## Highlights
 
-- **Up to thirteen pages in a sidebar** grouped like Omarchy's menu: Style, Hardware and System (ten on plain
-  Hyprland).
-- **Follows your theme**: on Omarchy, buttons and switches take the current theme's accent color, and change
-  with it.
-- **Live changes**: Hyprland options, displays, sound and the night light apply at once; display changes revert
-  by themselves unless you keep them.
+- **A sidebar of pages** grouped like Omarchy's menu: Style, Hardware and System. Ten pages on any Hyprland,
+  thirteen on Omarchy.
+- **Shortcuts without editing Lua**: record a new key combination (keys, mouse buttons or the wheel), disable a
+  shortcut or add your own to open an app or run a command, with warnings when keys are already taken.
+- **Displays by drag and drop**: arrange monitors, pick resolution, refresh rate, scale and rotation.
 - **Find anything** with **Ctrl+F**, and see what you changed from the defaults under **☰ → Changed
   settings**, each setting marked with a bar of the accent color.
-- **Safe by design**: one generated file for Hyprland settings, backups before touching your files, Undo where it
-  matters, passwords asked by the system in a visible terminal or a polkit prompt.
+- **Safe by design**: one generated file, backups before touching your files, Undo where it matters, passwords
+  asked by the system in a visible terminal or a polkit prompt.
+- **Follows your theme** on Omarchy: buttons and switches take the current theme's accent color.
 - **Your language**: the interface follows the system language: English, Brazilian Portuguese, Spanish, French
   and German.
 
 ![Moving through the pages, searching for "night" and listing the changed settings](docs/screenshots/demo.gif)
 
+## Omarchy and plain Hyprland
+
+| | Plain Hyprland | Omarchy |
+|---|---|---|
+| Pages | Appearance, Displays, Sound, Power, Input, Connectivity, Apps, Shortcuts, Accessibility, System | the same, plus Themes, Bar and fonts, Security |
+| Shortcuts read from | every `.lua` file in `~/.config/hypr` (`hl.bind` calls) | Omarchy's binding files and your `bindings.lua` |
+| Shortcuts and startup apps written with | Hyprland's Lua API (`hl.bind`, `hl.on("hyprland.start")`) | Omarchy's helpers (`o.bind`, `o.launch_on_start`), so they show in its menus |
+| Password prompts | your terminal (`xdg-terminal-exec`, kitty, foot, alacritty…) | Omarchy's floating terminal |
+| Also on Omarchy only | | web apps, power button, idle times, hibernation, Omarchy updates and snapshots |
+
+Hyprdial tells them apart by Omarchy's `omarchy` command and Lua helpers. `HYPRDIAL_PLATFORM=hyprland hyprdial`
+shows the plain Hyprland version on an Omarchy machine.
+
 ## Pages
 
-The pages sit in a sidebar grouped like Omarchy's menu. On a narrow window the sidebar and the page take turns,
-with a back button. Pages and options marked *(Omarchy)* below are shown only on Omarchy.
+On a narrow window the sidebar and the page take turns, with a back button. Pages and options marked
+*(Omarchy)* are shown only on Omarchy.
 
 ### Style
 
@@ -57,7 +88,7 @@ with a back button. Pages and options marked *(Omarchy)* below are shown only on
 
 | | |
 |---|---|
-| ![Displays](docs/screenshots/monitors.png) **Displays**: drag to arrange, resolution, refresh rate, scale, brightness | ![Sound](docs/screenshots/sound.png) **Sound**: devices, volume and the volume of each app |
+| ![Displays](docs/screenshots/monitors.png) **Displays**: drag to arrange, resolution, refresh rate, scale; brightness *(Omarchy)* | ![Sound](docs/screenshots/sound.png) **Sound**: devices, volume and the volume of each app |
 | ![Power](docs/screenshots/power.png) **Power**: profile, night light; power button, idle and hibernation *(Omarchy)* | ![Input](docs/screenshots/input.png) **Input**: keyboard layout and repeat, mouse, touchpad |
 
 **Connectivity** (Ethernet, Wi-Fi and Bluetooth, with pairing) has no picture here: it would show network names
@@ -68,8 +99,8 @@ and addresses.
 | | |
 |---|---|
 | ![Apps](docs/screenshots/apps.png) **Apps**: default apps, startup apps, web apps *(Omarchy)* | ![Shortcuts](docs/screenshots/shortcuts.png) **Shortcuts**: change, disable or add shortcuts, with conflict warnings |
-| ![Accessibility](docs/screenshots/accessibility.png) **Accessibility**: text size, pointer size, animations | ![Security](docs/screenshots/security.png) **Security** *(Omarchy)*: fingerprint, FIDO2 key and SSH server |
-| ![System](docs/screenshots/system.png) **System**: time, language, notifications, printers, updates and snapshots | ![Changed settings](docs/screenshots/changed.png) **☰ → Changed settings**: everything that differs from the defaults |
+| ![Accessibility](docs/screenshots/accessibility.png) **Accessibility**: pointer size, animations; text size *(Omarchy)* | ![Security](docs/screenshots/security.png) **Security** *(Omarchy)*: fingerprint, FIDO2 key and SSH server |
+| ![System](docs/screenshots/system.png) **System**: time, language, printers; notifications, updates and snapshots *(Omarchy)* | ![Changed settings](docs/screenshots/changed.png) **☰ → Changed settings**: everything that differs from the defaults |
 
 Press **Ctrl+F** (or the search button) to find any setting by name on every page: accents and case don't
 matter, and choosing a result opens its page, expands what is around it and highlights it.
@@ -125,7 +156,11 @@ Waybar instead of it:
   on every theme change, `style.css` imports it, and a `theme-set` hook reloads Waybar.
 - Position, restart and shortcuts to edit both files.
 
-## Installation
+## Installation details
+
+### From the source (`install.sh`)
+
+Installs for your user only (`~/.local/share/hyprdial`, `~/.local/bin/hyprdial`, the launcher entry), no pip:
 
 ```bash
 ./install.sh --deps   # installs missing dependencies (asks for your sudo password), then the app
@@ -158,6 +193,10 @@ password through polkit. On another system it only shows what is missing.
 
 To try it without installing: `python3 -m hyprdial` from the project folder.
 
+An `./install.sh` copy can live next to a package: the one in `~/.local/bin` comes first in `PATH`, so remove it
+(`rm -r ~/.local/share/hyprdial ~/.local/bin/hyprdial ~/.local/bin/omarchy-settings`) to use the package; the
+System page warns when both are installed.
+
 ### As a pacman package (Arch, Omarchy)
 
 Each [release](https://github.com/mvp-mark/hyprdial/releases) carries a ready package (`arch=any`, so it fits every
@@ -185,13 +224,9 @@ Publishing it on the AUR is described in [packaging/arch/README.md](packaging/ar
 
 ### As an RPM (Fedora, openSUSE)
 
-`packaging/rpm/hyprdial.spec` builds a `noarch` RPM with each family's dependencies; CI builds and installs it on
-Fedora and openSUSE Tumbleweed. Building it and publishing it on COPR and OBS are described in
-[packaging/rpm/README.md](packaging/rpm/README.md).
-
-It can live next to an `./install.sh` copy: the one in `~/.local/bin` comes first in `PATH`, so remove it
-(`rm -r ~/.local/share/hyprdial ~/.local/bin/hyprdial ~/.local/bin/omarchy-settings`) to use the package; the
-System page warns when both are installed.
+There is no published RPM repository yet. `packaging/rpm/hyprdial.spec` builds a `noarch` RPM with each family's
+dependencies (CI builds and installs it on Fedora and openSUSE Tumbleweed); how to build it and to publish it on
+COPR and OBS is in [packaging/rpm/README.md](packaging/rpm/README.md).
 
 ## Language
 
