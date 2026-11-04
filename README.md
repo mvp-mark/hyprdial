@@ -166,7 +166,7 @@ machine). It installs system-wide, with the app in `/usr/share/hyprdial`, the `h
 before 1.0:
 
 ```bash
-sudo pacman -U https://github.com/mvp-mark/hyprdial/releases/download/v0.6.0/hyprdial-0.6.0-1-any.pkg.tar.zst
+sudo pacman -U https://github.com/mvp-mark/hyprdial/releases/download/v1.0.0/hyprdial-1.0.0-1-any.pkg.tar.zst
 ```
 
 Or build it yourself from `packaging/arch/PKGBUILD`, which takes the release tag's source and compiles the
