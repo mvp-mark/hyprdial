@@ -183,6 +183,12 @@ cd hyprdial/packaging/arch && makepkg -si
 
 Publishing it on the AUR is described in [packaging/arch/README.md](packaging/arch/README.md).
 
+### As an RPM (Fedora, openSUSE)
+
+`packaging/rpm/hyprdial.spec` builds a `noarch` RPM with each family's dependencies; CI builds and installs it on
+Fedora and openSUSE Tumbleweed. Building it and publishing it on COPR and OBS are described in
+[packaging/rpm/README.md](packaging/rpm/README.md).
+
 It can live next to an `./install.sh` copy: the one in `~/.local/bin` comes first in `PATH`, so remove it
 (`rm -r ~/.local/share/hyprdial ~/.local/bin/hyprdial ~/.local/bin/omarchy-settings`) to use the package; the
 System page warns when both are installed.
@@ -264,6 +270,7 @@ hyprdial/
                      (ethernet, wifi, bluetooth, webapps, autostart), the search dialog and dependencies
 data/                .desktop
 packaging/arch/      PKGBUILD, .SRCINFO, the release build and the AUR publishing script
+packaging/rpm/       RPM spec for Fedora and openSUSE (COPR, OBS)
 docs/releases/       release notes, one file per tag (the release workflow publishes them)
 docs/screenshots/    images used by this README
 po/                  template (.pot) and translations (.po)
@@ -274,8 +281,8 @@ pyproject.toml       ruff and pytest settings
 
 ## Next steps
 
-- The package on the AUR: everything is ready in `packaging/arch/` (see its README); it needs the maintainer's
-  AUR account.
+- The package on the AUR, COPR and OBS: everything is ready in `packaging/` (see the READMEs there); each needs
+  the maintainer's account.
 - Native speakers' review of the Spanish, French and German translations, and more languages.
 
 ## License

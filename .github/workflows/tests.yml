@@ -74,3 +74,15 @@ jobs:
 
       - name: Run tests
         run: python3 -m pytest -q -rs
+
+      - name: Build and install the RPM (Fedora, openSUSE)
+        if: ${{ !startsWith(matrix.image, 'debian') }}
+        run: |
+          if command -v dnf; then dnf install -y rpm-build desktop-file-utils; install=(dnf install -y)
+          else zypper --non-interactive install rpm-build desktop-file-utils; install=(zypper --non-interactive install --allow-unsigned-rpm); fi
+          version=$(sed -n 's/^Version: *//p' packaging/rpm/hyprdial.spec)
+          mkdir -p ~/rpmbuild/SOURCES
+          tar --transform "s,^\.,hyprdial-$version," --exclude=./.git -czf ~/rpmbuild/SOURCES/hyprdial-$version.tar.gz .
+          rpmbuild -ba packaging/rpm/hyprdial.spec
+          "${install[@]}" ~/rpmbuild/RPMS/noarch/hyprdial-*.rpm
+          test "$(hyprdial --version)" = "hyprdial $version"

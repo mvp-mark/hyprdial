@@ -33,7 +33,7 @@ repository (empty the first time, which creates the `hyprdial` package) and push
 
 ## A new release
 
-1. Bump `__version__` in `hyprdial/__init__.py` and `pkgver` here (back to `pkgrel=1`,
+1. Bump `__version__` in `hyprdial/__init__.py`, `pkgver` here and `Version` in `packaging/rpm/hyprdial.spec` (back to `pkgrel=1`,
    `sha256sums=('SKIP')`, then `makepkg --printsrcinfo > .SRCINFO`), point the main README's `pacman -U` line at
    the new version, and write the notes in `docs/releases/vX.Y.Z.md`.
 2. Commit, push, then tag: `git tag -a vX.Y.Z -m "Hyprdial X.Y.Z" && git push origin vX.Y.Z`.
