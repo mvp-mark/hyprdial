@@ -420,7 +420,7 @@ class MonitorsPage(Adw.PreferencesPage):
     def _restore_row(self, name: str) -> Adw.ActionRow:
         row = button_row(
             _("Restore this display"),
-            _("Returns to what is in monitors.lua"),
+            _("Returns to what your config says"),
             _("Restore"),
             lambda: self._restore(name),
         )
@@ -475,7 +475,7 @@ class MonitorsPage(Adw.PreferencesPage):
 
     def _restore(self, name: str) -> None:
         if self.store.get_monitor(name) is None:
-            self.win.toast(_("{name} already uses monitors.lua").format(name=name))
+            self.win.toast(_("{name} already uses your config").format(name=name))
             return
         self.store.unset_monitor(name)
         self.win.toast(_("{name} restored").format(name=name))

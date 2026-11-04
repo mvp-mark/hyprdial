@@ -31,7 +31,8 @@ helpers.lua`). `HYPRDIAL_PLATFORM=omarchy|hyprland` forces one (tests, trying th
 
 - **Pages and groups that only make sense on Omarchy** are hidden elsewhere (`app.OMARCHY_ONLY`: themes, bar,
   security; web apps, the power button and idle times inside their pages). Rows that call an `omarchy-*`
-  command check `core.have` first, so they disappear on their own.
+  command check `core.have` first, so they disappear on their own: on plain Hyprland `core.have` says no to every
+  `omarchy*` command, so `HYPRDIAL_PLATFORM=hyprland` on an Omarchy machine shows what a plain Hyprland shows.
 - **Lua lines for the generated file** come from `core.bind_call` and `core.on_start_call`: Omarchy's `o.bind` /
   `o.launch_on_start` on Omarchy (its shortcut list and uwsm launching keep working), `hl.bind` /
   `hl.on("hyprland.start", ...)` elsewhere.

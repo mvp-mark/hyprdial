@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hyprdial\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 22:29-0400\n"
+"POT-Creation-Date: 2026-11-03 23:13-0400\n"
 "PO-Revision-Date: 2026-11-02 04:00-0400\n"
 "Last-Translator: omarchy-settings contributors\n"
 "Language-Team: French\n"
@@ -475,8 +475,8 @@ msgstr[1] "{n} commandes"
 msgid "Could not change {name}"
 msgstr "Impossible de modifier {name}"
 
-#: hyprdial/pages/autostart.py:112 hyprdial/pages/power.py:328
-#: hyprdial/pages/power.py:339 hyprdial/pages/security.py:53
+#: hyprdial/pages/autostart.py:112 hyprdial/pages/power.py:329
+#: hyprdial/pages/power.py:340 hyprdial/pages/security.py:53
 #: hyprdial/pages/security.py:71 hyprdial/pages/webapps.py:127
 #: hyprdial/pages/webapps.py:147
 msgid "Remove"
@@ -800,7 +800,7 @@ msgstr "omarchy-bar introuvable : mettez à jour Omarchy pour utiliser cette pag
 #: hyprdial/pages/bar.py:322 hyprdial/pages/bar.py:358
 #: hyprdial/pages/bar.py:445 hyprdial/pages/bluetooth.py:213
 #: hyprdial/pages/ethernet.py:223 hyprdial/pages/system.py:129
-#: hyprdial/pages/system.py:253 hyprdial/pages/wifi.py:268
+#: hyprdial/pages/system.py:254 hyprdial/pages/wifi.py:268
 #: hyprdial/pages/wifi.py:306 hyprdial/pages/wifi.py:321
 #, python-brace-format
 msgid "Failed: {error}"
@@ -815,7 +815,7 @@ msgstr "erreur inconnue"
 msgid "Custom — {format}"
 msgstr "Personnalisé — {format}"
 
-#: hyprdial/pages/bar.py:198 hyprdial/pages/system.py:168
+#: hyprdial/pages/bar.py:198 hyprdial/pages/system.py:169
 msgid "Clock format"
 msgstr "Format de l'horloge"
 
@@ -941,8 +941,8 @@ msgstr "Waybar n'est pas installé"
 msgid "Install it to use it instead of the Omarchy bar"
 msgstr "Installez-le pour l'utiliser à la place de la barre d'Omarchy"
 
-#: hyprdial/pages/bar.py:383 hyprdial/pages/system.py:213
-#: hyprdial/pages/system.py:233
+#: hyprdial/pages/bar.py:383 hyprdial/pages/system.py:214
+#: hyprdial/pages/system.py:234
 msgid "Install"
 msgstr "Installer"
 
@@ -1077,7 +1077,7 @@ msgid "Pairing code"
 msgstr "Code d'appairage"
 
 #: hyprdial/pages/bluetooth.py:35 hyprdial/pages/shortcuts.py:152
-#: hyprdial/pages/system.py:232 hyprdial/pages/wifi.py:53
+#: hyprdial/pages/system.py:233 hyprdial/pages/wifi.py:53
 #: hyprdial/pages/wifi.py:348 hyprdial/ui.py:174
 msgid "Cancel"
 msgstr "Annuler"
@@ -1310,7 +1310,7 @@ msgstr "Impossible d'appairer {name}"
 msgid "Dependencies"
 msgstr "Dépendances"
 
-#: hyprdial/pages/dependencies.py:38 hyprdial/pages/power.py:75
+#: hyprdial/pages/dependencies.py:38 hyprdial/pages/power.py:76
 msgid "Checking…"
 msgstr "Vérification…"
 
@@ -2102,8 +2102,8 @@ msgid "Restore this display"
 msgstr "Restaurer cet écran"
 
 #: hyprdial/pages/monitors.py:423
-msgid "Returns to what is in monitors.lua"
-msgstr "Revient au contenu de monitors.lua"
+msgid "Returns to what your config says"
+msgstr "Revient à ce que dit votre configuration"
 
 #: hyprdial/pages/monitors.py:461
 msgid "The only active display can't be turned off"
@@ -2111,8 +2111,8 @@ msgstr "Le seul écran actif ne peut pas être désactivé"
 
 #: hyprdial/pages/monitors.py:478
 #, python-brace-format
-msgid "{name} already uses monitors.lua"
-msgstr "{name} utilise déjà monitors.lua"
+msgid "{name} already uses your config"
+msgstr "{name} utilise déjà votre configuration"
 
 #: hyprdial/pages/monitors.py:481
 #, python-brace-format
@@ -2198,7 +2198,7 @@ msgstr "Ne rien faire"
 msgid "Power profile"
 msgstr "Profil d'énergie"
 
-#: hyprdial/pages/power.py:57 hyprdial/pages/power.py:132
+#: hyprdial/pages/power.py:57 hyprdial/pages/power.py:133
 msgid "Night light"
 msgstr "Éclairage nocturne"
 
@@ -2210,157 +2210,157 @@ msgstr "Des couleurs plus chaudes pour réduire la lumière bleue."
 msgid "Suspend and hibernate"
 msgstr "Veille et hibernation"
 
-#: hyprdial/pages/power.py:75
+#: hyprdial/pages/power.py:76
 msgid "Hibernation"
 msgstr "Hibernation"
 
-#: hyprdial/pages/power.py:75 hyprdial/pages/power.py:328
-#: hyprdial/pages/power.py:339 hyprdial/pages/security.py:57
+#: hyprdial/pages/power.py:76 hyprdial/pages/power.py:329
+#: hyprdial/pages/power.py:340 hyprdial/pages/security.py:57
 msgid "Set up"
 msgstr "Configurer"
 
-#: hyprdial/pages/power.py:83
+#: hyprdial/pages/power.py:84
 msgid "Power button"
 msgstr "Bouton d'alimentation"
 
-#: hyprdial/pages/power.py:87
+#: hyprdial/pages/power.py:88
 msgid "When the power button is pressed"
 msgstr "Quand on appuie sur le bouton d'alimentation"
 
-#: hyprdial/pages/power.py:88
+#: hyprdial/pages/power.py:89
 msgid "Works on the lock screen too"
 msgstr "Fonctionne aussi sur l'écran de verrouillage"
 
-#: hyprdial/pages/power.py:100
+#: hyprdial/pages/power.py:101
 msgid "No power profiles available"
 msgstr "Aucun profil d'énergie disponible"
 
-#: hyprdial/pages/power.py:103
+#: hyprdial/pages/power.py:104
 msgid "Profile"
 msgstr "Profil"
 
-#: hyprdial/pages/power.py:114
+#: hyprdial/pages/power.py:115
 msgid "Could not change the power profile"
 msgstr "Impossible de changer le profil d'énergie"
 
-#: hyprdial/pages/power.py:132
+#: hyprdial/pages/power.py:133
 msgid "Turns it on or off now"
 msgstr "L'active ou la désactive maintenant"
 
-#: hyprdial/pages/power.py:136
+#: hyprdial/pages/power.py:137
 msgid "Warmth"
 msgstr "Chaleur"
 
-#: hyprdial/pages/power.py:136
+#: hyprdial/pages/power.py:137
 msgid "Lower is warmer"
 msgstr "Plus bas, c'est plus chaud"
 
-#: hyprdial/pages/power.py:150
+#: hyprdial/pages/power.py:151
 msgid "Turn on automatically"
 msgstr "Activer automatiquement"
 
-#: hyprdial/pages/power.py:154
+#: hyprdial/pages/power.py:155
 msgid "Every day at the times below"
 msgstr "Tous les jours aux heures ci-dessous"
 
-#: hyprdial/pages/power.py:156
+#: hyprdial/pages/power.py:157
 msgid "Turns on at (HH:MM)"
 msgstr "S'active à (HH:MM)"
 
-#: hyprdial/pages/power.py:157
+#: hyprdial/pages/power.py:158
 msgid "Turns off at (HH:MM)"
 msgstr "Se désactive à (HH:MM)"
 
-#: hyprdial/pages/power.py:170
+#: hyprdial/pages/power.py:171
 msgid "Could not change the night light"
 msgstr "Impossible de modifier l'éclairage nocturne"
 
-#: hyprdial/pages/power.py:195
+#: hyprdial/pages/power.py:196
 msgid "Use times like 20:00 and 07:00"
 msgstr "Utilisez des heures comme 20:00 et 07:00"
 
-#: hyprdial/pages/power.py:199
+#: hyprdial/pages/power.py:200
 msgid "The start and end times must be different"
 msgstr "Les heures de début et de fin doivent être différentes"
 
-#: hyprdial/pages/power.py:232
+#: hyprdial/pages/power.py:233
 #, python-brace-format
 msgid "Night light scheduled from {start} to {end}"
 msgstr "Éclairage nocturne programmé de {start} à {end}"
 
-#: hyprdial/pages/power.py:234 hyprdial/pages/power.py:250
+#: hyprdial/pages/power.py:235 hyprdial/pages/power.py:251
 msgid "Could not save the schedule"
 msgstr "Impossible d'enregistrer la programmation"
 
-#: hyprdial/pages/power.py:248
+#: hyprdial/pages/power.py:249
 msgid "Night light schedule turned off"
 msgstr "Programmation de l'éclairage nocturne désactivée"
 
-#: hyprdial/pages/power.py:260
+#: hyprdial/pages/power.py:261
 msgid "Power button changed"
 msgstr "Bouton d'alimentation modifié"
 
-#: hyprdial/pages/power.py:260
+#: hyprdial/pages/power.py:261
 msgid "Could not save the setting"
 msgstr "Impossible d'enregistrer le réglage"
 
-#: hyprdial/pages/power.py:268
+#: hyprdial/pages/power.py:269
 msgid "Idle"
 msgstr "Inactivité"
 
-#: hyprdial/pages/power.py:268
+#: hyprdial/pages/power.py:269
 msgid "Counted from the moment you stop using the computer."
 msgstr "Compté à partir du moment où vous cessez d'utiliser l'ordinateur."
 
-#: hyprdial/pages/power.py:270
+#: hyprdial/pages/power.py:271
 msgid "Screensaver after"
 msgstr "Économiseur d'écran après"
 
-#: hyprdial/pages/power.py:273
+#: hyprdial/pages/power.py:274
 msgid "Lock the screen after"
 msgstr "Verrouiller l'écran après"
 
-#: hyprdial/pages/power.py:273
+#: hyprdial/pages/power.py:274
 msgid "Asks for the password to come back"
 msgstr "Demande le mot de passe pour revenir"
 
-#: hyprdial/pages/power.py:278
+#: hyprdial/pages/power.py:279
 msgid "Stay awake"
 msgstr "Rester éveillé"
 
-#: hyprdial/pages/power.py:279
+#: hyprdial/pages/power.py:280
 msgid "Pauses the screensaver and lock until you turn this off"
 msgstr "Suspend l'économiseur d'écran et le verrouillage jusqu'à ce que vous le désactiviez"
 
-#: hyprdial/pages/power.py:298
+#: hyprdial/pages/power.py:299
 msgid "Could not write shell.json"
 msgstr "Impossible d'écrire shell.json"
 
-#: hyprdial/pages/power.py:312
+#: hyprdial/pages/power.py:313
 msgid "Suspend in the system menu"
 msgstr "Veille dans le menu système"
 
-#: hyprdial/pages/power.py:313
+#: hyprdial/pages/power.py:314
 msgid "Shows Suspend next to Lock and Shut down"
 msgstr "Affiche Mettre en veille à côté de Verrouiller et Éteindre"
 
-#: hyprdial/pages/power.py:324
+#: hyprdial/pages/power.py:325
 msgid "Set up: Hibernate saves your session to disk and turns off"
 msgstr "Configurée : l'hibernation enregistre votre session sur le disque et éteint"
 
-#: hyprdial/pages/power.py:326
+#: hyprdial/pages/power.py:327
 msgid "Not set up; needs a swap file as big as the memory"
 msgstr "Non configurée ; il faut un fichier d'échange aussi grand que la mémoire"
 
-#: hyprdial/pages/power.py:334
+#: hyprdial/pages/power.py:335
 msgid "Remove hibernation?"
 msgstr "Supprimer l'hibernation ?"
 
-#: hyprdial/pages/power.py:334
+#: hyprdial/pages/power.py:335
 msgid "Set up hibernation?"
 msgstr "Configurer l'hibernation ?"
 
-#: hyprdial/pages/power.py:336
+#: hyprdial/pages/power.py:337
 msgid "Opens a terminal that asks for your password, changes the swap file and rebuilds the boot image. It takes a minute or two."
 msgstr "Ouvre un terminal qui demande votre mot de passe, modifie le fichier d'échange et reconstruit l'image de démarrage. Cela prend une ou deux minutes."
 
@@ -2840,7 +2840,7 @@ msgstr "À propos de cet ordinateur"
 msgid "Changed to {value}"
 msgstr "Changé en {value}"
 
-#: hyprdial/pages/system.py:129 hyprdial/pages/system.py:253
+#: hyprdial/pages/system.py:129 hyprdial/pages/system.py:254
 msgid "Not changed"
 msgstr "Inchangé"
 
@@ -2848,7 +2848,7 @@ msgstr "Inchangé"
 msgid "Time zone"
 msgstr "Fuseau horaire"
 
-#: hyprdial/pages/system.py:143 hyprdial/pages/system.py:212
+#: hyprdial/pages/system.py:143 hyprdial/pages/system.py:213
 msgid "Type to search"
 msgstr "Tapez pour rechercher"
 
@@ -2868,162 +2868,162 @@ msgstr "Impossible de modifier l'heure automatique"
 msgid "Set the time automatically"
 msgstr "Régler l'heure automatiquement"
 
-#: hyprdial/pages/system.py:168
+#: hyprdial/pages/system.py:169
 msgid "12 or 24 hours: Bar and fonts → Clock format"
 msgstr "12 ou 24 heures : Barre et polices → Format de l'horloge"
 
-#: hyprdial/pages/system.py:201
+#: hyprdial/pages/system.py:202
 msgid "System language"
 msgstr "Langue du système"
 
-#: hyprdial/pages/system.py:205
+#: hyprdial/pages/system.py:206
 msgid "No languages listed"
 msgstr "Aucune langue listée"
 
-#: hyprdial/pages/system.py:210
+#: hyprdial/pages/system.py:211
 msgid "Install a language"
 msgstr "Installer une langue"
 
-#: hyprdial/pages/system.py:212
+#: hyprdial/pages/system.py:213
 msgid "Suggested from your keyboard layout"
 msgstr "Suggérée d'après la disposition du clavier"
 
-#: hyprdial/pages/system.py:220
+#: hyprdial/pages/system.py:221
 #, python-brace-format
 msgid "Install {language}?"
 msgstr "Installer {language} ?"
 
-#: hyprdial/pages/system.py:222
+#: hyprdial/pages/system.py:223
 msgid "Opens a terminal that asks for your password, enables the language in /etc/locale.gen and runs locale-gen. With “Install and use” it also becomes the system language when it finishes (from your next login)."
 msgstr "Ouvre un terminal qui demande votre mot de passe, active la langue dans /etc/locale.gen et lance locale-gen. Avec « Installer et utiliser », elle devient aussi la langue du système une fois terminé (à partir de la prochaine connexion)."
 
-#: hyprdial/pages/system.py:228
+#: hyprdial/pages/system.py:229
 msgid "Opens a terminal that asks for your password and installs the language's package. With “Install and use” it also becomes the system language when it finishes (from your next login)."
 msgstr "Ouvre un terminal qui demande votre mot de passe et installe le paquet de la langue. Avec « Installer et utiliser », elle devient aussi la langue du système une fois terminé (à partir de la prochaine connexion)."
 
-#: hyprdial/pages/system.py:234
+#: hyprdial/pages/system.py:235
 msgid "Install and use"
 msgstr "Installer et utiliser"
 
-#: hyprdial/pages/system.py:250
+#: hyprdial/pages/system.py:251
 #, python-brace-format
 msgid "{language} is the system language from your next login"
 msgstr "{language} est la langue du système à partir de la prochaine connexion"
 
-#: hyprdial/pages/system.py:258
+#: hyprdial/pages/system.py:259
 msgid "The Omarchy shell isn't answering"
 msgstr "Le shell d'Omarchy ne répond pas"
 
-#: hyprdial/pages/system.py:264
+#: hyprdial/pages/system.py:265
 msgid "Could not change Do not disturb"
 msgstr "Impossible de modifier Ne pas déranger"
 
-#: hyprdial/pages/system.py:268
+#: hyprdial/pages/system.py:269
 msgid "Do not disturb"
 msgstr "Ne pas déranger"
 
-#: hyprdial/pages/system.py:268
+#: hyprdial/pages/system.py:269
 msgid "Hides notifications; critical ones still show"
 msgstr "Masque les notifications ; les critiques s'affichent quand même"
 
-#: hyprdial/pages/system.py:272
+#: hyprdial/pages/system.py:273
 msgid "Recent notifications"
 msgstr "Notifications récentes"
 
-#: hyprdial/pages/system.py:272
+#: hyprdial/pages/system.py:273
 msgid "Shows them again on screen"
 msgstr "Les affiche de nouveau à l'écran"
 
-#: hyprdial/pages/system.py:272
+#: hyprdial/pages/system.py:273
 msgid "Show"
 msgstr "Afficher"
 
-#: hyprdial/pages/system.py:293
+#: hyprdial/pages/system.py:294
 msgid "Update Omarchy"
 msgstr "Mettre à jour Omarchy"
 
-#: hyprdial/pages/system.py:293
+#: hyprdial/pages/system.py:294
 msgid "Checking for updates…"
 msgstr "Recherche de mises à jour…"
 
-#: hyprdial/pages/system.py:293
+#: hyprdial/pages/system.py:294
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: hyprdial/pages/system.py:299 hyprdial/pages/system.py:370
+#: hyprdial/pages/system.py:300 hyprdial/pages/system.py:371
 msgid "Opens a terminal with the update"
 msgstr "Ouvre un terminal avec la mise à jour"
 
-#: hyprdial/pages/system.py:303
+#: hyprdial/pages/system.py:304
 msgid "Create a snapshot now"
 msgstr "Créer un instantané maintenant"
 
-#: hyprdial/pages/system.py:304
+#: hyprdial/pages/system.py:305
 msgid "A restore point of the system; asks for your password in a terminal"
 msgstr "Un point de restauration du système ; demande votre mot de passe dans un terminal"
 
-#: hyprdial/pages/system.py:305
+#: hyprdial/pages/system.py:306
 msgid "Create"
 msgstr "Créer"
 
-#: hyprdial/pages/system.py:311
+#: hyprdial/pages/system.py:312
 msgid "Going back to a snapshot"
 msgstr "Revenir à un instantané"
 
-#: hyprdial/pages/system.py:312
+#: hyprdial/pages/system.py:313
 msgid "Choose it in the boot menu when the computer starts"
 msgstr "Choisissez-le dans le menu de démarrage au lancement de l'ordinateur"
 
-#: hyprdial/pages/system.py:319
+#: hyprdial/pages/system.py:320
 #, python-brace-format
 msgid "package {name}"
 msgstr "paquet {name}"
 
-#: hyprdial/pages/system.py:320
+#: hyprdial/pages/system.py:321
 msgid "installed with install.sh"
 msgstr "installé avec install.sh"
 
-#: hyprdial/pages/system.py:321
+#: hyprdial/pages/system.py:322
 msgid "running from the source folder"
 msgstr "lancé depuis le dossier des sources"
 
-#: hyprdial/pages/system.py:335
+#: hyprdial/pages/system.py:336
 #, python-brace-format
 msgid "the package {name}"
 msgstr "le paquet {name}"
 
-#: hyprdial/pages/system.py:336
+#: hyprdial/pages/system.py:337
 msgid "a copy from install.sh"
 msgstr "une copie d'install.sh"
 
-#: hyprdial/pages/system.py:337
+#: hyprdial/pages/system.py:338
 msgid "a copy from install.sh with the app's old name, omarchy-settings"
 msgstr "une copie d'install.sh avec l'ancien nom de l'app, omarchy-settings"
 
-#: hyprdial/pages/system.py:340
+#: hyprdial/pages/system.py:341
 msgid "Installed twice"
 msgstr "Installé deux fois"
 
-#: hyprdial/pages/system.py:342
+#: hyprdial/pages/system.py:343
 #, python-brace-format
 msgid "Also installed: {other}. The launcher opens only one of them ({path}); remove the one you don't use with {command}"
 msgstr "Également installé : {other}. Le lanceur n'ouvre que l'un des deux ({path}) ; supprimez celui que vous n'utilisez pas avec {command}"
 
-#: hyprdial/pages/system.py:357
+#: hyprdial/pages/system.py:358
 #, python-brace-format
 msgid "version {version} is available"
 msgstr "version {version} disponible"
 
-#: hyprdial/pages/system.py:358
+#: hyprdial/pages/system.py:359
 msgid "See"
 msgstr "Voir"
 
-#: hyprdial/pages/system.py:365
+#: hyprdial/pages/system.py:366
 #, python-brace-format
 msgid "Update available: {version}"
 msgstr "Mise à jour disponible : {version}"
 
-#: hyprdial/pages/system.py:368
+#: hyprdial/pages/system.py:369
 msgid "Omarchy is up to date"
 msgstr "Omarchy est à jour"
 

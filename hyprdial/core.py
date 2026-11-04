@@ -35,6 +35,12 @@ HEADER = (
 
 # --------------------------------------------------------------------------- processos
 def have(cmd: str) -> bool:
+    """The command is installed. On plain Hyprland Omarchy's commands count as missing, so a machine with them (or
+    HYPRDIAL_PLATFORM=hyprland on Omarchy) shows what plain Hyprland shows."""
+    from . import host
+
+    if cmd.startswith("omarchy") and host._detected == "hyprland":
+        return False
     return shutil.which(cmd) is not None
 
 

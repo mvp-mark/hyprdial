@@ -10,7 +10,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, Gtk  # noqa: E402
 
-from .. import __version__, core, system
+from .. import __version__, core, host, system
 from ..i18n import _
 from ..ui import Debouncer, bg, button_row, missing_row, switch_row
 
@@ -84,8 +84,8 @@ class SystemPage(Adw.PreferencesPage):
             self.archive_monitor.connect("changed", lambda *_a: self.reload_language())
 
         self.notify_group = Adw.PreferencesGroup(title=_("Notifications"))
-        self.add(self.notify_group)
-        if core.have("omarchy-shell"):
+        if core.have("omarchy-shell"):  # the Omarchy shell shows the notifications
+            self.add(self.notify_group)
             bg(system.dnd, self._populate_notifications)
 
         printers = Adw.PreferencesGroup(title=_("Printers"))
@@ -164,9 +164,10 @@ class SystemPage(Adw.PreferencesPage):
                 )
 
             self.time_group.add(switch_row(_("Set the time automatically"), subtitle, settings["ntp"], set_ntp))
-        self.time_group.add(
-            Adw.ActionRow(title=_("Clock format"), subtitle=_("12 or 24 hours: Bar and fonts → Clock format"))
-        )
+        if host.is_omarchy():  # the clock is in the Omarchy shell bar
+            self.time_group.add(
+                Adw.ActionRow(title=_("Clock format"), subtitle=_("12 or 24 hours: Bar and fonts → Clock format"))
+            )
 
     # -- language
     def _load_language(self) -> None:

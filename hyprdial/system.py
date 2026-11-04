@@ -248,7 +248,7 @@ def memory_gib() -> str:
 def about() -> list[tuple[str, str]]:
     """(key, value) pairs; keys are translated by the page."""
     info = [
-        ("omarchy", core.out(["omarchy", "version"])),
+        ("omarchy", core.out(["omarchy", "version"]) if host.is_omarchy() else ""),
         ("hostname", platform.node()),
         ("kernel", platform.release()),
         ("cpu", read_first("/proc/cpuinfo", "model name")),

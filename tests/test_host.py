@@ -76,3 +76,10 @@ def test_launch_and_tui(commands):
     commands.have = {"uwsm-app", "xdg-terminal-exec"}
     assert host.launch("gimp") == "uwsm-app -- gimp"
     assert host.tui_command("btop") == "xdg-terminal-exec btop"
+
+
+def test_omarchy_commands_count_as_missing_on_plain_hyprland(plain_hyprland):
+    from hyprdial import core
+
+    assert not core.have("omarchy-shell")
+    assert core.have("python3")
