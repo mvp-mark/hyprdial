@@ -2,7 +2,7 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import core, system
+from omarchy_settings import core, distro, system
 
 
 def test_time_settings(commands):
@@ -106,8 +106,10 @@ def test_app_location(monkeypatch, tmp_path):
 
 def test_other_copies(commands, monkeypatch, tmp_path):
     monkeypatch.setattr(system, "LOCAL_DIR", tmp_path)
+    commands.have = {"pacman"}
+    commands.answers["pacman -T omarchy-settings-gui"] = "omarchy-settings-gui"  # pacman -T: not installed
     assert system.other_copies("local") == []
-    commands.answers["pacman -Q omarchy-settings-gui"] = "omarchy-settings-gui 0.6.0-1"
+    commands.answers["pacman -T omarchy-settings-gui"] = ""
     (tmp_path / "omarchy_settings").mkdir()
     assert system.other_copies("local") == ["package"]
     assert system.other_copies("package") == ["local"]
@@ -146,3 +148,70 @@ def test_install_locale_command_on_plain_hyprland(commands, plain_hyprland):
     cmd = system.install_locale_command("pt_BR.UTF-8")
     assert cmd[:3] == ["kitty", "bash", "-c"]
     assert cmd[3].startswith("sudo sed -i") and cmd[3].endswith('read -rp "Press Enter to close"')
+
+
+def test_package_removal(commands, monkeypatch):
+    commands.have = {"dnf"}
+    monkeypatch.setattr(distro, "_family", "fedora")
+    assert system.package_removal() == "sudo dnf remove omarchy-settings-gui"
+
+
+def test_language_method(commands, monkeypatch, tmp_path):
+    gen = tmp_path / "locale.gen"
+    monkeypatch.setattr(system, "LOCALE_GEN", gen)
+    commands.have = {"locale-gen", "dnf"}
+    assert system.language_method() is None  # Arch without locale.gen: nothing to do
+    gen.write_text("#pt_BR.UTF-8 UTF-8\n")
+    assert system.language_method() == "locale-gen"
+    gen.unlink()
+    monkeypatch.setattr(distro, "_family", "fedora")
+    assert system.language_method() == "langpack"
+    commands.have = set()
+    assert system.language_method() is None
+
+
+@pytest.fixture
+def fedora(commands, monkeypatch, tmp_path):
+    monkeypatch.setattr(system, "LOCALE_GEN", tmp_path / "none")
+    monkeypatch.setattr(distro, "_family", "fedora")
+    commands.have = {"dnf", "kitty"}
+    commands.answers["dnf repoquery --qf %{name}\n glibc-langpack-*"] = (
+        "glibc-langpack-de\nglibc-langpack-en\nglibc-langpack-pt\nglibc-langpack-ast\nglibc-all-langpacks\n"
+    )
+    return commands
+
+
+def test_fedora_offers_langpacks_not_installed(fedora):
+    assert system.installable(["en_US.utf8", "en_GB.utf8", "C.utf8"]) == ["ast", "de", "pt"]
+
+
+def test_fedora_suggests_the_layouts_language(fedora):
+    assert system.suggest_install("br", ["de", "pt"]) == "pt"
+    assert system.suggest_install("de", ["de", "pt"]) == "de"
+    assert system.suggest_install("us", ["de", "pt"]) == ""
+
+
+def test_fedora_install_command(fedora, plain_hyprland):
+    assert system.install_command("pt")[3].startswith("sudo dnf install -y glibc-langpack-pt;")
+    with pytest.raises(ValueError):
+        system.install_command("pt; rm -rf ~")
+
+
+def test_installed_locale_after_installing():
+    available = ["en_US.utf8", "pt_BR.utf8", "pt_PT.utf8"]
+    assert system.installed_locale("pt_BR.UTF-8", available) == "pt_BR.utf8"
+    assert system.installed_locale("de_DE.UTF-8", available) is None
+    assert system.installed_locale("pt", available, "br") == "pt_BR.utf8"
+    assert system.installed_locale("pt", available, "pt") == "pt_PT.utf8"
+    assert system.installed_locale("pt", available) == "pt_BR.utf8"
+    assert system.installed_locale("de", available) is None
+
+
+def test_language_name(tmp_path):
+    iso = tmp_path / "iso.json"
+    iso.write_text(
+        '{"639-3": [{"alpha_3": "por", "alpha_2": "pt", "name": "Portuguese"}, {"alpha_3": "ast", "name": "Asturian"}]}'
+    )
+    assert system.language_name("pt", iso) == "Portuguese"
+    assert system.language_name("ast", iso) == "Asturian"
+    assert system.language_name("xx", iso) == "" and system.language_name("pt", tmp_path / "none") == ""

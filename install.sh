@@ -48,8 +48,14 @@ if (( ${#groups[@]} || with_waybar )); then
     mapfile -t -O "${#missing[@]}" missing < <(deps --missing --group optional | grep -x waybar)
   fi
   if (( ${#missing[@]} )); then
-    echo "Installing: ${missing[*]}"
-    sudo pacman -S --needed "${missing[@]}"
+    read -ra installer < <(deps --install-command) || true
+    if (( ${#installer[@]} )); then
+      echo "Installing: ${missing[*]}"
+      sudo "${installer[@]}" "${missing[@]}"
+    else
+      echo "Unknown package manager; install these yourself (Arch names): ${missing[*]}" >&2
+      exit 1
+    fi
   else
     echo "All dependencies are already installed."
   fi
@@ -61,7 +67,7 @@ if ! python3 -c 'import gi; gi.require_version("Adw", "1"); gi.require_version("
   exit 1
 fi
 
-if pacman -Q omarchy-settings-gui &>/dev/null; then
+if command -v pacman >/dev/null && pacman -Q omarchy-settings-gui &>/dev/null; then
   echo "Note: the omarchy-settings-gui package is installed too. This copy in $BIN_DIR comes first in PATH, so the"
   echo "launcher will open it instead of the package's. To keep only the package, remove this copy with:"
   echo "  rm -r $APP_DIR $BIN_DIR/omarchy-settings"

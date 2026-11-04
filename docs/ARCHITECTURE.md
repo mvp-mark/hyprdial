@@ -40,6 +40,15 @@ helpers.lua`). `HYPRDIAL_PLATFORM=omarchy|hyprland` forces one (tests, trying th
   banner and `HyprStore.read_only` keeps every change in memory; pages that don't write Hyprland's config work.
 - Only `hyprland.lua` is supported: Hyprland 0.55 made it the default and 0.57 drops `hyprland.conf`.
 
+## Distributions
+
+`distro.py` reads `/etc/os-release` (ID, ID_LIKE) into a family: arch, fedora, suse or debian, each with its
+package manager (`pacman`, `dnf`, `zypper`, `apt-get`). `deps.py` keeps Arch's package names plus each family's
+own (`None`: not packaged there, so not listed); CI installs them on Fedora, openSUSE Tumbleweed and Debian to
+prove they exist. On an unknown family the dependencies dialog only shows what is missing. Languages are
+installed with `/etc/locale.gen` + `locale-gen` where that exists, with `glibc-langpack-*` on Fedora, and not at
+all elsewhere (openSUSE ships every locale).
+
 ## Changing the system: Omarchy first
 
 1. **An `omarchy …` command exists** (`omarchy theme set`, `omarchy toggle touchpad`, `omarchy default browser`,

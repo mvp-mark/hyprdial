@@ -72,11 +72,12 @@ class SystemPage(Adw.PreferencesPage):
         )
         self.add(self.lang_group)
         self.lang_rows: list[Gtk.Widget] = []
-        self.use_after_install: str | None = None  # applied once locale-gen has generated it
+        self.use_after_install: str | None = None  # applied once the language is installed
+        self.layout = ""
         if core.have("localectl"):
             self._load_language()
-            # locale-gen rewrites the archive when a language is installed (in the terminal opened below)
-            self.archive_monitor = Gio.File.new_for_path(str(system.LOCALE_ARCHIVE)).monitor_file(
+            # installing a language (in the terminal opened below) changes this folder
+            self.archive_monitor = Gio.File.new_for_path(str(system.LOCALE_DIR)).monitor_directory(
                 Gio.FileMonitorFlags.NONE, None
             )
             self.reload_language = Debouncer(1000, self._load_language)
@@ -171,9 +172,10 @@ class SystemPage(Adw.PreferencesPage):
     def _load_language(self) -> None:
         def load():
             current, available = system.locale_settings()
-            installable = system.installable_locales(available)
-            suggested = system.suggest_locale(system.keyboard_layout(), installable)
-            return current, available, [(loc, system.locale_description(loc)) for loc in installable], suggested
+            installable = system.installable(available)
+            self.layout = system.keyboard_layout()
+            suggested = system.suggest_install(self.layout, installable)
+            return current, available, [(name, system.describe(name)) for name in installable], suggested
 
         bg(load, self._populate_language)
 
@@ -188,9 +190,8 @@ class SystemPage(Adw.PreferencesPage):
             self.lang_group.remove(row)
         self.lang_rows = []
         current, available, installable, suggested = result
-        pending = next(
-            (loc for loc in available if self.use_after_install and system.same_locale(loc, self.use_after_install)),
-            None,
+        pending = (
+            system.installed_locale(self.use_after_install, available, self.layout) if self.use_after_install else None
         )
         if pending:
             # installed with "Install and use": apply it now that locale-gen is done
@@ -221,6 +222,11 @@ class SystemPage(Adw.PreferencesPage):
                 "Opens a terminal that asks for your password, enables the language in /etc/locale.gen "
                 "and runs locale-gen. With “Install and use” it also becomes the system language when it finishes "
                 "(from your next login)."
+            )
+            if system.language_method() == "locale-gen"
+            else _(
+                "Opens a terminal that asks for your password and installs the language's package. With "
+                "“Install and use” it also becomes the system language when it finishes (from your next login)."
             ),
         )
         dialog.add_response("cancel", _("Cancel"))
@@ -233,7 +239,7 @@ class SystemPage(Adw.PreferencesPage):
         def respond(_d, response: str) -> None:
             if response in ("install", "use"):
                 self.use_after_install = name if response == "use" else None
-                core.spawn(system.install_locale_command(name))
+                core.spawn(system.install_command(name))
 
         dialog.connect("response", respond)
         dialog.present(self.win)
@@ -320,7 +326,7 @@ class SystemPage(Adw.PreferencesPage):
         if not others:
             return
         remove = {
-            "package": f"sudo pacman -R {system.PACKAGE}",
+            "package": system.package_removal(),
             "local": "rm -r ~/.local/share/omarchy-settings ~/.local/bin/omarchy-settings",
         }
         other = {

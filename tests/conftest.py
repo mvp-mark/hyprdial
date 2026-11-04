@@ -4,7 +4,7 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import core, host
+from omarchy_settings import core, distro, host
 
 
 class FakeCommands:
@@ -43,8 +43,10 @@ def commands(monkeypatch):
 
 @pytest.fixture(autouse=True)
 def on_omarchy(monkeypatch):
-    """Tests run as on Omarchy unless they ask for plain Hyprland (the `plain_hyprland` fixture)."""
+    """Tests run as on Omarchy (an Arch system) unless they ask for plain Hyprland (the `plain_hyprland` fixture)
+    or set distro._family."""
     monkeypatch.setattr(host, "_detected", "omarchy")
+    monkeypatch.setattr(distro, "_family", "arch")
 
 
 @pytest.fixture

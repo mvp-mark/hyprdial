@@ -2,7 +2,7 @@ import subprocess
 
 import pytest
 
-from omarchy_settings import core, deps
+from omarchy_settings import core, deps, distro
 
 
 @pytest.fixture
@@ -16,6 +16,7 @@ def pacman(monkeypatch):
         return subprocess.CompletedProcess(args, 127 if out else 0, out + "\n" if out else "", "")
 
     monkeypatch.setattr(core, "run", fake_run)
+    monkeypatch.setattr(core, "have", lambda cmd: True)
     return state
 
 
@@ -43,14 +44,16 @@ def test_missing_uses_pacman_t(pacman):
 
 def test_missing_without_pacman_treats_all_as_absent(monkeypatch):
     monkeypatch.setattr(core, "run", lambda args, timeout=10: None)
+    monkeypatch.setattr(core, "have", lambda cmd: False)
     assert deps.missing(["gtk4"]) == {"gtk4"}
+    assert not deps.can_install()
 
 
 def test_missing_empty_list_does_not_run_pacman(pacman):
     assert deps.missing([]) == set() and pacman["calls"] == []
 
 
-def test_install_command_uses_polkit_and_needed():
+def test_install_command_uses_polkit_and_needed(pacman):
     assert deps.install_command(["waybar"]) == ["pkexec", "pacman", "-S", "--needed", "--noconfirm", "waybar"]
 
 
@@ -68,3 +71,51 @@ def test_cli_exclude_keeps_waybar_out_of_deps(pacman, capsys):
     pacman["absent"] = {"waybar", "impala"}
     deps.main(["--missing", "--group", "optional", "--exclude", "waybar"])
     assert capsys.readouterr().out.split() == ["impala"]
+
+
+def names(family):
+    return {d.package for d in deps.dependencies(family)}
+
+
+def test_other_families_have_their_own_names_and_skip_arch_only_packages():
+    assert {"python3-gi", "gir1.2-gtk-4.0", "gir1.2-adw-1", "gir1.2-nm-1.0", "gettext"} <= names("debian")
+    assert {"python3-gobject", "gtk4", "libadwaita", "NetworkManager-libnm"} <= names("fedora")
+    assert {"typelib-1_0-Gtk-4_0", "typelib-1_0-Adw-1", "gettext-tools"} <= names("suse")
+    for family in ("debian", "fedora", "suse"):
+        assert not names(family) & {"impala", "bluetui", "wiremix", "python-gobject"}
+    assert names(None) == names("arch")  # unknown: Arch's names, for the user to translate
+
+
+def test_waybar_is_listed_only_on_omarchy(plain_hyprland):
+    assert "waybar" not in names("arch")
+
+
+def test_fedora_and_suse_check_capabilities_with_rpm(commands, monkeypatch):
+    monkeypatch.setattr(distro, "_family", "fedora")
+    commands.have = {"dnf", "pkexec"}
+    commands.answers["rpm -q --whatprovides gtk4 libadwaita"] = (
+        "gtk4-4.18-1.fc43.x86_64\nno package provides libadwaita\n"
+    )
+    commands.codes["rpm -q --whatprovides gtk4 libadwaita"] = 1
+    assert deps.missing(["gtk4", "libadwaita"]) == {"libadwaita"}
+    assert deps.install_command(["libadwaita"]) == ["pkexec", "dnf", "install", "-y", "libadwaita"]
+    assert deps.can_install()
+
+
+def test_debian_checks_with_dpkg_query(commands, monkeypatch):
+    monkeypatch.setattr(distro, "_family", "debian")
+    commands.have = {"apt-get"}
+    key = "dpkg-query -W -f=${Package} ${Status}\\n python3-gi gir1.2-adw-1 gettext"
+    commands.answers[key] = "python3-gi install ok installed\ngettext deinstall ok config-files\n"
+    assert deps.missing(["python3-gi", "gir1.2-adw-1", "gettext"]) == {"gir1.2-adw-1", "gettext"}
+    assert not deps.can_install()  # no pkexec
+
+
+def test_cli_install_command(commands, monkeypatch, capsys):
+    commands.have = {"zypper"}
+    monkeypatch.setattr(distro, "_family", "suse")
+    deps.main(["--install-command"])
+    assert capsys.readouterr().out.strip() == "zypper install"
+    monkeypatch.setattr(distro, "_family", None)
+    deps.main(["--install-command"])
+    assert capsys.readouterr().out.strip() == ""

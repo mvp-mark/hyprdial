@@ -46,12 +46,15 @@ class DependenciesDialog(Adw.PreferencesDialog):
             self.page.remove(group)
         self.page.remove(self.footer)
         self.groups, self.checks = [], {}
+        installable = deps.can_install()
 
         for name in deps.GROUPS:
             group = Adw.PreferencesGroup(title=deps.group_title(name))
             for d in (d for d in deps.dependencies() if d.group == name):
                 row = Adw.ActionRow(title=d.package, subtitle=d.purpose, use_markup=False)
-                if d.package in absent:
+                if d.package in absent and not installable:
+                    row.add_suffix(Gtk.Label(label=_("Not installed"), css_classes=["dim-label"]))
+                elif d.package in absent:
                     check = Gtk.CheckButton(active=d.default, valign=Gtk.Align.CENTER)
                     check.connect("toggled", lambda _c: self._update_button())
                     row.add_prefix(check)
@@ -73,7 +76,9 @@ class DependenciesDialog(Adw.PreferencesDialog):
         if self.busy:
             return
         selected = self._selected()
-        if not self.checks:
+        if not deps.can_install():
+            self.install_btn.set_label(_("Install what is missing with your package manager"))
+        elif not self.checks:
             self.install_btn.set_label(_("Everything is installed"))
         elif not selected:
             self.install_btn.set_label(_("Select packages to install"))

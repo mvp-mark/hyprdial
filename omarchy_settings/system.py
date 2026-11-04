@@ -12,7 +12,7 @@ import platform
 import re
 from pathlib import Path
 
-from . import core, host
+from . import core, distro, host
 
 
 # ------------------------------------------------------------------ date and time
@@ -60,7 +60,8 @@ def set_locale(lang: str) -> tuple[bool, str]:
 
 
 LOCALE_GEN = Path("/etc/locale.gen")
-LOCALE_ARCHIVE = Path("/usr/lib/locale/locale-archive")  # rewritten by locale-gen
+LOCALE_DIR = Path("/usr/lib/locale")  # locale-gen rewrites its locale-archive; Fedora's langpacks add folders
+ISO_639 = Path("/usr/share/iso-codes/json/iso_639-3.json")
 LOCALE_NAME = re.compile(r"[A-Za-z0-9_.@-]+")
 
 
@@ -89,6 +90,7 @@ LAYOUT_LOCALES = {
     "se": "sv_SE", "dk": "da_DK", "no": "nb_NO", "ua": "uk_UA", "cz": "cs_CZ", "gr": "el_GR", "il": "he_IL",
     "ee": "et_EE", "latam": "es_MX", "ca": "fr_CA", "ch": "de_CH", "at": "de_AT", "be": "fr_BE",
 }  # fmt: skip
+LAYOUT_LOCALES_UTF8 = tuple(f"{v}.UTF-8" for v in LAYOUT_LOCALES.values())
 
 
 def suggest_locale(layout: str, names: list[str]) -> str:
@@ -124,6 +126,77 @@ def locale_description(name: str, locales_dir: Path = Path("/usr/share/i18n/loca
     fields = dict(re.findall(r'^(language|territory)\s+"([^"]*)"', text, re.MULTILINE))
     language, territory = fields.get("language", ""), fields.get("territory", "")
     return f"{language} ({territory})" if language and territory else language
+
+
+# Installing a language: /etc/locale.gen + locale-gen (Arch, Debian) or a glibc langpack per language (Fedora).
+def language_method() -> str | None:
+    if LOCALE_GEN.exists() and core.have("locale-gen"):
+        return "locale-gen"
+    if distro.family() == "fedora" and core.have("dnf"):
+        return "langpack"
+    return None
+
+
+def _language(name: str) -> str:
+    return _locale_key(name).split("_")[0].split("@")[0]
+
+
+def langpacks(generated: list[str]) -> list[str]:
+    """Languages ('pt', 'de'…) with a glibc langpack in the repositories and no locale installed yet."""
+    out = core.out(["dnf", "repoquery", "--qf", "%{name}\n", "glibc-langpack-*"], timeout=120)
+    have = {_language(g) for g in generated}
+    return sorted({m.group(1) for m in re.finditer(r"^glibc-langpack-([a-z]{2,3})$", out, re.MULTILINE)} - have)
+
+
+def installable(generated: list[str]) -> list[str]:
+    """What "Install a language" offers: locales (locale-gen) or languages (langpacks)."""
+    method = language_method()
+    if method == "locale-gen":
+        return installable_locales(generated)
+    if method == "langpack":
+        return langpacks(generated)
+    return []
+
+
+def language_name(code: str, iso: Path = ISO_639) -> str:
+    """'Portuguese' for 'pt' from the iso-codes package; '' when it isn't there."""
+    try:
+        entries = json.loads(iso.read_text()).get("639-3", [])
+    except (OSError, ValueError, AttributeError):
+        return ""
+    return next((e.get("name", "") for e in entries if code in (e.get("alpha_2"), e.get("alpha_3"))), "")
+
+
+def describe(name: str) -> str:
+    return locale_description(name) if "_" in name else language_name(name)
+
+
+def suggest_install(layout: str, names: list[str]) -> str:
+    """The locale (or language) to preselect for a keyboard layout, if it is among names."""
+    if language_method() != "langpack":
+        return suggest_locale(layout, names)
+    locale = suggest_locale(layout, [f"{n}_{n.upper()}.UTF-8" for n in names] + list(LAYOUT_LOCALES_UTF8))
+    return _language(locale) if locale and _language(locale) in names else ""
+
+
+def installed_locale(name: str, available: list[str], layout: str = "") -> str | None:
+    """The locale "Install and use" applies once name is installed: name itself, or for a language one of its
+    locales (the keyboard layout's, if it is one of them)."""
+    same = [a for a in available if same_locale(a, name)]
+    if same:
+        return same[0]
+    if "_" in name:
+        return None
+    of_language = [a for a in available if _language(a) == name.lower() and "utf" in a.lower()]
+    return (suggest_locale(layout, of_language) or of_language[0]) if of_language else None
+
+
+def install_command(name: str) -> list[str]:
+    if language_method() == "langpack":
+        if not re.fullmatch(r"[a-z]{2,3}", name):
+            raise ValueError(name)
+        return host.terminal_command(f"sudo dnf install -y glibc-langpack-{name}")
+    return install_locale_command(name)
 
 
 def install_locale_command(name: str) -> list[str]:
@@ -208,11 +281,18 @@ def app_location(here: Path = HERE) -> str:
 def other_copies(location: str) -> list[str]:
     """The other installed copies, besides the one running; the launcher opens only one of them."""
     others = []
-    if location != "package" and core.out(["pacman", "-Q", PACKAGE]):
+    manager = distro.manager()
+    if location != "package" and manager and manager.installed(PACKAGE):
         others.append("package")
     if location != "local" and (LOCAL_DIR / "omarchy_settings").is_dir():
         others.append("local")
     return others
+
+
+def package_removal() -> str:
+    """Shell command that removes the installed package."""
+    manager = distro.manager()
+    return " ".join(["sudo", *(manager.remove if manager else ("pacman", "-R")), PACKAGE])
 
 
 def latest_release() -> str:
