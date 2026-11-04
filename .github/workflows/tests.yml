@@ -86,6 +86,6 @@ jobs:
           version=$(sed -n 's/^Version: *//p' packaging/rpm/hyprdial.spec)
           mkdir -p ~/rpmbuild/SOURCES
           tar --transform "s,^\.,hyprdial-$version," --exclude=./.git -czf ~/rpmbuild/SOURCES/hyprdial-$version.tar.gz .
-          rpmbuild -ba packaging/rpm/hyprdial.spec
+          rpmbuild -ba --define "_topdir $HOME/rpmbuild" packaging/rpm/hyprdial.spec  # openSUSE defaults to /usr/src/packages
           "${install[@]}" ~/rpmbuild/RPMS/noarch/hyprdial-*.rpm
           test "$(hyprdial --version)" = "hyprdial $version"
